@@ -173,14 +173,10 @@ void main() async {
     registeredSubClassMap: subClassMap,
   );
 
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-
   if(!QuickHelp.isWebPlatform()) {
     FlutterError.onError =
         FirebaseCrashlytics.instance.recordFlutterFatalError;
   }
-  await EasyLocalization.ensureInitialized();
   ZegoUIKit().initLog().then((value) {
     ZegoUIKitPrebuiltCallInvitationService().useSystemCallingUI(
       [ZegoUIKitSignalingPlugin()],
@@ -229,6 +225,12 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       getCurrentUser();
       QuickHelp.saveCurrentRoute(route: HomeScreen.route);
       print("AppState: resumed");
+      // Force a full rebuild so any stale native surfaces/textures
+      // (e.g. Zego's camera/GL views) are re-attached cleanly instead
+      // of leaving a blank frame behind.
+      if (mounted) {
+        setState(() {});
+      }
     } else {
       RemoveOnline();
       QuickHelp.saveCurrentRoute(route: "background");
@@ -410,7 +412,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                     : const SizedBox();
               },
               contextQuery: () {
-                return navigatorKey.currentState!.context;
+                return navigatorKey.currentState?.context ?? context;
               },
             ),
           ],
