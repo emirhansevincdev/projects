@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "341814846119",
+    "project_id": "vibellaparty",
+    "storage_bucket": "vibellaparty.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:341814846119:android:4617a3007247fb0b937182",
+        "android_client_info": {
+          "package_name": "com.orbitcreative.vibellaparty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "341814846119-eims6kfvucf8lho8hmktkft22ktprtsv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orbitcreative.vibellaparty",
+            "certificate_hash": "d46b43cf4d2ba33918c7887759474266ba834025"
+          }
+        },
+        {
+          "client_id": "341814846119-h4ctlf6f1uadh527nsbdv7k528s80elm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orbitcreative.vibellaparty",
+            "certificate_hash": "c68b626ca263012df9c5371ed3131d3ac423163d"
+          }
+        },
+        {
+          "client_id": "341814846119-4s9qr325a9le4akvth67dsoufb06lor4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASNU94Ky9f_jLp3PS_p9V9wdkg0wBRJeM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "341814846119-4s9qr325a9le4akvth67dsoufb06lor4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
