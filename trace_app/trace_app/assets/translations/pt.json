@@ -2800,6 +2800,14 @@
     "transfer_to_me": "{sender} transferir para mim",
     "transfer_to_receiver": "Transferir para {receiver}",
     "id_account_type": "ID:{id} ({account_type})"
+  },
+
+  "bottom_nav": {
+    "home": "Início",
+    "moments": "Momentos",
+    "rooms": "Salas",
+    "messages": "Mensagens",
+    "profile": "Perfil"
   }
 
 }

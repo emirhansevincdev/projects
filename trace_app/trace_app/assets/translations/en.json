@@ -2873,5 +2873,13 @@
     "transfer_to_me": "{sender} transfer to me",
     "transfer_to_receiver": "Transfer to {receiver}",
     "id_account_type": "ID:{id} ({account_type})"
+  },
+
+  "bottom_nav": {
+    "home": "Home",
+    "moments": "Moments",
+    "rooms": "Rooms",
+    "messages": "Messages",
+    "profile": "Profile"
   }
 }

@@ -707,7 +707,7 @@ class _EditVideoPostScreenState extends State<EditVideoPostScreen> {
         context,
         HomeScreen(
           currentUser: widget.currentUser,
-          initialTabIndex: 0,
+          initialTabIndex: 1, // Anlar (Reels)
         ),
       );
 

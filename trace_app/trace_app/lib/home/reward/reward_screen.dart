@@ -343,7 +343,7 @@ class _RewardScreenState extends State<RewardScreen>
                               context,
                               HomeScreen(
                                 currentUser: widget.currentUser,
-                                initialTabIndex: 1,
+                                initialTabIndex: 0, // Ana sayfa
                               ));
                         },
                         child: TextWithTap(

@@ -2815,6 +2815,14 @@
     "transfer_to_me": "{sender} نقل إليّ",
     "transfer_to_receiver": "نقل إلى {receiver}",
     "id_account_type": "معرف:{id} ({account_type})"
+  },
+
+  "bottom_nav": {
+    "home": "الرئيسية",
+    "moments": "اللحظات",
+    "rooms": "الغرف",
+    "messages": "الرسائل",
+    "profile": "الملف الشخصي"
   }
 
 }

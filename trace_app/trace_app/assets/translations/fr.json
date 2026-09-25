@@ -2799,6 +2799,14 @@
     "transfer_to_me": "{sender} me transférer",
     "transfer_to_receiver": "Transférer à {receiver}",
     "id_account_type": "ID:{id} ({account_type})"
+  },
+
+  "bottom_nav": {
+    "home": "Accueil",
+    "moments": "Moments",
+    "rooms": "Salons",
+    "messages": "Messages",
+    "profile": "Profil"
   }
 
 }

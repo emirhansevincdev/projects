@@ -577,7 +577,7 @@ class _UploadBanubaEditedVideoScreenState
         context,
         HomeScreen(
           currentUser: widget.currentUser,
-          initialTabIndex: 0,
+          initialTabIndex: 1, // Anlar (Reels)
         ),
         finish: true,
         back: false,

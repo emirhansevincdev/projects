@@ -2873,5 +2873,13 @@
     "transfer_to_me": "{sender} bana transfer etti",
     "transfer_to_receiver": "{receiver} kişisine transfer et",
     "id_account_type": "ID:{id} ({account_type})"
+  },
+
+  "bottom_nav": {
+    "home": "Ana Sayfa",
+    "moments": "Anlar",
+    "rooms": "Odalar",
+    "messages": "Mesajlar",
+    "profile": "Profil"
   }
 }

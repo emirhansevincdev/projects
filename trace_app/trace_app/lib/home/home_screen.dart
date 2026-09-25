@@ -22,9 +22,9 @@ import 'package:trace/ui/container_with_corner.dart';
 import 'package:trace/ui/text_with_tap.dart';
 import 'package:trace/utils/colors.dart';
 import 'package:trace/helpers/quick_help.dart';
-import 'package:trace/widgets/component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:vibration/vibration.dart';
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController inviteTextController = TextEditingController();
   bool hasNotification = false;
 
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   double iconSize = 30;
 
   static bool appTrackingDialogShowing = false;
@@ -237,13 +237,13 @@ class _HomeScreenState extends State<HomeScreen> {
     //_checkNotifications();
 
     List<Widget> widgets = [
+      FeedHomeScreen(
+        currentUser: widget.currentUser,
+      ),
       ReelsHomeScreen(
         currentUser: widget.currentUser != null
             ? widget.currentUser
             : widget.currentUser,
-      ),
-      FeedHomeScreen(
-        currentUser: widget.currentUser,
       ),
       AllLivesScreen(
         currentUser: widget.currentUser,
@@ -263,182 +263,184 @@ class _HomeScreenState extends State<HomeScreen> {
     return widgets;
   }
 
-  // Not: Fonksiyon adı ve çağrıldığı yer (Scaffold.bottomNavigationBar) aynı kaldı.
-  // Sadece görsel katman değişti — index'ler, onItemTapped(index) çağrıları,
-  // badge mantığı ve asset yolları birebir korunuyor.
+  // Alt sekme çubuğu: Ana sayfa, Anlar, Odalar, Mesajlar, Profil sırasıyla;
+  // her sekme eşit genişlikte, ikon + altında etiket ile gösterilir.
   Widget bottomNavBar() {
     bool isDark = QuickHelp.isDarkMode(context);
-    Color bgColor = QuickHelp.isDarkMode(context)
-        ? kContentColorLightTheme
-        : kContentColorDarkTheme;
+    Color bgColor = isDark ? kContentColorDarkTheme : Colors.white;
+    Color inactiveColor = isDark ? Colors.white70 : Colors.black45;
 
-    List<Widget> navIcons = [
+    List<Widget> navItems = [
       _navItem(
         index: 0,
-        icon: Component.buildNavIcon(
-            Icon(
-              Icons.smart_display_rounded,
-              size: iconSize,
-              color: _selectedIndex == 0
-                  ? kPrimaryColor
-                  : (isDark ? Colors.white : Colors.black),
-            ),
-            0,
-            false,
-            context),
+        label: "bottom_nav.home".tr(),
+        icon: Icon(
+          Icons.home_rounded,
+          size: iconSize,
+          color: _selectedIndex == 0 ? kPrimaryColor : inactiveColor,
+        ),
       ),
       _navItem(
         index: 1,
-        icon: Component.buildNavIcon(
-            Icon(
-              Icons.grid_view_rounded,
-              size: iconSize,
-              color: _selectedIndex == 1
-                  ? kPrimaryColor
-                  : (isDark ? Colors.white : Colors.black),
-            ),
-            1,
-            false,
-            context,
-            badge: 12),
+        label: "bottom_nav.moments".tr(),
+        icon: _badgeIcon(
+          Icon(
+            Icons.smart_display_rounded,
+            size: iconSize,
+            color: _selectedIndex == 1 ? kPrimaryColor : inactiveColor,
+          ),
+          12,
+        ),
       ),
       _navItem(
         index: 2,
         isCenter: true,
-        icon: Component.buildNavIcon(
-            Container(
-              height: 52,
-              width: 52,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [kPrimaryColor, kSecondaryColor],
-                ),
-              ),
-              child: const Icon(
-                Icons.videocam_rounded,
-                color: Colors.white,
-                size: 26,
-              ),
+        label: "bottom_nav.rooms".tr(),
+        icon: Container(
+          height: 48,
+          width: 48,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [kPrimaryColor, kSecondaryColor],
             ),
-            2,
-            false,
-            context,
-            color: 0xFF27E150,
-            badge: 15),
+          ),
+          child: const Icon(
+            Icons.videocam_rounded,
+            color: Colors.white,
+            size: 24,
+          ),
+        ),
       ),
       _navItem(
         index: 3,
-        icon: Component.buildNavIcon(
-            Icon(
-              Icons.chat_bubble_rounded,
-              size: 25,
-              color: _selectedIndex == 3
-                  ? kPrimaryColor
-                  : (isDark ? Colors.white : Colors.black),
-            ),
-            3,
-            unreadMessageMount > 0,
-            badge: unreadMessageMount,
-            context),
+        label: "bottom_nav.messages".tr(),
+        icon: _badgeIcon(
+          Icon(
+            Icons.chat_bubble_rounded,
+            size: 25,
+            color: _selectedIndex == 3 ? kPrimaryColor : inactiveColor,
+          ),
+          unreadMessageMount,
+        ),
       ),
       _navItem(
         index: 4,
+        label: "bottom_nav.profile".tr(),
         icon: Icon(
           Icons.person_rounded,
           size: iconSize,
-          color: _selectedIndex == 4
-              ? kPrimaryColor
-              : (isDark ? Colors.white : Colors.black),
+          color: _selectedIndex == 4 ? kPrimaryColor : inactiveColor,
         ),
       ),
     ];
 
     return Container(
-      color: Colors.transparent,
+      decoration: BoxDecoration(
+        color: bgColor,
+        border: Border(
+          top: BorderSide(
+            color: isDark ? Colors.white12 : Colors.black12,
+            width: 0.6,
+          ),
+        ),
+      ),
       child: SafeArea(
         top: false,
-        minimum: EdgeInsets.only(bottom: 6),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                decoration: BoxDecoration(
-                  color: bgColor.withOpacity(isDark ? 0.45 : 0.6),
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(isDark ? 0.12 : 0.55),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(isDark ? 0.25 : 0.14),
-                      blurRadius: 24,
-                      offset: Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: navIcons,
-                ),
-              ),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children:
+                navItems.map((item) => Expanded(child: item)).toList(),
           ),
         ),
       ),
     );
   }
 
+  Widget _badgeIcon(Widget icon, int badge) {
+    if (badge <= 0) return icon;
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        icon,
+        Positioned(
+          right: -10,
+          top: -6,
+          child: ContainerCorner(
+            height: 16,
+            width: 16,
+            color: const Color(0xFFFA3967),
+            borderWidth: 0,
+            borderRadius: 8,
+            child: Center(
+              child: Text(
+                QuickHelp.convertToK(badge),
+                style: GoogleFonts.nunito(
+                  fontSize: 9,
+                  color: Colors.white,
+                ),
+                maxLines: 1,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _navItem({
     required int index,
     required Widget icon,
+    required String label,
     bool isCenter = false,
   }) {
     bool isSelected = _selectedIndex == index;
+    bool isDark = QuickHelp.isDarkMode(context);
+    Color labelColor = isSelected
+        ? kPrimaryColor
+        : (isDark ? Colors.white70 : Colors.black45);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => onItemTapped(index),
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 180),
-        curve: Curves.easeOut,
-        padding: EdgeInsets.symmetric(
-          horizontal: isCenter ? 8 : 14,
-          vertical: isCenter ? 4 : 8,
-        ),
-        decoration: BoxDecoration(
-          color: (isSelected && !isCenter)
-              ? kPrimaryColor.withOpacity(0.14)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(22),
-        ),
-        child: isCenter
-            ? Transform.translate(
-          offset: Offset(0, -6),
-          child: Container(
-            padding: EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: kPrimaryColor.withOpacity(0.45),
-                  blurRadius: 16,
-                  offset: Offset(0, 6),
-                ),
-              ],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          isCenter
+              ? Transform.translate(
+                  offset: const Offset(0, -10),
+                  child: Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: kPrimaryColor.withOpacity(0.45),
+                          blurRadius: 16,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: icon,
+                  ),
+                )
+              : icon,
+          SizedBox(height: isCenter ? 0 : 3),
+          Text(
+            label,
+            style: GoogleFonts.nunito(
+              fontSize: 11,
+              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              color: labelColor,
             ),
-            child: icon,
           ),
-        )
-            : icon,
+        ],
       ),
     );
   }
