@@ -1030,6 +1030,14 @@ class _AllLivesScreenState extends State<AllLivesScreen>
                                               width: 45,
                                               height: 45,
                                             ),
+                                          if (liveStreaming.getAuthorId !=
+                                              widget.currentUser!.objectId)
+                                            Positioned(
+                                              right: 8,
+                                              bottom: 10,
+                                              child: _quickHiButton(
+                                                  liveStreaming.getAuthor!),
+                                            ),
                                         ]),
                                   ),
                                 ),
@@ -1718,6 +1726,50 @@ class _AllLivesScreenState extends State<AllLivesScreen>
           currentUser: currentUser,
           mUser: mUser,
         ));
+  }
+
+  // Tek dokunuşla hazır "Hi" karşılama mesajı gönderen hızlı buton.
+  Widget _quickHiButton(UserModel host) {
+    return GestureDetector(
+      onTap: () {
+        QuickHelp.goToNavigatorScreen(
+            context,
+            MessageScreen(
+              currentUser: widget.currentUser,
+              mUser: host,
+              autoGreetingText: "Hi",
+            ));
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: kRedColor1,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 6,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: const Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.favorite, color: Colors.white, size: 13),
+            SizedBox(width: 4),
+            Text(
+              "Hi",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   _changePicture(LiveStreamingModel live, {bool? terminate = false}) {

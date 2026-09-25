@@ -47,7 +47,13 @@ class MessageScreen extends StatefulWidget {
 
   UserModel? currentUser, mUser;
 
-  MessageScreen({Key? key, this.currentUser, this.mUser}) : super(key: key);
+  // Set to auto-send a one-tap greeting (e.g. the "Hi" quick message
+  // button on a host/user card) as soon as the chat opens.
+  String? autoGreetingText;
+
+  MessageScreen(
+      {Key? key, this.currentUser, this.mUser, this.autoGreetingText})
+      : super(key: key);
 
   @override
   State<MessageScreen> createState() => _MessageScreenState();
@@ -58,6 +64,7 @@ class _MessageScreenState extends State<MessageScreen> {
   TextEditingController messageController = TextEditingController();
 
   UserModel? currentUser, mUser;
+  bool _autoGreetingSent = false;
 
   String? sendButtonIcon = "assets/svg/ic_menu_gifters.svg";
   Color sendButtonBackground = kColorsBlue400;
@@ -520,6 +527,16 @@ class _MessageScreenState extends State<MessageScreen> {
     if (currentUser == null && mUser == null) {
       currentUser = widget.currentUser;
       mUser = widget.mUser;
+    }
+
+    if (!_autoGreetingSent &&
+        widget.autoGreetingText != null &&
+        widget.autoGreetingText!.isNotEmpty) {
+      _autoGreetingSent = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _saveMessage(widget.autoGreetingText!,
+            messageType: MessageModel.messageTypeText);
+      });
     }
 
     return GestureDetector(
