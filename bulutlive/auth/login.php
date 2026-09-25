@@ -1,18 +1,31 @@
 <?php
 require '../vendor/autoload.php';
 include '../Configs.php';
+include '../admin/roles_config.php';
 
 use Parse\ParseUser;
 use Parse\ParseException;
 
 $spinner_color = '#000';
 
+// A staff account may log in if it has a recognized staff_role, or (for
+// accounts created before this role system existed) the old flat
+// role === 'admin' flag, which is treated as full access (BLT).
+function isDashboardUser(ParseUser $user): bool
+{
+    $staffRole = $user->get('staff_role');
+    if (!empty($staffRole) && in_array($staffRole, DASHBOARD_ROLES, true)) {
+        return true;
+    }
+    return $user->get('role') === 'admin';
+}
+
 $success = false;
 $currUser = ParseUser::getCurrentUser();
 if ($currUser) {
 
     try {
-        if ($currUser->get("role") === 'admin') {
+        if (isDashboardUser($currUser)) {
             header('Refresh:0; url=../dashboard/panel.php');
         } else {
             header('Refresh:0; url=../auth/logout.php');
@@ -34,12 +47,12 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
         $user = ParseUser::logIn($username, $password);
 
         $currUser = ParseUser::getCurrentUser();
-        if ($currUser->get("role") === 'admin'){
+        if (isDashboardUser($currUser)){
             { header('Refresh:0; url=../dashboard/panel.php'); }
         } else {
             { header('Refresh:0; url=../auth/logout.php'); }
         }
-        
+
         $success = true;
 
         /*echo '

@@ -1,5 +1,28 @@
 <?php
 
+require_once __DIR__ . '/roles_config.php';
+
+if (!isset($currUser) || !$currUser) {
+    $currUser = \Parse\ParseUser::getCurrentUser();
+}
+
+$sidebarStaffRole = null;
+if ($currUser) {
+    $sidebarStaffRole = $currUser->get('staff_role');
+    if (empty($sidebarStaffRole) && $currUser->get('role') === 'admin') {
+        $sidebarStaffRole = STAFF_ROLE_FULL_ACCESS;
+    }
+}
+
+function sidebar_can_see(string $pageKey): bool
+{
+    global $sidebarStaffRole;
+    if (empty($sidebarStaffRole)) {
+        return false;
+    }
+    return staff_role_can_access($sidebarStaffRole, $pageKey);
+}
+
 ?>
 
 <div class="left-sidebar">
@@ -141,6 +164,37 @@
                 <li>
                     <a href="../dashboard/report.php" aria-expanded="false"><i class="fa fa-flag"></i><span class="hide-menu">Reports</span></a>
                 </li>
+
+                <!--<li class="nav-label font-weight-bold" style="color:black;">Management</li>-->
+                <?php if (sidebar_can_see('coins_panel')): ?>
+                <li>
+                    <a href="../dashboard/coins_panel.php" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">Coins Panel</span></a>
+                </li>
+                <?php endif; ?>
+
+                <?php if (sidebar_can_see('agency_panel')): ?>
+                <li>
+                    <a href="../dashboard/agency_panel.php" aria-expanded="false"><i class="fa fa-building"></i><span class="hide-menu">Agencies</span></a>
+                </li>
+                <?php endif; ?>
+
+                <?php if (sidebar_can_see('vip_control_panel')): ?>
+                <li>
+                    <a href="../dashboard/vip_control_panel.php" aria-expanded="false"><i class="fa fa-diamond"></i><span class="hide-menu">VIP / SVIP / Aristocracy</span></a>
+                </li>
+                <?php endif; ?>
+
+                <?php if (sidebar_can_see('account_management')): ?>
+                <li>
+                    <a href="../dashboard/account_management.php" aria-expanded="false"><i class="fa fa-id-badge"></i><span class="hide-menu">Account Management</span></a>
+                </li>
+                <?php endif; ?>
+
+                <?php if (sidebar_can_see('team_chat')): ?>
+                <li>
+                    <a href="../dashboard/team_chat.php" aria-expanded="false"><i class="fa fa-comments"></i><span class="hide-menu">Team Chat</span></a>
+                </li>
+                <?php endif; ?>
 
                 <!-- <li class="nav-label">Advertising</li> <i class="fa fa-credit-card"></i> -->
                 <li>
