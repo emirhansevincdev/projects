@@ -217,6 +217,13 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with WidgetsBindingObserver {
   UserModel? currentUser;
 
+  // Created once and reused: recreating this Future on every rebuild (e.g.
+  // the resume-triggered setState below) would reset this FutureBuilder to
+  // its loading state and tear down whatever screen was showing — which is
+  // exactly what happened mid-flow for Google/Apple sign-in, since leaving
+  // the app for the account picker and coming back is itself a resume.
+  late final Future<UserModel?> _currentUserFuture = QuickHelp.getUserAwait();
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
@@ -365,7 +372,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             WebViewScreen(pageType: QuickHelp.pageTypeCashOut),
       },
       home: FutureBuilder<UserModel?>(
-          future: QuickHelp.getUserAwait(),
+          future: _currentUserFuture,
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
