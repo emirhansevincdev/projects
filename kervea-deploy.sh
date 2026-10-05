@@ -139,6 +139,19 @@ SAME=0
 [ "$(cd "$SRC" && pwd -P)" = "$TARGET" ] && SAME=1
 [ "$SAME" -eq 1 ] && ok "Betik doğrudan site klasöründen çalışıyor (dosya kopyalama atlanacak)"
 
+# Dosya listesi kontrolü: elle yüklenen (SAME) ya da açılan ZIP'te (aksi hâlde) eksik dosya var mı?
+if [ -f "$SRC/kervea-dosyalar.txt" ]; then
+  CHECKDIR="$SRC"; [ "$SAME" -eq 1 ] && CHECKDIR="$TARGET"
+  MISSING="$(while IFS= read -r f; do [ -z "$f" ] || [ -f "$CHECKDIR/$f" ] || printf '%s\n' "$f"; done < "$SRC/kervea-dosyalar.txt")"
+  if [ -n "$MISSING" ]; then
+    NMISS="$(printf '%s\n' "$MISSING" | wc -l | tr -d ' ')"
+    printf '\n  Eksik dosyalar (%s adet, ilk 40):\n' "$NMISS" >&2
+    printf '%s\n' "$MISSING" | head -n 40 | sed 's/^/    - /' >&2
+    die "$CHECKDIR içinde $NMISS dosya eksik (yukarıdaki liste). Bunları ZIP'ten aynı yollara yükleyip betiği tekrar çalıştırın. Hiçbir şey değiştirilmedi."
+  fi
+  ok "Tüm Kervea dosyaları yerinde ($(wc -l < "$SRC/kervea-dosyalar.txt" | tr -d ' ') dosya)"
+fi
+
 if [ "$CHECK_ONLY" -eq 1 ]; then
   say "Kontrol bitti — hiçbir şey değiştirilmedi."
   [ "$WARNINGS" -eq 0 ] && ok "Her şey hazır. Güncellemek için:  bash kervea-deploy.sh" || true
