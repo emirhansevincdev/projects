@@ -61,7 +61,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->appendToGroup('web', SecurityHeaders::class);
         $middleware->validateCsrfTokens(except: ['kv/webhooks/stripe']);
         // Guests hitting a protected page are sent to the Kervea sign-in, not the template's login view.
-        $middleware->redirectGuestsTo('/giris');
+        $middleware->redirectGuestsTo('/login');
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'customer' => IsCustomer::class,

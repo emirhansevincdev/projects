@@ -48,7 +48,7 @@ Bu proje, hazır Atlas (Laravel 11) scriptinin üzerine müşterinin onayladığ
    `nano /var/www/kervea.ai/.env`  
    *Ayar dosyasını açar. Ok tuşlarıyla satırı değiştirin. Kaydetmek için `Ctrl+O`, Enter; çıkmak için `Ctrl+X`. Aşağıdaki `.env` tablosuna bakın.*
 
-Sonra tarayıcıda `https://siteniz/giris` adresini açın.
+Sonra tarayıcıda `https://siteniz/login` adresini açın.
 
 ### Sorun giderme
 
@@ -93,7 +93,7 @@ Web sunucusu belge kökü **`public/`** olmalı; `.env`, `storage/`, `vendor/` w
 
 ## 2. Yönetici
 
-Yönetici = `users.role = 1`. Mevcut Atlas yöneticisi aynen geçerlidir; **Kervea giriş sayfasından (`/giris`) girince doğrudan `/admin/kervea/applications` açılır.**
+Yönetici = `users.role = 1`. Mevcut Atlas yöneticisi aynen geçerlidir; **Kervea giriş sayfasından (`/login`) girince doğrudan `/admin/kervea/applications` açılır.**
 Yönetici yoksa (parola komut satırına yazılmaz, ekranda gizli girilir):
 
 ```bash
@@ -106,7 +106,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 
 1. Ziyaretçi **Firmanı Ekle** formunu doldurur (6 adım; KVKK/rıza kutuları işaretlenmemiş gelir) → `kv_companies` (durum: *pending*). Belgeler **özel** diskte (`storage/app/private`), logo/fotoğraflar yeniden kodlanarak `storage/app/public/kv/…` altında tutulur.
 2. Yönetici başvuruyu inceler → **Onayla**: üye hesabı oluşur, firmaya *parola belirleme* bağlantısı gider (24 saat). Aynı sektördeki, e-posta iznini vermiş üyelere "yeni firma" bildirimi gider.
-3. Üye `/giris` ile girer. Plan: *free* (ilk 3 firma açık, kalanı sunucuda maskeli) · *Premium* (hepsi + iletişim bilgisi açma, günde 40).
+3. Üye `/login` ile girer. Plan: *free* (ilk 3 firma açık, kalanı sunucuda maskeli) · *Premium* (hepsi + iletişim bilgisi açma, günde 40).
 4. İletişim bilgisi yalnızca **firma rıza verdiyse** ve **görüntüleyen Premium ise** açılır; her açma kaydedilir.
 5. Premium: `/kv/orders` sunucuda fiyatı hesaplar (promosyon dahil) → Stripe Checkout'a yönlendirir. Stripe anahtarı yoksa sipariş *pending* kalır, yönetici "Siparişler"den *Ödendi* işaretleyebilir (havale).
 

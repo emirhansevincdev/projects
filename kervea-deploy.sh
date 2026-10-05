@@ -329,7 +329,7 @@ DONE=1
 say "Bitti"
 printf '  Dosya yedeği : %s\n' "$BACKUP_FILE"
 if [ -n "$DB_DUMP" ]; then printf '  Veritabanı   : %s\n' "$DB_DUMP"; fi
-printf '  Yönetici girişi: %s/giris   (onay paneli: %s/admin/kervea/applications)\n' "$BASE" "$BASE"
+printf '  Yönetici girişi: %s/login   (onay paneli: %s/admin/kervea/applications)\n' "$BASE" "$BASE"
 if [ "$WARNINGS" -gt 0 ]; then
   printf '\n%s  %d uyarı var. Sarı satırlar hata değil, yapılacaklar listesidir; çözemezseniz bu ekranın görüntüsünü geliştiriciye gönderin.%s\n' "$Y" "$WARNINGS" "$N"
   [ "$ENVWARN" -eq 1 ] && printf '  Ayar dosyasını düzeltmek için:  nano %s/.env   (kaydet: Ctrl+O, Enter · çık: Ctrl+X)\n' "$TARGET"

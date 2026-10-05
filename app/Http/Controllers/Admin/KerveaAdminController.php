@@ -70,7 +70,7 @@ class KerveaAdminController extends Controller
             $company->save();
 
             $token = Password::broker()->createToken($user);
-            $url = url('/sifre-belirle?token='.$token.'&email='.urlencode($user->email));
+            $url = url('/set-password?token='.$token.'&email='.urlencode($user->email));
             $this->mail($company->email, 'Başvurunuz onaylandı · Kervea', 'application_approved', compact('company', 'url'));
         });
         $this->notifyMatching($company);

@@ -32,14 +32,21 @@ use Illuminate\Support\Facades\Artisan;
 // ── Kervea (public B2B shell) ─────────────────────────────────────────────
 Route::controller(\App\Http\Controllers\Kervea\PageController::class)->group(function () {
     Route::get('/', 'show')->defaults('view', 'home')->name('home');
-    Route::get('/firma-ekle', 'show')->defaults('view', 'add')->name('kervea.add');
-    Route::get('/fiyatlar', 'show')->defaults('view', 'pricing')->name('kervea.pricing');
-    Route::get('/hakkimizda', 'show')->defaults('view', 'about')->name('kervea.about');
-    Route::get('/iletisim', 'show')->defaults('view', 'contact')->name('kervea.contact');
-    Route::get('/giris', 'show')->defaults('view', 'login')->name('kervea.login');
-    Route::get('/uye-paneli', 'show')->defaults('view', 'panel')->name('kervea.panel');
-    Route::get('/firma/{firm}', 'show')->defaults('view', 'firm')->name('kervea.firm');
+    Route::get('/add-company', 'show')->defaults('view', 'add')->name('kervea.add');
+    Route::get('/pricing', 'show')->defaults('view', 'pricing')->name('kervea.pricing');
+    Route::get('/about', 'show')->defaults('view', 'about')->name('kervea.about');
+    Route::get('/contact', 'show')->defaults('view', 'contact')->name('kervea.contact');
+    Route::get('/login', 'show')->defaults('view', 'login')->name('login');   // name 'login' is what the framework redirects guests to
+    Route::get('/panel', 'show')->defaults('view', 'panel')->name('kervea.panel');
+    Route::get('/company/{firm}', 'show')->defaults('view', 'firm')->name('kervea.firm');
 });
+
+// URLs are English (the site is international). Earlier Turkish addresses keep working via permanent redirects.
+foreach (['/giris' => '/login', '/firma-ekle' => '/add-company', '/fiyatlar' => '/pricing', '/hakkimizda' => '/about',
+          '/iletisim' => '/contact', '/uye-paneli' => '/panel', '/sifre-belirle' => '/set-password'] as $from => $to) {
+    Route::get($from, fn (\Illuminate\Http\Request $r) => redirect($to.($r->getQueryString() ? '?'.$r->getQueryString() : ''), 301));
+}
+Route::get('/firma/{firm}', fn (string $firm) => redirect('/company/'.$firm, 301));
 
 // ── Kervea admin (server-side admin role enforced by the `admin` middleware) ──
 Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin'])->controller(\App\Http\Controllers\Admin\KerveaAdminController::class)->group(function () {
@@ -63,10 +70,10 @@ Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin
     Route::post('orders/{order}/paid', 'orderPaid')->name('order.paid');
 });
 
-Route::get('/sifre-belirle', fn () => view('kervea.set-password'))->name('kervea.password.set');
+Route::get('/set-password', fn () => view('kervea.set-password'))->name('kervea.password.set');
 
 // ── Kervea JSON endpoints ─────────────────────────────────────────────────
-Route::prefix('kv')->name('kv.')->group(function () {
+Route::prefix('kv')->group(function () {
     Route::get('stats', [\App\Http\Controllers\Kv\FirmController::class, 'stats']);
     Route::get('firms', [\App\Http\Controllers\Kv\FirmController::class, 'index'])->middleware('throttle:60,1');
     Route::get('firms/{slug}', [\App\Http\Controllers\Kv\FirmController::class, 'show'])->middleware('throttle:60,1');
@@ -116,7 +123,7 @@ Route::middleware('legacy')->group(function () {
 
     Route::get('/listing/{type}/{view?}', [FrontendController::class, 'listing_view'])->name('listing.view');
     Route::get('/details/{type}/{id}/{slug}', [FrontendController::class, 'listing_details'])->name('listing.details');
-    Route::get('/pricing', [FrontendController::class, 'pricing'])->name('pricing');
+    Route::get('/legacy/pricing', [FrontendController::class, 'pricing'])->name('pricing');   // moved: /pricing is the Kervea page
     Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
     Route::get('/blog/{id}/{slug}', [FrontendController::class, 'blog_details'])->name('blog.details');
     Route::get('/category/{category}/{slug}', [FrontendController::class, 'blog_category'])->name('blog.category');

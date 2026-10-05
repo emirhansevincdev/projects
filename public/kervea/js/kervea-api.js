@@ -648,7 +648,7 @@ window.renderMatchTable = function(){
 })();
 
 // ───────────────────────── adresler (gerçek URL) ─────────────────────────
-var PATHS={home:'/',add:'/firma-ekle',pricing:'/fiyatlar',about:'/hakkimizda',contact:'/iletisim',login:'/giris',panel:'/uye-paneli'};
+var PATHS={home:'/',add:'/add-company',pricing:'/pricing',about:'/about',contact:'/contact',login:'/login',panel:'/panel'};
 var _go=window.go;
 window.go=function(v){
   _go(v);
@@ -666,7 +666,11 @@ window.addEventListener('popstate',function(){
 document.addEventListener('DOMContentLoaded',function(){
   renderPositions();
   if(BOOT.view==='firm' && BOOT.firm){ api('GET','/kv/firms/'+encodeURIComponent(BOOT.firm)).then(function(r){ if(r.ok){ FIRM_CACHE[BOOT.firm]=r.data; CUR_FIRM=BOOT.firm; renderFirmPage(r.data); go('firm'); } else go('home'); }); }
-  else if(BOOT.view && BOOT.view!=='home'){ _go(BOOT.view); }
+  else if(BOOT.view && BOOT.view!=='home'){
+    _go(BOOT.view);
+    // e.g. /panel opened by a guest lands on the login view: show the matching address
+    var cur=document.querySelector('.view.on'); if(cur && cur.id!==BOOT.view && PATHS[cur.id]){ try{ history.replaceState({kv:cur.id},'',PATHS[cur.id]); }catch(e){} }
+  }
   if(window.KV_USER){ loadMember(); }
   if(/[?&]paid=1/.test(location.search)){ setTimeout(function(){ pingSession(); kvShowAlert('success','Ödeme alındı','Premium üyeliğiniz birkaç saniye içinde aktif olur.'); },600); }
 });

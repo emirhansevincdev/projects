@@ -26,7 +26,7 @@ document.getElementById('spBtn').addEventListener('click', async function(){
   if(body.password!==body.password_confirmation){msg.textContent='Parolalar eşleşmiyor.';return;}
   var r=await fetch('/kv/auth/set-password',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name=csrf-token]').content},body:JSON.stringify(body)});
   var j=await r.json().catch(function(){return{};});
-  if(r.ok){msg.style.color='#0D8A80';msg.textContent='Parolanız kaydedildi. Yönlendiriliyorsunuz…';setTimeout(function(){location.href='/giris';},1200);}
+  if(r.ok){msg.style.color='#0D8A80';msg.textContent='Parolanız kaydedildi. Yönlendiriliyorsunuz…';setTimeout(function(){location.href='/login';},1200);}
   else if(j.error==='invalid_token'){msg.textContent='Bağlantı geçersiz veya süresi dolmuş. Giriş sayfasından yeni bağlantı isteyin.';}
   else{msg.textContent=(j.errors&&Object.values(j.errors)[0][0])||'Parola kurallara uymuyor.';}
 });

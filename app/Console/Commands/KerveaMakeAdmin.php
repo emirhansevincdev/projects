@@ -44,7 +44,7 @@ class KerveaMakeAdmin extends Command
         \App\Services\Kv\LegacyUserColumns::apply($user, 'admin');
         $user->save();
 
-        $this->info("Tamam: {$email} yönetici olarak hazır. Giriş: /giris");
+        $this->info("Tamam: {$email} yönetici olarak hazır. Giriş: /login");
         return self::SUCCESS;
     }
 }

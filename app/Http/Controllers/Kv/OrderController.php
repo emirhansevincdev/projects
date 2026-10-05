@@ -68,8 +68,8 @@ class OrderController extends Controller
                 ],
             ]],
             'metadata' => ['order_id' => (string) $order->id],
-            'success_url' => url('/uye-paneli?paid=1'),
-            'cancel_url' => url('/fiyatlar?cancelled=1'),
+            'success_url' => url('/panel?paid=1'),
+            'cancel_url' => url('/pricing?cancelled=1'),
         ], ['idempotency_key' => 'kv-order-'.$order->id]);
         $order->update(['provider' => 'stripe', 'provider_ref' => $session->id]);
 
