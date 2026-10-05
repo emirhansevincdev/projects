@@ -231,12 +231,17 @@ say "5/7  PHP paketleri"
 STAMPF="$TARGET/vendor/.kervea-lock-md5"
 LOCKSUM="$(md5sum "$TARGET/composer.lock" | cut -d' ' -f1)"
 if [ ! -f "$TARGET/vendor/autoload.php" ] || [ "$(cat "$STAMPF" 2>/dev/null || true)" != "$LOCKSUM" ]; then
-  command -v "$COMPOSER" >/dev/null 2>&1 || die "composer bulunamadı; paketler güncellenemiyor."
-  SHIM="$(mktemp -d)"; ln -s "$(command -v "$PHP")" "$SHIM/php"       # composer, PHP_BIN ile seçilen PHP'yi kullansın
-  (cd "$TARGET" && PATH="$SHIM:$PATH" COMPOSER_ALLOW_SUPERUSER=1 "$COMPOSER" install --no-dev --optimize-autoloader --no-interaction --prefer-dist)
-  rm -rf "$SHIM"
-  printf '%s\n' "$LOCKSUM" > "$STAMPF"
-  ok "Paketler kuruldu"
+  if ! command -v "$COMPOSER" >/dev/null 2>&1; then
+    # Bu sürüm yeni PHP paketi eklemiyor: mevcut vendor/ ile çalışmak güvenlidir
+    [ -f "$TARGET/vendor/autoload.php" ] || die "composer bulunamadı ve vendor/ klasörü yok; paketler kurulamıyor."
+    warn "composer bulunamadı; mevcut paketler olduğu gibi bırakıldı (bu sürümde yeni paket yok)."
+  else
+    SHIM="$(mktemp -d)"; ln -s "$(command -v "$PHP")" "$SHIM/php"       # composer, PHP_BIN ile seçilen PHP'yi kullansın
+    (cd "$TARGET" && PATH="$SHIM:$PATH" COMPOSER_ALLOW_SUPERUSER=1 "$COMPOSER" install --no-dev --optimize-autoloader --no-interaction --prefer-dist)
+    rm -rf "$SHIM"
+    printf '%s\n' "$LOCKSUM" > "$STAMPF"
+    ok "Paketler kuruldu"
+  fi
 else
   ok "Paketler güncel, atlandı"
 fi
