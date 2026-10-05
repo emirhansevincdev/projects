@@ -136,6 +136,7 @@ app/Providers/AppServiceProvider.php
 app/Providers/RouteServiceProvider.php
 app/Services/Kv/FirmPresenter.php
 app/Services/Kv/ImageStore.php
+app/Services/Kv/LegacyUserColumns.php
 app/Services/Kv/Totp.php
 app/View/Components/AppLayout.php
 app/View/Components/GuestLayout.php

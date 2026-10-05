@@ -111,10 +111,10 @@ ok "Veritabanına bağlanıldı"
 # Mevcut 'users' tablosunda, hesap oluşturmayı engelleyecek zorunlu (NOT NULL, varsayılansız) ek sütun var mı?
 BAD="$(artisan tinker --execute='echo "KV_USERCOLS=".collect(Schema::getColumns("users"))->filter(fn($c)=>!$c["nullable"] && $c["default"]===null && empty($c["auto_increment"]) && !in_array($c["name"],["id","name","email","password","role"]))->pluck("name")->implode(",");' 2>/dev/null | grep -o 'KV_USERCOLS=.*' | head -n1 | cut -d= -f2- || true)"
 if [ -n "$BAD" ]; then
-  die "'users' tablosunda varsayılan değeri olmayan zorunlu sütun(lar) var: $BAD
-   Onaylanan firmalar için hesap açılamaz. Bu satırı bana gönderin; tabloyu güvenle düzelteceğim. (Hiçbir şey değiştirilmedi.)"
+  ok "'users' tablosunda ek zorunlu sütunlar var ($BAD): hesap açılırken şablonun kendi değerleriyle otomatik doldurulacak"
+else
+  ok "'users' tablosu uyumlu"
 fi
-ok "'users' tablosu uyumlu"
 
 dbcfg() {
   artisan tinker --execute='$c=config("database.connections.".config("database.default")); foreach(["driver","host","port","database","username","password","unix_socket"] as $k) echo "KV_",$k,"=",base64_encode((string)($c[$k] ?? "")),"\n";' 2>/dev/null \

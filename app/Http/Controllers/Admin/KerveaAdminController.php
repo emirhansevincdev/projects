@@ -58,6 +58,7 @@ class KerveaAdminController extends Controller
             if (! $user) {
                 $user = new User(['name' => $company->rep_name, 'email' => $company->email, 'password' => Str::random(48)]);
                 $user->role = 2;
+                \App\Services\Kv\LegacyUserColumns::apply($user, 'customer');
                 $user->save();
             }
             $company->user_id = $user->id;
