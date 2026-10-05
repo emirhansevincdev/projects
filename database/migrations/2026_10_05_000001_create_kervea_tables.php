@@ -2,13 +2,39 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('kv_sectors', function (Blueprint $table) {
+        // Re-runnable: MySQL DDL is not transactional, so an earlier failed attempt can leave some kv_* tables behind.
+        $create = function (string $name, \Closure $cb) {
+            if (! Schema::hasTable($name)) {
+                Schema::create($name, $cb);
+            }
+        };
+
+        // The legacy (SQL-imported) users.id may be INT / INT UNSIGNED / BIGINT UNSIGNED; an FK column must match it exactly.
+        $idType = strtolower((string) (collect(Schema::getColumns('users'))->firstWhere('name', 'id')['type'] ?? 'bigint unsigned'));
+        $big = str_contains($idType, 'bigint');
+        $unsigned = str_contains($idType, 'unsigned');
+        $engine = in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)
+            ? strtolower((string) (DB::selectOne("select engine as e from information_schema.tables where table_schema = database() and table_name = 'users'")->e ?? 'innodb'))
+            : 'innodb';
+        $userFk = function (Blueprint $t, string $col, string $onDelete, bool $nullable = true) use ($big, $unsigned, $engine) {
+            $c = $big ? ($unsigned ? $t->unsignedBigInteger($col) : $t->bigInteger($col))
+                      : ($unsigned ? $t->unsignedInteger($col) : $t->integer($col));
+            if ($nullable) { $c->nullable(); }
+            if ($engine === 'innodb') {
+                $t->foreign($col)->references('id')->on('users')->onDelete($onDelete);
+            } else {
+                $t->index($col);
+            }
+        };
+
+        $create('kv_sectors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('parent_id')->nullable()->constrained('kv_sectors')->nullOnDelete();
             $table->string('slug')->unique();
@@ -19,7 +45,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_countries', function (Blueprint $table) {
+        $create('kv_countries', function (Blueprint $table) {
             $table->string('cc', 2)->primary();
             $table->json('names');                 // {tr,en,es,fr,ar,ru} official names
             $table->unsignedInteger('sort')->default(0);
@@ -27,14 +53,14 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_companies', function (Blueprint $table) {
+        $create('kv_companies', function (Blueprint $table) use ($userFk) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $userFk($table, 'user_id', 'set null');
             $table->string('slug')->unique();
             $table->string('status', 16)->default('pending')->index(); // pending|approved|rejected|suspended
             $table->text('review_note')->nullable();
             $table->timestamp('reviewed_at')->nullable();
-            $table->foreignId('reviewed_by')->nullable()->constrained('users')->nullOnDelete();
+            $userFk($table, 'reviewed_by', 'set null');
             $table->boolean('is_verified')->default(false);
 
             // identity
@@ -77,7 +103,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_company_photos', function (Blueprint $table) {
+        $create('kv_company_photos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('kv_companies')->cascadeOnDelete();
             $table->string('path');
@@ -85,7 +111,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_company_documents', function (Blueprint $table) {
+        $create('kv_company_documents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('kv_companies')->cascadeOnDelete();
             $table->string('path');                    // private disk only
@@ -95,9 +121,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_consents', function (Blueprint $table) {
+        $create('kv_consents', function (Blueprint $table) use ($userFk) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $userFk($table, 'user_id', 'set null');
             $table->foreignId('company_id')->nullable()->constrained('kv_companies')->nullOnDelete();
             $table->string('email')->nullable();
             $table->string('type', 32)->index();       // kvkk|terms|verification|marketing|contact_visibility|cross_border|cookies
@@ -108,7 +134,7 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();
         });
 
-        Schema::create('kv_contact_messages', function (Blueprint $table) {
+        $create('kv_contact_messages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
@@ -119,7 +145,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_promo_codes', function (Blueprint $table) {
+        $create('kv_promo_codes', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique();
             $table->string('type', 8)->default('percent'); // percent|fixed
@@ -133,9 +159,9 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_orders', function (Blueprint $table) {
+        $create('kv_orders', function (Blueprint $table) use ($userFk) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $userFk($table, 'user_id', 'cascade', false);
             $table->foreignId('company_id')->nullable()->constrained('kv_companies')->nullOnDelete();
             $table->string('plan', 16);                    // pro|enterprise
             $table->string('period', 8)->default('year');  // month|year
@@ -150,13 +176,43 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('kv_reveals', function (Blueprint $table) {
+        $create('kv_reveals', function (Blueprint $table) use ($userFk) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $userFk($table, 'user_id', 'cascade', false);
             $table->foreignId('company_id')->constrained('kv_companies')->cascadeOnDelete();
             $table->timestamp('created_at')->useCurrent();
             $table->unique(['user_id', 'company_id']);
         });
+
+        // The Kervea API uses throttle:* (cache) and sessions; a SQL-imported install may lack the tables of the configured "database" drivers.
+        if (config('cache.default') === 'database') {
+            $ct = config('cache.stores.database.table', 'cache');
+            $lt = config('cache.stores.database.lock_table', 'cache_locks');
+            if (! Schema::hasTable($ct)) {
+                Schema::create($ct, function (Blueprint $t) {
+                    $t->string('key')->primary();
+                    $t->mediumText('value');
+                    $t->integer('expiration');
+                });
+            }
+            if (! Schema::hasTable($lt)) {
+                Schema::create($lt, function (Blueprint $t) {
+                    $t->string('key')->primary();
+                    $t->string('owner');
+                    $t->integer('expiration');
+                });
+            }
+        }
+        if (config('session.driver') === 'database' && ! Schema::hasTable(config('session.table', 'sessions'))) {
+            Schema::create(config('session.table', 'sessions'), function (Blueprint $t) {
+                $t->string('id')->primary();
+                $t->unsignedBigInteger('user_id')->nullable()->index();
+                $t->string('ip_address', 45)->nullable();
+                $t->text('user_agent')->nullable();
+                $t->longText('payload');
+                $t->integer('last_activity')->index();
+            });
+        }
 
         // Password setup / reset links need this table; the template's SQL installer may not have created it.
         if (! Schema::hasTable('password_reset_tokens')) {
