@@ -37,7 +37,47 @@ class MemberController extends Controller
                 'raw' => $c->only(['name', 'name_en', 'tax_id', 'mersis', 'founded_year', 'employees', 'country_cc', 'city', 'address', 'website', 'kep', 'email', 'phone', 'rep_name', 'rep_title', 'rep_email', 'direction', 'hs_codes', 'moq', 'incoterm', 'payment_terms', 'products', 'description', 'certificates', 'social']),
             ] : null,
             'consents' => $consents,
+            'documents' => $c ? $c->documents->map(fn ($d) => [
+                'name' => $d->original_name, 'mime' => $d->mime, 'size' => $d->size, 'at' => $d->created_at->toDateString(),
+            ])->all() : [],
         ])->header('Cache-Control', 'no-store');
+    }
+
+    /** Add verification documents later from the panel (same content checks as the application form). */
+    public function addDocuments(Request $r)
+    {
+        $company = $this->company($r);
+        abort_unless($company, 404);
+        $max = config('kervea.uploads.max_docs');
+        $v = $r->validate([
+            'documents' => 'required|array|min:1|max:'.$max,
+            'documents.*' => 'file|mimetypes:application/pdf,image/jpeg,image/png,image/webp|max:'.config('kervea.uploads.doc_max_kb'),
+        ]);
+        if ($company->documents()->count() + count($v['documents']) > $max) {
+            return response()->json(['message' => "En fazla {$max} belge yüklenebilir."], 422);
+        }
+        try {
+            foreach ($r->file('documents') as $f) {
+                \App\Models\Kv\CompanyDocument::create(['company_id' => $company->id] + \App\Services\Kv\ImageStore::saveDocument($f, 'kv/docs/'.$company->id));
+            }
+        } catch (\InvalidArgumentException $e) {
+            return response()->json(['message' => 'Dosya kabul edilmedi: '.$e->getMessage()], 422);
+        }
+        return response()->json(['ok' => true]);
+    }
+
+    /** KVKK m.11 – right of access: everything we hold about the member as a JSON download. */
+    public function export(Request $r)
+    {
+        $c = Company::with(['sector', 'photos', 'documents', 'consents'])->where('user_id', $r->user()->id)->first();
+        $data = [
+            'exported_at' => now()->toIso8601String(),
+            'account' => $r->user()->only(['name', 'email', 'created_at']),
+            'company' => $c?->makeHidden(['user_id'])->toArray(),
+            'consents' => $c?->consents->map->only(['type', 'version', 'granted', 'ip', 'created_at'])->all(),
+            'orders' => \App\Models\Kv\Order::where('user_id', $r->user()->id)->get(['id', 'plan', 'amount_cents', 'currency', 'status', 'created_at'])->all(),
+        ];
+        return response()->json($data, 200, ['Content-Disposition' => 'attachment; filename="kervea-verilerim.json"'], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     /** Withdrawal of consent (KVKK m.11). Mandatory consents can only be withdrawn by closing the account. */

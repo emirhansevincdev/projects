@@ -3,6 +3,9 @@
 return [
     'asset_version' => env('KERVEA_ASSET_VERSION', '1'),
 
+    // Legacy template routes (directory/listing front-end, customer/agent areas, installer). Keep false.
+    'legacy_routes' => (bool) env('KERVEA_LEGACY_ROUTES', false),
+
     // Notifications about new applications / contact messages (falls back to all admin users).
     'admin_email' => env('KERVEA_ADMIN_EMAIL'),
 

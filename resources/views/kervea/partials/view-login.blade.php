@@ -4,7 +4,12 @@
   <div class="kv-login-card">
     <div class="kv-login-hd">
       <div class="kv-login-logo">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <svg width="44" height="44" viewBox="0 0 200 200" aria-hidden="true"><defs><linearGradient id="lgl" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#0A5F56"/></linearGradient></defs>
+<circle cx="100" cy="100" r="92" fill="url(#lgl)"/>
+<path transform="translate(100 100) rotate(45) scale(.58) translate(-100 -100)" d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8" fill-opacity=".45"/>
+<path d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8"/>
+<circle cx="100" cy="100" r="10" fill="#0A5F56"/>
+</svg>
       </div>
       <h2 data-i18n="login_h">Kervea'ya giriş yap</h2>
       <p data-i18n="login_p">Doğrulanmış B2B ticaret ağınıza erişin</p>

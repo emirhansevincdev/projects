@@ -1,7 +1,12 @@
 @verbatim
 <nav class="nav"><div class="wrap">
  <a class="brand" onclick="go('home')">
-  <svg width="26" height="26" viewBox="0 0 200 200"><defs><linearGradient id="lg" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#0A5F56"/></linearGradient></defs><circle cx="100" cy="100" r="92" fill="url(#lg)"/><path d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8"/><circle cx="100" cy="100" r="10" fill="#0A5F56"/></svg>
+  <svg width="26" height="26" viewBox="0 0 200 200" aria-hidden="true"><defs><linearGradient id="lg" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#0A5F56"/></linearGradient></defs>
+<circle cx="100" cy="100" r="92" fill="url(#lg)"/>
+<path transform="translate(100 100) rotate(45) scale(.58) translate(-100 -100)" d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8" fill-opacity=".45"/>
+<path d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8"/>
+<circle cx="100" cy="100" r="10" fill="#0A5F56"/>
+</svg>
   <span>KER<span class="v">VEA</span></span>
  </a>
  <div class="tabs">

@@ -1832,33 +1832,7 @@ Object.keys(ADD).forEach(function(lg){if(!T[lg]) T[lg]={}; Object.keys(ADD[lg]).
 
 
 // =================== POSITIONS (firms) ===================
-var POS = [
- {id:"p01",code:"TR",dst:"FI",uyum:96,lg:"NK",nm:"Nordic Kaluste Oy",fc:"fi",cn_key:"fi",yr:2003,dir:"IMP",sec:9,hs:"8302",moq:"120.000 adet/yıl",inc:"DAP Turku",pay:"TT 30 gün",web:"https://nordickaluste.fi",tem:"Erik Nordström",tags:["Mobilya aksesuarları","Menteşe","Teleskopik ray"],hist:[["IM","8302 Mobilya aksesuarı","4.2M USD"],["EX","9403 Ofis mobilyası","1.1M USD"]]},
- {id:"p02",code:"TR",dst:"FI",uyum:88,lg:"HM",nm:"Helsinki Möbler",fc:"fi",cn_key:"fi",yr:2010,dir:"IMP",sec:9,hs:"8302",moq:"50.000 adet/yıl",inc:"FOB Helsinki",pay:"LC",web:"https://helsinkimobler.fi",tem:"Anna Virtanen"},
- {id:"p03",code:"TR",dst:"CI",uyum:94,lg:"AC",nm:"Abidjan Cacao Export SA",fc:"ci",cn_key:"ci",yr:2001,dir:"EXP",sec:2,hs:"1801",moq:"25 ton",inc:"FOB San Pédro",pay:"LC",web:"https://abidjancacao.ci",tem:"Kouassi N'Guessan",tags:["Kakao çekirdeği","Kakao yağı","Kakao tozu"]},
- {id:"p04",code:"TR",dst:"CI",uyum:91,lg:"YC",nm:"Yamoussoukro Cocoa Coop",fc:"ci",cn_key:"ci",yr:1995,dir:"EXP",sec:2,hs:"1801",moq:"50 ton",inc:"FOB Abidjan",pay:"TT + LC",web:"https://yc-coop.ci",tem:"Aya Bamba"},
- {id:"p05",code:"TR",dst:"KZ",uyum:93,lg:"AT",nm:"Almaty Tekstil",fc:"kz",cn_key:"kz",yr:2005,dir:"IMP",sec:10,hs:"5208",moq:"10 ton",inc:"DAP Almaty",pay:"TT 45 gün",web:"https://almaty-tekstil.kz",tem:"Nurlan Bekov"},
- {id:"p06",code:"TR",dst:"KZ",uyum:87,lg:"AS",nm:"Astana Textile Group",fc:"kz",cn_key:"kz",yr:2012,dir:"IMP",sec:10,hs:"5208",moq:"5 ton",inc:"FCA",pay:"LC",web:"https://astana-textile.kz",tem:"Aigerim Sultan"},
- {id:"p07",code:"TR",dst:"TM",uyum:94,lg:"AT",nm:"Aşgabat Tekstil Kompleksi",fc:"tm",cn_key:"tm",yr:2004,dir:"EXP",sec:10,hs:"5205",moq:"5 ton",inc:"FOB · CIF",pay:"LC · TT",web:"https://asgabat-tex.tm",tem:"Serdar Meredow"},
- {id:"p08",code:"TR",dst:"IT",uyum:84,lg:"MM",nm:"Milano Machinery Srl",fc:"it",cn_key:"it",yr:1990,dir:"EXP",sec:18,hs:"8445",moq:"1 adet",inc:"EXW Milano",pay:"LC",web:"https://milanomach.it",tem:"Giuseppe Rossi"},
- {id:"p09",code:"TR",dst:"IN",uyum:81,lg:"MC",nm:"Mumbai Chemical Ltd",fc:"in",cn_key:"in",yr:1996,dir:"EXP",sec:13,hs:"2917",moq:"5 ton",inc:"FOB Mumbai",pay:"LC",web:"https://mumbaichem.in",tem:"Rajesh Patel"},
- {id:"p10",code:"TR",dst:"UA",uyum:87,lg:"KG",nm:"Kyiv Grain Trading",fc:"ua",cn_key:"ua",yr:2003,dir:"EXP",sec:0,hs:"1001",moq:"3.000 ton",inc:"FOB Odessa",pay:"LC",web:"https://kyivgrain.ua",tem:"Olena Kovalenko"},
- {id:"p11",code:"TR",dst:"DE",uyum:92,lg:"BG",nm:"Berlin Autoparts GmbH",fc:"de",cn_key:"de",yr:1988,dir:"IMP",sec:15,hs:"8708",moq:"1000 adet",inc:"DAP Berlin",pay:"TT",web:"https://berlin-auto.de",tem:"Hans Mueller"},
- {id:"p12",code:"TR",dst:"AE",uyum:89,lg:"DP",nm:"Dubai Petrochem FZ",fc:"ae",cn_key:"ae",yr:2008,dir:"EXP",sec:13,hs:"3901",moq:"20 ton",inc:"FOB Jebel Ali",pay:"LC",web:"https://dubaipetro.ae",tem:"Ahmed Al-Rashid"},
- {id:"p13",code:"TR",dst:"BR",uyum:85,lg:"SP",nm:"São Paulo Coffee Co",fc:"br",cn_key:"br",yr:1975,dir:"EXP",sec:5,hs:"0901",moq:"18 ton",inc:"FOB Santos",pay:"LC",web:"https://spcoffee.br",tem:"Carlos Silva"},
- {id:"p14",code:"TR",dst:"CN",uyum:90,lg:"SG",nm:"Shanghai Electronics",fc:"cn",cn_key:"cn",yr:1999,dir:"EXP",sec:17,hs:"8517",moq:"5000 adet",inc:"FOB Shanghai",pay:"TT",web:"https://sh-elec.cn",tem:"Li Wei"},
- {id:"p15",code:"TR",dst:"EG",uyum:86,lg:"CT",nm:"Cairo Textiles Group",fc:"eg",cn_key:"eg",yr:2001,dir:"IMP",sec:10,hs:"5208",moq:"12 ton",inc:"CIF Alexandria",pay:"LC",web:"https://cairotex.eg",tem:"Mohammed Hassan"},
- {id:"p16",code:"TR",dst:"MX",uyum:82,lg:"MT",nm:"Mexico Tequila Export",fc:"mx",cn_key:"mx",yr:1985,dir:"EXP",sec:5,hs:"2208",moq:"5000 şişe",inc:"FOB Veracruz",pay:"TT",web:"https://mtequila.mx",tem:"Juan García"},
- {id:"p17",code:"TR",dst:"JP",uyum:91,lg:"TG",nm:"Tokyo Green Tea Co",fc:"jp",cn_key:"jp",yr:1965,dir:"EXP",sec:1,hs:"0902",moq:"2 ton",inc:"FOB Yokohama",pay:"LC",web:"https://tokyogreen.jp",tem:"Takashi Yamamoto"},
- {id:"p18",code:"TR",dst:"ZA",uyum:83,lg:"JW",nm:"Johannesburg Wine",fc:"za",cn_key:"za",yr:1992,dir:"EXP",sec:5,hs:"2204",moq:"1000 şişe",inc:"FOB Cape Town",pay:"LC",web:"https://jhbwine.za",tem:"Peter van der Merwe"},
- {id:"p19",code:"TR",dst:"NG",uyum:80,lg:"LO",nm:"Lagos Oil Traders",fc:"ng",cn_key:"ng",yr:2000,dir:"EXP",sec:13,hs:"2709",moq:"1000 varil",inc:"FOB Lagos",pay:"LC",web:"https://lagosoil.ng",tem:"Adebayo Okonkwo"},
- {id:"p20",code:"TR",dst:"VN",uyum:88,lg:"HC",nm:"Ho Chi Minh Coffee",fc:"vn",cn_key:"vn",yr:1998,dir:"EXP",sec:5,hs:"0901",moq:"15 ton",inc:"FOB HCM",pay:"TT",web:"https://hcmcoffee.vn",tem:"Nguyen Van An"},
- {id:"p21",code:"TR",dst:"PL",uyum:85,lg:"WF",nm:"Warsaw Furniture",fc:"pl",cn_key:"pl",yr:2007,dir:"IMP",sec:9,hs:"9403",moq:"500 adet",inc:"DAP Warsaw",pay:"TT",web:"https://warsawfurn.pl",tem:"Piotr Kowalski"},
- {id:"p22",code:"TR",dst:"AR",uyum:84,lg:"BA",nm:"Buenos Aires Beef",fc:"ar",cn_key:"ar",yr:1970,dir:"EXP",sec:8,hs:"0201",moq:"10 ton",inc:"FOB Buenos Aires",pay:"LC",web:"https://babeef.ar",tem:"Diego Fernández"},
- {id:"p23",code:"TR",dst:"NL",uyum:89,lg:"AM",nm:"Amsterdam Flowers",fc:"nl",cn_key:"nl",yr:1985,dir:"EXP",sec:7,hs:"0603",moq:"1000 buket",inc:"FCA Amsterdam",pay:"TT",web:"https://amsflowers.nl",tem:"Jan de Vries"},
- {id:"p24",code:"TR",dst:"SA",uyum:87,lg:"RD",nm:"Riyadh Dates Export",fc:"sa",cn_key:"sa",yr:1980,dir:"EXP",sec:3,hs:"0804",moq:"5 ton",inc:"FOB Jeddah",pay:"LC",web:"https://riyadhdates.sa",tem:"Khalid Al-Saud"},
- {id:"p25",code:"TR",dst:"CL",uyum:82,lg:"SL",nm:"Santiago Lithium Ltd",fc:"cl",cn_key:"cl",yr:2010,dir:"EXP",sec:25,hs:"2530",moq:"20 ton",inc:"FOB Valparaiso",pay:"LC",web:"https://santlithium.cl",tem:"María González"}
-];
+var POS = []; // filled from /kv/firms (server decides what each viewer may see)
 
 
 // =================== STATE ===================
@@ -2599,28 +2573,7 @@ function renderSecChipInto(selId, chipId){
 }
 
 // ================== KİŞİLER (Prospeo-style contact discovery) ==================
-var PEOPLE = [
- {id:"p1",  nm:"Mikko Virtanen",    role:"ceo",        ttl:"CEO & Founder",             cmp:"Nordic Kaluste Oy",    cc:"fi",cn:"Finlandiya", sec:9,  em:"m.virtanen@nordic-kaluste.fi",   ph:"+358 40 123 4567"},
- {id:"p2",  nm:"Sanni Korhonen",    role:"purchasing", ttl:"Satın Alma Müdürü",         cmp:"Nordic Kaluste Oy",    cc:"fi",cn:"Finlandiya", sec:9,  em:"s.korhonen@nordic-kaluste.fi",   ph:"+358 40 234 5678"},
- {id:"p3",  nm:"Kwame Adjei",       role:"export",     ttl:"Export Director",           cmp:"Abidjan Cacao Export", cc:"ci",cn:"Fildişi",     sec:3,  em:"k.adjei@abidjancacao.ci",        ph:"+225 27 22 45 67"},
- {id:"p4",  nm:"Aïcha Traoré",      role:"sales",      ttl:"Regional Sales Head",       cmp:"Abidjan Cacao Export", cc:"ci",cn:"Fildişi",     sec:3,  em:"a.traore@abidjancacao.ci",       ph:"+225 27 22 45 89"},
- {id:"p5",  nm:"Aidos Bekmuratov",  role:"ceo",        ttl:"Genel Müdür",               cmp:"Almaty Tekstil LLP",   cc:"kz",cn:"Kazakistan",  sec:10, em:"a.bekmuratov@almaty-textile.kz", ph:"+7 727 345 67 89"},
- {id:"p6",  nm:"Elena Nurtay",      role:"purchasing", ttl:"Satın Alma Direktörü",      cmp:"Almaty Tekstil LLP",   cc:"kz",cn:"Kazakistan",  sec:10, em:"e.nurtay@almaty-textile.kz",    ph:"+7 727 345 67 90"},
- {id:"p7",  nm:"Marco Rossi",       role:"ceo",        ttl:"Fondatore & CEO",           cmp:"Milano Machinery Srl", cc:"it",cn:"İtalya",      sec:18, em:"m.rossi@milanomachinery.it",     ph:"+39 02 8956 1234"},
- {id:"p8",  nm:"Giulia Ferrari",    role:"export",     ttl:"Responsabile Export",       cmp:"Milano Machinery Srl", cc:"it",cn:"İtalya",      sec:18, em:"g.ferrari@milanomachinery.it",   ph:"+39 02 8956 1245"},
- {id:"p9",  nm:"Ahmed Al-Rashid",   role:"purchasing", ttl:"Procurement Manager",       cmp:"Dubai Trading LLC",    cc:"ae",cn:"BAE",         sec:19, em:"ahmed@dubaitrading.ae",          ph:"+971 4 123 4567"},
- {id:"p10", nm:"Fatima Al-Zaabi",   role:"ceo",        ttl:"Managing Director",         cmp:"Dubai Trading LLC",    cc:"ae",cn:"BAE",         sec:19, em:"fatima@dubaitrading.ae",         ph:"+971 4 123 4589"},
- {id:"p11", nm:"Rajesh Sharma",     role:"ceo",        ttl:"Founder & MD",              cmp:"Mumbai Impex Pvt Ltd", cc:"in",cn:"Hindistan",   sec:10, em:"rajesh@mumbaiimpex.in",          ph:"+91 22 4567 8901"},
- {id:"p12", nm:"Priya Nair",        role:"sales",      ttl:"International Sales Head",  cmp:"Mumbai Impex Pvt Ltd", cc:"in",cn:"Hindistan",   sec:10, em:"priya@mumbaiimpex.in",           ph:"+91 22 4567 8912"},
- {id:"p13", nm:"Wei Zhang",         role:"export",     ttl:"外贸经理 (Export Manager)",  cmp:"Shanghai Textile Co.", cc:"cn",cn:"Çin",         sec:10, em:"wei.zhang@shanghaitex.cn",       ph:"+86 21 5432 1098"},
- {id:"p14", nm:"Li Chen",           role:"purchasing", ttl:"采购总监 (Procurement Dir.)",cmp:"Shanghai Textile Co.", cc:"cn",cn:"Çin",         sec:10, em:"li.chen@shanghaitex.cn",         ph:"+86 21 5432 1099"},
- {id:"p15", nm:"Hans Müller",       role:"purchasing", ttl:"Einkaufsleiter",            cmp:"Berlin Möbel GmbH",    cc:"de",cn:"Almanya",     sec:9,  em:"h.mueller@berlin-moebel.de",     ph:"+49 30 1234 5678"},
- {id:"p16", nm:"Sophie Weber",      role:"sales",      ttl:"Vertriebsleiterin",         cmp:"Berlin Möbel GmbH",    cc:"de",cn:"Almanya",     sec:9,  em:"s.weber@berlin-moebel.de",       ph:"+49 30 1234 5689"},
- {id:"p17", nm:"Adebayo Okonkwo",   role:"ceo",        ttl:"Managing Director",         cmp:"Lagos Trade Ltd",      cc:"ng",cn:"Nijerya",     sec:0,  em:"a.okonkwo@lagostrade.ng",        ph:"+234 1 456 7890"},
- {id:"p18", nm:"Chioma Eze",        role:"ops",        ttl:"Operations Head",           cmp:"Lagos Trade Ltd",      cc:"ng",cn:"Nijerya",     sec:0,  em:"c.eze@lagostrade.ng",            ph:"+234 1 456 7891"},
- {id:"p19", nm:"Jean-Pierre Dubois",role:"export",     ttl:"Directeur Export",          cmp:"Paris Négoce SA",      cc:"fr",cn:"Fransa",      sec:14, em:"jp.dubois@parisnegoce.fr",       ph:"+33 1 2345 6789"},
- {id:"p20", nm:"Amélie Laurent",    role:"purchasing", ttl:"Acheteuse Senior",          cmp:"Paris Négoce SA",      cc:"fr",cn:"Fransa",      sec:14, em:"a.laurent@parisnegoce.fr",       ph:"+33 1 2345 6790"},
-];
+var PEOPLE = []; // no demo people: person directory is not backed by real data yet
 
 var REVEALED = { em: {}, ph: {} };
 var PPL_FILTER = "all", PPL_QUERY = "";
@@ -2874,74 +2827,7 @@ function filterMsgList(q){
  });
 }
 // =================== MESSAGES (fully functional conversation panel) ===================
-var CONVOS = {
- nordic:{
-  nm:"Nordic Kaluste Oy · Mikko Virtanen", av:"NK", avc:["#8a5a2e","#b47a49"],
-  cn:"Finlandiya", lg:"FI", lg_full:"Fince",
-  msgs:[
-    {f:"them", tr:"Merhaba! Türkiye'den mobilya aksesuarı arıyoruz. HS 9403 kapsamında sunumunuzu inceledik. 500 adet metal mobilya iskeleti için fiyat teklifi alabilir miyiz? CFR Helsinki, Ocak 2027 teslim.",
-     orig:"Hei! Etsimme huonekalutarvikkeita Turkista. Tutkimme esityksesi HS 9403 alle…", tm:"14:15", who:"Mikko Virtanen"},
-    {f:"me", tr:"Merhaba Mikko, teklifinizi hazırlıyoruz. 500 adet için birim fiyat CFR Helsinki $47.50 · minimum sipariş karşılandı · L/C veya %30 avans + %70 B/L kopyasında ödeme koşulları geçerli.", tm:"14:18"},
-    {f:"me", tr:"Ürün kataloğumuzun son sürümü ekte. Sertifikalarımız (ISO 9001, FSC, TSE) sayfa 12'de.",
-     attach:{name:"Katalog-2026-Q3.pdf", size:"8.4 MB · PDF"}, tm:"14:19"},
-    {f:"them", tr:"Hızlı teklif için teşekkürler! Fiyat rekabetçi. 500 adet yerine 800 adet için indirim yapabilir misiniz? Ayrıca gümrük hattımızın Rotterdam üzerinden geçmesini tercih ederiz.",
-     orig:"Tack för snabb offert! Priset är konkurrenskraftigt. Kan ni ge rabatt för 800 st…", tm:"14:22", who:"Mikko Virtanen"}
-  ], typing:true
- },
- abidjan:{
-  nm:"Abidjan Cacao Export · Kouassi N'Guessan", av:"AC", avc:["#c4a06a","#8a5a2e"],
-  cn:"Fildişi Sahili", lg:"FR", lg_full:"Fransızca",
-  msgs:[
-    {f:"them", tr:"Merhaba, 25 ton fermente kakao çekirdeği için fiyat teklifi rica ediyoruz. FOB San Pédro tercih ederiz.",
-     orig:"Bonjour, nous avons besoin de 25 tonnes de fèves de cacao fermentées. FOB San Pédro préféré.", tm:"09:15", who:"Kouassi N'Guessan"},
-    {f:"me", tr:"Merhaba Kouassi Bey, 25 ton fermente kakao stoktan hazır. FOB San Pédro USD 2.850/ton. Ödeme LC ile.", tm:"09:32"},
-    {f:"them", tr:"Teşekkürler. LC hazırlığı yapıyoruz — önümüzdeki hafta konfirmasyon yollayacağız.",
-     orig:"Merci. LC hazırlığı — nous confirmons la semaine prochaine.", tm:"09:47", who:"Kouassi N'Guessan"}
-  ]
- },
- almaty:{
-  nm:"Almaty Tekstil · Nurlan Bekov", av:"AT", avc:["#0D8A80","#0A5F56"],
-  cn:"Kazakistan", lg:"RU", lg_full:"Rusça",
-  msgs:[
-    {f:"them", tr:"Merhaba! Bize 10 ton pamuklu bez lazım, teklif alabilir miyim?",
-     orig:"Здравствуйте! Пришлите пожалуйста коммерческое предложение на 10 тонн хлопковой ткани.", tm:"Dün 11:20", who:"Nurlan Bekov"},
-    {f:"me", tr:"Merhaba Nurlan Bey, 10 ton için DAP Almaty USD 3.20/kg. 45 gün vade ile ödeme yapabilirsiniz.", tm:"Dün 14:05"},
-    {f:"them", tr:"Fiyat uygun. Numune 5 kg gönderebilir misiniz? DHL ile.",
-     orig:"Цена подходит. Образец 5 кг DHL?", tm:"Dün 15:30", who:"Nurlan Bekov"}
-  ]
- },
- milano:{
-  nm:"Milano Machinery Srl · Giuseppe Rossi", av:"MM", avc:["#8b5cf6","#6366f1"],
-  cn:"İtalya", lg:"IT", lg_full:"İtalyanca",
-  msgs:[
-    {f:"them", tr:"Günaydın, HS 8445 halka iplik makinesi için teklif rica ediyorum.",
-     orig:"Buongiorno, richiedo preventivo per macchina filatoio ring HS 8445.", tm:"2 gün önce", who:"Giuseppe Rossi"},
-    {f:"me", tr:"Merhaba Giuseppe Bey, halka iplik makinesi için ayrıntılı teklif hazırlıyoruz. Yarın gönderiyoruz.", tm:"2 gün önce"},
-    {f:"them", tr:"Çok teşekkürler, teklif geldi. İnceliyoruz.",
-     orig:"Grazie mille, il preventivo è arrivato. Lo esaminiamo.", tm:"2 gün önce", who:"Giuseppe Rossi"}
-  ]
- },
- dubai:{
-  nm:"Dubai Trading LLC · Ahmed Al-Rashid", av:"DT", avc:["#3b82f6","#60a5fa"],
-  cn:"BAE", lg:"AR", lg_full:"Arapça",
-  msgs:[
-    {f:"them", tr:"Selamlar, HS 3901 PP granül için 20 ton siparişimiz olacak. FOB Jebel Ali fiyatı?",
-     orig:"مرحبا، لدينا طلبية 20 طن حبيبات PP HS 3901. سعر FOB Jebel Ali؟", tm:"3 gün önce", who:"Ahmed Al-Rashid"},
-    {f:"me", tr:"Merhaba Ahmed Bey, 20 ton PP granül FOB Jebel Ali USD 1.150/ton. LC ile ödeme.", tm:"3 gün önce"},
-    {f:"them", tr:"Hızlı cevap için teşekkür ederim. LC açıyoruz.",
-     orig:"شكراً لكم على الاستجابة السريعة. نفتح LC.", tm:"3 gün önce", who:"Ahmed Al-Rashid"}
-  ]
- },
- mumbai:{
-  nm:"Mumbai Chemical Ltd · Rajesh Patel", av:"MI", avc:["#22c55e","#16a34a"],
-  cn:"Hindistan", lg:"EN", lg_full:"İngilizce",
-  msgs:[
-    {f:"them", tr:"Merhaba, gönderdiğiniz numuneler için teşekkürler — test ediyoruz.",
-     orig:"Thank you for the samples, we're testing them now. Will confirm by end of week.", tm:"5 gün önce", who:"Rajesh Patel"},
-    {f:"me", tr:"Rica ederim Rajesh Bey, test sonuçlarınızı bekliyoruz. Herhangi bir sorunuz olursa ulaşın.", tm:"5 gün önce"}
-  ]
- }
-};
+var CONVOS = {};
 
 var CUR_CONV = "nordic";
 
@@ -3590,26 +3476,7 @@ function openGate(reason){
 // ================ VISITS / PROFILE VIEWERS (simulated real data) ================
 // In production these come from server-side IP geolocation + auth session logs.
 // Here we build a plausible pool of profile visits to demo the UX.
-var VISITS = (function(){
- var pool=[
-  {id:"v01",nm:"Bosch Global Trade GmbH",cc:"de",city:"Stuttgart",when:"2 saat önce",tsMin:120,ip:"91.204.xx.xx"},
-  {id:"v02",nm:"Carrefour Sourcing SA",cc:"fr",city:"Lyon",when:"4 saat önce",tsMin:240,ip:"78.192.xx.xx"},
-  {id:"v03",nm:"Abidjan Cocoa Traders",cc:"ci",city:"Abidjan",when:"6 saat önce",tsMin:360,ip:"41.203.xx.xx"},
-  {id:"v04",nm:"KazMinerals LLP",cc:"kz",city:"Almatı",when:"9 saat önce",tsMin:540,ip:"178.91.xx.xx"},
-  {id:"v05",nm:"Emirates Import House",cc:"ae",city:"Dubai",when:"1 gün önce",tsMin:1440,ip:"94.204.xx.xx"},
-  {id:"v06",nm:"Milano Machinery Srl",cc:"it",city:"Milano",when:"1 gün önce",tsMin:1500,ip:"151.55.xx.xx"},
-  {id:"v07",nm:"Rotterdam Port Logistics",cc:"nl",city:"Rotterdam",when:"1 gün önce",tsMin:1620,ip:"145.132.xx.xx"},
-  {id:"v08",nm:"Shanghai Sinotex Co.",cc:"cn",city:"Şanghay",when:"2 gün önce",tsMin:2880,ip:"116.226.xx.xx"},
-  {id:"v09",nm:"Berlin Autoparts GmbH",cc:"de",city:"Berlin",when:"2 gün önce",tsMin:3000,ip:"88.130.xx.xx"},
-  {id:"v10",nm:"Nordic Kaluste Oy",cc:"fi",city:"Helsinki",when:"3 gün önce",tsMin:4320,ip:"85.156.xx.xx"},
-  {id:"v11",nm:"Lyon Cotton SARL",cc:"fr",city:"Lyon",when:"3 gün önce",tsMin:4400,ip:"90.34.xx.xx"},
-  {id:"v12",nm:"Munich Textiles AG",cc:"de",city:"Münih",when:"4 gün önce",tsMin:5760,ip:"87.180.xx.xx"},
-  {id:"v13",nm:"Mumbai Spice Traders Pvt.",cc:"in",city:"Mumbai",when:"5 gün önce",tsMin:7200,ip:"117.220.xx.xx"},
-  {id:"v14",nm:"Lagos Cocoa Bureau",cc:"ng",city:"Lagos",when:"6 gün önce",tsMin:8640,ip:"197.210.xx.xx"},
-  {id:"v15",nm:"Karagandy Agro",cc:"kz",city:"Karaganda",when:"1 hafta önce",tsMin:10080,ip:"178.88.xx.xx"}
- ];
- return pool;
-})();
+var VISITS = []; // profile-view analytics are not collected yet
 // Localize "X gün/saat önce" for the current lang
 function relTime(mins){
  var Ls={tr:{h:"saat önce",d:"gün önce",w:"hafta önce"},en:{h:"h ago",d:"d ago",w:"w ago"},es:{h:"hace h",d:"hace d",w:"hace sem"},fr:{h:"il y a h",d:"il y a j",w:"il y a sem"},ar:{h:"قبل ساعة",d:"قبل يوم",w:"قبل أسبوع"},ru:{h:"ч назад",d:"д назад",w:"нед назад"}};
@@ -4081,12 +3948,7 @@ function scrollAnchor(id, ev){
 }
 
 // =================== TEAM MANAGEMENT (menu, invite, permissions) ===================
-var TEAM_USERS = {
- emrah:{nm:"Emrah Yılmaz", em:"emrah@kervea.com", role:"owner", av:"EY", avc:["#0D8A80","#0A5F56"], perms:["messages","matches","profile","docs","analytics","team"]},
- selin:{nm:"Selin Demir", em:"selin.demir@kervea.com", role:"admin", av:"SD", avc:["#8b5cf6","#6366f1"], perms:["messages","matches","profile","docs","analytics","team"]},
- mehmet:{nm:"Mehmet Karaca", em:"mehmet.k@kervea.com", role:"sales", av:"MK", avc:["#c78a2a","#e6a54a"], perms:["messages","matches"]},
- ayse:{nm:"Ayşe Şahin", em:"ayse.sahin@kervea.com", role:"ops", av:"AŞ", avc:["#3b82f6","#60a5fa"], perms:["profile","docs"]}
-};
+var TEAM_USERS = {};
 var TM_CUR_USER = null;
 var TM_INV_ROLE = "sales";
 

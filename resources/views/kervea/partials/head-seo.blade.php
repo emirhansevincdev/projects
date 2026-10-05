@@ -1,6 +1,6 @@
 @verbatim
 <!-- CSP: Plausible analytics için genişletildi (KVKK-safe, Google Fonts EKLENMEDİ) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.amcharts.com https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://flagcdn.com https://kervea.com; font-src 'self'; connect-src 'self' https://plausible.io; object-src 'none'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.amcharts.com https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://flagcdn.com __KV_BASE__; font-src 'self'; connect-src 'self' https://plausible.io; object-src 'none'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"/>
 <title>Kervea — Modern İpek Yolu · B2B Ticaret Eşleştirme Ağı</title>
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -21,14 +21,14 @@
 <meta name="format-detection" content="telephone=no">
 
 <!-- ─── Canonical + hreflang (6 dil desteği için) ─────────────────── -->
-<link rel="canonical" href="https://kervea.com/">
-<link rel="alternate" hreflang="tr" href="https://kervea.com/">
-<link rel="alternate" hreflang="en" href="https://kervea.com/en">
-<link rel="alternate" hreflang="es" href="https://kervea.com/es">
-<link rel="alternate" hreflang="fr" href="https://kervea.com/fr">
-<link rel="alternate" hreflang="ar" href="https://kervea.com/ar">
-<link rel="alternate" hreflang="ru" href="https://kervea.com/ru">
-<link rel="alternate" hreflang="x-default" href="https://kervea.com/">
+<link rel="canonical" href="__KV_BASE__/">
+<link rel="alternate" hreflang="tr" href="__KV_BASE__/">
+<link rel="alternate" hreflang="en" href="__KV_BASE__/en">
+<link rel="alternate" hreflang="es" href="__KV_BASE__/es">
+<link rel="alternate" hreflang="fr" href="__KV_BASE__/fr">
+<link rel="alternate" hreflang="ar" href="__KV_BASE__/ar">
+<link rel="alternate" hreflang="ru" href="__KV_BASE__/ru">
+<link rel="alternate" hreflang="x-default" href="__KV_BASE__/">
 
 <!-- ─── Favicon paketi ────────────────────────────────────────────── -->
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -41,9 +41,9 @@
 <meta property="og:site_name" content="Kervea">
 <meta property="og:title" content="Kervea — Modern İpek Yolu · B2B Ticaret Eşleştirme">
 <meta property="og:description" content="Satan ile alanı Trademap ve gümrük verisiyle doğrudan buluşturan B2B eşleştirme ağı. Aracı yok, komisyon yok.">
-<meta property="og:url" content="https://kervea.com/">
-<meta property="og:image" content="https://kervea.com/og-image.jpg">
-<meta property="og:image:secure_url" content="https://kervea.com/og-image.jpg">
+<meta property="og:url" content="__KV_BASE__/">
+<meta property="og:image" content="__KV_BASE__/og-image.jpg">
+<meta property="og:image:secure_url" content="__KV_BASE__/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -61,7 +61,7 @@
 <meta name="twitter:creator" content="@kervea">
 <meta name="twitter:title" content="Kervea — Modern İpek Yolu · B2B Ticaret Eşleştirme">
 <meta name="twitter:description" content="Aracı yok, komisyon yok. Trademap doğrulamalı B2B ağı. Listeleme ücretsiz.">
-<meta name="twitter:image" content="https://kervea.com/og-image.jpg">
+<meta name="twitter:image" content="__KV_BASE__/og-image.jpg">
 <meta name="twitter:image:alt" content="Kervea — Modern İpek Yolu">
 
 <!-- ─── Structured Data · Organization ────────────────────────────── -->
@@ -72,8 +72,8 @@
   "name": "Kervea",
   "legalName": "Kervea Ticaret A.Ş.",
   "alternateName": "Kervea Modern İpek Yolu",
-  "url": "https://kervea.com",
-  "logo": "https://kervea.com/logo.png",
+  "url": "__KV_BASE__",
+  "logo": "__KV_BASE__/logo.png",
   "description": "B2B ticaret eşleştirme ağı. Satan ile alanı Trademap ve gümrük verisiyle doğrudan buluşturur. Aracı değil, komisyon yok.",
   "foundingDate": "2025",
   "numberOfEmployees": {"@type": "QuantitativeValue", "value": 6},
@@ -105,13 +105,13 @@
   "@type": "WebSite",
   "name": "Kervea",
   "alternateName": "Kervea Modern İpek Yolu",
-  "url": "https://kervea.com",
+  "url": "__KV_BASE__",
   "inLanguage": ["tr-TR", "en-US", "es-ES", "fr-FR", "ar-SA", "ru-RU"],
   "potentialAction": {
     "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://kervea.com/ara?q={search_term_string}"
+      "urlTemplate": "__KV_BASE__/ara?q={search_term_string}"
     },
     "query-input": "required name=search_term_string"
   }
@@ -127,7 +127,7 @@
   "provider": {
     "@type": "Organization",
     "name": "Kervea Ticaret A.Ş.",
-    "url": "https://kervea.com"
+    "url": "__KV_BASE__"
   },
   "areaServed": "Worldwide",
   "audience": {

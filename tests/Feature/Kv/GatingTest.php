@@ -90,4 +90,22 @@ class GatingTest extends KvTestCase
         $this->assertSame(20000, Order::find($r->json('order'))->amount_cents);
         $this->postJson('/kv/orders', ['promo' => 'NOPE'])->assertStatus(422);
     }
+
+    public function test_matches_are_derived_from_the_members_own_company_and_gated(): void
+    {
+        [$me] = $this->member('Seller', 's@x.test', ['direction' => 'EXP', 'hs_codes' => '5208', 'products' => 'pamuklu kumaş']);
+        foreach (range(1, 5) as $i) {
+            $this->member("Buyer $i", "b$i@x.test", ['direction' => 'IMP', 'hs_codes' => '5208', 'products' => 'kumaş']);
+        }
+        $this->member('Unrelated', 'u@x.test', ['direction' => 'IMP', 'hs_codes' => '9999', 'sector_id' => \App\Models\Kv\Sector::where('meta_idx', 3)->value('id'), 'products' => 'kuru incir']);
+
+        $this->getJson('/kv/matches')->assertUnauthorized();
+        $res = $this->actingAs($me)->getJson('/kv/matches')->assertOk();
+        $items = $res->json('items');
+        $this->assertCount(5, $items);                                   // unrelated firm excluded
+        $this->assertCount(2, array_filter($items, fn ($i) => $i['locked']));   // free plan: 3 visible
+        $this->assertContains('dir_c', $items[0]['reasons']);
+        $this->assertGreaterThan(70, $items[0]['uyum']);
+        $this->assertStringNotContainsString('@x.test', $res->getContent());
+    }
 }

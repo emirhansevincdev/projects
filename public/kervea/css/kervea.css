@@ -4839,13 +4839,11 @@ html[dir="rtl"] .fx-bar{direction:rtl}
 .kv-login-hd{text-align:center;margin-bottom:28px;position:relative}
 .kv-login-logo{
   display:inline-flex;align-items:center;justify-content:center;
-  width:64px;height:64px;
-  background:linear-gradient(135deg,#0A5F56 0%,#0D8A80 100%);
-  color:#F5FAF8;
-  border-radius:16px;
+  width:auto;height:auto;
   margin-bottom:14px;
-  box-shadow:0 12px 24px -8px rgba(10,95,86,.4)
+  filter:drop-shadow(0 12px 18px rgba(10,95,86,.28))
 }
+.kv-login-logo svg{width:56px;height:56px}
 .kv-login-hd h2{
   margin:0 0 6px;font-size:1.5rem;font-weight:700;color:#0A2723
 }

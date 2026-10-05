@@ -5,11 +5,13 @@
       <!-- Marka -->
       <div class="fx-brand">
         <a class="fx-logo" onclick="go('home')" role="button" aria-label="Kervea">
-          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M10 10 L10 22 M10 16 L18 10 M10 16 L22 22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <b>KERVEA</b>
+          <svg viewBox="0 0 200 200" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="fg" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#0A5F56"/></linearGradient></defs>
+<circle cx="100" cy="100" r="92" fill="url(#fg)"/>
+<path transform="translate(100 100) rotate(45) scale(.58) translate(-100 -100)" d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8" fill-opacity=".45"/>
+<path d="M100,31 L115.27,84.73 L169,100 L115.27,115.27 L100,169 L84.73,115.27 L31,100 L84.73,84.73 Z" fill="#F5FAF8"/>
+<circle cx="100" cy="100" r="10" fill="#0A5F56"/>
+</svg>
+          <b>KER<span style="color:#0D8A80">VEA</span></b>
         </a>
         <p class="fx-tag" data-i18n="ft_brand_desc">Doğrulanmış B2B ticaret ağı. Aracısız, komisyonsuz, gerçek ihracat ve ithalat bağlantıları.</p>
       </div>

@@ -85,6 +85,18 @@ class ApplicationFlowTest extends KvTestCase
         $this->postJson('/kv/auth/login', ['email' => $u->email, 'password' => 'Secret-pass-1'])->assertStatus(429);
     }
 
+    public function test_pro_member_loaded_from_database_can_log_in(): void
+    {
+        [$u] = $this->member('Pro Login', 'pl@x.test');
+        $u->forceFill(['kv_plan' => 'pro', 'kv_plan_until' => now()->addYear()])->save();
+        $this->postJson('/kv/auth/login', ['email' => 'pl@x.test', 'password' => 'Secret-pass-1'])
+            ->assertOk()->assertJsonPath('user.plan', 'pro');
+        // expired plan falls back to free
+        $u->forceFill(['kv_plan_until' => now()->subDay()])->save();
+        \Illuminate\Support\Facades\Auth::forgetGuards();
+        $this->getJson('/kv/auth/me')->assertJsonPath('user.plan', 'free');
+    }
+
     public function test_two_factor_is_required_once_enabled(): void
     {
         [$u] = $this->member();

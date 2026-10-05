@@ -59,6 +59,57 @@ class FirmController extends Controller
             ->header('Cache-Control', 'no-store');
     }
 
+    /** GET /kv/matches – complementary firms for the logged-in member's own company (scores explained, not random). */
+    public function matches(Request $r)
+    {
+        $user = $r->user();
+        $mine = Company::where('user_id', $user->id)->first();
+        if (! $mine || $mine->status !== Company::STATUS_APPROVED) {
+            return response()->json(['items' => [], 'reason' => $mine ? 'not_approved' : 'no_company']);
+        }
+        $isPro = FirmPresenter::isPro($user);
+        $myHs = array_filter(array_map('trim', preg_split('/[,;\s]+/', (string) $mine->hs_codes)));
+        $myChapters = array_unique(array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 2), $myHs));
+        $myTokens = array_filter(preg_split('/[\s,;]+/u', mb_strtolower((string) $mine->products)), fn ($t) => mb_strlen($t) >= 4);
+
+        $rows = Company::approved()->with('sector')->where('id', '!=', $mine->id)->limit(500)->get();
+        $scored = $rows->map(function (Company $c) use ($mine, $myChapters, $myTokens) {
+            $sameSector = $c->sector_id && $c->sector_id === $mine->sector_id;
+            $theirHs = array_filter(array_map('trim', preg_split('/[,;\s]+/', (string) $c->hs_codes)));
+            $hs4 = count(array_intersect(array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 4), $theirHs), array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 4), array_filter(array_map('trim', preg_split('/[,;\s]+/', (string) $mine->hs_codes)))))) > 0;
+            $hs2 = count(array_intersect(array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 2), $theirHs), $myChapters)) > 0;
+            $hay = mb_strtolower($c->products.' '.$c->name);
+            $tok = (bool) array_filter($myTokens, fn ($t) => str_contains($hay, $t));
+            $complement = ($mine->direction === 'EXP' && $c->direction === 'IMP') || ($mine->direction === 'IMP' && $c->direction === 'EXP');
+            $loose = $mine->direction === 'BOTH' || $c->direction === 'BOTH' || ! $mine->direction || ! $c->direction;
+            $prod = min(100, ($sameSector ? 60 : 0) + ($hs4 ? 30 : ($hs2 ? 15 : 0)) + ($tok ? 10 : 0));
+            $dirfit = $complement ? 100 : ($loose ? 70 : 40);
+            if ($prod === 0) return null;                       // no product relation → not a match
+            $score = min(99, (int) round(0.6 * $prod + 0.4 * $dirfit) + ($c->is_verified ? 3 : 0));
+            return ['c' => $c, 'score' => $score, 'prod' => $prod, 'dirfit' => $dirfit, 'reasons' => array_values(array_filter([
+                $complement ? 'dir_c' : null, $sameSector ? 'sec' : null, ($hs4 || $hs2) ? 'hs' : null,
+                $c->is_verified ? 'vf' : null, ($c->founded_year && date('Y') - $c->founded_year > 15) ? 'veteran' : null,
+            ]))];
+        })->filter()->sortByDesc('score')->values()->take(60);
+
+        $items = $scored->map(function ($m, $i) use ($isPro) {
+            $locked = ! $isPro && $i >= FirmPresenter::FREE_FIRM_LIMIT;
+            return FirmPresenter::card($m['c'], $m['score'], $locked) + ['prod' => $m['prod'], 'dirfit' => $m['dirfit'], 'reasons' => $m['reasons']];
+        })->all();
+        return response()->json(['items' => $items])->header('Cache-Control', 'no-store');
+    }
+
+    /** GET /kv/stats – real counters for the hero bar (no invented numbers). */
+    public function stats()
+    {
+        $q = Company::approved();
+        return response()->json([
+            'firms' => (clone $q)->count(),
+            'countries' => (clone $q)->distinct('country_cc')->count('country_cc'),
+            'sectors' => \App\Models\Kv\Sector::whereNull('parent_id')->where('is_active', true)->count(),
+        ])->header('Cache-Control', 'public, max-age=60');
+    }
+
     /** GET /kv/firms/{slug} – detail; contact block only for entitled viewers. */
     public function show(Request $r, string $slug)
     {

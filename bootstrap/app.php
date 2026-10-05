@@ -4,6 +4,7 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AnyAuthMiddleware;
 use App\Http\Middleware\BlogPermission;
 use App\Http\Middleware\IsCustomer;
+use App\Http\Middleware\LegacyRoutes;
 use App\Http\Middleware\IsAgent;
 use App\Http\Middleware\CheckDatabaseConnection;
 use App\Http\Middleware\PreventBackHistory;
@@ -22,33 +23,33 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware(['web','PreventBackHistory'])
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware(['web','PreventBackHistory'])
+            Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/customer.php'));
-            Route::middleware(['web','PreventBackHistory'])
+            Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/agent.php'));
-            Route::middleware(['web','PreventBackHistory'])
+            Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/payment.php'));
             if (addon_status('live_chat') == 1){
-                Route::middleware(['web','PreventBackHistory'])
+                Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/live_chat.php'));
             }
             if (addon_status('shop') == 1){
-                Route::middleware(['web','PreventBackHistory'])
+                Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/shop.php'));
             }
             if (addon_status('form_builder') == 1){
-                Route::middleware(['web','PreventBackHistory'])
+                Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/form_builder.php'));
             }
-            Route::middleware(['web','PreventBackHistory'])
+            Route::middleware(['web','PreventBackHistory','legacy'])
             ->group(base_path('routes/custom_field.php'));
 
               if (addon_status('service_selling') == 1){
-                Route::middleware(['web','PreventBackHistory'])
+                Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/service_selling.php'));
              }
             //  if (addon_status('calendly') == 1){
-                Route::middleware(['web','PreventBackHistory'])
+                Route::middleware(['web','PreventBackHistory','legacy'])
                 ->group(base_path('routes/calendly.php'));
             //  }
          
@@ -57,6 +58,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Payment provider webhooks are authenticated by their signature, not by a CSRF token.
         $middleware->validateCsrfTokens(except: ['kv/webhooks/stripe']);
+        // Guests hitting a protected page are sent to the Kervea sign-in, not the template's login view.
+        $middleware->redirectGuestsTo('/giris');
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'customer' => IsCustomer::class,
@@ -65,6 +68,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'CheckDatabaseConnection' => CheckDatabaseConnection::class,
             'PreventBackHistory' => PreventBackHistory::class,
             'blog.permission' => BlogPermission::class,
+            'legacy' => LegacyRoutes::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

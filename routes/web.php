@@ -67,6 +67,7 @@ Route::get('/sifre-belirle', fn () => view('kervea.set-password'))->name('kervea
 
 // ── Kervea JSON endpoints ─────────────────────────────────────────────────
 Route::prefix('kv')->name('kv.')->group(function () {
+    Route::get('stats', [\App\Http\Controllers\Kv\FirmController::class, 'stats']);
     Route::get('firms', [\App\Http\Controllers\Kv\FirmController::class, 'index'])->middleware('throttle:60,1');
     Route::get('firms/{slug}', [\App\Http\Controllers\Kv\FirmController::class, 'show'])->middleware('throttle:60,1');
     Route::post('firms/{slug}/reveal', [\App\Http\Controllers\Kv\FirmController::class, 'reveal'])->middleware(['auth', 'throttle:30,1']);
@@ -83,6 +84,9 @@ Route::prefix('kv')->name('kv.')->group(function () {
 
     Route::middleware('auth')->group(function () {
         Route::get('me', [\App\Http\Controllers\Kv\MemberController::class, 'show']);
+        Route::get('matches', [\App\Http\Controllers\Kv\FirmController::class, 'matches'])->middleware('throttle:30,1');
+        Route::post('me/documents', [\App\Http\Controllers\Kv\MemberController::class, 'addDocuments'])->middleware('throttle:10,10');
+        Route::get('me/export', [\App\Http\Controllers\Kv\MemberController::class, 'export']);
         Route::put('me/company', [\App\Http\Controllers\Kv\MemberController::class, 'update']);
         Route::post('me/consents', [\App\Http\Controllers\Kv\MemberController::class, 'consent']);
         Route::delete('me', [\App\Http\Controllers\Kv\MemberController::class, 'destroy']);
@@ -94,141 +98,195 @@ Route::prefix('kv')->name('kv.')->group(function () {
 
     Route::post('webhooks/stripe', [\App\Http\Controllers\Kv\OrderController::class, 'stripeWebhook']);
 });
-Route::get('/hotel', [FrontendController::class, 'hotel_home'])->name('hotel.home');
-Route::get('/car', [FrontendController::class, 'car_home'])->name('car.home');
-Route::get('/beauty', [FrontendController::class, 'beauty_home'])->name('beauty.home');
-Route::get('/doctor', [FrontendController::class, 'doctor_home'])->name('doctor.home');
-Route::get('/real-estate', [FrontendController::class, 'realestate_home'])->name('real-estate.home');
-Route::get('/restaurant', [FrontendController::class, 'restaurant_home'])->name('restaurant.home');
+// ── Legacy template routes (hotel/car/listing directory, customer/agent areas, installer, helpers) ──
+// Kervea is not a marketplace/directory. These are kept only so route() names used by the old admin views
+// still resolve; every URL answers 404 unless KERVEA_LEGACY_ROUTES=true. Never enable in production.
+Route::middleware('legacy')->group(function () {
+    Route::get('/hotel', [FrontendController::class, 'hotel_home'])->name('hotel.home');
+    Route::get('/car', [FrontendController::class, 'car_home'])->name('car.home');
+    Route::get('/beauty', [FrontendController::class, 'beauty_home'])->name('beauty.home');
+    Route::get('/doctor', [FrontendController::class, 'doctor_home'])->name('doctor.home');
+    Route::get('/real-estate', [FrontendController::class, 'realestate_home'])->name('real-estate.home');
+    Route::get('/restaurant', [FrontendController::class, 'restaurant_home'])->name('restaurant.home');
 
 
-// Get Country By City 
-Route::get('/get-cities/{country_id}', [FrontendController::class, 'getCities'])->name('get.cities');
+    // Get Country By City 
+    Route::get('/get-cities/{country_id}', [FrontendController::class, 'getCities'])->name('get.cities');
 
 
-Route::get('/listing/{type}/{view?}', [FrontendController::class, 'listing_view'])->name('listing.view');
-Route::get('/details/{type}/{id}/{slug}', [FrontendController::class, 'listing_details'])->name('listing.details');
-Route::get('/pricing', [FrontendController::class, 'pricing'])->name('pricing');
-Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
-Route::get('/blog/{id}/{slug}', [FrontendController::class, 'blog_details'])->name('blog.details');
-Route::get('/category/{category}/{slug}', [FrontendController::class, 'blog_category'])->name('blog.category');
-Route::get('/blog-search', [FrontendController::class, 'blog_search'])->name('blog.search');
+    Route::get('/listing/{type}/{view?}', [FrontendController::class, 'listing_view'])->name('listing.view');
+    Route::get('/details/{type}/{id}/{slug}', [FrontendController::class, 'listing_details'])->name('listing.details');
+    Route::get('/pricing', [FrontendController::class, 'pricing'])->name('pricing');
+    Route::get('/blogs', [FrontendController::class, 'blogs'])->name('blogs');
+    Route::get('/blog/{id}/{slug}', [FrontendController::class, 'blog_details'])->name('blog.details');
+    Route::get('/category/{category}/{slug}', [FrontendController::class, 'blog_category'])->name('blog.category');
+    Route::get('/blog-search', [FrontendController::class, 'blog_search'])->name('blog.search');
 
-// Agent Details
-Route::get('/listing/agent/{id}/{slug}', [FrontendController::class, 'agent_details'])->name('agent.details');
+    // Agent Details
+    Route::get('/listing/agent/{id}/{slug}', [FrontendController::class, 'agent_details'])->name('agent.details');
 
-// Frontend Review 
-Route::post('/listing-review/{id}', [FrontendController::class, 'ListingReviews'])->name('listing.review');
-Route::post('/listing-review/update/{id}', [FrontendController::class, 'ListingReviewsUpdate'])->name('listing.review.update');
-Route::post('/listing-review/reply/{id}', [FrontendController::class, 'ListingReviewsReply'])->name('listing.review.reply');
-Route::get('/listing-review/edit/{id}', [FrontendController::class, 'ListingReviewsEdit'])->name('listing.review.edit');
-Route::post('/listing/reviews/updated/{id}', [FrontendController::class, 'ListingOwnReviewsUpdated'])->name('listing.reviews.updated');
-Route::get('/listing/reviews/delete/{id}', [FrontendController::class, 'ListingOwnReviewsDelete'])->name('listing.review.delete');
+    // Frontend Review 
+    Route::post('/listing-review/{id}', [FrontendController::class, 'ListingReviews'])->name('listing.review');
+    Route::post('/listing-review/update/{id}', [FrontendController::class, 'ListingReviewsUpdate'])->name('listing.review.update');
+    Route::post('/listing-review/reply/{id}', [FrontendController::class, 'ListingReviewsReply'])->name('listing.review.reply');
+    Route::get('/listing-review/edit/{id}', [FrontendController::class, 'ListingReviewsEdit'])->name('listing.review.edit');
+    Route::post('/listing/reviews/updated/{id}', [FrontendController::class, 'ListingOwnReviewsUpdated'])->name('listing.reviews.updated');
+    Route::get('/listing/reviews/delete/{id}', [FrontendController::class, 'ListingOwnReviewsDelete'])->name('listing.review.delete');
 
-// Frontend Review Report
-Route::post('/listing-review/report/{id}', [FrontendController::class, 'ListingReviewsReport'])->name('listing.review.report');
+    // Frontend Review Report
+    Route::post('/listing-review/report/{id}', [FrontendController::class, 'ListingReviewsReport'])->name('listing.review.report');
 
-// Page 
-Route::get('/privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy-policy');
-Route::get('/refund-policy', [FrontendController::class, 'refund_policy'])->name('refund-policy');
-Route::get('/about-us', [FrontendController::class, 'about_us'])->name('about_us');
-Route::get('/terms-and-condition', [FrontendController::class, 'terms_and_condition'])->name('terms-and-condition');
-Route::get('/contact-us', [FrontendController::class, 'contact_us'])->name('contact-us');
+    // Page 
+    Route::get('/privacy-policy', [FrontendController::class, 'privacy_policy'])->name('privacy-policy');
+    Route::get('/refund-policy', [FrontendController::class, 'refund_policy'])->name('refund-policy');
+    Route::get('/about-us', [FrontendController::class, 'about_us'])->name('about_us');
+    Route::get('/terms-and-condition', [FrontendController::class, 'terms_and_condition'])->name('terms-and-condition');
+    Route::get('/contact-us', [FrontendController::class, 'contact_us'])->name('contact-us');
 
-Route::post('/contact-store', [FrontendController::class, 'contact_store'])->name('contact.store');
-
-
-// Wishlist
-Route::post('/update-wishlist', [FrontendController::class, 'updateWishlist'])->name('wishlist.update');
-// Follow Agent
-Route::post('/followUnfollow', [FrontendController::class, 'followUnfollow'])->name('followUnfollow');
-// Message Customer
-Route::any('/customer/message', [FrontendController::class, 'customerMessage'])->name('customerMessage');
-
-// Appoinment
-Route::post('/customer/bookAppointment', [FrontendController::class, 'customerBookAppointment'])->name('customerBookAppointment');
+    Route::post('/contact-store', [FrontendController::class, 'contact_store'])->name('contact.store');
 
 
-// Beauty Filter
-Route::get('/listings-filter', [FrontendController::class, 'ListingsFilter'])->name('ListingsFilter');
+    // Wishlist
+    Route::post('/update-wishlist', [FrontendController::class, 'updateWishlist'])->name('wishlist.update');
+    // Follow Agent
+    Route::post('/followUnfollow', [FrontendController::class, 'followUnfollow'])->name('followUnfollow');
+    // Message Customer
+    Route::any('/customer/message', [FrontendController::class, 'customerMessage'])->name('customerMessage');
+
+    // Appoinment
+    Route::post('/customer/bookAppointment', [FrontendController::class, 'customerBookAppointment'])->name('customerBookAppointment');
 
 
-// Newsletter Subscriber  Frontend
-Route::post('newsletter/subscribe', [FrontendController::class, 'newslater_subscribe'])->name('newsletter.subscribe');
+    // Beauty Filter
+    Route::get('/listings-filter', [FrontendController::class, 'ListingsFilter'])->name('ListingsFilter');
 
 
- // Claim Listing 
- Route::post('claim-listing/store', [FrontendController::class, 'claimListingStore'])->name('claimListingStore');
-
- Route::get('claim-listing/form-show/{type}/{id}', [FrontendController::class, 'claimListingForm'])->name('claimListingForm');
-
- //Report Listing
- Route::get('report-listing/form-show/{type}/{id}', [FrontendController::class, 'reportListingForm'])->name('reportListingForm');
- Route::post('report-listing/store', [FrontendController::class, 'reportListingStore'])->name('reportListingStore');
+    // Newsletter Subscriber  Frontend
+    Route::post('newsletter/subscribe', [FrontendController::class, 'newslater_subscribe'])->name('newsletter.subscribe');
 
 
-Route::get('/customer/account', [AgentController::class, 'agent_account'])->name('user.account');
-Route::post('/account/update', [AgentController::class, 'customerAccountUpdate'])->name('customerAccountUpdate');
-Route::get('agent/country-city/{id}', [CityController::class, 'country_city'])->name('admin.country.city');
+     // Claim Listing 
+     Route::post('claim-listing/store', [FrontendController::class, 'claimListingStore'])->name('claimListingStore');
 
-Route::get('claim-submit/form-show/{type}/{id}', [FrontendController::class, 'claimForm'])->name('claimForm');
+     Route::get('claim-listing/form-show/{type}/{id}', [FrontendController::class, 'claimListingForm'])->name('claimListingForm');
 
-Route::post('claim-store', [FrontendController::class, 'claimStore'])->name('claimStore');
+     //Report Listing
+     Route::get('report-listing/form-show/{type}/{id}', [FrontendController::class, 'reportListingForm'])->name('reportListingForm');
+     Route::post('report-listing/store', [FrontendController::class, 'reportListingStore'])->name('reportListingStore');
 
 
-Route::prefix('{prefix}')->middleware(['auth', 'anyAuth'])->group(function () {
-    Route::get('/amenities-add/{type}/{item}/{page}/{listing_id}', [AmenitiesController::class, 'amenities_add'])->name('admin.amenities.add');
+    Route::get('/customer/account', [AgentController::class, 'agent_account'])->name('user.account');
+    Route::post('/account/update', [AgentController::class, 'customerAccountUpdate'])->name('customerAccountUpdate');
+    Route::get('agent/country-city/{id}', [CityController::class, 'country_city'])->name('admin.country.city');
+
+    Route::get('claim-submit/form-show/{type}/{id}', [FrontendController::class, 'claimForm'])->name('claimForm');
+
+    Route::post('claim-store', [FrontendController::class, 'claimStore'])->name('claimStore');
+
+
+    Route::prefix('{prefix}')->middleware(['auth', 'anyAuth'])->group(function () {
+        Route::get('/amenities-add/{type}/{item}/{page}/{listing_id}', [AmenitiesController::class, 'amenities_add'])->name('admin.amenities.add');
     
-    Route::post('/amenities-create/{type}', [AmenitiesController::class, 'amenities_create'])->name('admin.amenities.create');
-    Route::get('/amenities-delete/{id}', [AmenitiesController::class, 'amenities_delete'])->name('admin.amenities.delete');
-    Route::get('/amenities-edit/{id}', [AmenitiesController::class, 'amenities_edit'])->name('admin.amenities.edit');
-    Route::post('/amenities-update/{id}', [AmenitiesController::class, 'amenities_update'])->name('admin.amenities.update');
+        Route::post('/amenities-create/{type}', [AmenitiesController::class, 'amenities_create'])->name('admin.amenities.create');
+        Route::get('/amenities-delete/{id}', [AmenitiesController::class, 'amenities_delete'])->name('admin.amenities.delete');
+        Route::get('/amenities-edit/{id}', [AmenitiesController::class, 'amenities_edit'])->name('admin.amenities.edit');
+        Route::post('/amenities-update/{id}', [AmenitiesController::class, 'amenities_update'])->name('admin.amenities.update');
 
     
-    Route::get('/listing-add-feature/{id}', [ListingController::class, 'listing_feature_add'])->name('admin.add-listing-feature');
-    Route::post('/listing-store-feature/{id}', [ListingController::class, 'listing_feature_store'])->name('admin.store-listing-feature');
-    Route::get('/listing-delete-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_delete'])->name('admin.listing.feature.delete');
-    Route::get('/listing-edit-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_edit'])->name('admin.listing.feature.edit');
-    Route::post('/listing-update-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_update'])->name('admin.listing.feature.update');
-    Route::get('/listing-sub-feature-add/{id}/{feature_id}', [ListingController::class, 'listing_sub_feature_add'])->name('admin.listing.sub-feature.add');
-    Route::post('/listing-sub-feature-store/{id}/{feature_id}', [ListingController::class, 'listing_sub_feature_store'])->name('admin.listing.sub-feature.store');
+        Route::get('/listing-add-feature/{id}', [ListingController::class, 'listing_feature_add'])->name('admin.add-listing-feature');
+        Route::post('/listing-store-feature/{id}', [ListingController::class, 'listing_feature_store'])->name('admin.store-listing-feature');
+        Route::get('/listing-delete-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_delete'])->name('admin.listing.feature.delete');
+        Route::get('/listing-edit-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_edit'])->name('admin.listing.feature.edit');
+        Route::post('/listing-update-feature/{id}/{feature_id}', [ListingController::class, 'listing_feature_update'])->name('admin.listing.feature.update');
+        Route::get('/listing-sub-feature-add/{id}/{feature_id}', [ListingController::class, 'listing_sub_feature_add'])->name('admin.listing.sub-feature.add');
+        Route::post('/listing-sub-feature-store/{id}/{feature_id}', [ListingController::class, 'listing_sub_feature_store'])->name('admin.listing.sub-feature.store');
 
-    Route::get('/listing-specification.add/{id}', [ListingController::class, 'listing_specification_add'])->name('admin.add.listing.specification');
-    Route::post('/listing-specification.store/{id}', [ListingController::class, 'listing_specification_store'])->name('admin.store.listing.specification');
-    Route::get('/listing-specification.edit/{id}/{specification_id}', [ListingController::class, 'listing_specification_edit'])->name('admin.edit.listing.specification');
-    Route::get('/listing-specification.delete/{id}/{specification_id}', [ListingController::class, 'listing_specification_delete'])->name('admin.delete.listing.specification');
-    Route::post('/listing-specification.update/{id}/{specification_id}', [ListingController::class, 'listing_specification_update'])->name('admin.update.listing.specification');
-    Route::get('/listing-sub-specification-add/{id}/{specification_id}', [ListingController::class, 'listing_sub_specification_add'])->name('admin.add.listing.sub-specification');
-    Route::post('/listing-sub-specification-store/{id}/{specification_id}', [ListingController::class, 'listing_sub_specification_store'])->name('admin.store.listing.sub.specification');
+        Route::get('/listing-specification.add/{id}', [ListingController::class, 'listing_specification_add'])->name('admin.add.listing.specification');
+        Route::post('/listing-specification.store/{id}', [ListingController::class, 'listing_specification_store'])->name('admin.store.listing.specification');
+        Route::get('/listing-specification.edit/{id}/{specification_id}', [ListingController::class, 'listing_specification_edit'])->name('admin.edit.listing.specification');
+        Route::get('/listing-specification.delete/{id}/{specification_id}', [ListingController::class, 'listing_specification_delete'])->name('admin.delete.listing.specification');
+        Route::post('/listing-specification.update/{id}/{specification_id}', [ListingController::class, 'listing_specification_update'])->name('admin.update.listing.specification');
+        Route::get('/listing-sub-specification-add/{id}/{specification_id}', [ListingController::class, 'listing_sub_specification_add'])->name('admin.add.listing.sub-specification');
+        Route::post('/listing-sub-specification-store/{id}/{specification_id}', [ListingController::class, 'listing_sub_specification_store'])->name('admin.store.listing.sub.specification');
     
-    Route::get('/listing-sub-specification-edit/{id}/{specification_id}/{parent}', [ListingController::class, 'listing_sub_specification_edit'])->name('admin.edit.listing.sub-specification');
-    Route::post('/listing-sub-specification-update/{id}/{specification_id}/{parent}', [ListingController::class, 'listing_sub_specification_update'])->name('admin.update.listing.sub.specification');
+        Route::get('/listing-sub-specification-edit/{id}/{specification_id}/{parent}', [ListingController::class, 'listing_sub_specification_edit'])->name('admin.edit.listing.sub-specification');
+        Route::post('/listing-sub-specification-update/{id}/{specification_id}/{parent}', [ListingController::class, 'listing_sub_specification_update'])->name('admin.update.listing.sub.specification');
 
-    // Hotel Room
-    Route::get('/listing-add-listing-room/{id}/{room_id}/{page}', [ListingController::class, 'listing_add_room'])->name('admin.add.listing.room');
-    Route::post('/listing-store-listing-room/{id}', [ListingController::class, 'listing_store_room'])->name('admin.store.listing.room');
-    Route::post('/listing-update-listing-room/{id}/{room_id}', [ListingController::class, 'listing_update_room'])->name('admin.update.listing.room');
-    Route::get('/listing-delete-listing-room/{id}/{listing_id}', [ListingController::class, 'listing_room'])->name('admin.delete.listing.room');
+        // Hotel Room
+        Route::get('/listing-add-listing-room/{id}/{room_id}/{page}', [ListingController::class, 'listing_add_room'])->name('admin.add.listing.room');
+        Route::post('/listing-store-listing-room/{id}', [ListingController::class, 'listing_store_room'])->name('admin.store.listing.room');
+        Route::post('/listing-update-listing-room/{id}/{room_id}', [ListingController::class, 'listing_update_room'])->name('admin.update.listing.room');
+        Route::get('/listing-delete-listing-room/{id}/{listing_id}', [ListingController::class, 'listing_room'])->name('admin.delete.listing.room');
 
-    Route::get('/listing-menu-add/{id}', [ListingController::class, 'listing_menu_add'])->name('admin.add.listing.menu');
-    Route::post('/listing-menu-store/{id}', [ListingController::class, 'listing_menu_store'])->name('admin.store.listing.menu');
-    Route::get('/listing-menu-edit/{id}/{listing_id}/{page}', [ListingController::class, 'listing_menu_edit'])->name('admin.edit.listing.menu');
+        Route::get('/listing-menu-add/{id}', [ListingController::class, 'listing_menu_add'])->name('admin.add.listing.menu');
+        Route::post('/listing-menu-store/{id}', [ListingController::class, 'listing_menu_store'])->name('admin.store.listing.menu');
+        Route::get('/listing-menu-edit/{id}/{listing_id}/{page}', [ListingController::class, 'listing_menu_edit'])->name('admin.edit.listing.menu');
 
-    Route::get('/listing-menu-delete/{id}/{listing_id}', [ListingController::class, 'listing_menu_delete'])->name('admin.delete.listing.menu');
+        Route::get('/listing-menu-delete/{id}/{listing_id}', [ListingController::class, 'listing_menu_delete'])->name('admin.delete.listing.menu');
     
-    Route::post('/listing-menu-update/{id}/{listing_id}', [ListingController::class, 'listing_menu_update'])->name('admin.update.listing.menu');
+        Route::post('/listing-menu-update/{id}/{listing_id}', [ListingController::class, 'listing_menu_update'])->name('admin.update.listing.menu');
 
-    // Route::get('/account', [ProfileController::class, 'user_account'])->name('user.account');
+        // Route::get('/account', [ProfileController::class, 'user_account'])->name('user.account');
   
-    // NearBy Location  Admin
-    Route::get('/listing-add-nearBy/{id}', [ListingController::class, 'listing_nearBY'])->name('add-listing-nearBy');
+        // NearBy Location  Admin
+        Route::get('/listing-add-nearBy/{id}', [ListingController::class, 'listing_nearBY'])->name('add-listing-nearBy');
 
-    Route::post('listing/nearby/location/save', [ListingController::class, 'saveNearByLocation'])->name('saveNearByLocation');
-    Route::get('listing/nearby/location/edit/{id}/{page}', [ListingController::class, 'edit_listing_nearBY'])->name('editNearByLocation');
-    Route::post('listing/nearby/location/update/{id}', [ListingController::class, 'updateNearByLocation'])->name('updateNearByLocation');
-    Route::get('listing/nearby/location/delete/{id}', [ListingController::class, 'deleteNearByLocation'])->name('deleteNearByLocation');
+        Route::post('listing/nearby/location/save', [ListingController::class, 'saveNearByLocation'])->name('saveNearByLocation');
+        Route::get('listing/nearby/location/edit/{id}/{page}', [ListingController::class, 'edit_listing_nearBY'])->name('editNearByLocation');
+        Route::post('listing/nearby/location/update/{id}', [ListingController::class, 'updateNearByLocation'])->name('updateNearByLocation');
+        Route::get('listing/nearby/location/delete/{id}', [ListingController::class, 'deleteNearByLocation'])->name('deleteNearByLocation');
+
+    });
+    Route::prefix('user')->middleware(['auth'])->group(function () {
+
+    });
+
+
+
+
+    Route::get('/clear-cache', function () {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+
+        return 'Application cache cleared';
+    });
+
+    Route::get('/storage-link', function () {
+        Artisan::call('storage:link');
+        return 'storage linked successfully';
+    });
+
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    //Installation routes
+    Route::controller(InstallController::class)->middleware('CheckDatabaseConnection')->group(function () {
+        Route::get('/install_ended', 'index')->name('install');
+        Route::get('install/step0', 'step0')->name('step0');
+        Route::get('install/step1', 'step1')->name('step1');
+        Route::get('install/step2', 'step2')->name('step2');
+        Route::any('install/step3', 'step3')->name('step3');
+        Route::get('install/step4', 'step4')->name('step4');
+        Route::get('install/step5', 'step5')->name('step5');
+        Route::get('install/configure_database', 'configure_database')->name('configure_database');
+        Route::get('install/step4/{confirm_import}', 'confirmImport')->name('step4.confirm_import');
+        Route::get('install/install', 'confirmInstall')->name('confirm_install');
+        Route::post('install/validate', 'validatePurchaseCode')->name('install.validate');
+        Route::any('install/finalizing_setup', 'finalizingSetup')->name('finalizing_setup');
+    });
+    Route::controller(InstallController::class)->group(function () {
+        Route::get('install/success', 'success')->name('success');
+    });
+    //Installation routes
 
 });
+
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 
@@ -504,53 +562,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 });
 
-Route::prefix('user')->middleware(['auth'])->group(function () {
-
-});
-
-
-
-
-Route::get('/clear-cache', function () {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-
-    return 'Application cache cleared';
-});
-
-Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
-    return 'storage linked successfully';
-});
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-//Installation routes
-Route::controller(InstallController::class)->middleware('CheckDatabaseConnection')->group(function () {
-    Route::get('/install_ended', 'index')->name('install');
-    Route::get('install/step0', 'step0')->name('step0');
-    Route::get('install/step1', 'step1')->name('step1');
-    Route::get('install/step2', 'step2')->name('step2');
-    Route::any('install/step3', 'step3')->name('step3');
-    Route::get('install/step4', 'step4')->name('step4');
-    Route::get('install/step5', 'step5')->name('step5');
-    Route::get('install/configure_database', 'configure_database')->name('configure_database');
-    Route::get('install/step4/{confirm_import}', 'confirmImport')->name('step4.confirm_import');
-    Route::get('install/install', 'confirmInstall')->name('confirm_install');
-    Route::post('install/validate', 'validatePurchaseCode')->name('install.validate');
-    Route::any('install/finalizing_setup', 'finalizingSetup')->name('finalizing_setup');
-});
-Route::controller(InstallController::class)->group(function () {
-    Route::get('install/success', 'success')->name('success');
-});
-//Installation routes
 
 require __DIR__.'/auth.php';
  

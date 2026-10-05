@@ -73,7 +73,7 @@ class AuthController extends Controller
         RateLimiter::clear($key);
         Auth::login($user, (bool) ($v['remember'] ?? false));
         $r->session()->regenerate();
-        return response()->json(['ok' => true, 'user' => self::userPayload($user)]);
+        return response()->json(['ok' => true, 'user' => self::userPayload($user), 'csrf' => csrf_token()]);
     }
 
     public function logout(Request $r)
