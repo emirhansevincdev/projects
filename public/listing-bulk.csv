@@ -1,0 +1,4 @@
+id,title,description,visibility,Latitude,Longitude,area,address,postal_code
+1,This Is Listing,Good Description,visible,23450,23450,test1,test,2300
+2,This Is Listing 2,Good Description 2,visible,34567,2345,test2,test,5600
+3,This Is Listing 3,Good Description 3,visible,34567,2345,test3,test,5600
