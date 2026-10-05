@@ -5238,7 +5238,7 @@ function kvLogout(){
 // Zorunlu 3 checkbox (cx1, cx2, cx3) işaretlenmedikçe Continue disabled
 // ═══════════════════════════════════════════════════════════════
 function kvUpdateConsentState(){
-  var required = ['cx1','cx2','cx3'];
+  var required = ['cx1','cx2','cx3','cx6'];
   var allChecked = required.every(function(id){
     var el = document.getElementById(id);
     return el && el.checked;
@@ -5247,7 +5247,7 @@ function kvUpdateConsentState(){
   if(btn) btn.disabled = !allChecked;
 }
 function kvResetConsents(){
-  ['cx1','cx2','cx3','cx4'].forEach(function(id){
+  ['cx1','cx2','cx3','cx4','cx5','cx6'].forEach(function(id){
     var el = document.getElementById(id);
     if(el) el.checked = false;
   });
@@ -5256,10 +5256,10 @@ function kvResetConsents(){
 }
 function kvContinueConsents(){
   // Sim validation
-  var required = ['cx1','cx2','cx3'];
+  var required = ['cx1','cx2','cx3','cx6'];
   var allChecked = required.every(function(id){ return document.getElementById(id) && document.getElementById(id).checked; });
   if(!allChecked){
-    if(typeof kvShowAlert === 'function') kvShowAlert('destructive','Zorunlu onaylar eksik','Firma kaydı için 3 zorunlu maddeyi onaylayın.');
+    if(typeof kvShowAlert === 'function') kvShowAlert('destructive','Zorunlu onaylar eksik','Firma kaydı için zorunlu maddeleri onaylayın.');
     return;
   }
   // Call existing submit logic if any

@@ -40,6 +40,60 @@ Route::controller(\App\Http\Controllers\Kervea\PageController::class)->group(fun
     Route::get('/uye-paneli', 'show')->defaults('view', 'panel')->name('kervea.panel');
     Route::get('/firma/{firm}', 'show')->defaults('view', 'firm')->name('kervea.firm');
 });
+
+// ── Kervea admin (server-side admin role enforced by the `admin` middleware) ──
+Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin'])->controller(\App\Http\Controllers\Admin\KerveaAdminController::class)->group(function () {
+    Route::get('applications', 'applications')->name('applications');
+    Route::get('applications/{company}', 'applicationShow')->name('application');
+    Route::post('applications/{company}/approve', 'approve')->name('approve');
+    Route::post('applications/{company}/reject', 'reject')->name('reject');
+    Route::get('documents/{document}', 'document')->name('document');
+    Route::get('companies', 'companies')->name('companies');
+    Route::post('companies/{company}/status', 'companyStatus')->name('company.status');
+    Route::get('contacts', 'contacts')->name('contacts');
+    Route::post('contacts/{message}/status', 'contactStatus')->name('contact.status');
+    Route::get('promos', 'promos')->name('promos');
+    Route::post('promos', 'promoStore')->name('promo.store');
+    Route::post('promos/{promo}/toggle', 'promoToggle')->name('promo.toggle');
+    Route::delete('promos/{promo}', 'promoDelete')->name('promo.delete');
+    Route::get('sectors', 'sectors')->name('sectors');
+    Route::post('sectors', 'sectorStore')->name('sector.store');
+    Route::delete('sectors/{sector}', 'sectorDelete')->name('sector.delete');
+    Route::get('orders', 'orders')->name('orders');
+    Route::post('orders/{order}/paid', 'orderPaid')->name('order.paid');
+});
+
+Route::get('/sifre-belirle', fn () => view('kervea.set-password'))->name('kervea.password.set');
+
+// ── Kervea JSON endpoints ─────────────────────────────────────────────────
+Route::prefix('kv')->name('kv.')->group(function () {
+    Route::get('firms', [\App\Http\Controllers\Kv\FirmController::class, 'index'])->middleware('throttle:60,1');
+    Route::get('firms/{slug}', [\App\Http\Controllers\Kv\FirmController::class, 'show'])->middleware('throttle:60,1');
+    Route::post('firms/{slug}/reveal', [\App\Http\Controllers\Kv\FirmController::class, 'reveal'])->middleware(['auth', 'throttle:30,1']);
+
+    Route::post('applications', [\App\Http\Controllers\Kv\ApplicationController::class, 'store'])->middleware('throttle:6,60');
+    Route::post('contact', [\App\Http\Controllers\Kv\ContactController::class, 'store'])->middleware('throttle:5,10');
+    Route::post('promo/check', [\App\Http\Controllers\Kv\PromoController::class, 'check'])->middleware('throttle:20,1');
+
+    Route::get('auth/me', [\App\Http\Controllers\Kv\AuthController::class, 'me']);
+    Route::post('auth/login', [\App\Http\Controllers\Kv\AuthController::class, 'login'])->middleware('throttle:20,1');
+    Route::post('auth/logout', [\App\Http\Controllers\Kv\AuthController::class, 'logout']);
+    Route::post('auth/forgot', [\App\Http\Controllers\Kv\AuthController::class, 'forgot'])->middleware('throttle:5,10');
+    Route::post('auth/set-password', [\App\Http\Controllers\Kv\AuthController::class, 'setPassword'])->middleware('throttle:10,10');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('me', [\App\Http\Controllers\Kv\MemberController::class, 'show']);
+        Route::put('me/company', [\App\Http\Controllers\Kv\MemberController::class, 'update']);
+        Route::post('me/consents', [\App\Http\Controllers\Kv\MemberController::class, 'consent']);
+        Route::delete('me', [\App\Http\Controllers\Kv\MemberController::class, 'destroy']);
+        Route::post('auth/2fa/start', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorStart']);
+        Route::post('auth/2fa/confirm', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorConfirm']);
+        Route::post('auth/2fa/disable', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorDisable']);
+        Route::post('orders', [\App\Http\Controllers\Kv\OrderController::class, 'store'])->middleware('throttle:10,1');
+    });
+
+    Route::post('webhooks/stripe', [\App\Http\Controllers\Kv\OrderController::class, 'stripeWebhook']);
+});
 Route::get('/hotel', [FrontendController::class, 'hotel_home'])->name('hotel.home');
 Route::get('/car', [FrontendController::class, 'car_home'])->name('car.home');
 Route::get('/beauty', [FrontendController::class, 'beauty_home'])->name('beauty.home');

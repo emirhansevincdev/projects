@@ -23,5 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+
+        // Reset / first-time password links open the Kervea page, not the legacy template view.
+        \Illuminate\Auth\Notifications\ResetPassword::createUrlUsing(function ($user, string $token) {
+            return url('/sifre-belirle?token='.$token.'&email='.urlencode($user->getEmailForPasswordReset()));
+        });
     }
 }

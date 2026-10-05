@@ -55,6 +55,8 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
+        // Payment provider webhooks are authenticated by their signature, not by a CSRF token.
+        $middleware->validateCsrfTokens(except: ['kv/webhooks/stripe']);
         $middleware->alias([
             'admin' => AdminMiddleware::class,
             'customer' => IsCustomer::class,
