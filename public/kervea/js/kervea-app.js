@@ -2404,7 +2404,7 @@ function buildCountryDD(id, selected){
  el.className = "dd";
  el.innerHTML =
    '<button class="ddbtn" onclick="event.stopPropagation();toggleDD(\''+escapeJs(id)+'\')">' +
-     '<img src="https://flagcdn.com/w40/'+selected+'.png" onerror="this.style.visibility=\'hidden\'"/>' +
+     '<img src="/flags/'+selected+'.svg" onerror="this.style.visibility=\'hidden\'"/>' +
      '<span class="cc">'+selected.toUpperCase()+'</span>' +
      '<span class="lbl2">'+selName+'</span>' +
      '<span class="ar2">▾</span>' +
@@ -2423,7 +2423,7 @@ function renderDDItems(id, q){
  var host=document.getElementById(id+"-items");
  host.innerHTML = items.map(function(x){
    return '<a onclick="selectCountry(\''+escapeJs(id)+'\',\''+escapeJs(x.cc)+'\')">' +
-     '<img src="https://flagcdn.com/w40/'+escapeHtml(x.cc)+'.png" onerror="this.style.visibility=\'hidden\'"/>' +
+     '<img src="/flags/'+escapeHtml(x.cc)+'.svg" onerror="this.style.visibility=\'hidden\'"/>' +
      '<span class="ccode">'+escapeHtml(x.cc.toUpperCase())+'</span>' +
      '<span>'+escapeHtml(x.nm)+'</span></a>';
  }).join("");
@@ -2601,7 +2601,7 @@ function renderPeople(){
    var phR = _isProNow && REVEALED.ph[p.id];
    return '<div class="ppl-row">' +
      '<div class="ppl-nm" style="cursor:pointer" onclick="openPersonDrawer(\''+escapeJs(p.id)+'\')"><div class="av" style="background:linear-gradient(135deg,'+col[0]+','+col[1]+')">'+escapeHtml(initials(p.nm))+'</div><div style="min-width:0"><b>'+escapeHtml(p.nm)+'</b><span>'+escapeHtml(p.cn)+'</span></div></div>' +
-     '<div class="ppl-cmp col-cmp"><div style="min-width:0"><b><img src="https://flagcdn.com/w20/'+escapeHtml(p.cc)+'.png" onerror="this.style.display=\'none\'"/>'+escapeHtml(p.cmp)+'</b><span>'+t.ppl_verified+'</span></div></div>' +
+     '<div class="ppl-cmp col-cmp"><div style="min-width:0"><b><img src="/flags/'+escapeHtml(p.cc)+'.svg" onerror="this.style.display=\'none\'"/>'+escapeHtml(p.cmp)+'</b><span>'+t.ppl_verified+'</span></div></div>' +
      '<div class="ppl-ttl col-ttl">'+escapeHtml(p.ttl)+'</div>' +
      '<div>'+(emR ? '<span class="reveal-btn revealed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'+escapeHtml(p.em)+'</span>' : '<button class="reveal-btn" onclick="event.stopPropagation();revealField(\''+escapeJs(p.id)+'\',\'em\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>'+t.ppl_show_email+'</button>')+'</div>' +
      '<div class="col-phn">'+(phR ? '<span class="reveal-btn revealed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'+escapeHtml(p.ph)+'</span>' : '<button class="reveal-btn" onclick="event.stopPropagation();revealField(\''+escapeJs(p.id)+'\',\'ph\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>'+t.ppl_show_phone+'</button>')+'</div>' +
@@ -2660,7 +2660,7 @@ function openPersonDrawer(id){
   '<div class="pd-av" style="background:linear-gradient(135deg,'+col[0]+','+col[1]+')">'+escapeHtml(initials(p.nm))+'</div>' +
   '<div class="pd-nm">'+escapeHtml(p.nm)+'</div>' +
   '<div class="pd-ttl">'+escapeHtml(p.ttl)+'</div>' +
-  '<div class="pd-cmp"><img src="https://flagcdn.com/w20/'+escapeHtml(p.cc)+'.png" onerror="this.style.display=\'none\'"/>'+escapeHtml(p.cmp)+' · '+escapeHtml(p.cn)+'</div>' +
+  '<div class="pd-cmp"><img src="/flags/'+escapeHtml(p.cc)+'.svg" onerror="this.style.display=\'none\'"/>'+escapeHtml(p.cmp)+' · '+escapeHtml(p.cn)+'</div>' +
   '<div class="pd-tags"><span class="pt">'+escapeHtml(roleName)+'</span><span class="pt">'+t.ppl_verified+'</span><span class="pt">'+t.tm_active+' · '+t.pd_lastseen+' '+t.pd_lastseen_val+'</span></div>';
 
  // İLETİŞİM BÖLÜMÜ — Pro değilse tek büyük wall; Pro ise gerçek email+telefon (kredi mekaniği).
@@ -2691,7 +2691,7 @@ function openPersonDrawer(id){
   contactSection +
   '<div class="pd-sec"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>'+t.pd_firm+'</h4>' +
    '<div class="pd-fld"><span class="k">'+t.pd_firmname_lbl+'</span><span class="v">'+escapeHtml(p.cmp)+'</span></div>' +
-   '<div class="pd-fld"><span class="k">'+t.pd_country_lbl+'</span><span class="v"><img src="https://flagcdn.com/w20/'+escapeHtml(p.cc)+'.png" onerror="this.style.display=\'none\'" style="width:16px"/>'+escapeHtml(p.cn)+'</span></div>' +
+   '<div class="pd-fld"><span class="k">'+t.pd_country_lbl+'</span><span class="v"><img src="/flags/'+escapeHtml(p.cc)+'.svg" onerror="this.style.display=\'none\'" style="width:16px"/>'+escapeHtml(p.cn)+'</span></div>' +
    '<div class="pd-fld"><span class="k">'+t.pd_sector_lbl+'</span><span class="v">'+((SI[LANG]||SI.tr)[p.sec]||"—")+'</span></div>' +
   '</div>' +
   '<div class="pd-sec"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>'+t.pd_social+'</h4>' +
@@ -2959,7 +2959,7 @@ function renderPositions(){
    return '<div class="pc'+(locked?' locked':'')+'" '+clickHandler+' style="cursor:'+(locked?'default':'pointer')+'">' + lockBadge + lockOverlay +
      '<div class="pcbar"><span>'+(locked?'••••':escapeHtml(p.code))+'</span><span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+T[LANG].match_score+'</span></span><span>'+(locked?'••••':escapeHtml(p.dst))+'</span></div>' +
      '<div class="pchead">'+secTileHTML(p.sec, 46, 11)+'<div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span class="nm">'+escapeHtml(displayNm)+'</span><span class="side">'+dirLbl+'</span></div>' +
-     '<div class="meta"><img src="https://flagcdn.com/w20/'+escapeHtml(p.fc)+'.png" onerror="this.style.visibility=\'hidden\'"/>'+escapeHtml(displayCn)+' · '+escapeHtml(p.yr)+' · <span style="color:var(--verify)">● '+T[LANG].verified+'</span></div></div></div>' +
+     '<div class="meta"><img src="/flags/'+escapeHtml(p.fc)+'.svg" onerror="this.style.visibility=\'hidden\'"/>'+escapeHtml(displayCn)+' · '+escapeHtml(p.yr)+' · <span style="color:var(--verify)">● '+T[LANG].verified+'</span></div></div></div>' +
      '<div class="tmrow"><span class="sec-chip" style="background:'+sm.c+'18;color:'+sm.c+';padding:3px 9px;border-radius:100px;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;gap:5px"><span style="width:12px;height:12px;display:inline-flex">'+sm.i+'</span>'+sec+'</span> · <b>'+tt('fl_year','Kuruluş Yılı')+':</b> '+escapeHtml(p.yr)+'</div>' +
      (p.tags?'<div class="pc-tags">'+p.tags.map(function(t){return '<span class="pc-tag">'+(locked?'••••':escapeHtml(t))+'</span>';}).join('')+'</div>':'') +
      '<div class="hsrow"><div><div class="k">HS</div><b>'+(locked?'••••':escapeHtml(p.hs))+'</b></div><div><div class="k">MOQ</div><b>'+(locked?'••••':escapeHtml(p.moq))+'</b></div><div><div class="k">INCOTERM</div><b>'+(locked?'••••':escapeHtml(p.inc))+'</b></div><div><div class="k">'+tt('fp_pay','Ödeme')+'</div><b>'+(locked?'••••':escapeHtml(p.pay))+'</b></div></div>' +
@@ -3081,7 +3081,7 @@ function renderFirmPage(p){
      '<div>' +
       '<h1>'+escapeHtml(p.nm)+'</h1>' +
       '<div class="taxln">' +
-        '<img src="https://flagcdn.com/w40/'+escapeHtml(p.fc)+'.png" alt="'+escapeHtml(p.fc.toUpperCase())+'"/>' +
+        '<img src="/flags/'+escapeHtml(p.fc)+'.svg" alt="'+escapeHtml(p.fc.toUpperCase())+'"/>' +
         '<span>'+cn+'</span>· '+
         '<span>'+t.since+' '+escapeHtml(p.yr)+'</span>· '+
         '<span class="v">'+t.verified+'</span>' +
@@ -3502,7 +3502,7 @@ function openProfileViewers(){
  var host=modal.querySelector("#viewersList");
  host.innerHTML = VISITS.map(function(v){
    return '<div class="viewer-row" onclick="toast(\''+escapeJs(v.nm)+' — '+escapeJs(v.ip)+' ('+escapeJs(d[v.cc]||v.cc)+')\')">' +
-    '<div class="v-flag"><img src="https://flagcdn.com/w40/'+escapeHtml(v.cc)+'.png"/></div>' +
+    '<div class="v-flag"><img src="/flags/'+escapeHtml(v.cc)+'.svg"/></div>' +
     '<div class="v-info"><div class="v-nm">'+escapeHtml(v.nm)+'</div><div class="v-ln">'+(d[v.cc]||v.cc)+' · '+escapeHtml(v.city)+' · IP '+escapeHtml(v.ip)+'</div></div>' +
     '<div class="v-tm">'+relTime(v.tsMin)+'</div>' +
    '</div>';
@@ -3525,7 +3525,7 @@ function renderCountryDistribution(){
  var arr=computeCountryDistribution();
  var palette=["var(--teal)","var(--emer)","#3E8570","#8FE9C4","#c78a2a","#5A8FD8"];
  host.innerHTML = arr.map(function(r,i){
-   return '<div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px"><span><img src="https://flagcdn.com/w20/'+escapeHtml(r.cc)+'.png" style="width:14px;height:10px;vertical-align:middle;border-radius:1px"/> '+(d[r.cc]||r.cc)+'</span><b style="color:var(--ink)">'+r.pct+'%</b></div><div style="height:6px;background:var(--paper);border-radius:100px;overflow:hidden"><div style="width:'+r.pct+'%;height:100%;background:'+palette[i%palette.length]+'"></div></div></div>';
+   return '<div><div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:3px"><span><img src="/flags/'+escapeHtml(r.cc)+'.svg" style="width:14px;height:10px;vertical-align:middle;border-radius:1px"/> '+(d[r.cc]||r.cc)+'</span><b style="color:var(--ink)">'+r.pct+'%</b></div><div style="height:6px;background:var(--paper);border-radius:100px;overflow:hidden"><div style="width:'+r.pct+'%;height:100%;background:'+palette[i%palette.length]+'"></div></div></div>';
  }).join("");
 }
 
@@ -4239,7 +4239,7 @@ function renderMatchTable(){
          secTileHTML(p.sec, 44, 10) +
          '<div style="flex:1;min-width:0">' +
            '<div class="mnm">'+escapeHtml(p.nm)+'</div>' +
-           '<div class="msub"><img src="https://flagcdn.com/w20/'+escapeHtml(p.fc)+'.png" alt=""/> '+(d[p.cn_key]||"")+' · '+escapeHtml(p.yr)+' · '+(secs[p.sec]||"")+' · <b style="color:var(--body)">HS '+escapeHtml(p.hs)+'</b></div>' +
+           '<div class="msub"><img src="/flags/'+escapeHtml(p.fc)+'.svg" alt=""/> '+(d[p.cn_key]||"")+' · '+escapeHtml(p.yr)+' · '+(secs[p.sec]||"")+' · <b style="color:var(--body)">HS '+escapeHtml(p.hs)+'</b></div>' +
          '</div>' +
        '</div>' +
          '<span class="mdirpill '+dirCls+'">'+dirLbl+'</span>' +

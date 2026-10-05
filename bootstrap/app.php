@@ -5,6 +5,7 @@ use App\Http\Middleware\AnyAuthMiddleware;
 use App\Http\Middleware\BlogPermission;
 use App\Http\Middleware\IsCustomer;
 use App\Http\Middleware\LegacyRoutes;
+use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\IsAgent;
 use App\Http\Middleware\CheckDatabaseConnection;
 use App\Http\Middleware\PreventBackHistory;
@@ -57,6 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // Payment provider webhooks are authenticated by their signature, not by a CSRF token.
+        $middleware->appendToGroup('web', SecurityHeaders::class);
         $middleware->validateCsrfTokens(except: ['kv/webhooks/stripe']);
         // Guests hitting a protected page are sent to the Kervea sign-in, not the template's login view.
         $middleware->redirectGuestsTo('/giris');

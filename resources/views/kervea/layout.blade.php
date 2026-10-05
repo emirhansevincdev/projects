@@ -6,12 +6,9 @@
 {!! str_replace('__KV_BASE__', rtrim(config('app.url'), '/'), view('kervea.partials.head-seo')->render()) !!}
 <link rel="stylesheet" href="{{ asset('kervea/css/kervea.css') }}?v={{ config('kervea.asset_version') }}">
 <script src="{{ asset('kervea/js/kervea-head.js') }}?v={{ config('kervea.asset_version') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/index.js" defer></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js" defer></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js" defer></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js" defer></script>
+<script src="{{ asset('kervea/vendor/gsap.min.js') }}"></script>
+<script src="{{ asset('kervea/vendor/ScrollTrigger.min.js') }}"></script>
+<script src="{{ asset('kervea/vendor/amcharts-world.min.js') }}" defer></script>
 <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin">
 <meta http-equiv="Cross-Origin-Resource-Policy" content="same-site">
 </head>

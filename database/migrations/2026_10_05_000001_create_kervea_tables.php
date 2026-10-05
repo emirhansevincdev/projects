@@ -158,6 +158,18 @@ return new class extends Migration
             $table->unique(['user_id', 'company_id']);
         });
 
+        // Password setup / reset links need this table; the template's SQL installer may not have created it.
+        if (! Schema::hasTable('password_reset_tokens')) {
+            Schema::create('password_reset_tokens', function (Blueprint $table) {
+                $table->string('email')->primary();
+                $table->string('token');
+                $table->timestamp('created_at')->nullable();
+            });
+        }
+        if (! Schema::hasColumn('users', 'email_verified_at')) {
+            Schema::table('users', fn (Blueprint $t) => $t->timestamp('email_verified_at')->nullable());
+        }
+
         // Extra member columns on the shared users table (idempotent: production DB may already have some).
         $add = function (string $col, callable $def) {
             if (! Schema::hasColumn('users', $col)) {

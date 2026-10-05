@@ -290,7 +290,8 @@ Route::middleware('legacy')->group(function () {
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard'); 
+    // The template dashboard (listing/hotel statistics) is not part of Kervea: land on the approval panel.
+    Route::get('/dashboard', fn () => redirect()->route('admin.kervea.applications'))->name('admin.dashboard');
 
     //Notification Route
     Route::post('/notifications/mark-read', [DashboardController::class, 'markAllAsRead'])

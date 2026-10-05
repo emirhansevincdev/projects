@@ -1,6 +1,6 @@
 @verbatim
 <!-- CSP: Plausible analytics için genişletildi (KVKK-safe, Google Fonts EKLENMEDİ) -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.amcharts.com https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://flagcdn.com __KV_BASE__; font-src 'self'; connect-src 'self' https://plausible.io; object-src 'none'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"/>
 <title>Kervea — Modern İpek Yolu · B2B Ticaret Eşleştirme Ağı</title>
 
 <!-- ══════════════════════════════════════════════════════════════════

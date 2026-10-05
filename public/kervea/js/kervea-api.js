@@ -163,7 +163,7 @@ window.renderPositions = function(){
       var lockOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
       var score = (p.uyum!=null) ? '<span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+t.match_score+'</span></span>' : '<span class="mid"></span>';
-      var flag = (!locked && p.fc) ? '<img src="https://flagcdn.com/w20/'+escapeHtml(p.fc)+'.png" onerror="this.style.visibility=\'hidden\'"/>' : '';
+      var flag = (!locked && p.fc) ? '<img src="/flags/'+escapeHtml(p.fc)+'.svg" onerror="this.style.visibility=\'hidden\'"/>' : '';
       var meta = flag+escapeHtml(locked?'•••••••':cn)+(p.yr?' · '+escapeHtml(p.yr):'')+(locked?'':' · <span style="color:var(--verify)">● '+t.verified+'</span>');
       var secChip = (p.sec!=null) ? '<span class="sec-chip" style="background:'+sm.c+'18;color:'+sm.c+';padding:3px 9px;border-radius:100px;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;gap:5px"><span style="width:12px;height:12px;display:inline-flex">'+sm.i+'</span>'+sec+'</span>' : '';
       var yr = p.yr ? ' · <b>'+tt('fl_year','Kuruluş Yılı')+':</b> '+escapeHtml(p.yr) : '';
@@ -242,7 +242,7 @@ window.renderFirmPage = function(p){
   var years = p.yr ? (new Date().getFullYear()-p.yr) : null;
   el('fpgContent').innerHTML = cover+
    '<div class="fphead">'+logo+'<div class="toprow">'+pills+(p.uyum!=null?'<span class="pill" style="background:var(--emer);color:#fff">'+escapeHtml(p.uyum)+' '+t.match_score+'</span>':'')+'</div>'+
-   '<div class="fpname"><div><h1>'+escapeHtml(p.nm)+'</h1><div class="taxln"><img src="https://flagcdn.com/w40/'+escapeHtml(p.fc)+'.png" alt="'+escapeHtml(String(p.fc).toUpperCase())+'"/><span>'+escapeHtml(cn)+(p.city?' · '+escapeHtml(p.city):'')+'</span>'+(p.yr?'· <span>'+t.since+' '+escapeHtml(p.yr)+'</span>':'')+'· <span class="v">'+t.verified+'</span></div>'+(actions?'<div class="fpactions">'+actions+'</div>':'')+'</div></div></div>'+
+   '<div class="fpname"><div><h1>'+escapeHtml(p.nm)+'</h1><div class="taxln"><img src="/flags/'+escapeHtml(p.fc)+'.svg" alt="'+escapeHtml(String(p.fc).toUpperCase())+'"/><span>'+escapeHtml(cn)+(p.city?' · '+escapeHtml(p.city):'')+'</span>'+(p.yr?'· <span>'+t.since+' '+escapeHtml(p.yr)+'</span>':'')+'· <span class="v">'+t.verified+'</span></div>'+(actions?'<div class="fpactions">'+actions+'</div>':'')+'</div></div></div>'+
    '<div class="fpgridmain"><div>'+
     '<div class="fpblock"><h3>'+t.fp_about+'</h3><p style="white-space:pre-line">'+escapeHtml(p.desc||'')+'</p>'+tags+'</div>'+gal+tradeBlock+'</div>'+
    '<aside class="fpaside"><div class="fpblock"><h3>'+t.fp_contact+'</h3>'+contact+'</div>'+rep+
@@ -594,7 +594,7 @@ var _fillPanel=fillPanel;
 fillPanel=function(){ _fillPanel(); fillOverview(); fillDocs(); };
 
 window.renderMatchTable = function(){
-  var wrap=el('mtable-wrap'); if(!wrap) return;
+  var wrap=el('mtable-wrap'); if(!wrap || !window.KV_USER) return;
   var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
   var q=(el('mfSearch')||{value:''}).value.toLowerCase().trim();
   var dirf=(el('mfDir')||{value:''}).value, scoref=parseInt((el('mfScore')||{value:'0'}).value)||0;
@@ -626,6 +626,26 @@ window.renderMatchTable = function(){
     }).join('')+'</div>';
   });
 };
+
+
+// ───────────────────────── yeni alanların çevirileri ─────────────────────────
+(function(){
+  var X={
+   tr:{fl_repemail:"Yetkili E-posta (şahsi)",consent_vis_t:"İletişim bilgilerimin gösterilmesi",consent_vis_d:"İletişim bilgilerimin (e-posta, telefon, web sitesi) yalnızca Pro üyelere gösterilmesine açık rızam vardır. Rızamı üye panelinden istediğim zaman geri alabilirim.",consent_xb_t:"Yurt dışı aktarım bilgilendirmesi",consent_xb_d:"Firma profilimin yurt dışındaki üyelere gösterileceğini; bu aktarımın, bulunduğu ülkenin Türkiye ile aynı koruma seviyesini sağlamayabileceği riskini anladığımı beyan ederim."},
+   en:{fl_repemail:"Representative e-mail (personal)",consent_vis_t:"Showing my contact details",consent_vis_d:"I explicitly consent to my contact details (e-mail, phone, website) being shown to Pro members only. I can withdraw this consent at any time from the member panel.",consent_xb_t:"Cross-border transfer notice",consent_xb_d:"I understand that my company profile will be shown to members abroad and that the destination country may not offer the same level of data protection as Türkiye."},
+   es:{fl_repemail:"Correo del representante (personal)",consent_vis_t:"Mostrar mis datos de contacto",consent_vis_d:"Doy mi consentimiento expreso para que mis datos de contacto (correo, teléfono, web) se muestren solo a miembros Pro. Puedo retirarlo en cualquier momento desde el panel.",consent_xb_t:"Aviso de transferencia internacional",consent_xb_d:"Entiendo que el perfil de mi empresa se mostrará a miembros en el extranjero y que el país de destino puede no ofrecer el mismo nivel de protección de datos que Türkiye."},
+   fr:{fl_repemail:"E-mail du représentant (personnel)",consent_vis_t:"Affichage de mes coordonnées",consent_vis_d:"Je consens expressément à ce que mes coordonnées (e-mail, téléphone, site web) soient affichées uniquement aux membres Pro. Je peux retirer ce consentement à tout moment depuis l'espace membre.",consent_xb_t:"Information sur le transfert à l'étranger",consent_xb_d:"Je comprends que le profil de mon entreprise sera visible par des membres à l'étranger et que le pays de destination peut ne pas offrir le même niveau de protection des données que la Türkiye."},
+   ar:{fl_repemail:"البريد الإلكتروني للمسؤول (الشخصي)",consent_vis_t:"إظهار بيانات الاتصال الخاصة بي",consent_vis_d:"أوافق صراحةً على إظهار بيانات الاتصال الخاصة بي (البريد الإلكتروني، الهاتف، الموقع) لأعضاء Pro فقط. يمكنني سحب هذه الموافقة في أي وقت من لوحة العضو.",consent_xb_t:"إشعار النقل إلى الخارج",consent_xb_d:"أدرك أن ملف شركتي سيُعرض لأعضاء في الخارج، وأن بلد الوجهة قد لا يوفر نفس مستوى حماية البيانات المتوفر في تركيا."},
+   ru:{fl_repemail:"E-mail представителя (личный)",consent_vis_t:"Показ моих контактных данных",consent_vis_d:"Я явно соглашаюсь на показ моих контактных данных (e-mail, телефон, сайт) только Pro-участникам. Я могу отозвать согласие в любое время в личном кабинете.",consent_xb_t:"Уведомление о передаче за рубеж",consent_xb_d:"Я понимаю, что профиль моей компании будет показан участникам за рубежом и что страна назначения может не обеспечивать тот же уровень защиты данных, что и Турция."}
+  };
+  Object.keys(X).forEach(function(l){ if(!T[l]) T[l]={}; Object.assign(T[l],X[l]); });
+  window.kvApplyExtraI18n=function(){
+    var d=T[LANG]||T.tr; Object.keys(X.tr).forEach(function(k){ document.querySelectorAll('[data-i18n="'+k+'"]').forEach(function(n){ if(d[k]) n.innerHTML=d[k]; }); });
+  };
+  kvApplyExtraI18n();
+  // Dil değişince yeniden uygula
+  var _sl=window.setLang; window.setLang=function(l){ var r=_sl.apply(this,arguments); try{ kvApplyExtraI18n(); }catch(e){} return r; };
+})();
 
 // ───────────────────────── adresler (gerçek URL) ─────────────────────────
 var PATHS={home:'/',add:'/firma-ekle',pricing:'/fiyatlar',about:'/hakkimizda',contact:'/iletisim',login:'/giris',panel:'/uye-paneli'};
