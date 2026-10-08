@@ -37,6 +37,13 @@ class SocialController extends Controller
             return $this->home(Auth::user());
         }
 
+        // The state lives in a host-only session cookie, and the provider sends the browser back to the APP_URL host.
+        // So the flow must start on that host (e.g. visitors who arrived on www.): hop there once (?c=1 prevents any loop).
+        $canon = parse_url(SocialAuth::baseUrl());
+        if (! $r->query('c') && ! empty($canon['host']) && ($r->getHost() !== $canon['host'] || (($canon['scheme'] ?? '') === 'https' && ! $r->isSecure()))) {
+            return redirect()->away(SocialAuth::baseUrl()."/auth/$provider/redirect?c=1")->header('Cache-Control', 'no-store');
+        }
+
         $state = Str::random(40);
         $verifier = SocialAuth::usesPkce($provider) ? SocialAuth::newVerifier() : null;
         $r->session()->put('kv_oauth', ['provider' => $provider, 'state' => $state, 'verifier' => $verifier, 'exp' => now()->timestamp + self::FLOW_TTL]);
@@ -59,7 +66,7 @@ class SocialController extends Controller
             return $this->fail('expired');
         }
         if ($r->query('error') !== null) {
-            return $this->fail($r->query('error') === 'access_denied' ? 'cancelled' : 'failed');
+            return $this->fail(in_array($r->query('error'), ['access_denied', 'user_cancelled_login', 'user_cancelled_authorize'], true) ? 'cancelled' : 'failed');
         }
         $code = $r->query('code');
         if (! is_string($code) || $code === '' || strlen($code) > 2048) {
@@ -77,7 +84,15 @@ class SocialController extends Controller
         }
 
         $identity = SocialIdentity::where('provider', $provider)->where('provider_user_id', $p['id'])->first();
-        $user = $identity ? User::find($identity->user_id) : User::whereRaw('LOWER(email) = ?', [$p['email']])->first();
+        if ($identity && ! hash_equals((string) $identity->provider_user_id, $p['id'])) {
+            $identity = null;                      // case-insensitive column collation matched a different id
+        }
+        $user = $identity ? User::find($identity->user_id) : null;
+        if ($identity && ! $user) {
+            $identity->delete();                   // the linked account is gone (users table without FK cascade): the old link is void
+            $identity = null;
+        }
+        $user ??= User::whereRaw('LOWER(email) = ?', [$p['email']])->first();
 
         if (! $user || (int) $user->role !== 2) {
             // Unknown address → not a member yet (never create one). Admin → password only.
@@ -108,17 +123,20 @@ class SocialController extends Controller
             return response()->json(['error' => 'expired'], 422);
         }
         $key = 'kv-social-2fa|'.$pending['user_id'].'|'.$r->ip();
-        if (RateLimiter::tooManyAttempts($key, 5)) {
+        $userKey = 'kv-social-2fa|'.$pending['user_id'];           // across all IPs: a distributed guesser is slowed down too
+        if (RateLimiter::tooManyAttempts($key, 5) || RateLimiter::tooManyAttempts($userKey, 15)) {
             $r->session()->forget('kv_social_2fa');
-            return response()->json(['error' => 'locked', 'retry_after' => RateLimiter::availableIn($key)], 429);
+            return response()->json(['error' => 'locked', 'retry_after' => max(RateLimiter::availableIn($key), RateLimiter::availableIn($userKey))], 429);
         }
         $user = User::find($pending['user_id']);
         if (! $user || (int) $user->role !== 2 || ! $user->two_factor_confirmed_at || ! Totp::verify((string) $user->two_factor_secret, $v['code'])) {
             RateLimiter::hit($key, 900);
+            RateLimiter::hit($userKey, 900);
             return response()->json(['error' => 'two_factor_invalid'], 422);
         }
 
         RateLimiter::clear($key);
+        RateLimiter::clear($userKey);
         $this->signIn($r, $user, $pending);
         return response()->json(['ok' => true, 'user' => AuthController::userPayload($user), 'csrf' => csrf_token()]);
     }

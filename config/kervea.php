@@ -1,7 +1,13 @@
 <?php
 
 return [
-    'asset_version' => env('KERVEA_ASSET_VERSION', '1'),
+    // Cache-buster for kervea.css / kervea-*.js: follows the files' modification time, so returning visitors get new code after an upload.
+    'asset_version' => env('KERVEA_ASSET_VERSION') ?: (string) max(
+        (int) @filemtime(__DIR__.'/../public/kervea/js/kervea-api.js'),
+        (int) @filemtime(__DIR__.'/../public/kervea/js/kervea-app.js'),
+        (int) @filemtime(__DIR__.'/../public/kervea/css/kervea.css'),
+        1
+    ),
 
     // Legacy template routes (directory/listing front-end, customer/agent areas, installer). Keep false.
     'legacy_routes' => (bool) env('KERVEA_LEGACY_ROUTES', false),
@@ -36,7 +42,9 @@ return [
     // "Sign in with Google / LinkedIn" (OpenID Connect). Only EXISTING, admin-approved members can sign in this way:
     // no account is ever created from a social login. A provider with an empty id/secret is switched off (its button is hidden).
     // Redirect URI to register at the provider: {APP_URL}/auth/{google|linkedin}/callback
+    // (this template's config/app.php derives app.url from the request host, NOT from .env, so APP_URL is read here directly.)
     'social' => [
+        'redirect_base' => env('APP_URL'),
         'google' => [
             'client_id' => env('GOOGLE_CLIENT_ID'),
             'client_secret' => env('GOOGLE_CLIENT_SECRET'),

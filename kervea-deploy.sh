@@ -105,6 +105,23 @@ done
 "$PHP" -r 'exit(function_exists("imagewebp") ? 0 : 1);' || die "PHP GD eklentisi WebP desteğiyle kurulu olmalı."
 ok "PHP eklentileri tamam"
 
+SAME=0
+[ "$(cd "$SRC" && pwd -P)" = "$TARGET" ] && SAME=1
+[ "$SAME" -eq 1 ] && ok "Betik doğrudan site klasöründen çalışıyor (dosya kopyalama atlanacak)"
+
+# Dosya listesi kontrolü: elle yüklenen (SAME) ya da açılan ZIP'te (aksi hâlde) eksik dosya var mı?
+if [ -f "$SRC/kervea-dosyalar.txt" ]; then
+  CHECKDIR="$SRC"; [ "$SAME" -eq 1 ] && CHECKDIR="$TARGET"
+  MISSING="$(while IFS= read -r f; do [ -z "$f" ] || [ -f "$CHECKDIR/$f" ] || printf '%s\n' "$f"; done < "$SRC/kervea-dosyalar.txt")"
+  if [ -n "$MISSING" ]; then
+    NMISS="$(printf '%s\n' "$MISSING" | wc -l | tr -d ' ')"
+    printf '\n  Eksik dosyalar (%s adet, ilk 40):\n' "$NMISS" >&2
+    printf '%s\n' "$MISSING" | head -n 40 | sed 's/^/    - /' >&2
+    die "$CHECKDIR içinde $NMISS dosya eksik (yukarıdaki liste). Bunları ZIP'ten aynı yollara yükleyip betiği tekrar çalıştırın. Hiçbir şey değiştirilmedi."
+  fi
+  ok "Tüm Kervea dosyaları yerinde ($(wc -l < "$SRC/kervea-dosyalar.txt" | tr -d ' ') dosya)"
+fi
+
 DBOUT="$(artisan tinker --execute='DB::connection()->getPdo(); echo "KV_DB_OK";' 2>&1 || true)"
 grep -q "KV_DB_OK" <<<"$DBOUT" || { printf '%s\n' "$DBOUT" | tail -n 8 >&2; die "Veritabanına bağlanılamadı (yukarıdaki hata mesajına bakın). Bağlantı ayarları .env ve config/database.php içindedir."; }
 ok "Veritabanına bağlanıldı"
@@ -135,23 +152,6 @@ NEED_KB=$(( $(du -sk "$TARGET" --exclude=vendor --exclude=node_modules 2>/dev/nu
 AVAIL_KB="$(df -Pk "${BACKUP_DIR%/*}" 2>/dev/null | awk 'NR==2{print $4}')"
 [ -n "$AVAIL_KB" ] && [ "$AVAIL_KB" -lt "$NEED_KB" ] && die "Yedek için disk alanı yetersiz (gereken ~$((NEED_KB/1024)) MB, boş $((AVAIL_KB/1024)) MB)."
 ok "Disk alanı yeterli"
-
-SAME=0
-[ "$(cd "$SRC" && pwd -P)" = "$TARGET" ] && SAME=1
-[ "$SAME" -eq 1 ] && ok "Betik doğrudan site klasöründen çalışıyor (dosya kopyalama atlanacak)"
-
-# Dosya listesi kontrolü: elle yüklenen (SAME) ya da açılan ZIP'te (aksi hâlde) eksik dosya var mı?
-if [ -f "$SRC/kervea-dosyalar.txt" ]; then
-  CHECKDIR="$SRC"; [ "$SAME" -eq 1 ] && CHECKDIR="$TARGET"
-  MISSING="$(while IFS= read -r f; do [ -z "$f" ] || [ -f "$CHECKDIR/$f" ] || printf '%s\n' "$f"; done < "$SRC/kervea-dosyalar.txt")"
-  if [ -n "$MISSING" ]; then
-    NMISS="$(printf '%s\n' "$MISSING" | wc -l | tr -d ' ')"
-    printf '\n  Eksik dosyalar (%s adet, ilk 40):\n' "$NMISS" >&2
-    printf '%s\n' "$MISSING" | head -n 40 | sed 's/^/    - /' >&2
-    die "$CHECKDIR içinde $NMISS dosya eksik (yukarıdaki liste). Bunları ZIP'ten aynı yollara yükleyip betiği tekrar çalıştırın. Hiçbir şey değiştirilmedi."
-  fi
-  ok "Tüm Kervea dosyaları yerinde ($(wc -l < "$SRC/kervea-dosyalar.txt" | tr -d ' ') dosya)"
-fi
 
 if [ "$CHECK_ONLY" -eq 1 ]; then
   say "Kontrol bitti — hiçbir şey değiştirilmedi."
@@ -331,7 +331,14 @@ if grep -q "Kervea2026Pass" "$TARGET/config/database.php" 2>/dev/null; then
   warn "config/database.php içinde veritabanı parolası düz yazı olarak duruyor ve bu parola GitHub'a gitti: parolayı DEĞİŞTİRİN (docs/KERVEA-KURULUM.md · 'Veritabanı parolasını değiştirme')."
 fi
 for P in GOOGLE LINKEDIN; do
-  if [ -n "$(envget ${P}_CLIENT_ID)" ] && [ -n "$(envget ${P}_CLIENT_SECRET)" ]; then ok "$P ile giriş etkin"
+  p="$(printf '%s' "$P" | tr 'A-Z' 'a-z')"
+  if [ -n "$(envget ${P}_CLIENT_ID)" ] && [ -n "$(envget ${P}_CLIENT_SECRET)" ]; then
+    ok "$P ile giriş etkin. Sağlayıcı konsoluna şu yönlendirme adresi yazılmış olmalı (harfi harfine): $BASE/auth/$p/callback"
+    if command -v curl >/dev/null 2>&1; then
+      case "$p" in google) PROBE="https://accounts.google.com/.well-known/openid-configuration";; *) PROBE="https://www.linkedin.com/oauth/.well-known/openid-configuration";; esac
+      pc="$(curl -s -o /dev/null -m 10 -w '%{http_code}' "$PROBE" || true)"
+      if [ "$pc" = "200" ]; then ok "$P sunucusuna bu makineden erişilebiliyor"; else warn "$P sunucusuna bu makineden erişilemedi ($pc): giriş çalışmaz. Sunucunun dışarı HTTPS (443) çıkışı kapalı olabilir."; fi
+    fi
   else printf '  %s ile giriş kapalı (.env içinde %s_CLIENT_ID / %s_CLIENT_SECRET boş; düğme gizli kalır)\n' "$P" "$P" "$P"; fi
 done
 

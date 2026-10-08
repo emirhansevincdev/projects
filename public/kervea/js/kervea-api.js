@@ -643,7 +643,8 @@ window.renderMatchTable = function(){
       admin_password:['Yönetici hesabı','Yönetici hesapları yalnızca e-posta ve parola ile giriş yapar.'],
       other_account:['Farklı hesap bağlı','Üyeliğiniz bu sağlayıcıda başka bir hesaba bağlanmış. O hesapla ya da e-posta ile giriş yapın.'],
       tfa_title:['Doğrulama kodu gerekli','Authenticator uygulamanızdaki 6 haneli kodu girin.'],
-      tfa_label:'Doğrulama kodu (2FA)', tfa_btn:'Doğrula', tfa_back:'Vazgeç', tfa_bad:['Kod hatalı','Girdiğiniz kod geçersiz. Tekrar deneyin.'], tfa_lock:['Geçici olarak kilitlendi','Çok fazla hatalı deneme. Daha sonra tekrar deneyin.']
+      tfa_label:'Doğrulama kodu (2FA)', tfa_btn:'Doğrula', tfa_back:'Vazgeç',
+      tfa_bad:['Kod hatalı','Girdiğiniz kod geçersiz. Tekrar deneyin.'], tfa_lock:['Geçici olarak kilitlendi','Çok fazla hatalı deneme. Daha sonra tekrar deneyin.'], tfa_busy:['Çok sık deneme','Kısa süre sonra tekrar deneyin.']
     },
     en:{
       unavailable:['Sign-in method unavailable','This sign-in method is not active right now. Please sign in with e-mail and password.'],
@@ -655,15 +656,71 @@ window.renderMatchTable = function(){
       admin_password:['Administrator account','Administrator accounts sign in with e-mail and password only.'],
       other_account:['Different account linked','Your membership is linked to another account at this provider. Sign in with that account or with e-mail.'],
       tfa_title:['Verification code required','Enter the 6-digit code from your authenticator app.'],
-      tfa_label:'Verification code (2FA)', tfa_btn:'Verify', tfa_back:'Cancel', tfa_bad:['Wrong code','The code you entered is not valid. Please try again.'], tfa_lock:['Temporarily locked','Too many failed attempts. Please try again later.']
+      tfa_label:'Verification code (2FA)', tfa_btn:'Verify', tfa_back:'Cancel',
+      tfa_bad:['Wrong code','The code you entered is not valid. Please try again.'], tfa_lock:['Temporarily locked','Too many failed attempts. Please try again later.'], tfa_busy:['Too many requests','Please try again in a moment.']
+    },
+    es:{
+      unavailable:['Método de acceso no disponible','Este método de acceso no está activo ahora. Inicie sesión con correo y contraseña.'],
+      expired:['La solicitud ha caducado','El inicio de sesión ha caducado. Inténtelo de nuevo.'],
+      cancelled:['Inicio de sesión cancelado','No ha aprobado el inicio de sesión. Puede intentarlo de nuevo.'],
+      failed:['No se pudo completar el inicio de sesión','No se pudo contactar con el proveedor. Inténtelo de nuevo en unos minutos o inicie sesión con correo.'],
+      email_unverified:['Correo no verificado','El proveedor no ha verificado el correo de esta cuenta. Use una cuenta verificada o inicie sesión con correo.'],
+      not_member:['No hay membresía con este correo','No existe una membresía aprobada de Kervea para el correo de esta cuenta. La membresía se crea cuando se aprueba la solicitud de su empresa: primero solicítela con «Añadir empresa» y luego entre con la cuenta vinculada al correo de la solicitud.'],
+      admin_password:['Cuenta de administrador','Las cuentas de administrador solo inician sesión con correo y contraseña.'],
+      other_account:['Hay otra cuenta vinculada','Su membresía está vinculada a otra cuenta de este proveedor. Entre con esa cuenta o con correo.'],
+      tfa_title:['Se requiere código de verificación','Introduzca el código de 6 dígitos de su aplicación de autenticación.'],
+      tfa_label:'Código de verificación (2FA)', tfa_btn:'Verificar', tfa_back:'Cancelar',
+      tfa_bad:['Código incorrecto','El código introducido no es válido. Inténtelo de nuevo.'], tfa_lock:['Bloqueado temporalmente','Demasiados intentos fallidos. Inténtelo más tarde.'], tfa_busy:['Demasiadas solicitudes','Inténtelo de nuevo en un momento.']
+    },
+    fr:{
+      unavailable:['Méthode de connexion indisponible','Cette méthode de connexion n\'est pas active pour le moment. Connectez-vous avec e-mail et mot de passe.'],
+      expired:['Demande expirée','La connexion a expiré. Veuillez réessayer.'],
+      cancelled:['Connexion annulée','Vous n\'avez pas validé la connexion. Vous pouvez réessayer.'],
+      failed:['Connexion impossible','Le fournisseur est injoignable. Réessayez dans un instant ou connectez-vous avec votre e-mail.'],
+      email_unverified:['E-mail non vérifié','L\'adresse e-mail de ce compte n\'est pas vérifiée par le fournisseur. Utilisez un compte vérifié ou connectez-vous avec votre e-mail.'],
+      not_member:['Aucune adhésion pour cet e-mail','Il n\'existe pas d\'adhésion Kervea approuvée pour l\'e-mail de ce compte. L\'adhésion est créée lorsque la demande de votre entreprise est approuvée : déposez d\'abord une demande via « Ajouter une entreprise », puis connectez-vous avec le compte lié à l\'e-mail de la demande.'],
+      admin_password:['Compte administrateur','Les comptes administrateurs se connectent uniquement avec e-mail et mot de passe.'],
+      other_account:['Un autre compte est lié','Votre adhésion est liée à un autre compte chez ce fournisseur. Connectez-vous avec ce compte ou avec votre e-mail.'],
+      tfa_title:['Code de vérification requis','Saisissez le code à 6 chiffres de votre application d\'authentification.'],
+      tfa_label:'Code de vérification (2FA)', tfa_btn:'Vérifier', tfa_back:'Annuler',
+      tfa_bad:['Code incorrect','Le code saisi n\'est pas valide. Réessayez.'], tfa_lock:['Temporairement bloqué','Trop de tentatives échouées. Réessayez plus tard.'], tfa_busy:['Trop de requêtes','Réessayez dans un instant.']
+    },
+    ru:{
+      unavailable:['Способ входа недоступен','Этот способ входа сейчас не активен. Войдите по e-mail и паролю.'],
+      expired:['Время запроса истекло','Время входа истекло. Повторите попытку.'],
+      cancelled:['Вход отменён','Вы не подтвердили вход. Можете повторить попытку.'],
+      failed:['Не удалось войти','Не удалось связаться с провайдером. Повторите позже или войдите по e-mail.'],
+      email_unverified:['E-mail не подтверждён','Провайдер не подтвердил e-mail этой учётной записи. Используйте подтверждённую запись или войдите по e-mail.'],
+      not_member:['Нет членства для этого e-mail','Для e-mail этой учётной записи нет одобренного членства Kervea. Членство создаётся после одобрения заявки вашей компании: сначала подайте заявку через «Добавить компанию», затем входите с учётной записью, привязанной к e-mail из заявки.'],
+      admin_password:['Учётная запись администратора','Администраторы входят только по e-mail и паролю.'],
+      other_account:['Привязана другая учётная запись','Ваше членство привязано к другой учётной записи у этого провайдера. Войдите с ней или по e-mail.'],
+      tfa_title:['Нужен код подтверждения','Введите 6-значный код из приложения-аутентификатора.'],
+      tfa_label:'Код подтверждения (2FA)', tfa_btn:'Подтвердить', tfa_back:'Отмена',
+      tfa_bad:['Неверный код','Введённый код недействителен. Повторите попытку.'], tfa_lock:['Временная блокировка','Слишком много неудачных попыток. Повторите позже.'], tfa_busy:['Слишком много запросов','Повторите через мгновение.']
+    },
+    ar:{
+      unavailable:['طريقة تسجيل الدخول غير متاحة','طريقة تسجيل الدخول هذه غير مفعّلة حاليًا. سجّل الدخول بالبريد الإلكتروني وكلمة المرور.'],
+      expired:['انتهت صلاحية الطلب','انتهت مهلة تسجيل الدخول. يُرجى المحاولة مرة أخرى.'],
+      cancelled:['أُلغي تسجيل الدخول','لم توافق على تسجيل الدخول. يمكنك المحاولة مرة أخرى.'],
+      failed:['تعذّر إكمال تسجيل الدخول','تعذّر الاتصال بمزوّد الخدمة. حاول مرة أخرى بعد قليل أو سجّل الدخول بالبريد الإلكتروني.'],
+      email_unverified:['البريد الإلكتروني غير مُوثَّق','لم يوثّق مزوّد الخدمة البريد الإلكتروني لهذا الحساب. استخدم حسابًا موثّقًا أو سجّل الدخول بالبريد الإلكتروني.'],
+      not_member:['لا توجد عضوية لهذا البريد','لا توجد عضوية معتمدة في Kervea للبريد الإلكتروني لهذا الحساب. تُنشأ العضوية بعد الموافقة على طلب شركتك: قدّم الطلب أولاً عبر «أضف شركتك» ثم سجّل الدخول بالحساب المرتبط بالبريد الذي استخدمته في الطلب.'],
+      admin_password:['حساب المسؤول','يسجّل المسؤولون الدخول بالبريد الإلكتروني وكلمة المرور فقط.'],
+      other_account:['حساب آخر مرتبط','عضويتك مرتبطة بحساب آخر لدى هذا المزوّد. سجّل الدخول بذلك الحساب أو بالبريد الإلكتروني.'],
+      tfa_title:['رمز التحقق مطلوب','أدخل الرمز المكوّن من 6 أرقام من تطبيق المصادقة.'],
+      tfa_label:'رمز التحقق (2FA)', tfa_btn:'تحقق', tfa_back:'إلغاء',
+      tfa_bad:['رمز خاطئ','الرمز الذي أدخلته غير صالح. حاول مرة أخرى.'], tfa_lock:['حظر مؤقت','محاولات فاشلة كثيرة. حاول لاحقًا.'], tfa_busy:['طلبات كثيرة','حاول مرة أخرى بعد قليل.']
     }
   };
   function m(k){ var d = M[LANG] || M.en; return d[k] !== undefined ? d[k] : M.en[k]; }
 
   window.kvSocialLogin = function(p){
     if(!SOC[p]){ var u=m('unavailable'); kvShowAlert('info',u[0],u[1]); return; }
+    if(window.__kvSocialGo) return;                 // çift tıklama: tek yönlendirme
+    window.__kvSocialGo = true; setTimeout(function(){ window.__kvSocialGo = false; }, 8000);
     location.href = '/auth/' + encodeURIComponent(p) + '/redirect';
   };
+  window.addEventListener('pageshow', function(e){ if(e.persisted) window.__kvSocialGo = false; });   // geri tuşuyla dönülürse yeniden denenebilsin
 
   function initButtons(){
     var shown = 0;
@@ -677,7 +734,7 @@ window.renderMatchTable = function(){
     if(sep) sep.style.display = shown ? '' : 'none';
   }
 
-  // Üyede 2FA açıksa sağlayıcıdan döndükten sonra kod istenir.
+  // Üyede 2FA açıksa sağlayıcıdan döndükten sonra kod istenir. Başarıdan sonra sayfa tam yenilenir (panel sunucudan açılır).
   function showTfa(){
     var body = document.querySelector('#login .kv-login-body'); if(!body || el('kvSocialTfa')) return;
     Array.prototype.forEach.call(body.children, function(c){ c.style.display = 'none'; });
@@ -690,28 +747,30 @@ window.renderMatchTable = function(){
     el('kvSocialCodeBtn').textContent = m('tfa_btn');
     el('kvSocialTfaBack').textContent = m('tfa_back');
     var t = m('tfa_title'); kvShowAlert('info', t[0], t[1]);
-    el('kvSocialCode').focus();
+    setTimeout(function(){ try{ el('kvSocialCode').focus(); }catch(e){} }, 700);     // görünüm açıldıktan sonra odak
+    var busy = false;       // doğrulama tek kullanımlık: ikinci istek oturumu bozar (Enter iki kez / Enter + tık)
     function submit(){
+      if(busy) return;
       var code = el('kvSocialCode').value.trim(); if(!code) return;
-      var btn = el('kvSocialCodeBtn'); setBusy(btn, true);
+      var btn = el('kvSocialCodeBtn'); busy = true; setBusy(btn, true);
       api('POST', '/kv/auth/social/2fa', {code: code}).then(function(r){
-        setBusy(btn, false);
-        if(r.ok){
-          setCsrf(r.data.csrf); applyUser(r.data.user);
-          setTimeout(function(){ go('panel'); loadMember(); }, 300);
-        } else if(r.status === 429){ var l = m('tfa_lock'); kvShowAlert('destructive', l[0], l[1]); setTimeout(function(){ location.href = '/login'; }, 2500); }
-        else if(r.data && r.data.error === 'expired'){ var x = m('expired'); kvShowAlert('warning', x[0], x[1]); setTimeout(function(){ location.href = '/login'; }, 2000); }
+        if(r.ok){ location.href = '/panel'; return; }          // düğme sayfa değişene kadar kilitli kalır
+        if(r.status === 429 && r.data && r.data.error === 'locked'){ var l = m('tfa_lock'); kvShowAlert('destructive', l[0], l[1]); setTimeout(function(){ location.href = '/login'; }, 2500); return; }
+        if(r.status === 419 || (r.data && r.data.error === 'expired')){ var x = m('expired'); kvShowAlert('warning', x[0], x[1]); setTimeout(function(){ location.href = '/login'; }, 2000); return; }
+        busy = false; setBusy(btn, false);
+        if(r.status === 429){ var w = m('tfa_busy'); kvShowAlert('warning', w[0], w[1]); }      // genel hız sınırı: adım oturumda duruyor, form açık kalır
         else { var b = m('tfa_bad'); kvShowAlert('destructive', b[0], b[1]); }
       });
     }
     el('kvSocialCodeBtn').addEventListener('click', submit);
-    el('kvSocialCode').addEventListener('keydown', function(e){ if(e.key === 'Enter') submit(); });
+    el('kvSocialCode').addEventListener('keydown', function(e){ if(e.key === 'Enter' && !e.repeat) submit(); });
   }
 
   document.addEventListener('DOMContentLoaded', function(){
     initButtons();
     var mm = /[?&]social=([a-z_]+)/.exec(location.search); if(!mm) return;
     try{ history.replaceState(history.state, '', location.pathname); }catch(e){}     // adres çubuğunda kod kalmasın
+    if(window.KV_USER) return;                                                        // zaten girişli: uyarı gösterme
     if(mm[1] === 'two_factor'){ showTfa(); return; }
     var msg = m(mm[1]);
     if(Array.isArray(msg)) setTimeout(function(){ kvShowAlert(mm[1] === 'cancelled' ? 'info' : 'warning', msg[0], msg[1]); }, 500);

@@ -141,6 +141,7 @@ class MemberController extends Controller
                 $c->consents()->update(['email' => null, 'user_id' => null]);
                 $c->delete();
             }
+            \App\Models\Kv\SocialIdentity::where('user_id', $u->id)->delete();      // also when the users table has no FK cascade (MyISAM)
             Auth::guard('web')->logout();
             $u->delete();
         });

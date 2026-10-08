@@ -14,7 +14,7 @@ class SocialLoginTest extends KvTestCase
     {
         parent::setUp();
         config([
-            'app.url' => 'https://kervea.test',
+            'kervea.social.redirect_base' => 'http://localhost',     // = the host the test client uses (no canonical hop)
             'kervea.social.google' => ['client_id' => 'g-client', 'client_secret' => 'g-secret'],
             'kervea.social.linkedin' => ['client_id' => 'l-client', 'client_secret' => 'l-secret'],
         ]);
@@ -66,7 +66,7 @@ class SocialLoginTest extends KvTestCase
         $this->assertStringStartsWith('https://accounts.google.com/o/oauth2/v2/auth?', $loc);
         parse_str((string) parse_url($loc, PHP_URL_QUERY), $q);
         $this->assertSame('g-client', $q['client_id']);
-        $this->assertSame('https://kervea.test/auth/google/callback', $q['redirect_uri']);
+        $this->assertSame('http://localhost/auth/google/callback', $q['redirect_uri']);
         $this->assertSame('code', $q['response_type']);
         $this->assertStringContainsString('email', $q['scope']);
         $this->assertSame('S256', $q['code_challenge_method']);
@@ -92,7 +92,7 @@ class SocialLoginTest extends KvTestCase
         $this->assertDatabaseHas('kv_social_identities', ['user_id' => $u->id, 'provider' => 'google', 'provider_user_id' => 'g-1']);
         Http::assertSent(fn (Request $r) => str_contains($r->url(), 'oauth2.googleapis.com/token')
             && $r['code'] === 'auth-code' && $r['client_secret'] === 'g-secret' && ! empty($r['code_verifier'])
-            && $r['redirect_uri'] === 'https://kervea.test/auth/google/callback');
+            && $r['redirect_uri'] === 'http://localhost/auth/google/callback');
         Http::assertSent(fn (Request $r) => str_contains($r->url(), 'userinfo') && $r->hasHeader('Authorization', 'Bearer at-123'));
         $this->getJson('/kv/auth/me')->assertJsonPath('user.email', 'a@acme.test');
     }
@@ -264,5 +264,114 @@ class SocialLoginTest extends KvTestCase
         $before = session()->getId();
         $this->finish($state)->assertRedirect('/panel');
         $this->assertNotSame($before, session()->getId());
+    }
+
+    public function test_the_flow_always_starts_on_the_app_url_host(): void
+    {
+        config(['kervea.social.redirect_base' => 'https://kervea.ai']);
+        // arrived on another host (www.) or over http → one hop to the canonical address, never to the provider
+        $this->get('/auth/google/redirect')->assertRedirect('https://kervea.ai/auth/google/redirect?c=1');
+        $this->assertNull(session('kv_oauth'));
+        // the marker stops any loop; the redirect URI is built from APP_URL, not from the request host
+        $loc = $this->get('/auth/google/redirect?c=1')->assertRedirect()->headers->get('Location');
+        $this->assertStringStartsWith('https://accounts.google.com/', $loc);
+        parse_str((string) parse_url($loc, PHP_URL_QUERY), $q);
+        $this->assertSame('https://kervea.ai/auth/google/callback', $q['redirect_uri']);
+    }
+
+    public function test_redirect_uri_follows_env_app_url_even_though_config_app_url_is_host_derived(): void
+    {
+        config(['kervea.social.redirect_base' => null, 'app.url' => 'http://localhost/']);
+        $this->assertSame('http://localhost/auth/linkedin/callback', \App\Services\Kv\SocialAuth::redirectUri('linkedin'));
+        config(['kervea.social.redirect_base' => 'https://kervea.ai/']);
+        $this->assertSame('https://kervea.ai/auth/linkedin/callback', \App\Services\Kv\SocialAuth::redirectUri('linkedin'));
+    }
+
+    public function test_an_orphaned_identity_is_dropped_and_the_member_can_link_again(): void
+    {
+        [$u] = $this->member('Acme', 'a@acme.test');
+        // what a MyISAM users table leaves behind: the same table without the FK that would cascade
+        \Illuminate\Support\Facades\Schema::drop('kv_social_identities');
+        \Illuminate\Support\Facades\Schema::create('kv_social_identities', function (\Illuminate\Database\Schema\Blueprint $t) {
+            $t->id();
+            $t->unsignedBigInteger('user_id')->index();
+            $t->string('provider', 20);
+            $t->string('provider_user_id', 191);
+            $t->string('email', 254)->nullable();
+            $t->timestamp('last_login_at')->nullable();
+            $t->timestamps();
+            $t->unique(['provider', 'provider_user_id']);
+            $t->unique(['user_id', 'provider']);
+        });
+        SocialIdentity::create(['user_id' => 987654, 'provider' => 'google', 'provider_user_id' => 'g-1', 'email' => 'a@acme.test']);
+        $this->fakeProvider(['sub' => 'g-1', 'email' => 'a@acme.test', 'email_verified' => true]);
+        $this->finish($this->start())->assertRedirect('/panel');
+        $this->assertAuthenticatedAs($u->fresh());
+        $this->assertSame([$u->id], SocialIdentity::pluck('user_id')->all());
+    }
+
+    public function test_deleting_the_account_removes_the_provider_links(): void
+    {
+        [$u] = $this->member('Acme', 'a@acme.test');
+        SocialIdentity::create(['user_id' => $u->id, 'provider' => 'google', 'provider_user_id' => 'g-1', 'email' => 'a@acme.test']);
+        $this->actingAs($u)->deleteJson('/kv/me', ['password' => 'Secret-pass-1'])->assertOk();
+        $this->assertSame(0, SocialIdentity::count());
+    }
+
+    public function test_linkedin_cancel_codes_are_reported_as_cancelled(): void
+    {
+        $this->member('Acme', 'a@acme.test');
+        foreach (['user_cancelled_login', 'user_cancelled_authorize', 'access_denied'] as $err) {
+            $state = $this->start('linkedin');
+            $this->get('/auth/linkedin/callback?'.http_build_query(['error' => $err, 'state' => $state]))->assertRedirect('/login?social=cancelled');
+        }
+        $state = $this->start('linkedin');
+        $this->get('/auth/linkedin/callback?'.http_build_query(['error' => 'server_error', 'state' => $state]))->assertRedirect('/login?social=failed');
+    }
+
+    public function test_social_routes_have_their_own_rate_limit_buckets(): void
+    {
+        [$u] = $this->member('Acme', 'a@acme.test');
+        $secret = Totp::newSecret();
+        $u->forceFill(['two_factor_secret' => $secret, 'two_factor_confirmed_at' => now()])->save();
+        $this->fakeProvider(['sub' => 'g-1', 'email' => 'a@acme.test', 'email_verified' => true]);
+        for ($i = 0; $i < 12; $i++) {
+            $this->getJson('/kv/firms')->assertOk();            // ordinary browsing used to eat the 2FA budget (shared per-IP counter)
+        }
+        $this->finish($this->start())->assertRedirect('/login?social=two_factor');
+        $this->postJson('/kv/auth/social/2fa', ['code' => Totp::code($secret)])->assertOk();
+    }
+
+    public function test_two_factor_guessing_is_limited_per_member_across_ip_addresses(): void
+    {
+        [$u] = $this->member('Acme', 'a@acme.test');
+        $secret = Totp::newSecret();
+        $u->forceFill(['two_factor_secret' => $secret, 'two_factor_confirmed_at' => now()])->save();
+        $this->fakeProvider(['sub' => 'g-1', 'email' => 'a@acme.test', 'email_verified' => true]);
+        $this->finish($this->start())->assertRedirect('/login?social=two_factor');
+
+        foreach (['10.0.0.1', '10.0.0.2', '10.0.0.3'] as $ip) {
+            for ($i = 0; $i < 5; $i++) {
+                $this->withServerVariables(['REMOTE_ADDR' => $ip])->postJson('/kv/auth/social/2fa', ['code' => '111111'])->assertStatus(422);
+            }
+        }
+        $this->withServerVariables(['REMOTE_ADDR' => '10.0.0.4'])->postJson('/kv/auth/social/2fa', ['code' => Totp::code($secret)])
+            ->assertStatus(429)->assertJsonPath('error', 'locked');
+        $this->assertGuest();
+    }
+
+    public function test_unlink_command_clears_one_member_or_everybody_of_a_provider(): void
+    {
+        [$a] = $this->member('Acme', 'a@acme.test');
+        [$b] = $this->member('Beta', 'b@beta.test');
+        foreach ([[$a, 'google', 'g-a'], [$a, 'linkedin', 'l-a'], [$b, 'linkedin', 'l-b']] as [$u, $p, $sub]) {
+            SocialIdentity::create(['user_id' => $u->id, 'provider' => $p, 'provider_user_id' => $sub, 'email' => $u->email]);
+        }
+        $this->artisan('kervea:social-unlink', ['provider' => 'linkedin', 'email' => 'A@Acme.test'])->expectsOutput('1 bağlantı silindi.')->assertSuccessful();
+        $this->assertSame(2, SocialIdentity::count());
+        $this->artisan('kervea:social-unlink', ['provider' => 'linkedin'])->assertFailed();                    // neither e-mail nor --all
+        $this->artisan('kervea:social-unlink', ['provider' => 'facebook', '--all' => true])->assertFailed();
+        $this->artisan('kervea:social-unlink', ['provider' => 'linkedin', '--all' => true])->expectsConfirmation('Tüm linkedin bağlantıları silinsin mi? (Üyeler bir sonraki girişte yeniden bağlanır.)', 'yes')->assertSuccessful();
+        $this->assertSame(['google'], SocialIdentity::pluck('provider')->all());
     }
 }

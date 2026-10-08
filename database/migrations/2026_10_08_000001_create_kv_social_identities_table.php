@@ -35,7 +35,10 @@ return new class extends Migration
                 $t->index('user_id');
             }
             $t->string('provider', 20);
-            $t->string('provider_user_id', 191);
+            $col = $t->string('provider_user_id', 191);
+            if (in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)) {
+                $col->charset('utf8mb4')->collation('utf8mb4_bin');   // OIDC "sub" is case-sensitive (LinkedIn ids mix cases)
+            }
             $t->string('email', 254)->nullable();      // address the provider reported when the account was linked
             $t->timestamp('last_login_at')->nullable();
             $t->timestamps();

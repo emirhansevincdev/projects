@@ -71,9 +71,9 @@ Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin
 });
 
 // Sign in with Google / LinkedIn — existing members only (see SocialController); GET because the provider redirects the browser here.
-Route::prefix('auth/{provider}')->where(['provider' => implode('|', \App\Services\Kv\SocialAuth::PROVIDERS)])->controller(\App\Http\Controllers\Kv\SocialController::class)->group(function () {
-    Route::get('redirect', 'redirect')->middleware('throttle:20,1')->name('kervea.social.redirect');
-    Route::get('callback', 'callback')->middleware('throttle:30,1')->name('kervea.social.callback');
+Route::prefix('auth/{provider}')->where(['provider' => 'google|linkedin'])->controller(\App\Http\Controllers\Kv\SocialController::class)->group(function () {
+    Route::get('redirect', 'redirect')->middleware('throttle:20,1,kv-social-redirect')->name('kervea.social.redirect');
+    Route::get('callback', 'callback')->middleware('throttle:30,1,kv-social-callback')->name('kervea.social.callback');
 });
 
 Route::get('/set-password', fn () => view('kervea.set-password'))->name('kervea.password.set');
@@ -94,7 +94,7 @@ Route::prefix('kv')->group(function () {
     Route::post('auth/logout', [\App\Http\Controllers\Kv\AuthController::class, 'logout']);
     Route::post('auth/forgot', [\App\Http\Controllers\Kv\AuthController::class, 'forgot'])->middleware('throttle:5,10');
     Route::post('auth/set-password', [\App\Http\Controllers\Kv\AuthController::class, 'setPassword'])->middleware('throttle:10,10');
-    Route::post('auth/social/2fa', [\App\Http\Controllers\Kv\SocialController::class, 'twoFactor'])->middleware('throttle:10,1');
+    Route::post('auth/social/2fa', [\App\Http\Controllers\Kv\SocialController::class, 'twoFactor'])->middleware('throttle:10,1,kv-social-2fa');
 
     Route::middleware('auth')->group(function () {
         Route::get('me', [\App\Http\Controllers\Kv\MemberController::class, 'show']);

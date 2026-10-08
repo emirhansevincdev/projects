@@ -53,10 +53,17 @@ class SocialAuth
         return collect(self::PROVIDERS)->mapWithKeys(fn ($p) => [$p => self::enabled($p)])->all();
     }
 
+    /** Public address of the site as set in .env APP_URL (falls back to the host of the request). No trailing slash. */
+    public static function baseUrl(): string
+    {
+        $base = (string) (config('kervea.social.redirect_base') ?: config('app.url'));
+        return rtrim($base, '/');
+    }
+
     /** Must match, character for character, the URI registered in the provider's console. */
     public static function redirectUri(string $provider): string
     {
-        return rtrim((string) config('app.url'), '/')."/auth/$provider/callback";
+        return self::baseUrl()."/auth/$provider/callback";
     }
 
     public static function usesPkce(string $provider): bool
