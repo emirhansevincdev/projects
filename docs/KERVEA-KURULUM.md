@@ -87,7 +87,42 @@ Bu depodaki `config/database.php` artık parolayı `.env`'den (`DB_*`) okur; bet
 | `KERVEA_ADMIN_EMAIL` | Yeni başvuru / iletişim bildirimi gidecek adres (boşsa tüm yöneticilere). |
 | `KERVEA_PREMIUM_PRICE_USD` | Varsayılan 280. Müşteri 240 mı 280 mi kararını vermeli. |
 | `STRIPE_SECRET`, `STRIPE_WEBHOOK_SECRET` | Ödeme sağlayıcısı kararından sonra. Webhook: `POST /kv/webhooks/stripe`. |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET` | Google / LinkedIn ile giriş. Boşsa o düğme sitede görünmez. Nasıl alınır: aşağıdaki **Google ve LinkedIn ile giriş** bölümü. |
 | `KERVEA_LEGACY_ROUTES=false` | Şablonun eski otel/araç/ilan rotaları kapalı kalmalı. |
+
+### Google ve LinkedIn ile giriş
+
+**Nasıl çalışır (kısaca):** Bu yolla **yeni hesap açılmaz.** Üyelik yalnızca yönetici başvuruyu onaylayınca oluşur (müşterinin "yalnızca yönetici onayı" kuralı). Google/LinkedIn, **mevcut üyelerin** giriş kolaylığıdır: üyenin başvuruda yazdığı e-posta adresiyle, sağlayıcının **doğruladığı** aynı adres eşleşirse giriş açılır. Eşleşme yoksa "bu e-posta ile üyelik bulunamadı, önce firmanı ekle" uyarısı çıkar.
+
+Güvenlik kuralları: sağlayıcı e-postayı doğrulamamışsa giriş reddedilir · yönetici hesapları yalnızca parola ile girer · 2FA açık üyeler sağlayıcıdan döndükten sonra yine authenticator kodunu girer · ilk girişten sonra üye sağlayıcının kalıcı kimliğine bağlanır (e-posta adresi sonradan başkasına geçse bile başka biri giremez) · giriş adımı tek kullanımlık `state` ve 10 dakikalık süre ile korunur.
+
+Önce `.env` içindeki `APP_URL` sitenin **tam adresi** olmalı (örn. `https://kervea.ai`, `www` varsa o da aynı olacak şekilde yönlendirilmeli). Sağlayıcıya yazacağınız **yönlendirme adresleri** buna göre şudur:
+
+- Google: `https://kervea.ai/auth/google/callback`
+- LinkedIn: `https://kervea.ai/auth/linkedin/callback`
+
+**Google** (müşterinin Google hesabıyla):
+1. https://console.cloud.google.com → proje oluşturun → *APIs & Services* → *OAuth consent screen*: uygulama adı **Kervea**, destek e-postası, logo, gizlilik ve kullanım koşulları bağlantıları (`https://kervea.ai/...`). Kapsamlar yalnızca `openid`, `email`, `profile` (hassas kapsam yok → inceleme gerekmez). Yayın durumunu **In production** yapın (Testing'de yalnızca ekli test kullanıcıları girer).
+2. *Credentials* → *Create credentials* → *OAuth client ID* → tür **Web application** → *Authorized redirect URIs* alanına yukarıdaki Google adresini ekleyin.
+3. Çıkan **Client ID** ve **Client secret**'ı sunucudaki `.env`'e yazın.
+
+**LinkedIn:**
+1. https://www.linkedin.com/developers/apps → *Create app* (bir LinkedIn *Company Page* seçmeniz istenir; Kervea sayfası olmalı) → Products sekmesinden **Sign In with LinkedIn using OpenID Connect** ürününü ekleyin.
+2. *Auth* sekmesi → *Authorized redirect URLs for your app* → yukarıdaki LinkedIn adresini ekleyin.
+3. *Auth* sekmesindeki **Client ID** ve **Primary Client Secret**'ı `.env`'e yazın.
+
+`.env` içine (betik boş satırları kendisi ekler, siz değerleri doldurun):
+
+```
+GOOGLE_CLIENT_ID=...apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=...
+LINKEDIN_CLIENT_ID=...
+LINKEDIN_CLIENT_SECRET=...
+```
+
+Sonra `cd /var/www/kervea.ai && php artisan config:clear` (önbellek açıksa) ve `/login` sayfasını yenileyin: anahtarı girilen sağlayıcının düğmesi görünür. Test: başvurusu onaylı bir üyenin e-postasıyla giriş yapın; yönetici kendi Google hesabıyla **giremez** (bilerek).
+
+Not: Yeni tablo (`kv_social_identities`) `kervea-deploy.sh` ile otomatik oluşur; yeni dosyaları yükleyip betiği yeniden çalıştırmanız yeterlidir. Pilotta LinkedIn/Google'ın kendi gizlilik metinlerine ek olarak, KVKK aydınlatma metnine "giriş için sağlayıcıdan yalnızca e-posta, ad ve kimlik numarası alınır" cümlesinin eklenmesini öneririz.
 
 Web sunucusu belge kökü **`public/`** olmalı; `.env`, `storage/`, `vendor/` web'den erişilemez olmalı (betik bunu da dışarıdan dener ve uyarır).
 
@@ -121,7 +156,8 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 | Yönetici paneli | `app/Http/Controllers/Admin/KerveaAdminController.php`, `resources/views/kervea/admin/` |
 | Görünürlük/kapı mantığı | `app/Services/Kv/FirmPresenter.php` |
 | Yükleme güvenliği | `app/Services/Kv/ImageStore.php` |
-| Veri modeli | `database/migrations/2026_10_05_000001_create_kervea_tables.php`, `app/Models/Kv/` |
+| Veri modeli | `database/migrations/2026_10_05_000001_create_kervea_tables.php`, `2026_10_08_000001_create_kv_social_identities_table.php`, `app/Models/Kv/` |
+| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
 | Güvenlik başlıkları / eski rota kapatma | `app/Http/Middleware/SecurityHeaders.php`, `LegacyRoutes.php` |
 | Hata sayfaları | `resources/views/errors/` |
 | Güncelleme betiği / yönetici komutu | `kervea-deploy.sh`, `app/Console/Commands/KerveaMakeAdmin.php` |

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Kervea;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Kv\AuthController;
+use App\Services\Kv\SocialAuth;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -20,6 +21,7 @@ class PageController extends Controller
                 'firm' => $request->route('firm'),
                 'user' => AuthController::userPayload(auth()->user()),
                 'premium' => config('kervea.premium.price_usd'),
+                'social' => SocialAuth::enabledMap(),      // which "Sign in with …" buttons to show (no secrets)
             ],
         ]);
     }

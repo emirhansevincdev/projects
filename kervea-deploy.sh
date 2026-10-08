@@ -20,7 +20,7 @@ PHP="${PHP_BIN:-php}"
 COMPOSER="${COMPOSER_BIN:-composer}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP_DIR="${BACKUP_DIR:-$HOME/kervea-yedekler}"
-MIGRATION="database/migrations/2026_10_05_000001_create_kervea_tables.php"
+MIGRATIONS=(database/migrations/2026_10_05_000001_create_kervea_tables.php database/migrations/2026_10_08_000001_create_kv_social_identities_table.php)
 CHECK_ONLY=0
 
 case "${1:-}" in
@@ -85,7 +85,8 @@ artisan() { (cd "$TARGET" && "$PHP" artisan "$@"); }
 
 # ───────────────────────── 1. Kontroller ─────────────────────────
 say "1/7  Ön kontroller"
-[ -f "$SRC/artisan" ] && [ -f "$SRC/routes/web.php" ] && [ -f "$SRC/$MIGRATION" ] \
+MIGOK=1; for m in "${MIGRATIONS[@]}"; do [ -f "$SRC/$m" ] || MIGOK=0; done
+[ -f "$SRC/artisan" ] && [ -f "$SRC/routes/web.php" ] && [ "$MIGOK" = 1 ] \
   || die "Bu betik, indirdiğiniz Kervea klasörünün içinden çalıştırılmalı (artisan ve database/ klasörü yanında olmalı)."
 [ -d "$TARGET" ] && [ -f "$TARGET/artisan" ] \
   || die "Site klasörü bulunamadı: $TARGET  (farklıysa: TARGET=/yol/klasör bash kervea-deploy.sh)"
@@ -262,8 +263,9 @@ fi
 # ───────────────────────── 6. Veritabanı ─────────────────────────
 say "6/7  Veritabanı güncelleniyor (yalnızca Kervea tabloları eklenir; mevcut verilere dokunulmaz)"
 printf '  (Aşağıdaki İngilizce satırlar Laravel'"'"'in kendi çıktısıdır, normaldir.)\n'
-# DİKKAT: tüm 'migrate' çalıştırılmaz — eski şablon tabloları zaten var. Yalnızca Kervea migration'ı (tekrar çalıştırılabilir).
-artisan migrate --path="$MIGRATION" --force
+# DİKKAT: tüm 'migrate' çalıştırılmaz — eski şablon tabloları zaten var. Yalnızca Kervea migration'ları (tekrar çalıştırılabilir).
+MIGARGS=(); for m in "${MIGRATIONS[@]}"; do MIGARGS+=("--path=$m"); done
+artisan migrate "${MIGARGS[@]}" --force
 artisan db:seed --class=KerveaSeeder --force
 ok "Kervea tabloları, 26 sektör ve 249 ülke hazır"
 
@@ -276,6 +278,10 @@ grep -qx '# Kervea' "$TARGET/.env" || printf '\n# Kervea\n' >> "$TARGET/.env"
 add_env KERVEA_PREMIUM_PRICE_USD 280
 add_env KERVEA_LEGACY_ROUTES false
 add_env KERVEA_ADMIN_EMAIL ""
+add_env GOOGLE_CLIENT_ID ""
+add_env GOOGLE_CLIENT_SECRET ""
+add_env LINKEDIN_CLIENT_ID ""
+add_env LINKEDIN_CLIENT_SECRET ""
 
 for c in config:clear route:clear view:clear; do artisan "$c" >/dev/null 2>&1 || true; done
 fix_perms
@@ -324,6 +330,10 @@ else ok "Yönetici hesabı sayısı: $ADMINS"; fi
 if grep -q "Kervea2026Pass" "$TARGET/config/database.php" 2>/dev/null; then
   warn "config/database.php içinde veritabanı parolası düz yazı olarak duruyor ve bu parola GitHub'a gitti: parolayı DEĞİŞTİRİN (docs/KERVEA-KURULUM.md · 'Veritabanı parolasını değiştirme')."
 fi
+for P in GOOGLE LINKEDIN; do
+  if [ -n "$(envget ${P}_CLIENT_ID)" ] && [ -n "$(envget ${P}_CLIENT_SECRET)" ]; then ok "$P ile giriş etkin"
+  else printf '  %s ile giriş kapalı (.env içinde %s_CLIENT_ID / %s_CLIENT_SECRET boş; düğme gizli kalır)\n' "$P" "$P" "$P"; fi
+done
 
 DONE=1
 say "Bitti"

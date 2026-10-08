@@ -628,6 +628,96 @@ window.renderMatchTable = function(){
 };
 
 
+// ───────────────────────── Google / LinkedIn ile giriş ─────────────────────────
+// Yalnızca mevcut (yönetici onaylı) üyeler girer; bu yolla hesap OLUŞMAZ. Anahtarı (.env) girilmemiş sağlayıcının düğmesi gizlenir.
+(function(){
+  var SOC = BOOT.social || {};
+  var M = {
+    tr:{
+      unavailable:['Giriş yöntemi kapalı','Bu giriş yöntemi şu an etkin değil. E-posta ve parola ile giriş yapın.'],
+      expired:['İşlem süresi doldu','Giriş işlemi zaman aşımına uğradı. Lütfen tekrar deneyin.'],
+      cancelled:['Giriş iptal edildi','Giriş işlemini onaylamadınız. İsterseniz tekrar deneyin.'],
+      failed:['Giriş tamamlanamadı','Sağlayıcı ile bağlantı kurulamadı. Biraz sonra tekrar deneyin ya da e-posta ile giriş yapın.'],
+      email_unverified:['E-posta doğrulanmamış','Bu hesabın e-posta adresi sağlayıcı tarafından doğrulanmamış. Doğrulanmış bir hesap kullanın ya da e-posta ile giriş yapın.'],
+      not_member:['Bu e-posta ile üyelik bulunamadı','Bu hesabın e-posta adresiyle onaylanmış bir Kervea üyeliği yok. Üyelik, firma başvurunuz onaylandıktan sonra açılır: önce «Firmanı ekle» ile başvurun ve başvuruda yazdığınız e-posta adresine bağlı hesabla giriş yapın.'],
+      admin_password:['Yönetici hesabı','Yönetici hesapları yalnızca e-posta ve parola ile giriş yapar.'],
+      other_account:['Farklı hesap bağlı','Üyeliğiniz bu sağlayıcıda başka bir hesaba bağlanmış. O hesapla ya da e-posta ile giriş yapın.'],
+      tfa_title:['Doğrulama kodu gerekli','Authenticator uygulamanızdaki 6 haneli kodu girin.'],
+      tfa_label:'Doğrulama kodu (2FA)', tfa_btn:'Doğrula', tfa_back:'Vazgeç', tfa_bad:['Kod hatalı','Girdiğiniz kod geçersiz. Tekrar deneyin.'], tfa_lock:['Geçici olarak kilitlendi','Çok fazla hatalı deneme. Daha sonra tekrar deneyin.']
+    },
+    en:{
+      unavailable:['Sign-in method unavailable','This sign-in method is not active right now. Please sign in with e-mail and password.'],
+      expired:['Request expired','The sign-in timed out. Please try again.'],
+      cancelled:['Sign-in cancelled','You did not approve the sign-in. You can try again.'],
+      failed:['Sign-in could not be completed','The provider could not be reached. Please try again shortly or sign in with e-mail.'],
+      email_unverified:['E-mail not verified','The e-mail address of this account is not verified by the provider. Use a verified account or sign in with e-mail.'],
+      not_member:['No membership for this e-mail','There is no approved Kervea membership for this account\'s e-mail address. A membership is created once your company application is approved: apply with “Add your company” first, then sign in with the account tied to the e-mail you applied with.'],
+      admin_password:['Administrator account','Administrator accounts sign in with e-mail and password only.'],
+      other_account:['Different account linked','Your membership is linked to another account at this provider. Sign in with that account or with e-mail.'],
+      tfa_title:['Verification code required','Enter the 6-digit code from your authenticator app.'],
+      tfa_label:'Verification code (2FA)', tfa_btn:'Verify', tfa_back:'Cancel', tfa_bad:['Wrong code','The code you entered is not valid. Please try again.'], tfa_lock:['Temporarily locked','Too many failed attempts. Please try again later.']
+    }
+  };
+  function m(k){ var d = M[LANG] || M.en; return d[k] !== undefined ? d[k] : M.en[k]; }
+
+  window.kvSocialLogin = function(p){
+    if(!SOC[p]){ var u=m('unavailable'); kvShowAlert('info',u[0],u[1]); return; }
+    location.href = '/auth/' + encodeURIComponent(p) + '/redirect';
+  };
+
+  function initButtons(){
+    var shown = 0;
+    document.querySelectorAll('#login .kv-login-social-btn[data-social]').forEach(function(b){
+      var on = !!SOC[b.getAttribute('data-social')];
+      b.style.display = on ? '' : 'none';
+      if(on) shown++;
+    });
+    var box = document.querySelector('#login .kv-login-social'), sep = document.querySelector('#login .kv-login-sep');
+    if(box){ box.style.display = shown ? '' : 'none'; box.style.gridTemplateColumns = shown === 1 ? '1fr' : ''; }
+    if(sep) sep.style.display = shown ? '' : 'none';
+  }
+
+  // Üyede 2FA açıksa sağlayıcıdan döndükten sonra kod istenir.
+  function showTfa(){
+    var body = document.querySelector('#login .kv-login-body'); if(!body || el('kvSocialTfa')) return;
+    Array.prototype.forEach.call(body.children, function(c){ c.style.display = 'none'; });
+    var d = document.createElement('div'); d.id = 'kvSocialTfa';
+    d.innerHTML = '<div class="kv-float-input"><input type="text" id="kvSocialCode" class="kv-float-in" placeholder=" " inputmode="numeric" maxlength="6" autocomplete="one-time-code"/><label for="kvSocialCode" class="kv-float-lbl"></label></div>'
+      + '<button type="button" class="btn kv-login-btn" id="kvSocialCodeBtn"></button>'
+      + '<div class="kv-login-footer" style="margin-top:14px"><a href="/login" class="kv-login-signup" id="kvSocialTfaBack"></a></div>';
+    body.appendChild(d);
+    d.querySelector('label').textContent = m('tfa_label');
+    el('kvSocialCodeBtn').textContent = m('tfa_btn');
+    el('kvSocialTfaBack').textContent = m('tfa_back');
+    var t = m('tfa_title'); kvShowAlert('info', t[0], t[1]);
+    el('kvSocialCode').focus();
+    function submit(){
+      var code = el('kvSocialCode').value.trim(); if(!code) return;
+      var btn = el('kvSocialCodeBtn'); setBusy(btn, true);
+      api('POST', '/kv/auth/social/2fa', {code: code}).then(function(r){
+        setBusy(btn, false);
+        if(r.ok){
+          setCsrf(r.data.csrf); applyUser(r.data.user);
+          setTimeout(function(){ go('panel'); loadMember(); }, 300);
+        } else if(r.status === 429){ var l = m('tfa_lock'); kvShowAlert('destructive', l[0], l[1]); setTimeout(function(){ location.href = '/login'; }, 2500); }
+        else if(r.data && r.data.error === 'expired'){ var x = m('expired'); kvShowAlert('warning', x[0], x[1]); setTimeout(function(){ location.href = '/login'; }, 2000); }
+        else { var b = m('tfa_bad'); kvShowAlert('destructive', b[0], b[1]); }
+      });
+    }
+    el('kvSocialCodeBtn').addEventListener('click', submit);
+    el('kvSocialCode').addEventListener('keydown', function(e){ if(e.key === 'Enter') submit(); });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    initButtons();
+    var mm = /[?&]social=([a-z_]+)/.exec(location.search); if(!mm) return;
+    try{ history.replaceState(history.state, '', location.pathname); }catch(e){}     // adres çubuğunda kod kalmasın
+    if(mm[1] === 'two_factor'){ showTfa(); return; }
+    var msg = m(mm[1]);
+    if(Array.isArray(msg)) setTimeout(function(){ kvShowAlert(mm[1] === 'cancelled' ? 'info' : 'warning', msg[0], msg[1]); }, 500);
+  });
+})();
+
 // ───────────────────────── yeni alanların çevirileri ─────────────────────────
 (function(){
   var X={

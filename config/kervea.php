@@ -32,4 +32,18 @@ return [
         'secret' => env('STRIPE_SECRET'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
+
+    // "Sign in with Google / LinkedIn" (OpenID Connect). Only EXISTING, admin-approved members can sign in this way:
+    // no account is ever created from a social login. A provider with an empty id/secret is switched off (its button is hidden).
+    // Redirect URI to register at the provider: {APP_URL}/auth/{google|linkedin}/callback
+    'social' => [
+        'google' => [
+            'client_id' => env('GOOGLE_CLIENT_ID'),
+            'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        ],
+        'linkedin' => [
+            'client_id' => env('LINKEDIN_CLIENT_ID'),
+            'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
+        ],
+    ],
 ];

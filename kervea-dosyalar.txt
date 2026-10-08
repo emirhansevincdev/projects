@@ -49,6 +49,7 @@ app/Http/Controllers/Kv/FirmController.php
 app/Http/Controllers/Kv/MemberController.php
 app/Http/Controllers/Kv/OrderController.php
 app/Http/Controllers/Kv/PromoController.php
+app/Http/Controllers/Kv/SocialController.php
 app/Http/Controllers/PaymentController.php
 app/Http/Controllers/SeoController.php
 app/Http/Controllers/Updater.php
@@ -101,6 +102,7 @@ app/Models/Kv/Order.php
 app/Models/Kv/PromoCode.php
 app/Models/Kv/Reveal.php
 app/Models/Kv/Sector.php
+app/Models/Kv/SocialIdentity.php
 app/Models/Language.php
 app/Models/Listing_Feature.php
 app/Models/Listing_Specification.php
@@ -137,6 +139,8 @@ app/Providers/RouteServiceProvider.php
 app/Services/Kv/FirmPresenter.php
 app/Services/Kv/ImageStore.php
 app/Services/Kv/LegacyUserColumns.php
+app/Services/Kv/SocialAuth.php
+app/Services/Kv/SocialAuthException.php
 app/Services/Kv/Totp.php
 app/View/Components/AppLayout.php
 app/View/Components/GuestLayout.php
@@ -185,6 +189,7 @@ database/migrations/2025_12_20_045337_create_reviews_reports_table.php
 database/migrations/2025_12_23_055419_create_badges_table.php
 database/migrations/2025_12_30_052916_add_blog_permission_to_users_table.php
 database/migrations/2026_10_05_000001_create_kervea_tables.php
+database/migrations/2026_10_08_000001_create_kv_social_identities_table.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php
 database/seeders/data/i18n.json
