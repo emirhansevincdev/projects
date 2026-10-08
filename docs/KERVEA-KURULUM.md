@@ -104,7 +104,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 
 ## 3. Akış
 
-1. Ziyaretçi **Firmanı Ekle** formunu doldurur (6 adım; KVKK/rıza kutuları işaretlenmemiş gelir) → `kv_companies` (durum: *pending*). Belgeler **özel** diskte (`storage/app/private`), logo/fotoğraflar yeniden kodlanarak `storage/app/public/kv/…` altında tutulur.
+1. Ziyaretçi **Firmanı Ekle** formunu doldurur (6 adım; KVKK/rıza kutuları işaretlenmemiş gelir) → `kv_companies` (durum: *pending*). Belgeler **özel** diskte (`storage/app/kv/docs/<firma-id>/`, web üzerinden erişilemez), logo/fotoğraflar yeniden kodlanarak `storage/app/public/kv/…` altında tutulur.
 2. Yönetici başvuruyu inceler → **Onayla**: üye hesabı oluşur, firmaya *parola belirleme* bağlantısı gider (24 saat). Aynı sektördeki, e-posta iznini vermiş üyelere "yeni firma" bildirimi gider.
 3. Üye `/login` ile girer. Plan: *free* (ilk 3 firma açık, kalanı sunucuda maskeli) · *Premium* (hepsi + iletişim bilgisi açma, günde 40).
 4. İletişim bilgisi yalnızca **firma rıza verdiyse** ve **görüntüleyen Premium ise** açılır; her açma kaydedilir.
