@@ -110,8 +110,8 @@ SAME=0
 [ "$SAME" -eq 1 ] && ok "Betik doğrudan site klasöründen çalışıyor (dosya kopyalama atlanacak)"
 
 # Dosya listesi kontrolü: elle yüklenen (SAME) ya da açılan ZIP'te (aksi hâlde) eksik dosya var mı?
+CHECKDIR="$SRC"; [ "$SAME" -eq 1 ] && CHECKDIR="$TARGET"
 if [ -f "$SRC/kervea-dosyalar.txt" ]; then
-  CHECKDIR="$SRC"; [ "$SAME" -eq 1 ] && CHECKDIR="$TARGET"
   MISSING="$(while IFS= read -r f; do [ -z "$f" ] || [ -f "$CHECKDIR/$f" ] || printf '%s\n' "$f"; done < "$SRC/kervea-dosyalar.txt")"
   if [ -n "$MISSING" ]; then
     NMISS="$(printf '%s\n' "$MISSING" | wc -l | tr -d ' ')"
@@ -120,6 +120,18 @@ if [ -f "$SRC/kervea-dosyalar.txt" ]; then
     die "$CHECKDIR içinde $NMISS dosya eksik (yukarıdaki liste). Bunları ZIP'ten aynı yollara yükleyip betiği tekrar çalıştırın. Hiçbir şey değiştirilmedi."
   fi
   ok "Tüm Kervea dosyaları yerinde ($(wc -l < "$SRC/kervea-dosyalar.txt" | tr -d ' ') dosya)"
+fi
+
+# Sürüm kontrolü: dosya yerinde olsa bile ESKİ sürüm olabilir (elle yüklemede sık olur) → sha256 özetleri ZIP'tekiyle karşılaştırılır.
+if [ -f "$SRC/kervea-sha256.txt" ] && command -v sha256sum >/dev/null 2>&1 && [ "${KERVEA_SKIP_HASH:-0}" != "1" ]; then
+  STALE="$(cd "$CHECKDIR" && sha256sum -c --quiet "$SRC/kervea-sha256.txt" 2>/dev/null | grep -E ': FAILED$' | sed 's/: FAILED$//' || true)"
+  if [ -n "$STALE" ]; then
+    NST="$(printf '%s\n' "$STALE" | wc -l | tr -d ' ')"
+    printf '\n  Eski sürüm (ya da bozuk) dosyalar (%s adet, ilk 40):\n' "$NST" >&2
+    printf '%s\n' "$STALE" | head -n 40 | sed 's/^/    - /' >&2
+    die "$NST dosya ZIP'teki güncel sürümle aynı değil (eski sürüm yüklenmiş olabilir). Bunları ZIP'ten aynı yollara yeniden yükleyip betiği tekrar çalıştırın. Hiçbir şey değiştirilmedi. (Dosyayı bilerek değiştirdiyseniz:  KERVEA_SKIP_HASH=1 bash kervea-deploy.sh)"
+  fi
+  ok "Tüm dosyalar ZIP'teki güncel sürümle aynı"
 fi
 
 DBOUT="$(artisan tinker --execute='DB::connection()->getPdo(); echo "KV_DB_OK";' 2>&1 || true)"
