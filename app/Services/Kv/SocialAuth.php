@@ -116,11 +116,11 @@ class SocialAuth
         try {
             $token = Http::asForm()->acceptJson()->connectTimeout(5)->timeout(10)->post($s['token'], $form);
             if (! $token->successful() || ! is_string($token->json('access_token')) || $token->json('access_token') === '') {
-                throw new SocialAuthException("$provider token endpoint answered ".$token->status());
+                throw new SocialAuthException("$provider token endpoint answered ".$token->status().self::errorHint($token->json()));
             }
             $info = Http::withToken($token->json('access_token'))->acceptJson()->connectTimeout(5)->timeout(10)->get($s['userinfo']);
             if (! $info->successful()) {
-                throw new SocialAuthException("$provider userinfo answered ".$info->status());
+                throw new SocialAuthException("$provider userinfo answered ".$info->status().self::errorHint($info->json()));
             }
             $data = $info->json();
         } catch (ConnectionException|RequestException $e) {
@@ -144,6 +144,19 @@ class SocialAuth
             'email_verified' => $email !== '' && filter_var($data['email_verified'] ?? false, FILTER_VALIDATE_BOOLEAN),
             'name' => Str::limit(trim((string) ($data['name'] ?? '')), 120, ''),
         ];
+    }
+
+    /** " (invalid_client: Unauthorized)" — the provider's own error code, safe to log (no tokens, no secrets). */
+    private static function errorHint(mixed $json): string
+    {
+        if (! is_array($json)) {
+            return '';
+        }
+        $err = $json['error'] ?? null;
+        $err = is_array($err) ? ($err['status'] ?? $err['message'] ?? null) : $err;
+        $desc = $json['error_description'] ?? null;
+        $parts = array_filter([is_scalar($err) ? (string) $err : null, is_scalar($desc) ? (string) $desc : null]);
+        return $parts ? ' ('.Str::limit(preg_replace('/[^\w .:,\/-]+/u', '', implode(': ', $parts)), 160, '').')' : '';
     }
 
     private static function b64url(string $bin): string

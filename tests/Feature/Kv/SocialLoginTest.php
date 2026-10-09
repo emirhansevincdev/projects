@@ -485,4 +485,69 @@ class SocialLoginTest extends KvTestCase
         $this->artisan('kervea:social-setup', ['provider' => 'facebook', '--env' => $env])->assertFailed();
         unlink($env);
     }
+
+    public function test_who_command_explains_that_the_account_was_opened_with_the_firm_email_not_the_representatives(): void
+    {
+        $this->withoutMockingConsoleOutput();
+        [$u, $c] = $this->member('Ege Tekstil', 'info@egetekstil.test');
+        $c->forceFill(['rep_email' => 'owner@gmail.test'])->save();
+
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-who', ['email' => 'Owner@Gmail.test']);
+        $out = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertStringContainsString('Kullanıcı hesabı : YOK', $out);
+        $this->assertStringContainsString('YETKİLİ e-postası', $out);
+        $this->assertStringContainsString('info@egetekstil.test', $out);
+        $this->assertStringContainsString('OLMAZ', $out);
+
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-who', ['email' => 'info@egetekstil.test']);
+        $out = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertStringContainsString('ÇALIŞMALI', $out);
+        $this->assertStringContainsString('rol: üye', $out);
+    }
+
+    public function test_who_command_recognises_admins_and_accounts_with_a_leftover_template_role(): void
+    {
+        $this->withoutMockingConsoleOutput();
+        $this->admin();
+        [$legacy] = $this->member('Legacy', 'old@agent.test');
+        $legacy->role = 3;
+        $legacy->save();
+
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-who', ['email' => 'admin@kervea.test']);
+        $this->assertStringContainsString('YÖNETİCİ', \Illuminate\Support\Facades\Artisan::output());
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-who', ['email' => 'old@agent.test']);
+        $out = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertStringContainsString('rolü "üye" değil', $out);
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-who', ['email' => 'nobody@nowhere.test']);
+        $this->assertStringContainsString('hiçbir firma başvurusunda yazılı değil', \Illuminate\Support\Facades\Artisan::output());
+    }
+
+    public function test_approving_an_application_turns_a_leftover_template_account_into_a_member_and_names_the_login_email(): void
+    {
+        \Illuminate\Support\Facades\Mail::fake();
+        $this->postJson('/kv/applications', $this->payload())->assertCreated();
+        $c = \App\Models\Kv\Company::firstOrFail();
+        // an account with that address appears between the application and the approval (the form itself refuses known addresses)
+        $legacy = new User(['name' => 'Agent', 'email' => 'info@egetekstil.test', 'password' => 'Secret-pass-1']);
+        $legacy->role = 3;
+        $legacy->email_verified_at = now();
+        $legacy->save();
+
+        $res = $this->actingAs($this->admin())->post("/admin/kervea/applications/{$c->id}/approve");
+        $res->assertRedirect()->assertSessionHas('ok', fn ($m) => str_contains($m, 'info@egetekstil.test') && str_contains($m, 'FİRMA'));
+        $this->assertSame(2, (int) $legacy->fresh()->role);
+
+        $this->fakeProvider(['sub' => 'g-1', 'email' => 'info@egetekstil.test', 'email_verified' => true]);
+        auth()->logout();
+        $this->finish($this->start())->assertRedirect('/panel');
+    }
+
+    public function test_provider_error_codes_reach_the_log_but_never_tokens_or_secrets(): void
+    {
+        \Illuminate\Support\Facades\Log::spy();
+        $this->member('Acme', 'a@acme.test');
+        Http::fake(['oauth2.googleapis.com/token' => Http::response(['error' => 'invalid_client', 'error_description' => 'Unauthorized'], 401)]);
+        $this->finish($this->start())->assertRedirect('/login?social=failed');
+        \Illuminate\Support\Facades\Log::shouldHaveReceived('warning')->withArgs(fn ($m) => str_contains($m, 'kv.social') && str_contains($m, '401') && str_contains($m, 'invalid_client') && ! str_contains($m, 'g-secret'));
+    }
 }

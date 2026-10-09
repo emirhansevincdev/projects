@@ -11,7 +11,7 @@ use Illuminate\Console\Command;
  */
 class KerveaSocialStatus extends Command
 {
-    protected $signature = 'kervea:social-status';
+    protected $signature = 'kervea:social-status {--log : Son Google/LinkedIn giriş hatalarını da göster}';
     protected $description = 'Google/LinkedIn girişinin açık olup olmadığını ve olası ayar hatalarını gösterir';
 
     public function handle(): int
@@ -55,7 +55,30 @@ class KerveaSocialStatus extends Command
 
         $this->newLine();
         $problems === 0 ? $this->info('Ayarlarda sorun görünmüyor.') : $this->comment("$problems uyarı var (yukarıya bakın).");
+
+        if ($this->option('log')) {
+            $this->newLine();
+            $this->line('<options=bold>Son giriş hataları</> (storage/logs/laravel.log):');
+            $lines = $this->recentLog();
+            $lines ? array_map(fn ($l) => $this->line('  '.$l), $lines) : $this->line('  kayıt yok.');
+        }
         return self::SUCCESS;
+    }
+
+    /** @return list<string> last 10 "kv.social" lines of the log (they carry only provider error codes, never tokens) */
+    private function recentLog(): array
+    {
+        $file = storage_path('logs/laravel.log');
+        if (! is_file($file) || ! is_readable($file)) {
+            return [];
+        }
+        $size = filesize($file);
+        $fh = fopen($file, 'rb');
+        fseek($fh, max(0, $size - 400000));
+        $chunk = (string) stream_get_contents($fh);
+        fclose($fh);
+        $hits = array_values(array_filter(explode("\n", $chunk), fn ($l) => str_contains($l, 'kv.social')));
+        return array_map(fn ($l) => mb_strimwidth($l, 0, 220, '…'), array_slice($hits, -10));
     }
 
     /** @return list<string> */

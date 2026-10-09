@@ -4,6 +4,7 @@ app/Console/Commands/KerveaMakeAdmin.php
 app/Console/Commands/KerveaSocialSetup.php
 app/Console/Commands/KerveaSocialStatus.php
 app/Console/Commands/KerveaSocialUnlink.php
+app/Console/Commands/KerveaSocialWho.php
 app/Helpers/common_helpers.php
 app/Http/Controllers/Admin/AdminCalendlyController.php
 app/Http/Controllers/Admin/AdsController.php

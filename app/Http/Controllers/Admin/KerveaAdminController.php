@@ -60,6 +60,10 @@ class KerveaAdminController extends Controller
                 $user->role = 2;
                 \App\Services\Kv\LegacyUserColumns::apply($user, 'customer');
                 $user->save();
+            } elseif ((int) $user->role !== 1 && (int) $user->role !== 2) {
+                // an account left over from the old template (e.g. agent) becomes a normal member; admins stay admins
+                $user->role = 2;
+                $user->save();
             }
             $company->user_id = $user->id;
             $company->status = Company::STATUS_APPROVED;
@@ -74,7 +78,7 @@ class KerveaAdminController extends Controller
             $this->mail($company->email, 'Başvurunuz onaylandı · Kervea', 'application_approved', compact('company', 'url'));
         });
         $this->notifyMatching($company);
-        return redirect()->route('admin.kervea.applications')->with('ok', "{$company->name} onaylandı; üyeye parola belirleme bağlantısı gönderildi.");
+        return redirect()->route('admin.kervea.applications')->with('ok', "{$company->name} onaylandı; parola belirleme bağlantısı {$company->email} adresine gönderildi. Üye bu (FİRMA) e-posta adresiyle giriş yapar; Google/LinkedIn girişi de bu adrese bağlı hesapla çalışır.");
     }
 
     public function reject(Request $r, Company $company)
