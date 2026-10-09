@@ -118,13 +118,13 @@ Güvenlik kuralları: sağlayıcı e-postayı doğrulamamışsa giriş reddedili
 2. *Auth* sekmesi → *Authorized redirect URLs for your app* → yukarıdaki LinkedIn adresini ekleyin.
 3. *Auth* sekmesindeki **Client ID** ve **Primary Client Secret**'ı `.env`'e yazın.
 
-`.env` içine (betik boş satırları kendisi ekler, siz değerleri doldurun):
+`.env` içindeki **hazır, boş satırları doldurun** (aynı anahtarı ikinci kez eklemeyin; çift satır varsa ilki geçerli olur). Değerlerin başına/sonuna tırnak, boşluk ya da `...` koymayın, açıklama eklemeyin. **Hangi değer nereye:** Google'daki **Client ID** (uzun, `apps.googleusercontent.com` ile biter) → `GOOGLE_CLIENT_ID`; **Client secret** (kısa, `GOCSPX-` ile başlar) → `GOOGLE_CLIENT_SECRET`. İkisini birbirine karıştırmayın.
 
 ```
-GOOGLE_CLIENT_ID=...apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=...
-LINKEDIN_CLIENT_ID=...
-LINKEDIN_CLIENT_SECRET=...
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+LINKEDIN_CLIENT_ID=
+LINKEDIN_CLIENT_SECRET=
 ```
 
 Sonra `cd /var/www/kervea.ai && php artisan config:clear` ve `/login` sayfasını yenileyin: anahtarı girilen sağlayıcının düğmesi görünür.
