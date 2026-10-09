@@ -110,8 +110,8 @@ Güvenlik kuralları: sağlayıcı e-postayı doğrulamamışsa giriş reddedili
    - *Audience*: kullanıcı türü **External**; *Publish app* ile durumu **In production** yapın (*Testing*'de yalnızca ekli test kullanıcıları girebilir).
    - *Data Access*: yalnızca `openid`, `email`, `profile` (hassas kapsam yok → kapsam incelemesi gerekmez).
    - Not: Uygulama adı ve logo, Google'ın *marka doğrulaması* (*Verification Center* → *Verify Branding*; alan adının Google Search Console'da doğrulanması gerekir, birkaç gün sürebilir) bitene kadar onay ekranında görünmez, yalnızca alan adı görünür. Giriş doğrulama olmadan da çalışır.
-2. *Clients* → *Create client* → tür **Web application** → *Authorized redirect URIs* alanına yukarıdaki Google adresini ekleyin. Yeni adresin devreye girmesi 5 dakikadan birkaç saate kadar sürebilir; bu sürede `redirect_uri_mismatch` hatası normaldir, adres doğruysa bekleyin.
-3. Çıkan **Client ID** ve **Client secret**'ı sunucudaki `.env`'e yazın.
+2. *Clients* → *Create client* → tür **Web application** → *Authorized redirect URIs* alanına **tam adresi** yazın: `https://kervea.ai/auth/google/callback` (yalnızca `https://kervea.ai` yazmak yetmez, sonundaki `/auth/google/callback` da olmalı). *Authorized JavaScript origins* boş kalabilir. Yeni adresin devreye girmesi 5 dakikadan birkaç saate kadar sürebilir; bu sürede `redirect_uri_mismatch` hatası normaldir, adres doğruysa bekleyin.
+3. Çıkan **Client ID** ve **Client secret**'ı sunucudaki `.env`'e yazın. Client secret'ı bir daha göremezsiniz (kapatmadan kopyalayın) ve **kimseyle paylaşmayın** (sohbet, e-posta, ekran görüntüsü); yanlışlıkla paylaşıldıysa *Clients → Kervea Web → Client secrets → Add secret* ile yenisini üretip eskisini devre dışı bırakın.
 
 **LinkedIn:**
 1. https://www.linkedin.com/developers/apps → *Create app* (bir LinkedIn *Company Page* seçmeniz istenir; Kervea sayfası olmalı) → Products sekmesinden **Sign In with LinkedIn using OpenID Connect** ürününü ekleyin.
