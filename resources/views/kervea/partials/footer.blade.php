@@ -41,9 +41,9 @@
       <div class="fx-col">
         <h4 data-i18n="ft_col_legal">Yasal</h4>
         <ul>
-          <li><a onclick="openM('kvkk')" data-i18n="ft_kvkk">KVKK Aydınlatma</a></li>
-          <li><a onclick="openM('sozl')" data-i18n="ft_terms">Üyelik Sözleşmesi</a></li>
-          <li><a onclick="openM('cookie')" data-i18n="ft_cookie">Gizlilik/Çerez</a></li>
+          <li><a href="/kvkk" onclick="openM('kvkk');return false" data-i18n="ft_kvkk">KVKK Aydınlatma</a></li>
+          <li><a href="/terms" onclick="openM('sozl');return false" data-i18n="ft_terms">Üyelik Sözleşmesi</a></li>
+          <li><a href="/privacy" onclick="openM('cookie');return false" data-i18n="ft_cookie">Gizlilik/Çerez</a></li>
         </ul>
       </div>
     </div>

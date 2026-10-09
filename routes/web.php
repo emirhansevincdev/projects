@@ -41,6 +41,15 @@ Route::controller(\App\Http\Controllers\Kervea\PageController::class)->group(fun
     Route::get('/company/{firm}', 'show')->defaults('view', 'firm')->name('kervea.firm');
 });
 
+// Public legal pages (same texts as the footer pop-ups). Google/LinkedIn require real, public URLs for the privacy policy and terms.
+foreach ([
+    'privacy' => ['Gizlilik ve Çerez Politikası', 'v1.2', 'privacy'],
+    'kvkk' => ['KVKK Aydınlatma Metni', 'v1.2 · 16.08.2026', 'kvkk'],
+    'terms' => ['Üyelik Sözleşmesi', 'v1.2 · 16.08.2026', 'terms'],
+] as $path => [$title, $version, $partial]) {
+    Route::get('/'.$path, fn () => view('kervea.legal', ['title' => $title, 'version' => $version, 'partial' => $partial, 'path' => $path]))->name('kervea.legal.'.$path);
+}
+
 // URLs are English (the site is international). Earlier Turkish addresses keep working via permanent redirects.
 foreach (['/giris' => '/login', '/firma-ekle' => '/add-company', '/fiyatlar' => '/pricing', '/hakkimizda' => '/about',
           '/iletisim' => '/contact', '/uye-paneli' => '/panel', '/sifre-belirle' => '/set-password'] as $from => $to) {

@@ -96,127 +96,21 @@
 </div></div></div>
 
 <div class="modal" id="mKvkk"><div class="mbox legal-mbox"><div class="mhead"><h3><span data-i18n="modal_kvkk_h">KVKK Aydınlatma Metni</span> <span class="ver-tag">v1.2 · 16.08.2026</span></h3><button class="mclose" onclick="closeM('kvkk')" aria-label="Close">×</button></div><div class="mbody legal-body">
- <div class="info-box" style="background:#fef3c7;border-color:#fde68a;color:#78350f" data-i18n="legal_disclaimer"><b>ⓘ</b> Bu doküman Türkçe yasal orijinaldir. Türk hukuku kapsamında bağlayıcıdır. Diğer dillerde bilgilendirme amaçlı özet mevcuttur.</div>
- <div class="info-box"><b>Kanuni Dayanak:</b> 6698 sayılı Kişisel Verilerin Korunması Kanunu (7/4/2016; 7499 s. Kanun ile değişik) ve ikincil mevzuat. Madde atıfları, Kanun'un yürürlükteki metni esas alınarak hazırlanmıştır.</div>
- 
- <h4>1.1. Veri Sorumlusu</h4>
- <p>İşbu aydınlatma metni, KVKK'nın 10. maddesi ve Aydınlatma Yükümlülüğünün Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ uyarınca, veri sorumlusu sıfatıyla <b>Kervea Ticaret A.Ş.</b> ("Kervea", "Şirket") tarafından hazırlanmıştır.</p>
- <ul>
-  <li><b>Ünvan:</b> Kervea Ticaret A.Ş.</li>
-  <li><b>Adres:</b> [Şirket Adresi — İstanbul, Türkiye]</li>
-  <li><b>MERSİS No:</b> [MERSİS Numarası — atanacak]</li>
-  <li><b>E-posta / KEP:</b> destek@kervea.ai · kervea@hs01.kep.tr</li>
-  <li><b>Web sitesi:</b> kervea.ai</li>
- </ul>
- 
- <h4>1.2. İşlenen Kişisel Veri Kategorileri</h4>
- <ul>
-  <li><b>Kimlik verisi:</b> firma yetkilisinin/kullanıcının adı, soyadı, unvanı.</li>
-  <li><b>İletişim verisi:</b> e-posta adresi, telefon numarası, iş adresi.</li>
-  <li><b>Üyelik ve müşteri işlem verisi:</b> kullanıcı adı, üyelik tipi, temsil edilen firma bilgileri, tercih edilen dil ve pazarlar.</li>
-  <li><b>Ticari faaliyet verisi:</b> temsil edilen firmaya ait ürün/sektör bilgisi ile kamuya açık kaynaklardan (Trademap, gümrük istatistikleri) elde edilen ithalat/ihracat geçmişi.</li>
-  <li><b>İşlem güvenliği verisi:</b> IP adresi, giriş/çıkış (log) kayıtları, oturum ve cihaz bilgileri, çerez verileri.</li>
-  <li><b>Finansal veri</b> (Premium üyelik devreye girdiğinde): fatura bilgileri ve ödeme referansları. <b>Kart bilgileri Kervea tarafından saklanmaz;</b> ödeme, PCI-DSS uyumlu ödeme hizmeti sağlayıcısı (Stripe) altyapısında işlenir.</li>
- </ul>
- <div class="info-box"><b>KVKK kapsamı — önemli ayrım:</b> Platformda gösterilen firma-seviyesi ticaret verileri (tüzel kişiye ait ünvan, sektör, ürün ve ihracat/ithalat istatistikleri), KVKK anlamında kişisel veri DEĞİLDİR ve Kanun kapsamı dışındadır (m.3/d). Kervea'nın KVKK yükümlülükleri esasen (i) firma yetkilisinin iletişim bilgileri ve (ii) şahıs firması niteliğindeki kayıtlar ile sınırlıdır.</div>
- 
- <h4>1.3. İşleme Amaçları</h4>
- <ul>
-  <li>Üyelik kaydının oluşturulması ve üyelik ilişkisinin yönetilmesi;</li>
-  <li>Satıcı ve alıcı firmaların eşleştirilmesine yönelik istihbarat/eşleştirme hizmetinin sunulması;</li>
-  <li>Firma bilgilerinin kamuya açık ticaret verileriyle (Trademap, gümrük) teyit edilmesi (doğrulama);</li>
-  <li>Kullanıcının <b>açık rızası dâhilinde</b> iletişim bilgilerinin eşleşen kayıtlı firmalara gösterilmesi;</li>
-  <li>Talep, öneri ve şikâyetlerin karşılanması ve kullanıcı ile iletişim;</li>
-  <li>Platform güvenliğinin sağlanması, kötüye kullanım ve dolandırıcılığın önlenmesi;</li>
-  <li>Hizmet kalitesinin ölçülmesi, iyileştirilmesi ve istatistik (kişisel olmayan/kümelenmiş biçimde);</li>
-  <li>İlgili mevzuattan doğan yükümlülüklerin yerine getirilmesi.</li>
- </ul>
- 
- <h4>1.4. Hukuki Sebepler (KVKK m.5)</h4>
- <ul>
-  <li><b>m.5/2-c</b> Sözleşmenin kurulması/ifası — üyelik ve hizmet sunumu için gerekli veriler.</li>
-  <li><b>m.5/2-ç</b> Hukuki yükümlülük — mevzuattan doğan saklama/bildirim yükümlülükleri.</li>
-  <li><b>m.5/2-e</b> Bir hakkın tesisi, kullanılması veya korunması — uyuşmazlık yönetimi.</li>
-  <li><b>m.5/2-f</b> Meşru menfaat — eşleştirme kalitesi, güvenlik ve dolandırıcılığın önlenmesi.</li>
-  <li><b>m.5/2-d</b> Alenileştirme — kişinin kendisi tarafından alenileştirilmiş veriler.</li>
-  <li><b>m.5/1</b> Açık rıza — iletişim bilgisinin diğer kullanıcılara gösterilmesi ve ticari elektronik ileti.</li>
- </ul>
- 
- <h4>1.5. Toplama Yöntemi</h4>
- <p>Kişisel verileriniz; web sitesi ve kayıt/başvuru formları (elektronik ortam), platform kullanımı sırasında otomatik yollarla (çerezler, log kayıtları) ve kamuya açık kaynaklar (Trademap, gümrük istatistikleri) ile firma beyanları aracılığıyla toplanır.</p>
- 
- <h4>1.6. Aktarım — Yurt İçi ve Yurt Dışı</h4>
- <h5>Yurt içi aktarım (m.8)</h5>
- <p>Verileriniz; barındırma (hosting), e-posta, analitik ve bilişim hizmeti sağlayıcılarımıza, gerektiğinde hukuki/mali danışmanlara ve yetkili kamu kurumlarına, yalnızca yukarıdaki amaçlarla ve KVKK m.8 çerçevesinde aktarılabilir.</p>
- <h5>Yurt dışı aktarım (m.9)</h5>
- <p>Kervea küresel bir eşleştirme ağı olduğundan yurt dışı aktarım iki farklı akış bakımından değerlendirilir. Genel kural olarak Kurul'un yeterlilik kararı varsa aktarım yapılabilir; yoksa m.9/4'teki uygun güvencelerden biri (özellikle Kurul'ca ilan edilen standart sözleşme, bağlayıcı şirket kuralları veya taahhütname + Kurul izni) sağlanır.</p>
- 
- <h4>1.7. İlgili Kişinin Hakları (m.11)</h4>
- <p>KVKK m.11 uyarınca; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme, yurt içi/yurt dışı aktarıldığı üçüncü kişileri bilme, eksik/yanlış işlenmişse düzeltilmesini isteme, silme veya yok etme talep etme, düzeltme/silme/yok etme işlemlerinin aktarıldığı üçüncü kişilere bildirilmesini isteme, otomatik sistemler vasıtasıyla analiz edilmesi neticesinde aleyhinize bir sonuç çıkmasına itiraz etme ve zararın giderilmesini talep etme haklarına sahipsiniz.</p>
- 
- <div class="warn-box"><b>ÖNEMLİ — HUKUKİ UYARI:</b> Bu metin, KVKK ve ilgili mevzuat esas alınarak hazırlanmış bir TASLAK'tır; hukuki mütalaa veya avukatlık hizmeti değildir. Yayına almadan önce bir veri koruma / bilişim hukuku avukatına inceletiniz.</div>
+@endverbatim
+@include('kervea.legal.kvkk')
+@verbatim
 </div></div></div>
 
 <div class="modal" id="mSozl"><div class="mbox legal-mbox"><div class="mhead"><h3><span data-i18n="modal_sozl_h">Üyelik Sözleşmesi</span> <span class="ver-tag">v1.2 · 16.08.2026</span></h3><button class="mclose" onclick="closeM('sozl')" aria-label="Close">×</button></div><div class="mbody legal-body">
- <div class="info-box" style="background:#fef3c7;border-color:#fde68a;color:#78350f" data-i18n="legal_disclaimer">Bu doküman Türkçe yasal orijinaldir. Türk hukuku kapsamında bağlayıcıdır. Diğer dillerde bilgilendirme amaçlı özet mevcuttur.</div>
- <h4>MADDE 1 — Taraflar</h4>
- <p>İşbu Üyelik Sözleşmesi ("Sözleşme"), bir tarafta <b>Kervea Ticaret A.Ş.</b> ("Kervea") ile diğer tarafta platforma üye olan gerçek/tüzel kişi ("Kullanıcı") arasında elektronik ortamda kurulmuştur.</p>
- 
- <h4>MADDE 2 — Tanımlar</h4>
- <ul>
-  <li><b>Platform:</b> kervea.ai alan adı ve alt alan adlarında sunulan web/uygulama hizmeti.</li>
-  <li><b>Eşleştirme:</b> satıcı ve alıcı firmaların ticaret verileri temelinde birbirine önerilmesi.</li>
-  <li><b>Kullanıcı:</b> üyelik oluşturan kişi.</li>
- </ul>
- 
- <h4>MADDE 3 — Hizmetin Niteliği</h4>
- <div class="info-box"><b>Kervea bir ticaret istihbarat ve EŞLEŞTİRME ağıdır; bir PAZARYERİ DEĞİLDİR.</b> Platformda alışveriş sepeti, ödeme tahsilatı, komisyon veya taraflar arası mesajlaşma altyapısı sunulmaz. Kervea uygun alıcı/satıcıyı bulup taraflara gösterir; müzakere, sözleşme ve ifa tamamen taraflar arasında ve platform dışında gerçekleşir.</div>
- 
- <h4>MADDE 4 — Üyelik Koşulları</h4>
- <p>Kullanıcı, verdiği bilgilerin doğru ve güncel olduğunu; bir firmayı temsilen üye oluyorsa temsil yetkisini haiz olduğunu kabul eder. Hesap güvenliği ve giriş bilgilerinin gizliliği Kullanıcı'nın sorumluluğundadır.</p>
- 
- <h4>MADDE 5 — Kullanıcı Yükümlülükleri ve Yasak Kullanımlar</h4>
- <p>Kullanıcı; yanıltıcı/sahte bilgi girmemeyi, üçüncü kişi haklarını ve mevzuatı ihlal etmemeyi, platformdan edindiği iletişim verilerini yalnızca meşru ticari amaçla kullanmayı, toplu veri kazıma (scraping), spam ve platform güvenliğini tehdit eden fiillerden kaçınmayı kabul eder.</p>
- 
- <h4>MADDE 6 — Veri Doğruluğu ve Sorumluluğun Sınırı</h4>
- <p>Platformdaki firma ve ticaret bilgileri önemli ölçüde kamuya açık kaynaklardan (<b>Trademap, gümrük</b>) ve firma beyanlarından derlenir. Kervea, bu verilerin kesintisizliği, doğruluğu veya bir ticari sonuç doğuracağı yönünde garanti vermez. Eşleştirme bir öneri niteliğindedir; ticari karar ve risk Kullanıcı'ya aittir. Kervea, taraflar arası ilişkiden ve dolaylı zararlardan sorumlu tutulamaz.</p>
- 
- <h4>MADDE 7 — Fikri Mülkiyet</h4>
- <p>Platform, arayüz, marka ("Kervea"), logo, yazılım ve derlenmiş veri tabanının hakları Kervea'ya aittir. Kullanıcı'ya yalnızca hizmetten yararlanma amaçlı, devredilemez ve münhasır olmayan bir kullanım hakkı tanınır.</p>
- 
- <h4>MADDE 8 — Ücretlendirme</h4>
- <div class="info-box">Ağ kurma döneminde <b>(2026)</b> yurt dışı kullanıcılardan ücret alınmaz. Ücretli model, Türkiye pazarının açılışıyla <b>Ocak 2028</b>'de devreye alınması planlanmaktadır. Güncel ücret ve Premium kapsamı Üyelik/Fiyatlandırma sayfasında ilan edilir; değişiklikler ileriye etkili uygulanır.</div>
- 
- <h4>MADDE 9 — Kişisel Verilerin Korunması</h4>
- <p>Kişisel verilerin işlenmesine ilişkin esaslar, Aydınlatma Metni, Açık Rıza Metni ve Gizlilik/Çerez Politikası'nda düzenlenmiş olup Sözleşme'nin ayrılmaz parçasıdır.</p>
- 
- <h4>MADDE 10 — Fesih ve Askıya Alma</h4>
- <p>Kullanıcı üyeliğini dilediği zaman sonlandırabilir. Kervea, Sözleşme'ye veya mevzuata aykırılık hâlinde üyeliği askıya alabilir veya feshedebilir.</p>
- 
- <h4>MADDE 11 — Değişiklikler ve Uygulanacak Hukuk</h4>
- <p>Kervea Sözleşme'yi güncelleyebilir. Önemli değişiklikler üyeye e-posta ile bildirilir. İşbu Sözleşme Türk hukukuna tabi olup, uyuşmazlıklarda İstanbul Merkez (Çağlayan) Mahkemeleri ve İcra Daireleri yetkilidir.</p>
+@endverbatim
+@include('kervea.legal.terms')
+@verbatim
 </div></div></div>
 
 <div class="modal" id="mCookie"><div class="mbox legal-mbox"><div class="mhead"><h3><span data-i18n="modal_cookie_h">Gizlilik ve Çerez Politikası</span> <span class="ver-tag">v1.2</span></h3><button class="mclose" onclick="closeM('cookie')" aria-label="Close">×</button></div><div class="mbody legal-body">
- <div class="info-box" style="background:#fef3c7;border-color:#fde68a;color:#78350f" data-i18n="legal_disclaimer">Bu doküman Türkçe yasal orijinaldir. Türk hukuku kapsamında bağlayıcıdır. Diğer dillerde bilgilendirme amaçlı özet mevcuttur.</div>
- <h4>Genel İlkeler</h4>
- <p>Kervea kişisel verileri; hukuka ve dürüstlük kurallarına uygun, doğru ve güncel, belirli-açık-meşru amaçlarla, amaçla bağlantılı-sınırlı-ölçülü ve mevzuatın öngördüğü ya da amaç için gerekli süre kadar saklanacak şekilde işler.</p>
- <h4>Veri Güvenliği Tedbirleri</h4>
- <ul>
-  <li>Aktarımda ve saklamada şifreleme (<b>TLS 1.3 / HTTPS, AES-256</b>);</li>
-  <li>Rol ve yetki bazlı erişim kontrolü, en az yetki ilkesi;</li>
-  <li>Erişim ve işlem kayıtlarının (log) tutulması ve izlenmesi;</li>
-  <li>Düzenli yedekleme, güncelleme ve sızma/zafiyet testleri;</li>
-  <li>Çalışan ve tedarikçilerle gizlilik taahhütleri;</li>
-  <li>Veri ihlalinde Kurul'a ve ilgili kişilere en kısa sürede bildirim.</li>
- </ul>
- <h4>Çerezler (Cookies)</h4>
- <ul>
-  <li><b>Zorunlu çerezler:</b> oturum, güvenlik ve temel işlevler için gereklidir; devre dışı bırakılamaz.</li>
-  <li><b>Tercih çerezleri:</b> dil ve pazar seçimi gibi tercihlerinizi hatırlar.</li>
-  <li><b>Analitik çerezler:</b> site kullanımını ölçer; <b>rızanıza tabidir.</b></li>
- </ul>
- <p>Çerez tercihlerinizi site üzerindeki çerez panelinden veya tarayıcı ayarlarınızdan güncelleyebilirsiniz. Zorunlu olmayan çerezler rızanız alınmadan çalıştırılmaz.</p>
+@endverbatim
+@include('kervea.legal.privacy')
+@verbatim
 </div></div></div>
 
 <div class="modal" id="mPay">

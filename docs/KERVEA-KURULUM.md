@@ -108,8 +108,8 @@ Güvenlik kuralları: sağlayıcı e-postayı doğrulamamışsa giriş reddedili
 
 **Google** (müşterinin Google hesabıyla):
 1. https://console.cloud.google.com → proje oluşturun → *Google Auth Platform* (eski adıyla *APIs & Services → OAuth consent screen*; menüde eski ad görünüyorsa aynı yere gider).
-   - *Branding*: uygulama adı **Kervea**, destek e-postası, logo, gizlilik ve kullanım koşulları bağlantıları (`https://kervea.ai/...`); *Authorized domains* alanına `kervea.ai`.
-   - *Audience*: kullanıcı türü **External**; *Publish app* ile durumu **In production** yapın (*Testing*'de yalnızca ekli test kullanıcıları girebilir).
+   - *Branding*: uygulama adı **Kervea**, destek e-postası, geliştirici e-postası. **Yayınlamak için zorunlu:** *Application home page* `https://kervea.ai`, *Application privacy policy link* `https://kervea.ai/privacy`, *Application terms of service link* `https://kervea.ai/terms`; *Authorized domains* alanına `kervea.ai`. Logo yüklemeyin (yüklerseniz yayınlamadan önce Google'ın marka doğrulaması gerekir). *Publish app* düğmesi gri kalıyorsa üstüne gelince eksik alanı söyler.
+   - *Audience*: kullanıcı türü **External**; *Publish app* ile durumu **In production** yapın. *Testing*'de yalnızca *Test users* listesine eklediğiniz Google hesapları (en çok 100) girebilir; yayınlanana kadar denemek için kendi Gmail adresinizi oraya ekleyin.
    - *Data Access*: yalnızca `openid`, `email`, `profile` (hassas kapsam yok → kapsam incelemesi gerekmez).
    - Not: Uygulama adı ve logo, Google'ın *marka doğrulaması* (*Verification Center* → *Verify Branding*; alan adının Google Search Console'da doğrulanması gerekir, birkaç gün sürebilir) bitene kadar onay ekranında görünmez, yalnızca alan adı görünür. Giriş doğrulama olmadan da çalışır.
 2. *Clients* → *Create client* → tür **Web application** → *Authorized redirect URIs* alanına **tam adresi** yazın: `https://kervea.ai/auth/google/callback` (yalnızca `https://kervea.ai` yazmak yetmez, sonundaki `/auth/google/callback` da olmalı). *Authorized JavaScript origins* boş kalabilir. Yeni adresin devreye girmesi 5 dakikadan birkaç saate kadar sürebilir; bu sürede `redirect_uri_mismatch` hatası normaldir, adres doğruysa bekleyin.
@@ -176,7 +176,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 | Görünürlük/kapı mantığı | `app/Services/Kv/FirmPresenter.php` |
 | Yükleme güvenliği | `app/Services/Kv/ImageStore.php` |
 | Veri modeli | `database/migrations/2026_10_05_000001_create_kervea_tables.php`, `2026_10_08_000001_create_kv_social_identities_table.php`, `app/Models/Kv/` |
-| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, `KerveaSocialStatus.php`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
+| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, `KerveaSocialStatus.php`, herkese açık yasal sayfalar (`/privacy`, `/kvkk`, `/terms`): `resources/views/kervea/legal.blade.php` ve `resources/views/kervea/legal/`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
 | Güvenlik başlıkları / eski rota kapatma | `app/Http/Middleware/SecurityHeaders.php`, `LegacyRoutes.php` |
 | Hata sayfaları | `resources/views/errors/` |
 | Güncelleme betiği / yönetici komutu | `kervea-deploy.sh`, `app/Console/Commands/KerveaMakeAdmin.php` |

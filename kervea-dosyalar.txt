@@ -718,6 +718,10 @@ resources/views/kervea/admin/orders.blade.php
 resources/views/kervea/admin/promos.blade.php
 resources/views/kervea/admin/sectors.blade.php
 resources/views/kervea/layout.blade.php
+resources/views/kervea/legal.blade.php
+resources/views/kervea/legal/kvkk.blade.php
+resources/views/kervea/legal/privacy.blade.php
+resources/views/kervea/legal/terms.blade.php
 resources/views/kervea/mail/_layout.blade.php
 resources/views/kervea/mail/admin_contact.blade.php
 resources/views/kervea/mail/admin_new_application.blade.php
