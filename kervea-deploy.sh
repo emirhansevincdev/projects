@@ -368,7 +368,7 @@ for P in GOOGLE LINKEDIN; do
     fi
   else printf '  %s ile giriş kapalı (.env içinde %s_CLIENT_ID / %s_CLIENT_SECRET boş; düğme gizli kalır)\n' "$P" "$P" "$P"; fi
 done
-printf '  Giriş ayarlarını ayrıntılı görmek için:  cd %s && %s artisan kervea:social-status\n' "$TARGET" "$PHP"
+printf '  Anahtarları girmek için:  cd %s && %s artisan kervea:social-setup google   (linkedin için de aynısı)\n  Durumu görmek için:        %s artisan kervea:social-status\n' "$TARGET" "$PHP" "$PHP"
 
 DONE=1
 say "Bitti"

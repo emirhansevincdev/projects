@@ -422,4 +422,67 @@ class SocialLoginTest extends KvTestCase
         $this->assertStringContainsString('Biri boş', $out);
         $this->assertStringContainsString('GOOGLE_CLIENT_SECRET', $out);
     }
+
+    private function tmpEnv(string $content): string
+    {
+        $f = tempnam(sys_get_temp_dir(), 'kvenv');
+        file_put_contents($f, $content);
+        return $f;
+    }
+
+    public function test_setup_command_writes_the_keys_into_env_without_duplicates_or_echoing_the_secret(): void
+    {
+        $env = $this->tmpEnv("APP_NAME=Kervea\nGOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\nGOOGLE_CLIENT_ID=old\nMAIL_HOST=smtp.test\nLINKEDIN_CLIENT_ID=\n");
+        $secret = 'GOCSPX-abcDEF123_-xyz';
+        $this->artisan('kervea:social-setup', ['provider' => 'google', '--env' => $env])
+            ->expectsQuestion('Client ID', '123456789012-abc.apps.googleusercontent.com')
+            ->expectsQuestion('Client secret (yazarken görünmez)', $secret)
+            ->doesntExpectOutputToContain($secret)
+            ->expectsOutputToContain('anahtarları .env dosyasına yazıldı')
+            ->assertSuccessful();
+
+        $text = file_get_contents($env);
+        $this->assertSame(1, substr_count($text, 'GOOGLE_CLIENT_ID='));                          // the duplicate line is gone
+        $this->assertStringContainsString("GOOGLE_CLIENT_ID=123456789012-abc.apps.googleusercontent.com\n", $text);
+        $this->assertStringContainsString("GOOGLE_CLIENT_SECRET=$secret\n", $text);
+        $this->assertStringContainsString("APP_NAME=Kervea\n", $text);                          // other lines untouched
+        $this->assertStringContainsString("MAIL_HOST=smtp.test\n", $text);
+        $this->assertStringContainsString("LINKEDIN_CLIENT_ID=\n", $text);
+        $this->assertStringEndsWith("\n", $text);
+        unlink($env);
+    }
+
+    public function test_setup_command_appends_missing_keys_and_handles_a_file_without_trailing_newline(): void
+    {
+        $env = $this->tmpEnv("APP_NAME=Kervea");
+        $this->artisan('kervea:social-setup', ['provider' => 'linkedin', '--env' => $env])
+            ->expectsQuestion('Client ID', '77abcd1234xyz')
+            ->expectsQuestion('Client secret (yazarken görünmez)', 'WPL_AP1.abc.def==')
+            ->assertSuccessful();
+        $this->assertSame("APP_NAME=Kervea\nLINKEDIN_CLIENT_ID=77abcd1234xyz\nLINKEDIN_CLIENT_SECRET=WPL_AP1.abc.def==\n", file_get_contents($env));
+        unlink($env);
+    }
+
+    public function test_setup_command_refuses_the_usual_mix_ups_and_writes_nothing(): void
+    {
+        $original = "GOOGLE_CLIENT_ID=\nGOOGLE_CLIENT_SECRET=\n";
+        $env = $this->tmpEnv($original);
+        $cases = [
+            ['...apps.googleusercontent.com', 'GOCSPX-x'],                                       // the "..." from the docs example
+            ['123-abc.apps.googleusercontent.com', '123-abc2.apps.googleusercontent.com'],       // Client ID pasted as the secret
+            ['not-a-google-id', 'GOCSPX-x'],                                                     // wrong ending
+            ['123-abc.apps.googleusercontent.com', 'GOCSPX-x y'],                                // space inside
+            ['123-abc.apps.googleusercontent.com', ''],                                          // empty secret
+        ];
+        foreach ($cases as [$id, $sec]) {
+            $this->artisan('kervea:social-setup', ['provider' => 'google', '--env' => $env])
+                ->expectsQuestion('Client ID', $id)
+                ->expectsQuestion('Client secret (yazarken görünmez)', $sec)
+                ->expectsOutputToContain('Hiçbir şey kaydedilmedi')
+                ->assertFailed();
+            $this->assertSame($original, file_get_contents($env));
+        }
+        $this->artisan('kervea:social-setup', ['provider' => 'facebook', '--env' => $env])->assertFailed();
+        unlink($env);
+    }
 }

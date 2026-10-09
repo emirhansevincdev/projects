@@ -120,7 +120,17 @@ Güvenlik kuralları: sağlayıcı e-postayı doğrulamamışsa giriş reddedili
 2. *Auth* sekmesi → *Authorized redirect URLs for your app* → yukarıdaki LinkedIn adresini ekleyin.
 3. *Auth* sekmesindeki **Client ID** ve **Primary Client Secret**'ı `.env`'e yazın.
 
-`.env` içindeki **hazır, boş satırları doldurun** (aynı anahtarı ikinci kez eklemeyin; çift satır varsa ilki geçerli olur). Değerlerin başına/sonuna tırnak, boşluk ya da `...` koymayın, açıklama eklemeyin. **Hangi değer nereye:** Google'daki **Client ID** (uzun, `apps.googleusercontent.com` ile biter) → `GOOGLE_CLIENT_ID`; **Client secret** (kısa, `GOCSPX-` ile başlar) → `GOOGLE_CLIENT_SECRET`. İkisini birbirine karıştırmayın.
+**Anahtarları girmenin en kolay yolu** (elle dosya düzenlemek yok; secret yazarken görünmez ve kabuk geçmişine girmez):
+
+```bash
+cd /var/www/kervea.ai
+php artisan kervea:social-setup google
+php artisan kervea:social-setup linkedin
+```
+
+Komut sırayla **Client ID** (uzun, `apps.googleusercontent.com` ile biter) ve **Client secret**'ı (kısa, `GOCSPX-` ile başlar) sorar, karışıklık varsa (Client ID'yi secret yerine yapıştırmak, `...`, boşluk, tırnak) reddeder, değerleri `.env` içine yazar (aynı anahtarı ikinci kez eklemez), önbelleği temizler ve durumu gösterir: "Google: **AÇIK**" yazmalı.
+
+Elle yapmak isterseniz `.env` içindeki hazır, boş satırları doldurun (aynı anahtarı ikinci kez eklemeyin; çift satır varsa ilki geçerli olur; değerlerin başına/sonuna tırnak, boşluk ya da `...` koymayın):
 
 ```
 GOOGLE_CLIENT_ID=
@@ -176,7 +186,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 | Görünürlük/kapı mantığı | `app/Services/Kv/FirmPresenter.php` |
 | Yükleme güvenliği | `app/Services/Kv/ImageStore.php` |
 | Veri modeli | `database/migrations/2026_10_05_000001_create_kervea_tables.php`, `2026_10_08_000001_create_kv_social_identities_table.php`, `app/Models/Kv/` |
-| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, `KerveaSocialStatus.php`, herkese açık yasal sayfalar (`/privacy`, `/kvkk`, `/terms`): `resources/views/kervea/legal.blade.php` ve `resources/views/kervea/legal/`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
+| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, `KerveaSocialStatus.php`, `KerveaSocialSetup.php`, herkese açık yasal sayfalar (`/privacy`, `/kvkk`, `/terms`): `resources/views/kervea/legal.blade.php` ve `resources/views/kervea/legal/`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
 | Güvenlik başlıkları / eski rota kapatma | `app/Http/Middleware/SecurityHeaders.php`, `LegacyRoutes.php` |
 | Hata sayfaları | `resources/views/errors/` |
 | Güncelleme betiği / yönetici komutu | `kervea-deploy.sh`, `app/Console/Commands/KerveaMakeAdmin.php` |
