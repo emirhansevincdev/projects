@@ -20,6 +20,19 @@ if ($currUser){
     header("Refresh:0; url=../index.php");
 }
 
+$deleteError = null;
+
+// REMOVE BANNER ------------------------------------------------
+if (isset($_POST['delete_announcement_id']) && $_POST['delete_announcement_id'] !== '') {
+    try {
+        $deleteQuery = new ParseQuery('OfficialAnnouncement');
+        $toDelete = $deleteQuery->get($_POST['delete_announcement_id'], true);
+        $toDelete->destroy(true);
+    } catch (ParseException $e) {
+        $deleteError = $e->getMessage();
+    }
+}
+
 ?>
 
 <div class="page-wrapper">
@@ -52,6 +65,10 @@ if ($currUser){
 
                     echo ' <h2 class="card-title">'.$matchCounter.' Official Announcements</h2> ';
 
+                    if ($deleteError) {
+                        echo '<div class="alert alert-danger">'.htmlspecialchars($deleteError).'</div>';
+                    }
+
                     ?>
 
                     <div class="card-body">
@@ -66,6 +83,7 @@ if ($currUser){
                                     <th style="color:#242526;">Sub-title</th>
                                     <th style="color:#242526;">Preview Image</th>
                                     <th style="color:#242526;">Views</th>
+                                    <th style="color:#242526;">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -110,6 +128,11 @@ if ($currUser){
                                         $giftName = $cObj->get('name');
                                         $giftCategory = $cObj->get('categories');
 
+                                        $deleteForm = '<form method="post" action="" onsubmit="return confirm(\'Bu banneri kalici olarak silmek istedigine emin misin?\');">
+                                            <input type="hidden" name="delete_announcement_id" value="'.$objectId.'">
+                                            <button type="submit" class="btn btn-sm text-white" style="background:#c0392b;">Sil</button>
+                                        </form>';
+
                                         echo '
 		            	
 		            	        <tr>
@@ -119,6 +142,7 @@ if ($currUser){
                                     <td><span>'.$subtitle.'</span></td>
                                     <td>'.$previewImageTag.'</td>
                                     <td><span>'.$views.'</span></td>
+                                    <td>'.$deleteForm.'</td>
                                 </tr>
                                 
                                 ';
