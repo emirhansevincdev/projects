@@ -850,4 +850,5 @@ routes/customer.php
 routes/payment.php
 routes/web.php
 tailwind.config.js
+tools/regen-manifest.sh
 vite.config.js

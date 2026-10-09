@@ -124,7 +124,15 @@ fi
 
 # Sürüm kontrolü: dosya yerinde olsa bile ESKİ sürüm olabilir (elle yüklemede sık olur) → sha256 özetleri ZIP'tekiyle karşılaştırılır.
 if [ -f "$SRC/kervea-sha256.txt" ] && command -v sha256sum >/dev/null 2>&1 && [ "${KERVEA_SKIP_HASH:-0}" != "1" ]; then
-  STALE="$(cd "$CHECKDIR" && sha256sum -c --quiet "$SRC/kervea-sha256.txt" 2>/dev/null | grep -E ': FAILED$' | sed 's/: FAILED$//' || true)"
+  # Metin dosyalarında satır sonu (Windows CRLF / Linux LF) farkı sayılmaz: özet \r silinerek alınır (tools/regen-manifest.sh ile aynı kural).
+  kvhash() {
+    case "$1" in
+      *.php|*.js|*.css|*.html|*.htm|*.md|*.txt|*.json|*.sh|*.xml|*.svg|*.csv|*.yml|*.yaml|artisan|.env.example|.editorconfig|.gitattributes|.gitignore)
+        tr -d '\r' < "$1" | sha256sum | cut -d' ' -f1 ;;
+      *) sha256sum < "$1" | cut -d' ' -f1 ;;
+    esac
+  }
+  STALE="$(cd "$CHECKDIR" && while read -r want f; do [ -f "$f" ] || continue; [ "$(kvhash "$f")" = "$want" ] || printf '%s\n' "$f"; done < "$SRC/kervea-sha256.txt")"
   # Çalışmayı etkilemeyen dosyalar (belge, test ayarı, örnek .env) yalnızca uyarı verir; geri kalanı durdurur.
   STALE_MINOR="$(printf '%s\n' "$STALE" | grep -E '^(docs/|phpunit\.xml$|\.env\.example$|\.editorconfig$|\.gitattributes$|\.gitignore$|.*\.md$)' || true)"
   STALE_CRIT="$(printf '%s\n' "$STALE" | grep -vE '^(docs/|phpunit\.xml$|\.env\.example$|\.editorconfig$|\.gitattributes$|\.gitignore$|.*\.md$)' | grep -v '^$' || true)"

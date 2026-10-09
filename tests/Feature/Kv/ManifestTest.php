@@ -24,6 +24,15 @@ class ManifestTest extends TestCase
         $this->assertContains('database/seeders/data/i18n.json', $listed);
     }
 
+    /** KEEP IN SYNC with kvhash() in kervea-deploy.sh and tools/regen-manifest.sh: text files are hashed without carriage returns. */
+    private static function normalizedHash(string $path): string
+    {
+        $text = in_array(pathinfo($path, PATHINFO_EXTENSION), ['php', 'js', 'css', 'html', 'htm', 'md', 'txt', 'json', 'sh', 'xml', 'svg', 'csv', 'yml', 'yaml'], true)
+            || in_array($path, ['artisan', '.env.example', '.editorconfig', '.gitattributes', '.gitignore'], true);
+        $data = file_get_contents(base_path($path));
+        return hash('sha256', $text ? str_replace("\r", '', $data) : $data);
+    }
+
     /** kervea-sha256.txt lets the deploy script spot files that were uploaded but are an OLD version. */
     public function test_checksums_match_the_files_so_the_deploy_script_does_not_cry_wolf(): void
     {
@@ -45,7 +54,7 @@ class ManifestTest extends TestCase
         $this->assertSame($expected, $paths, 'kervea-sha256.txt dosya listesi güncel değil — yeniden üretin.');
         $stale = [];
         foreach ($sums as $path => $sum) {
-            if (! is_file(base_path($path)) || hash_file('sha256', base_path($path)) !== $sum) {
+            if (! is_file(base_path($path)) || self::normalizedHash($path) !== $sum) {
                 $stale[] = $path;
             }
         }
