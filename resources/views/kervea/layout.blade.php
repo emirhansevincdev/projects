@@ -5,6 +5,9 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 {!! str_replace('__KV_BASE__', rtrim(config('app.url'), '/'), view('kervea.partials.head-seo')->render()) !!}
 <link rel="stylesheet" href="{{ asset('kervea/css/kervea.css') }}?v={{ config('kervea.asset_version') }}">
+@php($social = array_filter($boot['social'] ?? []))
+{{-- "Sign in with Google/LinkedIn" buttons exist in the markup; hide the ones without keys already in the HTML so nothing flashes before JS runs. --}}
+<style>@if(! $social)#login .kv-login-social,#login .kv-login-sep{display:none}@else @foreach(\App\Services\Kv\SocialAuth::PROVIDERS as $p)@unless(isset($social[$p]))#login .kv-login-social-btn[data-social="{{ $p }}"]{display:none}@endunless @endforeach @if(count($social) === 1)#login .kv-login-social{grid-template-columns:1fr}@endif @endif</style>
 <script src="{{ asset('kervea/js/kervea-head.js') }}?v={{ config('kervea.asset_version') }}"></script>
 <script src="{{ asset('kervea/vendor/gsap.min.js') }}"></script>
 <script src="{{ asset('kervea/vendor/ScrollTrigger.min.js') }}"></script>

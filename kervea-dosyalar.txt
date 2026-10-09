@@ -1,6 +1,7 @@
 .editorconfig
 .env.example
 app/Console/Commands/KerveaMakeAdmin.php
+app/Console/Commands/KerveaSocialStatus.php
 app/Console/Commands/KerveaSocialUnlink.php
 app/Helpers/common_helpers.php
 app/Http/Controllers/Admin/AdminCalendlyController.php

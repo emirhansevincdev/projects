@@ -374,4 +374,52 @@ class SocialLoginTest extends KvTestCase
         $this->artisan('kervea:social-unlink', ['provider' => 'linkedin', '--all' => true])->expectsConfirmation('Tüm linkedin bağlantıları silinsin mi? (Üyeler bir sonraki girişte yeniden bağlanır.)', 'yes')->assertSuccessful();
         $this->assertSame(['google'], SocialIdentity::pluck('provider')->all());
     }
+
+    public function test_unconfigured_buttons_are_hidden_in_the_html_itself_so_nothing_flashes(): void
+    {
+        $off = ['client_id' => null, 'client_secret' => null];
+        $on = ['client_id' => 'x', 'client_secret' => 'y'];
+
+        config(['kervea.social.google' => $on, 'kervea.social.linkedin' => $off]);
+        $html = $this->get('/login')->getContent();
+        $this->assertStringContainsString('[data-social="linkedin"]{display:none}', $html);
+        $this->assertStringNotContainsString('[data-social="google"]{display:none}', $html);
+        $this->assertStringContainsString('#login .kv-login-social{grid-template-columns:1fr}', $html);
+
+        config(['kervea.social.google' => $off]);
+        $html = $this->get('/login')->getContent();
+        $this->assertStringContainsString('#login .kv-login-social,#login .kv-login-sep{display:none}', $html);
+
+        config(['kervea.social.google' => $on, 'kervea.social.linkedin' => $on]);
+        $html = $this->get('/login')->getContent();
+        $this->assertStringNotContainsString('data-social="google"]{display:none}', $html);
+        $this->assertStringNotContainsString('data-social="linkedin"]{display:none}', $html);
+        $this->assertStringNotContainsString('.kv-login-sep{display:none}', $html);
+    }
+
+    public function test_status_command_explains_a_client_id_pasted_into_the_secret_and_never_prints_secrets(): void
+    {
+        $secret = '510535883838-fakefakefake.apps.googleusercontent.com';
+        config(['kervea.social.redirect_base' => 'https://kervea.ai', 'kervea.social.google' => ['client_id' => '...apps.googleusercontent.com', 'client_secret' => $secret]]);
+        $this->withoutMockingConsoleOutput();
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-status');
+        $out = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertStringContainsString('GOOGLE_CLIENT_SECRET satırına Client ID yazılmış', $out);
+        $this->assertStringContainsString("'...'", $out);
+        $this->assertStringContainsString('https://kervea.ai/auth/google/callback', $out);
+        $this->assertStringContainsString('AÇIK', $out);            // both are non-empty, so the button is on — the hints say what is wrong
+        $this->assertStringNotContainsString($secret, $out);
+    }
+
+    public function test_status_command_reports_missing_keys_and_a_localhost_app_url(): void
+    {
+        config(['kervea.social.redirect_base' => 'http://127.0.0.1:8000', 'kervea.social.google' => ['client_id' => 'abc.apps.googleusercontent.com', 'client_secret' => null], 'kervea.social.linkedin' => ['client_id' => null, 'client_secret' => null]]);
+        $this->withoutMockingConsoleOutput();
+        \Illuminate\Support\Facades\Artisan::call('kervea:social-status');
+        $out = \Illuminate\Support\Facades\Artisan::output();
+        $this->assertStringContainsString('APP_URL gerçek ve https:// ile başlayan', $out);
+        $this->assertStringContainsString('KAPALI', $out);
+        $this->assertStringContainsString('Biri boş', $out);
+        $this->assertStringContainsString('GOOGLE_CLIENT_SECRET', $out);
+    }
 }

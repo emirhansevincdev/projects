@@ -57,6 +57,7 @@ Sonra tarayıcıda `https://siteniz/login` adresini açın.
 | `unzip: command not found` ya da `apt-get: command not found` | Sunucunuz Debian/Ubuntu değildir. `yum install -y unzip` yazın, sonra 5. adımdan devam edin. |
 | `No such file or directory` (`scp`, `cd` ya da `bash` satırında) | `cd ~ && ls` yazın. `kervea.zip` yoksa 2. adımı tekrarlayın (Windows dosyayı `... (1).zip` diye indirdiyse adını düzeltin ya da WinSCP ile sürükleyip adını `kervea.zip` yapın). `projects-main` gibi başka bir klasör görürseniz yanlış ZIP'i indirmişsiniz demektir; 1. adımdaki adresi kullanın. |
 | `Site klasörü bulunamadı: /var/www/kervea.ai` | Sitenin gerçek yerini bulun: `find /var/www /www /home /srv -maxdepth 4 -name artisan -not -path '*/vendor/*' 2>/dev/null`. Çıkan yoldan sondaki `/artisan` kısmını atın (örn. `/home/x/public_html/artisan` → `/home/x/public_html`) ve şöyle çalıştırın: `TARGET=/home/x/public_html bash kervea-deploy.sh` |
+| Giriş sayfasında Google/LinkedIn düğmesi yok | `.env` içindeki anahtarlar boş ya da hatalı, ya da `config:clear` yapılmamış. `php artisan kervea:social-status` komutu hangisi olduğunu yazar. |
 | Google/LinkedIn'de `redirect_uri_mismatch` | Konsoldaki yönlendirme adresi, `.env` içindeki `APP_URL` + `/auth/google/callback` (veya `/auth/linkedin/callback`) ile **harfi harfine** aynı olmalı (`https`, `www` yok, sonda `/` yok). Düzelttikten sonra Google'da birkaç dakika bekleyin. |
 | `Bu klasöre yazma/okuma yetkiniz yok` | `root` olarak bağlanın ya da `sudo bash kervea-deploy.sh` yazın. Sizde `sudo` yoksa `su -` ile root olup 6. adımdan tekrarlayın. |
 | `Veritabanına bağlanılamadı` | `.env` ve `config/database.php` içindeki veritabanı adı/kullanıcı/parolayı kontrol edin; hata satırlarını geliştiriciye gönderin. |
@@ -127,7 +128,7 @@ LINKEDIN_CLIENT_ID=
 LINKEDIN_CLIENT_SECRET=
 ```
 
-Sonra `cd /var/www/kervea.ai && php artisan config:clear` ve `/login` sayfasını yenileyin: anahtarı girilen sağlayıcının düğmesi görünür.
+Sonra `cd /var/www/kervea.ai && php artisan config:clear` ve `/login` sayfasını yenileyin: anahtarı girilen sağlayıcının düğmesi görünür. **Düğme görünmüyorsa** nedenini şu komut Türkçe söyler (anahtarları ekrana yazmaz): `php artisan kervea:social-status`
 
 **Nasıl denenir:** Yönetici hesabıyla (kendi Google hesabıyla) giriş **yapılamaz** (bilerek). Denemek için: (1) sitede **Firmanı ekle** ile, kendi Gmail (ya da LinkedIn'e kayıtlı) adresinizi e-posta olarak yazarak bir deneme başvurusu yapın; (2) yönetici panelinden başvuruyu **onaylayın** ve gelen e-postadaki bağlantıdan parola belirleyin; (3) çıkış yapıp `/login` sayfasında **Google** düğmesine basın: aynı adresli Google hesabıyla girer. Aynı adresle onaylı üyeliği olmayan bir hesap "bu e-posta ile üyelik bulunamadı" uyarısı alır.
 
@@ -174,7 +175,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 | Görünürlük/kapı mantığı | `app/Services/Kv/FirmPresenter.php` |
 | Yükleme güvenliği | `app/Services/Kv/ImageStore.php` |
 | Veri modeli | `database/migrations/2026_10_05_000001_create_kervea_tables.php`, `2026_10_08_000001_create_kv_social_identities_table.php`, `app/Models/Kv/` |
-| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
+| Google / LinkedIn girişi | `app/Http/Controllers/Kv/SocialController.php`, `app/Services/Kv/SocialAuth.php`, `app/Console/Commands/KerveaSocialUnlink.php`, `KerveaSocialStatus.php`, ön yüz: `kervea-api.js` ("Google / LinkedIn ile giriş" bölümü) |
 | Güvenlik başlıkları / eski rota kapatma | `app/Http/Middleware/SecurityHeaders.php`, `LegacyRoutes.php` |
 | Hata sayfaları | `resources/views/errors/` |
 | Güncelleme betiği / yönetici komutu | `kervea-deploy.sh`, `app/Console/Commands/KerveaMakeAdmin.php` |
