@@ -476,43 +476,39 @@
      </div>
     </div>
 
-    <!-- PROSPECT -->
+    <!-- PROSPECT: firmanın kendi profil verisinden tek sayfalık tanıtım belgesi (yazdır / PDF olarak kaydet) -->
     <div class="dpanel" id="dp-prospect">
      <h2 data-i18n="pr_title">Prospektüs Üretici</h2>
-     <p class="sub" data-i18n="pr_desc">Firmanızın veya bir eşleşmenin tek sayfalık tanıtım belgesini üretin. Aktif dilde, gerçek profil verilerinden.</p>
+     <p class="sub" data-kvt>Firma profilinizden tek sayfalık bir tanıtım belgesi hazırlanır. Belge yeni sekmede açılır; yazdır penceresinde “PDF olarak kaydet”i seçerek indirebilirsiniz.</p>
      <div class="dcard">
-      <div class="fg" style="grid-template-columns:1fr">
-       <div>
-        <label class="fl" data-i18n="pr_who">Kimin için hazırlıyorsunuz?</label>
-       <div class="prosp-usecases">
-        <div class="prosp-uc-tile" onclick="selectProspTarget(this,'meetings')" data-selected="true">
-         <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-         <div class="prosp-uc-t" data-i18n="pr_l1">Alıcı görüşmeleri öncesi bilgi paylaşımı</div>
-        </div>
-        <div class="prosp-uc-tile" onclick="selectProspTarget(this,'fair')">
-         <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-         <div class="prosp-uc-t" data-i18n="pr_l2">Fuar ve etkinliklerde dijital kartvizit</div>
-        </div>
-        <div class="prosp-uc-tile" onclick="selectProspTarget(this,'social')">
-         <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
-         <div class="prosp-uc-t" data-i18n="pr_l3">Sosyal medya ve web sitesinde referans</div>
-        </div>
+      <label class="fl" data-i18n="pr_who">Kimin için hazırlıyorsunuz?</label>
+      <div class="prosp-usecases">
+       <div class="prosp-uc-tile" role="button" tabindex="0" onclick="selectProspTarget(this,'meetings')" data-selected="true">
+        <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <div class="prosp-uc-t" data-i18n="pr_l1">Alıcı görüşmeleri öncesi bilgi paylaşımı</div>
        </div>
-       <div class="prosp-cta-row">
-        <button class="btn prosp-cta-primary" onclick="downloadProspectus(window._prospTarget||'meetings')">
-         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-         <span data-i18n="pr_dl_pdf">Prospektüsümü PDF olarak indir</span>
-        </button>
-        <button class="btn btn-ghost prosp-cta-secondary" onclick="toast((T[LANG]&&T[LANG].vs_prev)||'Önizle')">
-         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-         <span data-i18n="vs_prev">Önizle</span>
-        </button>
+       <div class="prosp-uc-tile" role="button" tabindex="0" onclick="selectProspTarget(this,'fair')">
+        <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <div class="prosp-uc-t" data-i18n="pr_l2">Fuar ve etkinliklerde dijital kartvizit</div>
        </div>
-       <button class="btn sec" onclick="toast(tt('toast_print_pdf','Tarayıcının yazdır menüsünden PDF olarak kaydedin'))"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg><span data-i18n="pr_pdf">PDF Olarak Yazdır</span></button>
+       <div class="prosp-uc-tile" role="button" tabindex="0" onclick="selectProspTarget(this,'social')">
+        <div class="prosp-uc-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <div class="prosp-uc-t" data-i18n="pr_l3">Sosyal medya ve web sitesinde referans</div>
+       </div>
       </div>
+      <div class="prosp-cta-row">
+       <button class="btn prosp-cta-primary" type="button" onclick="kvProspectus('print')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        <span data-kvt>Prospektüsü aç ve yazdır / PDF kaydet</span>
+       </button>
+       <button class="btn sec prosp-cta-secondary" type="button" onclick="kvProspectus('view')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span data-kvt>Önizle</span>
+       </button>
+      </div>
+      <p class="kv-hint" id="kvProspStatus" role="status" aria-live="polite"></p>
      </div>
     </div>
-    </div><!-- /dp-prospect (eksik kapanış — Faz 17) -->
    <!-- SETTINGS -->
     <div class="dpanel" id="dp-settings">
      <h2 data-kvt>Ayarlar</h2>

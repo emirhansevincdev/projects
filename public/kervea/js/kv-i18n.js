@@ -257,6 +257,31 @@ add([
  ['Devam etmek için onay kutusunu işaretleyin.','Tick the box to continue.','Marque la casilla para continuar.','Cochez la case pour continuer.','ضع علامة في المربع للمتابعة.','Отметьте флажок, чтобы продолжить.'],
 ]);
 
+
+// ── prospektüs (tek sayfalık tanıtım belgesi) ──
+add([
+ ['Firma profilinizden tek sayfalık bir tanıtım belgesi hazırlanır. Belge yeni sekmede açılır; yazdır penceresinde “PDF olarak kaydet”i seçerek indirebilirsiniz.','A one-page company brief is created from your profile. It opens in a new tab; choose “Save as PDF” in the print dialog to download it.','Se crea un resumen de una página a partir de su perfil. Se abre en una pestaña nueva; elija «Guardar como PDF» en la ventana de impresión para descargarlo.','Une fiche d\'une page est créée à partir de votre profil. Elle s\'ouvre dans un nouvel onglet ; choisissez « Enregistrer au format PDF » dans la fenêtre d\'impression pour la télécharger.','يُنشأ ملخص من صفحة واحدة من ملف شركتك. يُفتح في علامة تبويب جديدة؛ اختر «حفظ بصيغة PDF» في نافذة الطباعة لتنزيله.','По профилю создаётся одностраничная справка о компании. Она откроется в новой вкладке; для сохранения выберите в окне печати «Сохранить как PDF».'],
+ ['Prospektüsü aç ve yazdır / PDF kaydet','Open the brief and print / save as PDF','Abrir el resumen e imprimir / guardar como PDF','Ouvrir la fiche et imprimer / enregistrer en PDF','فتح الملخص وطباعته / حفظه بصيغة PDF','Открыть справку и распечатать / сохранить в PDF'],
+ ['Prospektüs penceresi açılamadı: tarayıcınızın açılır pencere engelini bu site için kapatın.','The brief could not be opened: allow pop-ups for this site in your browser.','No se pudo abrir el resumen: permita las ventanas emergentes de este sitio en su navegador.','La fiche n\'a pas pu s\'ouvrir : autorisez les fenêtres contextuelles pour ce site dans votre navigateur.','تعذّر فتح الملخص: اسمح بالنوافذ المنبثقة لهذا الموقع في متصفحك.','Не удалось открыть справку: разрешите всплывающие окна для этого сайта.'],
+ ['Önce firma profilinizi doldurun.','Fill in your company profile first.','Complete primero el perfil de su empresa.','Renseignez d\'abord le profil de votre entreprise.','أكمل ملف شركتك أولاً.','Сначала заполните профиль компании.'],
+ ['Firma özeti','Company summary','Resumen de la empresa','Présentation de l\'entreprise','نبذة عن الشركة','О компании'],
+ ['Temel bilgiler','Key facts','Datos principales','Informations clés','معلومات أساسية','Основные сведения'],
+ ['Ticari bilgiler','Trade details','Datos comerciales','Informations commerciales','معلومات تجارية','Торговые данные'],
+ ['Ürünler','Products','Productos','Produits','المنتجات','Товары'],
+ ['Kuruluş yılı','Founded','Año de fundación','Année de création','سنة التأسيس','Год основания'],
+ ['Web sitesi','Website','Sitio web','Site web','الموقع الإلكتروني','Сайт'],
+ ['Adres','Address','Dirección','Adresse','العنوان','Адрес'],
+ ['Çalışan sayısı','Employees','Empleados','Effectif','عدد الموظفين','Сотрудников'],
+ ['Firma tanıtım belgesi','Company brief','Resumen de empresa','Fiche entreprise','ملخص الشركة','Справка о компании'],
+ ['Dijital kartvizit','Digital business card','Tarjeta de visita digital','Carte de visite numérique','بطاقة عمل رقمية','Цифровая визитка'],
+ ['Referans özeti','Reference summary','Resumen de referencia','Fiche de référence','ملخص مرجعي','Справка-референс'],
+ ['Doğrulanmış firma · Kervea','Verified company · Kervea','Empresa verificada · Kervea','Entreprise vérifiée · Kervea','شركة موثّقة · Kervea','Проверенная компания · Kervea'],
+ ['Başvurusu inceleniyor · Kervea','Application under review · Kervea','Solicitud en revisión · Kervea','Candidature en cours d\'examen · Kervea','الطلب قيد المراجعة · Kervea','Заявка на рассмотрении · Kervea'],
+ ['Bu belge {date} tarihinde Kervea üyelik panelinden hazırlanmıştır.','This document was prepared from the Kervea member panel on {date}.','Este documento se preparó desde el panel de miembros de Kervea el {date}.','Ce document a été préparé depuis l\'espace membre Kervea le {date}.','أُعدّت هذه الوثيقة من لوحة أعضاء Kervea بتاريخ {date}.','Документ подготовлен в кабинете Kervea {date}.'],
+ ['Her ikisi','Both','Ambos','Les deux','كلاهما','Оба'],
+ ['Önizle','Preview','Vista previa','Aperçu','معاينة','Предпросмотр'],
+]);
+
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
 function fill(s, vars){
   if(!vars) return s;

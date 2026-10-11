@@ -459,4 +459,68 @@ document.addEventListener('kv:stats', function(){ if(typeof window.renderAboMap 
   };
 })();
 
+
+// ───────────────────────── prospektüs: firmanın kendi profil verisinden tek sayfalık belge ─────────────────────────
+// Veri yalnızca sunucudaki profilden (KV_ME) gelir. Belge yeni sekmede açılır; "yazdır" modunda yazdır penceresi kendiliğinden açılır.
+window.kvProspectus = function(mode){
+  var st = $('kvProspStatus'); function say(m, bad){ if(st){ st.textContent = m || ''; st.classList.toggle('bad', !!bad); } }
+  var me = window.KV_ME, co = me && me.company, raw = (co && co.raw) || null;
+  if(!raw || !raw.name){ say(kt('Önce firma profilinizi doldurun.'), true); return; }
+  var L = window.LANG || 'tr', rtl = L === 'ar', T_ = (window.T && (T[L] || T.tr)) || {};
+  var target = window._prospTarget || 'meetings';
+  var sub = kt(target === 'fair' ? 'Dijital kartvizit' : (target === 'social' ? 'Referans özeti' : 'Firma tanıtım belgesi'));
+  function row(k, v, ltr){ return v ? '<tr><td class="k">' + escapeHtml(k) + '</td><td class="v"' + (ltr ? ' dir="ltr" style="text-align:start"' : '') + '>' + escapeHtml(v) + '</td></tr>' : ''; }
+  var dirTxt = raw.direction === 'EXP' ? T_.dir_exp : (raw.direction === 'IMP' ? T_.dir_imp : (raw.direction === 'BOTH' ? kt('Her ikisi') : ''));
+  var basics = row(kt('Kuruluş yılı'), raw.founded_year) + row(T_.fl_country ? String(T_.fl_country).replace(/\s*\*$/, '') : kt('Ülke'), [countryName(raw.country_cc), raw.city].filter(Boolean).join(' · ')) +
+    row(kt('Çalışan sayısı'), raw.employees) + row(kt('Adres'), raw.address) + row(kt('Web sitesi'), raw.website, true) + row(T_.fp_email || kt('E-posta'), raw.email, true) + row(T_.fp_phone || kt('Telefon'), raw.phone, true) +
+    row(T_.fp_rep || kt('Yetkili'), [raw.rep_name, raw.rep_title].filter(Boolean).join(' — '));
+  var trade = row(T_.fp_sector, co.sec != null ? sectorName(co.sec) : '') + row(T_.fp_dir, dirTxt) + row(T_.fp_hs, raw.hs_codes, true) + row(T_.fp_moq, raw.moq) + row('INCOTERM', raw.incoterm) + row(T_.fp_pay, raw.payment_terms);
+  var certs = String(raw.certificates || '').split(',').map(function(x){ return x.trim(); }).filter(Boolean);
+  var logo = MEDIA && MEDIA.logo ? '<img class="lg" src="' + escapeHtml(MEDIA.logo) + '" alt="">' : '<div class="lg lgt">' + escapeHtml(initials(raw.name).toUpperCase()) + '</div>';
+  var origin = location.origin;
+  var date = new Date().toLocaleDateString((typeof window.kvLocale === 'function') ? window.kvLocale() : 'tr-TR');
+  var profileUrl = co.id ? origin + '/company/' + encodeURIComponent(co.id) : origin;
+  var css = '@font-face{font-family:"TeX Gyre Schola";src:url("' + origin + '/fonts/texgyreschola-regular.woff2") format("woff2");font-weight:400}' +
+    '@font-face{font-family:"TeX Gyre Schola";src:url("' + origin + '/fonts/texgyreschola-bold.woff2") format("woff2");font-weight:700}' +
+    '@font-face{font-family:"Carlito";src:url("' + origin + '/fonts/Carlito-Regular.woff2") format("woff2");font-weight:400}' +
+    '@font-face{font-family:"Carlito";src:url("' + origin + '/fonts/Carlito-Bold.woff2") format("woff2");font-weight:700}' +
+    '@font-face{font-family:"Noto Sans Arabic";src:url("' + origin + '/fonts/NotoSansArabic-Regular.woff2") format("woff2");font-weight:400}' +
+    '@font-face{font-family:"Noto Sans Arabic";src:url("' + origin + '/fonts/NotoSansArabic-Bold.woff2") format("woff2");font-weight:700}' +
+    '@page{size:A4;margin:16mm}*{box-sizing:border-box}body{font-family:"Carlito","Noto Sans Arabic",Arial,sans-serif;color:#0A211F;line-height:1.55;max-width:780px;margin:0 auto;padding:28px 24px;font-size:14px}' +
+    '.hdr{display:flex;align-items:center;gap:16px;border-bottom:3px solid #0D8A80;padding-bottom:14px;margin-bottom:6px}.lg{width:64px;height:64px;border-radius:12px;object-fit:contain;border:1px solid #DCE9E6;background:#fff;flex:none}' +
+    '.lgt{display:flex;align-items:center;justify-content:center;background:#0D8A80;color:#fff;font-family:"TeX Gyre Schola",Georgia,serif;font-weight:700;font-size:22px;border:0}' +
+    'h1{font-family:"TeX Gyre Schola",Georgia,serif;color:#0A5F56;margin:0;font-size:26px;line-height:1.2}.sub{color:#5A6C6D;font-size:13px;margin-top:4px}' +
+    'h2{font-family:"TeX Gyre Schola",Georgia,serif;color:#0D8A80;margin:22px 0 6px;font-size:16px;border-inline-start:3px solid #0D8A80;padding-inline-start:10px}' +
+    'table{width:100%;border-collapse:collapse}td{padding:7px 10px;border-bottom:1px solid #DCE9E6;vertical-align:top}.k{color:#6B7C7D;font-size:11px;text-transform:uppercase;letter-spacing:.05em;width:30%}.v{font-weight:700}' +
+    '.desc{background:#F5FAF8;border-inline-start:3px solid #0D8A80;padding:12px 16px;white-space:pre-line;margin:6px 0}.tag{display:inline-block;background:#E6F0EC;color:#0A5F56;font-size:12px;padding:3px 10px;border-radius:100px;margin:2px 4px 2px 0;font-weight:700}' +
+    '.foot{margin-top:28px;border-top:1px solid #DCE9E6;padding-top:12px;color:#6B7C7D;font-size:12px;text-align:center}.bar{position:sticky;top:0;background:#0A211F;color:#fff;padding:10px 16px;margin:-28px -24px 20px;display:flex;gap:12px;align-items:center;justify-content:space-between;font-size:13px}' +
+    '.bar button{background:#0D8A80;color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer}@media print{.bar{display:none}body{padding:0}}';
+  var statusTxt = kt(co.status === 'approved' ? 'Doğrulanmış firma · Kervea' : 'Başvurusu inceleniyor · Kervea');
+  var doc = '<!DOCTYPE html><html lang="' + L + '" dir="' + (rtl ? 'rtl' : 'ltr') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escapeHtml(raw.name) + ' — Kervea</title><style>' + css + '</style></head><body>' +
+    '<div class="bar"><span>' + escapeHtml(raw.name) + '</span><button type="button" onclick="window.print()">' + escapeHtml(kt('Prospektüsü aç ve yazdır / PDF kaydet')) + '</button></div>' +
+    '<div class="hdr">' + logo + '<div><h1>' + escapeHtml(raw.name) + '</h1><div class="sub">' + escapeHtml(sub) + ' · ' + escapeHtml(statusTxt) + '</div></div></div>' +
+    (raw.description ? '<h2>' + escapeHtml(kt('Firma özeti')) + '</h2><div class="desc">' + escapeHtml(raw.description) + '</div>' : '') +
+    '<h2>' + escapeHtml(kt('Temel bilgiler')) + '</h2><table>' + basics + '</table>' +
+    (trade ? '<h2>' + escapeHtml(kt('Ticari bilgiler')) + '</h2><table>' + trade + '</table>' : '') +
+    (raw.products ? '<h2>' + escapeHtml(kt('Ürünler')) + '</h2><p>' + escapeHtml(raw.products) + '</p>' : '') +
+    (certs.length ? '<h2>' + escapeHtml(T_.fp_cert || '') + '</h2><p>' + certs.map(function(x){ return '<span class="tag">' + escapeHtml(x) + '</span>'; }).join(' ') + '</p>' : '') +
+    '<div class="foot">' + escapeHtml(kt('Bu belge {date} tarihinde Kervea üyelik panelinden hazırlanmıştır.', { date: date })) + '<br>' + escapeHtml(profileUrl) + '</div>' +
+    (mode === 'print' ? '<script>window.addEventListener("load",function(){setTimeout(function(){window.print()},500)})<\/script>' : '') +
+    '</body></html>';
+  var url = URL.createObjectURL(new Blob([doc], { type: 'text/html;charset=utf-8' }));
+  var w = window.open(url, '_blank');
+  if(!w){ say(kt('Prospektüs penceresi açılamadı: tarayıcınızın açılır pencere engelini bu site için kapatın.'), true); URL.revokeObjectURL(url); return; }
+  say('');
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+};
+
+// role="button" olan ama düğme olmayan öğeler klavyeyle (Enter / Boşluk) çalışır
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  var t = e.target; if(!t || !t.getAttribute || t.getAttribute('role') !== 'button') return;
+  if(/^(BUTTON|A|INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && t.tagName !== 'A') return;
+  if(t.tagName === 'A' && t.getAttribute('href')) return;
+  e.preventDefault(); t.click();
+});
+
 })();
