@@ -100,7 +100,7 @@ add([
  ['İzinler ve Bildirimler (KVKK)','Permissions and notifications (KVKK)','Permisos y notificaciones (KVKK)','Autorisations et notifications (KVKK)','الأذونات والإشعارات (KVKK)','Разрешения и уведомления (KVKK)'],
  ['Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.','You can withdraw your permissions at any time; every change is recorded.','Puede retirar sus permisos en cualquier momento; cada cambio queda registrado.','Vous pouvez retirer vos autorisations à tout moment ; chaque modification est enregistrée.','يمكنك سحب أذوناتك في أي وقت؛ ويُسجَّل كل تغيير.','Вы можете отозвать разрешения в любой момент; каждое изменение фиксируется.'],
  ['İletişim bilgilerimin gösterilmesi','Showing my contact details','Mostrar mis datos de contacto','Affichage de mes coordonnées','إظهار بيانات الاتصال الخاصة بي','Показ моих контактных данных'],
- ['E-posta/telefon yalnızca Pro üyelere gösterilir. Kapatırsanız kimseye gösterilmez.','E-mail and phone are shown to Premium members only. If you turn this off they are shown to no one.','El correo y el teléfono solo se muestran a miembros Premium. Si lo desactiva, no se muestran a nadie.','L\'e-mail et le téléphone ne sont montrés qu\'aux membres Premium. Si vous désactivez, ils ne sont montrés à personne.','يظهر البريد الإلكتروني والهاتف للأعضاء Premium فقط. وإذا أوقفت هذا الخيار فلن يراهما أحد.','E-mail и телефон видны только участникам Premium. Если отключить, их не увидит никто.'],
+ ['E-posta/telefon yalnızca Premium üyelere gösterilir. Kapatırsanız kimseye gösterilmez.','E-mail and phone are shown to Premium members only. If you turn this off they are shown to no one.','El correo y el teléfono solo se muestran a miembros Premium. Si lo desactiva, no se muestran a nadie.','L\'e-mail et le téléphone ne sont montrés qu\'aux membres Premium. Si vous désactivez, ils ne sont montrés à personne.','يظهر البريد الإلكتروني والهاتف للأعضاء Premium فقط. وإذا أوقفت هذا الخيار فلن يراهما أحد.','E-mail и телефон видны только участникам Premium. Если отключить, их не увидит никто.'],
  ['E-posta bildirimleri','E-mail notifications','Notificaciones por correo','Notifications par e-mail','إشعارات البريد الإلكتروني','Уведомления по e-mail'],
  ['Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)','E-mail when a new company joins your sector and for platform announcements (commercial electronic message)','Correo cuando se une una empresa nueva a su sector y para anuncios de la plataforma (mensaje comercial electrónico)','E-mail lorsqu\'une nouvelle entreprise rejoint votre secteur et pour les annonces de la plateforme (message commercial électronique)','بريد إلكتروني عند انضمام شركة جديدة إلى قطاعك ولإعلانات المنصة (رسالة تجارية إلكترونية)','E-mail, когда в ваш сектор приходит новая компания, и для объявлений платформы (коммерческое электронное сообщение)'],
  ['KVKK / GDPR — Veri Hakları','KVKK / GDPR: data rights','KVKK / GDPR: derechos sobre los datos','KVKK / RGPD : droits sur les données','KVKK / GDPR: حقوق البيانات','KVKK / GDPR: права на данные'],
@@ -188,7 +188,8 @@ add([
  ['Sayfa içi gezinme','On-page navigation','Navegación de la página','Navigation de la page','التنقل داخل الصفحة','Навигация по странице'],
  ['Ticaret akışı','Trade flow','Flujo comercial','Flux commercial','مسار التجارة','Схема сделки'],
  ['Daha fazla','More','Más','Plus','المزيد','Ещё'],
- ['Pro üyeler için','For Premium members','Para miembros Premium','Pour les membres Premium','لأعضاء Premium','Для участников Premium'],
+ ['Premium üyeler için','For Premium members','Para miembros Premium','Pour les membres Premium','لأعضاء Premium','Для участников Premium'],
+ ['Premium','Premium','Premium','Premium','Premium','Premium'],
 ]);
 
 
@@ -359,7 +360,7 @@ wrap('toast', [0]);
 (function(){
   if(!window.T) return;
   var X = {
-   tr:{ pay_disc_secure:'Kart bilgileriniz bu sayfada alınmaz ve Kervea sunucularında saklanmaz. Onayladığınızda siparişiniz oluşturulur; ödeme güvenli ödeme sayfasında ya da e-postayla paylaşılan bilgilerle tamamlanır.', mt_sub:'Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.',
+   tr:{ promo_h:'Promosyon kodunuz var mı?', gate_title:'Firma bilgileri Premium üyelere açık', gate_sub:'Firma unvanı, ülke, HS kodu ve iletişim bilgileri Premium üyelikle görünür olur.', gate_cta:'Premium\'a Geç →', lock_title:'İletişim bilgileri Premium üyelere açık', lock_sub:'WhatsApp, telefon, e-posta ve web sitesi; firma paylaşıma izin verdiyse Premium üyelere gösterilir.', lock_cta:'Premium\'a Geç', start_pro:'Premium\'a Geç', pay_disc_secure:'Kart bilgileriniz bu sayfada alınmaz ve Kervea sunucularında saklanmaz. Onayladığınızda siparişiniz oluşturulur; ödeme güvenli ödeme sayfasında ya da e-postayla paylaşılan bilgilerle tamamlanır.', mt_sub:'Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.',
         ov_port_empty_p:'Firma başvurunuz onaylandığında, sektörünüze ve HS kodlarınıza göre eşleşen firmalar burada listelenir.',
         add_p:'Firmanızı 6 adımda ekleyin. “Sonra Devam Et” ile girdiğiniz bilgileri bu tarayıcıya taslak olarak kaydedebilirsiniz.',
         logo_hint:'Önerilen: 400×400 piksel · PNG, JPG veya WebP · en fazla 2 MB',
@@ -368,7 +369,7 @@ wrap('toast', [0]);
         pub_p:'Başvurunuz “Başvuruyu gönder” düğmesiyle iletilir. Belgelerinizi bir yönetici inceler; sonuç e-posta adresinize bildirilir.',
         step_publish:'Başvuruyu gönder', s6_pub:'Gönder',
         doc_txt:'Faaliyet belgesi, sicil gazetesi, imza sirküleri, kalite sertifikaları' },
-   en:{ pay_disc_secure:'Your card details are not taken on this page and are not stored on Kervea servers. When you confirm, your order is created; payment is completed on a secure payment page or with the details sent to your e-mail.', mt_sub:'Ranked by your sector, products and trade direction. You can filter them and download them as CSV.',
+   en:{ gate_title:'Company details are for Premium members', gate_sub:'Company name, country, HS code and contact details are shown with a Premium membership.', gate_cta:'Get Premium →', lock_title:'Contact details are for Premium members', lock_sub:'WhatsApp, phone, e-mail and website are shown to Premium members when the company allows it.', lock_cta:'Get Premium', start_pro:'Get Premium', pay_disc_secure:'Your card details are not taken on this page and are not stored on Kervea servers. When you confirm, your order is created; payment is completed on a secure payment page or with the details sent to your e-mail.', mt_sub:'Ranked by your sector, products and trade direction. You can filter them and download them as CSV.',
         ov_port_empty_p:'Once your application is approved, companies that match your sector and HS codes are listed here.',
         add_p:'Add your company in 6 steps. “Continue later” saves what you have entered as a draft in this browser.',
         logo_hint:'Recommended: 400×400 px · PNG, JPG or WebP · max 2 MB',
@@ -377,7 +378,7 @@ wrap('toast', [0]);
         pub_p:'Your application is sent with the “Submit application” button. An administrator reviews your documents; the result is sent to your e-mail address.',
         step_publish:'Submit application', s6_pub:'Submit',
         doc_txt:'Business certificate, trade registry gazette, signature circular, quality certificates' },
-   es:{ pay_disc_secure:'Los datos de su tarjeta no se introducen en esta página ni se guardan en los servidores de Kervea. Al confirmar se crea su pedido; el pago se completa en una página de pago segura o con los datos enviados a su correo.', mt_sub:'Ordenadas según su sector, sus productos y su orientación comercial. Puede filtrarlas y descargarlas en CSV.',
+   es:{ gate_title:'Los datos de la empresa son para miembros Premium', gate_sub:'El nombre, el país, el código HS y los datos de contacto se muestran con una membresía Premium.', gate_cta:'Obtener Premium →', lock_title:'Los datos de contacto son para miembros Premium', lock_sub:'WhatsApp, teléfono, correo y sitio web se muestran a los miembros Premium si la empresa lo permite.', lock_cta:'Obtener Premium', start_pro:'Obtener Premium', pay_disc_secure:'Los datos de su tarjeta no se introducen en esta página ni se guardan en los servidores de Kervea. Al confirmar se crea su pedido; el pago se completa en una página de pago segura o con los datos enviados a su correo.', mt_sub:'Ordenadas según su sector, sus productos y su orientación comercial. Puede filtrarlas y descargarlas en CSV.',
         ov_port_empty_p:'Cuando se apruebe su solicitud, aquí aparecerán las empresas que coincidan con su sector y sus códigos HS.',
         add_p:'Añada su empresa en 6 pasos. «Continuar después» guarda lo que ha escrito como borrador en este navegador.',
         logo_hint:'Recomendado: 400×400 px · PNG, JPG o WebP · máx. 2 MB',
@@ -386,7 +387,7 @@ wrap('toast', [0]);
         pub_p:'Su solicitud se envía con el botón «Enviar solicitud». Un administrador revisa sus documentos; el resultado se envía a su correo.',
         step_publish:'Enviar solicitud', s6_pub:'Enviar',
         doc_txt:'Certificado de actividad, gaceta del registro mercantil, circular de firma, certificados de calidad' },
-   fr:{ pay_disc_secure:'Les données de votre carte ne sont pas saisies sur cette page ni conservées sur les serveurs de Kervea. À la confirmation, votre commande est créée ; le paiement se termine sur une page de paiement sécurisée ou avec les informations envoyées par e-mail.', mt_sub:'Classées selon votre secteur, vos produits et votre sens d\'échange. Vous pouvez les filtrer et les télécharger en CSV.',
+   fr:{ gate_title:'Les données de l\'entreprise sont réservées aux membres Premium', gate_sub:'Le nom, le pays, le code SH et les coordonnées sont affichés avec un abonnement Premium.', gate_cta:'Passer à Premium →', lock_title:'Les coordonnées sont réservées aux membres Premium', lock_sub:'WhatsApp, téléphone, e-mail et site web sont affichés aux membres Premium lorsque l\'entreprise l\'autorise.', lock_cta:'Passer à Premium', start_pro:'Passer à Premium', pay_disc_secure:'Les données de votre carte ne sont pas saisies sur cette page ni conservées sur les serveurs de Kervea. À la confirmation, votre commande est créée ; le paiement se termine sur une page de paiement sécurisée ou avec les informations envoyées par e-mail.', mt_sub:'Classées selon votre secteur, vos produits et votre sens d\'échange. Vous pouvez les filtrer et les télécharger en CSV.',
         ov_port_empty_p:'Une fois votre candidature approuvée, les entreprises correspondant à votre secteur et à vos codes SH seront listées ici.',
         add_p:'Ajoutez votre entreprise en 6 étapes. « Continuer plus tard » enregistre votre saisie comme brouillon dans ce navigateur.',
         logo_hint:'Recommandé : 400×400 px · PNG, JPG ou WebP · 2 Mo max',
@@ -395,7 +396,7 @@ wrap('toast', [0]);
         pub_p:'Votre candidature est envoyée avec le bouton « Envoyer la candidature ». Un administrateur examine vos documents ; le résultat est envoyé à votre adresse e-mail.',
         step_publish:'Envoyer la candidature', s6_pub:'Envoi',
         doc_txt:'Certificat d\'activité, extrait du registre du commerce, circulaire de signature, certificats de qualité' },
-   ar:{ pay_disc_secure:'لا تُدخَل بيانات بطاقتك في هذه الصفحة ولا تُحفظ على خوادم Kervea. عند التأكيد يُنشأ طلبك، ويكتمل الدفع في صفحة دفع آمنة أو بالبيانات المرسلة إلى بريدك الإلكتروني.', mt_sub:'مرتبة حسب قطاعك ومنتجاتك واتجاه تجارتك. يمكنك تصفيتها وتنزيلها بصيغة CSV.',
+   ar:{ gate_title:'بيانات الشركة لأعضاء Premium', gate_sub:'يظهر اسم الشركة والدولة ورمز HS وبيانات الاتصال مع عضوية Premium.', gate_cta:'احصل على Premium ←', lock_title:'بيانات الاتصال لأعضاء Premium', lock_sub:'تُعرض بيانات واتساب والهاتف والبريد الإلكتروني والموقع لأعضاء Premium إذا سمحت الشركة بذلك.', lock_cta:'احصل على Premium', start_pro:'احصل على Premium', pay_disc_secure:'لا تُدخَل بيانات بطاقتك في هذه الصفحة ولا تُحفظ على خوادم Kervea. عند التأكيد يُنشأ طلبك، ويكتمل الدفع في صفحة دفع آمنة أو بالبيانات المرسلة إلى بريدك الإلكتروني.', mt_sub:'مرتبة حسب قطاعك ومنتجاتك واتجاه تجارتك. يمكنك تصفيتها وتنزيلها بصيغة CSV.',
         ov_port_empty_p:'بعد الموافقة على طلبك، ستظهر هنا الشركات المطابقة لقطاعك ورموز HS الخاصة بك.',
         add_p:'أضف شركتك في 6 خطوات. زر «المتابعة لاحقًا» يحفظ ما أدخلته كمسودة في هذا المتصفح.',
         logo_hint:'المقترح: 400×400 بكسل · PNG أو JPG أو WebP · بحد أقصى 2 ميغابايت',
@@ -404,7 +405,7 @@ wrap('toast', [0]);
         pub_p:'يُرسَل طلبك بزر «إرسال الطلب». يراجع أحد المسؤولين مستنداتك، ثم تصلك النتيجة على بريدك الإلكتروني.',
         step_publish:'إرسال الطلب', s6_pub:'إرسال',
         doc_txt:'شهادة النشاط، جريدة السجل التجاري، دائرية التوقيع، شهادات الجودة' },
-   ru:{ pay_disc_secure:'Данные карты не вводятся на этой странице и не хранятся на серверах Kervea. После подтверждения создаётся заказ; оплата завершается на защищённой странице оплаты или по реквизитам, отправленным на ваш e-mail.', mt_sub:'Отсортированы по вашей отрасли, товарам и направлению торговли. Можно отфильтровать и скачать в CSV.',
+   ru:{ gate_title:'Данные компании доступны участникам Premium', gate_sub:'Название, страна, код ТН ВЭД и контакты показываются при членстве Premium.', gate_cta:'Подключить Premium →', lock_title:'Контакты доступны участникам Premium', lock_sub:'WhatsApp, телефон, e-mail и сайт показываются участникам Premium, если компания это разрешила.', lock_cta:'Подключить Premium', start_pro:'Подключить Premium', pay_disc_secure:'Данные карты не вводятся на этой странице и не хранятся на серверах Kervea. После подтверждения создаётся заказ; оплата завершается на защищённой странице оплаты или по реквизитам, отправленным на ваш e-mail.', mt_sub:'Отсортированы по вашей отрасли, товарам и направлению торговли. Можно отфильтровать и скачать в CSV.',
         ov_port_empty_p:'После одобрения заявки здесь появятся компании, подходящие по вашей отрасли и кодам ТН ВЭД.',
         add_p:'Добавьте компанию за 6 шагов. «Продолжить позже» сохранит введённые данные как черновик в этом браузере.',
         logo_hint:'Рекомендуется: 400×400 px · PNG, JPG или WebP · до 2 МБ',

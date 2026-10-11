@@ -160,7 +160,7 @@ window.renderPositions = function(){
     var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
     grid.innerHTML=items.map(function(p){
       var locked=!!p.locked, cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
-      var lockBadge = locked ? '<div class="lockbadge" title="'+kvT('Pro üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
+      var lockBadge = locked ? '<div class="lockbadge" title="'+kvT('Premium üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
       var lockOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
       var score = (p.uyum!=null) ? '<span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+t.match_score+'</span></span>' : '<span class="mid"></span>';
@@ -236,8 +236,8 @@ window.renderFirmPage = function(p){
     var isGuest=!window.KV_USER;
     contact = '<div class="contact-lock"><div class="locked-inner"><table class="fptable"><tr><td>'+t.fp_rep+'</td><td>'+escapeHtml(p.tem||'—')+'</td></tr><tr><td>'+t.fp_email+'</td><td>••••••@•••••.•••</td></tr><tr><td>'+t.fp_phone+'</td><td>+•• ••• ••• ••</td></tr></table></div>'+
       '<div class="lock-veil" role="button" tabindex="0" onclick="'+(isGuest?'go(\'login\')':'revealContact(\''+escapeJs(p.id)+'\')')+'"><div class="lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>'+
-      '<div class="lock-title">'+(t.lock_title||'İletişim bilgileri Pro üyelere açık')+'</div><div class="lock-sub">'+(t.lock_sub||'Telefon, e-posta ve web sitesi Pro üyelere açılır.')+'</div>'+
-      '<button class="lock-cta" onclick="event.stopPropagation();'+(isGuest?'go(\'login\')':(isPro()?'revealContact(\''+escapeJs(p.id)+'\')':'upgradeToPro()'))+'">'+(isGuest?(t.nav_login||'Giriş')+' →':(isPro()?(t.fp_reveal||'Bilgileri göster')+' →':(t.lock_cta||"Pro'a Yükselt")+' →'))+'</button></div></div>';
+      '<div class="lock-title">'+(t.lock_title||'İletişim bilgileri Premium üyelere açık')+'</div><div class="lock-sub">'+(t.lock_sub||'Telefon, e-posta ve web sitesi Premium üyelere açılır.')+'</div>'+
+      '<button class="lock-cta" onclick="event.stopPropagation();'+(isGuest?'go(\'login\')':(isPro()?'revealContact(\''+escapeJs(p.id)+'\')':'upgradeToPro()'))+'">'+(isGuest?(t.nav_login||'Giriş')+' →':(isPro()?(t.fp_reveal||'Bilgileri göster')+' →':(t.lock_cta||"Premium'a Geç")+' →'))+'</button></div></div>';
   }
   var socials = ['li','yt','ig','fb','x'].map(function(k){ return socialLink(k,soc[k],'sbtn'); }).join('');
   var years = p.yr ? (new Date().getFullYear()-p.yr) : null;
@@ -483,7 +483,7 @@ function fillSettings(){
    '<div class="tglrow"><div class="l"><b>'+kvT('İki Faktörlü Kimlik Doğrulama (2FA)')+'</b><span>'+kvT('Authenticator uygulaması ile giriş kodu')+'</span></div><label class="tgl"><input type="checkbox" id="kvSet2fa"/><span class="slider"></span></label></div>'+
    '<div id="kv2faBox" style="display:none;margin:8px 0 16px;padding:14px;border:1px solid var(--line);border-radius:12px"></div>'+
    '<h3 style="margin-top:24px">'+kvT('İzinler ve Bildirimler (KVKK)')+'</h3><p class="card-sub">'+kvT('Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.')+'</p>'+
-   '<div class="tglrow"><div class="l"><b>'+kvT('İletişim bilgilerimin gösterilmesi')+'</b><span>'+kvT('E-posta/telefon yalnızca Pro üyelere gösterilir. Kapatırsanız kimseye gösterilmez.')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('İletişim bilgilerimin gösterilmesi')+'</b><span>'+kvT('E-posta/telefon yalnızca Premium üyelere gösterilir. Kapatırsanız kimseye gösterilmez.')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
    '<div class="tglrow"><div class="l"><b>'+kvT('E-posta bildirimleri')+'</b><span>'+kvT('Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetMkt"/><span class="slider"></span></label></div>'+
    '<h3 style="margin-top:24px">'+kvT('KVKK / GDPR — Veri Hakları')+'</h3><p class="card-sub">'+kvT('Verileriniz KVKK ve GDPR standartlarında saklanır.')+'</p>'+
    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">'+
@@ -605,7 +605,7 @@ window.renderMatchTable = function(){
        '<div class="mmid"><div class="mhead"><div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px">'+(p.locked?secTileHTML(p.sec,44,10):logoTile(p,44,10))+'<div style="flex:1;min-width:0"><div class="mnm">'+escapeHtml(p.nm)+'</div><div class="msub">'+escapeHtml(p.locked?'•••••':((d[p.cn_key]||p.cn_key)+(p.yr?' · '+p.yr:'')))+(p.sec!=null?' · '+escapeHtml(secs[p.sec]||''):'')+'</div></div></div>'+(p.dir?'<span class="mdirpill '+dirCls+'">'+dirLabel(p)+'</span>':'')+'</div>'+
        '<div class="mreasons">'+reasons+'</div>'+
        '<div class="mbars"><div class="mbar"><div class="bl"><span>'+kvT('Ürün Uyumu')+'</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>'+kvT('Yön Uyumu')+'</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
-       '<div class="mact">'+(p.locked?'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">PRO</button>':'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
+       '<div class="mact">'+(p.locked?'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">'+kvT('Premium')+'</button>':'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
     }).join('')+'</div>';
   });
 };

@@ -196,11 +196,11 @@
      <div style="text-align:center;padding:20px 20px 10px">
       <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--chip);color:var(--teal);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
       <h3 style="font-size:22px;margin-bottom:6px" data-i18n="pub_h">Başvurunuz alındı</h3>
-      <p style="color:var(--faint);font-size:14px;max-width:480px;margin:0 auto 20px" data-i18n="pub_p">Manuel doğrulama 24-48 saat içinde tamamlanır. Yayın hazır olduğunda e-posta ve SMS ile bilgilendirileceksiniz.</p>
+      <p style="color:var(--faint);font-size:14px;max-width:480px;margin:0 auto 20px" data-i18n="pub_p">Başvurunuz “Başvuruyu gönder” düğmesiyle iletilir. Belgelerinizi bir yönetici inceler; sonuç e-posta adresinize bildirilir.</p>
      </div>
      <div class="promobox" style="max-width:520px;margin:10px auto 0">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
-      <div class="txt"><b data-i18n="promo_h">Promosyon Kodun mu var?</b><span data-i18n="promo_s">İlk 3 ay Pro plana %30 indirim.</span></div>
+      <div class="txt"><b data-i18n="promo_h">Promosyon kodunuz var mı?</b><span data-i18n="promo_s">Elinizde bir kod varsa girin; indirim ödeme adımında uygulanır.</span></div>
       <input maxlength="200" data-i18n-ph="promo_ph" placeholder="Promosyon kodu" id="addPromo" autocomplete="off"/>
       <button class="btn sm" onclick="applyPromo('addPromo')" data-i18n="apply">Uygula</button>
      </div>
