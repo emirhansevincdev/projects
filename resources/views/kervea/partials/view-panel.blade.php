@@ -338,82 +338,40 @@
     <!-- MESSAGES -->
     <div class="dpanel" id="dp-messages">
      <h2 data-i18n="msg_h">Mesajlarım</h2>
-     <p class="sub" data-i18n="msg_sub">Uçtan uca şifreli · Otomatik çeviri · 40 MB'a kadar dosya paylaşımı</p>
-     <div class="msgwrap">
+     <p class="sub" id="kvMsgSub" data-i18n="kvm_sub">Aynı sektördeki onaylı firmalarla platform içinde yazışın.</p>
+     <div class="msgwrap" id="kvMsgWrap">
       <div class="msglist" id="msglist">
-       <div class="ml-sr"><svg class="sricon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><input type="text" placeholder="Konuşmalarda ara..." oninput="filterMsgList(this.value)"/ maxlength="200"></div>
-       <div class="msg-conv on" onclick="openConv('nordic')">
-        <div class="av" style="background:linear-gradient(135deg,#8a5a2e,#b47a49)">NK<span class="st-dot"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Nordic Kaluste Oy</span><span class="cn-tm">14:22</span></div><div class="cn-p"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Tack för snabb offert! Vi vill…</div></div>
-        <div class="un">2</div>
+       <div class="ml-sr"><svg class="sricon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><input type="search" id="kvMsgSearch" placeholder="Konuşmalarda ara..." data-i18n-ph="msg_search" maxlength="100" autocomplete="off" aria-label="Konuşmalarda ara"/></div>
+       <div class="kvm-tabs" id="kvmTabs" role="tablist">
+        <button type="button" role="tab" class="on" data-tab="inbox"><span data-i18n="kvm_tab_inbox">Gelen kutusu</span></button>
+        <button type="button" role="tab" data-tab="archive"><span data-i18n="kvm_tab_archive">Arşiv</span> <i id="kvmArchCnt" hidden></i></button>
        </div>
-       <div class="msg-conv" onclick="openConv('abidjan')">
-        <div class="av" style="background:linear-gradient(135deg,#a44a2e,#c46e50)">AC<span class="st-dot" style="background:#c78a2a"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Abidjan Cacao Export</span><span class="cn-tm">09:47</span></div><div class="cn-p"><svg fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Bonjour, nous confirmons la commande…</div></div>
-        <div class="un">1</div>
-       </div>
-       <div class="msg-conv" onclick="openConv('almaty')">
-        <div class="av" style="background:linear-gradient(135deg,#a679d1,#c69fea)">AT<span class="st-dot" style="background:var(--faint)"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Almaty Tekstil</span><span class="cn-tm">Dün</span></div><div class="cn-p">Здравствуйте! Пришлите пожалуйста…</div></div>
-       </div>
-       <div class="msg-conv" onclick="openConv('milano')">
-        <div class="av" style="background:linear-gradient(135deg,#5b7c99,#809bb8)">MM<span class="st-dot"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Milano Machinery</span><span class="cn-tm">2 gün</span></div><div class="cn-p">Grazie mille, il preventivo è arrivato…</div></div>
-       </div>
-       <div class="msg-conv" onclick="openConv('dubai')">
-        <div class="av" style="background:linear-gradient(135deg,#8FE9C4,#0D8A80);color:#04140f">DT<span class="st-dot"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Dubai Trading LLC</span><span class="cn-tm">3 gün</span></div><div class="cn-p">شكراً لكم على الاستجابة السريعة…</div></div>
-       </div>
-       <div class="msg-conv" onclick="openConv('mumbai')">
-        <div class="av" style="background:linear-gradient(135deg,#FFD68A,#c78a2a)">MI<span class="st-dot" style="background:#c78a2a"></span></div>
-        <div class="cn"><div class="cn-t"><span class="cn-n">Mumbai Impex</span><span class="cn-tm">5 gün</span></div><div class="cn-p">Thank you for the samples, we're testing…</div></div>
-       </div>
+       <div id="kvMsgItems" aria-live="polite"></div>
       </div>
       <div class="msgpane" id="msgpane">
-       <div class="mp-h">
-        <div class="av" style="background:linear-gradient(135deg,#8a5a2e,#b47a49)">NK</div>
-        <div class="mp-info"><b>Nordic Kaluste Oy · Mikko Virtanen</b><span><span data-i18n="chat_online">Çevrimiçi</span> · Finlandiya · <span data-i18n="chat_verified_firm">Doğrulanmış firma</span></span></div>
-        <div class="mp-actions">
-         <button data-i18n-title="chat_btn_firm" title="Firma profili" onclick="toast(tt('toast_firm_opening','Firma profili açılıyor'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></button>
-         <button data-i18n-title="chat_btn_video" title="Görüntülü ara" onclick="toast(tt('toast_video_call','Görüntülü arama başlatılıyor'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></button>
-         <button data-i18n-title="chat_btn_archive" title="Arşivle" onclick="toast(tt('toast_chat_archived','Konuşma arşivlendi'))"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></button>
-        </div>
+       <div class="kvm-pick" id="kvMsgPick">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <p id="kvMsgPickTxt" data-i18n="kvm_pick">Bir konuşma seçin</p>
        </div>
-       <div class="mp-body" id="mpBody">
-        <div class="mb-day">Bugün · 12 Eylül 2026</div>
-        <div class="mb-msg them">
-         <div class="tr-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg>FI → TR · Otomatik çeviri</div>
-         Merhaba! Türkiye'den mobilya aksesuarı arıyoruz. HS 9403 kapsamında sunumunuzu inceledik. 500 adet metal mobilya iskeleti için fiyat teklifi alabilir miyiz? CFR Helsinki, Ocak 2027 teslim.
-         <div class="mb-orig">"Hei! Etsimme huonekalutarvikkeita Turkista. Tutkimme esityksesi HS 9403 alle…"</div>
-         <div class="mb-t">14:15 · Mikko Virtanen</div>
+       <div class="kvm-thread" id="kvMsgThread" hidden>
+        <div class="mp-h" id="kvMsgHead"></div>
+        <div class="mp-body" id="mpBody"></div>
+        <div class="kvm-banner" id="kvMsgBanner" hidden></div>
+        <div class="mp-input" id="kvMsgComposer">
+         <div class="kvm-attchip" id="kvMsgAttChip" hidden></div>
+         <div class="mp-tools">
+          <button type="button" data-act="pick-file" data-i18n-title="kvm_attach_file" title="Dosya ekle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></button>
+          <button type="button" data-act="pick-image" data-i18n-title="kvm_attach_img" title="Resim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
+          <button type="button" data-act="emoji" data-i18n-title="kvm_emoji" title="Emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></button>
+         </div>
+         <input type="file" id="kvMsgFile" accept="image/jpeg,image/png,image/webp,application/pdf" hidden>
+         <input type="file" id="kvMsgImage" accept="image/jpeg,image/png,image/webp" hidden>
+         <div class="kv-emoji" id="kvEmoji"></div>
+         <textarea id="kvMsgText" rows="1" maxlength="4000" placeholder="Mesajınızı yazın…" data-i18n-ph="kvm_ph" aria-label="Mesaj"></textarea>
+         <button type="button" class="mp-send" id="kvMsgSend" data-i18n-title="kvm_send" title="Gönder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
         </div>
-        <div class="mb-msg me">
-         Merhaba Mikko, teklifinizi hazırlıyoruz. 500 adet için birim fiyat CFR Helsinki $47.50 · minimum sipariş karşılandı · L/C veya %30 avans + %70 B/L kopyasında ödeme koşulları geçerli.
-         <div class="mb-t">14:18 · ✓✓ Okundu</div>
-        </div>
-        <div class="mb-msg me">
-         Ürün kataloğumuzun son sürümü ekte. Sertifikalarımız (ISO 9001, FSC, TSE) sayfa 12'de.
-         <div class="mb-attach"><div class="mb-ai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div><b>Katalog-2026-Q3.pdf</b><br><span style="font-size:10.5px;opacity:.7">8.4 MB · PDF</span></div></div>
-         <div class="mb-t">14:19 · ✓✓ Okundu</div>
-        </div>
-        <div class="mb-msg them">
-         <div class="tr-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg>FI → TR · Otomatik çeviri</div>
-         Hızlı teklif için teşekkürler! Fiyat rekabetçi. 500 adet yerine 800 adet için indirim yapabilir misiniz? Ayrıca gümrük hattımızın Rotterdam üzerinden geçmesini tercih ederiz.
-         <div class="mb-orig">"Tack för snabb offert! Priset är konkurrenskraftigt. Kan ni ge rabatt för 800 st…"</div>
-         <div class="mb-t">14:22 · Mikko Virtanen</div>
-        </div>
-        <div class="mb-typing"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Mikko <span data-i18n="chat_typing">yazıyor…</span></div>
+        <div class="mp-lang" id="kvMsgHint"></div>
        </div>
-       <div class="mp-input">
-        <div class="mp-tools">
-         <button title="Dosya ekle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></button>
-         <button title="Resim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></button>
-         <button title="Emoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></button>
-        </div>
-        <textarea maxlength="4000" placeholder="Yanıt yazın… (Enter göndermek, Shift+Enter yeni satır)" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
-        <button class="mp-send" onclick="sendMsg()" title="Gönder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
-       </div>
-       <div class="mp-lang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg>Türkçe yazın · Karşı tarafa <b>Fince</b> olarak iletilecek · Otomatik çeviri aktif</div>
       </div>
      </div>
     </div>
