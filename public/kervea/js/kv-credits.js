@@ -58,6 +58,8 @@ KVC.i18n.apply = function(root){
   [['data-i18n','html'],['data-i18n-placeholder','placeholder'],['data-i18n-ph','placeholder'],['data-i18n-title','title']].forEach(function(pair){
     root.querySelectorAll('['+pair[0]+']').forEach(function(n){
       var k = n.getAttribute(pair[0]); if(!KEYS[k] || d[k]===undefined) return;
+      // amounts come from the server: until the catalog is loaded keep the markup's own text instead of printing blanks
+      if(/\{(signup|bonus)\}/.test(d[k]) && !(KVC.data || KVC.cat)) return;
       var v = KVC.i18n.fill(d[k]);
       if(pair[1]==='html') n.innerHTML = v; else n.setAttribute(pair[1], v);
     });
