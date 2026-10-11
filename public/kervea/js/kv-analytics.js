@@ -437,6 +437,7 @@ function spanLabel(b){
 }
 var chartObs=null;
 function chartCard(d){
+  if(chartObs){ chartObs.disconnect(); chartObs=null; }              // the previous chart's nodes are gone
   var card=E('div','an-card'), h=E('h3'); h.appendChild(E('span',null,L('an_ch_h'))); card.appendChild(h);
   var tools=E('div','an-chart-tools'), seg=E('div','an-seg'); seg.setAttribute('role','group');
   [['profile_view','an_ch_views'],['search_impression','an_ch_imp']].forEach(function(p){
