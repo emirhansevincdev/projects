@@ -56,8 +56,13 @@ return [
         'new_conversations_per_day' => 20,
     ],
     'analytics' => [
-        'retention_days' => 400,
+        'retention_days' => 400,           // daily counters and profile-view rows older than this are deleted by kervea:analytics-prune
+        'search_log_retention_days' => 90, // the search log (what people typed) is kept shorter
         'min_peers_for_benchmark' => 5,    // sector benchmark is shown only when at least this many firms are compared
+        'view_dedupe_minutes' => 30,       // the same viewer opening the same company page again within this time is ONE visit
+        'impression_cards' => 24,          // how many cards of the first result page count as "seen" (search impression)
+        'search_log_per_minute' => 10,     // search-log rows one viewer can create per minute (anti-spam)
+        'country_header' => 'CF-IPCountry', // request header that carries a guest's country (set by Cloudflare); absent = country unknown
     ],
     'team' => [
         'max_members' => 10,
