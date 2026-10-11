@@ -313,6 +313,8 @@ add([
  ['Firma, ürün veya HS kodu ara...','Search company, product or HS code...','Buscar empresa, producto o código HS...','Rechercher une entreprise, un produit ou un code SH...','ابحث عن شركة أو منتج أو رمز HS...','Поиск компании, товара или кода ТН ВЭД...'],
  ['Ülke değişikliği için destek ile iletişime geçin','Contact support to change the country','Contacte con soporte para cambiar el país','Contactez le support pour modifier le pays','تواصل مع الدعم لتغيير الدولة','Для смены страны обратитесь в поддержку'],
  ['Match','Match','Afinidad','Affinité','تطابق','Совпадение'],
+ ['@kullaniciadi','@username','@usuario','@utilisateur','@username','@username'],
+ ['10 ton / 1000 adet','10 tons / 1,000 pcs','10 toneladas / 1000 uds.','10 tonnes / 1000 pièces','10 أطنان / 1000 قطعة','10 т / 1000 шт.'],
 ]);
 
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
@@ -413,6 +415,14 @@ wrap('toast', [0]);
         doc_txt:'Свидетельство о деятельности, выписка из торгового реестра, образец подписи, сертификаты качества' }
   };
   Object.keys(X).forEach(function(l){ if(!T[l]) T[l] = {}; Object.assign(T[l], X[l]); });
+  // setLang sayfa açılışında bu düzeltmelerden ÖNCE çalışmış olabilir: metinleri yeni sözlükle hemen tazele.
+  try{
+    var cur = T[window.LANG || 'tr'] || T.tr;
+    Object.keys(X.tr).forEach(function(k){
+      var v = cur[k] || X.tr[k];
+      document.querySelectorAll('[data-i18n="' + k + '"]').forEach(function(n){ n.innerHTML = v; });
+    });
+  }catch(e){}
 })();
 
 // Eksik çeviri anahtarı: önce İngilizce, sonra Türkçe (ham anahtar ya da undefined asla görünmez).
