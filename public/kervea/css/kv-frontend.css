@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   KERVEA · FRONTEND (kervea.css'den SONRA yüklenir; yalnızca düzeltme/ek kurallar)
+   Fontlar (Century Schoolbook → TeX Gyre Schola, Calibri → Carlito) ve marka teali #0D8A80 değişmez.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── HERO: başlık, arama ve filtreler ilk açılışta küre ÜSTÜNDE görünür ─────────────────────────
+   Eski hata: .hero-heptapod-ring ".hhero > *{position:relative}" kuralı yüzünden akışa girip 680px
+   yer kaplıyor, metni küreninkiyle birlikte ekranın altına itiyordu. Halka kaldırıldı; küre artık
+   sağda duran bir arka plan, metin sol sütunda. ─────────────────────────────────────────────── */
+.hhero{display:flex;flex-direction:column;justify-content:flex-start}
+.hhero::before{display:none}
+.hhero .h-photo{display:none}
+@media (min-width:861px){
+  .hhero{min-height:calc(100vh - 110px);min-height:calc(100svh - 110px)}
+}
+.hhero > .wrap{width:100%;padding:clamp(24px,7.5vh,110px) 24px clamp(28px,5vh,56px)}
+.hhero h1{font-size:clamp(30px,4vw,54px);line-height:1.08;margin:0 0 14px;max-width:820px;text-shadow:0 1px 18px rgba(4,18,15,.55)}
+.hhero .kv-hero-loop{margin:0 0 14px;font-size:15.5px;color:#B7CFC9}
+.hhero .kv-hero-loop-item{color:#8FE9C4;filter:none;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease}
+.hhero .kv-hero-loop-item.kv-hero-loop-active{transform:none;filter:none}
+.hhero .kv-hero-loop-item.kv-hero-loop-exit{transform:translateY(-10px);filter:none}
+.hhero .lead{max-width:640px;font-size:16px;line-height:1.6;margin:0 0 20px;color:rgba(234,247,242,.88);text-shadow:0 1px 10px rgba(4,18,15,.6)}
+.hhero .searchbig{max-width:740px;margin:0;background:#0A2420;backdrop-filter:none;-webkit-backdrop-filter:none;border:1px solid rgba(143,233,196,.38);box-shadow:0 14px 30px -18px rgba(0,0,0,.7)}
+.hhero .searchbig:focus-within{border-color:rgba(143,233,196,.8);box-shadow:0 14px 30px -18px rgba(0,0,0,.7),0 0 0 3px rgba(143,233,196,.18)}
+.hhero .dene{margin-top:12px;max-width:760px}
+.hhero .dene .c{background:rgba(10,36,32,.82);color:#DCEDE8;border-color:rgba(143,233,196,.34)}
+.hhero .dene .c:hover{background:#12423B;color:#fff}
+.hhero .qf{margin-top:16px;max-width:760px}
+.hhero .qf .dd .ddbtn{background:#0A2420;border-color:rgba(143,233,196,.34)}
+.hhero .qf .seg{background:#0A2420}
+.hhero .secpick.compact .secpick-trigger{background:#0A2420}
+.hhero .stats{margin-top:18px;max-width:760px;gap:12px}
+.hhero .stats .statc{background:rgba(10,36,32,.78);backdrop-filter:none;-webkit-backdrop-filter:none;padding:12px 14px}
+.hhero .stats .statc .n{font-size:26px}
+/* giriş: yalnızca kısa (<=300 ms) solma; içerik hiçbir zaman gizli beklemez */
+@keyframes kvHeroIn{from{opacity:0}to{opacity:1}}
+.hhero > .wrap > *{animation:kvHeroIn .28s ease-out both}
+
+/* küre: sağda duran arka plan, imleç yalnızca metin olmayan yerlerde küreye gider */
+.hhero #globeMap{inset:auto;left:auto;top:50%;right:-7%;width:auto;height:min(118%,1040px);aspect-ratio:1/1;transform:translateY(-50%)}
+.hhero #globeMap,.hhero #globeMap *{touch-action:pan-y !important}
+.hhero::after{background:
+  linear-gradient(90deg,rgba(4,18,15,.88) 0%,rgba(4,18,15,.72) 34%,rgba(4,18,15,.26) 60%,rgba(4,18,15,0) 78%),
+  linear-gradient(180deg,rgba(4,18,15,.32) 0%,rgba(4,18,15,0) 22%,rgba(4,18,15,0) 76%,rgba(4,18,15,.5) 100%)}
+#firmsSec{scroll-margin-top:122px}
+@media (max-width:860px){
+  .hhero #globeMap{top:auto;bottom:-4%;right:50%;transform:translateX(50%);height:auto;width:min(150vw,900px)}
+  .hhero::after{background:linear-gradient(180deg,rgba(4,18,15,.82) 0%,rgba(4,18,15,.7) 55%,rgba(4,18,15,.55) 100%)}
+  .hhero .dene{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-right:-24px;padding-right:24px}
+  .hhero .dene::-webkit-scrollbar{display:none}
+  .hhero .dene .c{white-space:nowrap;flex:0 0 auto}
+  .hhero .dene .lbl{flex:0 0 auto}
+}
+@media (max-width:480px){
+  .hhero > .wrap{padding-left:16px;padding-right:16px}
+  .hhero .lead{font-size:15px}
+  .hhero .stats .statc .n{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hhero > .wrap > *{animation:none}
+  .hhero .kv-hero-loop-item{transition:none}
+}
+
+/* ── KÜRE: ülke kartı (imlecin yanında, her şeyin önünde) ───────────────────────────────────── */
+.kv-gcard{position:fixed;left:0;top:0;z-index:2000;display:flex;align-items:center;gap:12px;min-width:170px;max-width:280px;
+  padding:10px 16px 10px 10px;background:#0F1E1B;color:#EAF7F2;border:1px solid rgba(143,233,196,.4);border-radius:12px;
+  box-shadow:0 18px 40px -14px rgba(0,0,0,.7),0 2px 6px rgba(0,0,0,.35);pointer-events:none;opacity:0;visibility:hidden;
+  transition:opacity .12s ease,visibility 0s linear .12s;will-change:transform}
+.kv-gcard.on{opacity:1;visibility:visible;transition:opacity .12s ease}
+.kv-gcard-flag{width:44px;height:30px;object-fit:cover;border-radius:4px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(255,255,255,.2)}
+.kv-gcard-txt{min-width:0}
+.kv-gcard-name{display:block;font-family:var(--serif);font-size:15.5px;font-weight:700;line-height:1.2;color:#fff;overflow-wrap:anywhere}
+.kv-gcard-sub{display:block;font-size:12.5px;color:#9FC3B9;margin-top:3px}
+@media (prefers-reduced-motion:reduce){ .kv-gcard,.kv-gcard.on{transition:none} }
+/* klavye düğümleri: ekranda görünmez ama odaklanabilir (kart + vurgu odağı gösterir) */
+.kv-gnodes{position:absolute;left:0;top:0;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.kv-gnode{position:absolute;left:0;top:0}
+/* ülke seçici: "tüm ülkeler" satırı */
+.ddlist a.ddall{border-bottom:1px solid var(--line);border-radius:8px 8px 0 0;margin-bottom:4px;font-weight:600}
+.ddbtn .kv-all-ic{flex:0 0 auto;opacity:.8}
+
+/* ── AÇILIR MENÜLER / BİLDİRİMLER: opak zemin, doğru katman, dokunmatik kaydırma ──────────────────
+   Şeffaf zeminler (cam efekti) altındaki metni gösterip yazıların üst üste binmesine yol açıyordu. ── */
+.nav,html[data-theme="dark"] .nav{backdrop-filter:none;-webkit-backdrop-filter:none}
+.nav{background:#F5FAF8}
+html[data-theme="dark"] .nav{background:#0A1614}
+.ddlist{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.ddlist.kv-up{top:auto;bottom:calc(100% + 6px)}
+.secpick-panel.kv-up{top:auto;bottom:calc(100% + 8px);transform-origin:bottom center}
+/* hero içindeki ülke listesi: koyu hero ile uyumlu, opak */
+.hhero .ddlist{background:#0F1E1B;border-color:rgba(143,233,196,.28);box-shadow:0 24px 60px -20px rgba(0,0,0,.7)}
+.hhero .ddlist .ddsearch{background:#0F1E1B;border-bottom-color:rgba(143,233,196,.18)}
+.hhero .ddlist .ddsearch input{background:#16302B;border-color:rgba(255,255,255,.12);color:#fff}
+.hhero .ddlist a{color:#CFE3DD}
+.hhero .ddlist a:hover,.hhero .ddlist a.sel{background:#1B3D35;color:#fff}
+.hhero .ddlist .ccode{color:#8FA8A3}
+.hhero .ddlist a.ddall{border-bottom-color:rgba(143,233,196,.18)}
+/* bildirim kartları: arkadaki sayfa yazısı görünmesin */
+.kv-alert--destructive{background:#FEF3F2}
+.kv-alert--warning{background:#FFFAEB}
+.kv-alert--success{background:#ECF8F4}
+.kv-alert--info{background:#EFF6FF}
+html[data-theme="dark"] .kv-alert--destructive{background:#2B1719}
+html[data-theme="dark"] .kv-alert--warning{background:#2A2210}
+html[data-theme="dark"] .kv-alert--success{background:#11302B}
+html[data-theme="dark"] .kv-alert--info{background:#12233D}
+/* toast her mesajda "✓" göstermesin (hata/bilgi mesajları da bu kutudan geçiyor) */
+.toast::before{content:none}
+/* modal açıkken arkadaki sayfa kaymasın */
+html.kv-modal-open{overflow:hidden}

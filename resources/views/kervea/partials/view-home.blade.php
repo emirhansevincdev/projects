@@ -5,244 +5,7 @@
   <div class="hbg">
    <!-- 3D dönen dünya küresi (amCharts 5 orthographic projection) -->
    <div id="globeMap" aria-label="Kervea küresel koridor haritası" role="img"></div>
-  <svg class="map" viewBox="0 0 2000 1000" preserveAspectRatio="xMidYMid slice">
-    <defs>
-      <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#8FE9C4"/>
-      </linearGradient>
-      <linearGradient id="rt-main" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#8FE9C4" stop-opacity="0"/>
-        <stop offset=".2" stop-color="#8FE9C4" stop-opacity=".9"/>
-        <stop offset=".8" stop-color="#0D8A80" stop-opacity=".9"/>
-        <stop offset="1" stop-color="#0D8A80" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="rt-warm" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#FFD68A" stop-opacity="0"/>
-        <stop offset=".2" stop-color="#FFD68A" stop-opacity=".8"/>
-        <stop offset=".8" stop-color="#E89557" stop-opacity=".8"/>
-        <stop offset="1" stop-color="#E89557" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="rt-cool" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#A0C8FF" stop-opacity="0"/>
-        <stop offset=".2" stop-color="#A0C8FF" stop-opacity=".8"/>
-        <stop offset=".8" stop-color="#5A8FD8" stop-opacity=".8"/>
-        <stop offset="1" stop-color="#5A8FD8" stop-opacity="0"/>
-      </linearGradient>
-      <radialGradient id="hub-glow" cx=".5" cy=".5" r=".5">
-        <stop offset="0" stop-color="#8FE9C4" stop-opacity=".9"/>
-        <stop offset=".4" stop-color="#8FE9C4" stop-opacity=".3"/>
-        <stop offset="1" stop-color="#8FE9C4" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="hub-glow-main" cx=".5" cy=".5" r=".5">
-        <stop offset="0" stop-color="#FFF3A0" stop-opacity="1"/>
-        <stop offset=".3" stop-color="#FFD68A" stop-opacity=".7"/>
-        <stop offset="1" stop-color="#E89557" stop-opacity="0"/>
-      </radialGradient>
-      <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    </defs>
-    <use class="land" href="#kvWorldLand"/>
-    <!-- ═══════ TRADE ROUTES — country hubs, geographically correct (12 destinations) ═══════ -->
-    <g class="routes">
-     <!-- Türkiye→Hollanda -->
-     <path class="rt-base" d="M1161,272 Q1080,195 1027,209" stroke="url(#rt-cool)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1080,195 1027,209" stroke="url(#rt-cool)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1080,195 1027,209" stroke="#A0C8FF" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="4.5s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Nijerya -->
-     <path class="rt-base" d="M1161,272 Q1055,385 1042,450" stroke="url(#rt-warm)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1055,385 1042,450" stroke="url(#rt-warm)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1055,385 1042,450" stroke="#FFD68A" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="4.5s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→BAE -->
-     <path class="rt-base" d="M1161,272 Q1250,350 1302,364" stroke="url(#rt-main)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1250,350 1302,364" stroke="url(#rt-main)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1250,350 1302,364" stroke="#8FE9C4" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="3.6s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Kazakistan -->
-     <path class="rt-base" d="M1161,272 Q1290,205 1397,216" stroke="url(#rt-main)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1290,205 1397,216" stroke="url(#rt-main)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1290,205 1397,216" stroke="#8FE9C4" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="3.8s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Hindistan -->
-     <path class="rt-base" d="M1161,272 Q1310,340 1429,341" stroke="url(#rt-warm)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1310,340 1429,341" stroke="url(#rt-warm)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1310,340 1429,341" stroke="#FFD68A" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="4.4s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Çin -->
-     <path class="rt-base" d="M1161,272 Q1420,250 1675,326" stroke="url(#rt-main)" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.25"/>
-     <path class="rt-main" d="M1161,272 Q1420,250 1675,326" stroke="url(#rt-main)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1420,250 1675,326" stroke="#8FE9C4" stroke-width="1.4" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.95">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="4.2s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→ABD -->
-     <path class="rt-base" d="M1161,272 Q880,140 589,274" stroke="url(#rt-cool)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q880,140 589,274" stroke="url(#rt-cool)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q880,140 589,274" stroke="#A0C8FF" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="5.8s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Kanada -->
-     <path class="rt-base" d="M1161,272 Q850,120 559,257" stroke="url(#rt-cool)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q850,120 559,257" stroke="url(#rt-cool)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q850,120 559,257" stroke="#A0C8FF" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="6.0s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Meksika -->
-     <path class="rt-base" d="M1161,272 Q800,250 449,392" stroke="url(#rt-warm)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q800,250 449,392" stroke="url(#rt-warm)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q800,250 449,392" stroke="#FFD68A" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="6.5s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Brezilya -->
-     <path class="rt-base" d="M1161,272 Q900,520 741,631" stroke="url(#rt-warm)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q900,520 741,631" stroke="url(#rt-warm)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q900,520 741,631" stroke="#FFD68A" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="6.2s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→Mısır -->
-     <path class="rt-base" d="M1161,272 Q1165,305 1173,333" stroke="url(#rt-warm)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1165,305 1173,333" stroke="url(#rt-warm)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1165,305 1173,333" stroke="#FFD68A" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="3.4s" repeatCount="indefinite"/>
-     </path>
-     <!-- Türkiye→GAfrika -->
-     <path class="rt-base" d="M1161,272 Q1170,480 1156,646" stroke="url(#rt-main)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.2"/>
-     <path class="rt-main" d="M1161,272 Q1170,480 1156,646" stroke="url(#rt-main)" stroke-width="2" fill="none" stroke-linecap="round"/>
-     <path class="rt-dash" d="M1161,272 Q1170,480 1156,646" stroke="#8FE9C4" stroke-width="1.2" fill="none" stroke-dasharray="1 8" stroke-linecap="round" opacity="0.9">
-       <animate attributeName="stroke-dashoffset" values="0;-90" dur="6.4s" repeatCount="indefinite"/>
-     </path>
-    </g>
-
-    <!-- ═══════ TRAVELING PACKETS (12 arcs) ═══════ -->
-    <g class="packets">
-     <circle r="3" fill="#A0C8FF" filter="url(#glow)"><animateMotion dur="4.5s" repeatCount="indefinite" path="M1161,272 Q1080,195 1027,209"/><animate attributeName="opacity" values="0;1;1;0" dur="4.5s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#FFD68A" filter="url(#glow)"><animateMotion dur="4.5s" begin="2.0s" repeatCount="indefinite" path="M1161,272 Q1055,385 1042,450"/><animate attributeName="opacity" values="0;1;1;0" dur="4.5s" begin="2.0s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="3.6s" begin="0.8s" repeatCount="indefinite" path="M1161,272 Q1250,350 1302,364"/><animate attributeName="opacity" values="0;1;1;0" dur="3.6s" begin="0.8s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="3.8s" begin="1.5s" repeatCount="indefinite" path="M1161,272 Q1290,205 1397,216"/><animate attributeName="opacity" values="0;1;1;0" dur="3.8s" begin="1.5s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#FFD68A" filter="url(#glow)"><animateMotion dur="4.4s" begin="1.2s" repeatCount="indefinite" path="M1161,272 Q1310,340 1429,341"/><animate attributeName="opacity" values="0;1;1;0" dur="4.4s" begin="1.2s" repeatCount="indefinite"/></circle>
-     <circle r="4" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="4.2s" repeatCount="indefinite" path="M1161,272 Q1420,250 1675,326"/><animate attributeName="opacity" values="0;1;1;0" dur="4.2s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="4.2s" begin="1.3s" repeatCount="indefinite" path="M1161,272 Q1420,250 1675,326"/><animate attributeName="opacity" values="0;1;1;0" dur="4.2s" begin="1.3s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="4.2s" begin="2.6s" repeatCount="indefinite" path="M1161,272 Q1420,250 1675,326"/><animate attributeName="opacity" values="0;1;1;0" dur="4.2s" begin="2.6s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#A0C8FF" filter="url(#glow)"><animateMotion dur="5.8s" begin="0.5s" repeatCount="indefinite" path="M1161,272 Q880,140 589,274"/><animate attributeName="opacity" values="0;1;1;0" dur="5.8s" begin="0.5s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#A0C8FF" filter="url(#glow)"><animateMotion dur="6.0s" begin="2.5s" repeatCount="indefinite" path="M1161,272 Q850,120 559,257"/><animate attributeName="opacity" values="0;1;1;0" dur="6.0s" begin="2.5s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#FFD68A" filter="url(#glow)"><animateMotion dur="6.5s" begin="1.8s" repeatCount="indefinite" path="M1161,272 Q800,250 449,392"/><animate attributeName="opacity" values="0;1;1;0" dur="6.5s" begin="1.8s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#FFD68A" filter="url(#glow)"><animateMotion dur="6.2s" begin="3.0s" repeatCount="indefinite" path="M1161,272 Q900,520 741,631"/><animate attributeName="opacity" values="0;1;1;0" dur="6.2s" begin="3.0s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#FFD68A" filter="url(#glow)"><animateMotion dur="3.4s" begin="1.6s" repeatCount="indefinite" path="M1161,272 Q1165,305 1173,333"/><animate attributeName="opacity" values="0;1;1;0" dur="3.4s" begin="1.6s" repeatCount="indefinite"/></circle>
-     <circle r="3" fill="#8FE9C4" filter="url(#glow)"><animateMotion dur="6.4s" begin="2.2s" repeatCount="indefinite" path="M1161,272 Q1170,480 1156,646"/><animate attributeName="opacity" values="0;1;1;0" dur="6.4s" begin="2.2s" repeatCount="indefinite"/></circle>
-    </g>
-
-    <!-- ═══════ COUNTRY HUBS ═══════ -->
-    <g class="hubs">
-     <!-- MAIN HUB: TÜRKİYE -->
-     <circle cx="1161" cy="272" r="35" fill="url(#hub-glow-main)" opacity=".5"><animate attributeName="r" values="30;50;30" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;.1;.5" dur="3s" repeatCount="indefinite"/></circle>
-     <circle cx="1161" cy="272" r="18" fill="none" stroke="#FFD68A" stroke-width="1" opacity=".7"><animate attributeName="r" values="12;28;12" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".8;0;.8" dur="2.4s" repeatCount="indefinite"/></circle>
-     <circle cx="1161" cy="272" r="8" fill="#FFF3A0" filter="url(#glow)"/>
-     <circle cx="1161" cy="272" r="3.5" fill="#04120F"/>
-     <text x="1161" y="252" text-anchor="middle" fill="#FFF3A0" font-size="13" font-weight="700" font-family="Georgia,serif" opacity=".95" class="hubLbl main" data-cc="tr">TÜRKİYE</text>
-     <!-- Çin -->
-     <g class="hub-dst">
-       <circle cx="1675" cy="326" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.4s" repeatCount="indefinite"/></circle>
-       <circle cx="1675" cy="326" r="9" fill="none" stroke="#8FE9C4" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.0s" repeatCount="indefinite"/></circle>
-       <circle cx="1675" cy="326" r="4.5" fill="#8FE9C4" filter="url(#glow)"/>
-       <circle cx="1675" cy="326" r="2" fill="#04120F"/>
-       <text x="1675" y="313" text-anchor="middle" fill="#8FE9C4" font-size="10.5" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="cn">ÇIN</text>
-     </g>
-     <!-- Hollanda -->
-     <g class="hub-dst">
-       <circle cx="1027" cy="209" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.2s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.2s" begin="0.4s" repeatCount="indefinite"/></circle>
-       <circle cx="1027" cy="209" r="9" fill="none" stroke="#A0C8FF" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="2.8000000000000003s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.8000000000000003s" begin="0.4s" repeatCount="indefinite"/></circle>
-       <circle cx="1027" cy="209" r="4.5" fill="#A0C8FF" filter="url(#glow)"/>
-       <circle cx="1027" cy="209" r="2" fill="#04120F"/>
-       <text x="1027" y="196" text-anchor="middle" fill="#A0C8FF" font-size="10.5" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="nl">HOLLANDA</text>
-     </g>
-     <!-- Nijerya -->
-     <g class="hub-dst">
-       <circle cx="1042" cy="450" r="14" fill="url(#hub-glow-main)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.6s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.6s" begin="0.8s" repeatCount="indefinite"/></circle>
-       <circle cx="1042" cy="450" r="9" fill="none" stroke="#FFD68A" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.2s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.2s" begin="0.8s" repeatCount="indefinite"/></circle>
-       <circle cx="1042" cy="450" r="4.5" fill="#FFD68A" filter="url(#glow)"/>
-       <circle cx="1042" cy="450" r="2" fill="#04120F"/>
-       <text x="1042" y="470" text-anchor="middle" fill="#FFD68A" font-size="10.5" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="ng">NIJERYA</text>
-     </g>
-     <!-- BAE -->
-     <g class="hub-dst">
-       <circle cx="1302" cy="364" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.4s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.4s" begin="1.2s" repeatCount="indefinite"/></circle>
-       <circle cx="1302" cy="364" r="9" fill="none" stroke="#8FE9C4" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.0s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.0s" begin="1.2s" repeatCount="indefinite"/></circle>
-       <circle cx="1302" cy="364" r="4.5" fill="#8FE9C4" filter="url(#glow)"/>
-       <circle cx="1302" cy="364" r="2" fill="#04120F"/>
-       <text x="1302" y="384" text-anchor="middle" fill="#8FE9C4" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="ae">BAE</text>
-     </g>
-     <!-- Kazakistan -->
-     <g class="hub-dst">
-       <circle cx="1397" cy="216" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.2s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.2s" begin="1.6s" repeatCount="indefinite"/></circle>
-       <circle cx="1397" cy="216" r="9" fill="none" stroke="#8FE9C4" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="2.8000000000000003s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.8000000000000003s" begin="1.6s" repeatCount="indefinite"/></circle>
-       <circle cx="1397" cy="216" r="4.5" fill="#8FE9C4" filter="url(#glow)"/>
-       <circle cx="1397" cy="216" r="2" fill="#04120F"/>
-       <text x="1397" y="203" text-anchor="middle" fill="#8FE9C4" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="kz">KAZAKISTAN</text>
-     </g>
-     <!-- Hindistan -->
-     <g class="hub-dst">
-       <circle cx="1429" cy="341" r="14" fill="url(#hub-glow-main)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.5s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.5s" begin="0.6s" repeatCount="indefinite"/></circle>
-       <circle cx="1429" cy="341" r="9" fill="none" stroke="#FFD68A" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.1s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.1s" begin="0.6s" repeatCount="indefinite"/></circle>
-       <circle cx="1429" cy="341" r="4.5" fill="#FFD68A" filter="url(#glow)"/>
-       <circle cx="1429" cy="341" r="2" fill="#04120F"/>
-       <text x="1429" y="361" text-anchor="middle" fill="#FFD68A" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="in">HINDISTAN</text>
-     </g>
-     <!-- ABD -->
-     <g class="hub-dst">
-       <circle cx="589" cy="274" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.4s" begin="1.0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.4s" begin="1.0s" repeatCount="indefinite"/></circle>
-       <circle cx="589" cy="274" r="9" fill="none" stroke="#A0C8FF" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.0s" begin="1.0s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.0s" begin="1.0s" repeatCount="indefinite"/></circle>
-       <circle cx="589" cy="274" r="4.5" fill="#A0C8FF" filter="url(#glow)"/>
-       <circle cx="589" cy="274" r="2" fill="#04120F"/>
-       <text x="589" y="261" text-anchor="middle" fill="#A0C8FF" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="us">ABD</text>
-     </g>
-     <!-- Kanada -->
-     <g class="hub-dst">
-       <circle cx="559" cy="257" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.5s" begin="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.5s" begin="2.2s" repeatCount="indefinite"/></circle>
-       <circle cx="559" cy="257" r="9" fill="none" stroke="#A0C8FF" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.1s" begin="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.1s" begin="2.2s" repeatCount="indefinite"/></circle>
-       <circle cx="559" cy="257" r="4.5" fill="#A0C8FF" filter="url(#glow)"/>
-       <circle cx="559" cy="257" r="2" fill="#04120F"/>
-       <text x="559" y="244" text-anchor="middle" fill="#A0C8FF" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="ca">KANADA</text>
-     </g>
-     <!-- Meksika -->
-     <g class="hub-dst">
-       <circle cx="449" cy="392" r="14" fill="url(#hub-glow-main)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.6s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.6s" begin="1.4s" repeatCount="indefinite"/></circle>
-       <circle cx="449" cy="392" r="9" fill="none" stroke="#FFD68A" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.2s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.2s" begin="1.4s" repeatCount="indefinite"/></circle>
-       <circle cx="449" cy="392" r="4.5" fill="#FFD68A" filter="url(#glow)"/>
-       <circle cx="449" cy="392" r="2" fill="#04120F"/>
-       <text x="449" y="412" text-anchor="middle" fill="#FFD68A" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="mx">MEKSIKA</text>
-     </g>
-     <!-- Brezilya -->
-     <g class="hub-dst">
-       <circle cx="741" cy="631" r="14" fill="url(#hub-glow-main)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.8s" begin="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.8s" begin="2.6s" repeatCount="indefinite"/></circle>
-       <circle cx="741" cy="631" r="9" fill="none" stroke="#FFD68A" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.4s" begin="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.4s" begin="2.6s" repeatCount="indefinite"/></circle>
-       <circle cx="741" cy="631" r="4.5" fill="#FFD68A" filter="url(#glow)"/>
-       <circle cx="741" cy="631" r="2" fill="#04120F"/>
-       <text x="741" y="651" text-anchor="middle" fill="#FFD68A" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="br">BREZILYA</text>
-     </g>
-     <!-- Mısır -->
-     <g class="hub-dst">
-       <circle cx="1173" cy="333" r="14" fill="url(#hub-glow-main)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.2s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.2s" begin="0.7s" repeatCount="indefinite"/></circle>
-       <circle cx="1173" cy="333" r="9" fill="none" stroke="#FFD68A" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="2.8000000000000003s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="2.8000000000000003s" begin="0.7s" repeatCount="indefinite"/></circle>
-       <circle cx="1173" cy="333" r="4.5" fill="#FFD68A" filter="url(#glow)"/>
-       <circle cx="1173" cy="333" r="2" fill="#04120F"/>
-       <text x="1173" y="353" text-anchor="middle" fill="#FFD68A" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="eg">MISIR</text>
-     </g>
-     <!-- GAfrika -->
-     <g class="hub-dst">
-       <circle cx="1156" cy="646" r="14" fill="url(#hub-glow)" opacity=".45"><animate attributeName="r" values="12;20;12" dur="3.5s" begin="1.9s" repeatCount="indefinite"/><animate attributeName="opacity" values=".45;.1;.45" dur="3.5s" begin="1.9s" repeatCount="indefinite"/></circle>
-       <circle cx="1156" cy="646" r="9" fill="none" stroke="#8FE9C4" stroke-width=".8" opacity=".6"><animate attributeName="r" values="7;16;7" dur="3.1s" begin="1.9s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0;.7" dur="3.1s" begin="1.9s" repeatCount="indefinite"/></circle>
-       <circle cx="1156" cy="646" r="4.5" fill="#8FE9C4" filter="url(#glow)"/>
-       <circle cx="1156" cy="646" r="2" fill="#04120F"/>
-       <text x="1156" y="666" text-anchor="middle" fill="#8FE9C4" font-size="10" font-weight="600" font-family="Georgia,serif" opacity=".9" class="hubLbl" data-cc="za">GAFRIKA</text>
-     </g>
-    </g>    </g>
-  </svg>
  </div><!-- /.hbg -->
- <div class="hero-heptapod-ring" aria-hidden="true"><div class="hh-ring-inner"></div></div>
 
   <div class="wrap">
    <div class="htag"><span class="dot"></span><span data-i18n="tag_live">TÜRKİYE ↔ DÜNYA · 6 DİL</span></div>
@@ -250,11 +13,11 @@
       <div class="kv-hero-loop">
         <span class="kv-hero-loop-static" data-i18n="hero_loop_prefix">Doğrulanmış tedarikçiler:</span>
         <span class="kv-hero-loop-container" id="kvHeroLoopContainer" aria-live="polite">
-          <span class="kv-hero-loop-item kv-hero-loop-active" data-region="tr">Türkiye</span>
-          <span class="kv-hero-loop-item" data-region="af">Batı Afrika</span>
-          <span class="kv-hero-loop-item" data-region="eu">Avrupa</span>
-          <span class="kv-hero-loop-item" data-region="me">Ortadoğu</span>
-          <span class="kv-hero-loop-item" data-region="as">Asya</span>
+          <span class="kv-hero-loop-item kv-hero-loop-active" data-region="tr" data-i18n="loop_tr">Türkiye</span>
+          <span class="kv-hero-loop-item" data-region="af" data-i18n="loop_af">Batı Afrika</span>
+          <span class="kv-hero-loop-item" data-region="eu" data-i18n="loop_eu">Avrupa</span>
+          <span class="kv-hero-loop-item" data-region="me" data-i18n="loop_me">Ortadoğu</span>
+          <span class="kv-hero-loop-item" data-region="as" data-i18n="loop_as">Asya</span>
         </span>
       </div>
    <p class="lead" data-i18n="h_lead">Vergi levhası ve sicil kaydıyla doğrulanmış firmalar. 6 dilde çeviri, uçtan uca şifreli mesajlaşma.</p>
@@ -292,13 +55,13 @@
    </div>
    <div class="stats" id="statsBar">
     <div class="statc"><div class="n" data-stat="firms" data-target="0">0</div><div class="l" data-i18n="s_pos">Aktif firma</div></div>
-    <div class="statc"><div class="n" data-stat="countries" data-target="0">0</div><div class="l" data-i18n="s_ctr">Ülke ve bölge</div><svg class="l-spark" viewBox="0 0 60 20" preserveAspectRatio="none"><polyline fill="none" stroke="var(--accent)" stroke-width="1.5" points="0,16 10,14 20,12 30,10 40,8 50,6 60,3"/></svg></div>
-    <div class="statc"><div class="n" data-stat="sectors" data-target="0">0</div><div class="l" data-i18n="s_sec">Sektör</div><div class="l-tr st"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/></svg><span><span data-i18n="st_stable">Sabit</span> <small data-i18n="st_full">tam kapsam</small></span></div></div>
-    <div class="statc"><div class="n" data-stat="langs" data-target="0">0</div><div class="l" data-i18n="s_lng">Dil</div><div class="l-tr up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="17 6 23 6 23 12"/><path d="M23 6L13.5 15.5 8.5 10.5 1 18"/></svg><span>+1 <small data-i18n="st_soon">yakında JP</small></span></div></div>
+    <div class="statc"><div class="n" data-stat="countries" data-target="0">0</div><div class="l" data-i18n="s_ctr">Ülke ve bölge</div></div>
+    <div class="statc"><div class="n" data-stat="sectors" data-target="0">0</div><div class="l" data-i18n="s_sec">Sektör</div></div>
+    <div class="statc"><div class="n" data-stat="langs" data-target="0">0</div><div class="l" data-i18n="s_lng">Dil</div></div>
    </div>
   </div>
  </div>
- <div class="wrap sec">
+ <div class="wrap sec" id="firmsSec">
   <div class="firmshead">
    <div>
     <h2 data-i18n="firms_h">Firmalar</h2>

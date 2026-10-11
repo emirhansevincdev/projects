@@ -30,16 +30,16 @@
    </span>
  </button>
  <div class="langwrap">
-  <button class="langbtn" onclick="document.getElementById('lm').classList.toggle('open')">
-   <span id="cf">🇹🇷</span> <span id="cn">TR</span> ▾
+  <button class="langbtn" type="button" aria-haspopup="menu" aria-label="Dil seçimi" data-i18n-aria="lang_pick" onclick="event.stopPropagation();document.getElementById('lm').classList.toggle('open')">
+   <span id="cf" hidden></span><svg class="kv-globe-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg><span id="cn">TR</span><span class="kv-caret" aria-hidden="true">▾</span>
   </button>
-  <div class="langmenu" id="lm">
-   <a onclick="setLang('tr')">🇹🇷 Türkçe</a>
-   <a onclick="setLang('en')">🇬🇧 English</a>
-   <a onclick="setLang('es')">🇪🇸 Español</a>
-   <a onclick="setLang('fr')">🇫🇷 Français</a>
-   <a onclick="setLang('ar')">🇸🇦 العربية</a>
-   <a onclick="setLang('ru')">🇷🇺 Русский</a>
+  <div class="langmenu" id="lm" role="menu">
+   <a role="menuitem" tabindex="0" onclick="setLang('tr')" data-lang="tr"><span class="kv-lc">TR</span>Türkçe</a>
+   <a role="menuitem" tabindex="0" onclick="setLang('en')" data-lang="en"><span class="kv-lc">EN</span>English</a>
+   <a role="menuitem" tabindex="0" onclick="setLang('es')" data-lang="es"><span class="kv-lc">ES</span>Español</a>
+   <a role="menuitem" tabindex="0" onclick="setLang('fr')" data-lang="fr"><span class="kv-lc">FR</span>Français</a>
+   <a role="menuitem" tabindex="0" onclick="setLang('ar')" data-lang="ar"><span class="kv-lc">AR</span>العربية</a>
+   <a role="menuitem" tabindex="0" onclick="setLang('ru')" data-lang="ru"><span class="kv-lc">RU</span>Русский</a>
   </div>
  </div>
  <a class="ghostbtn" onclick="go('login')" data-i18n="nav_login">Giriş</a>

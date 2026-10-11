@@ -138,7 +138,7 @@ function logoTile(p, size, radius){
 function query(){
   var qs=[];
   if(DIR) qs.push('dir='+encodeURIComponent(DIR));
-  if(CUR_CC && CUR_CC!=='tr') qs.push('cc='+encodeURIComponent(CUR_CC));
+  if(CUR_CC) qs.push('cc='+encodeURIComponent(CUR_CC));
   if(CUR_SEC!=='' && CUR_SEC!=null) qs.push('sec='+encodeURIComponent(CUR_SEC));
   if(KV_Q) qs.push('q='+encodeURIComponent(KV_Q));
   return qs.join('&');
@@ -186,13 +186,14 @@ window.runSearch = function(){
   if(/alıcı|almac|buyer|ithalat|import/.test(q)) DIR='IMP';
   if(/tedarik|satıcı|supplier|ihracat|export/.test(q)) DIR='EXP';
   buildCountryDD('ddCountry', CUR_CC);
+  try{ if(window.AM_GLOBE && AM_GLOBE.selectCountry) AM_GLOBE.selectCountry(CUR_CC); }catch(e){}
   document.querySelectorAll('.qf .seg button').forEach(function(b,i){ b.classList.toggle('on',(i===0&&DIR==='EXP')||(i===1&&DIR==='IMP')); });
   renderPositions();
   if(typeof toast==='function') toast(tt('toast_search_applied','Arama uygulandı'));
 };
 // ana sayfa istatistikleri gerçek sayımlardan
 window.computeStats = function(){ var s=window.KV_STATS||{firms:0,countries:0}; return {firms:s.firms||0,countries:s.countries||0,sectors:s.sectors||26,langs:6}; };
-api('GET','/kv/stats').then(function(r){ if(r.ok){ window.KV_STATS=r.data; try{updateStats(false);}catch(e){} } });
+api('GET','/kv/stats').then(function(r){ if(r.ok){ window.KV_STATS=r.data; try{updateStats(true);}catch(e){} try{ document.dispatchEvent(new CustomEvent('kv:stats',{detail:r.data})); }catch(e){} } });
 
 var FIRM_CACHE = {};
 window.openFirm = function(slug){

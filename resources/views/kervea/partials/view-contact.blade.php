@@ -15,7 +15,7 @@
    <div class="dcard">
     <h3 data-i18n="ct_center">Merkez</h3>
     <p style="font-size:14px;color:var(--body);margin-bottom:16px">Kervea Ticaret A.Ş.<br/>Levent, İstanbul, Türkiye</p>
-    <p style="font-size:14px;color:var(--body)"><b data-i18n="ct_email_lbl">E-posta:</b> hello@kervea.io<br/><b data-i18n="ct_phone_lbl">Telefon:</b> +90 212 xxx xx xx</p>
+    <p style="font-size:14px;color:var(--body)"><b data-i18n="ct_email_lbl">E-posta:</b> hello@kervea.ai<br/><b data-i18n="ct_phone_lbl">Telefon:</b> +90 212 xxx xx xx</p>
    </div>
   </div>
  </div>

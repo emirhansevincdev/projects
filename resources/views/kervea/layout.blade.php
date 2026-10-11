@@ -8,6 +8,7 @@
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
 <link rel="stylesheet" href="{{ asset('kervea/css/kv-'.$kvFeature.'.css') }}?v={{ config('kervea.asset_version') }}">
 @endforeach
+<link rel="stylesheet" href="{{ asset('kervea/css/kv-frontend.css') }}?v={{ @filemtime(public_path('kervea/css/kv-frontend.css')) ?: 1 }}">
 @php($social = array_filter($boot['social'] ?? []))
 {{-- "Sign in with Google/LinkedIn" buttons exist in the markup; hide the ones without keys already in the HTML so nothing flashes before JS runs. --}}
 <style>@if(! $social)#login .kv-login-social,#login .kv-login-sep{display:none}@else @foreach(\App\Services\Kv\SocialAuth::PROVIDERS as $p)@unless(isset($social[$p]))#login .kv-login-social-btn[data-social="{{ $p }}"]{display:none}@endunless @endforeach @if(count($social) === 1)#login .kv-login-social{grid-template-columns:1fr}@endif @endif</style>
@@ -34,8 +35,10 @@
 <script>window.KV_BOOT = @json($boot);</script>
 <script src="{{ asset('kervea/js/kervea-app.js') }}?v={{ config('kervea.asset_version') }}"></script>
 <script src="{{ asset('kervea/js/kervea-api.js') }}?v={{ config('kervea.asset_version') }}"></script>
+<script src="{{ asset('kervea/js/kv-globe.js') }}?v={{ @filemtime(public_path('kervea/js/kv-globe.js')) ?: 1 }}"></script>
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
 <script src="{{ asset('kervea/js/kv-'.$kvFeature.'.js') }}?v={{ config('kervea.asset_version') }}"></script>
 @endforeach
+<script src="{{ asset('kervea/js/kv-frontend.js') }}?v={{ @filemtime(public_path('kervea/js/kv-frontend.js')) ?: 1 }}"></script>
 </body>
 </html>
