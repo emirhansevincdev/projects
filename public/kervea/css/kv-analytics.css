@@ -1,1 +1,140 @@
-/* Kervea panel · analytics — styles that belong only to this feature (shared styles live in kervea.css) */
+/* Kervea panel · analytics — styles that belong only to this feature (shared styles live in kervea.css).
+   Uses the shared tokens (--card, --line, --ink, --body, --faint, --teal, --emer, --verify, --paper, --chip) so light and dark follow
+   the site theme. Logical properties (inline-start/end) keep Arabic (RTL) correct; the chart itself always runs left to right in time. */
+
+#dp-analytics .an-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 16px;flex-wrap:wrap;margin-bottom:16px}
+#dp-analytics .an-head .sub{margin-bottom:0;max-width:62ch}
+#dp-analytics .an-range{display:inline-flex;gap:6px;flex-wrap:wrap}
+#dp-analytics .an-range button{font:inherit;font-size:12.5px;padding:7px 13px;min-height:34px;border-radius:100px;background:var(--card);border:1px solid var(--line);color:var(--body);cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+#dp-analytics .an-range button:hover{border-color:var(--teal);color:var(--ink)}
+#dp-analytics .an-range button.on{background:var(--teal);border-color:var(--teal);color:#04140f;font-weight:700}
+#dp-analytics .an-range button:focus-visible,#dp-analytics .an-seg button:focus-visible,#dp-analytics .an-link:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+#dp-analytics .an-body{transition:opacity .15s}
+#dp-analytics .an-body.an-busy{opacity:.55;pointer-events:none}
+#dp-analytics .an-note{font-size:12.5px;color:var(--faint);margin:-4px 0 14px;display:flex;gap:8px;align-items:flex-start}
+#dp-analytics .an-note svg{flex:none;margin-top:2px}
+#dp-analytics .an-empty-inline{padding:36px 12px;text-align:center;color:var(--faint);font-size:14px}
+
+/* generic card + the empty / error / locked boxes */
+#dp-analytics .an-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:14px;min-width:0}
+#dp-analytics .an-card > h3{font-family:var(--serif);font-size:15px;margin:0 0 4px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--ink)}
+#dp-analytics .an-card > h3 small{font-family:var(--sans);font-size:11.5px;font-weight:400;color:var(--faint)}
+#dp-analytics .an-hint{font-size:12.5px;color:var(--faint);margin:0 0 10px;line-height:1.45}
+#dp-analytics .an-hint.an-top{margin:10px 0 0}
+#dp-analytics .an-box{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:12px;background:var(--paper);border:1px dashed var(--line);margin-bottom:14px}
+#dp-analytics .an-box > svg{flex:none;color:var(--teal);margin-top:2px}
+#dp-analytics .an-box h4{font-family:var(--serif);font-size:15px;margin:0 0 4px;color:var(--ink)}
+#dp-analytics .an-box p{margin:0 0 10px;font-size:13.5px;color:var(--body);line-height:1.5;max-width:70ch}
+#dp-analytics .an-box p:last-child{margin-bottom:0}
+#dp-analytics .an-box.err{border-style:solid;border-color:#c94040}
+#dp-analytics .an-box.err > svg{color:#c94040}
+#dp-analytics .an-link{background:none;border:0;padding:0;font:inherit;font-weight:inherit;text-align:start;color:var(--teal);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+html[data-theme="dark"] #dp-analytics .an-box.err{border-color:#e07a7a}
+
+/* KPI cards: reuse .an-c / .an-n / .an-d from kervea.css */
+#dp-analytics .an-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:14px}
+#dp-analytics .an-kpis .an-c{padding:18px 20px}
+#dp-analytics .an-kpis .an-c h4{min-height:2.6em;align-items:flex-start;line-height:1.3}
+#dp-analytics .an-kpis .an-c h4 svg{flex:none;margin-top:2px}
+#dp-analytics .an-kpis .an-n{font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#dp-analytics .an-kpis .an-n.na{font-size:18px;font-weight:400;color:var(--faint);padding:6px 0}
+#dp-analytics .an-kpis .an-d{line-height:1.4}
+#dp-analytics .an-kpis .an-s{font-size:12px;color:var(--faint);margin-top:6px;line-height:1.4}
+#dp-analytics .an-kpis .an-d:not(.up):not(.dn){color:var(--faint)}
+
+/* chart */
+#dp-analytics .an-chart-tools{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 6px}
+#dp-analytics .an-seg{display:inline-flex;border:1px solid var(--line);border-radius:100px;overflow:hidden;background:var(--paper)}
+#dp-analytics .an-seg button{font:inherit;font-size:12.5px;padding:6px 13px;min-height:32px;background:transparent;border:0;color:var(--body);cursor:pointer}
+#dp-analytics .an-seg button.on{background:var(--chip);color:var(--ink);font-weight:700;box-shadow:inset 0 -2px 0 var(--teal)}
+#dp-analytics .an-chart-meta{font-size:12px;color:var(--faint);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#dp-analytics .an-chart-wrap{position:relative;direction:ltr;width:100%;min-width:0}
+#dp-analytics .an-chart-wrap svg{display:block;width:100%;height:auto;overflow:visible;outline:none}
+#dp-analytics .an-chart-wrap svg:focus-visible{outline:2px solid var(--teal);outline-offset:4px;border-radius:6px}
+#dp-analytics .an-grid-line{stroke:var(--line);stroke-width:1}
+#dp-analytics .an-axis{fill:var(--faint);font-size:11px;font-family:var(--sans)}
+#dp-analytics .an-bar-mark{fill:var(--teal);transition:fill .12s}
+#dp-analytics .an-bar-mark.on{fill:var(--emer)}
+html[data-theme="dark"] #dp-analytics .an-bar-mark.on{fill:var(--lite)}
+#dp-analytics .an-hit{fill:transparent;cursor:crosshair}
+#dp-analytics .an-tip{position:absolute;z-index:3;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh-3);padding:8px 11px;font-size:12px;color:var(--faint);line-height:1.35;white-space:nowrap;transform:translate(-50%,-100%);margin-top:-8px;direction:inherit}
+#dp-analytics .an-tip b{display:block;font-family:var(--serif);font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+#dp-analytics .an-tip[hidden]{display:none}
+#dp-analytics .an-chart-empty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13.5px;pointer-events:none;padding-bottom:22px}
+#dp-analytics .an-tbl-wrap{max-height:280px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:8px}
+#dp-analytics table.an-tbl{width:100%;border-collapse:collapse;font-size:13px}
+#dp-analytics table.an-tbl th,#dp-analytics table.an-tbl td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:start;font-weight:400;color:var(--body)}
+#dp-analytics table.an-tbl th{position:sticky;top:0;background:var(--paper);color:var(--faint);font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+#dp-analytics table.an-tbl td:last-child,#dp-analytics table.an-tbl th:last-child{text-align:end;font-variant-numeric:tabular-nums;color:var(--ink)}
+#dp-analytics .an-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* lists with bars (countries, sources, HS demand) */
+#dp-analytics .an-cols{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+#dp-analytics .an-cols > div{min-width:0}
+#dp-analytics .an-cols .an-card{margin-bottom:14px}
+#dp-analytics .an-list{display:flex;flex-direction:column}
+#dp-analytics .an-lr{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--body)}
+#dp-analytics .an-lr:last-child{border-bottom:0}
+#dp-analytics .an-lr .nm{display:flex;align-items:center;gap:9px;min-width:0;color:var(--ink)}
+#dp-analytics .an-lr .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dp-analytics .an-lr .nm img{width:20px;height:14px;object-fit:cover;border-radius:2px;flex:none;box-shadow:0 0 0 1px var(--line)}
+#dp-analytics .an-lr .nm .gl{width:20px;height:14px;flex:none;color:var(--faint);display:inline-flex;align-items:center;justify-content:center}
+#dp-analytics .an-bt{height:6px;background:var(--paper);border-radius:100px;overflow:hidden}
+#dp-analytics .an-bt > div{height:100%;background:linear-gradient(90deg,var(--teal),var(--emer));border-radius:100px;min-width:2px}
+#dp-analytics .an-lr .v{font-family:var(--serif);font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;text-align:end;min-width:2.2em}
+#dp-analytics .an-reach .an-n{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--ink);line-height:1.1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+#dp-analytics .an-reach p{margin:0 0 4px;font-size:13px;color:var(--body);line-height:1.5}
+#dp-analytics .an-reach .an-s{font-size:12px;color:var(--faint)}
+
+/* visitors */
+#dp-analytics .an-vis{display:flex;flex-direction:column}
+#dp-analytics .an-vr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+#dp-analytics .an-vr:last-child{border-bottom:0}
+#dp-analytics .an-vr .who{display:flex;align-items:center;gap:9px;min-width:0;color:var(--ink);font-weight:600}
+#dp-analytics .an-vr .who span,
+#dp-analytics .an-vr .who img{width:20px;height:14px;object-fit:cover;border-radius:2px;flex:none;box-shadow:0 0 0 1px var(--line)}
+#dp-analytics .an-vr .who .gl{width:20px;height:14px;flex:none;color:var(--faint);display:inline-flex;align-items:center;justify-content:center}
+#dp-analytics .an-vr .when{color:var(--faint);font-size:12px;text-align:end;white-space:nowrap}
+#dp-analytics .an-vr .sub{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--faint);font-size:12px;padding-inline-start:29px}
+#dp-analytics .an-chip{display:inline-flex;align-items:center;padding:2px 8px;border-radius:100px;background:var(--chip);color:var(--body);font-size:11px;font-weight:600}
+#dp-analytics .an-chip.pro{background:var(--teal);color:#04140f}
+#dp-analytics .an-lock{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:12px;background:var(--paper);border:1px solid var(--line);margin:8px 0 6px}
+#dp-analytics .an-lock > svg{flex:none;color:var(--teal)}
+#dp-analytics .an-lock > div{flex:1 1 220px;min-width:0}
+#dp-analytics .an-lock b{display:block;color:var(--ink);font-family:var(--serif);font-size:14.5px;margin-bottom:2px}
+#dp-analytics .an-lock span{font-size:12.5px;color:var(--body);line-height:1.45}
+
+/* HS table + benchmark reuse .hs-table / .hs-r from kervea.css */
+#dp-analytics .hs-table{margin-bottom:14px;min-width:0}
+#dp-analytics .hs-table .hs-r{grid-template-columns:96px minmax(0,1fr) 64px}
+#dp-analytics .hs-table .hs-r .hs-v{font-variant-numeric:tabular-nums}
+#dp-analytics .an-bench .hs-r{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1fr);align-items:start}
+#dp-analytics .an-bench .hs-r.hd{font-size:11.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:700;align-items:end}
+#dp-analytics .an-bench .cell b{font-family:var(--serif);font-size:18px;color:var(--ink);display:block;font-variant-numeric:tabular-nums;margin-bottom:5px}
+#dp-analytics .an-bench .cell.avg b{color:var(--faint)}
+#dp-analytics .an-bench .who b{display:block;color:var(--ink);font-weight:600}
+#dp-analytics .an-bench .who span{font-size:11.5px;color:var(--faint)}
+
+/* skeleton */
+#dp-analytics .an-sk{border-radius:14px;background:linear-gradient(90deg,var(--paper) 25%,var(--chip) 37%,var(--paper) 63%);background-size:400% 100%;animation:an-sh 1.3s ease infinite;min-height:110px}
+@keyframes an-sh{0%{background-position:100% 50%}100%{background-position:0 50%}}
+@media (prefers-reduced-motion:reduce){#dp-analytics .an-sk{animation:none}#dp-analytics .an-body,#dp-analytics .an-bar-mark{transition:none}}
+
+@media (max-width:960px){
+  #dp-analytics .an-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #dp-analytics .an-cols{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:520px){
+  #dp-analytics .an-kpis{gap:10px}
+  #dp-analytics .an-kpis .an-c{padding:14px 14px}
+  #dp-analytics .an-kpis .an-c h4{font-size:11px;min-height:3.9em}
+  #dp-analytics .an-kpis .an-n{font-size:25px}
+  #dp-analytics .an-card{padding:14px 14px}
+  #dp-analytics .an-lr{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}
+  #dp-analytics .an-lr .an-bt{grid-column:1/-1;order:3}
+  #dp-analytics .hs-table .hs-r{grid-template-columns:78px minmax(0,1fr) 44px;gap:8px}
+  #dp-analytics .an-bench .hs-r{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:8px}
+  #dp-analytics .an-bench .cell b{font-size:16px}
+  #dp-analytics .an-vr .sub{padding-inline-start:0}
+}

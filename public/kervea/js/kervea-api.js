@@ -554,6 +554,7 @@ function fillOverview(){
     b.className='ov-badge '+m[0]; b.innerHTML='<span>'+m[1]+'</span>';
   }
   var vals=document.querySelectorAll('#dp-overview .ov-stat-card');
+  if(window.kvAnalyticsOverview) window.kvAnalyticsOverview();   // real "Profil Görüntülenme" numbers (kv-analytics.js)
   if(vals[3]){
     var v=vals[3].querySelector('.ov-stat-val'), s=vals[3].querySelector('.ov-stat-sub');
     var ok=co&&co.status==='approved';
