@@ -479,6 +479,11 @@ public/icon-192.png
 public/icon-512.png
 public/icon.svg
 public/kervea/css/kervea.css
+public/kervea/css/kv-analytics.css
+public/kervea/css/kv-credits.css
+public/kervea/css/kv-messages.css
+public/kervea/css/kv-people.css
+public/kervea/css/kv-team.css
 public/kervea/img/img-00.jpg
 public/kervea/img/img-01.jpg
 public/kervea/img/img-02.jpg
@@ -858,6 +863,11 @@ routes/calendly.php
 routes/console.php
 routes/custom_field.php
 routes/customer.php
+routes/kv/admin-analytics.php
+routes/kv/admin-credits.php
+routes/kv/admin-messages.php
+routes/kv/admin-people.php
+routes/kv/admin-team.php
 routes/kv/analytics.php
 routes/kv/credits.php
 routes/kv/messages.php
