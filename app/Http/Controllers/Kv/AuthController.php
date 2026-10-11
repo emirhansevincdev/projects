@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kv;
 use App\Http\Controllers\Controller;
 use App\Models\Kv\Company;
 use App\Models\User;
+use App\Services\Kv\CompanyContext;
 use App\Services\Kv\FirmPresenter;
 use App\Services\Kv\Totp;
 use Illuminate\Auth\Events\PasswordReset;
@@ -21,7 +22,8 @@ class AuthController extends Controller
     public static function userPayload(?User $u): ?array
     {
         if (! $u) return null;
-        $company = Company::where('user_id', $u->id)->first();
+        $ctx = CompanyContext::resolve($u);
+        $company = $ctx['company'] ?? null;
         return [
             'name' => $u->name,
             'email' => $u->email,
@@ -29,6 +31,8 @@ class AuthController extends Controller
             'plan' => FirmPresenter::viewerPlan($u),
             'plan_until' => $u->kv_plan_until?->toIso8601String(),
             'company' => $company?->slug,
+            'role' => $ctx['role'] ?? null,                    // owner | admin | sales | ops (null: no company)
+            'perms' => $ctx['perms'] ?? [],                    // tabs/features this person may use
             'two_factor' => (bool) $u->two_factor_confirmed_at,
         ];
     }

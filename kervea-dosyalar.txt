@@ -63,6 +63,7 @@ app/Http/Middleware/BlogPermission.php
 app/Http/Middleware/CheckDatabaseConnection.php
 app/Http/Middleware/IsAgent.php
 app/Http/Middleware/IsCustomer.php
+app/Http/Middleware/KvMember.php
 app/Http/Middleware/LegacyRoutes.php
 app/Http/Middleware/PreventBackHistory.php
 app/Http/Middleware/SecurityHeaders.php
@@ -107,6 +108,7 @@ app/Models/Kv/PromoCode.php
 app/Models/Kv/Reveal.php
 app/Models/Kv/Sector.php
 app/Models/Kv/SocialIdentity.php
+app/Models/Kv/TeamMember.php
 app/Models/Language.php
 app/Models/Listing_Feature.php
 app/Models/Listing_Specification.php
@@ -140,6 +142,7 @@ app/Models/payment_gateway/Razorpay.php
 app/Models/payment_gateway/StripePay.php
 app/Providers/AppServiceProvider.php
 app/Providers/RouteServiceProvider.php
+app/Services/Kv/CompanyContext.php
 app/Services/Kv/FirmPresenter.php
 app/Services/Kv/ImageStore.php
 app/Services/Kv/LegacyUserColumns.php
@@ -194,6 +197,7 @@ database/migrations/2025_12_23_055419_create_badges_table.php
 database/migrations/2025_12_30_052916_add_blog_permission_to_users_table.php
 database/migrations/2026_10_05_000001_create_kervea_tables.php
 database/migrations/2026_10_08_000001_create_kv_social_identities_table.php
+database/migrations/2026_10_11_000001_create_kv_team_members_table.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php
 database/seeders/data/i18n.json
@@ -489,6 +493,11 @@ public/kervea/img/img-10.jpg
 public/kervea/js/kervea-api.js
 public/kervea/js/kervea-app.js
 public/kervea/js/kervea-head.js
+public/kervea/js/kv-analytics.js
+public/kervea/js/kv-credits.js
+public/kervea/js/kv-messages.js
+public/kervea/js/kv-people.js
+public/kervea/js/kv-team.js
 public/kervea/vendor/ScrollTrigger.min.js
 public/kervea/vendor/amcharts-world.min.js
 public/kervea/vendor/gsap.min.js
@@ -849,6 +858,11 @@ routes/calendly.php
 routes/console.php
 routes/custom_field.php
 routes/customer.php
+routes/kv/analytics.php
+routes/kv/credits.php
+routes/kv/messages.php
+routes/kv/people.php
+routes/kv/team.php
 routes/payment.php
 routes/web.php
 tailwind.config.js

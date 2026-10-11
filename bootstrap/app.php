@@ -71,6 +71,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'PreventBackHistory' => PreventBackHistory::class,
             'blog.permission' => BlogPermission::class,
             'legacy' => LegacyRoutes::class,
+            'kv.member' => \App\Http\Middleware\KvMember::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -31,5 +31,8 @@
 <script>window.KV_BOOT = @json($boot);</script>
 <script src="{{ asset('kervea/js/kervea-app.js') }}?v={{ config('kervea.asset_version') }}"></script>
 <script src="{{ asset('kervea/js/kervea-api.js') }}?v={{ config('kervea.asset_version') }}"></script>
+@foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
+<script src="{{ asset('kervea/js/kv-'.$kvFeature.'.js') }}?v={{ config('kervea.asset_version') }}"></script>
+@endforeach
 </body>
 </html>

@@ -7,6 +7,7 @@ use App\Models\Kv\Company;
 use App\Models\Kv\Order;
 use App\Models\Kv\PromoCode;
 use App\Models\User;
+use App\Services\Kv\CompanyContext;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -21,9 +22,13 @@ class OrderController extends Controller
     {
         $v = $r->validate(['promo' => 'nullable|string|max:64']);
         $user = $r->user();
-        $company = Company::where('user_id', $user->id)->where('status', 'approved')->first();
+        $ctx = CompanyContext::forRequest($r);
+        $company = $ctx && $ctx['company']->status === 'approved' ? $ctx['company'] : null;
         if (! $company) {
             return response()->json(['error' => 'no_company'], 403);
+        }
+        if (! in_array('billing', $ctx['perms'], true)) {
+            return response()->json(['error' => 'forbidden', 'need' => 'billing'], 403);
         }
 
         $price = (int) config('kervea.premium.price_usd') * 100;
@@ -106,7 +111,9 @@ class OrderController extends Controller
             if ($order->status === 'paid') return;
             $order->forceFill(['status' => 'paid', 'paid_at' => now(), 'provider' => $provider, 'provider_ref' => $order->provider_ref ?: $ref])->save();
             if ($order->promo_code_id) PromoCode::where('id', $order->promo_code_id)->increment('used_count');
-            $user = User::find($order->user_id);
+            // the subscription belongs to the company OWNER, whoever (team member with billing rights) paid
+            $company = Company::find($order->company_id);
+            $user = ($company && $company->user_id ? User::find($company->user_id) : null) ?: User::find($order->user_id);
             $base = $user->kv_plan_until && $user->kv_plan_until->isFuture() ? $user->kv_plan_until : now();
             $user->forceFill(['kv_plan' => 'pro', 'kv_plan_until' => $base->copy()->addDays((int) config('kervea.premium.period_days'))])->save();
         });

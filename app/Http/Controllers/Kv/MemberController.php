@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Kv\Company;
 use App\Models\Kv\Consent;
 use App\Models\Kv\Sector;
+use App\Services\Kv\CompanyContext;
 use App\Services\Kv\FirmPresenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,9 +17,23 @@ use Illuminate\Support\Facades\Storage;
 /** Everything here is scoped to the logged-in member's OWN company (no ids accepted from the client). */
 class MemberController extends Controller
 {
+    /** The company the signed-in person works for (owner or team member); relations loaded. */
     private function company(Request $r): ?Company
     {
-        return Company::with(['sector', 'photos', 'documents'])->where('user_id', $r->user()->id)->first();
+        $ctx = CompanyContext::forRequest($r);
+        return $ctx ? $ctx['company']->load(['sector', 'photos', 'documents']) : null;
+    }
+
+    /** 403 unless the person holds $perm (or is the owner). $perm = null → owner only. */
+    private function authorizeFor(Request $r, ?string $perm): void
+    {
+        $ctx = CompanyContext::forRequest($r);
+        abort_unless($ctx, 404);
+        if ($perm === null) {
+            abort_unless($ctx['is_owner'], 403, 'owner_only');
+        } else {
+            abort_unless(in_array($perm, $ctx['perms'], true), 403, 'forbidden');
+        }
     }
 
     public function show(Request $r)
@@ -46,6 +61,7 @@ class MemberController extends Controller
     /** Add verification documents later from the panel (same content checks as the application form). */
     public function addDocuments(Request $r)
     {
+        $this->authorizeFor($r, 'docs');
         $company = $this->company($r);
         abort_unless($company, 404);
         $max = config('kervea.uploads.max_docs');
@@ -69,6 +85,7 @@ class MemberController extends Controller
     /** KVKK m.11 – right of access: everything we hold about the member as a JSON download. */
     public function export(Request $r)
     {
+        $this->authorizeFor($r, null);
         $c = Company::with(['sector', 'photos', 'documents', 'consents'])->where('user_id', $r->user()->id)->first();
         $data = [
             'exported_at' => now()->toIso8601String(),
@@ -83,6 +100,7 @@ class MemberController extends Controller
     /** Withdrawal of consent (KVKK m.11). Mandatory consents can only be withdrawn by closing the account. */
     public function consent(Request $r)
     {
+        $this->authorizeFor($r, null);
         $v = $r->validate(['type' => 'required|in:marketing,contact_visibility', 'granted' => 'required|boolean']);
         $c = $this->company($r);
         abort_unless($c, 404);
@@ -96,6 +114,7 @@ class MemberController extends Controller
 
     public function update(Request $r)
     {
+        $this->authorizeFor($r, 'profile');
         $c = $this->company($r);
         abort_unless($c, 404);
         $rules = ApplicationController::rules(false);
@@ -127,6 +146,10 @@ class MemberController extends Controller
     {
         $v = $r->validate(['password' => 'required|string']);
         $u = $r->user();
+        $ctx = CompanyContext::forRequest($r);
+        if ($ctx && ! $ctx['is_owner']) {
+            return response()->json(['error' => 'owner_only'], 403);      // a team member cannot close the company
+        }
         if (! Hash::check($v['password'], $u->password)) {
             return response()->json(['error' => 'invalid'], 422);
         }

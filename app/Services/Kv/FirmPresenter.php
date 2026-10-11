@@ -19,8 +19,9 @@ class FirmPresenter
     {
         if (! $u) return 'guest';
         if ((int) $u->role === 1) return 'enterprise';
-        $plan = $u->kv_plan ?? 'free';
-        if ($plan !== 'free' && $u->kv_plan_until && $u->kv_plan_until->isPast()) return 'free';
+        $payer = CompanyContext::planOwner($u);          // team members use the subscription of their company's owner
+        $plan = $payer->kv_plan ?? 'free';
+        if ($plan !== 'free' && $payer->kv_plan_until && $payer->kv_plan_until->isPast()) return 'free';
         return $plan;
     }
 

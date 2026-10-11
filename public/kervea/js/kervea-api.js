@@ -420,7 +420,11 @@ window.kvConfirmPayment = function(){
 var ME=null;
 function loadMember(){
   if(!window.KV_USER) return;
-  api('GET','/kv/me').then(function(r){ if(!r.ok) return; ME=r.data; fillPanel(); });
+  api('GET','/kv/me').then(function(r){
+    if(!r.ok) return; ME=r.data; fillPanel();
+    window.KV_ME=ME;                                                   // panel features (kv-*.js) read the member payload from here
+    try{ document.dispatchEvent(new CustomEvent('kv:member',{detail:ME})); }catch(e){}
+  });
 }
 window.loadMember=loadMember;
 var fillPanel=function(){
@@ -523,14 +527,16 @@ function deleteAccount(){
   });
 }
 var _showPanel=window.showPanel;
-window.showPanel=function(sec,btn){ _showPanel(sec,btn); if(sec==='profile'||sec==='settings') loadMember(); };
+window.showPanel=function(sec,btn){
+  _showPanel(sec,btn); if(sec==='profile'||sec==='settings') loadMember();
+  try{ document.dispatchEvent(new CustomEvent('kv:panel',{detail:{name:sec}})); }catch(e){}   // panel features render their tab on this event
+};
 
 
 // ───────────────────────── panel: gerçek veri olmayan bölümler gizlenir ─────────────────────────
-// Mesajlaşma/analitik/ekip/kişi rehberi için gerçek veri kaynağı yok (ve Kervea pazaryeri/veri simsarı değildir):
-// sahte içerik göstermek yerine bu sekmeler kapalı tutulur.
+// Aktivite ve Prospektüs sekmeleri için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur.
 (function(){
-  var hide=['messages','analytics','team','activity','prospect','people'], css='';
+  var hide=['activity','prospect'], css='';          // messages, people, analytics and team are real now (kv-*.js)
   hide.forEach(function(k){ css+='.dmenu a[onclick*="showPanel(\''+k+'\'"]{display:none!important}#dp-'+k+'{display:none!important}'; });
   var st=document.createElement('style'); st.id='kv-hide-mock'; st.textContent=css; document.head.appendChild(st);
 })();

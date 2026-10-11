@@ -34,6 +34,41 @@ return [
         'max_docs' => 20,
     ],
 
+    // Panel features (credits, people, messaging, analytics, team). Amounts are decided on the server only.
+    'credits' => [
+        'signup' => 50,                    // granted when an application is approved ("üye olduğunda otomatik 50 kredi")
+        'pro_bonus' => 100,                // granted on every Premium purchase
+        'reveal_email' => 1,               // credits to open ONE person's e-mail
+        'reveal_phone' => 1,               // credits to open ONE person's phone
+        'packs' => [                       // credits => price in USD
+            100 => 10,
+            500 => 45,
+            1000 => 85,
+        ],
+    ],
+    'people' => [
+        'page_size' => 25,
+        'daily_reveal_limit' => 200,       // anti-scraping ceiling per company and day (credits are the main limit)
+    ],
+    'messaging' => [
+        'max_body' => 4000,
+        'max_attachment_kb' => 5120,
+        'new_conversations_per_day' => 20,
+    ],
+    'analytics' => [
+        'retention_days' => 400,
+        'min_peers_for_benchmark' => 5,    // sector benchmark is shown only when at least this many firms are compared
+    ],
+    'team' => [
+        'max_members' => 10,
+        'invite_days' => 7,
+        'roles' => [                       // default permissions per role; the owner always has all of them
+            'admin' => ['label' => 'Yönetici', 'perms' => ['matches', 'profile', 'docs', 'messages', 'people', 'analytics', 'team']],
+            'sales' => ['label' => 'Satış', 'perms' => ['matches', 'messages', 'people']],
+            'ops' => ['label' => 'Operasyon', 'perms' => ['profile', 'docs']],
+        ],
+    ],
+
     'stripe' => [
         'secret' => env('STRIPE_SECRET'),
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),

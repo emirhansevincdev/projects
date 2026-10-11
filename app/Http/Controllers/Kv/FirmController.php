@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kv;
 use App\Http\Controllers\Controller;
 use App\Models\Kv\Company;
 use App\Models\Kv\Reveal;
+use App\Services\Kv\CompanyContext;
 use App\Services\Kv\FirmPresenter;
 use Illuminate\Http\Request;
 
@@ -63,7 +64,11 @@ class FirmController extends Controller
     public function matches(Request $r)
     {
         $user = $r->user();
-        $mine = Company::where('user_id', $user->id)->first();
+        $ctx = CompanyContext::forRequest($r);
+        if ($ctx && ! in_array('matches', $ctx['perms'], true)) {
+            return response()->json(['error' => 'forbidden', 'need' => 'matches'], 403);
+        }
+        $mine = $ctx['company'] ?? null;
         if (! $mine || $mine->status !== Company::STATUS_APPROVED) {
             return response()->json(['items' => [], 'reason' => $mine ? 'not_approved' : 'no_company']);
         }
@@ -115,7 +120,8 @@ class FirmController extends Controller
     {
         $c = Company::with(['sector', 'photos'])->where('slug', $slug)->firstOrFail();
         $user = $r->user();
-        $isOwnerOrAdmin = $user && ($c->user_id === $user->id || (int) $user->role === 1);
+        $mineCtx = $user ? CompanyContext::forRequest($r) : null;
+        $isOwnerOrAdmin = $user && ($c->user_id === $user->id || (int) $user->role === 1 || ($mineCtx && $mineCtx['company']->id === $c->id));
         abort_unless($c->status === Company::STATUS_APPROVED || $isOwnerOrAdmin, 404);
 
         $revealed = $user && FirmPresenter::isPro($user)

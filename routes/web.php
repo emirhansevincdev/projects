@@ -121,6 +121,13 @@ Route::prefix('kv')->group(function () {
 
     Route::post('webhooks/stripe', [\App\Http\Controllers\Kv\OrderController::class, 'stripeWebhook']);
 });
+// ── Member panel features: one route file each (credits, people, messages, analytics, team) ──
+Route::prefix('kv')->middleware('auth')->group(function () {
+    foreach (['credits', 'people', 'messages', 'analytics', 'team'] as $feature) {
+        require base_path("routes/kv/{$feature}.php");
+    }
+});
+
 // ── Legacy template routes (hotel/car/listing directory, customer/agent areas, installer, helpers) ──
 // Kervea is not a marketplace/directory. These are kept only so route() names used by the old admin views
 // still resolve; every URL answers 404 unless KERVEA_LEGACY_ROUTES=true. Never enable in production.
