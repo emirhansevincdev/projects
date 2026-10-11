@@ -135,7 +135,9 @@ Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin
     }
 });
 
-// Public front-end endpoints (newsletter) and their admin pages: routes/kv/frontend.php, routes/kv/admin-frontend.php
+// Public front-end endpoints: routes/kv/frontend-public.php (guests: newsletter), routes/kv/frontend.php (members: profile media);
+// admin pages: routes/kv/admin-frontend.php
+Route::prefix('kv')->group(base_path('routes/kv/frontend-public.php'));
 Route::prefix('kv')->group(base_path('routes/kv/frontend.php'));
 Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin'])->group(base_path('routes/kv/admin-frontend.php'));
 

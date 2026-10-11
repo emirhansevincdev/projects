@@ -1,14 +1,10 @@
 <?php
 
-// Public site endpoints. Mounted in routes/web.php under Route::prefix('kv') WITHOUT the auth middleware;
-// the member-only routes below carry their own `auth` + `kv.member:<permission>` middleware.
+// Public front-end endpoints that need a signed-in member. Mounted in routes/web.php under Route::prefix('kv')
+// (the member panel feature loop may also `require` this file: the routes are unnamed, so a second registration is harmless).
 
-use App\Http\Controllers\Kv\NewsletterController;
 use App\Http\Controllers\Kv\ProfileMediaController;
 use Illuminate\Support\Facades\Route;
-
-// Newsletter sign-up: email + opt-in proof (consent, IP, user agent). Own throttle bucket.
-Route::post('newsletter', [NewsletterController::class, 'store'])->middleware('throttle:5,10,kv-newsletter');
 
 // Member panel "Firma Profilim": logo, cover, gallery of the member's own company (the controller requires the "profile" permission of the acting company).
 Route::middleware('auth')->group(function () {
