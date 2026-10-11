@@ -119,6 +119,9 @@ class ProfileMediaTest extends KvTestCase
         // too large for a logo (limit in KB)
         $big = UploadedFile::fake()->image('big.png', 100, 100)->size((int) config('kervea.uploads.logo_max_kb') + 10);
         $this->actingAs($u)->postJson('/kv/me/media', ['kind' => 'logo', 'file' => $big])->assertStatus(422);
+        // absurd pixel dimensions are refused before the image is decoded
+        $huge = UploadedFile::fake()->image('huge.png', 9000, 20);
+        $this->actingAs($u)->postJson('/kv/me/media', ['kind' => 'cover', 'file' => $huge])->assertStatus(422);
         // delete with a junk kind or a non-numeric photo id does not resolve
         $this->actingAs($u)->deleteJson('/kv/me/media/banner')->assertStatus(404);
         $this->actingAs($u)->deleteJson('/kv/me/media/photo/abc')->assertStatus(404);

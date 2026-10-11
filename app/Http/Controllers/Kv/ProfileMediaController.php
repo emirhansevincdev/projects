@@ -43,7 +43,8 @@ class ProfileMediaController extends Controller
         $u = config('kervea.uploads');
         $v = $r->validate([
             'kind' => 'required|in:logo,cover,photo',
-            'file' => 'required|file|mimetypes:image/jpeg,image/png,image/webp|max:'.($r->input('kind') === 'logo' ? $u['logo_max_kb'] : $u['image_max_kb']),
+            // the pixel limit keeps a tiny, highly compressed file from being decoded into a gigantic bitmap (memory exhaustion)
+            'file' => 'required|file|mimetypes:image/jpeg,image/png,image/webp|dimensions:max_width=8000,max_height=8000|max:'.($r->input('kind') === 'logo' ? $u['logo_max_kb'] : $u['image_max_kb']),
         ]);
         $dir = 'kv/companies/'.$company->id;
 
