@@ -1,13 +1,11 @@
 <?php
 
 return [
-    // Cache-buster for kervea.css / kervea-*.js: follows the files' modification time, so returning visitors get new code after an upload.
-    'asset_version' => env('KERVEA_ASSET_VERSION') ?: (string) max(
-        (int) @filemtime(__DIR__.'/../public/kervea/js/kervea-api.js'),
-        (int) @filemtime(__DIR__.'/../public/kervea/js/kervea-app.js'),
-        (int) @filemtime(__DIR__.'/../public/kervea/css/kervea.css'),
-        1
-    ),
+    // Cache-buster for the Kervea js/css files: follows their newest modification time, so returning visitors get new code after an upload.
+    'asset_version' => env('KERVEA_ASSET_VERSION') ?: (string) max(array_merge(
+        [1],
+        array_map(fn ($f) => (int) @filemtime($f), array_merge(glob(__DIR__.'/../public/kervea/js/*.js') ?: [], glob(__DIR__.'/../public/kervea/css/*.css') ?: []))
+    )),
 
     // Legacy template routes (directory/listing front-end, customer/agent areas, installer). Keep false.
     'legacy_routes' => (bool) env('KERVEA_LEGACY_ROUTES', false),

@@ -20,7 +20,9 @@ PHP="${PHP_BIN:-php}"
 COMPOSER="${COMPOSER_BIN:-composer}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP_DIR="${BACKUP_DIR:-$HOME/kervea-yedekler}"
-MIGRATIONS=(database/migrations/2026_10_05_000001_create_kervea_tables.php database/migrations/2026_10_08_000001_create_kv_social_identities_table.php)
+# Kervea migrations are all named 2026_10_*; the old template's own migrations are never run by this script.
+MIGRATIONS=()
+for f in "$SRC"/database/migrations/2026_10_*.php; do [ -e "$f" ] && MIGRATIONS+=("database/migrations/$(basename "$f")"); done
 CHECK_ONLY=0
 
 case "${1:-}" in
