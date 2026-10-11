@@ -72,6 +72,7 @@ class KerveaAdminController extends Controller
             $company->reviewed_by = $r->user()->id;
             $company->review_note = null;
             $company->save();
+            \App\Services\Kv\CreditService::grantSignup($company, $r->user()->id);   // "üye olduğunda otomatik 50 kredi" (once per company)
 
             $token = Password::broker()->createToken($user);
             $url = url('/set-password?token='.$token.'&email='.urlencode($user->email));
@@ -224,14 +225,20 @@ class KerveaAdminController extends Controller
     // ── Orders ───────────────────────────────────────────────────────────────
     public function orders()
     {
-        $rows = Order::with('promo')->latest()->paginate(25);
+        $rows = Order::with(['promo', 'company'])->latest()->paginate(25);
         $users = User::whereIn('id', $rows->pluck('user_id'))->pluck('email', 'id');
         return view('kervea.admin.orders', compact('rows', 'users'));
     }
 
     public function orderPaid(Order $order)
     {
-        OrderController::markPaid($order, 'manual-'.$order->id, 'manual');
-        return back()->with('ok', 'Sipariş ödendi olarak işaretlendi; üyelik etkinleştirildi.');
+        if ($order->status === 'paid') {
+            return back()->with('ok', 'Bu sipariş zaten ödenmiş; tekrar işlem yapılmadı.');
+        }
+        $bonus = (int) config('kervea.credits.pro_bonus');
+        OrderController::markPaid($order, 'manual-'.$order->id, 'manual');   // same idempotent code path as the Stripe webhook
+        return back()->with('ok', $order->kind === 'credits'
+            ? "Sipariş ödendi olarak işaretlendi; {$order->credits} kredi firma hesabına eklendi."
+            : 'Sipariş ödendi olarak işaretlendi; üyelik etkinleştirildi'.($bonus > 0 ? " ve {$bonus} kredi eklendi." : '.'));
     }
 }

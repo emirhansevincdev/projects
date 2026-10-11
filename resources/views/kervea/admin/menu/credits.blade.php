@@ -1,1 +1,1 @@
-{{-- Admin side-menu entry for this feature (an <a> like the ones in admin/layout.blade.php); leave empty if none. --}}
+<a href="{{ route('admin.kervea.credits') }}" class="{{ request()->routeIs('admin.kervea.credits*') ? 'on' : '' }}">Krediler</a>
