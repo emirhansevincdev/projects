@@ -44,7 +44,8 @@ class Activity
                 'ip' => $ip,
             ]);
         } catch (\Throwable $e) {
-            Log::warning('kv: activity log failed', ['action' => $action ?? '', 'err' => $e->getMessage()]);
+            // QueryException messages contain the bound values (= the metadata), so only the kind of failure is reported
+            Log::warning('kv: activity log failed', ['action' => $action ?? '', 'err' => get_class($e), 'code' => (string) $e->getCode()]);
         }
     }
 

@@ -107,7 +107,7 @@ class TeamService
             ]));
             return true;
         } catch (\Throwable $e) {
-            Log::warning('kv: team invite mail failed', ['member' => $m->id, 'err' => $e->getMessage()]);
+            Log::warning('kv: team invite mail failed', ['member' => $m->id, 'err' => get_class($e)]);      // transport messages may echo the mail body (= the link), so never log them
             return false;
         }
     }
