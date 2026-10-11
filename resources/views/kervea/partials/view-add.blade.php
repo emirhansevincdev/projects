@@ -104,7 +104,7 @@
     <!-- STEP 5: Documents & Consent -->
     <div class="panelstep" id="ps5">
      <label class="fl" data-i18n="doc_h">Belgeler *</label>
-     <div class="upl" onclick="this.querySelector('input').click()"><span data-i18n="doc_txt">📄 Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları</span><input data-f="documents" type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf"></div>
+     <div class="upl" onclick="this.querySelector('input').click()"><span data-i18n="doc_txt">Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları</span><input data-f="documents" type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf"></div>
      <p class="hint" data-i18n="doc_hint">PDF, JPG, PNG · her dosya max 10MB · en fazla 20 belge</p>
      <div class="consent kv-consent-wrap" style="margin-top:16px">
       <div class="kv-consent-hd">

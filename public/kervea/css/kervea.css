@@ -3702,17 +3702,10 @@ html[dir="rtl"] .fx-bar{direction:rtl}
 }
 .sp-amount{
   font-size:5rem;font-weight:700;
-  color:#0A2723;line-height:1;letter-spacing:-.03em;
-  background:linear-gradient(180deg,#0A2723 0%,#0A5F56 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent
+  color:#0A2723;line-height:1;letter-spacing:-.03em
 }
 [data-theme="dark"] .sp-currency{color:#8FE9C4}
-[data-theme="dark"] .sp-amount{
-  background:linear-gradient(180deg,#F5FAF8 0%,#8FE9C4 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent
-}
+[data-theme="dark"] .sp-amount{color:#F5FAF8}
 .sp-per{
   font-size:1rem;color:#546E71;font-weight:500;margin-left:4px
 }

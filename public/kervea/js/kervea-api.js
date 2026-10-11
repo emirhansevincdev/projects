@@ -160,7 +160,7 @@ window.renderPositions = function(){
     var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
     grid.innerHTML=items.map(function(p){
       var locked=!!p.locked, cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
-      var lockBadge = locked ? '<div class="lockbadge" title="'+kvT('Premium üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
+      var lockBadge = locked ? '<div class="lockbadge" title="'+kvT('Premium üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PREMIUM</span></div>' : '';
       var lockOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
       var score = (p.uyum!=null) ? '<span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+t.match_score+'</span></span>' : '<span class="mid"></span>';
