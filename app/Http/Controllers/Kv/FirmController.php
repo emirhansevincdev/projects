@@ -22,7 +22,7 @@ class FirmController extends Controller
             'page' => 'nullable|integer|min:1|max:200',
         ]);
         $user = $r->user();
-        $isPro = FirmPresenter::isPro($user);
+        $viewer = FirmPresenter::viewer($user, $r);          // premium / sector scope of whoever is looking
 
         $q = Company::approved()->with('sector');
         if (! empty($v['dir'])) {
@@ -46,15 +46,17 @@ class FirmController extends Controller
         $hasCriteria = (bool) array_filter([$criteria['cc'], $criteria['sec'], $criteria['q']]);
 
         $total = (clone $q)->count();
+        if ($viewer['scoped']) {
+            // the member's own sector first, so the 300-row window is never filled with firms they cannot open anyway
+            $q->orderByRaw('CASE WHEN sector_id IN ('.implode(',', array_map('intval', $viewer['tree'])).') THEN 0 ELSE 1 END');
+        }
         $rows = $q->orderByDesc('is_verified')->orderByDesc('id')->limit(300)->get();
 
-        $items = $rows->map(function (Company $c) use ($criteria, $hasCriteria) {
-            return [$c, $hasCriteria ? FirmPresenter::score($c, $criteria) : null];
-        })->sortByDesc(fn ($p) => $p[1] ?? 0)->values()
-          ->map(function ($pair, $i) use ($isPro) {
-              $locked = ! $isPro && $i >= FirmPresenter::FREE_FIRM_LIMIT;
-              return FirmPresenter::card($pair[0], $pair[1], $locked);
-          })->all();
+        $items = $this->cards(
+            $rows->map(fn (Company $c) => [$c, $hasCriteria ? FirmPresenter::score($c, $criteria) : null])
+                ->sortByDesc(fn ($p) => $p[1] ?? 0)->values()->all(),
+            $viewer
+        );
 
         return response()->json(['total' => $total, 'items' => $items, 'plan' => FirmPresenter::viewerPlan($user)])
             ->header('Cache-Control', 'no-store');
@@ -72,7 +74,7 @@ class FirmController extends Controller
         if (! $mine || $mine->status !== Company::STATUS_APPROVED) {
             return response()->json(['items' => [], 'reason' => $mine ? 'not_approved' : 'no_company']);
         }
-        $isPro = FirmPresenter::isPro($user);
+        $viewer = FirmPresenter::viewer($user, $r, $ctx);
         $myHs = array_filter(array_map('trim', preg_split('/[,;\s]+/', (string) $mine->hs_codes)));
         $myChapters = array_unique(array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 2), $myHs));
         $myTokens = array_filter(preg_split('/[\s,;]+/u', mb_strtolower((string) $mine->products)), fn ($t) => mb_strlen($t) >= 4);
@@ -97,11 +99,40 @@ class FirmController extends Controller
             ]))];
         })->filter()->sortByDesc('score')->values()->take(60);
 
-        $items = $scored->map(function ($m, $i) use ($isPro) {
-            $locked = ! $isPro && $i >= FirmPresenter::FREE_FIRM_LIMIT;
-            return FirmPresenter::card($m['c'], $m['score'], $locked) + ['prod' => $m['prod'], 'dirfit' => $m['dirfit'], 'reasons' => $m['reasons']];
-        })->all();
+        $items = $this->cards(
+            $scored->map(fn ($m) => [$m['c'], $m['score']])->all(),
+            $viewer,
+            fn (int $i) => ['prod' => $scored[$i]['prod'], 'dirfit' => $scored[$i]['dirfit'], 'reasons' => $scored[$i]['reasons']]
+        );
         return response()->json(['items' => $items])->header('Cache-Control', 'no-store');
+    }
+
+    /**
+     * Cards in display order with the visibility rules applied (this is the single place that locks list entries):
+     *  - a sector-scoped member sees firms of OTHER sectors only as locked cards (lock = 'sector'); their own firm is always open
+     *  - Premium (and admins): every firm in scope is open
+     *  - everybody else: the first FREE_FIRM_LIMIT firms in scope are open, the rest locked (lock = 'plan')
+     * @param list<array{0: Company, 1: ?int}> $pairs  [company, score] in display order
+     * @param \Closure|null $decorate  fn(int $position): array of extra fields for that card
+     */
+    private function cards(array $pairs, array $viewer, ?\Closure $decorate = null): array
+    {
+        $open = 0;
+        $out = [];
+        foreach ($pairs as $i => [$c, $score]) {
+            if ($viewer['company_id'] !== null && $viewer['company_id'] === $c->id) {
+                $card = FirmPresenter::card($c, $score, false);
+            } elseif (! FirmPresenter::inScope($viewer, $c)) {
+                $card = FirmPresenter::card($c, $score, true, 'sector');
+            } elseif (! $viewer['premium'] && $open >= FirmPresenter::FREE_FIRM_LIMIT) {
+                $card = FirmPresenter::card($c, $score, true, 'plan');
+            } else {
+                $open++;
+                $card = FirmPresenter::card($c, $score, false);
+            }
+            $out[] = $decorate ? $card + $decorate($i) : $card;
+        }
+        return $out;
     }
 
     /** GET /kv/stats – real counters for the hero bar (no invented numbers). */
@@ -121,13 +152,19 @@ class FirmController extends Controller
         $c = Company::with(['sector', 'photos'])->where('slug', $slug)->firstOrFail();
         $user = $r->user();
         $mineCtx = $user ? CompanyContext::forRequest($r) : null;
+        $viewer = FirmPresenter::viewer($user, $r, $mineCtx);
         $isOwnerOrAdmin = $user && ($c->user_id === $user->id || (int) $user->role === 1 || ($mineCtx && $mineCtx['company']->id === $c->id));
         abort_unless($c->status === Company::STATUS_APPROVED || $isOwnerOrAdmin, 404);
 
-        $revealed = $user && FirmPresenter::isPro($user)
+        // A member of another sector gets the masked card and a flag – nothing that identifies the firm (HTTP 200 so the UI can explain why).
+        if (! $isOwnerOrAdmin && ! FirmPresenter::inScope($viewer, $c)) {
+            return response()->json(FirmPresenter::lockedDetail($c, 'sector'))->header('Cache-Control', 'no-store');
+        }
+
+        $revealed = $viewer['premium'] && $user
             && Reveal::where('user_id', $user->id)->where('company_id', $c->id)->exists();
 
-        return response()->json(FirmPresenter::detail($c, $user, null, $revealed))->header('Cache-Control', 'no-store');
+        return response()->json(FirmPresenter::detail($c, $user, null, $revealed, $mineCtx))->header('Cache-Control', 'no-store');
     }
 
     /**
@@ -138,11 +175,17 @@ class FirmController extends Controller
     {
         $user = $r->user();
         abort_unless($user, 401);
-        if (! FirmPresenter::isPro($user)) {
-            return response()->json(['error' => 'pro_required'], 403);
+        $ctx = CompanyContext::forRequest($r);
+        $viewer = FirmPresenter::viewer($user, $r, $ctx);
+        if (! $viewer['premium']) {
+            // not Premium (or Premium plan without an approved company): free members can only buy credits for PEOPLE, never firm contacts
+            return response()->json(['error' => $viewer['member'] || $viewer['admin'] ? 'pro_required' : 'no_company'], 403);
         }
         $c = Company::approved()->where('slug', $slug)->firstOrFail();
-        if (! $c->hasConsent('contact_visibility')) {
+        if (! FirmPresenter::inScope($viewer, $c)) {
+            return response()->json(['error' => 'sector_locked'], 403);          // other sectors are reached through "Kişiler" with credits
+        }
+        if (! $c->hasConsent('contact_visibility') && $viewer['company_id'] !== $c->id && ! $viewer['admin']) {
             return response()->json(['error' => 'no_consent'], 403);
         }
         $already = Reveal::where('user_id', $user->id)->where('company_id', $c->id)->exists();
@@ -152,8 +195,11 @@ class FirmController extends Controller
                 return response()->json(['error' => 'quota'], 429);
             }
             Reveal::create(['user_id' => $user->id, 'company_id' => $c->id]);
+            if (class_exists(\App\Services\Kv\Activity::class)) {
+                \App\Services\Kv\Activity::log($viewer['company_id'], $user->id, 'firm.reveal', ['firm' => $c->id]);
+            }
         }
-        $d = FirmPresenter::detail($c->load(['sector', 'photos']), $user, null, true);
+        $d = FirmPresenter::detail($c->load(['sector', 'photos']), $user, null, true, $ctx);
         return response()->json(['contact' => $d['contact'] ?? null]);
     }
 }
