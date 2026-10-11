@@ -98,18 +98,23 @@ syncModalLock();
   if(amt && price) amt.textContent = String(price);
 })();
 
-// ───────────────────────── erişilebilirlik etiketleri / ipuçları: arayüz diline çevrilir ─────────────────────────
-// Kaynak metin Türkçe (aria-label / title); sözlükte karşılığı varsa seçili dilde gösterilir, yoksa olduğu gibi kalır.
+// ───────────────────────── erişilebilirlik etiketleri, ipuçları, yer tutucular: arayüz diline çevrilir ─────────────────────────
+// Kaynak metin Türkçe (aria-label / title / placeholder); sözlükte karşılığı varsa seçili dilde gösterilir, yoksa olduğu gibi kalır.
+// Sonradan eklenen öğeler (JS ile üretilen kartlar, modallar) için aşağıdaki gözlemci aynı işlemi yapar.
+var ATTRS = [['aria-label', 'data-i18n-aria'], ['title', 'data-i18n-title'], ['placeholder', 'data-i18n-ph']];
 function translateAttrs(root){
   if(typeof window.kvT !== 'function') return;
-  (root || document).querySelectorAll('[aria-label],[title]').forEach(function(el){
-    ['aria-label', 'title'].forEach(function(a){
-      var cur = el.getAttribute(a); if(cur === null || cur === '') return;
+  var base = root || document;
+  var list = [];
+  if(base.nodeType === 1 && (base.hasAttribute('aria-label') || base.hasAttribute('title') || base.hasAttribute('placeholder'))) list.push(base);
+  Array.prototype.forEach.call(base.querySelectorAll('[aria-label],[title],[placeholder]'), function(e){ list.push(e); });
+  list.forEach(function(el){
+    ATTRS.forEach(function(pair){
+      var a = pair[0], cur = el.getAttribute(a); if(cur === null || cur === '') return;
       var ok = 'data-kv-o-' + a;
       var src = el.getAttribute(ok);
       if(src === null){
-        if(el.hasAttribute('data-i18n-aria') && a === 'aria-label') return;   // anahtarlı olanlara setLang bakar
-        if(el.hasAttribute('data-i18n-title') && a === 'title') return;
+        if(el.hasAttribute(pair[1])) return;   // anahtarlı olanlara setLang bakar
         src = cur; el.setAttribute(ok, src);
       }
       var out = window.kvT(src);
@@ -132,7 +137,10 @@ if(typeof _openM === 'function'){
 // ───────────────────────── metin çevirisi: data-kvt (Türkçe kaynak metin → seçili dil) ─────────────────────────
 function kt(s, v){ return typeof window.kvT === 'function' ? window.kvT(s, v) : s; }
 function translateDom(root){
-  (root || document).querySelectorAll('[data-kvt]').forEach(function(el){
+  var base = root || document, list = [];
+  if(base.nodeType === 1 && base.hasAttribute('data-kvt')) list.push(base);
+  Array.prototype.forEach.call(base.querySelectorAll('[data-kvt]'), function(e){ list.push(e); });
+  list.forEach(function(el){
     var src = el.getAttribute('data-kvt-src');
     if(src === null){ src = el.textContent.trim(); if(!src) return; el.setAttribute('data-kvt-src', src); }
     var out = kt(src); if(el.textContent !== out) el.textContent = out;
@@ -141,6 +149,23 @@ function translateDom(root){
 window.kvTranslateDom = translateDom;
 document.addEventListener('kv:lang', function(){ translateDom(); });
 translateDom();
+
+// JS ile sonradan eklenen düğümler (firma kartları, listeler, açılır pencereler) seçili dilde doğar:
+// eklenen alt ağaçlar bir sonraki karede taranır; yalnızca Türkçe dışı bir dil seçiliyken iş yapılır.
+(function(){
+  if(!window.MutationObserver) return;
+  var queue = [], scheduled = false;
+  function flush(){
+    scheduled = false;
+    var items = queue; queue = [];
+    if((window.LANG || 'tr') === 'tr') return;
+    items.forEach(function(n){ if(n.isConnected){ translateAttrs(n); translateDom(n); } });
+  }
+  new MutationObserver(function(muts){
+    muts.forEach(function(m){ Array.prototype.forEach.call(m.addedNodes, function(n){ if(n.nodeType === 1) queue.push(n); }); });
+    if(queue.length && !scheduled){ scheduled = true; (window.requestAnimationFrame || setTimeout)(flush); }
+  }).observe(document.body, { childList: true, subtree: true });
+})();
 
 // ───────────────────────── üye paneli: genel bakış ve profil başlığı (gerçek veriden) ─────────────────────────
 var PROFILE_FIELDS = ['name', 'tax_id', 'country_cc', 'city', 'address', 'email', 'phone', 'rep_name', 'founded_year', 'direction', 'hs_codes', 'products', 'description', 'website', 'certificates'];

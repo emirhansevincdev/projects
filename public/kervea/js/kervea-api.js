@@ -160,7 +160,7 @@ window.renderPositions = function(){
     var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
     grid.innerHTML=items.map(function(p){
       var locked=!!p.locked, cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
-      var lockBadge = locked ? '<div class="lockbadge" title="Pro üyeler için"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
+      var lockBadge = locked ? '<div class="lockbadge" title="'+kvT('Pro üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
       var lockOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
       var score = (p.uyum!=null) ? '<span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+t.match_score+'</span></span>' : '<span class="mid"></span>';
@@ -375,7 +375,7 @@ function checkPromo(code, cb){
 window.applyPromo = function(id){
   var inp=el(id); if(!inp) return; var code=inp.value.trim().toUpperCase();
   checkPromo(code,function(d){
-    if(d){ PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents}; inp.style.borderColor='var(--verify)'; toast(code+' · '+(d.type==='percent'?'%'+d.value:fmtUsd(d.value))+' indirim uygulandı ✓'); }
+    if(d){ PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents}; inp.style.borderColor='var(--verify)'; toast(kvT('{code} · {d} indirim uygulandı ✓',{code:code,d:(d.type==='percent'?'%'+d.value:fmtUsd(d.value))})); }
     else if(code){ PROMO={code:'',valid:false,discount:0,total:null}; inp.style.borderColor='#d97757'; toast(tt('toast_invalid_promo','Geçersiz promosyon kodu')); }
   });
 };
@@ -387,8 +387,8 @@ window.applyKvPromo = function(){
       PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents};
       discRow.style.display='flex'; discEl.textContent='−'+fmtUsd(d.discount_cents); totalEl.textContent=fmtUsd(d.total_cents);
       if(cta) cta.innerHTML=((T_().pay_confirm)||'Ödemeyi Onayla — ')+'<b>'+fmtUsd(d.total_cents)+'</b>';
-      toast(code+' uygulandı');
-    } else if(code){ kvShowAlert('destructive','Geçersiz promosyon kodu',code+' kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.'); }
+      toast(kvT('{code} uygulandı',{code:code}));
+    } else if(code){ kvShowAlert('destructive','Geçersiz promosyon kodu',kvT('{code} kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.',{code:code})); }
   });
 };
 window.kvConfirmPayment = function(){
@@ -406,7 +406,7 @@ window.kvConfirmPayment = function(){
     if(r.data.redirect){ location.href=r.data.redirect; return; }       // Stripe barındırılan ödeme sayfası
     closeM('pay');
     if(r.data.paid){ kvShowAlert('success','Premium aktif','Üyeliğiniz etkinleştirildi.'); pingSession(); loadMember(); return; }
-    kvShowAlert('info','Siparişiniz alındı','Sipariş #'+r.data.order+' oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.');
+    kvShowAlert('info','Siparişiniz alındı',kvT('Sipariş #{n} oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.',{n:r.data.order}));
   });
 };
 // Kart verisi bu sayfada toplanmaz (PCI): kart alanlarını gizle, ödeme sağlayıcının sayfasında alınır.
@@ -601,7 +601,7 @@ window.renderMatchTable = function(){
     });
     var cnt=el('mfCount'); if(cnt) cnt.textContent=list.length;
     if(!list.length){
-      var why = (r.data&&r.data.reason==='no_company') ? 'Eşleşmeler için önce firma profilinizi oluşturun.' : ((r.data&&r.data.reason==='not_approved') ? 'Başvurunuz onaylandığında eşleşmeler burada listelenir.' : tt('empty_matches','Filtrelere uyan eşleşme yok'));
+      var why = (r.data&&r.data.reason==='no_company') ? kvT('Eşleşmeler için önce firma profilinizi oluşturun.') : ((r.data&&r.data.reason==='not_approved') ? kvT('Başvurunuz onaylandığında eşleşmeler burada listelenir.') : tt('empty_matches','Filtrelere uyan eşleşme yok'));
       wrap.innerHTML='<div class="empty" style="padding:40px 20px;text-align:center;color:var(--faint)">'+why+'</div>'; return;
     }
     var RZ={dir_c:kvT('Karşılıklı yön'),sec:kvT('Aynı sektör'),hs:kvT('HS kodu ortak'),vf:kvT('Doğrulanmış'),veteran:kvT('Deneyimli firma')};
@@ -610,7 +610,7 @@ window.renderMatchTable = function(){
       var cls=p.uyum>=90?'hi':p.uyum>=80?'md':'lo', off=CIRC-(p.uyum/100)*CIRC, dirCls=p.dir==='IMP'?'imp':'exp';
       var reasons=(p.reasons||[]).map(function(k){ return '<span class="rz'+(k==='dir_c'?' hot':'')+'">'+RZ[k]+'</span>'; }).join('');
       var lockedCls=p.locked?' style="position:relative;filter:blur(3px);pointer-events:none;user-select:none"':'';
-      return '<div class="mcard"'+lockedCls+'><div class="mring '+cls+'"><svg viewBox="0 0 76 76"><circle class="rbg" cx="38" cy="38" r="32"/><circle class="rfg" cx="38" cy="38" r="32" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="rtxt"><div class="n">'+escapeHtml(p.uyum)+'</div><div class="s">Match</div></div></div>'+
+      return '<div class="mcard"'+lockedCls+'><div class="mring '+cls+'"><svg viewBox="0 0 76 76"><circle class="rbg" cx="38" cy="38" r="32"/><circle class="rfg" cx="38" cy="38" r="32" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="rtxt"><div class="n">'+escapeHtml(p.uyum)+'</div><div class="s">'+kvT('Match')+'</div></div></div>'+
        '<div class="mmid"><div class="mhead"><div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px">'+(p.locked?secTileHTML(p.sec,44,10):logoTile(p,44,10))+'<div style="flex:1;min-width:0"><div class="mnm">'+escapeHtml(p.nm)+'</div><div class="msub">'+escapeHtml(p.locked?'•••••':((d[p.cn_key]||p.cn_key)+(p.yr?' · '+p.yr:'')))+(p.sec!=null?' · '+escapeHtml(secs[p.sec]||''):'')+'</div></div></div>'+(p.dir?'<span class="mdirpill '+dirCls+'">'+dirLabel(p)+'</span>':'')+'</div>'+
        '<div class="mreasons">'+reasons+'</div>'+
        '<div class="mbars"><div class="mbar"><div class="bl"><span>'+kvT('Ürün Uyumu')+'</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>'+kvT('Yön Uyumu')+'</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+

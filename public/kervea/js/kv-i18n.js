@@ -281,6 +281,40 @@ add([
  ['Önizle','Preview','Vista previa','Aperçu','معاينة','Предпросмотр'],
 ]);
 
+// ── genel arayüz: erişilebilirlik etiketleri, eşleşme nedenleri, ödeme/promosyon iletileri ──
+add([
+ ['Kervea küresel koridor haritası','Kervea global trade map','Mapa global de comercio de Kervea','Carte mondiale des échanges Kervea','خريطة Kervea العالمية للتجارة','Глобальная карта торговли Kervea'],
+ ['Doğrulanmış','Verified','Verificada','Vérifiée','موثّقة','Проверена'],
+ ['Günlük limit doldu','Daily limit reached','Límite diario alcanzado','Limite quotidienne atteinte','تم بلوغ الحد اليومي','Дневной лимит исчерпан'],
+ ['Bugün için iletişim bilgisi görüntüleme limitine ulaştınız. Yarın tekrar deneyin.','You have reached today\'s limit for viewing contact details. Try again tomorrow.','Ha alcanzado el límite de hoy para ver datos de contacto. Inténtelo de nuevo mañana.','Vous avez atteint la limite du jour pour consulter des coordonnées. Réessayez demain.','لقد بلغت حد اليوم لعرض بيانات الاتصال. حاول مجددًا غدًا.','Вы достигли дневного лимита просмотра контактов. Попробуйте завтра.'],
+ ['Premium için önce giriş yapın','Sign in first to get Premium','Inicie sesión primero para obtener Premium','Connectez-vous d\'abord pour passer à Premium','سجّل الدخول أولًا للحصول على Premium','Сначала войдите, чтобы подключить Premium'],
+ ['Logo kaldırıldı','Logo removed','Logotipo eliminado','Logo retiré','تمت إزالة الشعار','Логотип удалён'],
+ ['{code} · {d} indirim uygulandı ✓','{code} · {d} discount applied ✓','{code} · descuento de {d} aplicado ✓','{code} · remise de {d} appliquée ✓','{code} · تم تطبيق خصم {d} ✓','{code} · скидка {d} применена ✓'],
+ ['{code} uygulandı','{code} applied','{code} aplicado','{code} appliqué','تم تطبيق {code}','{code} применён'],
+ ['Geçersiz promosyon kodu','Invalid promo code','Código promocional no válido','Code promo invalide','رمز ترويجي غير صالح','Недействительный промокод'],
+ ['{code} kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.','The code {code} is invalid, expired or has reached its usage limit.','El código {code} no es válido, ha caducado o ha alcanzado su límite de uso.','Le code {code} est invalide, expiré ou a atteint sa limite d\'utilisation.','الرمز {code} غير صالح أو منتهي الصلاحية أو بلغ حد الاستخدام.','Код {code} недействителен, истёк или исчерпал лимит использований.'],
+ ['Onaylı firma gerekli','Approved company required','Se requiere una empresa aprobada','Entreprise approuvée requise','يلزم وجود شركة معتمدة','Нужна одобренная компания'],
+ ['Premium için önce firma başvurunuzun onaylanması gerekir.','Your company application must be approved before you can get Premium.','Su solicitud de empresa debe aprobarse antes de obtener Premium.','Votre candidature d\'entreprise doit être approuvée avant de passer à Premium.','يجب الموافقة على طلب شركتك قبل الحصول على Premium.','Прежде чем подключить Premium, заявку вашей компании должны одобрить.'],
+ ['Promosyon kodu geçersiz','Promo code not valid','Código promocional no válido','Code promo non valide','الرمز الترويجي غير صالح','Промокод недействителен'],
+ ['Kod artık kullanılamıyor.','This code can no longer be used.','Este código ya no se puede usar.','Ce code ne peut plus être utilisé.','لم يعد بالإمكان استخدام هذا الرمز.','Этот код больше нельзя использовать.'],
+ ['Ödeme başlatılamadı','The payment could not be started','No se pudo iniciar el pago','Le paiement n\'a pas pu être lancé','تعذّر بدء الدفع','Не удалось начать оплату'],
+ ['Premium aktif','Premium active','Premium activo','Premium actif','Premium مفعّل','Premium активен'],
+ ['Üyeliğiniz etkinleştirildi.','Your membership has been activated.','Su membresía se ha activado.','Votre abonnement a été activé.','تم تفعيل عضويتك.','Ваше членство активировано.'],
+ ['Siparişiniz alındı','Order received','Pedido recibido','Commande reçue','تم استلام طلبك','Заказ принят'],
+ ['Sipariş #{n} oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.','Order #{n} created. Payment details will be sent to your e-mail; Premium opens automatically once the payment is confirmed.','Pedido #{n} creado. Los datos de pago se enviarán a su correo; Premium se activa automáticamente al confirmarse el pago.','Commande n° {n} créée. Les informations de paiement seront envoyées par e-mail ; Premium s\'active automatiquement une fois le paiement confirmé.','تم إنشاء الطلب رقم {n}. سنرسل بيانات الدفع إلى بريدك الإلكتروني، ويُفعَّل Premium تلقائيًا عند تأكيد الدفع.','Заказ № {n} создан. Платёжные данные придут на ваш e-mail; Premium включится автоматически после подтверждения оплаты.'],
+ ['Kart bilgileri bu sayfada alınmaz; güvenli ödeme sayfasına yönlendirileceksiniz.','Card details are not entered on this page; you will be redirected to a secure payment page.','Los datos de la tarjeta no se introducen en esta página; se le redirigirá a una página de pago segura.','Les données de carte ne sont pas saisies sur cette page ; vous serez redirigé vers une page de paiement sécurisée.','لا تُدخَل بيانات البطاقة في هذه الصفحة؛ ستُحوَّل إلى صفحة دفع آمنة.','Данные карты на этой странице не вводятся; вы будете перенаправлены на защищённую страницу оплаты.'],
+ ['Henüz firma başvurunuz yok','You have not applied with a company yet','Aún no ha enviado la solicitud de su empresa','Vous n\'avez pas encore déposé de candidature d\'entreprise','لم تقدّم طلب شركة بعد','Вы ещё не подали заявку от компании'],
+ ['Firma başvurunuzu yapın','Submit your company application','Envíe la solicitud de su empresa','Déposez la candidature de votre entreprise','قدّم طلب شركتك','Подайте заявку от вашей компании'],
+ ['Görsel Kimlik','Visual identity','Identidad visual','Identité visuelle','الهوية البصرية','Визуальная идентичность'],
+ ['Yasal & Firma','Legal & company','Datos legales','Informations légales','معلومات قانونية','Юр. данные'],
+ ['Ticari Bilgiler','Trade details','Datos comerciales','Informations commerciales','معلومات تجارية','Торговые данные'],
+ ['Sosyal & İletişim','Social & contact','Redes y contacto','Réseaux & contact','التواصل الاجتماعي','Соцсети и контакты'],
+ ['Bu bölümü kaydet','Save this section','Guardar esta sección','Enregistrer cette section','حفظ هذا القسم','Сохранить этот раздел'],
+ ['Firma, ürün veya HS kodu ara...','Search company, product or HS code...','Buscar empresa, producto o código HS...','Rechercher une entreprise, un produit ou un code SH...','ابحث عن شركة أو منتج أو رمز HS...','Поиск компании, товара или кода ТН ВЭД...'],
+ ['Ülke değişikliği için destek ile iletişime geçin','Contact support to change the country','Contacte con soporte para cambiar el país','Contactez le support pour modifier le pays','تواصل مع الدعم لتغيير الدولة','Для смены страны обратитесь в поддержку'],
+ ['Match','Match','Afinidad','Affinité','تطابق','Совпадение'],
+]);
+
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
 function fill(s, vars){
   if(!vars) return s;

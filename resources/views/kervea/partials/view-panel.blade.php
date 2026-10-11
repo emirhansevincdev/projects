@@ -95,7 +95,7 @@
     <!-- MATCHES -->
     <div class="dpanel" id="dp-matches">
      <h2 data-i18n="mt_h">Eşleşmelerim</h2>
-     <p class="sub" data-i18n="mt_sub">AI eşleştirme motoru sizin için sıraladı. Filtrele, dışa aktar, doğrudan mesajlaş.</p>
+     <p class="sub" data-i18n="mt_sub">Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.</p>
      <div class="mfil">
       <input maxlength="200" placeholder="Firma, ürün veya HS kodu ara..." id="mfSearch" oninput="renderMatchTable()"/>
       <select id="mfDir" onchange="renderMatchTable()"><option value="" data-i18n="all_dir">Tüm yönler</option><option value="EXP" data-i18n="dir_exp">Satıyor</option><option value="IMP" data-i18n="dir_imp">Alıyor</option></select>
@@ -133,10 +133,10 @@
 
      <!-- Section anchor navigation -->
      <div class="prof-anchors">
-      <a href="#sec_visual" onclick="scrollAnchor('sec_visual',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>Görsel Kimlik</a>
-      <a href="#sec_legal" onclick="scrollAnchor('sec_legal',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Yasal & Firma</a>
-      <a href="#sec_biz" onclick="scrollAnchor('sec_biz',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l3 6 5 1-3.5 3.5.83 5.5L6 15l-5.33 2.5.83-5.5L-1.5 8.5 3.5 8 6 2z" transform="translate(6,4)"/></svg>Ticari Bilgiler</a>
-      <a href="#sec_social" onclick="scrollAnchor('sec_social',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>Sosyal & İletişim</a>
+      <a href="#sec_visual" onclick="scrollAnchor('sec_visual',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-kvt>Görsel Kimlik</span></a>
+      <a href="#sec_legal" onclick="scrollAnchor('sec_legal',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-kvt>Yasal & Firma</span></a>
+      <a href="#sec_biz" onclick="scrollAnchor('sec_biz',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l3 6 5 1-3.5 3.5.83 5.5L6 15l-5.33 2.5.83-5.5L-1.5 8.5 3.5 8 6 2z" transform="translate(6,4)"/></svg><span data-kvt>Ticari Bilgiler</span></a>
+      <a href="#sec_social" onclick="scrollAnchor('sec_social',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg><span data-kvt>Sosyal & İletişim</span></a>
      </div>
 
      <div class="dcard" id="sec_visual">
