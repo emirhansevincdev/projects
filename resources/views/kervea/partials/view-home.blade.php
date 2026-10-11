@@ -20,7 +20,7 @@
           <span class="kv-hero-loop-item" data-region="as" data-i18n="loop_as">Asya</span>
         </span>
       </div>
-   <p class="lead" data-i18n="h_lead">Vergi levhası ve sicil kaydıyla doğrulanmış firmalar. 6 dilde çeviri, uçtan uca şifreli mesajlaşma.</p>
+   <p class="lead" data-i18n="h_lead">Belgeleri bir yönetici tarafından incelenmiş firmalar. Ürün, firma adı veya HS koduyla arayın; sonuçları ülke ve sektöre göre daraltın.</p>
    <div class="searchbig">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9FC3B9" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
     <input maxlength="200" id="qinput" placeholder="Buraya aramak istediğinizi yazın — ürün, firma veya HS kodu"/>
@@ -28,9 +28,9 @@
    </div>
    <div class="dene">
     <span class="lbl" data-i18n="dene_lbl">DENE</span>
-    <span class="c" data-i18n="qt1" onclick="quickTry(this.textContent)">Finlandiya'da mobilya aksesuarı satın almacısı</span>
-    <span class="c" data-i18n="qt2" onclick="quickTry(this.textContent)">Fildişi Sahili'nde kakao tedarikçisi</span>
-    <span class="c" data-i18n="qt3" onclick="quickTry(this.textContent)">Kazakistan'da tekstil alıcısı</span>
+    <button type="button" class="c" data-i18n="qt1" data-cc="fi" data-dir="IMP" data-sec="9" onclick="quickTry(this)">Finlandiya'da mobilya alıcısı</button>
+    <button type="button" class="c" data-i18n="qt2" data-cc="ci" data-dir="EXP" data-q="1801" onclick="quickTry(this)">Fildişi Sahili'nde kakao tedarikçisi</button>
+    <button type="button" class="c" data-i18n="qt3" data-cc="kz" data-dir="IMP" data-sec="10" onclick="quickTry(this)">Kazakistan'da tekstil alıcısı</button>
    </div>
    <div class="qf">
     <span class="lbl" data-i18n="qf_lbl">HIZLI FİLTRE</span>
@@ -54,8 +54,8 @@
     <select id="secSel" onchange="applyFilters();renderSecStrip()" style="display:none"></select>
    </div>
    <div class="stats" id="statsBar">
-    <div class="statc"><div class="n" data-stat="firms" data-target="0">0</div><div class="l" data-i18n="s_pos">Aktif firma</div></div>
-    <div class="statc"><div class="n" data-stat="countries" data-target="0">0</div><div class="l" data-i18n="s_ctr">Ülke ve bölge</div></div>
+    <div class="statc"><div class="n" data-stat="firms" data-target="0">0</div><div class="l" data-i18n="s_pos">Doğrulanmış firma</div></div>
+    <div class="statc"><div class="n" data-stat="countries" data-target="0">0</div><div class="l" data-i18n="s_ctr">Firması olan ülke</div></div>
     <div class="statc"><div class="n" data-stat="sectors" data-target="0">0</div><div class="l" data-i18n="s_sec">Sektör</div></div>
     <div class="statc"><div class="n" data-stat="langs" data-target="0">0</div><div class="l" data-i18n="s_lng">Dil</div></div>
    </div>
@@ -84,28 +84,28 @@
 <div class="whyk-sec"><div class="wrap">
  <div class="whyk-hd">
   <h2 data-i18n="why_h">Neden Kervea?</h2>
-  <p data-i18n="why_p">Doğrulanmış firmalarla doğrudan iletişim. Komisyon yok, güvenilmez tedarikçi yok, sadece gerçek ticaret.</p>
+  <p data-i18n="why_p">Kervea bir pazaryeri değildir: sepet, ödeme ve komisyon yoktur. Firmalar belgeleriyle başvurur, bir yönetici inceler; ticareti taraflar kendi aralarında yapar.</p>
  </div>
- <div class="whyk">
+  <div class="whyk">
   <div class="whyk-card">
    <div class="whyk-content">
-    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20l2-14h16l2 14"/><path d="M6 20V10M18 20V10M12 20V10"/></svg></div>
-    <div class="whyk-n">249</div>
-    <div class="whyk-l" data-i18n="why_1t">Ülke koridoru</div>
+    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="whyk-n" data-i18n="why_1n">Belge incelemesi</div>
+    <div class="whyk-l" data-i18n="why_1t">Başvuran her firmanın belgeleri bir yönetici tarafından kontrol edilir; onaylananlar “doğrulanmış” rozetiyle listelenir.</div>
    </div>
   </div>
   <div class="whyk-card">
    <div class="whyk-content">
-    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <div class="whyk-n">%94</div>
-    <div class="whyk-l" data-i18n="why_2t">Doğrulama başarısı</div>
+    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 20l2-14h16l2 14"/><path d="M6 20V10M18 20V10M12 20V10"/></svg></div>
+    <div class="whyk-n" data-i18n="why_2n">Komisyon yok</div>
+    <div class="whyk-l" data-i18n="why_2t">Kervea satışa karışmaz. Sepet ve ödeme yoktur; anlaşma ve ödeme firmalar arasında yapılır.</div>
    </div>
   </div>
   <div class="whyk-card">
    <div class="whyk-content">
-    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l6 6 4-4 6 6M15 8h6v6"/></svg></div>
-    <div class="whyk-n">6</div>
-    <div class="whyk-l" data-i18n="why_3t">Dilde canlı çeviri</div>
+    <div class="whyk-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg></div>
+    <div class="whyk-n" data-i18n="why_3n">6 dil</div>
+    <div class="whyk-l" data-i18n="why_3t">Site Türkçe, İngilizce, İspanyolca, Fransızca, Arapça ve Rusça kullanılabilir.</div>
    </div>
   </div>
  </div>
@@ -121,22 +121,22 @@
   <div class="hiw-card">
    <div class="hiw-body">
     <div class="hiw-num">01</div>
-    <h3 data-i18n="hiw_1t">Doğrulanmış partneri bulun</h3>
-    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_1a">AI eşleştirme</span><span class="hiw-tg" data-i18n="hiw_1b">3 aşamalı doğrulama</span><span class="hiw-tg" data-i18n="hiw_1c">Kervea rozeti</span></div>
+    <h3 data-i18n="hiw_1t">Doğrulanmış firmayı bulun</h3>
+    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_1a">Ürün, firma veya HS kodu</span><span class="hiw-tg" data-i18n="hiw_1b">Ülke ve sektör filtresi</span><span class="hiw-tg" data-i18n="hiw_1c">Doğrulanmış rozeti</span></div>
    </div>
   </div>
   <div class="hiw-card">
    <div class="hiw-body">
     <div class="hiw-num">02</div>
-    <h3 data-i18n="hiw_2t">Doğrudan üreticiyle konuşun</h3>
-    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_2a">Otomatik çeviri</span><span class="hiw-tg" data-i18n="hiw_2b">E2E şifreli</span><span class="hiw-tg" data-i18n="hiw_2c">Karar vericiye erişim</span></div>
+    <h3 data-i18n="hiw_2t">Doğrudan firmayla iletişime geçin</h3>
+    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_2a">Aynı sektörde mesajlaşma</span><span class="hiw-tg" data-i18n="hiw_2b">İletişim bilgisi: Premium</span><span class="hiw-tg" data-i18n="hiw_2c">Diğer sektörler: kredi</span></div>
    </div>
   </div>
   <div class="hiw-card">
    <div class="hiw-body">
     <div class="hiw-num">03</div>
     <h3 data-i18n="hiw_3t">Anlaşın, sevk edin</h3>
-    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_3a">INCOTERM standardı</span><span class="hiw-tg" data-i18n="hiw_3b">LC/TT desteği</span><span class="hiw-tg" data-i18n="hiw_3c">Lojistik ağı</span></div>
+    <div class="hiw-tags"><span class="hiw-tg" data-i18n="hiw_3a">Profilde INCOTERM bilgisi</span><span class="hiw-tg" data-i18n="hiw_3b">Ödeme şekli firmalar arasında</span><span class="hiw-tg" data-i18n="hiw_3c">Kervea satışa karışmaz</span></div>
    </div>
   </div>
  </div>
@@ -148,199 +148,75 @@
      referans yok. Schema.org iskeleti hazır — ilk
      doğrulanmış üye referansları geldikçe doldurulacak.
      ============================================ -->
-<section id="kd-block" class="kd-wrap" aria-labelledby="kd-title" itemscope itemtype="https://schema.org/Organization">
-  <meta itemprop="name" content="Kervea"/>
-  <meta itemprop="url" content="https://kervea.com"/>
+<section id="kd-block" class="kd-wrap" aria-labelledby="kd-title">
   <div class="kd-inner">
-
     <header class="kd-head">
       <div class="kd-eyebrow" data-i18n="kd_eyebrow">KERVEA KÜRSÜSÜ</div>
-      <h2 id="kd-title" class="kd-title" data-i18n="kd_title">Referanslarımızı satın alamazsınız.</h2>
-      <p class="kd-lead" data-i18n="kd_lead">
-        Kervea 2026 pilot dönemindedir. Bu bölümde sadece <strong>doğrulanmış üyelerin gerçek yorumları</strong> yayınlanır — LinkedIn hesabı, şirket sicili ve gerçek ticaret hacmi eşleşen üyeler.
-      </p>
+      <h2 id="kd-title" class="kd-title" data-i18n="kd_title">Referanslar, gerçek üyeler yazdıkça yayınlanır.</h2>
+      <p class="kd-lead" data-i18n="kd_lead">Kervea yeni bir ağdır ve henüz yayınlanmış bir üye yorumu yoktur. Sahte referans göstermiyoruz; üyeler yazıp onay verdikçe burada yer alacak. Yorum karşılığında ücret alınmaz.</p>
     </header>
-
-    <!-- MANIFESTO KART · Neden burada sahte yorum yok -->
-    <article class="kd-card kd-manifesto" aria-label="Referans standardımız">
-      <div class="kd-badge">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
-        </svg>
-        <span data-i18n="kd_badge">Referans Standardımız</span>
-      </div>
-      <h3 class="kd-mtitle" data-i18n="kd_m_title">Neden burada henüz yorum yok?</h3>
-      <div class="kd-mgrid">
-        <div class="kd-mrow">
-          <span class="kd-mnum">01</span>
-          <div>
-            <div class="kd-mrow-t" data-i18n="kd_m1t">Kervea 2026 pilot dönemindedir</div>
-            <div class="kd-mrow-d" data-i18n="kd_m1d">İlk 10 doğrulanmış üye şu anda entegrasyon aşamasında. Referansları yayına alındıkça buraya, tarih ve doğrulama rozetiyle eklenir.</div>
-          </div>
-        </div>
-        <div class="kd-mrow">
-          <span class="kd-mnum">02</span>
-          <div>
-            <div class="kd-mrow-t" data-i18n="kd_m2t">Ödeme karşılığı yorum kabul etmiyoruz</div>
-            <div class="kd-mrow-d" data-i18n="kd_m2d">Hiçbir üye, yorum veya öne çıkma karşılığında ücretlendirilmez. Yorumlar üyenin kendi profilinden, düzenlenmemiş olarak alınır.</div>
-          </div>
-        </div>
-        <div class="kd-mrow">
-          <span class="kd-mnum">03</span>
-          <div>
-            <div class="kd-mrow-t" data-i18n="kd_m3t">Her yorumun arkasında doğrulanabilir bir üye vardır</div>
-            <div class="kd-mrow-d" data-i18n="kd_m3d">Yorum yazan her üyenin LinkedIn profili, şirket ticari sicili ve son 12 aydaki ticaret hacmi kontrol edilir. Bu üç kontrol tamamlanmadan yorum yayınlanmaz.</div>
-          </div>
-        </div>
-        <div class="kd-mrow">
-          <span class="kd-mnum">04</span>
-          <div>
-            <div class="kd-mrow-t" data-i18n="kd_m4t">Olumsuz yorumlar da yayınlanır</div>
-            <div class="kd-mrow-d" data-i18n="kd_m4d">Kervea'yı değerlendiren üyeler bunu 1–5 yıldız aralığında yapar. Filtreleme yoktur; olumsuz geri bildirim, cevabımızla birlikte yayınlanır.</div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- YER TUTUCU KARTLAR · İlk 3 referans slot'u -->
-    <div class="kd-grid" aria-label="İlk referans slotları">
-      <article class="kd-slot" aria-label="İlk referans slotu">
-        <div class="kd-slot-tag" data-i18n="kd_slot_open">SLOT AÇIK</div>
-        <div class="kd-slot-icon" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <div class="kd-slot-txt" data-i18n="kd_slot1">İlk doğrulanmış üye referansı için ayrıldı.</div>
-        <div class="kd-slot-sub" data-i18n="kd_slot_when">Üye entegrasyonu tamamlandığında yayına alınır.</div>
-      </article>
-      <article class="kd-slot" aria-label="İkinci referans slotu">
-        <div class="kd-slot-tag" data-i18n="kd_slot_open">SLOT AÇIK</div>
-        <div class="kd-slot-icon" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <div class="kd-slot-txt" data-i18n="kd_slot2">İkinci doğrulanmış üye referansı için ayrıldı.</div>
-        <div class="kd-slot-sub" data-i18n="kd_slot_when">Üye entegrasyonu tamamlandığında yayına alınır.</div>
-      </article>
-      <article class="kd-slot" aria-label="Üçüncü referans slotu">
-        <div class="kd-slot-tag" data-i18n="kd_slot_open">SLOT AÇIK</div>
-        <div class="kd-slot-icon" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/></svg>
-        </div>
-        <div class="kd-slot-txt" data-i18n="kd_slot3">Üçüncü doğrulanmış üye referansı için ayrıldı.</div>
-        <div class="kd-slot-sub" data-i18n="kd_slot_when">Üye entegrasyonu tamamlandığında yayına alınır.</div>
-      </article>
-    </div>
-
-    <!-- CTA · Erken üye ol -->
     <div class="kd-cta">
       <div class="kd-cta-txt">
-        <div class="kd-cta-t" data-i18n="kd_cta_t">İlk 10 pilot üyeden biri olun.</div>
-        <div class="kd-cta-d" data-i18n="kd_cta_d">Kervea'nın pilot döneminde yer alan üyeler, referansları platform ana sayfasında ve arama sonuçlarında öne çıkar. Listeleme ücretsizdir; Premium yıllık 280 USD'dir.</div>
+        <div class="kd-cta-t" data-i18n="kd_cta_t">Firmanızı Kervea'ya ekleyin.</div>
+        <div class="kd-cta-d" data-i18n="kd_cta_d">Listeleme ücretsizdir. Başvurunuzdaki belgeler incelendikten sonra profiliniz yayına girer.</div>
       </div>
-      <a class="btn kd-cta-btn" onclick="go('add')" data-i18n="kd_cta_btn">Firmamı Ekle</a>
+      <a class="btn kd-cta-btn" role="button" tabindex="0" onclick="go('add')" data-i18n="kd_cta_btn">Firmamı Ekle</a>
     </div>
-
   </div>
 </section>
 <!-- /KERVEA KÜRSÜSÜ -->
 
 <!-- ============================================
-     KERVEA GEO BLOĞU (Faz 3 · Generative Engine Optimization)
-     1) AI arama motorlarına doğrudan Kervea sorgulama butonları
-     2) FAQPage schema.org markup — ChatGPT/Perplexity/Google AI
-        Overviews'un yanıtlarına içerik olarak alması için
+     SIKÇA SORULAN SORULAR (schema.org FAQPage)
      ============================================ -->
 <section id="geo-block" class="geo-wrap" aria-labelledby="geo-title" itemscope itemtype="https://schema.org/FAQPage">
   <div class="geo-inner">
-
-    <!-- ÜST · AI'da Kervea'yı Sorun -->
     <header class="geo-head">
-      <div class="geo-eyebrow" data-i18n="geo_eyebrow">AI ARAMA MOTORLARINDA KERVEA</div>
-      <h2 id="geo-title" class="geo-title" data-i18n="geo_title">Kervea'yı AI'a sorun.</h2>
-      <p class="geo-lead" data-i18n="geo_lead">
-        Kervea hakkında bağımsız bir görüş almak için doğrudan AI arama motorlarına sorun. Aşağıdaki bağlantılar hazır sorguyla ilgili motoru açar — Kervea'nın kamuya açık bilgilerine dair yanıt alırsınız.
-      </p>
+      <div class="geo-eyebrow" data-i18n="geo_eyebrow">SSS</div>
+      <h2 id="geo-title" class="geo-title" data-i18n="geo_title">Sıkça sorulan sorular</h2>
+      <p class="geo-lead" data-i18n="geo_lead">Kervea'nın ne yaptığı ve ne yapmadığı hakkında kısa cevaplar.</p>
     </header>
-
-    <div class="geo-btns">
-      <a class="geo-btn" href="https://chatgpt.com/?q=Kervea%20nedir%3F%20T%C3%BCrkiye-Bat%C4%B1%20Afrika%20aras%C4%B1%20B2B%20ticaret%20e%C5%9Fle%C5%9Ftirme%20platformu%20Kervea%20hakk%C4%B1nda%20bilgi%20ver." target="_blank" rel="noopener noreferrer nofollow">
-        <svg class="geo-ico" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.28 10.24a5.9 5.9 0 0 0-.51-4.85 6 6 0 0 0-6.46-2.87A6 6 0 0 0 4.98 4.44 5.9 5.9 0 0 0 1.72 13.76a5.9 5.9 0 0 0 .51 4.85 6 6 0 0 0 6.46 2.87 5.98 5.98 0 0 0 4.51 2.02 6 6 0 0 0 5.82-4.34 5.9 5.9 0 0 0 3.26-9.32z"/></svg>
-        <span class="geo-btn-l">ChatGPT</span>
-        <span class="geo-btn-s" data-i18n="geo_ask">Sor</span>
-      </a>
-      <a class="geo-btn" href="https://www.perplexity.ai/?q=Kervea%20nedir%3F%20T%C3%BCrkiye-Bat%C4%B1%20Afrika%20aras%C4%B1%20B2B%20ticaret%20e%C5%9Fle%C5%9Ftirme%20platformu" target="_blank" rel="noopener noreferrer nofollow">
-        <svg class="geo-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/><path d="m21 21-4.35-4.35"/></svg>
-        <span class="geo-btn-l">Perplexity</span>
-        <span class="geo-btn-s" data-i18n="geo_ask">Sor</span>
-      </a>
-      <a class="geo-btn" href="https://www.google.com/search?q=Kervea+B2B+ticaret+e%C5%9Fle%C5%9Ftirme+platformu" target="_blank" rel="noopener noreferrer nofollow">
-        <svg class="geo-ico" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        <span class="geo-btn-l">Google</span>
-        <span class="geo-btn-s" data-i18n="geo_ask">Sor</span>
-      </a>
-      <a class="geo-btn" href="https://www.bing.com/search?q=Kervea+B2B+ticaret+e%C5%9Fle%C5%9Ftirme+platformu" target="_blank" rel="noopener noreferrer nofollow">
-        <svg class="geo-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h6v16H4z"/><path d="M10 10l6 3-6 4z"/></svg>
-        <span class="geo-btn-l">Bing</span>
-        <span class="geo-btn-s" data-i18n="geo_ask">Sor</span>
-      </a>
-      <a class="geo-btn" href="https://you.com/search?q=Kervea+B2B+trade+matchmaking+platform+Turkey+West+Africa" target="_blank" rel="noopener noreferrer nofollow">
-        <svg class="geo-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M2 12h20"/></svg>
-        <span class="geo-btn-l">You.com</span>
-        <span class="geo-btn-s" data-i18n="geo_ask">Sor</span>
-      </a>
-    </div>
-
-    <!-- SIKÇA SORULAN SORULAR · Schema.org FAQPage -->
     <div class="geo-faq">
-      <h3 class="geo-faq-title" data-i18n="geo_faq_title">Sıkça Sorulan Sorular</h3>
-      <p class="geo-faq-sub" data-i18n="geo_faq_sub">Kervea hakkında en çok sorulan sorular ve doğrudan cevapları. Bu bölüm AI arama motorları tarafından da okunur.</p>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <summary itemprop="name" data-i18n="geo_q1_q">Kervea nedir?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q1_a">Kervea, satıcı ile alıcıyı Trademap ve resmi gümrük verileriyle doğrudan buluşturan bir B2B ticaret eşleştirme ağıdır. Aracı değildir, komisyon almaz. Listeleme ücretsizdir, Premium üyelik yıllık 280 USD'dir. İlk odak koridoru Türkiye ile Batı Afrika arasındadır.</div>
+          <div itemprop="text" data-i18n="geo_q1_a">Kervea, doğrulanmış firmaları ülke ve sektöre göre listeleyen çok dilli bir B2B ticaret eşleştirme ağıdır. Pazaryeri değildir; sepet, ödeme ve komisyon yoktur. Satıcı ile alıcıyı buluşturur, ticareti taraflar kendi aralarında yapar.</div>
         </div>
       </details>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name" data-i18n="geo_q2_q">Kervea Alibaba veya benzeri platformlardan nasıl farklıdır?</summary>
+        <summary itemprop="name" data-i18n="geo_q2_q">Kervea bir pazaryeri mi?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q2_a">Üç temel farkımız vardır. Birincisi, Kervea aracı değildir — satıcı ile alıcı doğrudan iletişim kurar, komisyon alınmaz. İkincisi, sıralama satın alınamaz — üyeler yalnızca uyum skorlarına göre sıralanır, öne çıkma ücreti yoktur. Üçüncüsü, ücretlendirme tamamen şeffaftır — yıllık 280 USD sabit Premium ücret, listeleme ücretsiz.</div>
+          <div itemprop="text" data-i18n="geo_q2_a">Hayır. Kervea satış yapmaz, ödeme toplamaz ve komisyon almaz. Firmaları belgeleriyle doğrular, listeler ve iletişim kurmalarını sağlar.</div>
         </div>
       </details>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name" data-i18n="geo_q3_q">Kervea üyelerini nasıl doğrular?</summary>
+        <summary itemprop="name" data-i18n="geo_q3_q">Firmalar nasıl doğrulanıyor?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q3_a">Kervea 4 kademeli bir doğrulama sistemi uygular: (1) e-posta doğrulaması, (2) resmi ticaret sicili kontrolü, (3) banka hesabı ve IBAN eşleştirmesi, (4) opsiyonel saha doğrulaması. Bu kademelerin hiçbiri ödeme karşılığında atlanamaz.</div>
+          <div itemprop="text" data-i18n="geo_q3_a">Başvuran firma ticari kimliğini ve belgelerini (ör. vergi levhası, ticaret sicili) yükler. Belgeleri bir yönetici inceler. Onaylanan firmanın profili “doğrulanmış” rozetiyle yayına girer; onaylanmayan başvuru yayınlanmaz.</div>
         </div>
       </details>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name" data-i18n="geo_q4_q">Kervea üyelik ücretlendirmesi nasıldır?</summary>
+        <summary itemprop="name" data-i18n="geo_q4_q">Ücret nasıl işliyor?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q4_a">Temel listeleme ücretsizdir — hiçbir sınırlama olmadan profil oluşturabilir, ürünlerinizi listeleyebilir, gelen talepleri alabilirsiniz. Premium üyelik yıllık 280 USD sabit bedeldir ve gelişmiş arama, öncelikli müşteri desteği, ticaret veri erişimi gibi ek özellikler sunar. Komisyon veya işlem bedeli yoktur.</div>
+          <div itemprop="text" data-i18n="geo_q4_a">Firma eklemek ve listelenmek ücretsizdir. Premium üyelik yıllıktır ve firmaların iletişim bilgilerini görmenizi sağlar. Başka sektörlerdeki kişilere ulaşmak için kredi kullanılır: üyelikte başlangıç kredisi tanımlanır, ek kredi paketi satın alınabilir. Kervea hiçbir işlemden komisyon almaz.</div>
         </div>
       </details>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name" data-i18n="geo_q5_q">Kervea hangi ülkeleri kapsıyor?</summary>
+        <summary itemprop="name" data-i18n="geo_q5_q">Hangi ülkelerden firma var?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q5_a">Kervea 2026 pilot döneminde Türkiye ile Batı Afrika koridoruna (özellikle Senegal, Fildişi Sahili, Nijerya, Fas, Gana) odaklanır. Sonraki dönemlerde Kuzey Afrika, Körfez ülkeleri ve BDT koridorları eklenecektir.</div>
+          <div itemprop="text" data-i18n="geo_q5_a">Herhangi bir ülkeden başvurulabilir. Ana sayfadaki küre üzerinde firması olan ülkeler vurgulanır; bir ülkenin üzerine gelince o ülkedeki doğrulanmış firma sayısını görürsünüz.</div>
         </div>
       </details>
-
       <details class="geo-q" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <summary itemprop="name" data-i18n="geo_q6_q">Kervea hangi ödeme ve lojistik altyapısını sunar?</summary>
+        <summary itemprop="name" data-i18n="geo_q6_q">Ödeme ve lojistik hizmeti var mı?</summary>
         <div class="geo-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text" data-i18n="geo_q6_a">Kervea LC (akreditif) ve TT (havale) gibi standart uluslararası ödeme yöntemlerini destekler. INCOTERMS standartlarına göre çalışan doğrulanmış lojistik ortaklarıyla entegrasyonu vardır. Ödeme ve teslimat işlemleri üyeler arasında doğrudan yürütülür — Kervea sürece taraf olmaz.</div>
+          <div itemprop="text" data-i18n="geo_q6_a">Hayır. Ödeme şekli (ör. akreditif, havale) ve teslimat şartları (INCOTERM) firma profilinde belirtilir; ödeme ve sevkiyat firmalar arasında yürür, Kervea sürece taraf olmaz.</div>
         </div>
       </details>
-
     </div>
-
   </div>
 </section>
-<!-- /KERVEA GEO BLOĞU -->
+<!-- /SSS -->
 
 
 </section>

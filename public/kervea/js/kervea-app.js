@@ -1,25 +1,3 @@
-/* Footer i18n key genişletmeleri — 6 dil */
-(function(){
-  var _extend = {
-    tr:{ft_col_platform:"Platform",ft_col_company:"Şirket",ft_col_legal:"Yasal",ft_l_hiw:"Nasıl Çalışır",ft_l_enterprise:"Kurumsal Çözümler",ft_brand_desc:"Doğrulanmış B2B ticaret ağı. Aracısız, komisyonsuz, gerçek ihracat ve ithalat bağlantıları."},
-    en:{ft_col_platform:"Platform",ft_col_company:"Company",ft_col_legal:"Legal",ft_l_hiw:"How It Works",ft_l_enterprise:"Enterprise Solutions",ft_brand_desc:"Verified B2B trade network. Direct export and import connections without brokers or commissions."},
-    es:{ft_col_platform:"Plataforma",ft_col_company:"Empresa",ft_col_legal:"Legal",ft_l_hiw:"Cómo Funciona",ft_l_enterprise:"Soluciones Corporativas",ft_brand_desc:"Red B2B verificada. Conexiones directas de exportación e importación sin intermediarios ni comisiones."},
-    fr:{ft_col_platform:"Plateforme",ft_col_company:"Société",ft_col_legal:"Légal",ft_l_hiw:"Comment ça marche",ft_l_enterprise:"Solutions Entreprise",ft_brand_desc:"Réseau B2B vérifié. Connexions directes d'exportation et d'importation sans intermédiaires ni commissions."},
-    ar:{ft_col_platform:"المنصة",ft_col_company:"الشركة",ft_col_legal:"قانوني",ft_l_hiw:"كيف يعمل",ft_l_enterprise:"حلول المؤسسات",ft_brand_desc:"شبكة تجارة B2B موثقة. اتصالات تصدير واستيراد مباشرة بدون وسطاء أو عمولات."},
-    ru:{ft_col_platform:"Платформа",ft_col_company:"Компания",ft_col_legal:"Правовая информация",ft_l_hiw:"Как это работает",ft_l_enterprise:"Корпоративные решения",ft_brand_desc:"Проверенная B2B торговая сеть. Прямые экспортно-импортные связи без посредников и комиссий."}
-  };
-  function _apply(){
-    if(typeof T === 'undefined' || !T){ setTimeout(_apply, 100); return; }
-    Object.keys(_extend).forEach(function(lang){
-      if(!T[lang]) T[lang] = {};
-      Object.assign(T[lang], _extend[lang]);
-    });
-    if(typeof apply === 'function'){ try{ apply(); }catch(e){} }
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', _apply);
-  } else { _apply(); }
-})();
 // =================== i18n DATA ===================
 var I18N_DATA = {"countries": ["ad", "ae", "af", "ag", "ai", "al", "am", "ao", "aq", "ar", "as", "at", "au", "aw", "ax", "az", "ba", "bb", "bd", "be", "bf", "bg", "bh", "bi", "bj", "bl", "bm", "bn", "bo", "bq", "br", "bs", "bt", "bv", "bw", "by", "bz", "ca", "cc", "cd", "cf", "cg", "ch", "ci", "ck", "cl", "cm", "cn", "co", "cr", "cu", "cv", "cw", "cx", "cy", "cz", "de", "dj", "dk", "dm", "do", "dz", "ec", "ee", "eg", "eh", "er", "es", "et", "fi", "fj", "fk", "fm", "fo", "fr", "ga", "gb", "gd", "ge", "gf", "gg", "gh", "gi", "gl", "gm", "gn", "gp", "gq", "gr", "gs", "gt", "gu", "gw", "gy", "hk", "hm", "hn", "hr", "ht", "hu", "id", "ie", "il", "im", "in", "io", "iq", "ir", "is", "it", "je", "jm", "jo", "jp", "ke", "kg", "kh", "ki", "km", "kn", "kp", "kr", "kw", "ky", "kz", "la", "lb", "lc", "li", "lk", "lr", "ls", "lt", "lu", "lv", "ly", "ma", "mc", "md", "me", "mf", "mg", "mh", "mk", "ml", "mm", "mn", "mo", "mp", "mq", "mr", "ms", "mt", "mu", "mv", "mw", "mx", "my", "mz", "na", "nc", "ne", "nf", "ng", "ni", "nl", "no", "np", "nr", "nu", "nz", "om", "pa", "pe", "pf", "pg", "ph", "pk", "pl", "pm", "pn", "pr", "ps", "pt", "pw", "py", "qa", "re", "ro", "rs", "ru", "rw", "sa", "sb", "sc", "sd", "se", "sg", "sh", "si", "sj", "sk", "sl", "sm", "sn", "so", "sr", "ss", "st", "sv", "sx", "sy", "sz", "tc", "td", "tf", "tg", "th", "tj", "tk", "tl", "tm", "tn", "to", "tr", "tt", "tv", "tw", "tz", "ua", "ug", "um", "us", "uy", "uz", "va", "vc", "ve", "vg", "vi", "vn", "vu", "wf", "ws", "ye", "yt", "za", "zm", "zw"], "country_i18n": {"tr": {"ad": "Andorra", "ae": "Birleşik Arap Emirlikleri", "af": "Afganistan", "ag": "Antigua ve Barbuda", "ai": "Anguilla", "al": "Arnavutluk", "am": "Ermenistan", "ao": "Angola", "aq": "Antarktika", "ar": "Arjantin", "as": "Amerikan Samoası", "at": "Avusturya", "au": "Avustralya", "aw": "Aruba", "ax": "Åland Adaları", "az": "Azerbaycan", "ba": "Bosna-Hersek", "bb": "Barbados", "bd": "Bangladeş", "be": "Belçika", "bf": "Burkina Faso", "bg": "Bulgaristan", "bh": "Bahreyn", "bi": "Burundi", "bj": "Benin", "bl": "Saint Barthelemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivya", "bq": "Karayip Hollandası", "br": "Brezilya", "bs": "Bahamalar", "bt": "Butan", "bv": "Bouvet Adası", "bw": "Botsvana", "by": "Belarus", "bz": "Belize", "ca": "Kanada", "cc": "Cocos (Keeling) Adaları", "cd": "Kongo - Kinşasa", "cf": "Orta Afrika Cumhuriyeti", "cg": "Kongo - Brazavil", "ch": "İsviçre", "ci": "Côte d’Ivoire", "ck": "Cook Adaları", "cl": "Şili", "cm": "Kamerun", "cn": "Çin", "co": "Kolombiya", "cr": "Kosta Rika", "cu": "Küba", "cv": "Cabo Verde", "cw": "Curaçao", "cx": "Christmas Adası", "cy": "Kıbrıs", "cz": "Çekya", "de": "Almanya", "dj": "Cibuti", "dk": "Danimarka", "dm": "Dominika", "do": "Dominik Cumhuriyeti", "dz": "Cezayir", "ec": "Ekvador", "ee": "Estonya", "eg": "Mısır", "eh": "Batı Sahra", "er": "Eritre", "es": "İspanya", "et": "Etiyopya", "fi": "Finlandiya", "fj": "Fiji", "fk": "Falkland Adaları", "fm": "Mikronezya", "fo": "Faroe Adaları", "fr": "Fransa", "ga": "Gabon", "gb": "Birleşik Krallık", "gd": "Grenada", "ge": "Gürcistan", "gf": "Fransız Guyanası", "gg": "Guernsey", "gh": "Gana", "gi": "Cebelitarık", "gl": "Grönland", "gm": "Gambiya", "gn": "Gine", "gp": "Guadeloupe", "gq": "Ekvator Ginesi", "gr": "Yunanistan", "gs": "Güney Georgia ve Güney Sandwich Adaları", "gt": "Guatemala", "gu": "Guam", "gw": "Gine-Bissau", "gy": "Guyana", "hk": "Çin Hong Kong ÖİB", "hm": "Heard Adası ve McDonald Adaları", "hn": "Honduras", "hr": "Hırvatistan", "ht": "Haiti", "hu": "Macaristan", "id": "Endonezya", "ie": "İrlanda", "il": "İsrail", "im": "Man Adası", "in": "Hindistan", "io": "Britanya Hint Okyanusu Toprakları", "iq": "Irak", "ir": "İran", "is": "İzlanda", "it": "İtalya", "je": "Jersey", "jm": "Jamaika", "jo": "Ürdün", "jp": "Japonya", "ke": "Kenya", "kg": "Kırgızistan", "kh": "Kamboçya", "ki": "Kiribati", "km": "Komorlar", "kn": "Saint Kitts ve Nevis", "kp": "Kuzey Kore", "kr": "Güney Kore", "kw": "Kuveyt", "ky": "Cayman Adaları", "kz": "Kazakistan", "la": "Laos", "lb": "Lübnan", "lc": "Saint Lucia", "li": "Liechtenstein", "lk": "Sri Lanka", "lr": "Liberya", "ls": "Lesotho", "lt": "Litvanya", "lu": "Lüksemburg", "lv": "Letonya", "ly": "Libya", "ma": "Fas", "mc": "Monako", "md": "Moldova", "me": "Karadağ", "mf": "Saint Martin", "mg": "Madagaskar", "mh": "Marshall Adaları", "mk": "Kuzey Makedonya", "ml": "Mali", "mm": "Myanmar (Burma)", "mn": "Moğolistan", "mo": "Çin Makao ÖİB", "mp": "Kuzey Mariana Adaları", "mq": "Martinik", "mr": "Moritanya", "ms": "Montserrat", "mt": "Malta", "mu": "Mauritius", "mv": "Maldivler", "mw": "Malavi", "mx": "Meksika", "my": "Malezya", "mz": "Mozambik", "na": "Namibya", "nc": "Yeni Kaledonya", "ne": "Nijer", "nf": "Norfolk Adası", "ng": "Nijerya", "ni": "Nikaragua", "nl": "Hollanda", "no": "Norveç", "np": "Nepal", "nr": "Nauru", "nu": "Niue", "nz": "Yeni Zelanda", "om": "Umman", "pa": "Panama", "pe": "Peru", "pf": "Fransız Polinezyası", "pg": "Papua Yeni Gine", "ph": "Filipinler", "pk": "Pakistan", "pl": "Polonya", "pm": "Saint Pierre ve Miquelon", "pn": "Pitcairn Adaları", "pr": "Porto Riko", "ps": "Filistin Bölgeleri", "pt": "Portekiz", "pw": "Palau", "py": "Paraguay", "qa": "Katar", "re": "Reunion", "ro": "Romanya", "rs": "Sırbistan", "ru": "Rusya", "rw": "Ruanda", "sa": "Suudi Arabistan", "sb": "Solomon Adaları", "sc": "Seyşeller", "sd": "Sudan", "se": "İsveç", "sg": "Singapur", "sh": "Saint Helena", "si": "Slovenya", "sj": "Svalbard ve Jan Mayen", "sk": "Slovakya", "sl": "Sierra Leone", "sm": "San Marino", "sn": "Senegal", "so": "Somali", "sr": "Surinam", "ss": "Güney Sudan", "st": "Sao Tome ve Principe", "sv": "El Salvador", "sx": "Sint Maarten", "sy": "Suriye", "sz": "Esvatini", "tc": "Turks ve Caicos Adaları", "td": "Çad", "tf": "Fransız Güney Toprakları", "tg": "Togo", "th": "Tayland", "tj": "Tacikistan", "tk": "Tokelau", "tl": "Timor-Leste", "tm": "Türkmenistan", "tn": "Tunus", "to": "Tonga", "tr": "Türkiye", "tt": "Trinidad ve Tobago", "tv": "Tuvalu", "tw": "Tayvan", "tz": "Tanzanya", "ua": "Ukrayna", "ug": "Uganda", "um": "ABD Küçük Harici Adaları", "us": "Amerika Birleşik Devletleri", "uy": "Uruguay", "uz": "Özbekistan", "va": "Vatikan", "vc": "Saint Vincent ve Grenadinler", "ve": "Venezuela", "vg": "Britanya Virjin Adaları", "vi": "ABD Virjin Adaları", "vn": "Vietnam", "vu": "Vanuatu", "wf": "Wallis ve Futuna", "ws": "Samoa", "ye": "Yemen", "yt": "Mayotte", "za": "Güney Afrika", "zm": "Zambiya", "zw": "Zimbabve"}, "en": {"ad": "Andorra", "ae": "United Arab Emirates", "af": "Afghanistan", "ag": "Antigua & Barbuda", "ai": "Anguilla", "al": "Albania", "am": "Armenia", "ao": "Angola", "aq": "Antarctica", "ar": "Argentina", "as": "American Samoa", "at": "Austria", "au": "Australia", "aw": "Aruba", "ax": "Åland Islands", "az": "Azerbaijan", "ba": "Bosnia & Herzegovina", "bb": "Barbados", "bd": "Bangladesh", "be": "Belgium", "bf": "Burkina Faso", "bg": "Bulgaria", "bh": "Bahrain", "bi": "Burundi", "bj": "Benin", "bl": "St. Barthélemy", "bm": "Bermuda", "bn": "Brunei", "bo": "Bolivia", "bq": "Caribbean Netherlands", "br": "Brazil", "bs": "Bahamas", "bt": "Bhutan", "bv": "Bouvet Island", "bw": "Botswana", "by": "Belarus", "bz": "Belize", "ca": "Canada", "cc": "Cocos (Keeling) Islands", "cd": "Congo - Kinshasa", "cf": "Central African Republic", "cg": "Congo - Brazzaville", "ch": "Switzerland", "ci": "Côte d’Ivoire", "ck": "Cook Islands", "cl": "Chile", "cm": "Cameroon", "cn": "China", "co": "Colombia", "cr": "Costa Rica", "cu": "Cuba", "cv": "Cape Verde", "cw": "Curaçao", "cx": "Christmas Island", "cy": "Cyprus", "cz": "Czechia", "de": "Germany", "dj": "Djibouti", "dk": "Denmark", "dm": "Dominica", "do": "Dominican Republic", "dz": "Algeria", "ec": "Ecuador", "ee": "Estonia", "eg": "Egypt", "eh": "Western Sahara", "er": "Eritrea", "es": "Spain", "et": "Ethiopia", "fi": "Finland", "fj": "Fiji", "fk": "Falkland Islands", "fm": "Micronesia", "fo": "Faroe Islands", "fr": "France", "ga": "Gabon", "gb": "United Kingdom", "gd": "Grenada", "ge": "Georgia", "gf": "French Guiana", "gg": "Guernsey", "gh": "Ghana", "gi": "Gibraltar", "gl": "Greenland", "gm": "Gambia", "gn": "Guinea", "gp": "Guadeloupe", "gq": "Equatorial Guinea", "gr": "Greece", "gs": "South Georgia & South Sandwich Islands", "gt": "Guatemala", "gu": "Guam", "gw": "Guinea-Bissau", "gy": "Guyana", "hk": "Hong Kong SAR China", "hm": "Heard & McDonald Islands", "hn": "Honduras", "hr": "Croatia", "ht": "Haiti", "hu": "Hungary", "id": "Indonesia", "ie": "Ireland", "il": "Israel", "im": "Isle of Man", "in": "India", "io": "British Indian Ocean Territory", "iq": "Iraq", "ir": "Iran", "is": "Iceland", "it": "Italy", "je": "Jersey", "jm": "Jamaica", "jo": "Jordan", "jp": "Japan", "ke": "Kenya", "kg": "Kyrgyzstan", "kh": "Cambodia", "ki": "Kiribati", "km": "Comoros", "kn": "St. Kitts & Nevis", "kp": "North Korea", "kr": "South Korea", "kw": "Kuwait", "ky": "Cayman Islands", "kz": "Kazakhstan", "la": "Laos", "lb": "Lebanon", "lc": "St. Lucia", "li": "Liechtenstein", "lk": "Sri Lanka", "lr": "Liberia", "ls": "Lesotho", "lt": "Lithuania", "lu": "Luxembourg", "lv": "Latvia", "ly": "Libya", "ma": "Morocco", "mc": "Monaco", "md": "Moldova", "me": "Montenegro", "mf": "St. Martin", "mg": "Madagascar", "mh": "Marshall Islands", "mk": "North Macedonia", "ml": "Mali", "mm": "Myanmar (Burma)", "mn": "Mongolia", "mo": "Macao SAR China", "mp": "Northern Mariana Islands", "mq": "Martinique", "mr": "Mauritania", "ms": "Montserrat", "mt": "Malta", "mu": "Mauritius", "mv": "Maldives", "mw": "Malawi", "mx": "Mexico", "my": "Malaysia", "mz": "Mozambique", "na": "Namibia", "nc": "New Caledonia", "ne": "Niger", "nf": "Norfolk Island", "ng": "Nigeria", "ni": "Nicaragua", "nl": "Netherlands", "no": "Norway", "np": "Nepal", "nr": "Nauru", "nu": "Niue", "nz": "New Zealand", "om": "Oman", "pa": "Panama", "pe": "Peru", "pf": "French Polynesia", "pg": "Papua New Guinea", "ph": "Philippines", "pk": "Pakistan", "pl": "Poland", "pm": "St. Pierre & Miquelon", "pn": "Pitcairn Islands", "pr": "Puerto Rico", "ps": "Palestinian Territories", "pt": "Portugal", "pw": "Palau", "py": "Paraguay", "qa": "Qatar", "re": "Réunion", "ro": "Romania", "rs": "Serbia", "ru": "Russia", "rw": "Rwanda", "sa": "Saudi Arabia", "sb": "Solomon Islands", "sc": "Seychelles", "sd": "Sudan", "se": "Sweden", "sg": "Singapore", "sh": "St. Helena", "si": "Slovenia", "sj": "Svalbard & Jan Mayen", "sk": "Slovakia", "sl": "Sierra Leone", "sm": "San Marino", "sn": "Senegal", "so": "Somalia", "sr": "Suriname", "ss": "South Sudan", "st": "São Tomé & Príncipe", "sv": "El Salvador", "sx": "Sint Maarten", "sy": "Syria", "sz": "Eswatini", "tc": "Turks & Caicos Islands", "td": "Chad", "tf": "French Southern Territories", "tg": "Togo", "th": "Thailand", "tj": "Tajikistan", "tk": "Tokelau", "tl": "Timor-Leste", "tm": "Turkmenistan", "tn": "Tunisia", "to": "Tonga", "tr": "Türkiye", "tt": "Trinidad & Tobago", "tv": "Tuvalu", "tw": "Taiwan", "tz": "Tanzania", "ua": "Ukraine", "ug": "Uganda", "um": "U.S. Outlying Islands", "us": "United States", "uy": "Uruguay", "uz": "Uzbekistan", "va": "Vatican City", "vc": "St. Vincent & Grenadines", "ve": "Venezuela", "vg": "British Virgin Islands", "vi": "U.S. Virgin Islands", "vn": "Vietnam", "vu": "Vanuatu", "wf": "Wallis & Futuna", "ws": "Samoa", "ye": "Yemen", "yt": "Mayotte", "za": "South Africa", "zm": "Zambia", "zw": "Zimbabwe"}, "es": {"ad": "Andorra", "ae": "Emiratos Árabes Unidos", "af": "Afganistán", "ag": "Antigua y Barbuda", "ai": "Anguila", "al": "Albania", "am": "Armenia", "ao": "Angola", "aq": "Antártida", "ar": "Argentina", "as": "Samoa Americana", "at": "Austria", "au": "Australia", "aw": "Aruba", "ax": "Islas Aland", "az": "Azerbaiyán", "ba": "Bosnia y Herzegovina", "bb": "Barbados", "bd": "Bangladés", "be": "Bélgica", "bf": "Burkina Faso", "bg": "Bulgaria", "bh": "Baréin", "bi": "Burundi", "bj": "Benín", "bl": "San Bartolomé", "bm": "Bermudas", "bn": "Brunéi", "bo": "Bolivia", "bq": "Caribe neerlandés", "br": "Brasil", "bs": "Bahamas", "bt": "Bután", "bv": "Isla Bouvet", "bw": "Botsuana", "by": "Bielorrusia", "bz": "Belice", "ca": "Canadá", "cc": "Islas Cocos", "cd": "República Democrática del Congo", "cf": "República Centroafricana", "cg": "Congo", "ch": "Suiza", "ci": "Côte d’Ivoire", "ck": "Islas Cook", "cl": "Chile", "cm": "Camerún", "cn": "China", "co": "Colombia", "cr": "Costa Rica", "cu": "Cuba", "cv": "Cabo Verde", "cw": "Curazao", "cx": "Isla de Navidad", "cy": "Chipre", "cz": "Chequia", "de": "Alemania", "dj": "Yibuti", "dk": "Dinamarca", "dm": "Dominica", "do": "República Dominicana", "dz": "Argelia", "ec": "Ecuador", "ee": "Estonia", "eg": "Egipto", "eh": "Sáhara Occidental", "er": "Eritrea", "es": "España", "et": "Etiopía", "fi": "Finlandia", "fj": "Fiyi", "fk": "Islas Malvinas", "fm": "Micronesia", "fo": "Islas Feroe", "fr": "Francia", "ga": "Gabón", "gb": "Reino Unido", "gd": "Granada", "ge": "Georgia", "gf": "Guayana Francesa", "gg": "Guernesey", "gh": "Ghana", "gi": "Gibraltar", "gl": "Groenlandia", "gm": "Gambia", "gn": "Guinea", "gp": "Guadalupe", "gq": "Guinea Ecuatorial", "gr": "Grecia", "gs": "Islas Georgia del Sur y Sandwich del Sur", "gt": "Guatemala", "gu": "Guam", "gw": "Guinea-Bisáu", "gy": "Guyana", "hk": "RAE de Hong Kong (China)", "hm": "Islas Heard y McDonald", "hn": "Honduras", "hr": "Croacia", "ht": "Haití", "hu": "Hungría", "id": "Indonesia", "ie": "Irlanda", "il": "Israel", "im": "Isla de Man", "in": "India", "io": "Territorio Británico del Océano Índico", "iq": "Irak", "ir": "Irán", "is": "Islandia", "it": "Italia", "je": "Jersey", "jm": "Jamaica", "jo": "Jordania", "jp": "Japón", "ke": "Kenia", "kg": "Kirguistán", "kh": "Camboya", "ki": "Kiribati", "km": "Comoras", "kn": "San Cristóbal y Nieves", "kp": "Corea del Norte", "kr": "Corea del Sur", "kw": "Kuwait", "ky": "Islas Caimán", "kz": "Kazajistán", "la": "Laos", "lb": "Líbano", "lc": "Santa Lucía", "li": "Liechtenstein", "lk": "Sri Lanka", "lr": "Liberia", "ls": "Lesoto", "lt": "Lituania", "lu": "Luxemburgo", "lv": "Letonia", "ly": "Libia", "ma": "Marruecos", "mc": "Mónaco", "md": "Moldavia", "me": "Montenegro", "mf": "San Martín", "mg": "Madagascar", "mh": "Islas Marshall", "mk": "Macedonia del Norte", "ml": "Mali", "mm": "Myanmar (Birmania)", "mn": "Mongolia", "mo": "RAE de Macao (China)", "mp": "Islas Marianas del Norte", "mq": "Martinica", "mr": "Mauritania", "ms": "Montserrat", "mt": "Malta", "mu": "Mauricio", "mv": "Maldivas", "mw": "Malaui", "mx": "México", "my": "Malasia", "mz": "Mozambique", "na": "Namibia", "nc": "Nueva Caledonia", "ne": "Níger", "nf": "Isla Norfolk", "ng": "Nigeria", "ni": "Nicaragua", "nl": "Países Bajos", "no": "Noruega", "np": "Nepal", "nr": "Nauru", "nu": "Niue", "nz": "Nueva Zelanda", "om": "Omán", "pa": "Panamá", "pe": "Perú", "pf": "Polinesia Francesa", "pg": "Papúa Nueva Guinea", "ph": "Filipinas", "pk": "Pakistán", "pl": "Polonia", "pm": "San Pedro y Miquelón", "pn": "Islas Pitcairn", "pr": "Puerto Rico", "ps": "Territorios Palestinos", "pt": "Portugal", "pw": "Palaos", "py": "Paraguay", "qa": "Catar", "re": "Reunión", "ro": "Rumanía", "rs": "Serbia", "ru": "Rusia", "rw": "Ruanda", "sa": "Arabia Saudí", "sb": "Islas Salomón", "sc": "Seychelles", "sd": "Sudán", "se": "Suecia", "sg": "Singapur", "sh": "Santa Elena", "si": "Eslovenia", "sj": "Svalbard y Jan Mayen", "sk": "Eslovaquia", "sl": "Sierra Leona", "sm": "San Marino", "sn": "Senegal", "so": "Somalia", "sr": "Surinam", "ss": "Sudán del Sur", "st": "Santo Tomé y Príncipe", "sv": "El Salvador", "sx": "Sint Maarten", "sy": "Siria", "sz": "Esuatini", "tc": "Islas Turcas y Caicos", "td": "Chad", "tf": "Territorios Australes Franceses", "tg": "Togo", "th": "Tailandia", "tj": "Tayikistán", "tk": "Tokelau", "tl": "Timor-Leste", "tm": "Turkmenistán", "tn": "Túnez", "to": "Tonga", "tr": "Turquía", "tt": "Trinidad y Tobago", "tv": "Tuvalu", "tw": "Taiwán", "tz": "Tanzania", "ua": "Ucrania", "ug": "Uganda", "um": "Islas menores alejadas de EE. UU.", "us": "Estados Unidos", "uy": "Uruguay", "uz": "Uzbekistán", "va": "Ciudad del Vaticano", "vc": "San Vicente y las Granadinas", "ve": "Venezuela", "vg": "Islas Vírgenes Británicas", "vi": "Islas Vírgenes de EE. UU.", "vn": "Vietnam", "vu": "Vanuatu", "wf": "Wallis y Futuna", "ws": "Samoa", "ye": "Yemen", "yt": "Mayotte", "za": "Sudáfrica", "zm": "Zambia", "zw": "Zimbabue"}, "fr": {"ad": "Andorre", "ae": "Émirats arabes unis", "af": "Afghanistan", "ag": "Antigua-et-Barbuda", "ai": "Anguilla", "al": "Albanie", "am": "Arménie", "ao": "Angola", "aq": "Antarctique", "ar": "Argentine", "as": "Samoa américaines", "at": "Autriche", "au": "Australie", "aw": "Aruba", "ax": "Îles Åland", "az": "Azerbaïdjan", "ba": "Bosnie-Herzégovine", "bb": "Barbade", "bd": "Bangladesh", "be": "Belgique", "bf": "Burkina Faso", "bg": "Bulgarie", "bh": "Bahreïn", "bi": "Burundi", "bj": "Bénin", "bl": "Saint-Barthélemy", "bm": "Bermudes", "bn": "Brunei", "bo": "Bolivie", "bq": "Pays-Bas caribéens", "br": "Brésil", "bs": "Bahamas", "bt": "Bhoutan", "bv": "Île Bouvet", "bw": "Botswana", "by": "Biélorussie", "bz": "Belize", "ca": "Canada", "cc": "Îles Cocos", "cd": "Congo-Kinshasa", "cf": "République centrafricaine", "cg": "Congo-Brazzaville", "ch": "Suisse", "ci": "Côte d’Ivoire", "ck": "Îles Cook", "cl": "Chili", "cm": "Cameroun", "cn": "Chine", "co": "Colombie", "cr": "Costa Rica", "cu": "Cuba", "cv": "Cap-Vert", "cw": "Curaçao", "cx": "Île Christmas", "cy": "Chypre", "cz": "Tchéquie", "de": "Allemagne", "dj": "Djibouti", "dk": "Danemark", "dm": "Dominique", "do": "République dominicaine", "dz": "Algérie", "ec": "Équateur", "ee": "Estonie", "eg": "Égypte", "eh": "Sahara occidental", "er": "Érythrée", "es": "Espagne", "et": "Éthiopie", "fi": "Finlande", "fj": "Fidji", "fk": "Îles Malouines", "fm": "Micronésie", "fo": "Îles Féroé", "fr": "France", "ga": "Gabon", "gb": "Royaume-Uni", "gd": "Grenade", "ge": "Géorgie", "gf": "Guyane française", "gg": "Guernesey", "gh": "Ghana", "gi": "Gibraltar", "gl": "Groenland", "gm": "Gambie", "gn": "Guinée", "gp": "Guadeloupe", "gq": "Guinée équatoriale", "gr": "Grèce", "gs": "Géorgie du Sud-et-les Îles Sandwich du Sud", "gt": "Guatemala", "gu": "Guam", "gw": "Guinée-Bissau", "gy": "Guyana", "hk": "R.A.S. chinoise de Hong Kong", "hm": "Îles Heard-et-MacDonald", "hn": "Honduras", "hr": "Croatie", "ht": "Haïti", "hu": "Hongrie", "id": "Indonésie", "ie": "Irlande", "il": "Israël", "im": "Île de Man", "in": "Inde", "io": "Territoire britannique de l’océan Indien", "iq": "Irak", "ir": "Iran", "is": "Islande", "it": "Italie", "je": "Jersey", "jm": "Jamaïque", "jo": "Jordanie", "jp": "Japon", "ke": "Kenya", "kg": "Kirghizstan", "kh": "Cambodge", "ki": "Kiribati", "km": "Comores", "kn": "Saint-Christophe-et-Niévès", "kp": "Corée du Nord", "kr": "Corée du Sud", "kw": "Koweït", "ky": "Îles Caïmans", "kz": "Kazakhstan", "la": "Laos", "lb": "Liban", "lc": "Sainte-Lucie", "li": "Liechtenstein", "lk": "Sri Lanka", "lr": "Liberia", "ls": "Lesotho", "lt": "Lituanie", "lu": "Luxembourg", "lv": "Lettonie", "ly": "Libye", "ma": "Maroc", "mc": "Monaco", "md": "Moldavie", "me": "Monténégro", "mf": "Saint-Martin", "mg": "Madagascar", "mh": "Îles Marshall", "mk": "Macédoine du Nord", "ml": "Mali", "mm": "Myanmar (Birmanie)", "mn": "Mongolie", "mo": "R.A.S. chinoise de Macao", "mp": "Îles Mariannes du Nord", "mq": "Martinique", "mr": "Mauritanie", "ms": "Montserrat", "mt": "Malte", "mu": "Maurice", "mv": "Maldives", "mw": "Malawi", "mx": "Mexique", "my": "Malaisie", "mz": "Mozambique", "na": "Namibie", "nc": "Nouvelle-Calédonie", "ne": "Niger", "nf": "Île Norfolk", "ng": "Nigeria", "ni": "Nicaragua", "nl": "Pays-Bas", "no": "Norvège", "np": "Népal", "nr": "Nauru", "nu": "Niue", "nz": "Nouvelle-Zélande", "om": "Oman", "pa": "Panama", "pe": "Pérou", "pf": "Polynésie française", "pg": "Papouasie-Nouvelle-Guinée", "ph": "Philippines", "pk": "Pakistan", "pl": "Pologne", "pm": "Saint-Pierre-et-Miquelon", "pn": "Îles Pitcairn", "pr": "Porto Rico", "ps": "Territoires palestiniens", "pt": "Portugal", "pw": "Palaos", "py": "Paraguay", "qa": "Qatar", "re": "La Réunion", "ro": "Roumanie", "rs": "Serbie", "ru": "Russie", "rw": "Rwanda", "sa": "Arabie saoudite", "sb": "Îles Salomon", "sc": "Seychelles", "sd": "Soudan", "se": "Suède", "sg": "Singapour", "sh": "Sainte-Hélène", "si": "Slovénie", "sj": "Svalbard et Jan Mayen", "sk": "Slovaquie", "sl": "Sierra Leone", "sm": "Saint-Marin", "sn": "Sénégal", "so": "Somalie", "sr": "Suriname", "ss": "Soudan du Sud", "st": "Sao Tomé-et-Principe", "sv": "Salvador", "sx": "Saint-Martin (partie néerlandaise)", "sy": "Syrie", "sz": "Eswatini", "tc": "Îles Turques-et-Caïques", "td": "Tchad", "tf": "Terres australes françaises", "tg": "Togo", "th": "Thaïlande", "tj": "Tadjikistan", "tk": "Tokelau", "tl": "Timor oriental", "tm": "Turkménistan", "tn": "Tunisie", "to": "Tonga", "tr": "Turquie", "tt": "Trinité-et-Tobago", "tv": "Tuvalu", "tw": "Taïwan", "tz": "Tanzanie", "ua": "Ukraine", "ug": "Ouganda", "um": "Îles mineures éloignées des États-Unis", "us": "États-Unis", "uy": "Uruguay", "uz": "Ouzbékistan", "va": "État de la Cité du Vatican", "vc": "Saint-Vincent-et-les Grenadines", "ve": "Venezuela", "vg": "Îles Vierges britanniques", "vi": "Îles Vierges des États-Unis", "vn": "Viêt Nam", "vu": "Vanuatu", "wf": "Wallis-et-Futuna", "ws": "Samoa", "ye": "Yémen", "yt": "Mayotte", "za": "Afrique du Sud", "zm": "Zambie", "zw": "Zimbabwe"}, "ar": {"ad": "أندورا", "ae": "الإمارات العربية المتحدة", "af": "أفغانستان", "ag": "أنتيغوا وبربودا", "ai": "أنغويلا", "al": "ألبانيا", "am": "أرمينيا", "ao": "أنغولا", "aq": "أنتاركتيكا", "ar": "الأرجنتين", "as": "ساموا الأمريكية", "at": "النمسا", "au": "أستراليا", "aw": "أروبا", "ax": "جزر آلاند", "az": "أذربيجان", "ba": "البوسنة والهرسك", "bb": "بربادوس", "bd": "بنغلاديش", "be": "بلجيكا", "bf": "بوركينا فاسو", "bg": "بلغاريا", "bh": "البحرين", "bi": "بوروندي", "bj": "بنين", "bl": "سان بارتليمي", "bm": "برمودا", "bn": "بروناي", "bo": "بوليفيا", "bq": "هولندا الكاريبية", "br": "البرازيل", "bs": "جزر البهاما", "bt": "بوتان", "bv": "جزيرة بوفيه", "bw": "بوتسوانا", "by": "بيلاروس", "bz": "بليز", "ca": "كندا", "cc": "جزر كوكوس (كيلينغ)", "cd": "الكونغو - كينشاسا", "cf": "جمهورية أفريقيا الوسطى", "cg": "الكونغو - برازافيل", "ch": "سويسرا", "ci": "ساحل العاج", "ck": "جزر كوك", "cl": "تشيلي", "cm": "الكاميرون", "cn": "الصين", "co": "كولومبيا", "cr": "كوستاريكا", "cu": "كوبا", "cv": "الرأس الأخضر", "cw": "كوراساو", "cx": "جزيرة كريسماس", "cy": "قبرص", "cz": "التشيك", "de": "ألمانيا", "dj": "جيبوتي", "dk": "الدانمرك", "dm": "دومينيكا", "do": "جمهورية الدومينيكان", "dz": "الجزائر", "ec": "الإكوادور", "ee": "إستونيا", "eg": "مصر", "eh": "الصحراء الغربية", "er": "إريتريا", "es": "إسبانيا", "et": "إثيوبيا", "fi": "فنلندا", "fj": "فيجي", "fk": "جزر فوكلاند", "fm": "ميكرونيزيا", "fo": "جزر فارو", "fr": "فرنسا", "ga": "الغابون", "gb": "المملكة المتحدة", "gd": "غرينادا", "ge": "جورجيا", "gf": "غويانا الفرنسية", "gg": "غيرنزي", "gh": "غانا", "gi": "جبل طارق", "gl": "غرينلاند", "gm": "غامبيا", "gn": "غينيا", "gp": "غوادلوب", "gq": "غينيا الاستوائية", "gr": "اليونان", "gs": "جورجيا الجنوبية وجزر ساندويتش الجنوبية", "gt": "غواتيمالا", "gu": "غوام", "gw": "غينيا بيساو", "gy": "غيانا", "hk": "هونغ كونغ الصينية (منطقة إدارية خاصة)", "hm": "جزيرة هيرد وجزر ماكدونالد", "hn": "هندوراس", "hr": "كرواتيا", "ht": "هايتي", "hu": "هنغاريا", "id": "إندونيسيا", "ie": "أيرلندا", "il": "إسرائيل", "im": "جزيرة مان", "in": "الهند", "io": "الإقليم البريطاني في المحيط الهندي", "iq": "العراق", "ir": "إيران", "is": "آيسلندا", "it": "إيطاليا", "je": "جيرسي", "jm": "جامايكا", "jo": "الأردن", "jp": "اليابان", "ke": "كينيا", "kg": "قيرغيزستان", "kh": "كمبوديا", "ki": "كيريباتي", "km": "جزر القمر", "kn": "سانت كيتس ونيفيس", "kp": "كوريا الشمالية", "kr": "كوريا الجنوبية", "kw": "الكويت", "ky": "جزر كايمان", "kz": "كازاخستان", "la": "لاوس", "lb": "لبنان", "lc": "سانت لوسيا", "li": "ليختنشتاين", "lk": "سريلانكا", "lr": "ليبيريا", "ls": "ليسوتو", "lt": "ليتوانيا", "lu": "لوكسمبورغ", "lv": "لاتفيا", "ly": "ليبيا", "ma": "المغرب", "mc": "موناكو", "md": "مولدوفا", "me": "الجبل الأسود", "mf": "سان مارتن", "mg": "مدغشقر", "mh": "جزر مارشال", "mk": "مقدونيا الشمالية", "ml": "مالي", "mm": "ميانمار (بورما)", "mn": "منغوليا", "mo": "منطقة ماكاو الإدارية الخاصة", "mp": "جزر ماريانا الشمالية", "mq": "جزر المارتينيك", "mr": "موريتانيا", "ms": "مونتسرات", "mt": "مالطا", "mu": "موريشيوس", "mv": "جزر المالديف", "mw": "ملاوي", "mx": "المكسيك", "my": "ماليزيا", "mz": "موزمبيق", "na": "ناميبيا", "nc": "كاليدونيا الجديدة", "ne": "النيجر", "nf": "جزيرة نورفولك", "ng": "نيجيريا", "ni": "نيكاراغوا", "nl": "هولندا", "no": "النرويج", "np": "نيبال", "nr": "ناورو", "nu": "نيوي", "nz": "نيوزيلندا", "om": "عُمان", "pa": "بنما", "pe": "بيرو", "pf": "بولينيزيا الفرنسية", "pg": "بابوا غينيا الجديدة", "ph": "الفلبين", "pk": "باكستان", "pl": "بولندا", "pm": "سان بيير ومكويلون", "pn": "جزر بيتكيرن", "pr": "بورتوريكو", "ps": "الأراضي الفلسطينية", "pt": "البرتغال", "pw": "بالاو", "py": "باراغواي", "qa": "قطر", "re": "روينيون", "ro": "رومانيا", "rs": "صربيا", "ru": "روسيا", "rw": "رواندا", "sa": "المملكة العربية السعودية", "sb": "جزر سليمان", "sc": "سيشل", "sd": "السودان", "se": "السويد", "sg": "سنغافورة", "sh": "سانت هيلينا", "si": "سلوفينيا", "sj": "سفالبارد وجان ماين", "sk": "سلوفاكيا", "sl": "سيراليون", "sm": "سان مارينو", "sn": "السنغال", "so": "الصومال", "sr": "سورينام", "ss": "جنوب السودان", "st": "ساو تومي وبرينسيبي", "sv": "السلفادور", "sx": "سانت مارتن", "sy": "سوريا", "sz": "إسواتيني", "tc": "جزر توركس وكايكوس", "td": "تشاد", "tf": "الأقاليم الجنوبية الفرنسية", "tg": "توغو", "th": "تايلاند", "tj": "طاجيكستان", "tk": "توكيلاو", "tl": "تيمور - ليشتي", "tm": "تركمانستان", "tn": "تونس", "to": "تونغا", "tr": "تركيا", "tt": "ترينيداد وتوباغو", "tv": "توفالو", "tw": "تايوان", "tz": "تنزانيا", "ua": "أوكرانيا", "ug": "أوغندا", "um": "جزر الولايات المتحدة النائية", "us": "الولايات المتحدة", "uy": "أورغواي", "uz": "أوزبكستان", "va": "الفاتيكان", "vc": "سانت فنسنت وجزر غرينادين", "ve": "فنزويلا", "vg": "جزر فيرجن البريطانية", "vi": "جزر فيرجن الأمريكية", "vn": "فيتنام", "vu": "فانواتو", "wf": "جزر والس وفوتونا", "ws": "ساموا", "ye": "اليمن", "yt": "مايوت", "za": "جنوب أفريقيا", "zm": "زامبيا", "zw": "زيمبابوي"}, "ru": {"ad": "Андорра", "ae": "ОАЭ", "af": "Афганистан", "ag": "Антигуа и Барбуда", "ai": "Ангилья", "al": "Албания", "am": "Армения", "ao": "Ангола", "aq": "Антарктида", "ar": "Аргентина", "as": "Американское Самоа", "at": "Австрия", "au": "Австралия", "aw": "Аруба", "ax": "Аландские о-ва", "az": "Азербайджан", "ba": "Босния и Герцеговина", "bb": "Барбадос", "bd": "Бангладеш", "be": "Бельгия", "bf": "Буркина-Фасо", "bg": "Болгария", "bh": "Бахрейн", "bi": "Бурунди", "bj": "Бенин", "bl": "Сен-Бартелеми", "bm": "Бермудские о-ва", "bn": "Бруней", "bo": "Боливия", "bq": "Бонэйр, Синт-Эстатиус и Саба", "br": "Бразилия", "bs": "Багамы", "bt": "Бутан", "bv": "о-в Буве", "bw": "Ботсвана", "by": "Беларусь", "bz": "Белиз", "ca": "Канада", "cc": "Кокосовые о-ва", "cd": "Конго - Киншаса", "cf": "Центрально-Африканская Республика", "cg": "Конго - Браззавиль", "ch": "Швейцария", "ci": "Кот-д’Ивуар", "ck": "о-ва Кука", "cl": "Чили", "cm": "Камерун", "cn": "Китай", "co": "Колумбия", "cr": "Коста-Рика", "cu": "Куба", "cv": "Кабо-Верде", "cw": "Кюрасао", "cx": "о-в Рождества", "cy": "Кипр", "cz": "Чехия", "de": "Германия", "dj": "Джибути", "dk": "Дания", "dm": "Доминика", "do": "Доминиканская Республика", "dz": "Алжир", "ec": "Эквадор", "ee": "Эстония", "eg": "Египет", "eh": "Западная Сахара", "er": "Эритрея", "es": "Испания", "et": "Эфиопия", "fi": "Финляндия", "fj": "Фиджи", "fk": "Фолклендские о-ва", "fm": "Федеративные Штаты Микронезии", "fo": "Фарерские о-ва", "fr": "Франция", "ga": "Габон", "gb": "Великобритания", "gd": "Гренада", "ge": "Грузия", "gf": "Французская Гвиана", "gg": "Гернси", "gh": "Гана", "gi": "Гибралтар", "gl": "Гренландия", "gm": "Гамбия", "gn": "Гвинея", "gp": "Гваделупа", "gq": "Экваториальная Гвинея", "gr": "Греция", "gs": "Южная Георгия и Южные Сандвичевы о-ва", "gt": "Гватемала", "gu": "Гуам", "gw": "Гвинея-Бисау", "gy": "Гайана", "hk": "Гонконг (САР)", "hm": "о-ва Херд и Макдональд", "hn": "Гондурас", "hr": "Хорватия", "ht": "Гаити", "hu": "Венгрия", "id": "Индонезия", "ie": "Ирландия", "il": "Израиль", "im": "о-в Мэн", "in": "Индия", "io": "Британская территория в Индийском океане", "iq": "Ирак", "ir": "Иран", "is": "Исландия", "it": "Италия", "je": "Джерси", "jm": "Ямайка", "jo": "Иордания", "jp": "Япония", "ke": "Кения", "kg": "Киргизия", "kh": "Камбоджа", "ki": "Кирибати", "km": "Коморы", "kn": "Сент-Китс и Невис", "kp": "КНДР", "kr": "Республика Корея", "kw": "Кувейт", "ky": "о-ва Кайман", "kz": "Казахстан", "la": "Лаос", "lb": "Ливан", "lc": "Сент-Люсия", "li": "Лихтенштейн", "lk": "Шри-Ланка", "lr": "Либерия", "ls": "Лесото", "lt": "Литва", "lu": "Люксембург", "lv": "Латвия", "ly": "Ливия", "ma": "Марокко", "mc": "Монако", "md": "Молдова", "me": "Черногория", "mf": "Сен-Мартен", "mg": "Мадагаскар", "mh": "Маршалловы о-ва", "mk": "Северная Македония", "ml": "Мали", "mm": "Мьянма (Бирма)", "mn": "Монголия", "mo": "Макао (САР)", "mp": "Северные Марианские о-ва", "mq": "Мартиника", "mr": "Мавритания", "ms": "Монтсеррат", "mt": "Мальта", "mu": "Маврикий", "mv": "Мальдивы", "mw": "Малави", "mx": "Мексика", "my": "Малайзия", "mz": "Мозамбик", "na": "Намибия", "nc": "Новая Каледония", "ne": "Нигер", "nf": "о-в Норфолк", "ng": "Нигерия", "ni": "Никарагуа", "nl": "Нидерланды", "no": "Норвегия", "np": "Непал", "nr": "Науру", "nu": "Ниуэ", "nz": "Новая Зеландия", "om": "Оман", "pa": "Панама", "pe": "Перу", "pf": "Французская Полинезия", "pg": "Папуа — Новая Гвинея", "ph": "Филиппины", "pk": "Пакистан", "pl": "Польша", "pm": "Сен-Пьер и Микелон", "pn": "о-ва Питкэрн", "pr": "Пуэрто-Рико", "ps": "Палестинские территории", "pt": "Португалия", "pw": "Палау", "py": "Парагвай", "qa": "Катар", "re": "Реюньон", "ro": "Румыния", "rs": "Сербия", "ru": "Россия", "rw": "Руанда", "sa": "Саудовская Аравия", "sb": "Соломоновы о-ва", "sc": "Сейшельские о-ва", "sd": "Судан", "se": "Швеция", "sg": "Сингапур", "sh": "о-в Св. Елены", "si": "Словения", "sj": "Шпицберген и Ян-Майен", "sk": "Словакия", "sl": "Сьерра-Леоне", "sm": "Сан-Марино", "sn": "Сенегал", "so": "Сомали", "sr": "Суринам", "ss": "Южный Судан", "st": "Сан-Томе и Принсипи", "sv": "Сальвадор", "sx": "Синт-Мартен", "sy": "Сирия", "sz": "Эсватини", "tc": "Тёркс и Кайкос", "td": "Чад", "tf": "Французские Южные территории", "tg": "Того", "th": "Таиланд", "tj": "Таджикистан", "tk": "Токелау", "tl": "Восточный Тимор", "tm": "Туркменистан", "tn": "Тунис", "to": "Тонга", "tr": "Турция", "tt": "Тринидад и Тобаго", "tv": "Тувалу", "tw": "Тайвань", "tz": "Танзания", "ua": "Украина", "ug": "Уганда", "um": "Внешние малые о-ва (США)", "us": "Соединенные Штаты", "uy": "Уругвай", "uz": "Узбекистан", "va": "Ватикан", "vc": "Сент-Винсент и Гренадины", "ve": "Венесуэла", "vg": "Виргинские о-ва (Великобритания)", "vi": "Виргинские о-ва (США)", "vn": "Вьетнам", "vu": "Вануату", "wf": "Уоллис и Футуна", "ws": "Самоа", "ye": "Йемен", "yt": "Майотта", "za": "Южно-Африканская Республика", "zm": "Замбия", "zw": "Зимбабве"}}, "sectors": {"tr": ["Hububat, Bakliyat, Yağlı Tohumlar", "Yaş Meyve ve Sebze", "Meyve Sebze Mamulleri", "Kuru Meyve", "Fındık", "Zeytin ve Zeytinyağı", "Tütün", "Süs Bitkileri", "Su Ürünleri ve Hayvansal", "Mobilya, Kağıt ve Orman Ür.", "Tekstil ve Hammaddeleri", "Deri ve Deri Mamulleri", "Halı", "Kimyevi Maddeler ve Mam.", "Hazırgiyim ve Konfeksiyon", "Otomotiv", "Gemi ve Yat", "Elektrik-Elektronik", "Makine ve Aksamları", "Demir ve Demir Dışı Metaller", "Çelik", "Çimento Cam Seramik", "Mücevher", "Savunma ve Havacılık", "İklimlendirme", "Madencilik"], "en": ["Grains, Pulses, Oilseeds", "Fresh Fruit & Vegetables", "Processed Fruit & Vegetables", "Dried Fruit", "Hazelnuts & Nuts", "Olives & Olive Oil", "Tobacco", "Ornamental Plants", "Seafood & Livestock", "Furniture, Paper & Forest Products", "Textiles & Raw Materials", "Leather & Leather Products", "Carpets", "Chemicals & Products", "Apparel & Ready-Wear", "Automotive", "Ships & Yachts", "Electrical-Electronics", "Machinery & Components", "Ferrous & Non-Ferrous Metals", "Steel", "Cement, Glass, Ceramics", "Jewellery", "Defense & Aerospace", "HVAC", "Mining"], "es": ["Cereales, Legumbres, Oleaginosas", "Frutas y Verduras Frescas", "Frutas y Verduras Procesadas", "Fruta Seca", "Avellanas y Frutos Secos", "Aceitunas y Aceite de Oliva", "Tabaco", "Plantas Ornamentales", "Pescado y Ganado", "Muebles, Papel y Productos Forestales", "Textiles y Materias Primas", "Cuero y Productos de Cuero", "Alfombras", "Químicos y Productos", "Confección y Prendas", "Automoción", "Buques y Yates", "Eléctrico-Electrónica", "Maquinaria y Componentes", "Metales Ferrosos y No Ferrosos", "Acero", "Cemento, Vidrio, Cerámica", "Joyería", "Defensa y Aeroespacial", "HVAC / Climatización", "Minería"], "fr": ["Céréales, Légumineuses, Oléagineux", "Fruits & Légumes Frais", "Fruits & Légumes Transformés", "Fruits Secs", "Noisettes & Fruits à Coque", "Olives & Huile d'Olive", "Tabac", "Plantes Ornementales", "Produits de la Mer & Élevage", "Meubles, Papier & Produits Forestiers", "Textiles & Matières Premières", "Cuir & Articles en Cuir", "Tapis", "Produits Chimiques", "Prêt-à-Porter & Confection", "Automobile", "Navires & Yachts", "Électrique-Électronique", "Machines & Composants", "Métaux Ferreux & Non Ferreux", "Acier", "Ciment, Verre, Céramique", "Bijouterie", "Défense & Aérospatiale", "CVC / Climatisation", "Mines & Extraction"], "ar": ["الحبوب والبقوليات والزيوت", "الفواكه والخضروات الطازجة", "المنتجات المصنعة من الفواكه والخضروات", "الفواكه المجففة", "البندق والمكسرات", "الزيتون وزيت الزيتون", "التبغ", "نباتات الزينة", "المأكولات البحرية والماشية", "الأثاث والورق ومنتجات الغابات", "المنسوجات والمواد الخام", "الجلود ومنتجاتها", "السجاد", "المواد الكيميائية والمنتجات", "الملابس الجاهزة", "السيارات", "السفن واليخوت", "الكهرباء والإلكترونيات", "الآلات والمكونات", "المعادن الحديدية وغير الحديدية", "الصلب", "الأسمنت والزجاج والسيراميك", "المجوهرات", "الدفاع والفضاء", "التكييف", "التعدين"], "ru": ["Зерновые, бобовые, масличные", "Свежие фрукты и овощи", "Переработанные фрукты и овощи", "Сухофрукты", "Орехи", "Оливки и оливковое масло", "Табак", "Декоративные растения", "Морепродукты и животноводство", "Мебель, бумага и лесная продукция", "Текстиль и сырьё", "Кожа и изделия из кожи", "Ковры", "Химическая продукция", "Одежда и готовое платье", "Автомобильная", "Суда и яхты", "Электрика и электроника", "Машины и оборудование", "Чёрные и цветные металлы", "Сталь", "Цемент, стекло, керамика", "Ювелирные изделия", "Оборона и авиакосмос", "Отопление и вентиляция", "Горнодобывающая"]}};
 var COUNTRIES = I18N_DATA.countries;
@@ -92,72 +70,72 @@ function secTileHTML(idx, size, radius){
 // UI strings
 var T = {
  tr:{nav_home:"Ana Sayfa",nav_add:"Firma Ekle",nav_pricing:"Fiyatlar",nav_about:"Hakkımızda",nav_contact:"İletişim",nav_login:"Giriş",nav_panel:"Panel",
-     tag_live:"TÜRKİYE ↔ DÜNYA · 6 DİL",h_title:"Modern <em>İpek Yolu</em> ile alıcınızı ve tedarikçinizi bulun.",h_lead:"Vergi levhası ve sicil kaydıyla doğrulanmış firmalar. 6 dilde çeviri, uçtan uca şifreli mesajlaşma.",
-     f_match:"Eşleştir",fm_fullpage:"Tam sayfayı aç",fm_fullpage_tt:"Bu firmayı tam sayfada göster",pp_live_prev:"CANLI ÖNİZLEME",pr_dl_pdf:"Prospektüsümü PDF olarak indir",step_prev:"Önceki",step_next:"Sonraki",step_of:"·",step_publish:"Yayınla · Firmayı Kaydet",creds_continue:"Ödemeye Devam",creds_back:"Paketlere dön",creds_onetime:"Tek seferlik ödeme",pay_err_card:"Geçerli kart numarası girin",pay_err_name:"Kart sahibinin adını girin",pay_err_exp:"Son tarihi AA/YY olarak girin",pay_err_cvc:"CVC girin",ppl_pw_h:"Karar vericilere doğrudan erişim Pro üyelere açık",ppl_pw_sub:"2.400+ doğrulanmış CEO, satın alma müdürü ve dış ticaret uzmanının e-posta ve telefonuna bir tıkla ulaşın. Her Pro üyeye ayda 100 kredi hediye.",ppl_pw_stat1:"Karar verici",ppl_pw_stat2:"Aylık kredi",ppl_pw_stat3:"Doğrulanmış",ppl_pw_cta:"Pro'ya Yükselt",ppl_pw_note:"Aylık $29 · İstediğin zaman iptal",creds_h:"Kredi Paketleri",creds_sub:"Her karar vericinin e-posta veya telefonu 1 kredi. Kullanılmayan krediler bir sonraki aya devreder.",creds_current:"mevcut krediniz var",creds_lbl:"Kredi",creds_per_lbl:"kredi",creds_save10:"%10 avantaj",creds_save15:"%15 avantaj",creds_you_get:"Alacağınız",creds_buy_btn:"Satın Al",creds_secure:"Stripe ile güvenli ödeme · 3D Secure",creds_pick_pack:"Bir paket seçin",creds_added:"kredi eklendi",creds_charged:"tahsil edildi",creds_add_btn:"Kredi Ekle",pay_h:"Ödeme — Pro Plan",pay_plan:"Kervea Pro",pay_kdv:"KDV (%20)",pay_disc:"İndirim",pay_total:"Toplam",pay_card:"Kart Numarası",pay_exp:"Son Tarih",pay_btn:"Öde",apply:"Uygula",bill_m:"Aylık",bill_y:"Yıllık",bill_save:"−20%",per_month:"/ay",ct_name:"Ad Soyad",ct_email:"E-posta",ct_subject:"Konu",ct_ph_name:"Adınız",ct_ph_email:"ornek@sirket.com",ct_ph_subject:"Nasıl yardımcı olabiliriz?",ct_center:"Merkez",ct_email_lbl:"E-posta:",ct_phone_lbl:"Telefon:",lg_sso_google:"Google ile devam et",lg_sso_ms:"Microsoft ile devam et",lg_sso_apple:"Apple ile devam et",lg_or_email:"veya e-posta ile",pri_h:"aksiyon bekliyor — dikkatinizi gerektiriyor",pri_sub:"2 yeni yüksek skorlu eşleşme cevap bekliyor · 1 sözleşme yenileme yaklaşıyor · Belge güncelleme gerekli",pri_open_matches:"Eşleşmeleri Aç",pri_all:"Tümü",range_7d:"7g",range_30d:"30g",range_90d:"90g",range_1y:"1y",ac_title:"Aktivite Zaman Çizelgesi",ac_sub:"Son 30 günün tam kaydı.",ac_filter_all:"Tümü",ac_filter_match:"Eşleşmeler",ac_filter_msg:"Mesajlar",ac_filter_prof:"Profil",ac_filter_doc:"Belgeler",all_dir:"Tüm yönler",all_scores:"Tüm skorlar",attention:"dikkat",back_list:"Firma listesine dön",cancel:"İptal",custom:"Özel",contact_sales:"Satış ekibiyle iletişim",export_csv:"CSV",remove:"Kaldır",upload:"Yükle",save_all:"Tümünü Kaydet",results:"sonuç",complete:"Tamamlandı",stable:"Sabit",preview_page:"Sayfa önizle",ch_ctr:"Ülke Dağılımı",ch_trend:"Firma büyüme trendi",ck_logo:"Logo yüklendi",ck_doc:"Belgeler onaylı",ck_social:"Sosyal medya bağlı",ck_gal:"Galeri (5/12 görsel)",cover_h:"Kapak Görseli",cover_lbl:"Kapak Görseli · 1600×400",cover_tt:"Kapak fotoğrafını yükle",cover_st:"Firma sayfanızın üstünde görünecek · 1600×400px önerilen · max 5MB",cover_change:"Kapak fotoğrafı yükle veya değiştir",doc_h:"Belgeler *",doc_txt:"📄 Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları",doc_hint:"PDF, JPG, PNG · her dosya max 10MB · en fazla 20 belge",ent_p:"Kervea Enterprise · özel çözüm",ent_1:"Sınırsız firma, iletişim bilgisi, gelişmiş eşleştirme, dışa aktarım",ent_2:"Özel entegrasyon (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Beyaz etiket profil (kendi markanız)",ent_4:"Özel API erişimi + web-hook desteği",ent_5:"SLA + öncelikli destek (4 saat cevap garantisi)",ent_6:"Dedike hesap yöneticisi",ent_7:"Aylık eğitim ve strateji seansları",fl_cname:"Firma Adı *",fl_ctitle:"Ticari Ünvan (EN)",fl_tax:"Vergi No / Tax ID *",fl_mersis:"MERSIS / Sicil No",fl_year:"Kuruluş Yılı *",fl_emp:"Çalışan Sayısı",fl_country:"Ülke *",fl_city:"Şehir",fl_kep:"KEP Adresi",fl_web:"Web Sitesi",fl_email:"E-posta *",fl_phone:"Telefon *",fl_repname:"Yetkili Adı *",fl_reptitle:"Yetkili Ünvanı",fl_address:"Firma Adresi",fl_sec:"Ana Sektör *",fl_dir:"Ticaret Yönü *",fl_hs:"HS Kodu (virgülle)",fl_moq:"MOQ (Minimum Sipariş)",fl_inc:"INCOTERM Tercihi",fl_pay:"Ödeme Şekli",fl_products:"Ana Ürünler / Hizmetler",fl_desc:"Firma Açıklaması *",fl_certs:"Sertifikalar",gal_h:"Ürün / Tesis Fotoğrafları (max 12)",gal_tt:"Görselleri sürükle-bırak veya seç",gal_st:"JPG, PNG, WEBP · her biri max 5MB · toplam 12 görsel",gal_lbl:"Ürün / Tesis Fotoğrafları",gal_add:"Yeni görsel ekle · Sürükle-bırak destekli",gal_max:"JPG/PNG/WEBP · en fazla 12 görsel · her biri max 5MB",hiw_tag:"SÜREÇ",hiw_h:"Aracı yok. Sadece <em style=\"font-style:normal;color:var(--teal)\">gerçek ticaret</em>.",hiw_1a:"01",hiw_1t:"Firma profilinizi oluşturun",hiw_1b:"6 adımda küresel görünürlük",hiw_1c:"Ort. 8 dakika · manuel doğrulama 24 saat",hiw_2a:"02",hiw_2t:"AI eşleştirme sizin için çalışsın",hiw_2b:"Uyum skoruna göre sıralı öneriler",hiw_2c:"Ortalama 3-5 dakikada 20+ eşleşme",hiw_3a:"03",hiw_3t:"Doğrudan iletişim, gerçek zamanlı çeviri",hiw_3b:"Doğrudan bağlantı · komisyon yok",hiw_3c:"Ortalama cevap süresi 4 saat",kpi_match:"Yeni Eşleşme",kpi_msg:"Yeni Mesaj",kpi_offer:"Teklif",kpi_view:"Görüntülenme",logo_h:"Firma Logosu *",logo_hint:"Önerilen: 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · şeffaf zemin · min 200×200",logo_lbl:"Firma Logosu",msg_h:"Mesajlar",msg_sub:"Doğrulanmış firmalarla doğrudan iletişim. Uçtan uca şifreli. 6 dilde otomatik çeviri.",mt_h:"Eşleşmelerim",mt_sub:"AI eşleştirme motoru sizin için sıraladı. Filtrele, dışa aktar, doğrudan mesajlaş.",ov_hello:"Merhaba",ov_sub:"İşte panelinizin son 30 günlük özeti.",ov_recent:"Son Etkinlikler",ov_status:"Profil Sağlığı",ov_ev1:"yeni teklif gönderdi",ov_ev2:"mesaj yazdı",ov_ev3:"profilinizi görüntüledi",ov_ev4:"ISO 9001 sertifikası doğrulandı",ov_ev5:"bağlantı isteği",ov_t1:"2 saat önce",ov_t2:"4 saat önce",ov_t3:"1 gün önce",ov_t4:"2 gün önce",ov_t5:"3 gün önce",p_ana:"Analiz",p_people:"Kişiler",p_docs:"Belgelerim",p_team:"Ekip",p_activity:"Aktivite",plan_starter:"Starter",starter_p:"Ücretsiz · başlangıç için ideal",starter_1:"1 firma profili + doğrulama rozeti",starter_2:"Ayda 50 eşleşme",starter_3:"Temel sektör filtreleme",starter_4:"6 dilde otomatik profil çevirisi",starter_5:"Sınırlı mesajlaşma (5/gün)",starter_6:"Standart destek",start_starter:"Ücretsiz Başla",pro_p:"Kervea Pro · en popüler",pro_1:"Starter'ın tüm özellikleri",pro_2:"Sınırsız eşleşme + gelişmiş AI skoru",pro_3:"Sınırsız firma, iletişim bilgisi, gelişmiş eşleştirme, dışa aktarım",pro_4:"Sınırsız mesajlaşma + öncelikli sıralama",pro_5:"Analitik dashboard (ziyaretçi, dönüşüm, rakip)",pro_6:"Profil vitrini · üst sıralarda görünüm",pro_7:"Öncelikli müşteri desteği (24 saat)",start_pro:"Pro'ya Yükselt",prof_h:"Firma Profilim",prof_sub:"Firma bilgilerinizi, görsellerinizi ve iletişim kanallarınızı güncelleyin.",promo_h:"Promosyon Kodun mu var?",promo_s:"İlk 3 ay Pro plana %30 indirim.",promo_h2:"Kod Girin",promo_s2:"Erken kullanıcılar ve oda üyelerine özel indirim kodları.",pub_h:"Başvurunuz alındı",pub_p:"Manuel doğrulama 24-48 saat içinde tamamlanır. Yayın hazır olduğunda e-posta ve SMS ile bilgilendirileceksiniz.",ppl_title:"Kişiler",ppl_sub:"Karar vericilerin doğrudan iletişim bilgileri. Her kişi 1 kredi.",ppl_credits:"Krediler",ppl_renew:"Kredi yenile",ppl_export:"Dışa aktar",ppl_all:"Tümü",ppl_ceo:"CEO / Genel Müdür",ppl_purchasing:"Satın Alma",ppl_sales:"Satış",ppl_ops:"Operasyon",ppl_col_person:"Kişi",ppl_col_title:"Ünvan",ppl_col_firm:"Firma",ppl_col_email:"E-posta",ppl_col_phone:"Telefon",ppl_col_act:"İşlem",ppl_kvkk:"Bu bilgiler KVKK'ya uygun şekilde ve firma yetkilisinin açık rızasıyla paylaşılmaktadır.",ppl_kvkk_link:"KVKK Aydınlatma Metni",pr_title:"Prospektüs",pr_desc:"Firmanızın tam bir profesyonel özeti — alıcı görüşmelerine hazır PDF.",pr_dl:"PDF olarak indir",pr_pdf:"PDF Prospektüs",pr_langs:"6 dilde",pr_mine:"Prospektüsümü indir",pr_incl:"İçindekiler",pr_i1:"Firma özeti + ana ürünler",pr_i2:"Sektör, HS kodu, MOQ",pr_i3:"Doğrulama rozetleri (vergi, sicil, KEP)",pr_i4:"Sertifikalar (ISO, GOTS, HACCP)",pr_i5:"İletişim bilgileri + QR kod",pr_who:"Kimler için?",pr_l1:"Alıcı görüşmeleri öncesi bilgi paylaşımı",pr_l2:"Fuar ve etkinliklerde dijital kartvizit",pr_l3:"Sosyal medya ve web sitesinde referans",s3_media:"Logo",s4_social:"Sosyal",s5_doc:"Belge",s6_pub:"Yayın",sec_biz:"İş Bilgileri",sec_visual:"Görsel Kimlik",sec_social:"Sosyal Medya & Web",sec_legal:"Yasal Bilgi",social_intro:"Sosyal medya ve iletişim kanallarınız — alıcılar buradan size ulaşacak.",ss_h:"Kervea'ya güvenen firmalar",ss_p:"Doğrulanmış üreticiler ve ihracatçılar, 6 kıtada aktif ağın parçası.",ss_5t:"Antep Baharat",ss_5s:"Gaziantep · Kırmızı biber",tm_title:"Ekip Yönetimi",tm_sub:"Firmanızın kullanıcılarını, rollerini ve erişim izinlerini yönetin.",tm_seats:"Koltuk kullanımı",tm_invite:"+ Kullanıcı Davet Et",tm_col_user:"Kullanıcı",tm_role:"Rol",tm_perms:"İzinler",tm_status:"Durum",tm_last:"Son Giriş",tm_active:"Aktif",tm_pending:"Beklemede",tm_owner:"Sahibi",tm_admin:"Yönetici",tm_sales:"Satış",tm_ops:"Operasyon",tm_p_all:"Tüm izinler",tm_p_msg:"Mesaj + Kişiler",tm_p_prof:"Profil + Belgeler",pr_preview:"Önizle",why_h:"Neden Kervea?",why_p:"Doğrulanmış firmalarla doğrudan iletişim. Komisyon yok, güvenilmez tedarikçi yok, sadece gerçek ticaret.",why_1t:"Ülke koridoru",why_2t:"Doğrulanmış firma",why_3t:"6 dilde çeviri",chat_online:"Çevrimiçi",chat_verified_firm:"Doğrulanmış firma",chat_typing:"yazıyor…",chat_btn_firm:"Firma profili",chat_btn_video:"Görüntülü ara",chat_btn_archive:"Arşivle",empty_firms:"Filtrenize uyan firma bulunamadı.",empty_records:"Filtrenize uyan kayıt yok.",toast_name_required:"Ad Soyad zorunlu",toast_valid_email:"Geçerli e-posta girin",toast_invalid_promo:"Geçersiz promosyon kodu",toast_search_applied:"Arama uygulandı",toast_csv_downloaded:"CSV indirildi",toast_pdf_downloaded:"Prospektüs indirildi",toast_photo_removed:"Fotoğraf kaldırıldı",toast_photo_uploaded:"Fotoğraf yüklendi",toast_logo_uploaded:"Logo yüklendi",toast_login_ok:"Giriş başarılı",toast_login_full:"Giriş yapıldı — tam erişim aktif",toast_logout:"Çıkış yapıldı",toast_credit_out:"Kredi bitti — planınızı yükseltin",toast_docs_opening:"Belge yükleme aracı açılıyor",toast_firm_opening:"Firma profili açılıyor",toast_firm_notfound:"Firma bulunamadı",toast_firm_error:"Firma açılırken hata",toast_visual_saved:"Görsel kimlik kaydedildi",toast_video_call:"Görüntülü arama başlatılıyor",toast_cover_updated:"Kapak güncellendi",toast_chat_archived:"Konuşma arşivlendi",toast_profile_updated:"Profil güncellendi",toast_delete_requested:"Silme talebi alındı — 7 gün içinde tamamlanacak",toast_social_saved:"Sosyal medya bilgileri kaydedildi",toast_form_opened:"Talep formu açıldı",toast_print_pdf:"Tarayıcının yazdır menüsünden PDF olarak kaydedin",toast_trade_saved:"Ticari bilgiler kaydedildi",toast_all_tasks:"Tüm görevler görüntüleniyor",toast_data_export:"Verilerin hazırlanıyor, e-postaya link gönderilecek",toast_legal_saved:"Yasal bilgiler kaydedildi",toast_cancelled:"İptal edildi",toast_copied:"Panoya kopyalandı",confirm_delete_account:"Hesabınız ve tüm verileriniz kalıcı olarak silinecek. Emin misiniz?",tm_inv_h:"Yeni Kullanıcı Davet Et",tm_inv_sub:"Firmanıza yeni bir ekip üyesi ekleyin. Davet e-postayla gönderilir; kullanıcı kabul ettiğinde aktif olur.",tm_fld_name:"Ad Soyad *",tm_fld_email:"E-posta *",tm_fld_role:"Rol *",tm_role_admin:"Yönetici",tm_role_admin_desc:"Tüm modüller · davet edebilir",tm_role_sales:"Satış",tm_role_sales_desc:"Mesajlaşma + Kişiler",tm_role_ops:"Operasyon",tm_role_ops_desc:"Profil + Belgeler",tm_role_view:"Sadece Görüntüleme",tm_role_view_desc:"Yalnızca okuma erişimi",tm_inv_info:"Rolü sonradan değiştirebilirsin. Bu kullanıcı <b>4/10 koltuk</b> kullanımınızın 5.'si olacak.",tm_btn_invite:"Davet Gönder",btn_cancel:"İptal",tm_perm_h:"Rol ve İzinleri Düzenle",tm_perm_sub:"Bu kullanıcının erişebileceği modülleri belirleyin.",tm_lbl_role:"Rol",tm_lbl_perms:"İzinler",tm_role_admin_short:"Tüm modüller",tm_role_sales_short:"Mesaj + Kişiler",tm_role_view_short:"Okuma",tm_perm_msg:"Mesajlaşma",tm_perm_msg_desc:"Tüm konuşmalara erişim, mesaj gönderme ve dosya paylaşımı.",tm_perm_match:"Eşleşmeler & Kişiler",tm_perm_match_desc:"AI eşleşme önerilerini görüntüle, kişi kredilerini kullan.",tm_perm_prof:"Firma Profili",tm_perm_prof_desc:"Firma bilgilerini, galeriyi, sosyal medya bağlantılarını düzenle.",tm_perm_docs:"Belgeler",tm_perm_docs_desc:"Sertifika, vergi levhası, KEP evraklarını yükle ve onayla.",tm_perm_ana:"Analitik",tm_perm_ana_desc:"Ağ erişimi, dönüşüm oranı, rakip karşılaştırması ve raporlar.",tm_perm_team:"Ekip Yönetimi",tm_perm_team_desc:"Yeni kullanıcı davet et, rol ata, hesapları devre dışı bırak.",tm_btn_save:"Değişiklikleri Kaydet",toast_saved:"Kaydedildi",ph_tm_name:"Örn. Ahmet Kaya",ph_tm_email:"ahmet@firma.com",pay_card_holder:"KART SAHİBİ",pay_card_holder_ph:"AD SOYAD",pay_card_exp_short:"SON TARİH",pay_per_month:"/ay",pay_method_card:"Kart",pay_method_mc:"MC",pay_method_bank:"iBank Transfer",pay_card_holder_lbl:"Kart Sahibi",ph_card_holder:"AD SOYAD",ph_promo:"Promo kodu (opsiyonel)",toast_pay_success:"Ödeme başarılı — Pro aktif",pay_disclaimer:"Ödemeyi tamamlayarak <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Üyelik Sözleşmesi</a> ve <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">KVKK Aydınlatma Metni</a>'ni kabul etmiş olursunuz.",modal_kvkk_h:"KVKK Aydınlatma Metni",modal_sozl_h:"Üyelik Sözleşmesi",modal_cookie_h:"Gizlilik ve Çerez Politikası",legal_disclaimer:"<b>ⓘ</b> Bu doküman Türkçe yasal orijinaldir. Türk hukuku kapsamında bağlayıcıdır.",viewers_h:"Profilini Görüntüleyenler",viewers_sub:"IP adresine göre ülke tespit edildi · Son 30 gün",add_draft_btn:"Sonra Devam Et",add_draft_saved:"Taslak kaydedildi — devam etmek için giriş yapın",dir_both:"Her ikisi",pay_tt_cash:"TT Peşin",pay_tt_30:"TT 30 gün",pay_tt_60:"TT 60 gün",toast_logo_removed:"Logo kaldırıldı",toast_cover_uploaded:"Kapak yüklendi",consent_kvkk:"<b>KVKK Aydınlatma Metni</b>'ni okudum ve kabul ediyorum.",consent_terms:"<b>Kullanıcı Sözleşmesi</b>'ni kabul ediyorum.",consent_verify:"Verilerimin doğrulama amacıyla kontrol edilmesine izin veriyorum.",consent_marketing:"Ticari elektronik ileti almayı kabul ediyorum (opsiyonel).",consent_read:"Oku",consent_read2:"Oku",ph_cname:"Örn. XYZ Ticaret A.Ş.",ph_address:"Cadde, No, Semt / İlçe / Şehir / Ülke",ph_fullname:"Ad Soyad",ph_gm:"Genel Müdür",ph_products:"Örn. Pamuk ipliği, Dokuma kumaş, Örme kumaş",ph_desc:"Firmanızı, üretim kapasitenizi, ihracat pazarlarınızı bir paragrafta anlatın...",an_ip_based:"● IP tabanlı",an_visitors_sub:"Ziyaretçilerinin geldiği ülkeler (son 30 gün)",an_pulse_h:"Pazar Nabzı — HS Kodu Trendleri",an_pulse_sub:"Sektörünüzdeki 8 haftalık talep-arz değişimi · Trademap kaynaklı",an_p1_nm:"Pamuklu dokuma kumaş",an_p1_sub:"Almanya, Hollanda, Fransa · alıcı sinyali güçlü",an_p2_nm:"Mobilya (metal iskeletli)",an_p2_sub:"Finlandiya, Norveç · sipariş hacmi rekor seviyede",an_p3_nm:"Ahşap paletler, sandık",an_p3_sub:"Nijerya, Cezayir · yeni tarife nedeniyle dalgalı",an_p4_nm:"Pamuk ipliği (tarak)",an_p4_sub:"Kazakistan, Özbekistan · hammadde fiyatı geriliyor",an_p5_nm:"Demir/çelik eşya",an_p5_sub:"Mısır, Fas · liman kongesyonu düşüyor",an_data_freq:"Verilerin güncellenme sıklığı: 24 saat",an_full_report:"Tam rapor →",an_opening_report:"Detaylı analiz açılıyor",an_ai_alerts_h:"AI Uyarı Merkezi",an_ai_alerts_sub:"Firmanız için tespit edilen fırsatlar ve riskler",an_priority_high:"Yüksek öncelik",an_priority_med:"Orta öncelik",an_priority_opp:"Fırsat",an_priority_tip:"İpucu",an_alert1_nm:"cevap süresi kritik",an_alert1_desc:"3 gündür beklemede. Ortalama cevap süreniz 4 saatten uzun olursa eşleşme kalitesi düşer.",an_alert2_nm:"Vergi levhanız 8 gün içinde yenilenmeli",an_alert2_desc:"Yenilenmeyen belgeler firma sıralamasında düşüşe neden olur. Belgelerim → Yükle.",an_alert3_nm:"Yeni fırsat: HS 6006 Almanya alıcıları",an_alert3_desc:"Sizinle uyumlu 6 yeni alıcı tespit edildi. Örme kumaş sektöründe hızlı büyüyen bir koridor.",an_alert4_nm:"Profil tamamlanma önerisi",an_alert4_desc:"Galeri bölümüne 7 görsel daha eklerseniz profil skoru %94'ten %100'e çıkar.",an_security_h:"Güvenlik & Doğrulama Durumu",an_sec1_nm:"2FA Aktif",an_sec2_nm:"Vergi Levhası",an_status_approved:"Onaylı",an_sec3_nm:"Ticaret Sicil",an_status_verified:"Doğrulandı",an_sec4_nm:"KEP Adresi",an_status_active:"Aktif",an_sec5_sub:"Yenileme 15g içinde",an_sec6_sub:"Tüm iletişim şifreli",an_sec7_nm:"KVKK Uyumlu",an_sec7_sub:"Aydınlatma v1.2",an_sec8_sub:"IP + rate limiting aktif",an_deep_h:"Derin Analiz",fl_yourmsg:"Mesajınız",btn_send:"Gönder",toast_msg_sent:"Mesajınız iletildi",fl_password:"Şifre",btn_login:"Giriş Yap",stat_today:"bugün",stat_this_week:"bu hafta",stat_soon:"yakında",ft_kvkk:"KVKK Aydınlatma",ft_terms:"Üyelik Sözleşmesi",ft_cookie:"Gizlilik/Çerez",ft_tagline:"Modern İpek Yolu",fp_decisionmakers:"Karar Vericiler",fp_detail:"Detay",fp_gotoallppl:"Tüm Kişiler paneline git →",fp_gal1:"Ürün Vitrini",fp_gal2:"Üretim Tesisi",fp_gal3:"Depo",fp_gal4:"Ekip",fp_gal5:"Kalite Kontrol",fp_gal6:"Sertifikalar",lock_title:"İletişim bilgileri Pro üyelere açık",lock_sub:"WhatsApp, telefon, e-posta ve web sitesi Pro üyelik başladığında anında görünür olur.",lock_cta:"Pro'a Yükselt",sec_social_short:"Sosyal Medya",dene_lbl:"DENE",qt1:"Finlandiya'da mobilya aksesuarı alıcısı",qt2:"Fildişi Sahili'nde kakao tedarikçisi",qt3:"Kazakistan'da tekstil alıcısı",qf_lbl:"HIZLI FİLTRE",f_exp:"İhracat",f_imp:"İthalat",
-     s_pos:"Aktif firma",s_ctr:"Ülke ve bölge",s_sec:"Sektör",s_lng:"Dil",
+     tag_live:"TÜRKİYE ↔ DÜNYA · 6 DİL",h_title:"Modern <em>İpek Yolu</em> ile alıcınızı ve tedarikçinizi bulun.",
+     f_match:"Eşleştir",fm_fullpage:"Tam sayfayı aç",fm_fullpage_tt:"Bu firmayı tam sayfada göster",pp_live_prev:"CANLI ÖNİZLEME",pr_dl_pdf:"Prospektüsümü PDF olarak indir",step_prev:"Önceki",step_next:"Sonraki",step_of:"·",step_publish:"Yayınla · Firmayı Kaydet",creds_continue:"Ödemeye Devam",creds_back:"Paketlere dön",creds_onetime:"Tek seferlik ödeme",pay_err_card:"Geçerli kart numarası girin",pay_err_name:"Kart sahibinin adını girin",pay_err_exp:"Son tarihi AA/YY olarak girin",pay_err_cvc:"CVC girin",ppl_pw_h:"Karar vericilere doğrudan erişim Pro üyelere açık",ppl_pw_sub:"2.400+ doğrulanmış CEO, satın alma müdürü ve dış ticaret uzmanının e-posta ve telefonuna bir tıkla ulaşın. Her Pro üyeye ayda 100 kredi hediye.",ppl_pw_stat1:"Karar verici",ppl_pw_stat2:"Aylık kredi",ppl_pw_stat3:"Doğrulanmış",ppl_pw_cta:"Pro'ya Yükselt",ppl_pw_note:"Aylık $29 · İstediğin zaman iptal",creds_h:"Kredi Paketleri",creds_sub:"Her karar vericinin e-posta veya telefonu 1 kredi. Kullanılmayan krediler bir sonraki aya devreder.",creds_current:"mevcut krediniz var",creds_lbl:"Kredi",creds_per_lbl:"kredi",creds_save10:"%10 avantaj",creds_save15:"%15 avantaj",creds_you_get:"Alacağınız",creds_buy_btn:"Satın Al",creds_secure:"Stripe ile güvenli ödeme · 3D Secure",creds_pick_pack:"Bir paket seçin",creds_added:"kredi eklendi",creds_charged:"tahsil edildi",creds_add_btn:"Kredi Ekle",pay_h:"Ödeme — Pro Plan",pay_plan:"Kervea Pro",pay_kdv:"KDV (%20)",pay_disc:"İndirim",pay_total:"Toplam",pay_card:"Kart Numarası",pay_exp:"Son Tarih",pay_btn:"Öde",apply:"Uygula",bill_m:"Aylık",bill_y:"Yıllık",bill_save:"−20%",per_month:"/ay",ct_name:"Ad Soyad",ct_email:"E-posta",ct_subject:"Konu",ct_ph_name:"Adınız",ct_ph_email:"ornek@sirket.com",ct_ph_subject:"Nasıl yardımcı olabiliriz?",ct_email_lbl:"E-posta:",ct_phone_lbl:"Telefon:",lg_sso_google:"Google ile devam et",lg_sso_ms:"Microsoft ile devam et",lg_sso_apple:"Apple ile devam et",lg_or_email:"veya e-posta ile",pri_h:"aksiyon bekliyor — dikkatinizi gerektiriyor",pri_sub:"2 yeni yüksek skorlu eşleşme cevap bekliyor · 1 sözleşme yenileme yaklaşıyor · Belge güncelleme gerekli",pri_open_matches:"Eşleşmeleri Aç",pri_all:"Tümü",range_7d:"7g",range_30d:"30g",range_90d:"90g",range_1y:"1y",ac_title:"Aktivite Zaman Çizelgesi",ac_sub:"Son 30 günün tam kaydı.",ac_filter_all:"Tümü",ac_filter_match:"Eşleşmeler",ac_filter_msg:"Mesajlar",ac_filter_prof:"Profil",ac_filter_doc:"Belgeler",all_dir:"Tüm yönler",all_scores:"Tüm skorlar",attention:"dikkat",back_list:"Firma listesine dön",cancel:"İptal",custom:"Özel",contact_sales:"Satış ekibiyle iletişim",export_csv:"CSV",remove:"Kaldır",upload:"Yükle",save_all:"Tümünü Kaydet",results:"sonuç",complete:"Tamamlandı",stable:"Sabit",preview_page:"Sayfa önizle",ch_ctr:"Ülke Dağılımı",ch_trend:"Firma büyüme trendi",ck_logo:"Logo yüklendi",ck_doc:"Belgeler onaylı",ck_social:"Sosyal medya bağlı",ck_gal:"Galeri (5/12 görsel)",cover_h:"Kapak Görseli",cover_lbl:"Kapak Görseli · 1600×400",cover_tt:"Kapak fotoğrafını yükle",cover_st:"Firma sayfanızın üstünde görünecek · 1600×400px önerilen · max 5MB",cover_change:"Kapak fotoğrafı yükle veya değiştir",doc_h:"Belgeler *",doc_txt:"📄 Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları",doc_hint:"PDF, JPG, PNG · her dosya max 10MB · en fazla 20 belge",ent_p:"Kervea Enterprise · özel çözüm",ent_1:"Sınırsız firma, iletişim bilgisi, gelişmiş eşleştirme, dışa aktarım",ent_2:"Özel entegrasyon (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Beyaz etiket profil (kendi markanız)",ent_4:"Özel API erişimi + web-hook desteği",ent_5:"SLA + öncelikli destek (4 saat cevap garantisi)",ent_6:"Dedike hesap yöneticisi",ent_7:"Aylık eğitim ve strateji seansları",fl_cname:"Firma Adı *",fl_ctitle:"Ticari Ünvan (EN)",fl_tax:"Vergi No / Tax ID *",fl_mersis:"MERSIS / Sicil No",fl_year:"Kuruluş Yılı *",fl_emp:"Çalışan Sayısı",fl_country:"Ülke *",fl_city:"Şehir",fl_kep:"KEP Adresi",fl_web:"Web Sitesi",fl_email:"E-posta *",fl_phone:"Telefon *",fl_repname:"Yetkili Adı *",fl_reptitle:"Yetkili Ünvanı",fl_address:"Firma Adresi",fl_sec:"Ana Sektör *",fl_dir:"Ticaret Yönü *",fl_hs:"HS Kodu (virgülle)",fl_moq:"MOQ (Minimum Sipariş)",fl_inc:"INCOTERM Tercihi",fl_pay:"Ödeme Şekli",fl_products:"Ana Ürünler / Hizmetler",fl_desc:"Firma Açıklaması *",fl_certs:"Sertifikalar",gal_h:"Ürün / Tesis Fotoğrafları (max 12)",gal_tt:"Görselleri sürükle-bırak veya seç",gal_st:"JPG, PNG, WEBP · her biri max 5MB · toplam 12 görsel",gal_lbl:"Ürün / Tesis Fotoğrafları",gal_add:"Yeni görsel ekle · Sürükle-bırak destekli",gal_max:"JPG/PNG/WEBP · en fazla 12 görsel · her biri max 5MB",hiw_tag:"SÜREÇ",hiw_h:"Aracı yok. Sadece <em style=\"font-style:normal;color:var(--teal)\">gerçek ticaret</em>.",kpi_match:"Yeni Eşleşme",kpi_msg:"Yeni Mesaj",kpi_offer:"Teklif",kpi_view:"Görüntülenme",logo_h:"Firma Logosu *",logo_hint:"Önerilen: 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · şeffaf zemin · min 200×200",logo_lbl:"Firma Logosu",msg_h:"Mesajlar",msg_sub:"Doğrulanmış firmalarla doğrudan iletişim. Uçtan uca şifreli. 6 dilde otomatik çeviri.",mt_h:"Eşleşmelerim",mt_sub:"AI eşleştirme motoru sizin için sıraladı. Filtrele, dışa aktar, doğrudan mesajlaş.",ov_hello:"Merhaba",ov_sub:"İşte panelinizin son 30 günlük özeti.",ov_recent:"Son Etkinlikler",ov_status:"Profil Sağlığı",ov_ev1:"yeni teklif gönderdi",ov_ev2:"mesaj yazdı",ov_ev3:"profilinizi görüntüledi",ov_ev4:"ISO 9001 sertifikası doğrulandı",ov_ev5:"bağlantı isteği",ov_t1:"2 saat önce",ov_t2:"4 saat önce",ov_t3:"1 gün önce",ov_t4:"2 gün önce",ov_t5:"3 gün önce",p_ana:"Analiz",p_people:"Kişiler",p_docs:"Belgelerim",p_team:"Ekip",p_activity:"Aktivite",plan_starter:"Starter",starter_p:"Ücretsiz · başlangıç için ideal",starter_1:"1 firma profili + doğrulama rozeti",starter_2:"Ayda 50 eşleşme",starter_3:"Temel sektör filtreleme",starter_4:"6 dilde otomatik profil çevirisi",starter_5:"Sınırlı mesajlaşma (5/gün)",starter_6:"Standart destek",start_starter:"Ücretsiz Başla",pro_p:"Kervea Pro · en popüler",pro_1:"Starter'ın tüm özellikleri",pro_2:"Sınırsız eşleşme + gelişmiş AI skoru",pro_3:"Sınırsız firma, iletişim bilgisi, gelişmiş eşleştirme, dışa aktarım",pro_4:"Sınırsız mesajlaşma + öncelikli sıralama",pro_5:"Analitik dashboard (ziyaretçi, dönüşüm, rakip)",pro_6:"Profil vitrini · üst sıralarda görünüm",pro_7:"Öncelikli müşteri desteği (24 saat)",start_pro:"Pro'ya Yükselt",prof_h:"Firma Profilim",prof_sub:"Firma bilgilerinizi, görsellerinizi ve iletişim kanallarınızı güncelleyin.",promo_h:"Promosyon Kodun mu var?",promo_s:"İlk 3 ay Pro plana %30 indirim.",pub_h:"Başvurunuz alındı",pub_p:"Manuel doğrulama 24-48 saat içinde tamamlanır. Yayın hazır olduğunda e-posta ve SMS ile bilgilendirileceksiniz.",ppl_title:"Kişiler",ppl_sub:"Karar vericilerin doğrudan iletişim bilgileri. Her kişi 1 kredi.",ppl_credits:"Krediler",ppl_renew:"Kredi yenile",ppl_export:"Dışa aktar",ppl_all:"Tümü",ppl_ceo:"CEO / Genel Müdür",ppl_purchasing:"Satın Alma",ppl_sales:"Satış",ppl_ops:"Operasyon",ppl_col_person:"Kişi",ppl_col_title:"Ünvan",ppl_col_firm:"Firma",ppl_col_email:"E-posta",ppl_col_phone:"Telefon",ppl_col_act:"İşlem",ppl_kvkk:"Bu bilgiler KVKK'ya uygun şekilde ve firma yetkilisinin açık rızasıyla paylaşılmaktadır.",ppl_kvkk_link:"KVKK Aydınlatma Metni",pr_title:"Prospektüs",pr_desc:"Firmanızın tam bir profesyonel özeti — alıcı görüşmelerine hazır PDF.",pr_dl:"PDF olarak indir",pr_pdf:"PDF Prospektüs",pr_langs:"6 dilde",pr_mine:"Prospektüsümü indir",pr_incl:"İçindekiler",pr_i1:"Firma özeti + ana ürünler",pr_i2:"Sektör, HS kodu, MOQ",pr_i3:"Doğrulama rozetleri (vergi, sicil, KEP)",pr_i4:"Sertifikalar (ISO, GOTS, HACCP)",pr_i5:"İletişim bilgileri + QR kod",pr_who:"Kimler için?",pr_l1:"Alıcı görüşmeleri öncesi bilgi paylaşımı",pr_l2:"Fuar ve etkinliklerde dijital kartvizit",pr_l3:"Sosyal medya ve web sitesinde referans",s3_media:"Logo",s4_social:"Sosyal",s5_doc:"Belge",s6_pub:"Yayın",sec_biz:"İş Bilgileri",sec_visual:"Görsel Kimlik",sec_social:"Sosyal Medya & Web",sec_legal:"Yasal Bilgi",social_intro:"Sosyal medya ve iletişim kanallarınız — alıcılar buradan size ulaşacak.",ss_h:"Kervea'ya güvenen firmalar",ss_p:"Doğrulanmış üreticiler ve ihracatçılar, 6 kıtada aktif ağın parçası.",ss_5t:"Antep Baharat",ss_5s:"Gaziantep · Kırmızı biber",tm_title:"Ekip Yönetimi",tm_sub:"Firmanızın kullanıcılarını, rollerini ve erişim izinlerini yönetin.",tm_seats:"Koltuk kullanımı",tm_invite:"+ Kullanıcı Davet Et",tm_col_user:"Kullanıcı",tm_role:"Rol",tm_perms:"İzinler",tm_status:"Durum",tm_last:"Son Giriş",tm_active:"Aktif",tm_pending:"Beklemede",tm_owner:"Sahibi",tm_admin:"Yönetici",tm_sales:"Satış",tm_ops:"Operasyon",tm_p_all:"Tüm izinler",tm_p_msg:"Mesaj + Kişiler",tm_p_prof:"Profil + Belgeler",pr_preview:"Önizle",why_h:"Neden Kervea?",chat_online:"Çevrimiçi",chat_verified_firm:"Doğrulanmış firma",chat_typing:"yazıyor…",chat_btn_firm:"Firma profili",chat_btn_video:"Görüntülü ara",chat_btn_archive:"Arşivle",empty_firms:"Filtrenize uyan firma bulunamadı.",empty_records:"Filtrenize uyan kayıt yok.",toast_name_required:"Ad Soyad zorunlu",toast_valid_email:"Geçerli e-posta girin",toast_invalid_promo:"Geçersiz promosyon kodu",toast_search_applied:"Arama uygulandı",toast_csv_downloaded:"CSV indirildi",toast_pdf_downloaded:"Prospektüs indirildi",toast_photo_removed:"Fotoğraf kaldırıldı",toast_photo_uploaded:"Fotoğraf yüklendi",toast_logo_uploaded:"Logo yüklendi",toast_login_ok:"Giriş başarılı",toast_login_full:"Giriş yapıldı — tam erişim aktif",toast_logout:"Çıkış yapıldı",toast_credit_out:"Kredi bitti — planınızı yükseltin",toast_docs_opening:"Belge yükleme aracı açılıyor",toast_firm_opening:"Firma profili açılıyor",toast_firm_notfound:"Firma bulunamadı",toast_firm_error:"Firma açılırken hata",toast_visual_saved:"Görsel kimlik kaydedildi",toast_video_call:"Görüntülü arama başlatılıyor",toast_cover_updated:"Kapak güncellendi",toast_chat_archived:"Konuşma arşivlendi",toast_profile_updated:"Profil güncellendi",toast_delete_requested:"Silme talebi alındı — 7 gün içinde tamamlanacak",toast_social_saved:"Sosyal medya bilgileri kaydedildi",toast_form_opened:"Talep formu açıldı",toast_print_pdf:"Tarayıcının yazdır menüsünden PDF olarak kaydedin",toast_trade_saved:"Ticari bilgiler kaydedildi",toast_all_tasks:"Tüm görevler görüntüleniyor",toast_data_export:"Verilerin hazırlanıyor, e-postaya link gönderilecek",toast_legal_saved:"Yasal bilgiler kaydedildi",toast_cancelled:"İptal edildi",toast_copied:"Panoya kopyalandı",confirm_delete_account:"Hesabınız ve tüm verileriniz kalıcı olarak silinecek. Emin misiniz?",tm_inv_h:"Yeni Kullanıcı Davet Et",tm_inv_sub:"Firmanıza yeni bir ekip üyesi ekleyin. Davet e-postayla gönderilir; kullanıcı kabul ettiğinde aktif olur.",tm_fld_name:"Ad Soyad *",tm_fld_email:"E-posta *",tm_fld_role:"Rol *",tm_role_admin:"Yönetici",tm_role_admin_desc:"Tüm modüller · davet edebilir",tm_role_sales:"Satış",tm_role_sales_desc:"Mesajlaşma + Kişiler",tm_role_ops:"Operasyon",tm_role_ops_desc:"Profil + Belgeler",tm_role_view:"Sadece Görüntüleme",tm_role_view_desc:"Yalnızca okuma erişimi",tm_inv_info:"Rolü sonradan değiştirebilirsin. Bu kullanıcı <b>4/10 koltuk</b> kullanımınızın 5.'si olacak.",tm_btn_invite:"Davet Gönder",btn_cancel:"İptal",tm_perm_h:"Rol ve İzinleri Düzenle",tm_perm_sub:"Bu kullanıcının erişebileceği modülleri belirleyin.",tm_lbl_role:"Rol",tm_lbl_perms:"İzinler",tm_role_admin_short:"Tüm modüller",tm_role_sales_short:"Mesaj + Kişiler",tm_role_view_short:"Okuma",tm_perm_msg:"Mesajlaşma",tm_perm_msg_desc:"Tüm konuşmalara erişim, mesaj gönderme ve dosya paylaşımı.",tm_perm_match:"Eşleşmeler & Kişiler",tm_perm_match_desc:"AI eşleşme önerilerini görüntüle, kişi kredilerini kullan.",tm_perm_prof:"Firma Profili",tm_perm_prof_desc:"Firma bilgilerini, galeriyi, sosyal medya bağlantılarını düzenle.",tm_perm_docs:"Belgeler",tm_perm_docs_desc:"Sertifika, vergi levhası, KEP evraklarını yükle ve onayla.",tm_perm_ana:"Analitik",tm_perm_ana_desc:"Ağ erişimi, dönüşüm oranı, rakip karşılaştırması ve raporlar.",tm_perm_team:"Ekip Yönetimi",tm_perm_team_desc:"Yeni kullanıcı davet et, rol ata, hesapları devre dışı bırak.",tm_btn_save:"Değişiklikleri Kaydet",toast_saved:"Kaydedildi",ph_tm_name:"Örn. Ahmet Kaya",ph_tm_email:"ahmet@firma.com",pay_card_holder:"KART SAHİBİ",pay_card_holder_ph:"AD SOYAD",pay_card_exp_short:"SON TARİH",pay_per_month:"/ay",pay_method_card:"Kart",pay_method_mc:"MC",pay_method_bank:"iBank Transfer",pay_card_holder_lbl:"Kart Sahibi",ph_card_holder:"AD SOYAD",ph_promo:"Promo kodu (opsiyonel)",toast_pay_success:"Ödeme başarılı — Pro aktif",pay_disclaimer:"Ödemeyi tamamlayarak <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Üyelik Sözleşmesi</a> ve <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">KVKK Aydınlatma Metni</a>'ni kabul etmiş olursunuz.",modal_kvkk_h:"KVKK Aydınlatma Metni",modal_sozl_h:"Üyelik Sözleşmesi",modal_cookie_h:"Gizlilik ve Çerez Politikası",legal_disclaimer:"<b>ⓘ</b> Bu doküman Türkçe yasal orijinaldir. Türk hukuku kapsamında bağlayıcıdır.",viewers_h:"Profilini Görüntüleyenler",viewers_sub:"IP adresine göre ülke tespit edildi · Son 30 gün",add_draft_btn:"Sonra Devam Et",add_draft_saved:"Taslak kaydedildi — devam etmek için giriş yapın",dir_both:"Her ikisi",pay_tt_cash:"TT Peşin",pay_tt_30:"TT 30 gün",pay_tt_60:"TT 60 gün",toast_logo_removed:"Logo kaldırıldı",toast_cover_uploaded:"Kapak yüklendi",consent_kvkk:"<b>KVKK Aydınlatma Metni</b>'ni okudum ve kabul ediyorum.",consent_terms:"<b>Kullanıcı Sözleşmesi</b>'ni kabul ediyorum.",consent_verify:"Verilerimin doğrulama amacıyla kontrol edilmesine izin veriyorum.",consent_marketing:"Ticari elektronik ileti almayı kabul ediyorum (opsiyonel).",consent_read:"Oku",consent_read2:"Oku",ph_cname:"Örn. XYZ Ticaret A.Ş.",ph_address:"Cadde, No, Semt / İlçe / Şehir / Ülke",ph_fullname:"Ad Soyad",ph_gm:"Genel Müdür",ph_products:"Örn. Pamuk ipliği, Dokuma kumaş, Örme kumaş",ph_desc:"Firmanızı, üretim kapasitenizi, ihracat pazarlarınızı bir paragrafta anlatın...",an_ip_based:"● IP tabanlı",an_visitors_sub:"Ziyaretçilerinin geldiği ülkeler (son 30 gün)",an_pulse_h:"Pazar Nabzı — HS Kodu Trendleri",an_pulse_sub:"Sektörünüzdeki 8 haftalık talep-arz değişimi · Trademap kaynaklı",an_p1_nm:"Pamuklu dokuma kumaş",an_p1_sub:"Almanya, Hollanda, Fransa · alıcı sinyali güçlü",an_p2_nm:"Mobilya (metal iskeletli)",an_p2_sub:"Finlandiya, Norveç · sipariş hacmi rekor seviyede",an_p3_nm:"Ahşap paletler, sandık",an_p3_sub:"Nijerya, Cezayir · yeni tarife nedeniyle dalgalı",an_p4_nm:"Pamuk ipliği (tarak)",an_p4_sub:"Kazakistan, Özbekistan · hammadde fiyatı geriliyor",an_p5_nm:"Demir/çelik eşya",an_p5_sub:"Mısır, Fas · liman kongesyonu düşüyor",an_data_freq:"Verilerin güncellenme sıklığı: 24 saat",an_full_report:"Tam rapor →",an_opening_report:"Detaylı analiz açılıyor",an_ai_alerts_h:"AI Uyarı Merkezi",an_ai_alerts_sub:"Firmanız için tespit edilen fırsatlar ve riskler",an_priority_high:"Yüksek öncelik",an_priority_med:"Orta öncelik",an_priority_opp:"Fırsat",an_priority_tip:"İpucu",an_alert1_nm:"cevap süresi kritik",an_alert1_desc:"3 gündür beklemede. Ortalama cevap süreniz 4 saatten uzun olursa eşleşme kalitesi düşer.",an_alert2_nm:"Vergi levhanız 8 gün içinde yenilenmeli",an_alert2_desc:"Yenilenmeyen belgeler firma sıralamasında düşüşe neden olur. Belgelerim → Yükle.",an_alert3_nm:"Yeni fırsat: HS 6006 Almanya alıcıları",an_alert3_desc:"Sizinle uyumlu 6 yeni alıcı tespit edildi. Örme kumaş sektöründe hızlı büyüyen bir koridor.",an_alert4_nm:"Profil tamamlanma önerisi",an_alert4_desc:"Galeri bölümüne 7 görsel daha eklerseniz profil skoru %94'ten %100'e çıkar.",an_security_h:"Güvenlik & Doğrulama Durumu",an_sec1_nm:"2FA Aktif",an_sec2_nm:"Vergi Levhası",an_status_approved:"Onaylı",an_sec3_nm:"Ticaret Sicil",an_status_verified:"Doğrulandı",an_sec4_nm:"KEP Adresi",an_status_active:"Aktif",an_sec5_sub:"Yenileme 15g içinde",an_sec6_sub:"Tüm iletişim şifreli",an_sec7_nm:"KVKK Uyumlu",an_sec7_sub:"Aydınlatma v1.2",an_sec8_sub:"IP + rate limiting aktif",an_deep_h:"Derin Analiz",fl_yourmsg:"Mesajınız",btn_send:"Gönder",toast_msg_sent:"Mesajınız iletildi",fl_password:"Şifre",btn_login:"Giriş Yap",stat_today:"bugün",stat_this_week:"bu hafta",stat_soon:"yakında",ft_kvkk:"KVKK Aydınlatma",ft_terms:"Üyelik Sözleşmesi",ft_cookie:"Gizlilik/Çerez",ft_tagline:"Modern İpek Yolu",fp_decisionmakers:"Karar Vericiler",fp_detail:"Detay",fp_gotoallppl:"Tüm Kişiler paneline git →",fp_gal1:"Ürün Vitrini",fp_gal2:"Üretim Tesisi",fp_gal3:"Depo",fp_gal4:"Ekip",fp_gal5:"Kalite Kontrol",fp_gal6:"Sertifikalar",lock_title:"İletişim bilgileri Pro üyelere açık",lock_sub:"WhatsApp, telefon, e-posta ve web sitesi Pro üyelik başladığında anında görünür olur.",lock_cta:"Pro'a Yükselt",sec_social_short:"Sosyal Medya",dene_lbl:"DENE",qf_lbl:"HIZLI FİLTRE",f_exp:"İhracat",f_imp:"İthalat",
+     s_sec:"Sektör",s_lng:"Dil",
      firms_h:"Firmalar",firms_cnt:"eşleşme · uyum skoruna göre sıralı",sort_lbl:"Sırala:",sort_match:"Uyum",sort_year:"Kuruluş",sort_name:"İsim",
      add_h:"Firmanı Ekle",add_p:"6 adımda küresel görünürlük.",s1:"Firma",s2:"Sektör",s3:"Belge",s4:"Onay",s5:"Yayın",prev:"← Önceki",next:"Sonraki →",
-     pr_h:"Planlar",pr_p:"Küresel görünürlük seviyeniz.",ct_h:"İletişim",ct_p:"Sorularınız için buradayız.",
+     pr_h:"Planlar",ct_h:"İletişim",
      lg_h:"Giriş",lg_p:"Kervea hesabınıza erişin",pn_h:"Firma Paneli",pn_p:"Profil, eşleşme ve mesajlarınızı yönetin.",
      p_over:"Genel Bakış",p_matches:"Eşleşmeler",p_profile:"Firma Profilim",p_msgs:"Mesajlar",p_com:"Taahhütlerim",p_pros:"Prospektüs",p_set:"Ayarlar",p_out:"Çıkış",
      all_sec:"— Tüm sektörler",sel_ctr:"Ülke seç",dd_search:"Ülke ara...",
      dir_exp:"İHRACATÇI",dir_imp:"İTHALATÇI",match_score:"UYUM",verified:"Doğrulanmış",
      detail:"Detay",message:"Mesaj Gönder",match_col:"Firma",prod_col:"Ürün",sec_col:"Sektör",ctr_col:"Ülke",score_col:"Uyum",action_col:"İşlem"},
  en:{nav_home:"Home",nav_add:"Add Company",nav_pricing:"Pricing",nav_about:"About",nav_contact:"Contact",nav_login:"Login",nav_panel:"Panel",
-     tag_live:"TURKEY ↔ WORLD · 6 LANGUAGES",h_title:"Find your buyer or supplier on the modern <em>Silk Road</em>.",h_lead:"Companies verified by tax certificate and trade registry. Messaging in 6 languages, end-to-end encrypted.",
-     f_match:"Match",fm_fullpage:"Open full page",fm_fullpage_tt:"Show this company in full page",pp_live_prev:"LIVE PREVIEW",pr_dl_pdf:"Download my prospectus as PDF",step_prev:"Previous",step_next:"Next",step_of:"·",step_publish:"Publish · Save Company",creds_continue:"Continue to Payment",creds_back:"Back to packs",creds_onetime:"One-time payment",pay_err_card:"Enter a valid card number",pay_err_name:"Enter the cardholder name",pay_err_exp:"Enter expiry as MM/YY",pay_err_cvc:"Enter CVC",ppl_pw_h:"Direct access to decision-makers is available to Pro members",ppl_pw_sub:"Reach 2,400+ verified CEOs, purchasing managers and foreign trade specialists with one click. 100 monthly credits included with Pro.",ppl_pw_stat1:"Decision-makers",ppl_pw_stat2:"Monthly credits",ppl_pw_stat3:"Verified",ppl_pw_cta:"Upgrade to Pro",ppl_pw_note:"$29/month · Cancel anytime",creds_h:"Credit Packs",creds_sub:"Each decision-maker's email or phone is 1 credit. Unused credits roll over to next month.",creds_current:"credits currently available",creds_lbl:"Credits",creds_per_lbl:"credit",creds_save10:"10% savings",creds_save15:"15% savings",creds_you_get:"You get",creds_buy_btn:"Buy Now",creds_secure:"Secure payment with Stripe · 3D Secure",creds_pick_pack:"Please pick a pack",creds_added:"credits added",creds_charged:"charged",creds_add_btn:"Add Credits",pay_h:"Payment — Pro Plan",pay_plan:"Kervea Pro",pay_kdv:"VAT (20%)",pay_disc:"Discount",pay_total:"Total",pay_card:"Card Number",pay_exp:"Expires",pay_btn:"Pay",apply:"Apply",bill_m:"Monthly",bill_y:"Yearly",bill_save:"−20%",per_month:"/mo",ct_name:"Full Name",ct_email:"Email",ct_subject:"Subject",ct_ph_name:"Your name",ct_ph_email:"you@company.com",ct_ph_subject:"How can we help?",ct_center:"Headquarters",ct_email_lbl:"Email:",ct_phone_lbl:"Phone:",lg_sso_google:"Continue with Google",lg_sso_ms:"Continue with Microsoft",lg_sso_apple:"Continue with Apple",lg_or_email:"or with email",pri_h:"action pending — needs your attention",pri_sub:"2 new high-score matches awaiting reply · 1 contract renewal approaching · Document update required",pri_open_matches:"Open Matches",pri_all:"All",range_7d:"7d",range_30d:"30d",range_90d:"90d",range_1y:"1y",ac_title:"Activity Timeline",ac_sub:"Full record of the last 30 days.",ac_filter_all:"All",ac_filter_match:"Matches",ac_filter_msg:"Messages",ac_filter_prof:"Profile",ac_filter_doc:"Documents",all_dir:"All directions",all_scores:"All scores",attention:"attention",back_list:"Back to company list",cancel:"Cancel",custom:"Custom",contact_sales:"Contact sales team",export_csv:"CSV",remove:"Remove",upload:"Upload",save_all:"Save All",results:"results",complete:"Complete",stable:"Stable",preview_page:"Preview page",ch_ctr:"Country Distribution",ch_trend:"Company growth trend",ck_logo:"Logo uploaded",ck_doc:"Documents approved",ck_social:"Social media connected",ck_gal:"Gallery (5/12 images)",cover_h:"Cover Image",cover_lbl:"Cover Image · 1600×400",cover_tt:"Upload cover photo",cover_st:"Displayed at the top of your company page · 1600×400px recommended · max 5MB",cover_change:"Upload or change cover photo",doc_h:"Documents *",doc_txt:"📄 Business Certificate, Registry Gazette, Signature Circular, Quality Certificates",doc_hint:"PDF, JPG, PNG · max 10MB per file · up to 20 documents",ent_p:"Kervea Enterprise · custom solution",ent_1:"Unlimited companies, contacts, advanced matching, export",ent_2:"Custom integration (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"White-label profile (your own brand)",ent_4:"Dedicated API access + web-hook support",ent_5:"SLA + priority support (4-hour response guarantee)",ent_6:"Dedicated account manager",ent_7:"Monthly training and strategy sessions",fl_cname:"Company Name *",fl_ctitle:"Commercial Title (EN)",fl_tax:"Tax ID *",fl_mersis:"MERSIS / Registry No",fl_year:"Founded Year *",fl_emp:"Employee Count",fl_country:"Country *",fl_city:"City",fl_kep:"Registered E-mail",fl_web:"Website",fl_email:"Email *",fl_phone:"Phone *",fl_repname:"Contact Name *",fl_reptitle:"Contact Title",fl_address:"Company Address",fl_sec:"Main Sector *",fl_dir:"Trade Direction *",fl_hs:"HS Code (comma-separated)",fl_moq:"MOQ (Minimum Order)",fl_inc:"INCOTERM Preference",fl_pay:"Payment Method",fl_products:"Main Products / Services",fl_desc:"Company Description *",fl_certs:"Certifications",gal_h:"Product / Facility Photos (max 12)",gal_tt:"Drag & drop images or select",gal_st:"JPG, PNG, WEBP · max 5MB each · up to 12 images",gal_lbl:"Product / Facility Photos",gal_add:"Add new image · Drag & drop supported",gal_max:"JPG/PNG/WEBP · up to 12 images · max 5MB each",hiw_tag:"PROCESS",hiw_h:"Direct trade. <em style=\"font-style:normal;color:var(--teal)\">Real connections</em>.",hiw_1a:"01",hiw_1t:"Create your company profile",hiw_1b:"Global visibility in 6 steps",hiw_1c:"Avg 8 minutes · manual verification 24 hours",hiw_2a:"02",hiw_2t:"Let AI matching work for you",hiw_2b:"Recommendations sorted by match score",hiw_2c:"20+ matches in 3-5 minutes on average",hiw_3a:"03",hiw_3t:"Direct contact, real-time translation",hiw_3b:"Direct connection · no commission",hiw_3c:"Average response time 4 hours",kpi_match:"New Matches",kpi_msg:"New Messages",kpi_offer:"Offers",kpi_view:"Views",logo_h:"Company Logo *",logo_hint:"Recommended: 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · transparent background · min 200×200",logo_lbl:"Company Logo",msg_h:"Messages",msg_sub:"Direct communication with verified companies. End-to-end encrypted. Auto-translated in 6 languages.",mt_h:"My Matches",mt_sub:"AI matching engine sorted for you. Filter, export, message directly.",ov_hello:"Hello",ov_sub:"Here's your panel's last 30 days summary.",ov_recent:"Recent Activity",ov_status:"Profile Health",ov_ev1:"sent a new offer",ov_ev2:"sent a message",ov_ev3:"viewed your profile",ov_ev4:"ISO 9001 certificate verified",ov_ev5:"connection request",ov_t1:"2 hours ago",ov_t2:"4 hours ago",ov_t3:"1 day ago",ov_t4:"2 days ago",ov_t5:"3 days ago",p_ana:"Analytics",p_people:"Contacts",p_docs:"My Documents",p_team:"Team",p_activity:"Activity",plan_starter:"Starter",starter_p:"Free · ideal for getting started",starter_1:"1 company profile + verification badge",starter_2:"50 matches per month",starter_3:"Basic sector filtering",starter_4:"Auto profile translation in 6 languages",starter_5:"Limited messaging (5/day)",starter_6:"Standard support",start_starter:"Start Free",pro_p:"Kervea Pro · most popular",pro_1:"Everything in Starter",pro_2:"Unlimited matches + advanced AI score",pro_3:"Unlimited companies, contacts, advanced matching, export",pro_4:"Unlimited messaging + priority ranking",pro_5:"Analytics dashboard (visitors, conversion, competitors)",pro_6:"Profile showcase · top ranking visibility",pro_7:"Priority customer support (24 hours)",start_pro:"Upgrade to Pro",prof_h:"My Company Profile",prof_sub:"Update your company info, images, and communication channels.",promo_h:"Have a Promo Code?",promo_s:"30% off Pro plan for the first 3 months.",promo_h2:"Enter Code",promo_s2:"Special discount codes for early users and chamber members.",pub_h:"Application received",pub_p:"Manual verification completes in 24-48 hours. You'll be notified by email and SMS when live.",ppl_title:"Contacts",ppl_sub:"Direct contact details of decision-makers. 1 credit per contact.",ppl_credits:"Credits",ppl_renew:"Renew credits",ppl_export:"Export",ppl_all:"All",ppl_ceo:"CEO / General Manager",ppl_purchasing:"Purchasing",ppl_sales:"Sales",ppl_ops:"Operations",ppl_col_person:"Person",ppl_col_title:"Title",ppl_col_firm:"Company",ppl_col_email:"Email",ppl_col_phone:"Phone",ppl_col_act:"Action",ppl_kvkk:"This info is shared in compliance with data protection law and with the explicit consent of the company representative.",ppl_kvkk_link:"Privacy Notice",pr_title:"Prospectus",pr_desc:"A complete professional summary of your company — a PDF ready for buyer meetings.",pr_dl:"Download as PDF",pr_pdf:"PDF Prospectus",pr_langs:"In 6 languages",pr_mine:"Download my prospectus",pr_incl:"Contents",pr_i1:"Company summary + main products",pr_i2:"Sector, HS code, MOQ",pr_i3:"Verification badges (tax, registry, e-mail)",pr_i4:"Certifications (ISO, GOTS, HACCP)",pr_i5:"Contact details + QR code",pr_who:"Who is it for?",pr_l1:"Info sharing before buyer meetings",pr_l2:"Digital business card at fairs and events",pr_l3:"Reference on social media and websites",s3_media:"Logo",s4_social:"Social",s5_doc:"Documents",s6_pub:"Publish",sec_biz:"Business Info",sec_visual:"Visual Identity",sec_social:"Social Media & Web",sec_legal:"Legal Info",social_intro:"Your social media and communication channels — buyers will reach you here.",ss_h:"Companies that trust Kervea",ss_p:"Verified manufacturers and exporters, part of the active network in 6 continents.",ss_5t:"Antep Spices",ss_5s:"Gaziantep · Red pepper",tm_title:"Team Management",tm_sub:"Manage your company's users, roles, and access permissions.",tm_seats:"Seat usage",tm_invite:"+ Invite User",tm_col_user:"User",tm_role:"Role",tm_perms:"Permissions",tm_status:"Status",tm_last:"Last Login",tm_active:"Active",tm_pending:"Pending",tm_owner:"Owner",tm_admin:"Admin",tm_sales:"Sales",tm_ops:"Operations",tm_p_all:"All permissions",tm_p_msg:"Msg + Contacts",tm_p_prof:"Profile + Docs",pr_preview:"Preview",why_h:"Why Kervea?",why_p:"Direct contact with verified companies. No commissions, no unreliable suppliers, just real trade.",why_1t:"Country corridor",why_2t:"Verified company",why_3t:"6-language translation",chat_online:"Online",chat_verified_firm:"Verified company",chat_typing:"is typing…",chat_btn_firm:"Company profile",chat_btn_video:"Video call",chat_btn_archive:"Archive",empty_firms:"No companies match your filter.",empty_records:"No records match your filter.",toast_name_required:"Full name is required",toast_valid_email:"Enter a valid email",toast_invalid_promo:"Invalid promo code",toast_search_applied:"Search applied",toast_csv_downloaded:"CSV downloaded",toast_pdf_downloaded:"Prospectus downloaded",toast_photo_removed:"Photo removed",toast_photo_uploaded:"Photo uploaded",toast_logo_uploaded:"Logo uploaded",toast_login_ok:"Sign-in successful",toast_login_full:"Signed in — full access active",toast_logout:"Signed out",toast_credit_out:"Out of credits — upgrade your plan",toast_docs_opening:"Opening document uploader",toast_firm_opening:"Opening company profile",toast_firm_notfound:"Company not found",toast_firm_error:"Error opening company",toast_visual_saved:"Visual identity saved",toast_video_call:"Starting video call",toast_cover_updated:"Cover updated",toast_chat_archived:"Conversation archived",toast_profile_updated:"Profile updated",toast_delete_requested:"Deletion request received — will be completed in 7 days",toast_social_saved:"Social media info saved",toast_form_opened:"Request form opened",toast_print_pdf:"Save as PDF from your browser's print menu",toast_trade_saved:"Trade info saved",toast_all_tasks:"Showing all tasks",toast_data_export:"Preparing your data, link will be sent by email",toast_legal_saved:"Legal info saved",toast_cancelled:"Cancelled",toast_copied:"Copied to clipboard",confirm_delete_account:"Your account and all your data will be permanently deleted. Are you sure?",tm_inv_h:"Invite New User",tm_inv_sub:"Add a new team member to your company. The invitation is sent by email; the user becomes active when they accept.",tm_fld_name:"Full Name *",tm_fld_email:"Email *",tm_fld_role:"Role *",tm_role_admin:"Administrator",tm_role_admin_desc:"All modules · can invite",tm_role_sales:"Sales",tm_role_sales_desc:"Messaging + Contacts",tm_role_ops:"Operations",tm_role_ops_desc:"Profile + Documents",tm_role_view:"View Only",tm_role_view_desc:"Read-only access",tm_inv_info:"You can change the role later. This user will be the 5th of your <b>4/10 seats</b>.",tm_btn_invite:"Send Invitation",btn_cancel:"Cancel",tm_perm_h:"Edit Role & Permissions",tm_perm_sub:"Specify which modules this user can access.",tm_lbl_role:"Role",tm_lbl_perms:"Permissions",tm_role_admin_short:"All modules",tm_role_sales_short:"Msg + Contacts",tm_role_view_short:"Read",tm_perm_msg:"Messaging",tm_perm_msg_desc:"Access to all conversations, sending messages, and file sharing.",tm_perm_match:"Matches & Contacts",tm_perm_match_desc:"View AI match suggestions, use contact credits.",tm_perm_prof:"Company Profile",tm_perm_prof_desc:"Edit company info, gallery, and social media links.",tm_perm_docs:"Documents",tm_perm_docs_desc:"Upload and approve certificates, tax certificates, and registered mail documents.",tm_perm_ana:"Analytics",tm_perm_ana_desc:"Network access, conversion rate, competitor comparison, and reports.",tm_perm_team:"Team Management",tm_perm_team_desc:"Invite new users, assign roles, deactivate accounts.",tm_btn_save:"Save Changes",toast_saved:"Saved",ph_tm_name:"E.g. John Smith",ph_tm_email:"john@company.com",pay_card_holder:"CARDHOLDER",pay_card_holder_ph:"FULL NAME",pay_card_exp_short:"EXPIRES",pay_per_month:"/mo",pay_method_card:"Card",pay_method_mc:"MC",pay_method_bank:"Bank Transfer",pay_card_holder_lbl:"Cardholder",ph_card_holder:"FULL NAME",ph_promo:"Promo code (optional)",toast_pay_success:"Payment successful — Pro active",pay_disclaimer:"By completing payment, you accept the <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">User Agreement</a> and <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Privacy Notice</a>.",modal_kvkk_h:"Privacy Notice (Turkish KVKK)",modal_sozl_h:"User Agreement",modal_cookie_h:"Privacy and Cookie Policy",legal_disclaimer:"<b>ⓘ</b> This document is the Turkish legal original. It is binding under Turkish law. Translations in other languages are for informational purposes only.",viewers_h:"Profile Viewers",viewers_sub:"Country detected by IP address · Last 30 days",add_draft_btn:"Continue Later",add_draft_saved:"Draft saved — sign in to continue",dir_both:"Both",pay_tt_cash:"TT Cash",pay_tt_30:"TT 30 days",pay_tt_60:"TT 60 days",toast_logo_removed:"Logo removed",toast_cover_uploaded:"Cover uploaded",consent_kvkk:"I have read and accept the <b>Privacy Notice</b>.",consent_terms:"I accept the <b>User Agreement</b>.",consent_verify:"I authorize verification checks on my data.",consent_marketing:"I agree to receive marketing communications (optional).",consent_read:"Read",consent_read2:"Read",ph_cname:"E.g. XYZ Trade Co. Ltd.",ph_address:"Street, No, District / City / Country",ph_fullname:"Full Name",ph_gm:"General Manager",ph_products:"E.g. Cotton yarn, Woven fabric, Knitted fabric",ph_desc:"Describe your company, production capacity, and export markets in one paragraph...",an_ip_based:"● IP-based",an_visitors_sub:"Countries your visitors come from (last 30 days)",an_pulse_h:"Market Pulse — HS Code Trends",an_pulse_sub:"8-week demand-supply shift in your sector · Sourced from Trademap",an_p1_nm:"Cotton woven fabric",an_p1_sub:"Germany, Netherlands, France · strong buyer signal",an_p2_nm:"Furniture (metal frame)",an_p2_sub:"Finland, Norway · order volume at record high",an_p3_nm:"Wooden pallets, crates",an_p3_sub:"Nigeria, Algeria · volatile due to new tariff",an_p4_nm:"Cotton yarn (carded)",an_p4_sub:"Kazakhstan, Uzbekistan · raw material price receding",an_p5_nm:"Iron/steel goods",an_p5_sub:"Egypt, Morocco · port congestion easing",an_data_freq:"Data refresh frequency: 24 hours",an_full_report:"Full report →",an_opening_report:"Opening detailed analysis",an_ai_alerts_h:"AI Alert Center",an_ai_alerts_sub:"Opportunities and risks detected for your company",an_priority_high:"High priority",an_priority_med:"Medium priority",an_priority_opp:"Opportunity",an_priority_tip:"Tip",an_alert1_nm:"response time critical",an_alert1_desc:"Waiting 3 days. If your average response time exceeds 4 hours, match quality drops.",an_alert2_nm:"Your tax certificate must be renewed within 8 days",an_alert2_desc:"Unrenewed documents cause a drop in company ranking. Go to My Documents → Upload.",an_alert3_nm:"New opportunity: HS 6006 German buyers",an_alert3_desc:"6 new buyers matching your profile detected. A fast-growing corridor in the knitted fabric sector.",an_alert4_nm:"Profile completion suggestion",an_alert4_desc:"Adding 7 more images to the gallery will raise your profile score from 94% to 100%.",an_security_h:"Security & Verification Status",an_sec1_nm:"2FA Active",an_sec2_nm:"Tax Certificate",an_status_approved:"Approved",an_sec3_nm:"Trade Registry",an_status_verified:"Verified",an_sec4_nm:"Registered E-mail",an_status_active:"Active",an_sec5_sub:"Renewal in 15 days",an_sec6_sub:"All communication encrypted",an_sec7_nm:"GDPR Compliant",an_sec7_sub:"Privacy Notice v1.2",an_sec8_sub:"IP + rate limiting active",an_deep_h:"Deep Analysis",fl_yourmsg:"Your message",btn_send:"Send",toast_msg_sent:"Message sent",fl_password:"Password",btn_login:"Log in",stat_today:"today",stat_this_week:"this week",stat_soon:"soon",ft_kvkk:"Privacy Notice",ft_terms:"Terms of Service",ft_cookie:"Privacy/Cookies",ft_tagline:"Modern Silk Road",fp_decisionmakers:"Decision Makers",fp_detail:"Details",fp_gotoallppl:"Go to all contacts →",fp_gal1:"Showroom",fp_gal2:"Production Facility",fp_gal3:"Warehouse",fp_gal4:"Team",fp_gal5:"Quality Control",fp_gal6:"Certificates",lock_title:"Contact details are available for Pro members",lock_sub:"WhatsApp, phone, email and website become instantly visible when your Pro membership starts.",lock_cta:"Upgrade to Pro",sec_social_short:"Social Media",dene_lbl:"TRY",qt1:"Furniture accessory buyer in Finland",qt2:"Cocoa supplier in Ivory Coast",qt3:"Textile buyer in Kazakhstan",qf_lbl:"QUICK FILTER",f_exp:"Export",f_imp:"Import",
-     s_pos:"Active firms",s_ctr:"Countries and territories",s_sec:"Sectors",s_lng:"Languages",
+     tag_live:"TURKEY ↔ WORLD · 6 LANGUAGES",h_title:"Find your buyer or supplier on the modern <em>Silk Road</em>.",
+     f_match:"Match",fm_fullpage:"Open full page",fm_fullpage_tt:"Show this company in full page",pp_live_prev:"LIVE PREVIEW",pr_dl_pdf:"Download my prospectus as PDF",step_prev:"Previous",step_next:"Next",step_of:"·",step_publish:"Publish · Save Company",creds_continue:"Continue to Payment",creds_back:"Back to packs",creds_onetime:"One-time payment",pay_err_card:"Enter a valid card number",pay_err_name:"Enter the cardholder name",pay_err_exp:"Enter expiry as MM/YY",pay_err_cvc:"Enter CVC",ppl_pw_h:"Direct access to decision-makers is available to Pro members",ppl_pw_sub:"Reach 2,400+ verified CEOs, purchasing managers and foreign trade specialists with one click. 100 monthly credits included with Pro.",ppl_pw_stat1:"Decision-makers",ppl_pw_stat2:"Monthly credits",ppl_pw_stat3:"Verified",ppl_pw_cta:"Upgrade to Pro",ppl_pw_note:"$29/month · Cancel anytime",creds_h:"Credit Packs",creds_sub:"Each decision-maker's email or phone is 1 credit. Unused credits roll over to next month.",creds_current:"credits currently available",creds_lbl:"Credits",creds_per_lbl:"credit",creds_save10:"10% savings",creds_save15:"15% savings",creds_you_get:"You get",creds_buy_btn:"Buy Now",creds_secure:"Secure payment with Stripe · 3D Secure",creds_pick_pack:"Please pick a pack",creds_added:"credits added",creds_charged:"charged",creds_add_btn:"Add Credits",pay_h:"Payment — Pro Plan",pay_plan:"Kervea Pro",pay_kdv:"VAT (20%)",pay_disc:"Discount",pay_total:"Total",pay_card:"Card Number",pay_exp:"Expires",pay_btn:"Pay",apply:"Apply",bill_m:"Monthly",bill_y:"Yearly",bill_save:"−20%",per_month:"/mo",ct_name:"Full Name",ct_email:"Email",ct_subject:"Subject",ct_ph_name:"Your name",ct_ph_email:"you@company.com",ct_ph_subject:"How can we help?",ct_email_lbl:"Email:",ct_phone_lbl:"Phone:",lg_sso_google:"Continue with Google",lg_sso_ms:"Continue with Microsoft",lg_sso_apple:"Continue with Apple",lg_or_email:"or with email",pri_h:"action pending — needs your attention",pri_sub:"2 new high-score matches awaiting reply · 1 contract renewal approaching · Document update required",pri_open_matches:"Open Matches",pri_all:"All",range_7d:"7d",range_30d:"30d",range_90d:"90d",range_1y:"1y",ac_title:"Activity Timeline",ac_sub:"Full record of the last 30 days.",ac_filter_all:"All",ac_filter_match:"Matches",ac_filter_msg:"Messages",ac_filter_prof:"Profile",ac_filter_doc:"Documents",all_dir:"All directions",all_scores:"All scores",attention:"attention",back_list:"Back to company list",cancel:"Cancel",custom:"Custom",contact_sales:"Contact sales team",export_csv:"CSV",remove:"Remove",upload:"Upload",save_all:"Save All",results:"results",complete:"Complete",stable:"Stable",preview_page:"Preview page",ch_ctr:"Country Distribution",ch_trend:"Company growth trend",ck_logo:"Logo uploaded",ck_doc:"Documents approved",ck_social:"Social media connected",ck_gal:"Gallery (5/12 images)",cover_h:"Cover Image",cover_lbl:"Cover Image · 1600×400",cover_tt:"Upload cover photo",cover_st:"Displayed at the top of your company page · 1600×400px recommended · max 5MB",cover_change:"Upload or change cover photo",doc_h:"Documents *",doc_txt:"📄 Business Certificate, Registry Gazette, Signature Circular, Quality Certificates",doc_hint:"PDF, JPG, PNG · max 10MB per file · up to 20 documents",ent_p:"Kervea Enterprise · custom solution",ent_1:"Unlimited companies, contacts, advanced matching, export",ent_2:"Custom integration (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"White-label profile (your own brand)",ent_4:"Dedicated API access + web-hook support",ent_5:"SLA + priority support (4-hour response guarantee)",ent_6:"Dedicated account manager",ent_7:"Monthly training and strategy sessions",fl_cname:"Company Name *",fl_ctitle:"Commercial Title (EN)",fl_tax:"Tax ID *",fl_mersis:"MERSIS / Registry No",fl_year:"Founded Year *",fl_emp:"Employee Count",fl_country:"Country *",fl_city:"City",fl_kep:"Registered E-mail",fl_web:"Website",fl_email:"Email *",fl_phone:"Phone *",fl_repname:"Contact Name *",fl_reptitle:"Contact Title",fl_address:"Company Address",fl_sec:"Main Sector *",fl_dir:"Trade Direction *",fl_hs:"HS Code (comma-separated)",fl_moq:"MOQ (Minimum Order)",fl_inc:"INCOTERM Preference",fl_pay:"Payment Method",fl_products:"Main Products / Services",fl_desc:"Company Description *",fl_certs:"Certifications",gal_h:"Product / Facility Photos (max 12)",gal_tt:"Drag & drop images or select",gal_st:"JPG, PNG, WEBP · max 5MB each · up to 12 images",gal_lbl:"Product / Facility Photos",gal_add:"Add new image · Drag & drop supported",gal_max:"JPG/PNG/WEBP · up to 12 images · max 5MB each",hiw_tag:"PROCESS",hiw_h:"Direct trade. <em style=\"font-style:normal;color:var(--teal)\">Real connections</em>.",kpi_match:"New Matches",kpi_msg:"New Messages",kpi_offer:"Offers",kpi_view:"Views",logo_h:"Company Logo *",logo_hint:"Recommended: 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · transparent background · min 200×200",logo_lbl:"Company Logo",msg_h:"Messages",msg_sub:"Direct communication with verified companies. End-to-end encrypted. Auto-translated in 6 languages.",mt_h:"My Matches",mt_sub:"AI matching engine sorted for you. Filter, export, message directly.",ov_hello:"Hello",ov_sub:"Here's your panel's last 30 days summary.",ov_recent:"Recent Activity",ov_status:"Profile Health",ov_ev1:"sent a new offer",ov_ev2:"sent a message",ov_ev3:"viewed your profile",ov_ev4:"ISO 9001 certificate verified",ov_ev5:"connection request",ov_t1:"2 hours ago",ov_t2:"4 hours ago",ov_t3:"1 day ago",ov_t4:"2 days ago",ov_t5:"3 days ago",p_ana:"Analytics",p_people:"Contacts",p_docs:"My Documents",p_team:"Team",p_activity:"Activity",plan_starter:"Starter",starter_p:"Free · ideal for getting started",starter_1:"1 company profile + verification badge",starter_2:"50 matches per month",starter_3:"Basic sector filtering",starter_4:"Auto profile translation in 6 languages",starter_5:"Limited messaging (5/day)",starter_6:"Standard support",start_starter:"Start Free",pro_p:"Kervea Pro · most popular",pro_1:"Everything in Starter",pro_2:"Unlimited matches + advanced AI score",pro_3:"Unlimited companies, contacts, advanced matching, export",pro_4:"Unlimited messaging + priority ranking",pro_5:"Analytics dashboard (visitors, conversion, competitors)",pro_6:"Profile showcase · top ranking visibility",pro_7:"Priority customer support (24 hours)",start_pro:"Upgrade to Pro",prof_h:"My Company Profile",prof_sub:"Update your company info, images, and communication channels.",promo_h:"Have a Promo Code?",promo_s:"30% off Pro plan for the first 3 months.",pub_h:"Application received",pub_p:"Manual verification completes in 24-48 hours. You'll be notified by email and SMS when live.",ppl_title:"Contacts",ppl_sub:"Direct contact details of decision-makers. 1 credit per contact.",ppl_credits:"Credits",ppl_renew:"Renew credits",ppl_export:"Export",ppl_all:"All",ppl_ceo:"CEO / General Manager",ppl_purchasing:"Purchasing",ppl_sales:"Sales",ppl_ops:"Operations",ppl_col_person:"Person",ppl_col_title:"Title",ppl_col_firm:"Company",ppl_col_email:"Email",ppl_col_phone:"Phone",ppl_col_act:"Action",ppl_kvkk:"This info is shared in compliance with data protection law and with the explicit consent of the company representative.",ppl_kvkk_link:"Privacy Notice",pr_title:"Prospectus",pr_desc:"A complete professional summary of your company — a PDF ready for buyer meetings.",pr_dl:"Download as PDF",pr_pdf:"PDF Prospectus",pr_langs:"In 6 languages",pr_mine:"Download my prospectus",pr_incl:"Contents",pr_i1:"Company summary + main products",pr_i2:"Sector, HS code, MOQ",pr_i3:"Verification badges (tax, registry, e-mail)",pr_i4:"Certifications (ISO, GOTS, HACCP)",pr_i5:"Contact details + QR code",pr_who:"Who is it for?",pr_l1:"Info sharing before buyer meetings",pr_l2:"Digital business card at fairs and events",pr_l3:"Reference on social media and websites",s3_media:"Logo",s4_social:"Social",s5_doc:"Documents",s6_pub:"Publish",sec_biz:"Business Info",sec_visual:"Visual Identity",sec_social:"Social Media & Web",sec_legal:"Legal Info",social_intro:"Your social media and communication channels — buyers will reach you here.",ss_h:"Companies that trust Kervea",ss_p:"Verified manufacturers and exporters, part of the active network in 6 continents.",ss_5t:"Antep Spices",ss_5s:"Gaziantep · Red pepper",tm_title:"Team Management",tm_sub:"Manage your company's users, roles, and access permissions.",tm_seats:"Seat usage",tm_invite:"+ Invite User",tm_col_user:"User",tm_role:"Role",tm_perms:"Permissions",tm_status:"Status",tm_last:"Last Login",tm_active:"Active",tm_pending:"Pending",tm_owner:"Owner",tm_admin:"Admin",tm_sales:"Sales",tm_ops:"Operations",tm_p_all:"All permissions",tm_p_msg:"Msg + Contacts",tm_p_prof:"Profile + Docs",pr_preview:"Preview",why_h:"Why Kervea?",chat_online:"Online",chat_verified_firm:"Verified company",chat_typing:"is typing…",chat_btn_firm:"Company profile",chat_btn_video:"Video call",chat_btn_archive:"Archive",empty_firms:"No companies match your filter.",empty_records:"No records match your filter.",toast_name_required:"Full name is required",toast_valid_email:"Enter a valid email",toast_invalid_promo:"Invalid promo code",toast_search_applied:"Search applied",toast_csv_downloaded:"CSV downloaded",toast_pdf_downloaded:"Prospectus downloaded",toast_photo_removed:"Photo removed",toast_photo_uploaded:"Photo uploaded",toast_logo_uploaded:"Logo uploaded",toast_login_ok:"Sign-in successful",toast_login_full:"Signed in — full access active",toast_logout:"Signed out",toast_credit_out:"Out of credits — upgrade your plan",toast_docs_opening:"Opening document uploader",toast_firm_opening:"Opening company profile",toast_firm_notfound:"Company not found",toast_firm_error:"Error opening company",toast_visual_saved:"Visual identity saved",toast_video_call:"Starting video call",toast_cover_updated:"Cover updated",toast_chat_archived:"Conversation archived",toast_profile_updated:"Profile updated",toast_delete_requested:"Deletion request received — will be completed in 7 days",toast_social_saved:"Social media info saved",toast_form_opened:"Request form opened",toast_print_pdf:"Save as PDF from your browser's print menu",toast_trade_saved:"Trade info saved",toast_all_tasks:"Showing all tasks",toast_data_export:"Preparing your data, link will be sent by email",toast_legal_saved:"Legal info saved",toast_cancelled:"Cancelled",toast_copied:"Copied to clipboard",confirm_delete_account:"Your account and all your data will be permanently deleted. Are you sure?",tm_inv_h:"Invite New User",tm_inv_sub:"Add a new team member to your company. The invitation is sent by email; the user becomes active when they accept.",tm_fld_name:"Full Name *",tm_fld_email:"Email *",tm_fld_role:"Role *",tm_role_admin:"Administrator",tm_role_admin_desc:"All modules · can invite",tm_role_sales:"Sales",tm_role_sales_desc:"Messaging + Contacts",tm_role_ops:"Operations",tm_role_ops_desc:"Profile + Documents",tm_role_view:"View Only",tm_role_view_desc:"Read-only access",tm_inv_info:"You can change the role later. This user will be the 5th of your <b>4/10 seats</b>.",tm_btn_invite:"Send Invitation",btn_cancel:"Cancel",tm_perm_h:"Edit Role & Permissions",tm_perm_sub:"Specify which modules this user can access.",tm_lbl_role:"Role",tm_lbl_perms:"Permissions",tm_role_admin_short:"All modules",tm_role_sales_short:"Msg + Contacts",tm_role_view_short:"Read",tm_perm_msg:"Messaging",tm_perm_msg_desc:"Access to all conversations, sending messages, and file sharing.",tm_perm_match:"Matches & Contacts",tm_perm_match_desc:"View AI match suggestions, use contact credits.",tm_perm_prof:"Company Profile",tm_perm_prof_desc:"Edit company info, gallery, and social media links.",tm_perm_docs:"Documents",tm_perm_docs_desc:"Upload and approve certificates, tax certificates, and registered mail documents.",tm_perm_ana:"Analytics",tm_perm_ana_desc:"Network access, conversion rate, competitor comparison, and reports.",tm_perm_team:"Team Management",tm_perm_team_desc:"Invite new users, assign roles, deactivate accounts.",tm_btn_save:"Save Changes",toast_saved:"Saved",ph_tm_name:"E.g. John Smith",ph_tm_email:"john@company.com",pay_card_holder:"CARDHOLDER",pay_card_holder_ph:"FULL NAME",pay_card_exp_short:"EXPIRES",pay_per_month:"/mo",pay_method_card:"Card",pay_method_mc:"MC",pay_method_bank:"Bank Transfer",pay_card_holder_lbl:"Cardholder",ph_card_holder:"FULL NAME",ph_promo:"Promo code (optional)",toast_pay_success:"Payment successful — Pro active",pay_disclaimer:"By completing payment, you accept the <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">User Agreement</a> and <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Privacy Notice</a>.",modal_kvkk_h:"Privacy Notice (Turkish KVKK)",modal_sozl_h:"User Agreement",modal_cookie_h:"Privacy and Cookie Policy",legal_disclaimer:"<b>ⓘ</b> This document is the Turkish legal original. It is binding under Turkish law. Translations in other languages are for informational purposes only.",viewers_h:"Profile Viewers",viewers_sub:"Country detected by IP address · Last 30 days",add_draft_btn:"Continue Later",add_draft_saved:"Draft saved — sign in to continue",dir_both:"Both",pay_tt_cash:"TT Cash",pay_tt_30:"TT 30 days",pay_tt_60:"TT 60 days",toast_logo_removed:"Logo removed",toast_cover_uploaded:"Cover uploaded",consent_kvkk:"I have read and accept the <b>Privacy Notice</b>.",consent_terms:"I accept the <b>User Agreement</b>.",consent_verify:"I authorize verification checks on my data.",consent_marketing:"I agree to receive marketing communications (optional).",consent_read:"Read",consent_read2:"Read",ph_cname:"E.g. XYZ Trade Co. Ltd.",ph_address:"Street, No, District / City / Country",ph_fullname:"Full Name",ph_gm:"General Manager",ph_products:"E.g. Cotton yarn, Woven fabric, Knitted fabric",ph_desc:"Describe your company, production capacity, and export markets in one paragraph...",an_ip_based:"● IP-based",an_visitors_sub:"Countries your visitors come from (last 30 days)",an_pulse_h:"Market Pulse — HS Code Trends",an_pulse_sub:"8-week demand-supply shift in your sector · Sourced from Trademap",an_p1_nm:"Cotton woven fabric",an_p1_sub:"Germany, Netherlands, France · strong buyer signal",an_p2_nm:"Furniture (metal frame)",an_p2_sub:"Finland, Norway · order volume at record high",an_p3_nm:"Wooden pallets, crates",an_p3_sub:"Nigeria, Algeria · volatile due to new tariff",an_p4_nm:"Cotton yarn (carded)",an_p4_sub:"Kazakhstan, Uzbekistan · raw material price receding",an_p5_nm:"Iron/steel goods",an_p5_sub:"Egypt, Morocco · port congestion easing",an_data_freq:"Data refresh frequency: 24 hours",an_full_report:"Full report →",an_opening_report:"Opening detailed analysis",an_ai_alerts_h:"AI Alert Center",an_ai_alerts_sub:"Opportunities and risks detected for your company",an_priority_high:"High priority",an_priority_med:"Medium priority",an_priority_opp:"Opportunity",an_priority_tip:"Tip",an_alert1_nm:"response time critical",an_alert1_desc:"Waiting 3 days. If your average response time exceeds 4 hours, match quality drops.",an_alert2_nm:"Your tax certificate must be renewed within 8 days",an_alert2_desc:"Unrenewed documents cause a drop in company ranking. Go to My Documents → Upload.",an_alert3_nm:"New opportunity: HS 6006 German buyers",an_alert3_desc:"6 new buyers matching your profile detected. A fast-growing corridor in the knitted fabric sector.",an_alert4_nm:"Profile completion suggestion",an_alert4_desc:"Adding 7 more images to the gallery will raise your profile score from 94% to 100%.",an_security_h:"Security & Verification Status",an_sec1_nm:"2FA Active",an_sec2_nm:"Tax Certificate",an_status_approved:"Approved",an_sec3_nm:"Trade Registry",an_status_verified:"Verified",an_sec4_nm:"Registered E-mail",an_status_active:"Active",an_sec5_sub:"Renewal in 15 days",an_sec6_sub:"All communication encrypted",an_sec7_nm:"GDPR Compliant",an_sec7_sub:"Privacy Notice v1.2",an_sec8_sub:"IP + rate limiting active",an_deep_h:"Deep Analysis",fl_yourmsg:"Your message",btn_send:"Send",toast_msg_sent:"Message sent",fl_password:"Password",btn_login:"Log in",stat_today:"today",stat_this_week:"this week",stat_soon:"soon",ft_kvkk:"Privacy Notice",ft_terms:"Terms of Service",ft_cookie:"Privacy/Cookies",ft_tagline:"Modern Silk Road",fp_decisionmakers:"Decision Makers",fp_detail:"Details",fp_gotoallppl:"Go to all contacts →",fp_gal1:"Showroom",fp_gal2:"Production Facility",fp_gal3:"Warehouse",fp_gal4:"Team",fp_gal5:"Quality Control",fp_gal6:"Certificates",lock_title:"Contact details are available for Pro members",lock_sub:"WhatsApp, phone, email and website become instantly visible when your Pro membership starts.",lock_cta:"Upgrade to Pro",sec_social_short:"Social Media",dene_lbl:"TRY",qf_lbl:"QUICK FILTER",f_exp:"Export",f_imp:"Import",
+     s_sec:"Sectors",s_lng:"Languages",
      firms_h:"Companies",firms_cnt:"matches · sorted by score",sort_lbl:"Sort:",sort_match:"Match",sort_year:"Year",sort_name:"Name",
      add_h:"Add Your Company",add_p:"Global visibility in 6 steps.",s1:"Company",s2:"Sector",s3:"Docs",s4:"Consent",s5:"Publish",prev:"← Prev",next:"Next →",
-     pr_h:"Plans",pr_p:"Your global visibility tier.",ct_h:"Contact",ct_p:"We're here to help.",
+     pr_h:"Plans",ct_h:"Contact",
      lg_h:"Sign In",lg_p:"Access your Kervea account",pn_h:"Company Panel",pn_p:"Manage your profile, matches and messages.",
      p_over:"Overview",p_matches:"Matches",p_profile:"My Profile",p_msgs:"Messages",p_com:"Commitments",p_pros:"Prospectus",p_set:"Settings",p_out:"Sign Out",
      all_sec:"— All sectors",sel_ctr:"Select country",dd_search:"Search country...",
      dir_exp:"EXPORTING",dir_imp:"IMPORTING",match_score:"MATCH",verified:"Verified",
      detail:"Details",message:"Send Message",match_col:"Company",prod_col:"Product",sec_col:"Sector",ctr_col:"Country",score_col:"Match",action_col:"Action"},
  es:{nav_home:"Inicio",nav_add:"Añadir",nav_pricing:"Precios",nav_about:"Nosotros",nav_contact:"Contacto",nav_login:"Ingresar",nav_panel:"Panel",
-     tag_live:"TURQUÍA ↔ MUNDO · 6 IDIOMAS",h_title:"Encuentra tu comprador o proveedor en la <em>Ruta de la Seda</em> moderna.",h_lead:"Empresas verificadas mediante certificado fiscal y registro mercantil. Mensajería en 6 idiomas, cifrada de extremo a extremo.",
-     f_match:"Emparejar",fm_fullpage:"Abrir página completa",fm_fullpage_tt:"Mostrar esta empresa en página completa",pp_live_prev:"VISTA EN VIVO",pr_dl_pdf:"Descargar mi folleto en PDF",step_prev:"Anterior",step_next:"Siguiente",step_of:"·",step_publish:"Publicar · Guardar Empresa",creds_continue:"Continuar al Pago",creds_back:"Volver a paquetes",creds_onetime:"Pago único",pay_err_card:"Ingrese un número de tarjeta válido",pay_err_name:"Ingrese el nombre del titular",pay_err_exp:"Ingrese vencimiento como MM/AA",pay_err_cvc:"Ingrese CVC",ppl_pw_h:"Acceso directo a tomadores de decisiones para miembros Pro",ppl_pw_sub:"Alcance 2.400+ CEOs, gerentes de compras y especialistas verificados con un clic. 100 créditos mensuales incluidos con Pro.",ppl_pw_stat1:"Tomadores de decisión",ppl_pw_stat2:"Créditos mensuales",ppl_pw_stat3:"Verificado",ppl_pw_cta:"Actualizar a Pro",ppl_pw_note:"$29/mes · Cancele cuando quiera",creds_h:"Paquetes de Créditos",creds_sub:"Cada correo o teléfono es 1 crédito. Los créditos no usados se transfieren al mes siguiente.",creds_current:"créditos actualmente disponibles",creds_lbl:"Créditos",creds_per_lbl:"crédito",creds_save10:"10% ahorro",creds_save15:"15% ahorro",creds_you_get:"Obtiene",creds_buy_btn:"Comprar",creds_secure:"Pago seguro con Stripe · 3D Secure",creds_pick_pack:"Seleccione un paquete",creds_added:"créditos añadidos",creds_charged:"cobrado",creds_add_btn:"Añadir Créditos",pay_h:"Pago — Plan Pro",pay_plan:"Kervea Pro",pay_kdv:"IVA (20%)",pay_disc:"Descuento",pay_total:"Total",pay_card:"Número de Tarjeta",pay_exp:"Vencimiento",pay_btn:"Pagar",apply:"Aplicar",bill_m:"Mensual",bill_y:"Anual",bill_save:"−20%",per_month:"/mes",ct_name:"Nombre Completo",ct_email:"Correo Electrónico",ct_subject:"Asunto",ct_ph_name:"Su nombre",ct_ph_email:"usted@empresa.com",ct_ph_subject:"¿En qué podemos ayudarle?",ct_center:"Sede Central",ct_email_lbl:"Correo:",ct_phone_lbl:"Teléfono:",lg_sso_google:"Continuar con Google",lg_sso_ms:"Continuar con Microsoft",lg_sso_apple:"Continuar con Apple",lg_or_email:"o con correo electrónico",pri_h:"acciones pendientes — requieren su atención",pri_sub:"2 nuevas coincidencias de alto puntaje esperando respuesta · 1 renovación de contrato próxima · Actualización de documento requerida",pri_open_matches:"Abrir Coincidencias",pri_all:"Todos",range_7d:"7d",range_30d:"30d",range_90d:"90d",range_1y:"1a",ac_title:"Cronología de Actividad",ac_sub:"Registro completo de los últimos 30 días.",ac_filter_all:"Todos",ac_filter_match:"Coincidencias",ac_filter_msg:"Mensajes",ac_filter_prof:"Perfil",ac_filter_doc:"Documentos",all_dir:"Todas direcciones",all_scores:"Todas puntuaciones",attention:"atención",back_list:"Volver a lista de empresas",cancel:"Cancelar",custom:"Personalizado",contact_sales:"Contactar ventas",export_csv:"CSV",remove:"Quitar",upload:"Cargar",save_all:"Guardar Todo",results:"resultados",complete:"Completado",stable:"Estable",preview_page:"Vista previa",ch_ctr:"Distribución por País",ch_trend:"Tendencia de crecimiento",ck_logo:"Logo cargado",ck_doc:"Documentos aprobados",ck_social:"Redes sociales conectadas",ck_gal:"Galería (5/12 imágenes)",cover_h:"Imagen de Portada",cover_lbl:"Imagen de Portada · 1600×400",cover_tt:"Cargar foto de portada",cover_st:"Se muestra arriba de su página · 1600×400px recomendado · máx 5MB",cover_change:"Cargar o cambiar foto de portada",doc_h:"Documentos *",doc_txt:"📄 Certificado de Actividad, Gaceta del Registro, Circular de Firma, Certificados de Calidad",doc_hint:"PDF, JPG, PNG · máx 10MB por archivo · hasta 20 documentos",ent_p:"Kervea Enterprise · solución personalizada",ent_1:"Empresas ilimitadas, contactos, matching avanzado, exportación",ent_2:"Integración personalizada (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Perfil de marca blanca (su propia marca)",ent_4:"Acceso API dedicado + soporte web-hook",ent_5:"SLA + soporte prioritario (garantía de respuesta de 4 horas)",ent_6:"Gerente de cuenta dedicado",ent_7:"Sesiones mensuales de formación y estrategia",fl_cname:"Nombre de Empresa *",fl_ctitle:"Razón Social (EN)",fl_tax:"NIF / Tax ID *",fl_mersis:"MERSIS / Nº Registro",fl_year:"Año de Fundación *",fl_emp:"Nº de Empleados",fl_country:"País *",fl_city:"Ciudad",fl_kep:"Email Registrado",fl_web:"Sitio Web",fl_email:"Correo *",fl_phone:"Teléfono *",fl_repname:"Nombre del Contacto *",fl_reptitle:"Cargo del Contacto",fl_address:"Dirección de Empresa",fl_sec:"Sector Principal *",fl_dir:"Dirección de Comercio *",fl_hs:"Código HS (separados por coma)",fl_moq:"MOQ (Pedido Mínimo)",fl_inc:"Preferencia INCOTERM",fl_pay:"Método de Pago",fl_products:"Productos / Servicios Principales",fl_desc:"Descripción de Empresa *",fl_certs:"Certificaciones",gal_h:"Fotos de Producto / Instalación (máx 12)",gal_tt:"Arrastre imágenes o seleccione",gal_st:"JPG, PNG, WEBP · máx 5MB cada uno · hasta 12 imágenes",gal_lbl:"Fotos de Producto / Instalación",gal_add:"Añadir imagen · Arrastrar y soltar",gal_max:"JPG/PNG/WEBP · hasta 12 imágenes · máx 5MB cada uno",hiw_tag:"PROCESO",hiw_h:"Contacto directo. <em style=\"font-style:normal;color:var(--teal)\">Solo comercio real</em>.",hiw_1a:"01",hiw_1t:"Cree su perfil de empresa",hiw_1b:"Visibilidad global en 6 pasos",hiw_1c:"Prom 8 minutos · verificación manual 24 horas",hiw_2a:"02",hiw_2t:"Deje que el matching de IA trabaje",hiw_2b:"Recomendaciones ordenadas por puntaje",hiw_2c:"20+ coincidencias en 3-5 minutos",hiw_3a:"03",hiw_3t:"Contacto directo, traducción en tiempo real",hiw_3b:"Contacto directo · sin comisión",hiw_3c:"Tiempo de respuesta promedio 4 horas",kpi_match:"Nuevas Coincidencias",kpi_msg:"Nuevos Mensajes",kpi_offer:"Ofertas",kpi_view:"Vistas",logo_h:"Logo de Empresa *",logo_hint:"Recomendado: 400×400px, PNG/JPG/SVG, máx 2MB",logo_hint2:"PNG · fondo transparente · mín 200×200",logo_lbl:"Logo de Empresa",msg_h:"Mensajes",msg_sub:"Comunicación directa con empresas verificadas. Cifrado E2E. Traducción automática en 6 idiomas.",mt_h:"Mis Coincidencias",mt_sub:"El motor de IA los ordenó. Filtre, exporte, mensaje directo.",ov_hello:"Hola",ov_sub:"Aquí está el resumen de los últimos 30 días.",ov_recent:"Actividad Reciente",ov_status:"Salud del Perfil",ov_ev1:"envió una nueva oferta",ov_ev2:"envió un mensaje",ov_ev3:"vio su perfil",ov_ev4:"Certificado ISO 9001 verificado",ov_ev5:"solicitud de conexión",ov_t1:"hace 2 horas",ov_t2:"hace 4 horas",ov_t3:"hace 1 día",ov_t4:"hace 2 días",ov_t5:"hace 3 días",p_ana:"Analítica",p_people:"Contactos",p_docs:"Mis Documentos",p_team:"Equipo",p_activity:"Actividad",plan_starter:"Starter",starter_p:"Gratis · ideal para empezar",starter_1:"1 perfil de empresa + insignia de verificación",starter_2:"50 coincidencias por mes",starter_3:"Filtrado básico por sector",starter_4:"Traducción automática en 6 idiomas",starter_5:"Mensajería limitada (5/día)",starter_6:"Soporte estándar",start_starter:"Empezar Gratis",pro_p:"Kervea Pro · más popular",pro_1:"Todo en Starter",pro_2:"Coincidencias ilimitadas + IA avanzada",pro_3:"Empresas ilimitadas, contactos, matching avanzado, exportación",pro_4:"Mensajería ilimitada + posición prioritaria",pro_5:"Panel de analítica (visitantes, conversión, competidores)",pro_6:"Perfil destacado · visibilidad prioritaria",pro_7:"Soporte prioritario (24 horas)",start_pro:"Actualizar a Pro",prof_h:"Mi Perfil de Empresa",prof_sub:"Actualice información, imágenes y canales de contacto.",promo_h:"¿Tiene Código Promocional?",promo_s:"30% descuento en Pro los primeros 3 meses.",promo_h2:"Ingrese Código",promo_s2:"Códigos especiales para primeros usuarios y miembros de cámara.",pub_h:"Solicitud recibida",pub_p:"La verificación manual se completa en 24-48 horas. Se le notificará por email y SMS al publicar.",ppl_title:"Contactos",ppl_sub:"Contactos directos de tomadores de decisiones. 1 crédito por contacto.",ppl_credits:"Créditos",ppl_renew:"Renovar créditos",ppl_export:"Exportar",ppl_all:"Todos",ppl_ceo:"CEO / Director General",ppl_purchasing:"Compras",ppl_sales:"Ventas",ppl_ops:"Operaciones",ppl_col_person:"Persona",ppl_col_title:"Cargo",ppl_col_firm:"Empresa",ppl_col_email:"Correo",ppl_col_phone:"Teléfono",ppl_col_act:"Acción",ppl_kvkk:"Esta información se comparte cumpliendo la ley de protección de datos y con consentimiento del representante.",ppl_kvkk_link:"Aviso de Privacidad",pr_title:"Folleto",pr_desc:"Un resumen profesional completo — PDF listo para reuniones.",pr_dl:"Descargar como PDF",pr_pdf:"Folleto PDF",pr_langs:"En 6 idiomas",pr_mine:"Descargar mi folleto",pr_incl:"Contenido",pr_i1:"Resumen + productos principales",pr_i2:"Sector, HS, MOQ",pr_i3:"Insignias (fiscal, registro, e-mail)",pr_i4:"Certificaciones (ISO, GOTS, HACCP)",pr_i5:"Contacto + código QR",pr_who:"¿Para quién?",pr_l1:"Compartir info antes de reuniones",pr_l2:"Tarjeta digital en ferias",pr_l3:"Referencia en redes y web",s3_media:"Logo",s4_social:"Social",s5_doc:"Docs",s6_pub:"Publicar",sec_biz:"Info Comercial",sec_visual:"Identidad Visual",sec_social:"Redes Sociales y Web",sec_legal:"Info Legal",social_intro:"Sus redes sociales y canales — los compradores le contactarán aquí.",ss_h:"Empresas que confían en Kervea",ss_p:"Fabricantes y exportadores verificados en 6 continentes.",ss_5t:"Antep Especias",ss_5s:"Gaziantep · Pimiento rojo",tm_title:"Gestión de Equipo",tm_sub:"Gestione usuarios, roles y permisos.",tm_seats:"Uso de asientos",tm_invite:"+ Invitar Usuario",tm_col_user:"Usuario",tm_role:"Rol",tm_perms:"Permisos",tm_status:"Estado",tm_last:"Último Acceso",tm_active:"Activo",tm_pending:"Pendiente",tm_owner:"Propietario",tm_admin:"Admin",tm_sales:"Ventas",tm_ops:"Operaciones",tm_p_all:"Todos los permisos",tm_p_msg:"Msj + Contactos",tm_p_prof:"Perfil + Docs",pr_preview:"Vista previa",why_h:"¿Por qué Kervea?",why_p:"Diga adiós a intermediarios, comisiones y proveedores no confiables. Contacto directo, empresas verificadas, comercio real.",why_1t:"Corredor de país",why_2t:"Empresa verificada",why_3t:"Traducción en 6 idiomas",chat_online:"En línea",chat_verified_firm:"Empresa verificada",chat_typing:"está escribiendo…",chat_btn_firm:"Perfil de empresa",chat_btn_video:"Videollamada",chat_btn_archive:"Archivar",empty_firms:"Ninguna empresa coincide con su filtro.",empty_records:"No hay registros que coincidan.",toast_name_required:"Nombre completo es obligatorio",toast_valid_email:"Ingrese un correo válido",toast_invalid_promo:"Código promo inválido",toast_search_applied:"Búsqueda aplicada",toast_csv_downloaded:"CSV descargado",toast_pdf_downloaded:"Folleto descargado",toast_photo_removed:"Foto eliminada",toast_photo_uploaded:"Foto cargada",toast_logo_uploaded:"Logo cargado",toast_login_ok:"Inicio de sesión exitoso",toast_login_full:"Sesión iniciada — acceso completo activo",toast_logout:"Sesión cerrada",toast_credit_out:"Sin créditos — actualice su plan",toast_docs_opening:"Abriendo cargador de documentos",toast_firm_opening:"Abriendo perfil de empresa",toast_firm_notfound:"Empresa no encontrada",toast_firm_error:"Error al abrir la empresa",toast_visual_saved:"Identidad visual guardada",toast_video_call:"Iniciando videollamada",toast_cover_updated:"Portada actualizada",toast_chat_archived:"Conversación archivada",toast_profile_updated:"Perfil actualizado",toast_delete_requested:"Solicitud de eliminación recibida — se completará en 7 días",toast_social_saved:"Información de redes sociales guardada",toast_form_opened:"Formulario de solicitud abierto",toast_print_pdf:"Guarde como PDF desde el menú imprimir",toast_trade_saved:"Info comercial guardada",toast_all_tasks:"Mostrando todas las tareas",toast_data_export:"Preparando datos, se enviará enlace por correo",toast_legal_saved:"Información legal guardada",toast_cancelled:"Cancelado",toast_copied:"Copiado al portapapeles",confirm_delete_account:"Su cuenta y todos sus datos serán eliminados permanentemente. ¿Está seguro?",tm_inv_h:"Invitar Nuevo Usuario",tm_inv_sub:"Agregue un nuevo miembro del equipo a su empresa. La invitación se envía por correo; se activa cuando el usuario acepta.",tm_fld_name:"Nombre Completo *",tm_fld_email:"Correo *",tm_fld_role:"Rol *",tm_role_admin:"Administrador",tm_role_admin_desc:"Todos los módulos · puede invitar",tm_role_sales:"Ventas",tm_role_sales_desc:"Mensajería + Contactos",tm_role_ops:"Operaciones",tm_role_ops_desc:"Perfil + Documentos",tm_role_view:"Solo Lectura",tm_role_view_desc:"Solo acceso de lectura",tm_inv_info:"Puede cambiar el rol más tarde. Este usuario será el 5º de sus <b>4/10 asientos</b>.",tm_btn_invite:"Enviar Invitación",btn_cancel:"Cancelar",tm_perm_h:"Editar Rol y Permisos",tm_perm_sub:"Especifique a qué módulos puede acceder este usuario.",tm_lbl_role:"Rol",tm_lbl_perms:"Permisos",tm_role_admin_short:"Todos los módulos",tm_role_sales_short:"Msj + Contactos",tm_role_view_short:"Lectura",tm_perm_msg:"Mensajería",tm_perm_msg_desc:"Acceso a todas las conversaciones, envío de mensajes y compartición de archivos.",tm_perm_match:"Coincidencias y Contactos",tm_perm_match_desc:"Ver sugerencias de coincidencias de IA, usar créditos de contacto.",tm_perm_prof:"Perfil de Empresa",tm_perm_prof_desc:"Editar información de empresa, galería y enlaces de redes sociales.",tm_perm_docs:"Documentos",tm_perm_docs_desc:"Cargar y aprobar certificados, certificado fiscal y documentos oficiales.",tm_perm_ana:"Analítica",tm_perm_ana_desc:"Acceso a la red, tasa de conversión, comparación con competidores e informes.",tm_perm_team:"Gestión de Equipo",tm_perm_team_desc:"Invitar nuevos usuarios, asignar roles, desactivar cuentas.",tm_btn_save:"Guardar Cambios",toast_saved:"Guardado",ph_tm_name:"Ej. Juan Pérez",ph_tm_email:"juan@empresa.com",pay_card_holder:"TITULAR",pay_card_holder_ph:"NOMBRE COMPLETO",pay_card_exp_short:"VENCE",pay_per_month:"/mes",pay_method_card:"Tarjeta",pay_method_mc:"MC",pay_method_bank:"Transferencia",pay_card_holder_lbl:"Titular",ph_card_holder:"NOMBRE COMPLETO",ph_promo:"Código promo (opcional)",toast_pay_success:"Pago exitoso — Pro activo",pay_disclaimer:"Al completar el pago, acepta el <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Acuerdo de Usuario</a> y el <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Aviso de Privacidad</a>.",modal_kvkk_h:"Aviso de Privacidad (KVKK Turco)",modal_sozl_h:"Acuerdo de Usuario",modal_cookie_h:"Política de Privacidad y Cookies",legal_disclaimer:"<b>ⓘ</b> Este documento es el original legal turco. Es vinculante bajo la ley turca. Las traducciones a otros idiomas son solo para fines informativos.",viewers_h:"Visitantes del Perfil",viewers_sub:"País detectado por dirección IP · Últimos 30 días",add_draft_btn:"Continuar Después",add_draft_saved:"Borrador guardado — inicie sesión para continuar",dir_both:"Ambos",pay_tt_cash:"TT al contado",pay_tt_30:"TT 30 días",pay_tt_60:"TT 60 días",toast_logo_removed:"Logo eliminado",toast_cover_uploaded:"Portada cargada",consent_kvkk:"He leído y acepto el <b>Aviso de Privacidad</b>.",consent_terms:"Acepto el <b>Acuerdo de Usuario</b>.",consent_verify:"Autorizo la verificación de mis datos.",consent_marketing:"Acepto recibir comunicaciones comerciales (opcional).",consent_read:"Leer",consent_read2:"Leer",ph_cname:"Ej. Kervea Textil S.L.",ph_address:"Calle, Nº, Distrito / Ciudad / País",ph_fullname:"Nombre completo",ph_gm:"Director General",ph_products:"Ej. Hilo de algodón, Tela tejida, Tela de punto",ph_desc:"Describa su empresa, capacidad de producción y mercados de exportación en un párrafo...",an_ip_based:"● Basado en IP",an_visitors_sub:"Países de origen de tus visitantes (últimos 30 días)",an_pulse_h:"Pulso del Mercado — Tendencias del Código HS",an_pulse_sub:"Cambio de oferta-demanda de 8 semanas en su sector · Fuente Trademap",an_p1_nm:"Tela de algodón tejido",an_p1_sub:"Alemania, Países Bajos, Francia · señal de comprador fuerte",an_p2_nm:"Muebles (estructura metálica)",an_p2_sub:"Finlandia, Noruega · volumen de pedidos en récord",an_p3_nm:"Paletas de madera, cajones",an_p3_sub:"Nigeria, Argelia · volátil por nueva tarifa",an_p4_nm:"Hilo de algodón (cardado)",an_p4_sub:"Kazajistán, Uzbekistán · precio de materia prima cediendo",an_p5_nm:"Artículos de hierro/acero",an_p5_sub:"Egipto, Marruecos · congestión portuaria disminuyendo",an_data_freq:"Frecuencia de actualización de datos: 24 horas",an_full_report:"Informe completo →",an_opening_report:"Abriendo análisis detallado",an_ai_alerts_h:"Centro de Alertas de IA",an_ai_alerts_sub:"Oportunidades y riesgos detectados para su empresa",an_priority_high:"Prioridad alta",an_priority_med:"Prioridad media",an_priority_opp:"Oportunidad",an_priority_tip:"Consejo",an_alert1_nm:"tiempo de respuesta crítico",an_alert1_desc:"3 días de espera. Si el tiempo medio de respuesta supera 4 horas, la calidad de coincidencia baja.",an_alert2_nm:"Su certificado fiscal debe renovarse en 8 días",an_alert2_desc:"Los documentos no renovados causan una caída en el ranking. Vaya a Mis Documentos → Cargar.",an_alert3_nm:"Nueva oportunidad: HS 6006 compradores alemanes",an_alert3_desc:"Se detectaron 6 nuevos compradores compatibles. Un corredor de rápido crecimiento en el sector de tejidos de punto.",an_alert4_nm:"Sugerencia de finalización de perfil",an_alert4_desc:"Añadir 7 imágenes más a la galería subirá su puntuación de perfil del 94% al 100%.",an_security_h:"Estado de Seguridad y Verificación",an_sec1_nm:"2FA Activo",an_sec2_nm:"Certificado Fiscal",an_status_approved:"Aprobado",an_sec3_nm:"Registro Mercantil",an_status_verified:"Verificado",an_sec4_nm:"Email Registrado",an_status_active:"Activo",an_sec5_sub:"Renovación en 15 días",an_sec6_sub:"Toda la comunicación cifrada",an_sec7_nm:"Compatible GDPR",an_sec7_sub:"Aviso de Privacidad v1.2",an_sec8_sub:"IP + limitación de tasa activa",an_deep_h:"Análisis Profundo",fl_yourmsg:"Su mensaje",btn_send:"Enviar",toast_msg_sent:"Mensaje enviado",fl_password:"Contraseña",btn_login:"Iniciar sesión",stat_today:"hoy",stat_this_week:"esta semana",stat_soon:"pronto",ft_kvkk:"Aviso de privacidad",ft_terms:"Términos del servicio",ft_cookie:"Privacidad/Cookies",ft_tagline:"Ruta de la Seda Moderna",fp_decisionmakers:"Responsables de Decisión",fp_detail:"Detalles",fp_gotoallppl:"Ver todos los contactos →",fp_gal1:"Sala de Exposición",fp_gal2:"Planta de Producción",fp_gal3:"Almacén",fp_gal4:"Equipo",fp_gal5:"Control de Calidad",fp_gal6:"Certificados",lock_title:"Los datos de contacto están disponibles para miembros Pro",lock_sub:"WhatsApp, teléfono, email y sitio web se muestran al instante al iniciar tu membresía Pro.",lock_cta:"Actualizar a Pro",sec_social_short:"Redes Sociales",dene_lbl:"PROBAR",qt1:"Comprador de accesorios de muebles en Finlandia",qt2:"Proveedor de cacao en Costa de Marfil",qt3:"Comprador textil en Kazajistán",qf_lbl:"FILTRO RÁPIDO",f_exp:"Exportación",f_imp:"Importación",
-     s_pos:"Empresas activas",s_ctr:"Países y territorios",s_sec:"Sectores",s_lng:"Idiomas",
+     tag_live:"TURQUÍA ↔ MUNDO · 6 IDIOMAS",h_title:"Encuentra tu comprador o proveedor en la <em>Ruta de la Seda</em> moderna.",
+     f_match:"Emparejar",fm_fullpage:"Abrir página completa",fm_fullpage_tt:"Mostrar esta empresa en página completa",pp_live_prev:"VISTA EN VIVO",pr_dl_pdf:"Descargar mi folleto en PDF",step_prev:"Anterior",step_next:"Siguiente",step_of:"·",step_publish:"Publicar · Guardar Empresa",creds_continue:"Continuar al Pago",creds_back:"Volver a paquetes",creds_onetime:"Pago único",pay_err_card:"Ingrese un número de tarjeta válido",pay_err_name:"Ingrese el nombre del titular",pay_err_exp:"Ingrese vencimiento como MM/AA",pay_err_cvc:"Ingrese CVC",ppl_pw_h:"Acceso directo a tomadores de decisiones para miembros Pro",ppl_pw_sub:"Alcance 2.400+ CEOs, gerentes de compras y especialistas verificados con un clic. 100 créditos mensuales incluidos con Pro.",ppl_pw_stat1:"Tomadores de decisión",ppl_pw_stat2:"Créditos mensuales",ppl_pw_stat3:"Verificado",ppl_pw_cta:"Actualizar a Pro",ppl_pw_note:"$29/mes · Cancele cuando quiera",creds_h:"Paquetes de Créditos",creds_sub:"Cada correo o teléfono es 1 crédito. Los créditos no usados se transfieren al mes siguiente.",creds_current:"créditos actualmente disponibles",creds_lbl:"Créditos",creds_per_lbl:"crédito",creds_save10:"10% ahorro",creds_save15:"15% ahorro",creds_you_get:"Obtiene",creds_buy_btn:"Comprar",creds_secure:"Pago seguro con Stripe · 3D Secure",creds_pick_pack:"Seleccione un paquete",creds_added:"créditos añadidos",creds_charged:"cobrado",creds_add_btn:"Añadir Créditos",pay_h:"Pago — Plan Pro",pay_plan:"Kervea Pro",pay_kdv:"IVA (20%)",pay_disc:"Descuento",pay_total:"Total",pay_card:"Número de Tarjeta",pay_exp:"Vencimiento",pay_btn:"Pagar",apply:"Aplicar",bill_m:"Mensual",bill_y:"Anual",bill_save:"−20%",per_month:"/mes",ct_name:"Nombre Completo",ct_email:"Correo Electrónico",ct_subject:"Asunto",ct_ph_name:"Su nombre",ct_ph_email:"usted@empresa.com",ct_ph_subject:"¿En qué podemos ayudarle?",ct_email_lbl:"Correo:",ct_phone_lbl:"Teléfono:",lg_sso_google:"Continuar con Google",lg_sso_ms:"Continuar con Microsoft",lg_sso_apple:"Continuar con Apple",lg_or_email:"o con correo electrónico",pri_h:"acciones pendientes — requieren su atención",pri_sub:"2 nuevas coincidencias de alto puntaje esperando respuesta · 1 renovación de contrato próxima · Actualización de documento requerida",pri_open_matches:"Abrir Coincidencias",pri_all:"Todos",range_7d:"7d",range_30d:"30d",range_90d:"90d",range_1y:"1a",ac_title:"Cronología de Actividad",ac_sub:"Registro completo de los últimos 30 días.",ac_filter_all:"Todos",ac_filter_match:"Coincidencias",ac_filter_msg:"Mensajes",ac_filter_prof:"Perfil",ac_filter_doc:"Documentos",all_dir:"Todas direcciones",all_scores:"Todas puntuaciones",attention:"atención",back_list:"Volver a lista de empresas",cancel:"Cancelar",custom:"Personalizado",contact_sales:"Contactar ventas",export_csv:"CSV",remove:"Quitar",upload:"Cargar",save_all:"Guardar Todo",results:"resultados",complete:"Completado",stable:"Estable",preview_page:"Vista previa",ch_ctr:"Distribución por País",ch_trend:"Tendencia de crecimiento",ck_logo:"Logo cargado",ck_doc:"Documentos aprobados",ck_social:"Redes sociales conectadas",ck_gal:"Galería (5/12 imágenes)",cover_h:"Imagen de Portada",cover_lbl:"Imagen de Portada · 1600×400",cover_tt:"Cargar foto de portada",cover_st:"Se muestra arriba de su página · 1600×400px recomendado · máx 5MB",cover_change:"Cargar o cambiar foto de portada",doc_h:"Documentos *",doc_txt:"📄 Certificado de Actividad, Gaceta del Registro, Circular de Firma, Certificados de Calidad",doc_hint:"PDF, JPG, PNG · máx 10MB por archivo · hasta 20 documentos",ent_p:"Kervea Enterprise · solución personalizada",ent_1:"Empresas ilimitadas, contactos, matching avanzado, exportación",ent_2:"Integración personalizada (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Perfil de marca blanca (su propia marca)",ent_4:"Acceso API dedicado + soporte web-hook",ent_5:"SLA + soporte prioritario (garantía de respuesta de 4 horas)",ent_6:"Gerente de cuenta dedicado",ent_7:"Sesiones mensuales de formación y estrategia",fl_cname:"Nombre de Empresa *",fl_ctitle:"Razón Social (EN)",fl_tax:"NIF / Tax ID *",fl_mersis:"MERSIS / Nº Registro",fl_year:"Año de Fundación *",fl_emp:"Nº de Empleados",fl_country:"País *",fl_city:"Ciudad",fl_kep:"Email Registrado",fl_web:"Sitio Web",fl_email:"Correo *",fl_phone:"Teléfono *",fl_repname:"Nombre del Contacto *",fl_reptitle:"Cargo del Contacto",fl_address:"Dirección de Empresa",fl_sec:"Sector Principal *",fl_dir:"Dirección de Comercio *",fl_hs:"Código HS (separados por coma)",fl_moq:"MOQ (Pedido Mínimo)",fl_inc:"Preferencia INCOTERM",fl_pay:"Método de Pago",fl_products:"Productos / Servicios Principales",fl_desc:"Descripción de Empresa *",fl_certs:"Certificaciones",gal_h:"Fotos de Producto / Instalación (máx 12)",gal_tt:"Arrastre imágenes o seleccione",gal_st:"JPG, PNG, WEBP · máx 5MB cada uno · hasta 12 imágenes",gal_lbl:"Fotos de Producto / Instalación",gal_add:"Añadir imagen · Arrastrar y soltar",gal_max:"JPG/PNG/WEBP · hasta 12 imágenes · máx 5MB cada uno",hiw_tag:"PROCESO",hiw_h:"Contacto directo. <em style=\"font-style:normal;color:var(--teal)\">Solo comercio real</em>.",kpi_match:"Nuevas Coincidencias",kpi_msg:"Nuevos Mensajes",kpi_offer:"Ofertas",kpi_view:"Vistas",logo_h:"Logo de Empresa *",logo_hint:"Recomendado: 400×400px, PNG/JPG/SVG, máx 2MB",logo_hint2:"PNG · fondo transparente · mín 200×200",logo_lbl:"Logo de Empresa",msg_h:"Mensajes",msg_sub:"Comunicación directa con empresas verificadas. Cifrado E2E. Traducción automática en 6 idiomas.",mt_h:"Mis Coincidencias",mt_sub:"El motor de IA los ordenó. Filtre, exporte, mensaje directo.",ov_hello:"Hola",ov_sub:"Aquí está el resumen de los últimos 30 días.",ov_recent:"Actividad Reciente",ov_status:"Salud del Perfil",ov_ev1:"envió una nueva oferta",ov_ev2:"envió un mensaje",ov_ev3:"vio su perfil",ov_ev4:"Certificado ISO 9001 verificado",ov_ev5:"solicitud de conexión",ov_t1:"hace 2 horas",ov_t2:"hace 4 horas",ov_t3:"hace 1 día",ov_t4:"hace 2 días",ov_t5:"hace 3 días",p_ana:"Analítica",p_people:"Contactos",p_docs:"Mis Documentos",p_team:"Equipo",p_activity:"Actividad",plan_starter:"Starter",starter_p:"Gratis · ideal para empezar",starter_1:"1 perfil de empresa + insignia de verificación",starter_2:"50 coincidencias por mes",starter_3:"Filtrado básico por sector",starter_4:"Traducción automática en 6 idiomas",starter_5:"Mensajería limitada (5/día)",starter_6:"Soporte estándar",start_starter:"Empezar Gratis",pro_p:"Kervea Pro · más popular",pro_1:"Todo en Starter",pro_2:"Coincidencias ilimitadas + IA avanzada",pro_3:"Empresas ilimitadas, contactos, matching avanzado, exportación",pro_4:"Mensajería ilimitada + posición prioritaria",pro_5:"Panel de analítica (visitantes, conversión, competidores)",pro_6:"Perfil destacado · visibilidad prioritaria",pro_7:"Soporte prioritario (24 horas)",start_pro:"Actualizar a Pro",prof_h:"Mi Perfil de Empresa",prof_sub:"Actualice información, imágenes y canales de contacto.",promo_h:"¿Tiene Código Promocional?",promo_s:"30% descuento en Pro los primeros 3 meses.",pub_h:"Solicitud recibida",pub_p:"La verificación manual se completa en 24-48 horas. Se le notificará por email y SMS al publicar.",ppl_title:"Contactos",ppl_sub:"Contactos directos de tomadores de decisiones. 1 crédito por contacto.",ppl_credits:"Créditos",ppl_renew:"Renovar créditos",ppl_export:"Exportar",ppl_all:"Todos",ppl_ceo:"CEO / Director General",ppl_purchasing:"Compras",ppl_sales:"Ventas",ppl_ops:"Operaciones",ppl_col_person:"Persona",ppl_col_title:"Cargo",ppl_col_firm:"Empresa",ppl_col_email:"Correo",ppl_col_phone:"Teléfono",ppl_col_act:"Acción",ppl_kvkk:"Esta información se comparte cumpliendo la ley de protección de datos y con consentimiento del representante.",ppl_kvkk_link:"Aviso de Privacidad",pr_title:"Folleto",pr_desc:"Un resumen profesional completo — PDF listo para reuniones.",pr_dl:"Descargar como PDF",pr_pdf:"Folleto PDF",pr_langs:"En 6 idiomas",pr_mine:"Descargar mi folleto",pr_incl:"Contenido",pr_i1:"Resumen + productos principales",pr_i2:"Sector, HS, MOQ",pr_i3:"Insignias (fiscal, registro, e-mail)",pr_i4:"Certificaciones (ISO, GOTS, HACCP)",pr_i5:"Contacto + código QR",pr_who:"¿Para quién?",pr_l1:"Compartir info antes de reuniones",pr_l2:"Tarjeta digital en ferias",pr_l3:"Referencia en redes y web",s3_media:"Logo",s4_social:"Social",s5_doc:"Docs",s6_pub:"Publicar",sec_biz:"Info Comercial",sec_visual:"Identidad Visual",sec_social:"Redes Sociales y Web",sec_legal:"Info Legal",social_intro:"Sus redes sociales y canales — los compradores le contactarán aquí.",ss_h:"Empresas que confían en Kervea",ss_p:"Fabricantes y exportadores verificados en 6 continentes.",ss_5t:"Antep Especias",ss_5s:"Gaziantep · Pimiento rojo",tm_title:"Gestión de Equipo",tm_sub:"Gestione usuarios, roles y permisos.",tm_seats:"Uso de asientos",tm_invite:"+ Invitar Usuario",tm_col_user:"Usuario",tm_role:"Rol",tm_perms:"Permisos",tm_status:"Estado",tm_last:"Último Acceso",tm_active:"Activo",tm_pending:"Pendiente",tm_owner:"Propietario",tm_admin:"Admin",tm_sales:"Ventas",tm_ops:"Operaciones",tm_p_all:"Todos los permisos",tm_p_msg:"Msj + Contactos",tm_p_prof:"Perfil + Docs",pr_preview:"Vista previa",why_h:"¿Por qué Kervea?",chat_online:"En línea",chat_verified_firm:"Empresa verificada",chat_typing:"está escribiendo…",chat_btn_firm:"Perfil de empresa",chat_btn_video:"Videollamada",chat_btn_archive:"Archivar",empty_firms:"Ninguna empresa coincide con su filtro.",empty_records:"No hay registros que coincidan.",toast_name_required:"Nombre completo es obligatorio",toast_valid_email:"Ingrese un correo válido",toast_invalid_promo:"Código promo inválido",toast_search_applied:"Búsqueda aplicada",toast_csv_downloaded:"CSV descargado",toast_pdf_downloaded:"Folleto descargado",toast_photo_removed:"Foto eliminada",toast_photo_uploaded:"Foto cargada",toast_logo_uploaded:"Logo cargado",toast_login_ok:"Inicio de sesión exitoso",toast_login_full:"Sesión iniciada — acceso completo activo",toast_logout:"Sesión cerrada",toast_credit_out:"Sin créditos — actualice su plan",toast_docs_opening:"Abriendo cargador de documentos",toast_firm_opening:"Abriendo perfil de empresa",toast_firm_notfound:"Empresa no encontrada",toast_firm_error:"Error al abrir la empresa",toast_visual_saved:"Identidad visual guardada",toast_video_call:"Iniciando videollamada",toast_cover_updated:"Portada actualizada",toast_chat_archived:"Conversación archivada",toast_profile_updated:"Perfil actualizado",toast_delete_requested:"Solicitud de eliminación recibida — se completará en 7 días",toast_social_saved:"Información de redes sociales guardada",toast_form_opened:"Formulario de solicitud abierto",toast_print_pdf:"Guarde como PDF desde el menú imprimir",toast_trade_saved:"Info comercial guardada",toast_all_tasks:"Mostrando todas las tareas",toast_data_export:"Preparando datos, se enviará enlace por correo",toast_legal_saved:"Información legal guardada",toast_cancelled:"Cancelado",toast_copied:"Copiado al portapapeles",confirm_delete_account:"Su cuenta y todos sus datos serán eliminados permanentemente. ¿Está seguro?",tm_inv_h:"Invitar Nuevo Usuario",tm_inv_sub:"Agregue un nuevo miembro del equipo a su empresa. La invitación se envía por correo; se activa cuando el usuario acepta.",tm_fld_name:"Nombre Completo *",tm_fld_email:"Correo *",tm_fld_role:"Rol *",tm_role_admin:"Administrador",tm_role_admin_desc:"Todos los módulos · puede invitar",tm_role_sales:"Ventas",tm_role_sales_desc:"Mensajería + Contactos",tm_role_ops:"Operaciones",tm_role_ops_desc:"Perfil + Documentos",tm_role_view:"Solo Lectura",tm_role_view_desc:"Solo acceso de lectura",tm_inv_info:"Puede cambiar el rol más tarde. Este usuario será el 5º de sus <b>4/10 asientos</b>.",tm_btn_invite:"Enviar Invitación",btn_cancel:"Cancelar",tm_perm_h:"Editar Rol y Permisos",tm_perm_sub:"Especifique a qué módulos puede acceder este usuario.",tm_lbl_role:"Rol",tm_lbl_perms:"Permisos",tm_role_admin_short:"Todos los módulos",tm_role_sales_short:"Msj + Contactos",tm_role_view_short:"Lectura",tm_perm_msg:"Mensajería",tm_perm_msg_desc:"Acceso a todas las conversaciones, envío de mensajes y compartición de archivos.",tm_perm_match:"Coincidencias y Contactos",tm_perm_match_desc:"Ver sugerencias de coincidencias de IA, usar créditos de contacto.",tm_perm_prof:"Perfil de Empresa",tm_perm_prof_desc:"Editar información de empresa, galería y enlaces de redes sociales.",tm_perm_docs:"Documentos",tm_perm_docs_desc:"Cargar y aprobar certificados, certificado fiscal y documentos oficiales.",tm_perm_ana:"Analítica",tm_perm_ana_desc:"Acceso a la red, tasa de conversión, comparación con competidores e informes.",tm_perm_team:"Gestión de Equipo",tm_perm_team_desc:"Invitar nuevos usuarios, asignar roles, desactivar cuentas.",tm_btn_save:"Guardar Cambios",toast_saved:"Guardado",ph_tm_name:"Ej. Juan Pérez",ph_tm_email:"juan@empresa.com",pay_card_holder:"TITULAR",pay_card_holder_ph:"NOMBRE COMPLETO",pay_card_exp_short:"VENCE",pay_per_month:"/mes",pay_method_card:"Tarjeta",pay_method_mc:"MC",pay_method_bank:"Transferencia",pay_card_holder_lbl:"Titular",ph_card_holder:"NOMBRE COMPLETO",ph_promo:"Código promo (opcional)",toast_pay_success:"Pago exitoso — Pro activo",pay_disclaimer:"Al completar el pago, acepta el <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Acuerdo de Usuario</a> y el <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Aviso de Privacidad</a>.",modal_kvkk_h:"Aviso de Privacidad (KVKK Turco)",modal_sozl_h:"Acuerdo de Usuario",modal_cookie_h:"Política de Privacidad y Cookies",legal_disclaimer:"<b>ⓘ</b> Este documento es el original legal turco. Es vinculante bajo la ley turca. Las traducciones a otros idiomas son solo para fines informativos.",viewers_h:"Visitantes del Perfil",viewers_sub:"País detectado por dirección IP · Últimos 30 días",add_draft_btn:"Continuar Después",add_draft_saved:"Borrador guardado — inicie sesión para continuar",dir_both:"Ambos",pay_tt_cash:"TT al contado",pay_tt_30:"TT 30 días",pay_tt_60:"TT 60 días",toast_logo_removed:"Logo eliminado",toast_cover_uploaded:"Portada cargada",consent_kvkk:"He leído y acepto el <b>Aviso de Privacidad</b>.",consent_terms:"Acepto el <b>Acuerdo de Usuario</b>.",consent_verify:"Autorizo la verificación de mis datos.",consent_marketing:"Acepto recibir comunicaciones comerciales (opcional).",consent_read:"Leer",consent_read2:"Leer",ph_cname:"Ej. Kervea Textil S.L.",ph_address:"Calle, Nº, Distrito / Ciudad / País",ph_fullname:"Nombre completo",ph_gm:"Director General",ph_products:"Ej. Hilo de algodón, Tela tejida, Tela de punto",ph_desc:"Describa su empresa, capacidad de producción y mercados de exportación en un párrafo...",an_ip_based:"● Basado en IP",an_visitors_sub:"Países de origen de tus visitantes (últimos 30 días)",an_pulse_h:"Pulso del Mercado — Tendencias del Código HS",an_pulse_sub:"Cambio de oferta-demanda de 8 semanas en su sector · Fuente Trademap",an_p1_nm:"Tela de algodón tejido",an_p1_sub:"Alemania, Países Bajos, Francia · señal de comprador fuerte",an_p2_nm:"Muebles (estructura metálica)",an_p2_sub:"Finlandia, Noruega · volumen de pedidos en récord",an_p3_nm:"Paletas de madera, cajones",an_p3_sub:"Nigeria, Argelia · volátil por nueva tarifa",an_p4_nm:"Hilo de algodón (cardado)",an_p4_sub:"Kazajistán, Uzbekistán · precio de materia prima cediendo",an_p5_nm:"Artículos de hierro/acero",an_p5_sub:"Egipto, Marruecos · congestión portuaria disminuyendo",an_data_freq:"Frecuencia de actualización de datos: 24 horas",an_full_report:"Informe completo →",an_opening_report:"Abriendo análisis detallado",an_ai_alerts_h:"Centro de Alertas de IA",an_ai_alerts_sub:"Oportunidades y riesgos detectados para su empresa",an_priority_high:"Prioridad alta",an_priority_med:"Prioridad media",an_priority_opp:"Oportunidad",an_priority_tip:"Consejo",an_alert1_nm:"tiempo de respuesta crítico",an_alert1_desc:"3 días de espera. Si el tiempo medio de respuesta supera 4 horas, la calidad de coincidencia baja.",an_alert2_nm:"Su certificado fiscal debe renovarse en 8 días",an_alert2_desc:"Los documentos no renovados causan una caída en el ranking. Vaya a Mis Documentos → Cargar.",an_alert3_nm:"Nueva oportunidad: HS 6006 compradores alemanes",an_alert3_desc:"Se detectaron 6 nuevos compradores compatibles. Un corredor de rápido crecimiento en el sector de tejidos de punto.",an_alert4_nm:"Sugerencia de finalización de perfil",an_alert4_desc:"Añadir 7 imágenes más a la galería subirá su puntuación de perfil del 94% al 100%.",an_security_h:"Estado de Seguridad y Verificación",an_sec1_nm:"2FA Activo",an_sec2_nm:"Certificado Fiscal",an_status_approved:"Aprobado",an_sec3_nm:"Registro Mercantil",an_status_verified:"Verificado",an_sec4_nm:"Email Registrado",an_status_active:"Activo",an_sec5_sub:"Renovación en 15 días",an_sec6_sub:"Toda la comunicación cifrada",an_sec7_nm:"Compatible GDPR",an_sec7_sub:"Aviso de Privacidad v1.2",an_sec8_sub:"IP + limitación de tasa activa",an_deep_h:"Análisis Profundo",fl_yourmsg:"Su mensaje",btn_send:"Enviar",toast_msg_sent:"Mensaje enviado",fl_password:"Contraseña",btn_login:"Iniciar sesión",stat_today:"hoy",stat_this_week:"esta semana",stat_soon:"pronto",ft_kvkk:"Aviso de privacidad",ft_terms:"Términos del servicio",ft_cookie:"Privacidad/Cookies",ft_tagline:"Ruta de la Seda Moderna",fp_decisionmakers:"Responsables de Decisión",fp_detail:"Detalles",fp_gotoallppl:"Ver todos los contactos →",fp_gal1:"Sala de Exposición",fp_gal2:"Planta de Producción",fp_gal3:"Almacén",fp_gal4:"Equipo",fp_gal5:"Control de Calidad",fp_gal6:"Certificados",lock_title:"Los datos de contacto están disponibles para miembros Pro",lock_sub:"WhatsApp, teléfono, email y sitio web se muestran al instante al iniciar tu membresía Pro.",lock_cta:"Actualizar a Pro",sec_social_short:"Redes Sociales",dene_lbl:"PROBAR",qf_lbl:"FILTRO RÁPIDO",f_exp:"Exportación",f_imp:"Importación",
+     s_sec:"Sectores",s_lng:"Idiomas",
      firms_h:"Empresas",firms_cnt:"coincidencias · ordenadas por puntuación",sort_lbl:"Ordenar:",sort_match:"Coincidencia",sort_year:"Año",sort_name:"Nombre",
      add_h:"Añade tu Empresa",add_p:"Visibilidad global en 6 pasos.",s1:"Empresa",s2:"Sector",s3:"Docs",s4:"Consentim.",s5:"Publicar",prev:"← Anterior",next:"Siguiente →",
-     pr_h:"Planes",pr_p:"Tu nivel de visibilidad global.",ct_h:"Contacto",ct_p:"Estamos aquí para ayudar.",
+     pr_h:"Planes",ct_h:"Contacto",
      lg_h:"Iniciar Sesión",lg_p:"Accede a tu cuenta Kervea",pn_h:"Panel de Empresa",pn_p:"Gestiona tu perfil, coincidencias y mensajes.",
      p_over:"Resumen",p_matches:"Coincidencias",p_profile:"Mi Perfil",p_msgs:"Mensajes",p_com:"Compromisos",p_pros:"Prospecto",p_set:"Ajustes",p_out:"Salir",
      all_sec:"— Todos los sectores",sel_ctr:"Selecciona país",dd_search:"Buscar país...",
      dir_exp:"EXPORTA",dir_imp:"IMPORTA",match_score:"COINCIDENCIA",verified:"Verificado",
      detail:"Detalles",message:"Enviar Mensaje",match_col:"Empresa",prod_col:"Producto",sec_col:"Sector",ctr_col:"País",score_col:"Match",action_col:"Acción"},
  fr:{nav_home:"Accueil",nav_add:"Ajouter",nav_pricing:"Tarifs",nav_about:"À propos",nav_contact:"Contact",nav_login:"Connexion",nav_panel:"Panneau",
-     tag_live:"TURQUIE ↔ MONDE · 6 LANGUES",h_title:"Trouvez votre acheteur ou fournisseur sur la <em>Route de la Soie</em> moderne.",h_lead:"Entreprises vérifiées par certificat fiscal et registre du commerce. Messagerie en 6 langues, chiffrement de bout en bout.",
-     f_match:"Correspondre",fm_fullpage:"Ouvrir en pleine page",fm_fullpage_tt:"Afficher cette entreprise en pleine page",pp_live_prev:"APERÇU EN DIRECT",pr_dl_pdf:"Télécharger mon prospectus en PDF",step_prev:"Précédent",step_next:"Suivant",step_of:"·",step_publish:"Publier · Enregistrer",creds_continue:"Continuer au Paiement",creds_back:"Retour aux packs",creds_onetime:"Paiement unique",pay_err_card:"Entrez un numéro de carte valide",pay_err_name:"Entrez le nom du titulaire",pay_err_exp:"Entrez l'expiration en MM/AA",pay_err_cvc:"Entrez le CVC",ppl_pw_h:"Accès direct aux décideurs pour les membres Pro",ppl_pw_sub:"Accédez à 2 400+ PDG, responsables achats et spécialistes vérifiés en un clic. 100 crédits mensuels inclus avec Pro.",ppl_pw_stat1:"Décideurs",ppl_pw_stat2:"Crédits mensuels",ppl_pw_stat3:"Vérifié",ppl_pw_cta:"Passer à Pro",ppl_pw_note:"$29/mois · Annulez à tout moment",creds_h:"Packs de Crédits",creds_sub:"Chaque e-mail ou téléphone est 1 crédit. Les crédits inutilisés reportés au mois suivant.",creds_current:"crédits actuellement disponibles",creds_lbl:"Crédits",creds_per_lbl:"crédit",creds_save10:"10% économie",creds_save15:"15% économie",creds_you_get:"Vous obtenez",creds_buy_btn:"Acheter",creds_secure:"Paiement sécurisé Stripe · 3D Secure",creds_pick_pack:"Sélectionnez un pack",creds_added:"crédits ajoutés",creds_charged:"prélevé",creds_add_btn:"Ajouter Crédits",pay_h:"Paiement — Plan Pro",pay_plan:"Kervea Pro",pay_kdv:"TVA (20%)",pay_disc:"Remise",pay_total:"Total",pay_card:"Numéro de Carte",pay_exp:"Expiration",pay_btn:"Payer",apply:"Appliquer",bill_m:"Mensuel",bill_y:"Annuel",bill_save:"−20%",per_month:"/mois",ct_name:"Nom Complet",ct_email:"E-mail",ct_subject:"Sujet",ct_ph_name:"Votre nom",ct_ph_email:"vous@entreprise.com",ct_ph_subject:"Comment pouvons-nous aider ?",ct_center:"Siège Social",ct_email_lbl:"E-mail :",ct_phone_lbl:"Téléphone :",lg_sso_google:"Continuer avec Google",lg_sso_ms:"Continuer avec Microsoft",lg_sso_apple:"Continuer avec Apple",lg_or_email:"ou par e-mail",pri_h:"action en attente — nécessite votre attention",pri_sub:"2 nouvelles correspondances à haut score en attente de réponse · 1 renouvellement de contrat approchant · Mise à jour de document requise",pri_open_matches:"Ouvrir les Correspondances",pri_all:"Tous",range_7d:"7j",range_30d:"30j",range_90d:"90j",range_1y:"1a",ac_title:"Chronologie d'Activité",ac_sub:"Enregistrement complet des 30 derniers jours.",ac_filter_all:"Tous",ac_filter_match:"Correspondances",ac_filter_msg:"Messages",ac_filter_prof:"Profil",ac_filter_doc:"Documents",all_dir:"Toutes directions",all_scores:"Tous scores",attention:"attention",back_list:"Retour à la liste",cancel:"Annuler",custom:"Personnalisé",contact_sales:"Contacter les ventes",export_csv:"CSV",remove:"Retirer",upload:"Charger",save_all:"Tout Enregistrer",results:"résultats",complete:"Terminé",stable:"Stable",preview_page:"Aperçu de la page",ch_ctr:"Répartition par Pays",ch_trend:"Tendance de croissance",ck_logo:"Logo téléversé",ck_doc:"Documents approuvés",ck_social:"Réseaux sociaux connectés",ck_gal:"Galerie (5/12 images)",cover_h:"Image de Couverture",cover_lbl:"Image de Couverture · 1600×400",cover_tt:"Charger la photo de couverture",cover_st:"S'affiche en haut de votre page · 1600×400px recommandé · max 5MB",cover_change:"Charger ou changer la photo de couverture",doc_h:"Documents *",doc_txt:"📄 Certificat d'Activité, Gazette du Registre, Circulaire de Signature, Certificats de Qualité",doc_hint:"PDF, JPG, PNG · max 10MB par fichier · jusqu'à 20 documents",ent_p:"Kervea Enterprise · solution sur mesure",ent_1:"Entreprises illimitées, contacts, matching avancé, export",ent_2:"Intégration sur mesure (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Profil marque blanche (votre propre marque)",ent_4:"Accès API dédié + support web-hook",ent_5:"SLA + support prioritaire (garantie de réponse en 4 heures)",ent_6:"Gestionnaire de compte dédié",ent_7:"Sessions mensuelles de formation et stratégie",fl_cname:"Nom de l'Entreprise *",fl_ctitle:"Raison Sociale (EN)",fl_tax:"Numéro Fiscal *",fl_mersis:"MERSIS / N° Registre",fl_year:"Année de Fondation *",fl_emp:"Nombre d'Employés",fl_country:"Pays *",fl_city:"Ville",fl_kep:"E-mail Enregistré",fl_web:"Site Web",fl_email:"E-mail *",fl_phone:"Téléphone *",fl_repname:"Nom du Contact *",fl_reptitle:"Titre du Contact",fl_address:"Adresse de l'Entreprise",fl_sec:"Secteur Principal *",fl_dir:"Direction du Commerce *",fl_hs:"Code HS (séparés par virgule)",fl_moq:"MOQ (Commande Minimum)",fl_inc:"Préférence INCOTERM",fl_pay:"Méthode de Paiement",fl_products:"Produits / Services Principaux",fl_desc:"Description de l'Entreprise *",fl_certs:"Certifications",gal_h:"Photos Produit / Installation (max 12)",gal_tt:"Glisser-déposer ou sélectionner",gal_st:"JPG, PNG, WEBP · max 5MB chacun · jusqu'à 12 images",gal_lbl:"Photos Produit / Installation",gal_add:"Ajouter une image · Glisser-déposer supporté",gal_max:"JPG/PNG/WEBP · jusqu'à 12 images · max 5MB chacune",hiw_tag:"PROCESSUS",hiw_h:"Pas d'intermédiaires. Juste <em style=\"font-style:normal;color:var(--teal)\">le vrai commerce</em>.",hiw_1a:"01",hiw_1t:"Créez votre profil d'entreprise",hiw_1b:"Visibilité mondiale en 6 étapes",hiw_1c:"Env. 8 minutes · vérification manuelle 24 heures",hiw_2a:"02",hiw_2t:"Laissez l'IA travailler pour vous",hiw_2b:"Recommandations triées par score",hiw_2c:"20+ correspondances en 3-5 minutes",hiw_3a:"03",hiw_3t:"Contact direct, traduction en temps réel",hiw_3b:"Sans intermédiaire · sans commission",hiw_3c:"Temps de réponse moyen 4 heures",kpi_match:"Nouvelles Correspondances",kpi_msg:"Nouveaux Messages",kpi_offer:"Offres",kpi_view:"Vues",logo_h:"Logo d'Entreprise *",logo_hint:"Recommandé : 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · fond transparent · min 200×200",logo_lbl:"Logo d'Entreprise",msg_h:"Messages",msg_sub:"Communication directe avec entreprises vérifiées. Chiffré E2E. Traduction auto en 6 langues.",mt_h:"Mes Correspondances",mt_sub:"Le moteur IA a trié pour vous. Filtrer, exporter, messager directement.",ov_hello:"Bonjour",ov_sub:"Voici le résumé des 30 derniers jours.",ov_recent:"Activité Récente",ov_status:"Santé du Profil",ov_ev1:"a envoyé une nouvelle offre",ov_ev2:"a écrit un message",ov_ev3:"a consulté votre profil",ov_ev4:"Certificat ISO 9001 vérifié",ov_ev5:"demande de connexion",ov_t1:"il y a 2 heures",ov_t2:"il y a 4 heures",ov_t3:"il y a 1 jour",ov_t4:"il y a 2 jours",ov_t5:"il y a 3 jours",p_ana:"Analytique",p_people:"Contacts",p_docs:"Mes Documents",p_team:"Équipe",p_activity:"Activité",plan_starter:"Starter",starter_p:"Gratuit · idéal pour commencer",starter_1:"1 profil d'entreprise + badge de vérification",starter_2:"50 correspondances par mois",starter_3:"Filtrage sectoriel de base",starter_4:"Traduction auto en 6 langues",starter_5:"Messagerie limitée (5/jour)",starter_6:"Support standard",start_starter:"Commencer Gratuitement",pro_p:"Kervea Pro · le plus populaire",pro_1:"Tout du Starter",pro_2:"Correspondances illimitées + IA avancée",pro_3:"Entreprises illimitées, contacts, matching avancé, export",pro_4:"Messagerie illimitée + classement prioritaire",pro_5:"Tableau analytique (visiteurs, conversion, concurrents)",pro_6:"Vitrine profil · visibilité prioritaire",pro_7:"Support prioritaire (24 heures)",start_pro:"Passer à Pro",prof_h:"Mon Profil d'Entreprise",prof_sub:"Mettez à jour infos, images et canaux de contact.",promo_h:"Avez-vous un Code Promo ?",promo_s:"30% de réduction sur Pro les 3 premiers mois.",promo_h2:"Entrez le Code",promo_s2:"Codes spéciaux pour utilisateurs précoces et membres de chambre.",pub_h:"Demande reçue",pub_p:"La vérification manuelle se termine sous 24-48 heures. Vous serez notifié par e-mail et SMS.",ppl_title:"Contacts",ppl_sub:"Contacts directs des décideurs. 1 crédit par contact.",ppl_credits:"Crédits",ppl_renew:"Renouveler crédits",ppl_export:"Exporter",ppl_all:"Tous",ppl_ceo:"CEO / Directeur Général",ppl_purchasing:"Achats",ppl_sales:"Ventes",ppl_ops:"Opérations",ppl_col_person:"Personne",ppl_col_title:"Titre",ppl_col_firm:"Entreprise",ppl_col_email:"E-mail",ppl_col_phone:"Téléphone",ppl_col_act:"Action",ppl_kvkk:"Ces infos sont partagées conformément à la loi de protection des données et avec le consentement du représentant.",ppl_kvkk_link:"Avis de Confidentialité",pr_title:"Prospectus",pr_desc:"Un résumé professionnel complet — PDF prêt pour les rendez-vous.",pr_dl:"Télécharger en PDF",pr_pdf:"Prospectus PDF",pr_langs:"En 6 langues",pr_mine:"Télécharger mon prospectus",pr_incl:"Contenu",pr_i1:"Résumé + produits principaux",pr_i2:"Secteur, HS, MOQ",pr_i3:"Badges (fiscal, registre, e-mail)",pr_i4:"Certifications (ISO, GOTS, HACCP)",pr_i5:"Coordonnées + QR code",pr_who:"Pour qui ?",pr_l1:"Partage d'infos avant réunions",pr_l2:"Carte de visite numérique en salons",pr_l3:"Référence sur réseaux et web",s3_media:"Logo",s4_social:"Social",s5_doc:"Docs",s6_pub:"Publier",sec_biz:"Infos Commerciales",sec_visual:"Identité Visuelle",sec_social:"Réseaux Sociaux et Web",sec_legal:"Infos Juridiques",social_intro:"Vos réseaux sociaux et canaux — les acheteurs vous contacteront ici.",ss_h:"Entreprises qui font confiance à Kervea",ss_p:"Fabricants et exportateurs vérifiés sur 6 continents.",ss_5t:"Antep Épices",ss_5s:"Gaziantep · Piment rouge",tm_title:"Gestion d'Équipe",tm_sub:"Gérez utilisateurs, rôles et permissions.",tm_seats:"Utilisation des sièges",tm_invite:"+ Inviter Utilisateur",tm_col_user:"Utilisateur",tm_role:"Rôle",tm_perms:"Permissions",tm_status:"Statut",tm_last:"Dernière Connexion",tm_active:"Actif",tm_pending:"En attente",tm_owner:"Propriétaire",tm_admin:"Admin",tm_sales:"Ventes",tm_ops:"Opérations",tm_p_all:"Toutes permissions",tm_p_msg:"Msg + Contacts",tm_p_prof:"Profil + Docs",pr_preview:"Aperçu",why_h:"Pourquoi Kervea ?",why_p:"Dites adieu aux intermédiaires, commissions et fournisseurs peu fiables. Contact direct, entreprises vérifiées, vrai commerce.",why_1t:"Corridor de pays",why_2t:"Entreprise vérifiée",why_3t:"Traduction en 6 langues",chat_online:"En ligne",chat_verified_firm:"Entreprise vérifiée",chat_typing:"est en train d'écrire…",chat_btn_firm:"Profil d'entreprise",chat_btn_video:"Appel vidéo",chat_btn_archive:"Archiver",empty_firms:"Aucune entreprise ne correspond à votre filtre.",empty_records:"Aucun enregistrement ne correspond.",toast_name_required:"Le nom complet est obligatoire",toast_valid_email:"Entrez un e-mail valide",toast_invalid_promo:"Code promo invalide",toast_search_applied:"Recherche appliquée",toast_csv_downloaded:"CSV téléchargé",toast_pdf_downloaded:"Prospectus téléchargé",toast_photo_removed:"Photo supprimée",toast_photo_uploaded:"Photo téléversée",toast_logo_uploaded:"Logo téléversé",toast_login_ok:"Connexion réussie",toast_login_full:"Connecté — accès complet actif",toast_logout:"Déconnecté",toast_credit_out:"Crédits épuisés — mettez à niveau",toast_docs_opening:"Ouverture du gestionnaire de documents",toast_firm_opening:"Ouverture du profil d'entreprise",toast_firm_notfound:"Entreprise introuvable",toast_firm_error:"Erreur d'ouverture de l'entreprise",toast_visual_saved:"Identité visuelle enregistrée",toast_video_call:"Démarrage de l'appel vidéo",toast_cover_updated:"Couverture mise à jour",toast_chat_archived:"Conversation archivée",toast_profile_updated:"Profil mis à jour",toast_delete_requested:"Demande de suppression reçue — sera complétée en 7 jours",toast_social_saved:"Infos réseaux sociaux enregistrées",toast_form_opened:"Formulaire de demande ouvert",toast_print_pdf:"Enregistrez en PDF depuis le menu impression",toast_trade_saved:"Infos commerciales enregistrées",toast_all_tasks:"Affichage de toutes les tâches",toast_data_export:"Préparation de vos données, un lien sera envoyé par e-mail",toast_legal_saved:"Infos juridiques enregistrées",toast_cancelled:"Annulé",toast_copied:"Copié dans le presse-papiers",confirm_delete_account:"Votre compte et toutes vos données seront supprimés définitivement. Êtes-vous sûr ?",tm_inv_h:"Inviter un Nouvel Utilisateur",tm_inv_sub:"Ajoutez un nouveau membre à votre entreprise. L'invitation est envoyée par e-mail ; l'utilisateur devient actif après acceptation.",tm_fld_name:"Nom Complet *",tm_fld_email:"E-mail *",tm_fld_role:"Rôle *",tm_role_admin:"Administrateur",tm_role_admin_desc:"Tous les modules · peut inviter",tm_role_sales:"Commerce",tm_role_sales_desc:"Messagerie + Contacts",tm_role_ops:"Opérations",tm_role_ops_desc:"Profil + Documents",tm_role_view:"Lecture Seule",tm_role_view_desc:"Accès en lecture seule",tm_inv_info:"Vous pouvez changer le rôle plus tard. Cet utilisateur sera le 5e de vos <b>4/10 sièges</b>.",tm_btn_invite:"Envoyer l'Invitation",btn_cancel:"Annuler",tm_perm_h:"Modifier Rôle et Permissions",tm_perm_sub:"Spécifiez les modules auxquels cet utilisateur peut accéder.",tm_lbl_role:"Rôle",tm_lbl_perms:"Permissions",tm_role_admin_short:"Tous les modules",tm_role_sales_short:"Msg + Contacts",tm_role_view_short:"Lecture",tm_perm_msg:"Messagerie",tm_perm_msg_desc:"Accès à toutes les conversations, envoi de messages et partage de fichiers.",tm_perm_match:"Correspondances et Contacts",tm_perm_match_desc:"Consulter les suggestions IA, utiliser les crédits contact.",tm_perm_prof:"Profil d'Entreprise",tm_perm_prof_desc:"Modifier les infos de l'entreprise, la galerie et les liens sociaux.",tm_perm_docs:"Documents",tm_perm_docs_desc:"Charger et approuver certificats, attestation fiscale et documents officiels.",tm_perm_ana:"Analytique",tm_perm_ana_desc:"Accès au réseau, taux de conversion, comparaison concurrentielle et rapports.",tm_perm_team:"Gestion d'Équipe",tm_perm_team_desc:"Inviter de nouveaux utilisateurs, attribuer des rôles, désactiver des comptes.",tm_btn_save:"Enregistrer les Modifications",toast_saved:"Enregistré",ph_tm_name:"Ex. Jean Dupont",ph_tm_email:"jean@entreprise.com",pay_card_holder:"TITULAIRE",pay_card_holder_ph:"NOM COMPLET",pay_card_exp_short:"EXPIRE",pay_per_month:"/mois",pay_method_card:"Carte",pay_method_mc:"MC",pay_method_bank:"Virement",pay_card_holder_lbl:"Titulaire",ph_card_holder:"NOM COMPLET",ph_promo:"Code promo (facultatif)",toast_pay_success:"Paiement réussi — Pro actif",pay_disclaimer:"En finalisant le paiement, vous acceptez l'<a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Accord d'utilisation</a> et l'<a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Avis de confidentialité</a>.",modal_kvkk_h:"Avis de Confidentialité (KVKK Turque)",modal_sozl_h:"Accord d'Utilisation",modal_cookie_h:"Politique de Confidentialité et Cookies",legal_disclaimer:"<b>ⓘ</b> Ce document est l'original juridique turc. Il est contraignant en vertu du droit turc. Les traductions dans d'autres langues sont fournies à titre informatif uniquement.",viewers_h:"Visiteurs du Profil",viewers_sub:"Pays détecté par adresse IP · 30 derniers jours",add_draft_btn:"Continuer Plus Tard",add_draft_saved:"Brouillon enregistré — connectez-vous pour continuer",dir_both:"Les deux",pay_tt_cash:"TT au comptant",pay_tt_30:"TT 30 jours",pay_tt_60:"TT 60 jours",toast_logo_removed:"Logo supprimé",toast_cover_uploaded:"Couverture téléversée",consent_kvkk:"J'ai lu et accepte l'<b>Avis de confidentialité</b>.",consent_terms:"J'accepte l'<b>Accord d'utilisation</b>.",consent_verify:"J'autorise les vérifications de mes données.",consent_marketing:"J'accepte de recevoir des communications marketing (optionnel).",consent_read:"Lire",consent_read2:"Lire",ph_cname:"Ex. XYZ Trade Co. SAS",ph_address:"Rue, N°, Quartier / Ville / Pays",ph_fullname:"Nom complet",ph_gm:"Directeur Général",ph_products:"Ex. Fil de coton, Tissu, Tricot",ph_desc:"Décrivez votre entreprise, capacité de production et marchés d'exportation en un paragraphe...",an_ip_based:"● Basé sur IP",an_visitors_sub:"Pays d'origine de vos visiteurs (30 derniers jours)",an_pulse_h:"Pouls du Marché — Tendances des Codes HS",an_pulse_sub:"Variation offre-demande sur 8 semaines dans votre secteur · Source Trademap",an_p1_nm:"Tissu de coton",an_p1_sub:"Allemagne, Pays-Bas, France · signal acheteur fort",an_p2_nm:"Meubles (structure métallique)",an_p2_sub:"Finlande, Norvège · volume de commandes record",an_p3_nm:"Palettes en bois, caisses",an_p3_sub:"Nigéria, Algérie · volatile en raison du nouveau tarif",an_p4_nm:"Fil de coton (peigné)",an_p4_sub:"Kazakhstan, Ouzbékistan · le prix des matières premières recule",an_p5_nm:"Articles en fer/acier",an_p5_sub:"Égypte, Maroc · la congestion portuaire diminue",an_data_freq:"Fréquence de mise à jour des données : 24 heures",an_full_report:"Rapport complet →",an_opening_report:"Ouverture de l'analyse détaillée",an_ai_alerts_h:"Centre d'Alertes IA",an_ai_alerts_sub:"Opportunités et risques détectés pour votre entreprise",an_priority_high:"Priorité haute",an_priority_med:"Priorité moyenne",an_priority_opp:"Opportunité",an_priority_tip:"Astuce",an_alert1_nm:"temps de réponse critique",an_alert1_desc:"En attente depuis 3 jours. Si votre temps de réponse moyen dépasse 4 heures, la qualité des correspondances baisse.",an_alert2_nm:"Votre certificat fiscal doit être renouvelé sous 8 jours",an_alert2_desc:"Les documents non renouvelés entraînent une baisse du classement. Allez dans Mes Documents → Charger.",an_alert3_nm:"Nouvelle opportunité : acheteurs allemands HS 6006",an_alert3_desc:"6 nouveaux acheteurs compatibles détectés. Un corridor à croissance rapide dans le secteur du tissu tricoté.",an_alert4_nm:"Suggestion de complétion du profil",an_alert4_desc:"Ajouter 7 images de plus à la galerie fera passer votre score de profil de 94% à 100%.",an_security_h:"État de Sécurité et de Vérification",an_sec1_nm:"2FA Actif",an_sec2_nm:"Certificat Fiscal",an_status_approved:"Approuvé",an_sec3_nm:"Registre du Commerce",an_status_verified:"Vérifié",an_sec4_nm:"E-mail Enregistré",an_status_active:"Actif",an_sec5_sub:"Renouvellement dans 15 jours",an_sec6_sub:"Toutes communications chiffrées",an_sec7_nm:"Conforme RGPD",an_sec7_sub:"Avis de confidentialité v1.2",an_sec8_sub:"IP + limitation de débit active",an_deep_h:"Analyse Approfondie",fl_yourmsg:"Votre message",btn_send:"Envoyer",toast_msg_sent:"Message envoyé",fl_password:"Mot de passe",btn_login:"Se connecter",stat_today:"aujourd'hui",stat_this_week:"cette semaine",stat_soon:"bientôt",ft_kvkk:"Avis de confidentialité",ft_terms:"Conditions d'utilisation",ft_cookie:"Confidentialité/Cookies",ft_tagline:"Route de la Soie Moderne",fp_decisionmakers:"Décideurs",fp_detail:"Détails",fp_gotoallppl:"Voir tous les contacts →",fp_gal1:"Showroom",fp_gal2:"Site de Production",fp_gal3:"Entrepôt",fp_gal4:"Équipe",fp_gal5:"Contrôle Qualité",fp_gal6:"Certificats",lock_title:"Les coordonnées sont réservées aux membres Pro",lock_sub:"WhatsApp, téléphone, e-mail et site web deviennent visibles dès l'activation de votre abonnement Pro.",lock_cta:"Passer à Pro",sec_social_short:"Réseaux Sociaux",dene_lbl:"ESSAYER",qt1:"Acheteur d'accessoires de meubles en Finlande",qt2:"Fournisseur de cacao en Côte d'Ivoire",qt3:"Acheteur textile au Kazakhstan",qf_lbl:"FILTRE RAPIDE",f_exp:"Exportation",f_imp:"Importation",
-     s_pos:"Entreprises actives",s_ctr:"Pays et territoires",s_sec:"Secteurs",s_lng:"Langues",
+     tag_live:"TURQUIE ↔ MONDE · 6 LANGUES",h_title:"Trouvez votre acheteur ou fournisseur sur la <em>Route de la Soie</em> moderne.",
+     f_match:"Correspondre",fm_fullpage:"Ouvrir en pleine page",fm_fullpage_tt:"Afficher cette entreprise en pleine page",pp_live_prev:"APERÇU EN DIRECT",pr_dl_pdf:"Télécharger mon prospectus en PDF",step_prev:"Précédent",step_next:"Suivant",step_of:"·",step_publish:"Publier · Enregistrer",creds_continue:"Continuer au Paiement",creds_back:"Retour aux packs",creds_onetime:"Paiement unique",pay_err_card:"Entrez un numéro de carte valide",pay_err_name:"Entrez le nom du titulaire",pay_err_exp:"Entrez l'expiration en MM/AA",pay_err_cvc:"Entrez le CVC",ppl_pw_h:"Accès direct aux décideurs pour les membres Pro",ppl_pw_sub:"Accédez à 2 400+ PDG, responsables achats et spécialistes vérifiés en un clic. 100 crédits mensuels inclus avec Pro.",ppl_pw_stat1:"Décideurs",ppl_pw_stat2:"Crédits mensuels",ppl_pw_stat3:"Vérifié",ppl_pw_cta:"Passer à Pro",ppl_pw_note:"$29/mois · Annulez à tout moment",creds_h:"Packs de Crédits",creds_sub:"Chaque e-mail ou téléphone est 1 crédit. Les crédits inutilisés reportés au mois suivant.",creds_current:"crédits actuellement disponibles",creds_lbl:"Crédits",creds_per_lbl:"crédit",creds_save10:"10% économie",creds_save15:"15% économie",creds_you_get:"Vous obtenez",creds_buy_btn:"Acheter",creds_secure:"Paiement sécurisé Stripe · 3D Secure",creds_pick_pack:"Sélectionnez un pack",creds_added:"crédits ajoutés",creds_charged:"prélevé",creds_add_btn:"Ajouter Crédits",pay_h:"Paiement — Plan Pro",pay_plan:"Kervea Pro",pay_kdv:"TVA (20%)",pay_disc:"Remise",pay_total:"Total",pay_card:"Numéro de Carte",pay_exp:"Expiration",pay_btn:"Payer",apply:"Appliquer",bill_m:"Mensuel",bill_y:"Annuel",bill_save:"−20%",per_month:"/mois",ct_name:"Nom Complet",ct_email:"E-mail",ct_subject:"Sujet",ct_ph_name:"Votre nom",ct_ph_email:"vous@entreprise.com",ct_ph_subject:"Comment pouvons-nous aider ?",ct_email_lbl:"E-mail :",ct_phone_lbl:"Téléphone :",lg_sso_google:"Continuer avec Google",lg_sso_ms:"Continuer avec Microsoft",lg_sso_apple:"Continuer avec Apple",lg_or_email:"ou par e-mail",pri_h:"action en attente — nécessite votre attention",pri_sub:"2 nouvelles correspondances à haut score en attente de réponse · 1 renouvellement de contrat approchant · Mise à jour de document requise",pri_open_matches:"Ouvrir les Correspondances",pri_all:"Tous",range_7d:"7j",range_30d:"30j",range_90d:"90j",range_1y:"1a",ac_title:"Chronologie d'Activité",ac_sub:"Enregistrement complet des 30 derniers jours.",ac_filter_all:"Tous",ac_filter_match:"Correspondances",ac_filter_msg:"Messages",ac_filter_prof:"Profil",ac_filter_doc:"Documents",all_dir:"Toutes directions",all_scores:"Tous scores",attention:"attention",back_list:"Retour à la liste",cancel:"Annuler",custom:"Personnalisé",contact_sales:"Contacter les ventes",export_csv:"CSV",remove:"Retirer",upload:"Charger",save_all:"Tout Enregistrer",results:"résultats",complete:"Terminé",stable:"Stable",preview_page:"Aperçu de la page",ch_ctr:"Répartition par Pays",ch_trend:"Tendance de croissance",ck_logo:"Logo téléversé",ck_doc:"Documents approuvés",ck_social:"Réseaux sociaux connectés",ck_gal:"Galerie (5/12 images)",cover_h:"Image de Couverture",cover_lbl:"Image de Couverture · 1600×400",cover_tt:"Charger la photo de couverture",cover_st:"S'affiche en haut de votre page · 1600×400px recommandé · max 5MB",cover_change:"Charger ou changer la photo de couverture",doc_h:"Documents *",doc_txt:"📄 Certificat d'Activité, Gazette du Registre, Circulaire de Signature, Certificats de Qualité",doc_hint:"PDF, JPG, PNG · max 10MB par fichier · jusqu'à 20 documents",ent_p:"Kervea Enterprise · solution sur mesure",ent_1:"Entreprises illimitées, contacts, matching avancé, export",ent_2:"Intégration sur mesure (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"Profil marque blanche (votre propre marque)",ent_4:"Accès API dédié + support web-hook",ent_5:"SLA + support prioritaire (garantie de réponse en 4 heures)",ent_6:"Gestionnaire de compte dédié",ent_7:"Sessions mensuelles de formation et stratégie",fl_cname:"Nom de l'Entreprise *",fl_ctitle:"Raison Sociale (EN)",fl_tax:"Numéro Fiscal *",fl_mersis:"MERSIS / N° Registre",fl_year:"Année de Fondation *",fl_emp:"Nombre d'Employés",fl_country:"Pays *",fl_city:"Ville",fl_kep:"E-mail Enregistré",fl_web:"Site Web",fl_email:"E-mail *",fl_phone:"Téléphone *",fl_repname:"Nom du Contact *",fl_reptitle:"Titre du Contact",fl_address:"Adresse de l'Entreprise",fl_sec:"Secteur Principal *",fl_dir:"Direction du Commerce *",fl_hs:"Code HS (séparés par virgule)",fl_moq:"MOQ (Commande Minimum)",fl_inc:"Préférence INCOTERM",fl_pay:"Méthode de Paiement",fl_products:"Produits / Services Principaux",fl_desc:"Description de l'Entreprise *",fl_certs:"Certifications",gal_h:"Photos Produit / Installation (max 12)",gal_tt:"Glisser-déposer ou sélectionner",gal_st:"JPG, PNG, WEBP · max 5MB chacun · jusqu'à 12 images",gal_lbl:"Photos Produit / Installation",gal_add:"Ajouter une image · Glisser-déposer supporté",gal_max:"JPG/PNG/WEBP · jusqu'à 12 images · max 5MB chacune",hiw_tag:"PROCESSUS",hiw_h:"Pas d'intermédiaires. Juste <em style=\"font-style:normal;color:var(--teal)\">le vrai commerce</em>.",kpi_match:"Nouvelles Correspondances",kpi_msg:"Nouveaux Messages",kpi_offer:"Offres",kpi_view:"Vues",logo_h:"Logo d'Entreprise *",logo_hint:"Recommandé : 400×400px, PNG/JPG/SVG, max 2MB",logo_hint2:"PNG · fond transparent · min 200×200",logo_lbl:"Logo d'Entreprise",msg_h:"Messages",msg_sub:"Communication directe avec entreprises vérifiées. Chiffré E2E. Traduction auto en 6 langues.",mt_h:"Mes Correspondances",mt_sub:"Le moteur IA a trié pour vous. Filtrer, exporter, messager directement.",ov_hello:"Bonjour",ov_sub:"Voici le résumé des 30 derniers jours.",ov_recent:"Activité Récente",ov_status:"Santé du Profil",ov_ev1:"a envoyé une nouvelle offre",ov_ev2:"a écrit un message",ov_ev3:"a consulté votre profil",ov_ev4:"Certificat ISO 9001 vérifié",ov_ev5:"demande de connexion",ov_t1:"il y a 2 heures",ov_t2:"il y a 4 heures",ov_t3:"il y a 1 jour",ov_t4:"il y a 2 jours",ov_t5:"il y a 3 jours",p_ana:"Analytique",p_people:"Contacts",p_docs:"Mes Documents",p_team:"Équipe",p_activity:"Activité",plan_starter:"Starter",starter_p:"Gratuit · idéal pour commencer",starter_1:"1 profil d'entreprise + badge de vérification",starter_2:"50 correspondances par mois",starter_3:"Filtrage sectoriel de base",starter_4:"Traduction auto en 6 langues",starter_5:"Messagerie limitée (5/jour)",starter_6:"Support standard",start_starter:"Commencer Gratuitement",pro_p:"Kervea Pro · le plus populaire",pro_1:"Tout du Starter",pro_2:"Correspondances illimitées + IA avancée",pro_3:"Entreprises illimitées, contacts, matching avancé, export",pro_4:"Messagerie illimitée + classement prioritaire",pro_5:"Tableau analytique (visiteurs, conversion, concurrents)",pro_6:"Vitrine profil · visibilité prioritaire",pro_7:"Support prioritaire (24 heures)",start_pro:"Passer à Pro",prof_h:"Mon Profil d'Entreprise",prof_sub:"Mettez à jour infos, images et canaux de contact.",promo_h:"Avez-vous un Code Promo ?",promo_s:"30% de réduction sur Pro les 3 premiers mois.",pub_h:"Demande reçue",pub_p:"La vérification manuelle se termine sous 24-48 heures. Vous serez notifié par e-mail et SMS.",ppl_title:"Contacts",ppl_sub:"Contacts directs des décideurs. 1 crédit par contact.",ppl_credits:"Crédits",ppl_renew:"Renouveler crédits",ppl_export:"Exporter",ppl_all:"Tous",ppl_ceo:"CEO / Directeur Général",ppl_purchasing:"Achats",ppl_sales:"Ventes",ppl_ops:"Opérations",ppl_col_person:"Personne",ppl_col_title:"Titre",ppl_col_firm:"Entreprise",ppl_col_email:"E-mail",ppl_col_phone:"Téléphone",ppl_col_act:"Action",ppl_kvkk:"Ces infos sont partagées conformément à la loi de protection des données et avec le consentement du représentant.",ppl_kvkk_link:"Avis de Confidentialité",pr_title:"Prospectus",pr_desc:"Un résumé professionnel complet — PDF prêt pour les rendez-vous.",pr_dl:"Télécharger en PDF",pr_pdf:"Prospectus PDF",pr_langs:"En 6 langues",pr_mine:"Télécharger mon prospectus",pr_incl:"Contenu",pr_i1:"Résumé + produits principaux",pr_i2:"Secteur, HS, MOQ",pr_i3:"Badges (fiscal, registre, e-mail)",pr_i4:"Certifications (ISO, GOTS, HACCP)",pr_i5:"Coordonnées + QR code",pr_who:"Pour qui ?",pr_l1:"Partage d'infos avant réunions",pr_l2:"Carte de visite numérique en salons",pr_l3:"Référence sur réseaux et web",s3_media:"Logo",s4_social:"Social",s5_doc:"Docs",s6_pub:"Publier",sec_biz:"Infos Commerciales",sec_visual:"Identité Visuelle",sec_social:"Réseaux Sociaux et Web",sec_legal:"Infos Juridiques",social_intro:"Vos réseaux sociaux et canaux — les acheteurs vous contacteront ici.",ss_h:"Entreprises qui font confiance à Kervea",ss_p:"Fabricants et exportateurs vérifiés sur 6 continents.",ss_5t:"Antep Épices",ss_5s:"Gaziantep · Piment rouge",tm_title:"Gestion d'Équipe",tm_sub:"Gérez utilisateurs, rôles et permissions.",tm_seats:"Utilisation des sièges",tm_invite:"+ Inviter Utilisateur",tm_col_user:"Utilisateur",tm_role:"Rôle",tm_perms:"Permissions",tm_status:"Statut",tm_last:"Dernière Connexion",tm_active:"Actif",tm_pending:"En attente",tm_owner:"Propriétaire",tm_admin:"Admin",tm_sales:"Ventes",tm_ops:"Opérations",tm_p_all:"Toutes permissions",tm_p_msg:"Msg + Contacts",tm_p_prof:"Profil + Docs",pr_preview:"Aperçu",why_h:"Pourquoi Kervea ?",chat_online:"En ligne",chat_verified_firm:"Entreprise vérifiée",chat_typing:"est en train d'écrire…",chat_btn_firm:"Profil d'entreprise",chat_btn_video:"Appel vidéo",chat_btn_archive:"Archiver",empty_firms:"Aucune entreprise ne correspond à votre filtre.",empty_records:"Aucun enregistrement ne correspond.",toast_name_required:"Le nom complet est obligatoire",toast_valid_email:"Entrez un e-mail valide",toast_invalid_promo:"Code promo invalide",toast_search_applied:"Recherche appliquée",toast_csv_downloaded:"CSV téléchargé",toast_pdf_downloaded:"Prospectus téléchargé",toast_photo_removed:"Photo supprimée",toast_photo_uploaded:"Photo téléversée",toast_logo_uploaded:"Logo téléversé",toast_login_ok:"Connexion réussie",toast_login_full:"Connecté — accès complet actif",toast_logout:"Déconnecté",toast_credit_out:"Crédits épuisés — mettez à niveau",toast_docs_opening:"Ouverture du gestionnaire de documents",toast_firm_opening:"Ouverture du profil d'entreprise",toast_firm_notfound:"Entreprise introuvable",toast_firm_error:"Erreur d'ouverture de l'entreprise",toast_visual_saved:"Identité visuelle enregistrée",toast_video_call:"Démarrage de l'appel vidéo",toast_cover_updated:"Couverture mise à jour",toast_chat_archived:"Conversation archivée",toast_profile_updated:"Profil mis à jour",toast_delete_requested:"Demande de suppression reçue — sera complétée en 7 jours",toast_social_saved:"Infos réseaux sociaux enregistrées",toast_form_opened:"Formulaire de demande ouvert",toast_print_pdf:"Enregistrez en PDF depuis le menu impression",toast_trade_saved:"Infos commerciales enregistrées",toast_all_tasks:"Affichage de toutes les tâches",toast_data_export:"Préparation de vos données, un lien sera envoyé par e-mail",toast_legal_saved:"Infos juridiques enregistrées",toast_cancelled:"Annulé",toast_copied:"Copié dans le presse-papiers",confirm_delete_account:"Votre compte et toutes vos données seront supprimés définitivement. Êtes-vous sûr ?",tm_inv_h:"Inviter un Nouvel Utilisateur",tm_inv_sub:"Ajoutez un nouveau membre à votre entreprise. L'invitation est envoyée par e-mail ; l'utilisateur devient actif après acceptation.",tm_fld_name:"Nom Complet *",tm_fld_email:"E-mail *",tm_fld_role:"Rôle *",tm_role_admin:"Administrateur",tm_role_admin_desc:"Tous les modules · peut inviter",tm_role_sales:"Commerce",tm_role_sales_desc:"Messagerie + Contacts",tm_role_ops:"Opérations",tm_role_ops_desc:"Profil + Documents",tm_role_view:"Lecture Seule",tm_role_view_desc:"Accès en lecture seule",tm_inv_info:"Vous pouvez changer le rôle plus tard. Cet utilisateur sera le 5e de vos <b>4/10 sièges</b>.",tm_btn_invite:"Envoyer l'Invitation",btn_cancel:"Annuler",tm_perm_h:"Modifier Rôle et Permissions",tm_perm_sub:"Spécifiez les modules auxquels cet utilisateur peut accéder.",tm_lbl_role:"Rôle",tm_lbl_perms:"Permissions",tm_role_admin_short:"Tous les modules",tm_role_sales_short:"Msg + Contacts",tm_role_view_short:"Lecture",tm_perm_msg:"Messagerie",tm_perm_msg_desc:"Accès à toutes les conversations, envoi de messages et partage de fichiers.",tm_perm_match:"Correspondances et Contacts",tm_perm_match_desc:"Consulter les suggestions IA, utiliser les crédits contact.",tm_perm_prof:"Profil d'Entreprise",tm_perm_prof_desc:"Modifier les infos de l'entreprise, la galerie et les liens sociaux.",tm_perm_docs:"Documents",tm_perm_docs_desc:"Charger et approuver certificats, attestation fiscale et documents officiels.",tm_perm_ana:"Analytique",tm_perm_ana_desc:"Accès au réseau, taux de conversion, comparaison concurrentielle et rapports.",tm_perm_team:"Gestion d'Équipe",tm_perm_team_desc:"Inviter de nouveaux utilisateurs, attribuer des rôles, désactiver des comptes.",tm_btn_save:"Enregistrer les Modifications",toast_saved:"Enregistré",ph_tm_name:"Ex. Jean Dupont",ph_tm_email:"jean@entreprise.com",pay_card_holder:"TITULAIRE",pay_card_holder_ph:"NOM COMPLET",pay_card_exp_short:"EXPIRE",pay_per_month:"/mois",pay_method_card:"Carte",pay_method_mc:"MC",pay_method_bank:"Virement",pay_card_holder_lbl:"Titulaire",ph_card_holder:"NOM COMPLET",ph_promo:"Code promo (facultatif)",toast_pay_success:"Paiement réussi — Pro actif",pay_disclaimer:"En finalisant le paiement, vous acceptez l'<a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Accord d'utilisation</a> et l'<a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Avis de confidentialité</a>.",modal_kvkk_h:"Avis de Confidentialité (KVKK Turque)",modal_sozl_h:"Accord d'Utilisation",modal_cookie_h:"Politique de Confidentialité et Cookies",legal_disclaimer:"<b>ⓘ</b> Ce document est l'original juridique turc. Il est contraignant en vertu du droit turc. Les traductions dans d'autres langues sont fournies à titre informatif uniquement.",viewers_h:"Visiteurs du Profil",viewers_sub:"Pays détecté par adresse IP · 30 derniers jours",add_draft_btn:"Continuer Plus Tard",add_draft_saved:"Brouillon enregistré — connectez-vous pour continuer",dir_both:"Les deux",pay_tt_cash:"TT au comptant",pay_tt_30:"TT 30 jours",pay_tt_60:"TT 60 jours",toast_logo_removed:"Logo supprimé",toast_cover_uploaded:"Couverture téléversée",consent_kvkk:"J'ai lu et accepte l'<b>Avis de confidentialité</b>.",consent_terms:"J'accepte l'<b>Accord d'utilisation</b>.",consent_verify:"J'autorise les vérifications de mes données.",consent_marketing:"J'accepte de recevoir des communications marketing (optionnel).",consent_read:"Lire",consent_read2:"Lire",ph_cname:"Ex. XYZ Trade Co. SAS",ph_address:"Rue, N°, Quartier / Ville / Pays",ph_fullname:"Nom complet",ph_gm:"Directeur Général",ph_products:"Ex. Fil de coton, Tissu, Tricot",ph_desc:"Décrivez votre entreprise, capacité de production et marchés d'exportation en un paragraphe...",an_ip_based:"● Basé sur IP",an_visitors_sub:"Pays d'origine de vos visiteurs (30 derniers jours)",an_pulse_h:"Pouls du Marché — Tendances des Codes HS",an_pulse_sub:"Variation offre-demande sur 8 semaines dans votre secteur · Source Trademap",an_p1_nm:"Tissu de coton",an_p1_sub:"Allemagne, Pays-Bas, France · signal acheteur fort",an_p2_nm:"Meubles (structure métallique)",an_p2_sub:"Finlande, Norvège · volume de commandes record",an_p3_nm:"Palettes en bois, caisses",an_p3_sub:"Nigéria, Algérie · volatile en raison du nouveau tarif",an_p4_nm:"Fil de coton (peigné)",an_p4_sub:"Kazakhstan, Ouzbékistan · le prix des matières premières recule",an_p5_nm:"Articles en fer/acier",an_p5_sub:"Égypte, Maroc · la congestion portuaire diminue",an_data_freq:"Fréquence de mise à jour des données : 24 heures",an_full_report:"Rapport complet →",an_opening_report:"Ouverture de l'analyse détaillée",an_ai_alerts_h:"Centre d'Alertes IA",an_ai_alerts_sub:"Opportunités et risques détectés pour votre entreprise",an_priority_high:"Priorité haute",an_priority_med:"Priorité moyenne",an_priority_opp:"Opportunité",an_priority_tip:"Astuce",an_alert1_nm:"temps de réponse critique",an_alert1_desc:"En attente depuis 3 jours. Si votre temps de réponse moyen dépasse 4 heures, la qualité des correspondances baisse.",an_alert2_nm:"Votre certificat fiscal doit être renouvelé sous 8 jours",an_alert2_desc:"Les documents non renouvelés entraînent une baisse du classement. Allez dans Mes Documents → Charger.",an_alert3_nm:"Nouvelle opportunité : acheteurs allemands HS 6006",an_alert3_desc:"6 nouveaux acheteurs compatibles détectés. Un corridor à croissance rapide dans le secteur du tissu tricoté.",an_alert4_nm:"Suggestion de complétion du profil",an_alert4_desc:"Ajouter 7 images de plus à la galerie fera passer votre score de profil de 94% à 100%.",an_security_h:"État de Sécurité et de Vérification",an_sec1_nm:"2FA Actif",an_sec2_nm:"Certificat Fiscal",an_status_approved:"Approuvé",an_sec3_nm:"Registre du Commerce",an_status_verified:"Vérifié",an_sec4_nm:"E-mail Enregistré",an_status_active:"Actif",an_sec5_sub:"Renouvellement dans 15 jours",an_sec6_sub:"Toutes communications chiffrées",an_sec7_nm:"Conforme RGPD",an_sec7_sub:"Avis de confidentialité v1.2",an_sec8_sub:"IP + limitation de débit active",an_deep_h:"Analyse Approfondie",fl_yourmsg:"Votre message",btn_send:"Envoyer",toast_msg_sent:"Message envoyé",fl_password:"Mot de passe",btn_login:"Se connecter",stat_today:"aujourd'hui",stat_this_week:"cette semaine",stat_soon:"bientôt",ft_kvkk:"Avis de confidentialité",ft_terms:"Conditions d'utilisation",ft_cookie:"Confidentialité/Cookies",ft_tagline:"Route de la Soie Moderne",fp_decisionmakers:"Décideurs",fp_detail:"Détails",fp_gotoallppl:"Voir tous les contacts →",fp_gal1:"Showroom",fp_gal2:"Site de Production",fp_gal3:"Entrepôt",fp_gal4:"Équipe",fp_gal5:"Contrôle Qualité",fp_gal6:"Certificats",lock_title:"Les coordonnées sont réservées aux membres Pro",lock_sub:"WhatsApp, téléphone, e-mail et site web deviennent visibles dès l'activation de votre abonnement Pro.",lock_cta:"Passer à Pro",sec_social_short:"Réseaux Sociaux",dene_lbl:"ESSAYER",qf_lbl:"FILTRE RAPIDE",f_exp:"Exportation",f_imp:"Importation",
+     s_sec:"Secteurs",s_lng:"Langues",
      firms_h:"Entreprises",firms_cnt:"correspondances · triées par score",sort_lbl:"Trier:",sort_match:"Match",sort_year:"Année",sort_name:"Nom",
      add_h:"Ajoutez votre Entreprise",add_p:"Visibilité mondiale en 6 étapes.",s1:"Société",s2:"Secteur",s3:"Docs",s4:"Consent.",s5:"Publier",prev:"← Précéd.",next:"Suivant →",
-     pr_h:"Plans",pr_p:"Votre niveau de visibilité mondiale.",ct_h:"Contact",ct_p:"Nous sommes là pour vous aider.",
+     pr_h:"Plans",ct_h:"Contact",
      lg_h:"Connexion",lg_p:"Accédez à votre compte Kervea",pn_h:"Panneau Entreprise",pn_p:"Gérez profil, correspondances et messages.",
      p_over:"Vue d'ensemble",p_matches:"Correspondances",p_profile:"Mon Profil",p_msgs:"Messages",p_com:"Engagements",p_pros:"Prospectus",p_set:"Paramètres",p_out:"Déconnexion",
      all_sec:"— Tous les secteurs",sel_ctr:"Sélectionner pays",dd_search:"Rechercher pays...",
      dir_exp:"EXPORTE",dir_imp:"IMPORTE",match_score:"MATCH",verified:"Vérifié",
      detail:"Détails",message:"Envoyer Message",match_col:"Entreprise",prod_col:"Produit",sec_col:"Secteur",ctr_col:"Pays",score_col:"Match",action_col:"Action"},
  ar:{nav_home:"الرئيسية",nav_add:"إضافة",nav_pricing:"الأسعار",nav_about:"من نحن",nav_contact:"اتصل",nav_login:"دخول",nav_panel:"اللوحة",
-     tag_live:"تركيا ↔ العالم · 6 لغات",h_title:"اعثر على المشتري أو المورد على <em>طريق الحرير</em> الحديث.",h_lead:"شركات موثقة بشهادة ضريبية وسجل تجاري. مراسلة بـ 6 لغات مع تشفير من طرف إلى طرف.",
-     f_match:"مطابقة",fm_fullpage:"افتح الصفحة كاملة",fm_fullpage_tt:"عرض هذه الشركة في صفحة كاملة",pp_live_prev:"معاينة مباشرة",pr_dl_pdf:"تنزيل نشرتي كملف PDF",step_prev:"السابق",step_next:"التالي",step_of:"·",step_publish:"نشر · حفظ الشركة",creds_continue:"المتابعة للدفع",creds_back:"العودة للحزم",creds_onetime:"دفعة واحدة",pay_err_card:"أدخل رقم بطاقة صالح",pay_err_name:"أدخل اسم حامل البطاقة",pay_err_exp:"أدخل تاريخ الانتهاء بصيغة MM/YY",pay_err_cvc:"أدخل CVC",ppl_pw_h:"الوصول المباشر لصانعي القرار متاح لأعضاء Pro",ppl_pw_sub:"تواصل مع أكثر من 2400 مدير تنفيذي ومدير مشتريات وخبير موثق بنقرة واحدة. 100 رصيد شهري مع Pro.",ppl_pw_stat1:"صانعو القرار",ppl_pw_stat2:"أرصدة شهرية",ppl_pw_stat3:"موثق",ppl_pw_cta:"الترقية إلى Pro",ppl_pw_note:"$29 شهريًا · إلغاء في أي وقت",creds_h:"حزم الأرصدة",creds_sub:"كل بريد أو هاتف رصيد واحد. الأرصدة غير المستخدمة تُنقل للشهر التالي.",creds_current:"أرصدة متاحة حاليًا",creds_lbl:"رصيد",creds_per_lbl:"رصيد",creds_save10:"توفير 10%",creds_save15:"توفير 15%",creds_you_get:"ستحصل على",creds_buy_btn:"شراء",creds_secure:"دفع آمن عبر Stripe · 3D Secure",creds_pick_pack:"اختر حزمة",creds_added:"أرصدة أضيفت",creds_charged:"تم الخصم",creds_add_btn:"إضافة أرصدة",pay_h:"الدفع — الخطة الاحترافية",pay_plan:"Kervea Pro",pay_kdv:"ضريبة (20%)",pay_disc:"خصم",pay_total:"المجموع",pay_card:"رقم البطاقة",pay_exp:"تاريخ الانتهاء",pay_btn:"ادفع",apply:"تطبيق",bill_m:"شهري",bill_y:"سنوي",bill_save:"−20%",per_month:"/شهر",ct_name:"الاسم الكامل",ct_email:"البريد الإلكتروني",ct_subject:"الموضوع",ct_ph_name:"اسمك",ct_ph_email:"you@company.com",ct_ph_subject:"كيف يمكننا المساعدة؟",ct_center:"المقر الرئيسي",ct_email_lbl:"البريد الإلكتروني:",ct_phone_lbl:"الهاتف:",lg_sso_google:"المتابعة باستخدام Google",lg_sso_ms:"المتابعة باستخدام Microsoft",lg_sso_apple:"المتابعة باستخدام Apple",lg_or_email:"أو عبر البريد الإلكتروني",pri_h:"إجراء معلّق — يتطلب انتباهك",pri_sub:"مطابقتان جديدتان بدرجات عالية بانتظار الرد · تجديد عقد واحد يقترب · مطلوب تحديث المستندات",pri_open_matches:"فتح المطابقات",pri_all:"الكل",range_7d:"7ي",range_30d:"30ي",range_90d:"90ي",range_1y:"1س",ac_title:"الجدول الزمني للنشاط",ac_sub:"سجل كامل لآخر 30 يومًا.",ac_filter_all:"الكل",ac_filter_match:"المطابقات",ac_filter_msg:"الرسائل",ac_filter_prof:"الملف الشخصي",ac_filter_doc:"المستندات",all_dir:"كل الاتجاهات",all_scores:"كل النقاط",attention:"انتباه",back_list:"العودة لقائمة الشركات",cancel:"إلغاء",custom:"مخصص",contact_sales:"تواصل مع المبيعات",export_csv:"CSV",remove:"إزالة",upload:"رفع",save_all:"حفظ الكل",results:"نتائج",complete:"مكتمل",stable:"مستقر",preview_page:"معاينة الصفحة",ch_ctr:"التوزيع حسب الدولة",ch_trend:"اتجاه النمو",ck_logo:"تم رفع الشعار",ck_doc:"المستندات معتمدة",ck_social:"وسائل التواصل متصلة",ck_gal:"المعرض (5/12 صور)",cover_h:"صورة الغلاف",cover_lbl:"صورة الغلاف · 1600×400",cover_tt:"رفع صورة الغلاف",cover_st:"يظهر أعلى صفحة الشركة · 1600×400px موصى به · حد أقصى 5MB",cover_change:"رفع أو تغيير صورة الغلاف",doc_h:"المستندات *",doc_txt:"📄 شهادة النشاط، جريدة السجل، دائرية التوقيع، شهادات الجودة",doc_hint:"PDF, JPG, PNG · حد أقصى 10MB لكل ملف · حتى 20 مستندًا",ent_p:"Kervea Enterprise · حل مخصص",ent_1:"شركات ولا محدودة، جهات اتصال، مطابقة متقدمة، تصدير",ent_2:"تكامل مخصص (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"ملف بعلامة بيضاء (علامتك التجارية)",ent_4:"وصول API مخصص + دعم web-hook",ent_5:"SLA + دعم أولوية (ضمان الرد خلال 4 ساعات)",ent_6:"مدير حساب مخصص",ent_7:"جلسات تدريب واستراتيجية شهرية",fl_cname:"اسم الشركة *",fl_ctitle:"الاسم التجاري (EN)",fl_tax:"الرقم الضريبي *",fl_mersis:"MERSIS / رقم السجل",fl_year:"سنة التأسيس *",fl_emp:"عدد الموظفين",fl_country:"الدولة *",fl_city:"المدينة",fl_kep:"البريد الإلكتروني المسجل",fl_web:"الموقع الإلكتروني",fl_email:"البريد الإلكتروني *",fl_phone:"الهاتف *",fl_repname:"اسم المسؤول *",fl_reptitle:"منصب المسؤول",fl_address:"عنوان الشركة",fl_sec:"القطاع الرئيسي *",fl_dir:"اتجاه التجارة *",fl_hs:"رمز HS (مفصول بفاصلة)",fl_moq:"MOQ (الحد الأدنى للطلب)",fl_inc:"تفضيل INCOTERM",fl_pay:"طريقة الدفع",fl_products:"المنتجات / الخدمات الرئيسية",fl_desc:"وصف الشركة *",fl_certs:"الشهادات",gal_h:"صور المنتج / المنشأة (حد أقصى 12)",gal_tt:"اسحب وأفلت الصور أو حدد",gal_st:"JPG, PNG, WEBP · حد أقصى 5MB لكل صورة · حتى 12 صورة",gal_lbl:"صور المنتج / المنشأة",gal_add:"أضف صورة جديدة · يدعم السحب والإفلات",gal_max:"JPG/PNG/WEBP · حتى 12 صورة · حد أقصى 5MB",hiw_tag:"العملية",hiw_h:"لا وسطاء. تجارة <em style=\"font-style:normal;color:var(--teal)\">حقيقية</em> فقط.",hiw_1a:"01",hiw_1t:"أنشئ ملف شركتك",hiw_1b:"الرؤية العالمية في 6 خطوات",hiw_1c:"متوسط 8 دقائق · التحقق اليدوي 24 ساعة",hiw_2a:"02",hiw_2t:"دع الذكاء الاصطناعي يعمل لك",hiw_2b:"توصيات مرتبة حسب درجة المطابقة",hiw_2c:"20+ مطابقة خلال 3-5 دقائق",hiw_3a:"03",hiw_3t:"تواصل مباشر، ترجمة فورية",hiw_3b:"بدون وسطاء · بدون عمولة",hiw_3c:"متوسط وقت الرد 4 ساعات",kpi_match:"مطابقات جديدة",kpi_msg:"رسائل جديدة",kpi_offer:"عروض",kpi_view:"المشاهدات",logo_h:"شعار الشركة *",logo_hint:"موصى: 400×400 بكسل، PNG/JPG/SVG، حد أقصى 2MB",logo_hint2:"PNG · خلفية شفافة · بحد أدنى 200×200",logo_lbl:"شعار الشركة",msg_h:"الرسائل",msg_sub:"تواصل مباشر مع شركات موثقة. تشفير من طرف إلى طرف. ترجمة تلقائية بـ 6 لغات.",mt_h:"مطابقاتي",mt_sub:"محرك المطابقة بالذكاء الاصطناعي رتبها لك. صفّي، صدّر، راسل مباشرة.",ov_hello:"مرحبا",ov_sub:"إليك ملخص آخر 30 يومًا للوحتك.",ov_recent:"النشاط الأخير",ov_status:"صحة الملف الشخصي",ov_ev1:"أرسل عرضًا جديدًا",ov_ev2:"أرسل رسالة",ov_ev3:"شاهد ملفك الشخصي",ov_ev4:"تم التحقق من شهادة ISO 9001",ov_ev5:"طلب اتصال",ov_t1:"قبل ساعتين",ov_t2:"قبل 4 ساعات",ov_t3:"قبل يوم",ov_t4:"قبل يومين",ov_t5:"قبل 3 أيام",p_ana:"التحليلات",p_people:"جهات الاتصال",p_docs:"مستنداتي",p_team:"الفريق",p_activity:"النشاط",plan_starter:"المبتدئ",starter_p:"مجاني · مثالي للبدء",starter_1:"ملف شركة واحد + شارة التحقق",starter_2:"50 مطابقة شهريًا",starter_3:"تصفية القطاعات الأساسية",starter_4:"ترجمة تلقائية بـ 6 لغات",starter_5:"مراسلة محدودة (5/يوم)",starter_6:"دعم قياسي",start_starter:"ابدأ مجانًا",pro_p:"Kervea Pro · الأكثر شعبية",pro_1:"كل ميزات Starter",pro_2:"مطابقات لا محدودة + درجة ذكاء اصطناعي متقدمة",pro_3:"شركات لا محدودة، جهات اتصال، مطابقة متقدمة، تصدير",pro_4:"مراسلة لا محدودة + ترتيب أولوية",pro_5:"لوحة تحليلات (الزوار، التحويل، المنافسون)",pro_6:"معرض الملف الشخصي · ظهور في المقدمة",pro_7:"دعم عملاء أولوية (24 ساعة)",start_pro:"الترقية إلى Pro",prof_h:"ملف شركتي",prof_sub:"قم بتحديث معلومات الشركة والصور وقنوات الاتصال.",promo_h:"لديك رمز ترويجي؟",promo_s:"خصم 30% على Pro لأول 3 أشهر.",promo_h2:"أدخل الرمز",promo_s2:"رموز خصم خاصة للمستخدمين الأوائل وأعضاء الغرفة.",pub_h:"تم استلام طلبك",pub_p:"يكتمل التحقق اليدوي خلال 24-48 ساعة. سيتم إعلامك بالبريد والرسائل النصية.",ppl_title:"جهات الاتصال",ppl_sub:"معلومات اتصال مباشرة لصانعي القرار. رصيد واحد لكل جهة اتصال.",ppl_credits:"الأرصدة",ppl_renew:"تجديد الأرصدة",ppl_export:"تصدير",ppl_all:"الكل",ppl_ceo:"الرئيس التنفيذي / المدير العام",ppl_purchasing:"المشتريات",ppl_sales:"المبيعات",ppl_ops:"العمليات",ppl_col_person:"الشخص",ppl_col_title:"المنصب",ppl_col_firm:"الشركة",ppl_col_email:"البريد الإلكتروني",ppl_col_phone:"الهاتف",ppl_col_act:"الإجراء",ppl_kvkk:"تتم مشاركة هذه المعلومات وفقًا لقانون حماية البيانات وبموافقة صريحة من ممثل الشركة.",ppl_kvkk_link:"إشعار الخصوصية",pr_title:"النشرة",pr_desc:"ملخص مهني كامل — PDF جاهز للاجتماعات.",pr_dl:"تنزيل PDF",pr_pdf:"نشرة PDF",pr_langs:"بـ 6 لغات",pr_mine:"تنزيل نشرتي",pr_incl:"المحتويات",pr_i1:"ملخص الشركة + المنتجات الرئيسية",pr_i2:"القطاع، رمز HS، MOQ",pr_i3:"شارات (ضريبي، سجل، بريد)",pr_i4:"الشهادات (ISO, GOTS, HACCP)",pr_i5:"معلومات الاتصال + رمز QR",pr_who:"لمن؟",pr_l1:"مشاركة المعلومات قبل الاجتماعات",pr_l2:"بطاقة أعمال رقمية في المعارض",pr_l3:"مرجع على وسائل التواصل والمواقع",s3_media:"الشعار",s4_social:"التواصل",s5_doc:"المستندات",s6_pub:"نشر",sec_biz:"معلومات العمل",sec_visual:"الهوية البصرية",sec_social:"وسائل التواصل والويب",sec_legal:"معلومات قانونية",social_intro:"قنوات التواصل الاجتماعي — سيتواصل معك المشترون هنا.",ss_h:"شركات تثق بـ Kervea",ss_p:"مصنّعون ومصدّرون موثقون، جزء من شبكة نشطة في 6 قارات.",ss_5t:"أنتيب للتوابل",ss_5s:"غازي أنتيب · فلفل أحمر",tm_title:"إدارة الفريق",tm_sub:"أدر مستخدمي شركتك وأدوارهم وأذوناتهم.",tm_seats:"استخدام المقاعد",tm_invite:"+ دعوة مستخدم",tm_col_user:"المستخدم",tm_role:"الدور",tm_perms:"الأذونات",tm_status:"الحالة",tm_last:"آخر تسجيل دخول",tm_active:"نشط",tm_pending:"معلق",tm_owner:"المالك",tm_admin:"مدير",tm_sales:"المبيعات",tm_ops:"العمليات",tm_p_all:"جميع الأذونات",tm_p_msg:"الرسائل + جهات الاتصال",tm_p_prof:"الملف + المستندات",pr_preview:"معاينة",why_h:"لماذا Kervea؟",why_p:"قل وداعًا للوسطاء والعمولات. تواصل مباشر، شركات موثقة، تجارة حقيقية.",why_1t:"ممر الدول",why_2t:"شركة موثقة",why_3t:"ترجمة بـ 6 لغات",chat_online:"متصل",chat_verified_firm:"شركة موثقة",chat_typing:"يكتب…",chat_btn_firm:"ملف الشركة",chat_btn_video:"مكالمة فيديو",chat_btn_archive:"أرشفة",empty_firms:"لا توجد شركات تطابق التصفية.",empty_records:"لا توجد سجلات مطابقة.",toast_name_required:"الاسم الكامل مطلوب",toast_valid_email:"أدخل بريدًا إلكترونيًا صالحًا",toast_invalid_promo:"رمز الترويج غير صالح",toast_search_applied:"تم تطبيق البحث",toast_csv_downloaded:"تم تنزيل CSV",toast_pdf_downloaded:"تم تنزيل النشرة",toast_photo_removed:"تمت إزالة الصورة",toast_photo_uploaded:"تم رفع الصورة",toast_logo_uploaded:"تم رفع الشعار",toast_login_ok:"تم تسجيل الدخول بنجاح",toast_login_full:"تم تسجيل الدخول — الوصول الكامل مفعّل",toast_logout:"تم تسجيل الخروج",toast_credit_out:"نفدت الأرصدة — قم بترقية خطتك",toast_docs_opening:"جارٍ فتح أداة رفع المستندات",toast_firm_opening:"جارٍ فتح ملف الشركة",toast_firm_notfound:"الشركة غير موجودة",toast_firm_error:"خطأ في فتح الشركة",toast_visual_saved:"تم حفظ الهوية البصرية",toast_video_call:"جارٍ بدء مكالمة الفيديو",toast_cover_updated:"تم تحديث الغلاف",toast_chat_archived:"تمت أرشفة المحادثة",toast_profile_updated:"تم تحديث الملف الشخصي",toast_delete_requested:"تم استلام طلب الحذف — سيكتمل خلال 7 أيام",toast_social_saved:"تم حفظ معلومات وسائل التواصل الاجتماعي",toast_form_opened:"تم فتح نموذج الطلب",toast_print_pdf:"احفظ كملف PDF من قائمة الطباعة",toast_trade_saved:"تم حفظ المعلومات التجارية",toast_all_tasks:"عرض جميع المهام",toast_data_export:"جارٍ تحضير بياناتك، سيتم إرسال الرابط بالبريد",toast_legal_saved:"تم حفظ المعلومات القانونية",toast_cancelled:"تم الإلغاء",toast_copied:"تم النسخ إلى الحافظة",confirm_delete_account:"سيتم حذف حسابك وجميع بياناتك بشكل دائم. هل أنت متأكد؟",tm_inv_h:"دعوة مستخدم جديد",tm_inv_sub:"أضف عضوًا جديدًا إلى فريق شركتك. تُرسل الدعوة بالبريد الإلكتروني ويصبح المستخدم نشطًا عند قبولها.",tm_fld_name:"الاسم الكامل *",tm_fld_email:"البريد الإلكتروني *",tm_fld_role:"الدور *",tm_role_admin:"مدير",tm_role_admin_desc:"جميع الوحدات · يمكنه الدعوة",tm_role_sales:"مبيعات",tm_role_sales_desc:"المراسلة + جهات الاتصال",tm_role_ops:"العمليات",tm_role_ops_desc:"الملف الشخصي + المستندات",tm_role_view:"عرض فقط",tm_role_view_desc:"وصول للقراءة فقط",tm_inv_info:"يمكنك تغيير الدور لاحقًا. سيكون هذا المستخدم الخامس من <b>4/10 مقاعد</b>.",tm_btn_invite:"إرسال الدعوة",btn_cancel:"إلغاء",tm_perm_h:"تعديل الدور والأذونات",tm_perm_sub:"حدد الوحدات التي يمكن لهذا المستخدم الوصول إليها.",tm_lbl_role:"الدور",tm_lbl_perms:"الأذونات",tm_role_admin_short:"جميع الوحدات",tm_role_sales_short:"رسائل + جهات اتصال",tm_role_view_short:"قراءة",tm_perm_msg:"المراسلة",tm_perm_msg_desc:"الوصول إلى جميع المحادثات وإرسال الرسائل ومشاركة الملفات.",tm_perm_match:"المطابقات وجهات الاتصال",tm_perm_match_desc:"عرض اقتراحات المطابقة بالذكاء الاصطناعي واستخدام أرصدة الاتصال.",tm_perm_prof:"ملف الشركة",tm_perm_prof_desc:"تعديل معلومات الشركة والمعرض وروابط التواصل الاجتماعي.",tm_perm_docs:"المستندات",tm_perm_docs_desc:"تحميل واعتماد الشهادات والشهادة الضريبية والمستندات الرسمية.",tm_perm_ana:"التحليلات",tm_perm_ana_desc:"الوصول للشبكة ومعدل التحويل ومقارنة المنافسين والتقارير.",tm_perm_team:"إدارة الفريق",tm_perm_team_desc:"دعوة مستخدمين جدد وتعيين الأدوار وتعطيل الحسابات.",tm_btn_save:"حفظ التغييرات",toast_saved:"تم الحفظ",ph_tm_name:"مثال: أحمد كايا",ph_tm_email:"ahmed@company.com",pay_card_holder:"حامل البطاقة",pay_card_holder_ph:"الاسم الكامل",pay_card_exp_short:"تاريخ الانتهاء",pay_per_month:"/شهر",pay_method_card:"بطاقة",pay_method_mc:"MC",pay_method_bank:"تحويل بنكي",pay_card_holder_lbl:"حامل البطاقة",ph_card_holder:"الاسم الكامل",ph_promo:"رمز ترويجي (اختياري)",toast_pay_success:"تم الدفع بنجاح — Pro مفعّل",pay_disclaimer:"بإتمام الدفع، توافق على <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">اتفاقية المستخدم</a> و<a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">إشعار الخصوصية</a>.",modal_kvkk_h:"إشعار الخصوصية (KVKK التركي)",modal_sozl_h:"اتفاقية المستخدم",modal_cookie_h:"سياسة الخصوصية وملفات تعريف الارتباط",legal_disclaimer:"<b>ⓘ</b> هذا المستند هو الأصل القانوني التركي وهو ملزم بموجب القانون التركي. الترجمات إلى لغات أخرى لأغراض إعلامية فقط.",viewers_h:"من زاروا ملفك",viewers_sub:"تم اكتشاف البلد عبر عنوان IP · آخر 30 يومًا",add_draft_btn:"المتابعة لاحقًا",add_draft_saved:"تم حفظ المسودة — سجل الدخول للمتابعة",dir_both:"كلاهما",pay_tt_cash:"تحويل بنكي نقدي",pay_tt_30:"تحويل بنكي 30 يومًا",pay_tt_60:"تحويل بنكي 60 يومًا",toast_logo_removed:"تم إزالة الشعار",toast_cover_uploaded:"تم رفع الغلاف",consent_kvkk:"لقد قرأت وأوافق على <b>إشعار الخصوصية</b>.",consent_terms:"أوافق على <b>اتفاقية المستخدم</b>.",consent_verify:"أسمح بالتحقق من بياناتي.",consent_marketing:"أوافق على استلام الرسائل التسويقية (اختياري).",consent_read:"اقرأ",consent_read2:"اقرأ",ph_cname:"مثال: كيرفيا نسيج ذ.م.م",ph_address:"الشارع، رقم، الحي / المدينة / البلد",ph_fullname:"الاسم الكامل",ph_gm:"المدير العام",ph_products:"مثال: خيوط قطن، قماش منسوج، قماش محبوك",ph_desc:"صف شركتك وطاقتك الإنتاجية وأسواق التصدير في فقرة واحدة...",an_ip_based:"● حسب عنوان IP",an_visitors_sub:"البلدان التي يأتي منها الزوار (آخر 30 يوم)",an_pulse_h:"نبض السوق — اتجاهات رموز HS",an_pulse_sub:"تغير العرض والطلب خلال 8 أسابيع في قطاعك · المصدر Trademap",an_p1_nm:"قماش قطن منسوج",an_p1_sub:"ألمانيا وهولندا وفرنسا · إشارة مشتري قوية",an_p2_nm:"أثاث (هيكل معدني)",an_p2_sub:"فنلندا والنرويج · حجم الطلبات في مستوى قياسي",an_p3_nm:"منصات نقالة خشبية، صناديق",an_p3_sub:"نيجيريا والجزائر · متقلب بسبب التعرفة الجديدة",an_p4_nm:"خيوط قطن (ممشط)",an_p4_sub:"كازاخستان وأوزبكستان · تراجع أسعار المواد الخام",an_p5_nm:"سلع من الحديد/الصلب",an_p5_sub:"مصر والمغرب · انخفاض ازدحام الموانئ",an_data_freq:"تحديث البيانات كل 24 ساعة",an_full_report:"التقرير الكامل ←",an_opening_report:"جارٍ فتح التحليل التفصيلي",an_ai_alerts_h:"مركز تنبيهات الذكاء الاصطناعي",an_ai_alerts_sub:"الفرص والمخاطر المكتشفة لشركتك",an_priority_high:"أولوية عالية",an_priority_med:"أولوية متوسطة",an_priority_opp:"فرصة",an_priority_tip:"نصيحة",an_alert1_nm:"وقت الاستجابة حرج",an_alert1_desc:"في الانتظار منذ 3 أيام. إذا تجاوز متوسط وقت الاستجابة 4 ساعات، ستنخفض جودة المطابقة.",an_alert2_nm:"يجب تجديد شهادتك الضريبية خلال 8 أيام",an_alert2_desc:"المستندات غير المجددة تسبب انخفاضاً في تصنيف الشركة. انتقل إلى مستنداتي → رفع.",an_alert3_nm:"فرصة جديدة: مشترون ألمان لرمز HS 6006",an_alert3_desc:"تم اكتشاف 6 مشترين جدد متوافقين معك. ممر سريع النمو في قطاع الأقمشة المحبوكة.",an_alert4_nm:"اقتراح إكمال الملف الشخصي",an_alert4_desc:"إضافة 7 صور أخرى إلى المعرض سترفع نقاط ملفك من 94٪ إلى 100٪.",an_security_h:"حالة الأمان والتحقق",an_sec1_nm:"المصادقة الثنائية نشطة",an_sec2_nm:"شهادة ضريبية",an_status_approved:"معتمد",an_sec3_nm:"السجل التجاري",an_status_verified:"تم التحقق",an_sec4_nm:"البريد الإلكتروني المسجل",an_status_active:"نشط",an_sec5_sub:"التجديد خلال 15 يومًا",an_sec6_sub:"جميع الاتصالات مشفرة",an_sec7_nm:"متوافق مع GDPR",an_sec7_sub:"إشعار الخصوصية v1.2",an_sec8_sub:"IP + تحديد المعدل نشط",an_deep_h:"تحليل عميق",fl_yourmsg:"رسالتك",btn_send:"إرسال",toast_msg_sent:"تم إرسال الرسالة",fl_password:"كلمة المرور",btn_login:"تسجيل الدخول",stat_today:"اليوم",stat_this_week:"هذا الأسبوع",stat_soon:"قريباً",ft_kvkk:"إشعار الخصوصية",ft_terms:"شروط الخدمة",ft_cookie:"الخصوصية/الكوكيز",ft_tagline:"طريق الحرير الحديث",fp_decisionmakers:"صنّاع القرار",fp_detail:"تفاصيل",fp_gotoallppl:"عرض جميع جهات الاتصال ←",fp_gal1:"صالة العرض",fp_gal2:"منشأة الإنتاج",fp_gal3:"المستودع",fp_gal4:"الفريق",fp_gal5:"مراقبة الجودة",fp_gal6:"الشهادات",lock_title:"معلومات الاتصال متاحة لأعضاء Pro",lock_sub:"يظهر واتساب والهاتف والبريد الإلكتروني والموقع الإلكتروني فور تفعيل عضوية Pro.",lock_cta:"الترقية إلى Pro",sec_social_short:"وسائل التواصل",dene_lbl:"جرب",qt1:"مشتري إكسسوارات أثاث في فنلندا",qt2:"مورد كاكاو في ساحل العاج",qt3:"مشتري منسوجات في كازاخستان",qf_lbl:"مرشح سريع",f_exp:"تصدير",f_imp:"استيراد",
-     s_pos:"شركات نشطة",s_ctr:"دولة وإقليم",s_sec:"قطاع",s_lng:"لغة",
+     tag_live:"تركيا ↔ العالم · 6 لغات",h_title:"اعثر على المشتري أو المورد على <em>طريق الحرير</em> الحديث.",
+     f_match:"مطابقة",fm_fullpage:"افتح الصفحة كاملة",fm_fullpage_tt:"عرض هذه الشركة في صفحة كاملة",pp_live_prev:"معاينة مباشرة",pr_dl_pdf:"تنزيل نشرتي كملف PDF",step_prev:"السابق",step_next:"التالي",step_of:"·",step_publish:"نشر · حفظ الشركة",creds_continue:"المتابعة للدفع",creds_back:"العودة للحزم",creds_onetime:"دفعة واحدة",pay_err_card:"أدخل رقم بطاقة صالح",pay_err_name:"أدخل اسم حامل البطاقة",pay_err_exp:"أدخل تاريخ الانتهاء بصيغة MM/YY",pay_err_cvc:"أدخل CVC",ppl_pw_h:"الوصول المباشر لصانعي القرار متاح لأعضاء Pro",ppl_pw_sub:"تواصل مع أكثر من 2400 مدير تنفيذي ومدير مشتريات وخبير موثق بنقرة واحدة. 100 رصيد شهري مع Pro.",ppl_pw_stat1:"صانعو القرار",ppl_pw_stat2:"أرصدة شهرية",ppl_pw_stat3:"موثق",ppl_pw_cta:"الترقية إلى Pro",ppl_pw_note:"$29 شهريًا · إلغاء في أي وقت",creds_h:"حزم الأرصدة",creds_sub:"كل بريد أو هاتف رصيد واحد. الأرصدة غير المستخدمة تُنقل للشهر التالي.",creds_current:"أرصدة متاحة حاليًا",creds_lbl:"رصيد",creds_per_lbl:"رصيد",creds_save10:"توفير 10%",creds_save15:"توفير 15%",creds_you_get:"ستحصل على",creds_buy_btn:"شراء",creds_secure:"دفع آمن عبر Stripe · 3D Secure",creds_pick_pack:"اختر حزمة",creds_added:"أرصدة أضيفت",creds_charged:"تم الخصم",creds_add_btn:"إضافة أرصدة",pay_h:"الدفع — الخطة الاحترافية",pay_plan:"Kervea Pro",pay_kdv:"ضريبة (20%)",pay_disc:"خصم",pay_total:"المجموع",pay_card:"رقم البطاقة",pay_exp:"تاريخ الانتهاء",pay_btn:"ادفع",apply:"تطبيق",bill_m:"شهري",bill_y:"سنوي",bill_save:"−20%",per_month:"/شهر",ct_name:"الاسم الكامل",ct_email:"البريد الإلكتروني",ct_subject:"الموضوع",ct_ph_name:"اسمك",ct_ph_email:"you@company.com",ct_ph_subject:"كيف يمكننا المساعدة؟",ct_email_lbl:"البريد الإلكتروني:",ct_phone_lbl:"الهاتف:",lg_sso_google:"المتابعة باستخدام Google",lg_sso_ms:"المتابعة باستخدام Microsoft",lg_sso_apple:"المتابعة باستخدام Apple",lg_or_email:"أو عبر البريد الإلكتروني",pri_h:"إجراء معلّق — يتطلب انتباهك",pri_sub:"مطابقتان جديدتان بدرجات عالية بانتظار الرد · تجديد عقد واحد يقترب · مطلوب تحديث المستندات",pri_open_matches:"فتح المطابقات",pri_all:"الكل",range_7d:"7ي",range_30d:"30ي",range_90d:"90ي",range_1y:"1س",ac_title:"الجدول الزمني للنشاط",ac_sub:"سجل كامل لآخر 30 يومًا.",ac_filter_all:"الكل",ac_filter_match:"المطابقات",ac_filter_msg:"الرسائل",ac_filter_prof:"الملف الشخصي",ac_filter_doc:"المستندات",all_dir:"كل الاتجاهات",all_scores:"كل النقاط",attention:"انتباه",back_list:"العودة لقائمة الشركات",cancel:"إلغاء",custom:"مخصص",contact_sales:"تواصل مع المبيعات",export_csv:"CSV",remove:"إزالة",upload:"رفع",save_all:"حفظ الكل",results:"نتائج",complete:"مكتمل",stable:"مستقر",preview_page:"معاينة الصفحة",ch_ctr:"التوزيع حسب الدولة",ch_trend:"اتجاه النمو",ck_logo:"تم رفع الشعار",ck_doc:"المستندات معتمدة",ck_social:"وسائل التواصل متصلة",ck_gal:"المعرض (5/12 صور)",cover_h:"صورة الغلاف",cover_lbl:"صورة الغلاف · 1600×400",cover_tt:"رفع صورة الغلاف",cover_st:"يظهر أعلى صفحة الشركة · 1600×400px موصى به · حد أقصى 5MB",cover_change:"رفع أو تغيير صورة الغلاف",doc_h:"المستندات *",doc_txt:"📄 شهادة النشاط، جريدة السجل، دائرية التوقيع، شهادات الجودة",doc_hint:"PDF, JPG, PNG · حد أقصى 10MB لكل ملف · حتى 20 مستندًا",ent_p:"Kervea Enterprise · حل مخصص",ent_1:"شركات ولا محدودة، جهات اتصال، مطابقة متقدمة، تصدير",ent_2:"تكامل مخصص (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"ملف بعلامة بيضاء (علامتك التجارية)",ent_4:"وصول API مخصص + دعم web-hook",ent_5:"SLA + دعم أولوية (ضمان الرد خلال 4 ساعات)",ent_6:"مدير حساب مخصص",ent_7:"جلسات تدريب واستراتيجية شهرية",fl_cname:"اسم الشركة *",fl_ctitle:"الاسم التجاري (EN)",fl_tax:"الرقم الضريبي *",fl_mersis:"MERSIS / رقم السجل",fl_year:"سنة التأسيس *",fl_emp:"عدد الموظفين",fl_country:"الدولة *",fl_city:"المدينة",fl_kep:"البريد الإلكتروني المسجل",fl_web:"الموقع الإلكتروني",fl_email:"البريد الإلكتروني *",fl_phone:"الهاتف *",fl_repname:"اسم المسؤول *",fl_reptitle:"منصب المسؤول",fl_address:"عنوان الشركة",fl_sec:"القطاع الرئيسي *",fl_dir:"اتجاه التجارة *",fl_hs:"رمز HS (مفصول بفاصلة)",fl_moq:"MOQ (الحد الأدنى للطلب)",fl_inc:"تفضيل INCOTERM",fl_pay:"طريقة الدفع",fl_products:"المنتجات / الخدمات الرئيسية",fl_desc:"وصف الشركة *",fl_certs:"الشهادات",gal_h:"صور المنتج / المنشأة (حد أقصى 12)",gal_tt:"اسحب وأفلت الصور أو حدد",gal_st:"JPG, PNG, WEBP · حد أقصى 5MB لكل صورة · حتى 12 صورة",gal_lbl:"صور المنتج / المنشأة",gal_add:"أضف صورة جديدة · يدعم السحب والإفلات",gal_max:"JPG/PNG/WEBP · حتى 12 صورة · حد أقصى 5MB",hiw_tag:"العملية",hiw_h:"لا وسطاء. تجارة <em style=\"font-style:normal;color:var(--teal)\">حقيقية</em> فقط.",kpi_match:"مطابقات جديدة",kpi_msg:"رسائل جديدة",kpi_offer:"عروض",kpi_view:"المشاهدات",logo_h:"شعار الشركة *",logo_hint:"موصى: 400×400 بكسل، PNG/JPG/SVG، حد أقصى 2MB",logo_hint2:"PNG · خلفية شفافة · بحد أدنى 200×200",logo_lbl:"شعار الشركة",msg_h:"الرسائل",msg_sub:"تواصل مباشر مع شركات موثقة. تشفير من طرف إلى طرف. ترجمة تلقائية بـ 6 لغات.",mt_h:"مطابقاتي",mt_sub:"محرك المطابقة بالذكاء الاصطناعي رتبها لك. صفّي، صدّر، راسل مباشرة.",ov_hello:"مرحبا",ov_sub:"إليك ملخص آخر 30 يومًا للوحتك.",ov_recent:"النشاط الأخير",ov_status:"صحة الملف الشخصي",ov_ev1:"أرسل عرضًا جديدًا",ov_ev2:"أرسل رسالة",ov_ev3:"شاهد ملفك الشخصي",ov_ev4:"تم التحقق من شهادة ISO 9001",ov_ev5:"طلب اتصال",ov_t1:"قبل ساعتين",ov_t2:"قبل 4 ساعات",ov_t3:"قبل يوم",ov_t4:"قبل يومين",ov_t5:"قبل 3 أيام",p_ana:"التحليلات",p_people:"جهات الاتصال",p_docs:"مستنداتي",p_team:"الفريق",p_activity:"النشاط",plan_starter:"المبتدئ",starter_p:"مجاني · مثالي للبدء",starter_1:"ملف شركة واحد + شارة التحقق",starter_2:"50 مطابقة شهريًا",starter_3:"تصفية القطاعات الأساسية",starter_4:"ترجمة تلقائية بـ 6 لغات",starter_5:"مراسلة محدودة (5/يوم)",starter_6:"دعم قياسي",start_starter:"ابدأ مجانًا",pro_p:"Kervea Pro · الأكثر شعبية",pro_1:"كل ميزات Starter",pro_2:"مطابقات لا محدودة + درجة ذكاء اصطناعي متقدمة",pro_3:"شركات لا محدودة، جهات اتصال، مطابقة متقدمة، تصدير",pro_4:"مراسلة لا محدودة + ترتيب أولوية",pro_5:"لوحة تحليلات (الزوار، التحويل، المنافسون)",pro_6:"معرض الملف الشخصي · ظهور في المقدمة",pro_7:"دعم عملاء أولوية (24 ساعة)",start_pro:"الترقية إلى Pro",prof_h:"ملف شركتي",prof_sub:"قم بتحديث معلومات الشركة والصور وقنوات الاتصال.",promo_h:"لديك رمز ترويجي؟",promo_s:"خصم 30% على Pro لأول 3 أشهر.",pub_h:"تم استلام طلبك",pub_p:"يكتمل التحقق اليدوي خلال 24-48 ساعة. سيتم إعلامك بالبريد والرسائل النصية.",ppl_title:"جهات الاتصال",ppl_sub:"معلومات اتصال مباشرة لصانعي القرار. رصيد واحد لكل جهة اتصال.",ppl_credits:"الأرصدة",ppl_renew:"تجديد الأرصدة",ppl_export:"تصدير",ppl_all:"الكل",ppl_ceo:"الرئيس التنفيذي / المدير العام",ppl_purchasing:"المشتريات",ppl_sales:"المبيعات",ppl_ops:"العمليات",ppl_col_person:"الشخص",ppl_col_title:"المنصب",ppl_col_firm:"الشركة",ppl_col_email:"البريد الإلكتروني",ppl_col_phone:"الهاتف",ppl_col_act:"الإجراء",ppl_kvkk:"تتم مشاركة هذه المعلومات وفقًا لقانون حماية البيانات وبموافقة صريحة من ممثل الشركة.",ppl_kvkk_link:"إشعار الخصوصية",pr_title:"النشرة",pr_desc:"ملخص مهني كامل — PDF جاهز للاجتماعات.",pr_dl:"تنزيل PDF",pr_pdf:"نشرة PDF",pr_langs:"بـ 6 لغات",pr_mine:"تنزيل نشرتي",pr_incl:"المحتويات",pr_i1:"ملخص الشركة + المنتجات الرئيسية",pr_i2:"القطاع، رمز HS، MOQ",pr_i3:"شارات (ضريبي، سجل، بريد)",pr_i4:"الشهادات (ISO, GOTS, HACCP)",pr_i5:"معلومات الاتصال + رمز QR",pr_who:"لمن؟",pr_l1:"مشاركة المعلومات قبل الاجتماعات",pr_l2:"بطاقة أعمال رقمية في المعارض",pr_l3:"مرجع على وسائل التواصل والمواقع",s3_media:"الشعار",s4_social:"التواصل",s5_doc:"المستندات",s6_pub:"نشر",sec_biz:"معلومات العمل",sec_visual:"الهوية البصرية",sec_social:"وسائل التواصل والويب",sec_legal:"معلومات قانونية",social_intro:"قنوات التواصل الاجتماعي — سيتواصل معك المشترون هنا.",ss_h:"شركات تثق بـ Kervea",ss_p:"مصنّعون ومصدّرون موثقون، جزء من شبكة نشطة في 6 قارات.",ss_5t:"أنتيب للتوابل",ss_5s:"غازي أنتيب · فلفل أحمر",tm_title:"إدارة الفريق",tm_sub:"أدر مستخدمي شركتك وأدوارهم وأذوناتهم.",tm_seats:"استخدام المقاعد",tm_invite:"+ دعوة مستخدم",tm_col_user:"المستخدم",tm_role:"الدور",tm_perms:"الأذونات",tm_status:"الحالة",tm_last:"آخر تسجيل دخول",tm_active:"نشط",tm_pending:"معلق",tm_owner:"المالك",tm_admin:"مدير",tm_sales:"المبيعات",tm_ops:"العمليات",tm_p_all:"جميع الأذونات",tm_p_msg:"الرسائل + جهات الاتصال",tm_p_prof:"الملف + المستندات",pr_preview:"معاينة",why_h:"لماذا Kervea؟",chat_online:"متصل",chat_verified_firm:"شركة موثقة",chat_typing:"يكتب…",chat_btn_firm:"ملف الشركة",chat_btn_video:"مكالمة فيديو",chat_btn_archive:"أرشفة",empty_firms:"لا توجد شركات تطابق التصفية.",empty_records:"لا توجد سجلات مطابقة.",toast_name_required:"الاسم الكامل مطلوب",toast_valid_email:"أدخل بريدًا إلكترونيًا صالحًا",toast_invalid_promo:"رمز الترويج غير صالح",toast_search_applied:"تم تطبيق البحث",toast_csv_downloaded:"تم تنزيل CSV",toast_pdf_downloaded:"تم تنزيل النشرة",toast_photo_removed:"تمت إزالة الصورة",toast_photo_uploaded:"تم رفع الصورة",toast_logo_uploaded:"تم رفع الشعار",toast_login_ok:"تم تسجيل الدخول بنجاح",toast_login_full:"تم تسجيل الدخول — الوصول الكامل مفعّل",toast_logout:"تم تسجيل الخروج",toast_credit_out:"نفدت الأرصدة — قم بترقية خطتك",toast_docs_opening:"جارٍ فتح أداة رفع المستندات",toast_firm_opening:"جارٍ فتح ملف الشركة",toast_firm_notfound:"الشركة غير موجودة",toast_firm_error:"خطأ في فتح الشركة",toast_visual_saved:"تم حفظ الهوية البصرية",toast_video_call:"جارٍ بدء مكالمة الفيديو",toast_cover_updated:"تم تحديث الغلاف",toast_chat_archived:"تمت أرشفة المحادثة",toast_profile_updated:"تم تحديث الملف الشخصي",toast_delete_requested:"تم استلام طلب الحذف — سيكتمل خلال 7 أيام",toast_social_saved:"تم حفظ معلومات وسائل التواصل الاجتماعي",toast_form_opened:"تم فتح نموذج الطلب",toast_print_pdf:"احفظ كملف PDF من قائمة الطباعة",toast_trade_saved:"تم حفظ المعلومات التجارية",toast_all_tasks:"عرض جميع المهام",toast_data_export:"جارٍ تحضير بياناتك، سيتم إرسال الرابط بالبريد",toast_legal_saved:"تم حفظ المعلومات القانونية",toast_cancelled:"تم الإلغاء",toast_copied:"تم النسخ إلى الحافظة",confirm_delete_account:"سيتم حذف حسابك وجميع بياناتك بشكل دائم. هل أنت متأكد؟",tm_inv_h:"دعوة مستخدم جديد",tm_inv_sub:"أضف عضوًا جديدًا إلى فريق شركتك. تُرسل الدعوة بالبريد الإلكتروني ويصبح المستخدم نشطًا عند قبولها.",tm_fld_name:"الاسم الكامل *",tm_fld_email:"البريد الإلكتروني *",tm_fld_role:"الدور *",tm_role_admin:"مدير",tm_role_admin_desc:"جميع الوحدات · يمكنه الدعوة",tm_role_sales:"مبيعات",tm_role_sales_desc:"المراسلة + جهات الاتصال",tm_role_ops:"العمليات",tm_role_ops_desc:"الملف الشخصي + المستندات",tm_role_view:"عرض فقط",tm_role_view_desc:"وصول للقراءة فقط",tm_inv_info:"يمكنك تغيير الدور لاحقًا. سيكون هذا المستخدم الخامس من <b>4/10 مقاعد</b>.",tm_btn_invite:"إرسال الدعوة",btn_cancel:"إلغاء",tm_perm_h:"تعديل الدور والأذونات",tm_perm_sub:"حدد الوحدات التي يمكن لهذا المستخدم الوصول إليها.",tm_lbl_role:"الدور",tm_lbl_perms:"الأذونات",tm_role_admin_short:"جميع الوحدات",tm_role_sales_short:"رسائل + جهات اتصال",tm_role_view_short:"قراءة",tm_perm_msg:"المراسلة",tm_perm_msg_desc:"الوصول إلى جميع المحادثات وإرسال الرسائل ومشاركة الملفات.",tm_perm_match:"المطابقات وجهات الاتصال",tm_perm_match_desc:"عرض اقتراحات المطابقة بالذكاء الاصطناعي واستخدام أرصدة الاتصال.",tm_perm_prof:"ملف الشركة",tm_perm_prof_desc:"تعديل معلومات الشركة والمعرض وروابط التواصل الاجتماعي.",tm_perm_docs:"المستندات",tm_perm_docs_desc:"تحميل واعتماد الشهادات والشهادة الضريبية والمستندات الرسمية.",tm_perm_ana:"التحليلات",tm_perm_ana_desc:"الوصول للشبكة ومعدل التحويل ومقارنة المنافسين والتقارير.",tm_perm_team:"إدارة الفريق",tm_perm_team_desc:"دعوة مستخدمين جدد وتعيين الأدوار وتعطيل الحسابات.",tm_btn_save:"حفظ التغييرات",toast_saved:"تم الحفظ",ph_tm_name:"مثال: أحمد كايا",ph_tm_email:"ahmed@company.com",pay_card_holder:"حامل البطاقة",pay_card_holder_ph:"الاسم الكامل",pay_card_exp_short:"تاريخ الانتهاء",pay_per_month:"/شهر",pay_method_card:"بطاقة",pay_method_mc:"MC",pay_method_bank:"تحويل بنكي",pay_card_holder_lbl:"حامل البطاقة",ph_card_holder:"الاسم الكامل",ph_promo:"رمز ترويجي (اختياري)",toast_pay_success:"تم الدفع بنجاح — Pro مفعّل",pay_disclaimer:"بإتمام الدفع، توافق على <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">اتفاقية المستخدم</a> و<a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">إشعار الخصوصية</a>.",modal_kvkk_h:"إشعار الخصوصية (KVKK التركي)",modal_sozl_h:"اتفاقية المستخدم",modal_cookie_h:"سياسة الخصوصية وملفات تعريف الارتباط",legal_disclaimer:"<b>ⓘ</b> هذا المستند هو الأصل القانوني التركي وهو ملزم بموجب القانون التركي. الترجمات إلى لغات أخرى لأغراض إعلامية فقط.",viewers_h:"من زاروا ملفك",viewers_sub:"تم اكتشاف البلد عبر عنوان IP · آخر 30 يومًا",add_draft_btn:"المتابعة لاحقًا",add_draft_saved:"تم حفظ المسودة — سجل الدخول للمتابعة",dir_both:"كلاهما",pay_tt_cash:"تحويل بنكي نقدي",pay_tt_30:"تحويل بنكي 30 يومًا",pay_tt_60:"تحويل بنكي 60 يومًا",toast_logo_removed:"تم إزالة الشعار",toast_cover_uploaded:"تم رفع الغلاف",consent_kvkk:"لقد قرأت وأوافق على <b>إشعار الخصوصية</b>.",consent_terms:"أوافق على <b>اتفاقية المستخدم</b>.",consent_verify:"أسمح بالتحقق من بياناتي.",consent_marketing:"أوافق على استلام الرسائل التسويقية (اختياري).",consent_read:"اقرأ",consent_read2:"اقرأ",ph_cname:"مثال: كيرفيا نسيج ذ.م.م",ph_address:"الشارع، رقم، الحي / المدينة / البلد",ph_fullname:"الاسم الكامل",ph_gm:"المدير العام",ph_products:"مثال: خيوط قطن، قماش منسوج، قماش محبوك",ph_desc:"صف شركتك وطاقتك الإنتاجية وأسواق التصدير في فقرة واحدة...",an_ip_based:"● حسب عنوان IP",an_visitors_sub:"البلدان التي يأتي منها الزوار (آخر 30 يوم)",an_pulse_h:"نبض السوق — اتجاهات رموز HS",an_pulse_sub:"تغير العرض والطلب خلال 8 أسابيع في قطاعك · المصدر Trademap",an_p1_nm:"قماش قطن منسوج",an_p1_sub:"ألمانيا وهولندا وفرنسا · إشارة مشتري قوية",an_p2_nm:"أثاث (هيكل معدني)",an_p2_sub:"فنلندا والنرويج · حجم الطلبات في مستوى قياسي",an_p3_nm:"منصات نقالة خشبية، صناديق",an_p3_sub:"نيجيريا والجزائر · متقلب بسبب التعرفة الجديدة",an_p4_nm:"خيوط قطن (ممشط)",an_p4_sub:"كازاخستان وأوزبكستان · تراجع أسعار المواد الخام",an_p5_nm:"سلع من الحديد/الصلب",an_p5_sub:"مصر والمغرب · انخفاض ازدحام الموانئ",an_data_freq:"تحديث البيانات كل 24 ساعة",an_full_report:"التقرير الكامل ←",an_opening_report:"جارٍ فتح التحليل التفصيلي",an_ai_alerts_h:"مركز تنبيهات الذكاء الاصطناعي",an_ai_alerts_sub:"الفرص والمخاطر المكتشفة لشركتك",an_priority_high:"أولوية عالية",an_priority_med:"أولوية متوسطة",an_priority_opp:"فرصة",an_priority_tip:"نصيحة",an_alert1_nm:"وقت الاستجابة حرج",an_alert1_desc:"في الانتظار منذ 3 أيام. إذا تجاوز متوسط وقت الاستجابة 4 ساعات، ستنخفض جودة المطابقة.",an_alert2_nm:"يجب تجديد شهادتك الضريبية خلال 8 أيام",an_alert2_desc:"المستندات غير المجددة تسبب انخفاضاً في تصنيف الشركة. انتقل إلى مستنداتي → رفع.",an_alert3_nm:"فرصة جديدة: مشترون ألمان لرمز HS 6006",an_alert3_desc:"تم اكتشاف 6 مشترين جدد متوافقين معك. ممر سريع النمو في قطاع الأقمشة المحبوكة.",an_alert4_nm:"اقتراح إكمال الملف الشخصي",an_alert4_desc:"إضافة 7 صور أخرى إلى المعرض سترفع نقاط ملفك من 94٪ إلى 100٪.",an_security_h:"حالة الأمان والتحقق",an_sec1_nm:"المصادقة الثنائية نشطة",an_sec2_nm:"شهادة ضريبية",an_status_approved:"معتمد",an_sec3_nm:"السجل التجاري",an_status_verified:"تم التحقق",an_sec4_nm:"البريد الإلكتروني المسجل",an_status_active:"نشط",an_sec5_sub:"التجديد خلال 15 يومًا",an_sec6_sub:"جميع الاتصالات مشفرة",an_sec7_nm:"متوافق مع GDPR",an_sec7_sub:"إشعار الخصوصية v1.2",an_sec8_sub:"IP + تحديد المعدل نشط",an_deep_h:"تحليل عميق",fl_yourmsg:"رسالتك",btn_send:"إرسال",toast_msg_sent:"تم إرسال الرسالة",fl_password:"كلمة المرور",btn_login:"تسجيل الدخول",stat_today:"اليوم",stat_this_week:"هذا الأسبوع",stat_soon:"قريباً",ft_kvkk:"إشعار الخصوصية",ft_terms:"شروط الخدمة",ft_cookie:"الخصوصية/الكوكيز",ft_tagline:"طريق الحرير الحديث",fp_decisionmakers:"صنّاع القرار",fp_detail:"تفاصيل",fp_gotoallppl:"عرض جميع جهات الاتصال ←",fp_gal1:"صالة العرض",fp_gal2:"منشأة الإنتاج",fp_gal3:"المستودع",fp_gal4:"الفريق",fp_gal5:"مراقبة الجودة",fp_gal6:"الشهادات",lock_title:"معلومات الاتصال متاحة لأعضاء Pro",lock_sub:"يظهر واتساب والهاتف والبريد الإلكتروني والموقع الإلكتروني فور تفعيل عضوية Pro.",lock_cta:"الترقية إلى Pro",sec_social_short:"وسائل التواصل",dene_lbl:"جرب",qf_lbl:"مرشح سريع",f_exp:"تصدير",f_imp:"استيراد",
+     s_sec:"قطاع",s_lng:"لغة",
      firms_h:"الشركات",firms_cnt:"مطابقة · مرتبة حسب النتيجة",sort_lbl:"ترتيب:",sort_match:"مطابقة",sort_year:"سنة",sort_name:"اسم",
      add_h:"أضف شركتك",add_p:"رؤية عالمية في 6 خطوات.",s1:"الشركة",s2:"القطاع",s3:"وثائق",s4:"موافقة",s5:"نشر",prev:"← السابق",next:"التالي →",
-     pr_h:"الخطط",pr_p:"مستوى رؤيتك العالمية.",ct_h:"اتصل",ct_p:"نحن هنا للمساعدة.",
+     pr_h:"الخطط",ct_h:"اتصل",
      lg_h:"تسجيل الدخول",lg_p:"ادخل حسابك في Kervea",pn_h:"لوحة الشركة",pn_p:"إدارة الملف والمطابقات والرسائل.",
      p_over:"نظرة عامة",p_matches:"مطابقات",p_profile:"ملفي",p_msgs:"الرسائل",p_com:"التزاماتي",p_pros:"نشرة",p_set:"إعدادات",p_out:"خروج",
      all_sec:"— جميع القطاعات",sel_ctr:"اختر البلد",dd_search:"ابحث عن بلد...",
      dir_exp:"مصدّر",dir_imp:"مستورد",match_score:"مطابقة",verified:"موثق",
      detail:"تفاصيل",message:"أرسل رسالة",match_col:"الشركة",prod_col:"المنتج",sec_col:"القطاع",ctr_col:"البلد",score_col:"مطابقة",action_col:"إجراء"},
  ru:{nav_home:"Главная",nav_add:"Добавить",nav_pricing:"Тарифы",nav_about:"О нас",nav_contact:"Контакты",nav_login:"Вход",nav_panel:"Панель",
-     tag_live:"ТУРЦИЯ ↔ МИР · 6 ЯЗЫКОВ",h_title:"Найдите покупателя или поставщика на современном <em>Шёлковом пути</em>.",h_lead:"Компании, проверенные налоговым свидетельством и торговым реестром. Обмен сообщениями на 6 языках со сквозным шифрованием.",
-     f_match:"Найти",fm_fullpage:"Открыть страницу полностью",fm_fullpage_tt:"Показать компанию на полной странице",pp_live_prev:"ЖИВОЙ ПРОСМОТР",pr_dl_pdf:"Скачать проспект в PDF",step_prev:"Назад",step_next:"Далее",step_of:"·",step_publish:"Опубликовать · Сохранить",creds_continue:"Продолжить к оплате",creds_back:"Назад к пакетам",creds_onetime:"Разовый платёж",pay_err_card:"Введите корректный номер карты",pay_err_name:"Введите имя держателя карты",pay_err_exp:"Введите срок в формате MM/ГГ",pay_err_cvc:"Введите CVC",ppl_pw_h:"Прямой доступ к лицам, принимающим решения — для Pro",ppl_pw_sub:"Свяжитесь с 2400+ проверенными CEO и менеджерами по закупкам одним кликом. 100 кредитов в месяц с Pro.",ppl_pw_stat1:"Лица, принимающие решения",ppl_pw_stat2:"Кредитов в месяц",ppl_pw_stat3:"Проверено",ppl_pw_cta:"Улучшить до Pro",ppl_pw_note:"$29/мес · Отмена в любое время",creds_h:"Пакеты кредитов",creds_sub:"Каждый e-mail или телефон — 1 кредит. Неиспользованные переносятся.",creds_current:"кредитов доступно сейчас",creds_lbl:"Кредитов",creds_per_lbl:"кредит",creds_save10:"экономия 10%",creds_save15:"экономия 15%",creds_you_get:"Вы получаете",creds_buy_btn:"Купить",creds_secure:"Безопасно через Stripe · 3D Secure",creds_pick_pack:"Выберите пакет",creds_added:"кредитов добавлено",creds_charged:"списано",creds_add_btn:"Добавить кредиты",pay_h:"Оплата — план Pro",pay_plan:"Kervea Pro",pay_kdv:"НДС (20%)",pay_disc:"Скидка",pay_total:"Итого",pay_card:"Номер карты",pay_exp:"Срок",pay_btn:"Оплатить",apply:"Применить",bill_m:"Ежемесячно",bill_y:"Ежегодно",bill_save:"−20%",per_month:"/мес",ct_name:"ФИО",ct_email:"E-mail",ct_subject:"Тема",ct_ph_name:"Ваше имя",ct_ph_email:"you@company.com",ct_ph_subject:"Чем можем помочь?",ct_center:"Головной офис",ct_email_lbl:"E-mail:",ct_phone_lbl:"Телефон:",lg_sso_google:"Продолжить с Google",lg_sso_ms:"Продолжить с Microsoft",lg_sso_apple:"Продолжить с Apple",lg_or_email:"или по e-mail",pri_h:"действия ожидают — требуется ваше внимание",pri_sub:"2 новых совпадения с высоким рейтингом ждут ответа · Приближается 1 продление контракта · Требуется обновление документа",pri_open_matches:"Открыть совпадения",pri_all:"Все",range_7d:"7д",range_30d:"30д",range_90d:"90д",range_1y:"1г",ac_title:"Хронология активности",ac_sub:"Полная запись за последние 30 дней.",ac_filter_all:"Все",ac_filter_match:"Совпадения",ac_filter_msg:"Сообщения",ac_filter_prof:"Профиль",ac_filter_doc:"Документы",all_dir:"Все направления",all_scores:"Все баллы",attention:"внимание",back_list:"Назад к списку компаний",cancel:"Отмена",custom:"Персонально",contact_sales:"Связаться с отделом продаж",export_csv:"CSV",remove:"Удалить",upload:"Загрузить",save_all:"Сохранить всё",results:"результатов",complete:"Завершено",stable:"Стабильно",preview_page:"Предпросмотр",ch_ctr:"Распределение по странам",ch_trend:"Тренд роста",ck_logo:"Логотип загружен",ck_doc:"Документы одобрены",ck_social:"Соцсети подключены",ck_gal:"Галерея (5/12 изображений)",cover_h:"Обложка",cover_lbl:"Обложка · 1600×400",cover_tt:"Загрузить обложку",cover_st:"Отображается вверху страницы · 1600×400px рекомендуется · макс 5MB",cover_change:"Загрузить или изменить обложку",doc_h:"Документы *",doc_txt:"📄 Свидетельство о деятельности, Реестровая газета, Циркуляр подписи, Сертификаты качества",doc_hint:"PDF, JPG, PNG · макс 10MB на файл · до 20 документов",ent_p:"Kervea Enterprise · индивидуальное решение",ent_1:"Безлимитные компании, контакты, продвинутый матчинг, экспорт",ent_2:"Индивидуальная интеграция (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"White-label профиль (ваш бренд)",ent_4:"Выделенный API-доступ + web-hook поддержка",ent_5:"SLA + приоритетная поддержка (гарантия ответа за 4 часа)",ent_6:"Персональный менеджер",ent_7:"Ежемесячные тренинги и стратегические сессии",fl_cname:"Название компании *",fl_ctitle:"Коммерческое название (EN)",fl_tax:"ИНН *",fl_mersis:"MERSIS / Регистр. №",fl_year:"Год основания *",fl_emp:"Число сотрудников",fl_country:"Страна *",fl_city:"Город",fl_kep:"Зарегистрированный e-mail",fl_web:"Веб-сайт",fl_email:"E-mail *",fl_phone:"Телефон *",fl_repname:"Имя контакта *",fl_reptitle:"Должность",fl_address:"Адрес компании",fl_sec:"Основной сектор *",fl_dir:"Направление торговли *",fl_hs:"Код ТН ВЭД (через запятую)",fl_moq:"MOQ (мин. заказ)",fl_inc:"Предпочтение INCOTERM",fl_pay:"Способ оплаты",fl_products:"Основные продукты / услуги",fl_desc:"Описание компании *",fl_certs:"Сертификаты",gal_h:"Фото продукта / объекта (макс 12)",gal_tt:"Перетащите изображения или выберите",gal_st:"JPG, PNG, WEBP · макс 5MB каждый · до 12 изображений",gal_lbl:"Фото продукта / объекта",gal_add:"Добавить изображение · Поддержка drag & drop",gal_max:"JPG/PNG/WEBP · до 12 изображений · макс 5MB",hiw_tag:"ПРОЦЕСС",hiw_h:"Никаких посредников. Только <em style=\"font-style:normal;color:var(--teal)\">настоящая торговля</em>.",hiw_1a:"01",hiw_1t:"Создайте профиль компании",hiw_1b:"Глобальная видимость за 6 шагов",hiw_1c:"В среднем 8 минут · проверка 24 часа",hiw_2a:"02",hiw_2t:"AI-подбор работает за вас",hiw_2b:"Рекомендации по совпадению",hiw_2c:"20+ совпадений за 3-5 минут",hiw_3a:"03",hiw_3t:"Прямой контакт, переводы в реальном времени",hiw_3b:"Без посредников · без комиссий",hiw_3c:"Среднее время ответа 4 часа",kpi_match:"Новые совпадения",kpi_msg:"Новые сообщения",kpi_offer:"Предложения",kpi_view:"Просмотры",logo_h:"Логотип компании *",logo_hint:"Рекомендуется: 400×400px, PNG/JPG/SVG, макс 2MB",logo_hint2:"PNG · прозрачный фон · мин 200×200",logo_lbl:"Логотип компании",msg_h:"Сообщения",msg_sub:"Прямое общение с проверенными компаниями. E2E-шифрование. Автоперевод на 6 языках.",mt_h:"Мои совпадения",mt_sub:"AI подобрал совпадения. Фильтруйте, экспортируйте, пишите.",ov_hello:"Здравствуйте",ov_sub:"Сводка за последние 30 дней.",ov_recent:"Недавняя активность",ov_status:"Здоровье профиля",ov_ev1:"отправил новое предложение",ov_ev2:"написал сообщение",ov_ev3:"просмотрел ваш профиль",ov_ev4:"Сертификат ISO 9001 подтверждён",ov_ev5:"запрос на подключение",ov_t1:"2 часа назад",ov_t2:"4 часа назад",ov_t3:"1 день назад",ov_t4:"2 дня назад",ov_t5:"3 дня назад",p_ana:"Аналитика",p_people:"Контакты",p_docs:"Мои документы",p_team:"Команда",p_activity:"Активность",plan_starter:"Starter",starter_p:"Бесплатно · для старта",starter_1:"1 профиль + значок верификации",starter_2:"50 совпадений в месяц",starter_3:"Базовая фильтрация по секторам",starter_4:"Автоперевод на 6 языках",starter_5:"Ограниченные сообщения (5/день)",starter_6:"Стандартная поддержка",start_starter:"Начать бесплатно",pro_p:"Kervea Pro · самый популярный",pro_1:"Всё из Starter",pro_2:"Безлимитные совпадения + AI-скоринг",pro_3:"Безлимит: компании, контакты, продвинутый матчинг, экспорт",pro_4:"Безлимитные сообщения + приоритетное ранжирование",pro_5:"Аналитика (посетители, конверсия, конкуренты)",pro_6:"Витрина профиля · показ в топе",pro_7:"Приоритетная поддержка (24 часа)",start_pro:"Улучшить до Pro",prof_h:"Профиль моей компании",prof_sub:"Обновите инфо, изображения и каналы связи.",promo_h:"Есть промокод?",promo_s:"Скидка 30% на Pro на первые 3 месяца.",promo_h2:"Введите код",promo_s2:"Особые коды для ранних пользователей и членов палат.",pub_h:"Заявка получена",pub_p:"Ручная проверка занимает 24-48 часов. Уведомление по e-mail и SMS.",ppl_title:"Контакты",ppl_sub:"Прямые контакты лиц, принимающих решения. 1 кредит за контакт.",ppl_credits:"Кредиты",ppl_renew:"Обновить кредиты",ppl_export:"Экспорт",ppl_all:"Все",ppl_ceo:"CEO / Гендиректор",ppl_purchasing:"Закупки",ppl_sales:"Продажи",ppl_ops:"Операции",ppl_col_person:"Человек",ppl_col_title:"Должность",ppl_col_firm:"Компания",ppl_col_email:"E-mail",ppl_col_phone:"Телефон",ppl_col_act:"Действие",ppl_kvkk:"Информация передаётся в соответствии с законом о защите данных и с согласия представителя компании.",ppl_kvkk_link:"Уведомление о конфиденциальности",pr_title:"Проспект",pr_desc:"Полное профессиональное резюме — PDF для встреч.",pr_dl:"Скачать PDF",pr_pdf:"PDF-проспект",pr_langs:"На 6 языках",pr_mine:"Скачать мой проспект",pr_incl:"Содержание",pr_i1:"Резюме компании + основные продукты",pr_i2:"Сектор, код ТН ВЭД, MOQ",pr_i3:"Значки (налог, регистр, e-mail)",pr_i4:"Сертификаты (ISO, GOTS, HACCP)",pr_i5:"Контакты + QR-код",pr_who:"Для кого?",pr_l1:"Обмен информацией до встреч",pr_l2:"Цифровая визитка на выставках",pr_l3:"Ссылка в соцсетях и на сайте",s3_media:"Логотип",s4_social:"Соцсети",s5_doc:"Документы",s6_pub:"Публикация",sec_biz:"Бизнес-информация",sec_visual:"Визуальная айдентика",sec_social:"Соцсети и Веб",sec_legal:"Юридическая информация",social_intro:"Ваши соцсети и каналы — покупатели свяжутся с вами здесь.",ss_h:"Компании, доверяющие Kervea",ss_p:"Проверенные производители и экспортёры на 6 континентах.",ss_5t:"Антеп Специи",ss_5s:"Газиантеп · Красный перец",tm_title:"Управление командой",tm_sub:"Управляйте пользователями, ролями и правами.",tm_seats:"Использование мест",tm_invite:"+ Пригласить",tm_col_user:"Пользователь",tm_role:"Роль",tm_perms:"Права",tm_status:"Статус",tm_last:"Последний вход",tm_active:"Активный",tm_pending:"Ожидает",tm_owner:"Владелец",tm_admin:"Админ",tm_sales:"Продажи",tm_ops:"Операции",tm_p_all:"Все права",tm_p_msg:"Сообщ + Контакты",tm_p_prof:"Профиль + Документы",pr_preview:"Предпросмотр",why_h:"Почему Kervea?",why_p:"Прощайте, посредники, комиссии и ненадёжные поставщики. Прямой контакт, проверенные компании, реальная торговля.",why_1t:"Страновой коридор",why_2t:"Проверенная компания",why_3t:"Перевод на 6 языках",chat_online:"В сети",chat_verified_firm:"Проверенная компания",chat_typing:"печатает…",chat_btn_firm:"Профиль компании",chat_btn_video:"Видеозвонок",chat_btn_archive:"Архивировать",empty_firms:"Нет компаний, соответствующих фильтру.",empty_records:"Нет записей, соответствующих фильтру.",toast_name_required:"ФИО обязательно",toast_valid_email:"Введите корректный e-mail",toast_invalid_promo:"Недействительный промокод",toast_search_applied:"Поиск применён",toast_csv_downloaded:"CSV загружен",toast_pdf_downloaded:"Проспект загружен",toast_photo_removed:"Фото удалено",toast_photo_uploaded:"Фото загружено",toast_logo_uploaded:"Логотип загружен",toast_login_ok:"Вход выполнен",toast_login_full:"Вход выполнен — полный доступ активен",toast_logout:"Выход выполнен",toast_credit_out:"Кредиты закончились — обновите план",toast_docs_opening:"Открытие загрузчика документов",toast_firm_opening:"Открытие профиля компании",toast_firm_notfound:"Компания не найдена",toast_firm_error:"Ошибка открытия компании",toast_visual_saved:"Визуальная идентичность сохранена",toast_video_call:"Начинается видеозвонок",toast_cover_updated:"Обложка обновлена",toast_chat_archived:"Беседа архивирована",toast_profile_updated:"Профиль обновлён",toast_delete_requested:"Запрос на удаление получен — будет выполнен в течение 7 дней",toast_social_saved:"Данные соцсетей сохранены",toast_form_opened:"Форма запроса открыта",toast_print_pdf:"Сохраните как PDF через меню печати",toast_trade_saved:"Коммерческие данные сохранены",toast_all_tasks:"Показаны все задачи",toast_data_export:"Готовим ваши данные, ссылка будет отправлена на e-mail",toast_legal_saved:"Юридические данные сохранены",toast_cancelled:"Отменено",toast_copied:"Скопировано в буфер обмена",confirm_delete_account:"Ваш аккаунт и все данные будут удалены навсегда. Вы уверены?",tm_inv_h:"Пригласить пользователя",tm_inv_sub:"Добавьте нового участника в команду. Приглашение отправляется по email; пользователь активируется после принятия.",tm_fld_name:"ФИО *",tm_fld_email:"E-mail *",tm_fld_role:"Роль *",tm_role_admin:"Администратор",tm_role_admin_desc:"Все модули · может приглашать",tm_role_sales:"Продажи",tm_role_sales_desc:"Сообщения + Контакты",tm_role_ops:"Операции",tm_role_ops_desc:"Профиль + Документы",tm_role_view:"Только просмотр",tm_role_view_desc:"Доступ только для чтения",tm_inv_info:"Вы можете изменить роль позже. Это будет 5-й пользователь из <b>4/10 мест</b>.",tm_btn_invite:"Отправить приглашение",btn_cancel:"Отмена",tm_perm_h:"Изменить роль и права",tm_perm_sub:"Укажите, к каким модулям может обращаться этот пользователь.",tm_lbl_role:"Роль",tm_lbl_perms:"Права",tm_role_admin_short:"Все модули",tm_role_sales_short:"Сообщ + Контакты",tm_role_view_short:"Чтение",tm_perm_msg:"Сообщения",tm_perm_msg_desc:"Доступ ко всем беседам, отправка сообщений и обмен файлами.",tm_perm_match:"Совпадения и контакты",tm_perm_match_desc:"Просмотр AI-совпадений, использование кредитов контактов.",tm_perm_prof:"Профиль компании",tm_perm_prof_desc:"Редактирование информации компании, галереи и соцсетей.",tm_perm_docs:"Документы",tm_perm_docs_desc:"Загрузка и утверждение сертификатов, налоговых свидетельств и официальных документов.",tm_perm_ana:"Аналитика",tm_perm_ana_desc:"Доступ к сети, конверсия, сравнение с конкурентами и отчёты.",tm_perm_team:"Управление командой",tm_perm_team_desc:"Приглашение новых пользователей, назначение ролей, отключение аккаунтов.",tm_btn_save:"Сохранить изменения",toast_saved:"Сохранено",ph_tm_name:"Напр. Иван Иванов",ph_tm_email:"ivan@company.com",pay_card_holder:"ВЛАДЕЛЕЦ КАРТЫ",pay_card_holder_ph:"ФИО",pay_card_exp_short:"СРОК",pay_per_month:"/мес",pay_method_card:"Карта",pay_method_mc:"MC",pay_method_bank:"Банковский перевод",pay_card_holder_lbl:"Владелец карты",ph_card_holder:"ФИО",ph_promo:"Промокод (необязательно)",toast_pay_success:"Оплата успешна — Pro активирован",pay_disclaimer:"Завершая оплату, вы принимаете <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Пользовательское соглашение</a> и <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Уведомление о конфиденциальности</a>.",modal_kvkk_h:"Уведомление о конфиденциальности (KVKK Турции)",modal_sozl_h:"Пользовательское соглашение",modal_cookie_h:"Политика конфиденциальности и cookies",legal_disclaimer:"<b>ⓘ</b> Этот документ является турецким юридическим оригиналом. Он обязателен к исполнению в соответствии с турецким законодательством. Переводы на другие языки предоставлены только в информационных целях.",viewers_h:"Кто смотрел ваш профиль",viewers_sub:"Страна определена по IP-адресу · Последние 30 дней",add_draft_btn:"Продолжить позже",add_draft_saved:"Черновик сохранён — войдите, чтобы продолжить",dir_both:"Оба",pay_tt_cash:"TT предоплата",pay_tt_30:"TT 30 дней",pay_tt_60:"TT 60 дней",toast_logo_removed:"Логотип удалён",toast_cover_uploaded:"Обложка загружена",consent_kvkk:"Я прочитал(а) и принимаю <b>Уведомление о конфиденциальности</b>.",consent_terms:"Я принимаю <b>Пользовательское соглашение</b>.",consent_verify:"Разрешаю проверку моих данных.",consent_marketing:"Согласен(на) получать маркетинговые сообщения (необязательно).",consent_read:"Читать",consent_read2:"Читать",ph_cname:"Напр. XYZ Trade Co. ООО",ph_address:"Улица, №, район / город / страна",ph_fullname:"ФИО",ph_gm:"Генеральный директор",ph_products:"Напр. Хлопковая пряжа, ткань, трикотаж",ph_desc:"Опишите вашу компанию, производственные мощности и экспортные рынки в одном абзаце...",an_ip_based:"● По IP",an_visitors_sub:"Страны, откуда приходят посетители (последние 30 дней)",an_pulse_h:"Пульс рынка — Тренды кодов ТН ВЭД",an_pulse_sub:"Изменение спроса-предложения за 8 недель · Источник Trademap",an_p1_nm:"Хлопковая ткань",an_p1_sub:"Германия, Нидерланды, Франция · сильный сигнал покупателя",an_p2_nm:"Мебель (металлический каркас)",an_p2_sub:"Финляндия, Норвегия · рекордный объём заказов",an_p3_nm:"Деревянные поддоны, ящики",an_p3_sub:"Нигерия, Алжир · волатильно из-за нового тарифа",an_p4_nm:"Хлопковая пряжа (кардочёсанная)",an_p4_sub:"Казахстан, Узбекистан · цена сырья снижается",an_p5_nm:"Изделия из железа/стали",an_p5_sub:"Египет, Марокко · снижение перегруженности портов",an_data_freq:"Частота обновления данных: 24 часа",an_full_report:"Полный отчёт →",an_opening_report:"Открытие детального анализа",an_ai_alerts_h:"Центр AI-оповещений",an_ai_alerts_sub:"Возможности и риски, выявленные для вашей компании",an_priority_high:"Высокий приоритет",an_priority_med:"Средний приоритет",an_priority_opp:"Возможность",an_priority_tip:"Подсказка",an_alert1_nm:"критическое время ответа",an_alert1_desc:"Ожидание 3 дня. Если среднее время ответа превысит 4 часа, качество подбора снизится.",an_alert2_nm:"Ваше налоговое свидетельство должно быть продлено в течение 8 дней",an_alert2_desc:"Непродлённые документы снижают рейтинг компании. Перейдите в Мои документы → Загрузить.",an_alert3_nm:"Новая возможность: покупатели из Германии по коду ТН ВЭД 6006",an_alert3_desc:"Обнаружено 6 новых покупателей, подходящих вам. Быстрорастущий коридор в секторе трикотажных тканей.",an_alert4_nm:"Рекомендация по заполнению профиля",an_alert4_desc:"Добавление ещё 7 изображений в галерею повысит ваш рейтинг с 94% до 100%.",an_security_h:"Статус безопасности и проверки",an_sec1_nm:"2FA включена",an_sec2_nm:"Налоговое свидетельство",an_status_approved:"Одобрено",an_sec3_nm:"Торговый реестр",an_status_verified:"Проверено",an_sec4_nm:"Зарегистрированный e-mail",an_status_active:"Активно",an_sec5_sub:"Продление через 15 дней",an_sec6_sub:"Все коммуникации зашифрованы",an_sec7_nm:"Соответствует GDPR",an_sec7_sub:"Уведомление о конфиденциальности v1.2",an_sec8_sub:"IP + ограничение частоты активно",an_deep_h:"Глубокий анализ",fl_yourmsg:"Ваше сообщение",btn_send:"Отправить",toast_msg_sent:"Сообщение отправлено",fl_password:"Пароль",btn_login:"Войти",stat_today:"сегодня",stat_this_week:"на этой неделе",stat_soon:"скоро",ft_kvkk:"Уведомление о конфиденциальности",ft_terms:"Условия использования",ft_cookie:"Конфиденциальность/Cookies",ft_tagline:"Современный Шёлковый путь",fp_decisionmakers:"Лица, принимающие решения",fp_detail:"Подробности",fp_gotoallppl:"Все контакты →",fp_gal1:"Шоу-рум",fp_gal2:"Производство",fp_gal3:"Склад",fp_gal4:"Команда",fp_gal5:"Контроль качества",fp_gal6:"Сертификаты",lock_title:"Контактные данные доступны для участников Pro",lock_sub:"WhatsApp, телефон, email и веб-сайт становятся видны сразу после активации Pro.",lock_cta:"Перейти на Pro",sec_social_short:"Соцсети",dene_lbl:"ПОПРОБУЙ",qt1:"Покупатель мебельной фурнитуры в Финляндии",qt2:"Поставщик какао в Кот-д'Ивуаре",qt3:"Покупатель текстиля в Казахстане",qf_lbl:"БЫСТРЫЙ ФИЛЬТР",f_exp:"Экспорт",f_imp:"Импорт",
-     s_pos:"Активных компаний",s_ctr:"Стран и территорий",s_sec:"Секторов",s_lng:"Языков",
+     tag_live:"ТУРЦИЯ ↔ МИР · 6 ЯЗЫКОВ",h_title:"Найдите покупателя или поставщика на современном <em>Шёлковом пути</em>.",
+     f_match:"Найти",fm_fullpage:"Открыть страницу полностью",fm_fullpage_tt:"Показать компанию на полной странице",pp_live_prev:"ЖИВОЙ ПРОСМОТР",pr_dl_pdf:"Скачать проспект в PDF",step_prev:"Назад",step_next:"Далее",step_of:"·",step_publish:"Опубликовать · Сохранить",creds_continue:"Продолжить к оплате",creds_back:"Назад к пакетам",creds_onetime:"Разовый платёж",pay_err_card:"Введите корректный номер карты",pay_err_name:"Введите имя держателя карты",pay_err_exp:"Введите срок в формате MM/ГГ",pay_err_cvc:"Введите CVC",ppl_pw_h:"Прямой доступ к лицам, принимающим решения — для Pro",ppl_pw_sub:"Свяжитесь с 2400+ проверенными CEO и менеджерами по закупкам одним кликом. 100 кредитов в месяц с Pro.",ppl_pw_stat1:"Лица, принимающие решения",ppl_pw_stat2:"Кредитов в месяц",ppl_pw_stat3:"Проверено",ppl_pw_cta:"Улучшить до Pro",ppl_pw_note:"$29/мес · Отмена в любое время",creds_h:"Пакеты кредитов",creds_sub:"Каждый e-mail или телефон — 1 кредит. Неиспользованные переносятся.",creds_current:"кредитов доступно сейчас",creds_lbl:"Кредитов",creds_per_lbl:"кредит",creds_save10:"экономия 10%",creds_save15:"экономия 15%",creds_you_get:"Вы получаете",creds_buy_btn:"Купить",creds_secure:"Безопасно через Stripe · 3D Secure",creds_pick_pack:"Выберите пакет",creds_added:"кредитов добавлено",creds_charged:"списано",creds_add_btn:"Добавить кредиты",pay_h:"Оплата — план Pro",pay_plan:"Kervea Pro",pay_kdv:"НДС (20%)",pay_disc:"Скидка",pay_total:"Итого",pay_card:"Номер карты",pay_exp:"Срок",pay_btn:"Оплатить",apply:"Применить",bill_m:"Ежемесячно",bill_y:"Ежегодно",bill_save:"−20%",per_month:"/мес",ct_name:"ФИО",ct_email:"E-mail",ct_subject:"Тема",ct_ph_name:"Ваше имя",ct_ph_email:"you@company.com",ct_ph_subject:"Чем можем помочь?",ct_email_lbl:"E-mail:",ct_phone_lbl:"Телефон:",lg_sso_google:"Продолжить с Google",lg_sso_ms:"Продолжить с Microsoft",lg_sso_apple:"Продолжить с Apple",lg_or_email:"или по e-mail",pri_h:"действия ожидают — требуется ваше внимание",pri_sub:"2 новых совпадения с высоким рейтингом ждут ответа · Приближается 1 продление контракта · Требуется обновление документа",pri_open_matches:"Открыть совпадения",pri_all:"Все",range_7d:"7д",range_30d:"30д",range_90d:"90д",range_1y:"1г",ac_title:"Хронология активности",ac_sub:"Полная запись за последние 30 дней.",ac_filter_all:"Все",ac_filter_match:"Совпадения",ac_filter_msg:"Сообщения",ac_filter_prof:"Профиль",ac_filter_doc:"Документы",all_dir:"Все направления",all_scores:"Все баллы",attention:"внимание",back_list:"Назад к списку компаний",cancel:"Отмена",custom:"Персонально",contact_sales:"Связаться с отделом продаж",export_csv:"CSV",remove:"Удалить",upload:"Загрузить",save_all:"Сохранить всё",results:"результатов",complete:"Завершено",stable:"Стабильно",preview_page:"Предпросмотр",ch_ctr:"Распределение по странам",ch_trend:"Тренд роста",ck_logo:"Логотип загружен",ck_doc:"Документы одобрены",ck_social:"Соцсети подключены",ck_gal:"Галерея (5/12 изображений)",cover_h:"Обложка",cover_lbl:"Обложка · 1600×400",cover_tt:"Загрузить обложку",cover_st:"Отображается вверху страницы · 1600×400px рекомендуется · макс 5MB",cover_change:"Загрузить или изменить обложку",doc_h:"Документы *",doc_txt:"📄 Свидетельство о деятельности, Реестровая газета, Циркуляр подписи, Сертификаты качества",doc_hint:"PDF, JPG, PNG · макс 10MB на файл · до 20 документов",ent_p:"Kervea Enterprise · индивидуальное решение",ent_1:"Безлимитные компании, контакты, продвинутый матчинг, экспорт",ent_2:"Индивидуальная интеграция (SAP, Logo, Netsis, Zoho, HubSpot)",ent_3:"White-label профиль (ваш бренд)",ent_4:"Выделенный API-доступ + web-hook поддержка",ent_5:"SLA + приоритетная поддержка (гарантия ответа за 4 часа)",ent_6:"Персональный менеджер",ent_7:"Ежемесячные тренинги и стратегические сессии",fl_cname:"Название компании *",fl_ctitle:"Коммерческое название (EN)",fl_tax:"ИНН *",fl_mersis:"MERSIS / Регистр. №",fl_year:"Год основания *",fl_emp:"Число сотрудников",fl_country:"Страна *",fl_city:"Город",fl_kep:"Зарегистрированный e-mail",fl_web:"Веб-сайт",fl_email:"E-mail *",fl_phone:"Телефон *",fl_repname:"Имя контакта *",fl_reptitle:"Должность",fl_address:"Адрес компании",fl_sec:"Основной сектор *",fl_dir:"Направление торговли *",fl_hs:"Код ТН ВЭД (через запятую)",fl_moq:"MOQ (мин. заказ)",fl_inc:"Предпочтение INCOTERM",fl_pay:"Способ оплаты",fl_products:"Основные продукты / услуги",fl_desc:"Описание компании *",fl_certs:"Сертификаты",gal_h:"Фото продукта / объекта (макс 12)",gal_tt:"Перетащите изображения или выберите",gal_st:"JPG, PNG, WEBP · макс 5MB каждый · до 12 изображений",gal_lbl:"Фото продукта / объекта",gal_add:"Добавить изображение · Поддержка drag & drop",gal_max:"JPG/PNG/WEBP · до 12 изображений · макс 5MB",hiw_tag:"ПРОЦЕСС",hiw_h:"Никаких посредников. Только <em style=\"font-style:normal;color:var(--teal)\">настоящая торговля</em>.",kpi_match:"Новые совпадения",kpi_msg:"Новые сообщения",kpi_offer:"Предложения",kpi_view:"Просмотры",logo_h:"Логотип компании *",logo_hint:"Рекомендуется: 400×400px, PNG/JPG/SVG, макс 2MB",logo_hint2:"PNG · прозрачный фон · мин 200×200",logo_lbl:"Логотип компании",msg_h:"Сообщения",msg_sub:"Прямое общение с проверенными компаниями. E2E-шифрование. Автоперевод на 6 языках.",mt_h:"Мои совпадения",mt_sub:"AI подобрал совпадения. Фильтруйте, экспортируйте, пишите.",ov_hello:"Здравствуйте",ov_sub:"Сводка за последние 30 дней.",ov_recent:"Недавняя активность",ov_status:"Здоровье профиля",ov_ev1:"отправил новое предложение",ov_ev2:"написал сообщение",ov_ev3:"просмотрел ваш профиль",ov_ev4:"Сертификат ISO 9001 подтверждён",ov_ev5:"запрос на подключение",ov_t1:"2 часа назад",ov_t2:"4 часа назад",ov_t3:"1 день назад",ov_t4:"2 дня назад",ov_t5:"3 дня назад",p_ana:"Аналитика",p_people:"Контакты",p_docs:"Мои документы",p_team:"Команда",p_activity:"Активность",plan_starter:"Starter",starter_p:"Бесплатно · для старта",starter_1:"1 профиль + значок верификации",starter_2:"50 совпадений в месяц",starter_3:"Базовая фильтрация по секторам",starter_4:"Автоперевод на 6 языках",starter_5:"Ограниченные сообщения (5/день)",starter_6:"Стандартная поддержка",start_starter:"Начать бесплатно",pro_p:"Kervea Pro · самый популярный",pro_1:"Всё из Starter",pro_2:"Безлимитные совпадения + AI-скоринг",pro_3:"Безлимит: компании, контакты, продвинутый матчинг, экспорт",pro_4:"Безлимитные сообщения + приоритетное ранжирование",pro_5:"Аналитика (посетители, конверсия, конкуренты)",pro_6:"Витрина профиля · показ в топе",pro_7:"Приоритетная поддержка (24 часа)",start_pro:"Улучшить до Pro",prof_h:"Профиль моей компании",prof_sub:"Обновите инфо, изображения и каналы связи.",promo_h:"Есть промокод?",promo_s:"Скидка 30% на Pro на первые 3 месяца.",pub_h:"Заявка получена",pub_p:"Ручная проверка занимает 24-48 часов. Уведомление по e-mail и SMS.",ppl_title:"Контакты",ppl_sub:"Прямые контакты лиц, принимающих решения. 1 кредит за контакт.",ppl_credits:"Кредиты",ppl_renew:"Обновить кредиты",ppl_export:"Экспорт",ppl_all:"Все",ppl_ceo:"CEO / Гендиректор",ppl_purchasing:"Закупки",ppl_sales:"Продажи",ppl_ops:"Операции",ppl_col_person:"Человек",ppl_col_title:"Должность",ppl_col_firm:"Компания",ppl_col_email:"E-mail",ppl_col_phone:"Телефон",ppl_col_act:"Действие",ppl_kvkk:"Информация передаётся в соответствии с законом о защите данных и с согласия представителя компании.",ppl_kvkk_link:"Уведомление о конфиденциальности",pr_title:"Проспект",pr_desc:"Полное профессиональное резюме — PDF для встреч.",pr_dl:"Скачать PDF",pr_pdf:"PDF-проспект",pr_langs:"На 6 языках",pr_mine:"Скачать мой проспект",pr_incl:"Содержание",pr_i1:"Резюме компании + основные продукты",pr_i2:"Сектор, код ТН ВЭД, MOQ",pr_i3:"Значки (налог, регистр, e-mail)",pr_i4:"Сертификаты (ISO, GOTS, HACCP)",pr_i5:"Контакты + QR-код",pr_who:"Для кого?",pr_l1:"Обмен информацией до встреч",pr_l2:"Цифровая визитка на выставках",pr_l3:"Ссылка в соцсетях и на сайте",s3_media:"Логотип",s4_social:"Соцсети",s5_doc:"Документы",s6_pub:"Публикация",sec_biz:"Бизнес-информация",sec_visual:"Визуальная айдентика",sec_social:"Соцсети и Веб",sec_legal:"Юридическая информация",social_intro:"Ваши соцсети и каналы — покупатели свяжутся с вами здесь.",ss_h:"Компании, доверяющие Kervea",ss_p:"Проверенные производители и экспортёры на 6 континентах.",ss_5t:"Антеп Специи",ss_5s:"Газиантеп · Красный перец",tm_title:"Управление командой",tm_sub:"Управляйте пользователями, ролями и правами.",tm_seats:"Использование мест",tm_invite:"+ Пригласить",tm_col_user:"Пользователь",tm_role:"Роль",tm_perms:"Права",tm_status:"Статус",tm_last:"Последний вход",tm_active:"Активный",tm_pending:"Ожидает",tm_owner:"Владелец",tm_admin:"Админ",tm_sales:"Продажи",tm_ops:"Операции",tm_p_all:"Все права",tm_p_msg:"Сообщ + Контакты",tm_p_prof:"Профиль + Документы",pr_preview:"Предпросмотр",why_h:"Почему Kervea?",chat_online:"В сети",chat_verified_firm:"Проверенная компания",chat_typing:"печатает…",chat_btn_firm:"Профиль компании",chat_btn_video:"Видеозвонок",chat_btn_archive:"Архивировать",empty_firms:"Нет компаний, соответствующих фильтру.",empty_records:"Нет записей, соответствующих фильтру.",toast_name_required:"ФИО обязательно",toast_valid_email:"Введите корректный e-mail",toast_invalid_promo:"Недействительный промокод",toast_search_applied:"Поиск применён",toast_csv_downloaded:"CSV загружен",toast_pdf_downloaded:"Проспект загружен",toast_photo_removed:"Фото удалено",toast_photo_uploaded:"Фото загружено",toast_logo_uploaded:"Логотип загружен",toast_login_ok:"Вход выполнен",toast_login_full:"Вход выполнен — полный доступ активен",toast_logout:"Выход выполнен",toast_credit_out:"Кредиты закончились — обновите план",toast_docs_opening:"Открытие загрузчика документов",toast_firm_opening:"Открытие профиля компании",toast_firm_notfound:"Компания не найдена",toast_firm_error:"Ошибка открытия компании",toast_visual_saved:"Визуальная идентичность сохранена",toast_video_call:"Начинается видеозвонок",toast_cover_updated:"Обложка обновлена",toast_chat_archived:"Беседа архивирована",toast_profile_updated:"Профиль обновлён",toast_delete_requested:"Запрос на удаление получен — будет выполнен в течение 7 дней",toast_social_saved:"Данные соцсетей сохранены",toast_form_opened:"Форма запроса открыта",toast_print_pdf:"Сохраните как PDF через меню печати",toast_trade_saved:"Коммерческие данные сохранены",toast_all_tasks:"Показаны все задачи",toast_data_export:"Готовим ваши данные, ссылка будет отправлена на e-mail",toast_legal_saved:"Юридические данные сохранены",toast_cancelled:"Отменено",toast_copied:"Скопировано в буфер обмена",confirm_delete_account:"Ваш аккаунт и все данные будут удалены навсегда. Вы уверены?",tm_inv_h:"Пригласить пользователя",tm_inv_sub:"Добавьте нового участника в команду. Приглашение отправляется по email; пользователь активируется после принятия.",tm_fld_name:"ФИО *",tm_fld_email:"E-mail *",tm_fld_role:"Роль *",tm_role_admin:"Администратор",tm_role_admin_desc:"Все модули · может приглашать",tm_role_sales:"Продажи",tm_role_sales_desc:"Сообщения + Контакты",tm_role_ops:"Операции",tm_role_ops_desc:"Профиль + Документы",tm_role_view:"Только просмотр",tm_role_view_desc:"Доступ только для чтения",tm_inv_info:"Вы можете изменить роль позже. Это будет 5-й пользователь из <b>4/10 мест</b>.",tm_btn_invite:"Отправить приглашение",btn_cancel:"Отмена",tm_perm_h:"Изменить роль и права",tm_perm_sub:"Укажите, к каким модулям может обращаться этот пользователь.",tm_lbl_role:"Роль",tm_lbl_perms:"Права",tm_role_admin_short:"Все модули",tm_role_sales_short:"Сообщ + Контакты",tm_role_view_short:"Чтение",tm_perm_msg:"Сообщения",tm_perm_msg_desc:"Доступ ко всем беседам, отправка сообщений и обмен файлами.",tm_perm_match:"Совпадения и контакты",tm_perm_match_desc:"Просмотр AI-совпадений, использование кредитов контактов.",tm_perm_prof:"Профиль компании",tm_perm_prof_desc:"Редактирование информации компании, галереи и соцсетей.",tm_perm_docs:"Документы",tm_perm_docs_desc:"Загрузка и утверждение сертификатов, налоговых свидетельств и официальных документов.",tm_perm_ana:"Аналитика",tm_perm_ana_desc:"Доступ к сети, конверсия, сравнение с конкурентами и отчёты.",tm_perm_team:"Управление командой",tm_perm_team_desc:"Приглашение новых пользователей, назначение ролей, отключение аккаунтов.",tm_btn_save:"Сохранить изменения",toast_saved:"Сохранено",ph_tm_name:"Напр. Иван Иванов",ph_tm_email:"ivan@company.com",pay_card_holder:"ВЛАДЕЛЕЦ КАРТЫ",pay_card_holder_ph:"ФИО",pay_card_exp_short:"СРОК",pay_per_month:"/мес",pay_method_card:"Карта",pay_method_mc:"MC",pay_method_bank:"Банковский перевод",pay_card_holder_lbl:"Владелец карты",ph_card_holder:"ФИО",ph_promo:"Промокод (необязательно)",toast_pay_success:"Оплата успешна — Pro активирован",pay_disclaimer:"Завершая оплату, вы принимаете <a onclick=\"openM('sozl')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Пользовательское соглашение</a> и <a onclick=\"openM('kvkk')\" style=\"color:var(--teal);text-decoration:underline;cursor:pointer\">Уведомление о конфиденциальности</a>.",modal_kvkk_h:"Уведомление о конфиденциальности (KVKK Турции)",modal_sozl_h:"Пользовательское соглашение",modal_cookie_h:"Политика конфиденциальности и cookies",legal_disclaimer:"<b>ⓘ</b> Этот документ является турецким юридическим оригиналом. Он обязателен к исполнению в соответствии с турецким законодательством. Переводы на другие языки предоставлены только в информационных целях.",viewers_h:"Кто смотрел ваш профиль",viewers_sub:"Страна определена по IP-адресу · Последние 30 дней",add_draft_btn:"Продолжить позже",add_draft_saved:"Черновик сохранён — войдите, чтобы продолжить",dir_both:"Оба",pay_tt_cash:"TT предоплата",pay_tt_30:"TT 30 дней",pay_tt_60:"TT 60 дней",toast_logo_removed:"Логотип удалён",toast_cover_uploaded:"Обложка загружена",consent_kvkk:"Я прочитал(а) и принимаю <b>Уведомление о конфиденциальности</b>.",consent_terms:"Я принимаю <b>Пользовательское соглашение</b>.",consent_verify:"Разрешаю проверку моих данных.",consent_marketing:"Согласен(на) получать маркетинговые сообщения (необязательно).",consent_read:"Читать",consent_read2:"Читать",ph_cname:"Напр. XYZ Trade Co. ООО",ph_address:"Улица, №, район / город / страна",ph_fullname:"ФИО",ph_gm:"Генеральный директор",ph_products:"Напр. Хлопковая пряжа, ткань, трикотаж",ph_desc:"Опишите вашу компанию, производственные мощности и экспортные рынки в одном абзаце...",an_ip_based:"● По IP",an_visitors_sub:"Страны, откуда приходят посетители (последние 30 дней)",an_pulse_h:"Пульс рынка — Тренды кодов ТН ВЭД",an_pulse_sub:"Изменение спроса-предложения за 8 недель · Источник Trademap",an_p1_nm:"Хлопковая ткань",an_p1_sub:"Германия, Нидерланды, Франция · сильный сигнал покупателя",an_p2_nm:"Мебель (металлический каркас)",an_p2_sub:"Финляндия, Норвегия · рекордный объём заказов",an_p3_nm:"Деревянные поддоны, ящики",an_p3_sub:"Нигерия, Алжир · волатильно из-за нового тарифа",an_p4_nm:"Хлопковая пряжа (кардочёсанная)",an_p4_sub:"Казахстан, Узбекистан · цена сырья снижается",an_p5_nm:"Изделия из железа/стали",an_p5_sub:"Египет, Марокко · снижение перегруженности портов",an_data_freq:"Частота обновления данных: 24 часа",an_full_report:"Полный отчёт →",an_opening_report:"Открытие детального анализа",an_ai_alerts_h:"Центр AI-оповещений",an_ai_alerts_sub:"Возможности и риски, выявленные для вашей компании",an_priority_high:"Высокий приоритет",an_priority_med:"Средний приоритет",an_priority_opp:"Возможность",an_priority_tip:"Подсказка",an_alert1_nm:"критическое время ответа",an_alert1_desc:"Ожидание 3 дня. Если среднее время ответа превысит 4 часа, качество подбора снизится.",an_alert2_nm:"Ваше налоговое свидетельство должно быть продлено в течение 8 дней",an_alert2_desc:"Непродлённые документы снижают рейтинг компании. Перейдите в Мои документы → Загрузить.",an_alert3_nm:"Новая возможность: покупатели из Германии по коду ТН ВЭД 6006",an_alert3_desc:"Обнаружено 6 новых покупателей, подходящих вам. Быстрорастущий коридор в секторе трикотажных тканей.",an_alert4_nm:"Рекомендация по заполнению профиля",an_alert4_desc:"Добавление ещё 7 изображений в галерею повысит ваш рейтинг с 94% до 100%.",an_security_h:"Статус безопасности и проверки",an_sec1_nm:"2FA включена",an_sec2_nm:"Налоговое свидетельство",an_status_approved:"Одобрено",an_sec3_nm:"Торговый реестр",an_status_verified:"Проверено",an_sec4_nm:"Зарегистрированный e-mail",an_status_active:"Активно",an_sec5_sub:"Продление через 15 дней",an_sec6_sub:"Все коммуникации зашифрованы",an_sec7_nm:"Соответствует GDPR",an_sec7_sub:"Уведомление о конфиденциальности v1.2",an_sec8_sub:"IP + ограничение частоты активно",an_deep_h:"Глубокий анализ",fl_yourmsg:"Ваше сообщение",btn_send:"Отправить",toast_msg_sent:"Сообщение отправлено",fl_password:"Пароль",btn_login:"Войти",stat_today:"сегодня",stat_this_week:"на этой неделе",stat_soon:"скоро",ft_kvkk:"Уведомление о конфиденциальности",ft_terms:"Условия использования",ft_cookie:"Конфиденциальность/Cookies",ft_tagline:"Современный Шёлковый путь",fp_decisionmakers:"Лица, принимающие решения",fp_detail:"Подробности",fp_gotoallppl:"Все контакты →",fp_gal1:"Шоу-рум",fp_gal2:"Производство",fp_gal3:"Склад",fp_gal4:"Команда",fp_gal5:"Контроль качества",fp_gal6:"Сертификаты",lock_title:"Контактные данные доступны для участников Pro",lock_sub:"WhatsApp, телефон, email и веб-сайт становятся видны сразу после активации Pro.",lock_cta:"Перейти на Pro",sec_social_short:"Соцсети",dene_lbl:"ПОПРОБУЙ",qf_lbl:"БЫСТРЫЙ ФИЛЬТР",f_exp:"Экспорт",f_imp:"Импорт",
+     s_sec:"Секторов",s_lng:"Языков",
      firms_h:"Компании",firms_cnt:"совпадений · по оценке",sort_lbl:"Сорт:",sort_match:"Совпадение",sort_year:"Год",sort_name:"Название",
      add_h:"Добавьте компанию",add_p:"Глобальная видимость за 6 шагов.",s1:"Компания",s2:"Сектор",s3:"Доки",s4:"Согласие",s5:"Публикация",prev:"← Назад",next:"Далее →",
-     pr_h:"Тарифы",pr_p:"Ваш уровень глобальной видимости.",ct_h:"Контакты",ct_p:"Мы здесь, чтобы помочь.",
+     pr_h:"Тарифы",ct_h:"Контакты",
      lg_h:"Войти",lg_p:"Доступ к вашему аккаунту Kervea",pn_h:"Панель компании",pn_p:"Управляйте профилем, совпадениями и сообщениями.",
      p_over:"Обзор",p_matches:"Совпадения",p_profile:"Мой профиль",p_msgs:"Сообщения",p_com:"Обязательства",p_pros:"Проспект",p_set:"Настройки",p_out:"Выход",
      all_sec:"— Все секторы",sel_ctr:"Выберите страну",dd_search:"Поиск страны...",
@@ -176,7 +154,7 @@ var T_EXT = {
   social_intro:"Sosyal medya ve iletişim kanallarınız — alıcılar buradan size ulaşacak.",
   doc_h:"Belgeler *",doc_txt:"📄 Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları",doc_hint:"PDF/JPG/PNG · her dosya max 10MB · en fazla 20 belge",
   pub_h:"Başvurunuz alındı",pub_p:"Manuel doğrulama 24-48 saat içinde tamamlanır. Yayın hazır olduğunda e-posta ve SMS ile bilgilendirileceksiniz.",
-  promo_h:"Promosyon Kodun mu var?",promo_s:"İlk 3 ay Pro plana %30 indirim.",promo_h2:"Promosyon Kodu",promo_s2:"Erken kullanıcılar ve oda üyelerine özel indirim kodları.",apply:"Uygula",
+  promo_h:"Promosyon Kodun mu var?",promo_s:"İlk 3 ay Pro plana %30 indirim.",apply:"Uygula",
   bill_m:"Aylık",bill_y:"Yıllık",bill_save:"−20%",per_month:"/ay",plan_starter:"Starter",
   starter_p:"Tek firma profili, küresel görünürlük.",starter_1:"1 firma profili + doğrulama rozeti",starter_2:"Ayda 50 eşleşme",starter_3:"6 dilde otomatik profil çevirisi",starter_4:"Firmalarla doğrudan mesajlaşma",starter_5:"10 GB depolama / mesaj dosyaları",starter_6:"E-posta destek (48 saat)",
   pro_p:"Ciddi ihracatçılar ve alıcılar için.",pro_1:"<b>Sınırsız</b> eşleşme + gelişmiş AI skoru",pro_2:"Mesajlarda gerçek zamanlı çeviri (RU/AR/EN...)",pro_3:"40 MB'a kadar dosya paylaşımı",pro_4:"Öne çıkan profil (aramada üstte)",pro_5:"Prospektüs PDF üretici",pro_6:"CRM entegrasyonu (HubSpot, Salesforce)",pro_7:"Öncelikli destek (12 saat) + WhatsApp",
@@ -203,7 +181,7 @@ var T_EXT = {
   upload:"Upload",remove:"Remove",social_intro:"Your social channels — buyers reach you from here.",
   doc_h:"Documents *",doc_txt:"📄 Activity Certificate, Trade Registry, Signature Circular, Quality Certificates",doc_hint:"PDF/JPG/PNG · max 10MB per file · up to 20 files",
   pub_h:"Application received",pub_p:"Manual verification completes within 24-48 hours. You'll be notified by email and SMS when live.",
-  promo_h:"Got a promo code?",promo_s:"30% off Pro plan for first 3 months.",promo_h2:"Promo Code",promo_s2:"Special discount codes for early users and chamber members.",apply:"Apply",
+  promo_h:"Got a promo code?",promo_s:"30% off Pro plan for first 3 months.",apply:"Apply",
   bill_m:"Monthly",bill_y:"Yearly",bill_save:"−20%",per_month:"/mo",plan_starter:"Starter",
   starter_p:"Single company profile, global visibility.",starter_1:"1 company profile + verified badge",starter_2:"50 matches per month",starter_3:"Auto profile translation in 6 languages",starter_4:"Direct messaging with companies",starter_5:"10 GB storage / message files",starter_6:"Email support (48h)",
   pro_p:"For serious exporters and importers.",pro_1:"<b>Unlimited</b> matches + advanced AI score",pro_2:"Real-time message translation (RU/AR/EN...)",pro_3:"Up to 40 MB file sharing",pro_4:"Featured profile (top of search)",pro_5:"Prospectus PDF generator",pro_6:"CRM integration (HubSpot, Salesforce)",pro_7:"Priority support (12h) + WhatsApp",
@@ -224,7 +202,7 @@ var T_EXT = {
  },
  es:{s3_media:"Logo e Imágenes",s4_social:"Redes Sociales",s5_doc:"Documentos y Consent.",s6_pub:"Publicar",
   fl_cname:"Nombre de Empresa *",fl_ctitle:"Nombre Comercial (EN)",fl_tax:"NIF / Tax ID *",fl_mersis:"Registro Mercantil",fl_year:"Año de Fundación",fl_emp:"Empleados",fl_country:"País *",fl_city:"Ciudad",fl_kep:"Email Registrado",fl_web:"Sitio Web",fl_email:"Email *",fl_phone:"Teléfono *",fl_repname:"Persona de Contacto *",fl_reptitle:"Cargo",fl_address:"Dirección",fl_sec:"Sector Principal *",fl_dir:"Dirección Comercial *",fl_hs:"Código HS",fl_moq:"MOQ",fl_inc:"INCOTERM",fl_pay:"Forma de Pago",fl_products:"Productos / Servicios",fl_desc:"Descripción *",fl_certs:"Certificaciones",
-  logo_h:"Logo *",logo_hint:"400×400 · PNG/JPG · max 2MB",logo_lbl:"Logo *",logo_hint2:"400×400 · PNG/JPG · max 2MB",cover_h:"Imagen de Portada",cover_tt:"Subir portada",cover_st:"1600×400px recomendado",cover_lbl:"Portada · 1600×400",cover_change:"Cambiar imagen",gal_h:"Fotos de Producto/Instalación",gal_tt:"Arrastra y suelta",gal_st:"JPG/PNG · max 5MB c/u",gal_lbl:"Fotos",gal_add:"Añadir imagen",gal_max:"Hasta 12 imágenes",upload:"Subir",remove:"Quitar",social_intro:"Sus canales sociales.",doc_h:"Documentos *",doc_txt:"📄 Suba documentos oficiales",doc_hint:"PDF/JPG · max 10MB",pub_h:"Solicitud recibida",pub_p:"Verificación manual en 24-48 horas.",promo_h:"¿Código promocional?",promo_s:"30% off Pro por 3 meses.",promo_h2:"Código Promocional",promo_s2:"Descuentos para usuarios tempranos.",apply:"Aplicar",bill_m:"Mensual",bill_y:"Anual",bill_save:"−20%",per_month:"/mes",plan_starter:"Starter",
+  logo_h:"Logo *",logo_hint:"400×400 · PNG/JPG · max 2MB",logo_lbl:"Logo *",logo_hint2:"400×400 · PNG/JPG · max 2MB",cover_h:"Imagen de Portada",cover_tt:"Subir portada",cover_st:"1600×400px recomendado",cover_lbl:"Portada · 1600×400",cover_change:"Cambiar imagen",gal_h:"Fotos de Producto/Instalación",gal_tt:"Arrastra y suelta",gal_st:"JPG/PNG · max 5MB c/u",gal_lbl:"Fotos",gal_add:"Añadir imagen",gal_max:"Hasta 12 imágenes",upload:"Subir",remove:"Quitar",social_intro:"Sus canales sociales.",doc_h:"Documentos *",doc_txt:"📄 Suba documentos oficiales",doc_hint:"PDF/JPG · max 10MB",pub_h:"Solicitud recibida",pub_p:"Verificación manual en 24-48 horas.",promo_h:"¿Código promocional?",promo_s:"30% off Pro por 3 meses.",apply:"Aplicar",bill_m:"Mensual",bill_y:"Anual",bill_save:"−20%",per_month:"/mes",plan_starter:"Starter",
   starter_p:"Un perfil, visibilidad global.",starter_1:"1 perfil + verificación",starter_2:"50 coincidencias/mes",starter_3:"Traducción de perfil en 6 idiomas",starter_4:"Mensajería directa",starter_5:"10 GB",starter_6:"Soporte email (48h)",
   pro_p:"Para exportadores serios.",pro_1:"<b>Ilimitado</b> + AI score",pro_2:"Traducción en tiempo real",pro_3:"Archivos hasta 40 MB",pro_4:"Perfil destacado",pro_5:"Prospecto PDF",pro_6:"Integración CRM",pro_7:"Soporte prioritario",
   ent_p:"Holdings y cámaras.",ent_1:"Todo Pro +",ent_2:"Multi-empresa",ent_3:"API + Webhook",ent_4:"SSO",ent_5:"Ilimitado",ent_6:"SLA 99.9%",ent_7:"Ejecutivo dedicado",
@@ -236,7 +214,7 @@ var T_EXT = {
  },
  fr:{s3_media:"Logo & Visuels",s4_social:"Réseaux Sociaux",s5_doc:"Docs & Consent.",s6_pub:"Publication",
   fl_cname:"Nom de l'Entreprise *",fl_ctitle:"Raison Sociale (EN)",fl_tax:"N° Fiscal *",fl_mersis:"Registre",fl_year:"Année de Création",fl_emp:"Effectif",fl_country:"Pays *",fl_city:"Ville",fl_kep:"Email Officiel",fl_web:"Site Web",fl_email:"Email *",fl_phone:"Téléphone *",fl_repname:"Contact *",fl_reptitle:"Poste",fl_address:"Adresse",fl_sec:"Secteur Principal *",fl_dir:"Direction Commerciale *",fl_hs:"Code HS",fl_moq:"MOQ",fl_inc:"INCOTERM",fl_pay:"Paiement",fl_products:"Produits / Services",fl_desc:"Description *",fl_certs:"Certifications",
-  logo_h:"Logo *",logo_hint:"400×400 · PNG/JPG · max 2Mo",logo_lbl:"Logo *",logo_hint2:"400×400 · PNG/JPG · max 2Mo",cover_h:"Image de Couverture",cover_tt:"Charger la couverture",cover_st:"1600×400 recommandé",cover_lbl:"Couverture · 1600×400",cover_change:"Changer l'image",gal_h:"Photos Produits/Site",gal_tt:"Glisser-déposer",gal_st:"JPG/PNG · max 5Mo",gal_lbl:"Photos",gal_add:"Ajouter une image",gal_max:"Jusqu'à 12 images",upload:"Charger",remove:"Retirer",social_intro:"Vos canaux sociaux.",doc_h:"Documents *",doc_txt:"📄 Chargez les documents",doc_hint:"PDF/JPG · max 10Mo",pub_h:"Demande reçue",pub_p:"Vérification manuelle en 24-48h.",promo_h:"Code promo ?",promo_s:"30% sur Pro les 3 premiers mois.",promo_h2:"Code Promo",promo_s2:"Codes spéciaux pour utilisateurs précoces.",apply:"Appliquer",bill_m:"Mensuel",bill_y:"Annuel",bill_save:"−20%",per_month:"/mois",plan_starter:"Starter",
+  logo_h:"Logo *",logo_hint:"400×400 · PNG/JPG · max 2Mo",logo_lbl:"Logo *",logo_hint2:"400×400 · PNG/JPG · max 2Mo",cover_h:"Image de Couverture",cover_tt:"Charger la couverture",cover_st:"1600×400 recommandé",cover_lbl:"Couverture · 1600×400",cover_change:"Changer l'image",gal_h:"Photos Produits/Site",gal_tt:"Glisser-déposer",gal_st:"JPG/PNG · max 5Mo",gal_lbl:"Photos",gal_add:"Ajouter une image",gal_max:"Jusqu'à 12 images",upload:"Charger",remove:"Retirer",social_intro:"Vos canaux sociaux.",doc_h:"Documents *",doc_txt:"📄 Chargez les documents",doc_hint:"PDF/JPG · max 10Mo",pub_h:"Demande reçue",pub_p:"Vérification manuelle en 24-48h.",promo_h:"Code promo ?",promo_s:"30% sur Pro les 3 premiers mois.",apply:"Appliquer",bill_m:"Mensuel",bill_y:"Annuel",bill_save:"−20%",per_month:"/mois",plan_starter:"Starter",
   starter_p:"Un profil, visibilité mondiale.",starter_1:"1 profil + vérifié",starter_2:"50 correspondances/mois",starter_3:"Traduction 6 langues",starter_4:"Messagerie directe",starter_5:"10 Go",starter_6:"Support email (48h)",
   pro_p:"Pour exportateurs sérieux.",pro_1:"<b>Illimité</b> + score AI",pro_2:"Traduction temps réel",pro_3:"Fichiers jusqu'à 40 Mo",pro_4:"Profil mis en avant",pro_5:"Prospectus PDF",pro_6:"Intégration CRM",pro_7:"Support prioritaire",
   ent_p:"Holdings & chambres.",ent_1:"Tout Pro +",ent_2:"Multi-entreprise",ent_3:"API + Webhook",ent_4:"SSO",ent_5:"Illimité",ent_6:"SLA 99.9%",ent_7:"Compte dédié",
@@ -248,7 +226,7 @@ var T_EXT = {
  },
  ar:{s3_media:"الشعار والصور",s4_social:"وسائل التواصل",s5_doc:"الوثائق والموافقة",s6_pub:"النشر",
   fl_cname:"اسم الشركة *",fl_ctitle:"الاسم التجاري (EN)",fl_tax:"الرقم الضريبي *",fl_mersis:"السجل التجاري",fl_year:"سنة التأسيس",fl_emp:"عدد الموظفين",fl_country:"الدولة *",fl_city:"المدينة",fl_kep:"البريد الرسمي",fl_web:"الموقع",fl_email:"البريد *",fl_phone:"الهاتف *",fl_repname:"جهة الاتصال *",fl_reptitle:"المنصب",fl_address:"العنوان",fl_sec:"القطاع *",fl_dir:"اتجاه التجارة *",fl_hs:"رمز HS",fl_moq:"MOQ",fl_inc:"INCOTERM",fl_pay:"الدفع",fl_products:"المنتجات",fl_desc:"الوصف *",fl_certs:"الشهادات",
-  logo_h:"الشعار *",logo_hint:"400×400",logo_lbl:"الشعار *",logo_hint2:"400×400 · PNG/JPG · حد أقصى 2MB",cover_h:"صورة الغلاف",cover_tt:"رفع الغلاف",cover_st:"1600×400 موصى به",cover_lbl:"الغلاف · 1600×400",cover_change:"تغيير الغلاف",gal_h:"صور المنتج/المنشأة",gal_tt:"اسحب وأفلت",gal_st:"JPG/PNG · 5MB لكل صورة",gal_lbl:"الصور",gal_add:"إضافة صورة",gal_max:"حتى 12 صورة",upload:"رفع",remove:"إزالة",social_intro:"قنوات التواصل الخاصة بك.",doc_h:"الوثائق *",doc_txt:"📄 وثائق رسمية",doc_hint:"PDF/JPG · 10MB",pub_h:"تم استلام الطلب",pub_p:"تحقق يدوي خلال 24-48 ساعة.",promo_h:"لديك رمز ترويجي؟",promo_s:"خصم 30% على Pro لأول 3 أشهر.",promo_h2:"رمز ترويجي",promo_s2:"خصومات للمستخدمين الأوائل.",apply:"تطبيق",bill_m:"شهري",bill_y:"سنوي",bill_save:"−20%",per_month:"/شهر",plan_starter:"Starter",
+  logo_h:"الشعار *",logo_hint:"400×400",logo_lbl:"الشعار *",logo_hint2:"400×400 · PNG/JPG · حد أقصى 2MB",cover_h:"صورة الغلاف",cover_tt:"رفع الغلاف",cover_st:"1600×400 موصى به",cover_lbl:"الغلاف · 1600×400",cover_change:"تغيير الغلاف",gal_h:"صور المنتج/المنشأة",gal_tt:"اسحب وأفلت",gal_st:"JPG/PNG · 5MB لكل صورة",gal_lbl:"الصور",gal_add:"إضافة صورة",gal_max:"حتى 12 صورة",upload:"رفع",remove:"إزالة",social_intro:"قنوات التواصل الخاصة بك.",doc_h:"الوثائق *",doc_txt:"📄 وثائق رسمية",doc_hint:"PDF/JPG · 10MB",pub_h:"تم استلام الطلب",pub_p:"تحقق يدوي خلال 24-48 ساعة.",promo_h:"لديك رمز ترويجي؟",promo_s:"خصم 30% على Pro لأول 3 أشهر.",apply:"تطبيق",bill_m:"شهري",bill_y:"سنوي",bill_save:"−20%",per_month:"/شهر",plan_starter:"Starter",
   starter_p:"ملف واحد، رؤية عالمية.",starter_1:"ملف واحد + موثق",starter_2:"50 مطابقة/شهر",starter_3:"ترجمة تلقائية بـ 6 لغات",starter_4:"مراسلة مباشرة",starter_5:"10 GB",starter_6:"دعم بريد (48 ساعة)",
   pro_p:"للمصدرين الجادين.",pro_1:"<b>غير محدود</b> + AI",pro_2:"ترجمة فورية",pro_3:"ملفات حتى 40 MB",pro_4:"ملف مميز",pro_5:"PDF نشرة",pro_6:"CRM",pro_7:"دعم أولوية",
   ent_p:"للشركات والغرف.",ent_1:"كل Pro +",ent_2:"إدارة متعددة",ent_3:"API + Webhook",ent_4:"SSO",ent_5:"غير محدود",ent_6:"SLA 99.9%",ent_7:"مدير مخصص",
@@ -260,7 +238,7 @@ var T_EXT = {
  },
  ru:{s3_media:"Лого и Медиа",s4_social:"Соцсети",s5_doc:"Документы",s6_pub:"Публикация",
   fl_cname:"Название Компании *",fl_ctitle:"Торговое Имя (EN)",fl_tax:"ИНН / Tax ID *",fl_mersis:"Регистрационный №",fl_year:"Год Основания",fl_emp:"Сотрудники",fl_country:"Страна *",fl_city:"Город",fl_kep:"Официальный Email",fl_web:"Сайт",fl_email:"Email *",fl_phone:"Телефон *",fl_repname:"Контактное лицо *",fl_reptitle:"Должность",fl_address:"Адрес",fl_sec:"Основной Сектор *",fl_dir:"Направление *",fl_hs:"Код HS",fl_moq:"MOQ",fl_inc:"INCOTERM",fl_pay:"Оплата",fl_products:"Продукты",fl_desc:"Описание *",fl_certs:"Сертификаты",
-  logo_h:"Логотип *",logo_hint:"400×400 · PNG/JPG · до 2МБ",logo_lbl:"Логотип *",logo_hint2:"400×400 · PNG/JPG · до 2МБ",cover_h:"Обложка",cover_tt:"Загрузить обложку",cover_st:"1600×400 рекомендуется",cover_lbl:"Обложка · 1600×400",cover_change:"Изменить обложку",gal_h:"Фото Продукции/Производства",gal_tt:"Перетащите или выберите",gal_st:"JPG/PNG · до 5МБ",gal_lbl:"Фото",gal_add:"Добавить фото",gal_max:"До 12 фото",upload:"Загрузить",remove:"Удалить",social_intro:"Ваши каналы связи.",doc_h:"Документы *",doc_txt:"📄 Официальные документы",doc_hint:"PDF/JPG · до 10МБ",pub_h:"Заявка получена",pub_p:"Проверка вручную за 24-48 ч.",promo_h:"Есть промокод?",promo_s:"30% скидка на Pro первые 3 месяца.",promo_h2:"Промокод",promo_s2:"Специальные скидки для ранних пользователей.",apply:"Применить",bill_m:"Ежемесячно",bill_y:"Ежегодно",bill_save:"−20%",per_month:"/мес",plan_starter:"Starter",
+  logo_h:"Логотип *",logo_hint:"400×400 · PNG/JPG · до 2МБ",logo_lbl:"Логотип *",logo_hint2:"400×400 · PNG/JPG · до 2МБ",cover_h:"Обложка",cover_tt:"Загрузить обложку",cover_st:"1600×400 рекомендуется",cover_lbl:"Обложка · 1600×400",cover_change:"Изменить обложку",gal_h:"Фото Продукции/Производства",gal_tt:"Перетащите или выберите",gal_st:"JPG/PNG · до 5МБ",gal_lbl:"Фото",gal_add:"Добавить фото",gal_max:"До 12 фото",upload:"Загрузить",remove:"Удалить",social_intro:"Ваши каналы связи.",doc_h:"Документы *",doc_txt:"📄 Официальные документы",doc_hint:"PDF/JPG · до 10МБ",pub_h:"Заявка получена",pub_p:"Проверка вручную за 24-48 ч.",promo_h:"Есть промокод?",promo_s:"30% скидка на Pro первые 3 месяца.",apply:"Применить",bill_m:"Ежемесячно",bill_y:"Ежегодно",bill_save:"−20%",per_month:"/мес",plan_starter:"Starter",
   starter_p:"Один профиль, глобально.",starter_1:"1 профиль + верификация",starter_2:"50 совпадений/мес",starter_3:"Перевод на 6 языков",starter_4:"Прямая переписка",starter_5:"10 ГБ",starter_6:"Email поддержка (48 ч)",
   pro_p:"Для серьёзных экспортеров.",pro_1:"<b>Безлимит</b> + AI",pro_2:"Перевод в реальном времени",pro_3:"Файлы до 40 МБ",pro_4:"Продвижение в поиске",pro_5:"PDF-проспект",pro_6:"CRM интеграция",pro_7:"Приоритетная поддержка",
   ent_p:"Холдинги и палаты.",ent_1:"Всё из Pro +",ent_2:"Мульти-компания",ent_3:"API + Webhook",ent_4:"SSO",ent_5:"Безлимит",ent_6:"SLA 99.9%",ent_7:"Персональный менеджер",
@@ -295,7 +273,7 @@ var I18N_EXT = {
   doc_title:"Belgelerim",doc_sub:"Doğrulanmış belgeler firma sıralamanızı yükseltir. Belgeler AES-256 ile şifreli saklanır.",doc_upload:"Yeni Belge Yükle",doc_verified:"Doğrulandı",doc_add:"Yeni belge ekle",doc_add_hint:"PDF, PNG, JPG · max 20 MB",doc_renew:"15g içinde yenile",
   msg_search:"Konuşmalarda ara...",msg_online:"Çevrimiçi",msg_verified_firm:"Doğrulanmış firma",msg_today:"Bugün",msg_auto_tr:"Otomatik çeviri",msg_read:"Okundu",msg_typing:"yazıyor…",msg_type:"Yanıt yazın… (Enter göndermek, Shift+Enter yeni satır)",msg_send:"Gönder",msg_lang_note:"Türkçe yazın · Karşı tarafa Fince olarak iletilecek · Otomatik çeviri aktif",msg_open:"Konuşma yüklendi",msg_sent:"Mesaj gönderildi · çevrildi",
   gate_title:"Firma bilgileri Pro üyelere açık",gate_sub:"Firma unvanı, ülke, HS kodu ve iletişim bilgileri Pro üyelikle anında görünür olur.",gate_cta:"Pro'ya Yükselt →",
-  st_pos:"Aktif firma",st_ctr:"Ülke",st_sec:"Sektör",st_lng:"Dil",st_live:"Canlı",st_today:"bugün",st_week:"bu hafta",st_stable:"Sabit",st_full:"tam kapsam",st_soon:"yakında JP",
+  st_pos:"Aktif firma",st_ctr:"Ülke",st_sec:"Sektör",st_lng:"Dil",st_live:"Canlı",st_today:"bugün",st_week:"bu hafta",
   sector_lbl:"Sektör",all_sec_pick:"— Tümü —",sec_search:"Sektör ara...",
   add_intro:"6 adımda küresel görünürlük. Her adım kaydedilir; istediğin an dönebilirsin.",add_save:"Sonra Devam Et",add_draft:"Taslak kaydedildi — devam etmek için giriş yapın",
   tm_title:"Ekip Yönetimi",tm_sub:"Firmanızda birden fazla kullanıcı hesabı yönetin. Roller ve izinler.",tm_invite:"Kullanıcı Davet Et",tm_role:"Rol",tm_perms:"İzinler",tm_status:"Durum",tm_email:"E-posta",tm_last:"Son etkinlik",tm_owner:"Sahip",tm_admin:"Yönetici",tm_sales:"Satış",tm_ops:"Operasyon",tm_view:"Sadece görüntüleme",tm_active:"Aktif",tm_pending:"Beklemede",tm_seats:"Koltuk",tm_col_user:"KULLANICI",tm_p_all:"Tüm modüller",tm_p_msg:"Sadece mesajlaşma",tm_p_prof:"Profil + Doküman",tm_p_view:"Görüntüleme",
@@ -319,7 +297,7 @@ var I18N_EXT = {
   doc_title:"My Documents",doc_sub:"Verified documents raise your firm ranking. Files are encrypted at rest with AES-256.",doc_upload:"Upload New Document",doc_verified:"Verified",doc_add:"Add new document",doc_add_hint:"PDF, PNG, JPG · max 20 MB",doc_renew:"Renew within 15d",
   msg_search:"Search conversations...",msg_online:"Online",msg_verified_firm:"Verified company",msg_today:"Today",msg_auto_tr:"Auto-translate",msg_read:"Read",msg_typing:"typing…",msg_type:"Type a reply… (Enter to send, Shift+Enter for new line)",msg_send:"Send",msg_lang_note:"Type in English · Recipient sees Finnish · Auto-translate on",msg_open:"Conversation loaded",msg_sent:"Message sent · translated",
   gate_title:"Company info is Pro-members only",gate_sub:"Company name, country, HS code and contacts become visible instantly with a Pro plan.",gate_cta:"Upgrade to Pro →",
-  st_pos:"Active firms",st_ctr:"Countries",st_sec:"Sectors",st_lng:"Languages",st_live:"Live",st_today:"today",st_week:"this week",st_stable:"Stable",st_full:"full coverage",st_soon:"JP soon",
+  st_pos:"Active firms",st_ctr:"Countries",st_sec:"Sectors",st_lng:"Languages",st_live:"Live",st_today:"today",st_week:"this week",
   sector_lbl:"Sector",all_sec_pick:"— All —",sec_search:"Search sector...",
   add_intro:"Global visibility in 6 steps. Every step is saved; come back anytime.",add_save:"Continue Later",add_draft:"Draft saved — sign in to continue",
   tm_title:"Team Management",tm_sub:"Manage multiple user accounts for your company. Roles and permissions.",tm_invite:"Invite User",tm_role:"Role",tm_perms:"Permissions",tm_status:"Status",tm_email:"Email",tm_last:"Last activity",tm_owner:"Owner",tm_admin:"Admin",tm_sales:"Sales",tm_ops:"Operations",tm_view:"View-only",tm_active:"Active",tm_pending:"Pending",tm_seats:"seats",tm_col_user:"USER",tm_p_all:"All modules",tm_p_msg:"Messaging only",tm_p_prof:"Profile + Docs",tm_p_view:"Read-only",
@@ -343,7 +321,7 @@ var I18N_EXT = {
   doc_title:"Mis Documentos",doc_sub:"Los documentos verificados suben su ranking. Cifrado AES-256.",doc_upload:"Subir Documento",doc_verified:"Verificado",doc_add:"Añadir documento",doc_add_hint:"PDF, PNG, JPG · máx 20 MB",doc_renew:"Renovar en 15d",
   msg_search:"Buscar conversaciones...",msg_online:"En línea",msg_verified_firm:"Empresa verificada",msg_today:"Hoy",msg_auto_tr:"Traducción auto",msg_read:"Leído",msg_typing:"escribiendo…",msg_type:"Escriba una respuesta… (Enter para enviar)",msg_send:"Enviar",msg_lang_note:"Escriba en español · El destinatario ve finés · Traducción activa",msg_open:"Conversación cargada",msg_sent:"Mensaje enviado · traducido",
   gate_title:"Info empresa solo para Pro",gate_sub:"Nombre, país, código HS y contactos visibles al instante con Pro.",gate_cta:"Subir a Pro →",
-  st_pos:"Empresas",st_ctr:"Países",st_sec:"Sectores",st_lng:"Idiomas",st_live:"En vivo",st_today:"hoy",st_week:"esta semana",st_stable:"Estable",st_full:"cobertura total",st_soon:"JP pronto",
+  st_pos:"Empresas",st_ctr:"Países",st_sec:"Sectores",st_lng:"Idiomas",st_live:"En vivo",st_today:"hoy",st_week:"esta semana",
   sector_lbl:"Sector",all_sec_pick:"— Todos —",sec_search:"Buscar sector...",
   add_intro:"Visibilidad global en 6 pasos. Cada paso se guarda automáticamente.",add_save:"Continuar Después",add_draft:"Borrador guardado — inicie sesión para continuar",
   tm_title:"Gestión de Equipo",tm_sub:"Gestione múltiples cuentas para su empresa. Roles y permisos.",tm_invite:"Invitar Usuario",tm_role:"Rol",tm_perms:"Permisos",tm_status:"Estado",tm_email:"Email",tm_last:"Última actividad",tm_owner:"Propietario",tm_admin:"Admin",tm_sales:"Ventas",tm_ops:"Operaciones",tm_view:"Solo ver",tm_active:"Activo",tm_pending:"Pendiente",tm_seats:"asientos",tm_col_user:"USUARIO",tm_p_all:"Todos los módulos",tm_p_msg:"Solo mensajería",tm_p_prof:"Perfil + Docs",tm_p_view:"Solo lectura",
@@ -367,7 +345,7 @@ var I18N_EXT = {
   doc_title:"Mes Documents",doc_sub:"Les documents vérifiés augmentent votre classement. Chiffrement AES-256.",doc_upload:"Télécharger Document",doc_verified:"Vérifié",doc_add:"Ajouter document",doc_add_hint:"PDF, PNG, JPG · max 20 Mo",doc_renew:"Renouveler sous 15j",
   msg_search:"Rechercher conversations...",msg_online:"En ligne",msg_verified_firm:"Entreprise vérifiée",msg_today:"Aujourd'hui",msg_auto_tr:"Traduction auto",msg_read:"Lu",msg_typing:"écrit…",msg_type:"Écrivez une réponse… (Entrée pour envoyer)",msg_send:"Envoyer",msg_lang_note:"Écrivez en français · Le destinataire voit finnois · Traduction active",msg_open:"Conversation chargée",msg_sent:"Message envoyé · traduit",
   gate_title:"Info entreprise réservée aux Pro",gate_sub:"Nom, pays, code HS et contacts visibles immédiatement avec Pro.",gate_cta:"Passer Pro →",
-  st_pos:"Entreprises",st_ctr:"Pays",st_sec:"Secteurs",st_lng:"Langues",st_live:"En direct",st_today:"aujourd'hui",st_week:"cette semaine",st_stable:"Stable",st_full:"couverture totale",st_soon:"JP bientôt",
+  st_pos:"Entreprises",st_ctr:"Pays",st_sec:"Secteurs",st_lng:"Langues",st_live:"En direct",st_today:"aujourd'hui",st_week:"cette semaine",
   sector_lbl:"Secteur",all_sec_pick:"— Tous —",sec_search:"Rechercher un secteur...",
   add_intro:"Visibilité mondiale en 6 étapes. Chaque étape sauvegardée automatiquement.",add_save:"Continuer Plus Tard",add_draft:"Brouillon sauvegardé — connectez-vous pour continuer",
   tm_title:"Gestion d'Équipe",tm_sub:"Gérez plusieurs comptes pour votre entreprise. Rôles et permissions.",tm_invite:"Inviter Utilisateur",tm_role:"Rôle",tm_perms:"Permissions",tm_status:"Statut",tm_email:"Email",tm_last:"Dernière activité",tm_owner:"Propriétaire",tm_admin:"Admin",tm_sales:"Ventes",tm_ops:"Opérations",tm_view:"Lecture seule",tm_active:"Actif",tm_pending:"En attente",tm_seats:"sièges",tm_col_user:"UTILISATEUR",tm_p_all:"Tous les modules",tm_p_msg:"Messagerie uniq.",tm_p_prof:"Profil + Docs",tm_p_view:"Lecture",
@@ -391,7 +369,7 @@ var I18N_EXT = {
   doc_title:"مستنداتي",doc_sub:"المستندات الموثقة ترفع تصنيف شركتك. تشفير AES-256.",doc_upload:"تحميل مستند",doc_verified:"موثق",doc_add:"إضافة مستند",doc_add_hint:"PDF, PNG, JPG · حد 20 MB",doc_renew:"جدد خلال 15 يوم",
   msg_search:"ابحث في المحادثات...",msg_online:"متصل",msg_verified_firm:"شركة موثقة",msg_today:"اليوم",msg_auto_tr:"ترجمة تلقائية",msg_read:"مقروء",msg_typing:"يكتب…",msg_type:"اكتب رداً… (Enter للإرسال)",msg_send:"إرسال",msg_lang_note:"اكتب بالعربية · سيرى المستقبل بالفنلندية · الترجمة مفعلة",msg_open:"تم تحميل المحادثة",msg_sent:"تم الإرسال · مترجم",
   gate_title:"معلومات الشركة للأعضاء Pro",gate_sub:"اسم الشركة والبلد ورمز HS والاتصال تظهر فوراً مع خطة Pro.",gate_cta:"ترقية إلى Pro ←",
-  st_pos:"الشركات",st_ctr:"البلدان",st_sec:"القطاعات",st_lng:"اللغات",st_live:"مباشر",st_today:"اليوم",st_week:"هذا الأسبوع",st_stable:"مستقر",st_full:"تغطية كاملة",st_soon:"JP قريباً",
+  st_pos:"الشركات",st_ctr:"البلدان",st_sec:"القطاعات",st_lng:"اللغات",st_live:"مباشر",st_today:"اليوم",st_week:"هذا الأسبوع",
   sector_lbl:"القطاع",all_sec_pick:"— الكل —",sec_search:"ابحث عن قطاع...",
   add_intro:"الوصول العالمي في 6 خطوات. كل خطوة تحفظ تلقائياً.",add_save:"متابعة لاحقاً",add_draft:"تم حفظ المسودة — سجل الدخول للمتابعة",
   tm_title:"إدارة الفريق",tm_sub:"إدارة عدة حسابات لشركتك. الأدوار والصلاحيات.",tm_invite:"دعوة مستخدم",tm_role:"الدور",tm_perms:"الصلاحيات",tm_status:"الحالة",tm_email:"البريد",tm_last:"آخر نشاط",tm_owner:"المالك",tm_admin:"مدير",tm_sales:"المبيعات",tm_ops:"العمليات",tm_view:"عرض فقط",tm_active:"نشط",tm_pending:"قيد الانتظار",tm_seats:"مقاعد",tm_col_user:"المستخدم",tm_p_all:"جميع الوحدات",tm_p_msg:"المراسلة فقط",tm_p_prof:"الملف + الوثائق",tm_p_view:"قراءة فقط",
@@ -415,7 +393,7 @@ var I18N_EXT = {
   doc_title:"Мои документы",doc_sub:"Верифицированные документы повышают ваш рейтинг. Шифрование AES-256.",doc_upload:"Загрузить документ",doc_verified:"Верифицирован",doc_add:"Добавить документ",doc_add_hint:"PDF, PNG, JPG · макс 20 МБ",doc_renew:"Обновить в 15д",
   msg_search:"Поиск разговоров...",msg_online:"В сети",msg_verified_firm:"Проверенная компания",msg_today:"Сегодня",msg_auto_tr:"Автоперевод",msg_read:"Прочитано",msg_typing:"печатает…",msg_type:"Напишите ответ… (Enter для отправки)",msg_send:"Отправить",msg_lang_note:"Пишите по-русски · Получатель видит финский · Автоперевод активен",msg_open:"Разговор загружен",msg_sent:"Отправлено · переведено",
   gate_title:"Инфо о компании только для Pro",gate_sub:"Название, страна, код HS и контакты моментально видны с планом Pro.",gate_cta:"Перейти на Pro →",
-  st_pos:"Активные фирмы",st_ctr:"Страны",st_sec:"Секторы",st_lng:"Языки",st_live:"В эфире",st_today:"сегодня",st_week:"на неделе",st_stable:"Стабильно",st_full:"полный охват",st_soon:"скоро JP",
+  st_pos:"Активные фирмы",st_ctr:"Страны",st_sec:"Секторы",st_lng:"Языки",st_live:"В эфире",st_today:"сегодня",st_week:"на неделе",
   sector_lbl:"Сектор",all_sec_pick:"— Все —",sec_search:"Поиск сектора...",
   add_intro:"Глобальная видимость за 6 шагов. Каждый шаг сохраняется автоматически.",add_save:"Продолжить позже",add_draft:"Черновик сохранён — войдите для продолжения",
   tm_title:"Управление командой",tm_sub:"Управляйте несколькими аккаунтами для вашей компании. Роли и разрешения.",tm_invite:"Пригласить",tm_role:"Роль",tm_perms:"Разрешения",tm_status:"Статус",tm_email:"Email",tm_last:"Последняя активность",tm_owner:"Владелец",tm_admin:"Админ",tm_sales:"Продажи",tm_ops:"Операции",tm_view:"Только просмотр",tm_active:"Активен",tm_pending:"Ожидание",tm_seats:"мест",tm_col_user:"ПОЛЬЗОВАТЕЛЬ",tm_p_all:"Все модули",tm_p_msg:"Только сообщения",tm_p_prof:"Профиль + Док.",tm_p_view:"Чтение",
@@ -436,256 +414,250 @@ var I18N_FAZ234 = {
   nav_kursusu:"Kürsüsü",nav_sss:"SSS",
   // Kervea Kürsüsü (Wall of Love · Faz 2)
   kd_eyebrow:"KERVEA KÜRSÜSÜ",
-  kd_title:"Referanslarımızı satın alamazsınız.",
-  kd_lead:"Kervea 2026 pilot dönemindedir. Bu bölümde sadece <strong>doğrulanmış üyelerin gerçek yorumları</strong> yayınlanır — LinkedIn hesabı, şirket sicili ve gerçek ticaret hacmi eşleşen üyeler.",
-  kd_badge:"Referans Standardımız",
-  kd_m_title:"Neden burada henüz yorum yok?",
-  kd_m1t:"Kervea 2026 pilot dönemindedir",
-  kd_m1d:"İlk 10 doğrulanmış üye şu anda entegrasyon aşamasında. Referansları yayına alındıkça buraya, tarih ve doğrulama rozetiyle eklenir.",
-  kd_m2t:"Ödeme karşılığı yorum kabul etmiyoruz",
-  kd_m2d:"Hiçbir üye, yorum veya öne çıkma karşılığında ücretlendirilmez. Yorumlar üyenin kendi profilinden, düzenlenmemiş olarak alınır.",
-  kd_m3t:"Her yorumun arkasında doğrulanabilir bir üye vardır",
-  kd_m3d:"Yorum yazan her üyenin LinkedIn profili, şirket ticari sicili ve son 12 aydaki ticaret hacmi kontrol edilir. Bu üç kontrol tamamlanmadan yorum yayınlanmaz.",
-  kd_m4t:"Olumsuz yorumlar da yayınlanır",
-  kd_m4d:"Kervea'yı değerlendiren üyeler bunu 1–5 yıldız aralığında yapar. Filtreleme yoktur; olumsuz geri bildirim, cevabımızla birlikte yayınlanır.",
-  kd_slot_open:"SLOT AÇIK",
-  kd_slot1:"İlk doğrulanmış üye referansı için ayrıldı.",
-  kd_slot2:"İkinci doğrulanmış üye referansı için ayrıldı.",
-  kd_slot3:"Üçüncü doğrulanmış üye referansı için ayrıldı.",
-  kd_slot_when:"Üye entegrasyonu tamamlandığında yayına alınır.",
-  kd_cta_t:"İlk 10 pilot üyeden biri olun.",
-  kd_cta_d:"Kervea'nın pilot döneminde yer alan üyeler, referansları platform ana sayfasında ve arama sonuçlarında öne çıkar. Listeleme ücretsizdir; Premium yıllık 280 USD'dir.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"Firmamı Ekle",
   // GEO · AI'ya Sor + FAQ (Faz 3)
-  geo_eyebrow:"AI ARAMA MOTORLARINDA KERVEA",
-  geo_title:"Kervea'yı AI'a sorun.",
-  geo_lead:"Kervea hakkında bağımsız bir görüş almak için doğrudan AI arama motorlarına sorun. Aşağıdaki bağlantılar hazır sorguyla ilgili motoru açar — Kervea'nın kamuya açık bilgilerine dair yanıt alırsınız.",
-  geo_ask:"Sor",
-  geo_faq_title:"Sıkça Sorulan Sorular",
-  geo_faq_sub:"Kervea hakkında en çok sorulan sorular ve doğrudan cevapları. Bu bölüm AI arama motorları tarafından da okunur.",
-  geo_q1_q:"Kervea nedir?",
-  geo_q1_a:"Kervea, satıcı ile alıcıyı Trademap ve resmi gümrük verileriyle doğrudan buluşturan bir B2B ticaret eşleştirme ağıdır. Aracı değildir, komisyon almaz. Listeleme ücretsizdir, Premium üyelik yıllık 280 USD'dir. İlk odak koridoru Türkiye ile Batı Afrika arasındadır.",
-  geo_q2_q:"Kervea Alibaba veya benzeri platformlardan nasıl farklıdır?",
-  geo_q2_a:"Üç temel farkımız vardır. Birincisi, Kervea aracı değildir — satıcı ile alıcı doğrudan iletişim kurar, komisyon alınmaz. İkincisi, sıralama satın alınamaz — üyeler yalnızca uyum skorlarına göre sıralanır, öne çıkma ücreti yoktur. Üçüncüsü, ücretlendirme tamamen şeffaftır — yıllık 280 USD sabit Premium ücret, listeleme ücretsiz.",
-  geo_q3_q:"Kervea üyelerini nasıl doğrular?",
-  geo_q3_a:"Kervea 4 kademeli bir doğrulama sistemi uygular: (1) e-posta doğrulaması, (2) resmi ticaret sicili kontrolü, (3) banka hesabı ve IBAN eşleştirmesi, (4) opsiyonel saha doğrulaması. Bu kademelerin hiçbiri ödeme karşılığında atlanamaz.",
-  geo_q4_q:"Kervea üyelik ücretlendirmesi nasıldır?",
-  geo_q4_a:"Temel listeleme ücretsizdir — hiçbir sınırlama olmadan profil oluşturabilir, ürünlerinizi listeleyebilir, gelen talepleri alabilirsiniz. Premium üyelik yıllık 280 USD sabit bedeldir ve gelişmiş arama, öncelikli müşteri desteği, ticaret veri erişimi gibi ek özellikler sunar. Komisyon veya işlem bedeli yoktur.",
-  geo_q5_q:"Kervea hangi ülkeleri kapsıyor?",
-  geo_q5_a:"Kervea 2026 pilot döneminde Türkiye ile Batı Afrika koridoruna (özellikle Senegal, Fildişi Sahili, Nijerya, Fas, Gana) odaklanır. Sonraki dönemlerde Kuzey Afrika, Körfez ülkeleri ve BDT koridorları eklenecektir.",
-  geo_q6_q:"Kervea hangi ödeme ve lojistik altyapısını sunar?",
-  geo_q6_a:"Kervea LC (akreditif) ve TT (havale) gibi standart uluslararası ödeme yöntemlerini destekler. INCOTERMS standartlarına göre çalışan doğrulanmış lojistik ortaklarıyla entegrasyonu vardır. Ödeme ve teslimat işlemleri üyeler arasında doğrudan yürütülür — Kervea sürece taraf olmaz."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  en:{
   nav_kursusu:"Podium",nav_sss:"FAQ",
   kd_eyebrow:"KERVEA PODIUM",
-  kd_title:"Our references cannot be bought.",
-  kd_lead:"Kervea is in its 2026 pilot phase. This section only publishes <strong>verified members' real reviews</strong> — members whose LinkedIn profile, corporate registry and actual trade volume all match.",
-  kd_badge:"Our Reference Standard",
-  kd_m_title:"Why are there no reviews here yet?",
-  kd_m1t:"Kervea is in its 2026 pilot phase",
-  kd_m1d:"The first 10 verified members are currently in the integration stage. Their references will be added here with date and verification badge as they go live.",
-  kd_m2t:"We do not accept paid reviews",
-  kd_m2d:"No member is charged in exchange for a review or featured placement. Reviews are pulled from the member's own profile, unedited.",
-  kd_m3t:"Every review is backed by a verifiable member",
-  kd_m3d:"Every reviewing member's LinkedIn profile, corporate trade registry, and trade volume over the last 12 months is checked. Reviews are not published until these three checks are complete.",
-  kd_m4t:"Negative reviews are also published",
-  kd_m4d:"Members who rate Kervea do so on a 1–5 star scale. There is no filtering; negative feedback is published together with our response.",
-  kd_slot_open:"SLOT OPEN",
-  kd_slot1:"Reserved for the first verified member reference.",
-  kd_slot2:"Reserved for the second verified member reference.",
-  kd_slot3:"Reserved for the third verified member reference.",
-  kd_slot_when:"Published once member integration is complete.",
-  kd_cta_t:"Be one of the first 10 pilot members.",
-  kd_cta_d:"Members who join during Kervea's pilot period are featured on the platform's homepage and search results. Listing is free; Premium is 280 USD per year.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"Add My Company",
-  geo_eyebrow:"KERVEA ON AI SEARCH ENGINES",
-  geo_title:"Ask AI about Kervea.",
-  geo_lead:"For an independent opinion about Kervea, ask AI search engines directly. The links below open the corresponding engine with a ready-made query — you will get an answer based on Kervea's publicly available information.",
-  geo_ask:"Ask",
-  geo_faq_title:"Frequently Asked Questions",
-  geo_faq_sub:"The most common questions about Kervea and their direct answers. This section is also read by AI search engines.",
-  geo_q1_q:"What is Kervea?",
-  geo_q1_a:"Kervea is a B2B trade matchmaking network that connects sellers and buyers directly using Trademap and official customs data. It is not an intermediary and does not take commission. Listing is free, and Premium membership is 280 USD per year. The initial focus corridor is between Turkey and West Africa.",
-  geo_q2_q:"How is Kervea different from Alibaba or similar platforms?",
-  geo_q2_a:"We have three core differences. First, Kervea is not an intermediary — sellers and buyers communicate directly, no commission is taken. Second, ranking cannot be bought — members are ranked solely by compatibility score, with no featured placement fees. Third, pricing is fully transparent — a flat 280 USD annual Premium fee, with free listing.",
-  geo_q3_q:"How does Kervea verify its members?",
-  geo_q3_a:"Kervea applies a 4-tier verification system: (1) email verification, (2) official trade registry check, (3) bank account and IBAN matching, (4) optional on-site verification. None of these tiers can be skipped in exchange for payment.",
-  geo_q4_q:"How is Kervea membership priced?",
-  geo_q4_a:"Basic listing is free — you can create a profile, list your products and receive inbound inquiries with no limitations. Premium membership is a flat 280 USD per year and offers additional features such as advanced search, priority customer support and trade data access. There are no commissions or transaction fees.",
-  geo_q5_q:"Which countries does Kervea cover?",
-  geo_q5_a:"During its 2026 pilot phase, Kervea focuses on the Turkey–West Africa corridor (specifically Senegal, Ivory Coast, Nigeria, Morocco, and Ghana). North Africa, Gulf countries and CIS corridors will be added in later phases.",
-  geo_q6_q:"What payment and logistics infrastructure does Kervea provide?",
-  geo_q6_a:"Kervea supports standard international payment methods such as LC (letter of credit) and TT (wire transfer). It integrates with verified logistics partners operating under INCOTERMS standards. Payment and delivery are conducted directly between members — Kervea is not a party to the transaction."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  fr:{
   nav_kursusu:"Tribune",nav_sss:"FAQ",
   kd_eyebrow:"TRIBUNE KERVEA",
-  kd_title:"Nos références ne s'achètent pas.",
-  kd_lead:"Kervea est en phase pilote 2026. Cette section ne publie que <strong>les avis réels de membres vérifiés</strong> — des membres dont le profil LinkedIn, le registre commercial et le volume d'échanges correspondent.",
-  kd_badge:"Notre standard de référence",
-  kd_m_title:"Pourquoi n'y a-t-il pas encore d'avis ici ?",
-  kd_m1t:"Kervea est en phase pilote 2026",
-  kd_m1d:"Les 10 premiers membres vérifiés sont actuellement en phase d'intégration. Leurs références seront ajoutées ici avec date et badge de vérification au fur et à mesure de leur mise en ligne.",
-  kd_m2t:"Nous n'acceptons pas d'avis rémunérés",
-  kd_m2d:"Aucun membre n'est facturé en échange d'un avis ou d'une mise en avant. Les avis sont extraits du profil du membre, sans modification.",
-  kd_m3t:"Chaque avis repose sur un membre vérifiable",
-  kd_m3d:"Pour chaque membre qui laisse un avis, le profil LinkedIn, le registre commercial de l'entreprise et le volume d'échanges des 12 derniers mois sont contrôlés. Aucun avis n'est publié avant que ces trois vérifications ne soient terminées.",
-  kd_m4t:"Les avis négatifs sont également publiés",
-  kd_m4d:"Les membres évaluent Kervea sur une échelle de 1 à 5 étoiles. Il n'y a pas de filtrage ; les retours négatifs sont publiés avec notre réponse.",
-  kd_slot_open:"EMPLACEMENT LIBRE",
-  kd_slot1:"Réservé pour la première référence vérifiée.",
-  kd_slot2:"Réservé pour la deuxième référence vérifiée.",
-  kd_slot3:"Réservé pour la troisième référence vérifiée.",
-  kd_slot_when:"Publié une fois l'intégration du membre terminée.",
-  kd_cta_t:"Faites partie des 10 premiers membres pilotes.",
-  kd_cta_d:"Les membres qui rejoignent Kervea pendant la phase pilote sont mis en avant sur la page d'accueil de la plateforme et dans les résultats de recherche. L'inscription est gratuite ; Premium est à 1 000 USD par an.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"Ajouter mon entreprise",
-  geo_eyebrow:"KERVEA SUR LES MOTEURS DE RECHERCHE IA",
-  geo_title:"Demandez à l'IA à propos de Kervea.",
-  geo_lead:"Pour un avis indépendant sur Kervea, interrogez directement les moteurs de recherche IA. Les liens ci-dessous ouvrent le moteur concerné avec une requête préparée — vous obtiendrez une réponse basée sur les informations publiques de Kervea.",
-  geo_ask:"Demander",
-  geo_faq_title:"Questions fréquentes",
-  geo_faq_sub:"Les questions les plus fréquentes sur Kervea et leurs réponses directes. Cette section est également lue par les moteurs de recherche IA.",
-  geo_q1_q:"Qu'est-ce que Kervea ?",
-  geo_q1_a:"Kervea est un réseau de mise en relation commerciale B2B qui connecte directement vendeurs et acheteurs à partir des données Trademap et douanières officielles. Kervea n'est pas un intermédiaire et ne prélève aucune commission. L'inscription est gratuite, l'adhésion Premium coûte 1 000 USD par an. Le couloir initial couvre la Turquie et l'Afrique de l'Ouest.",
-  geo_q2_q:"En quoi Kervea diffère-t-il d'Alibaba ou de plateformes similaires ?",
-  geo_q2_a:"Nous avons trois différences fondamentales. Premièrement, Kervea n'est pas un intermédiaire — vendeurs et acheteurs communiquent directement, sans commission. Deuxièmement, le classement ne peut pas être acheté — les membres sont classés uniquement en fonction de leur score de compatibilité, sans frais de mise en avant. Troisièmement, la tarification est totalement transparente — 1 000 USD par an de Premium, inscription gratuite.",
-  geo_q3_q:"Comment Kervea vérifie-t-il ses membres ?",
-  geo_q3_a:"Kervea applique un système de vérification en 4 niveaux : (1) vérification e-mail, (2) contrôle du registre commercial officiel, (3) correspondance du compte bancaire et de l'IBAN, (4) vérification sur site optionnelle. Aucun de ces niveaux ne peut être contourné contre paiement.",
-  geo_q4_q:"Quelle est la tarification de l'adhésion Kervea ?",
-  geo_q4_a:"L'inscription de base est gratuite — vous pouvez créer un profil, lister vos produits et recevoir des demandes entrantes sans limitation. L'adhésion Premium est à 1 000 USD par an et offre des fonctionnalités supplémentaires telles que la recherche avancée, le support client prioritaire et l'accès aux données commerciales. Il n'y a aucune commission ni frais de transaction.",
-  geo_q5_q:"Quels pays Kervea couvre-t-il ?",
-  geo_q5_a:"Pendant sa phase pilote 2026, Kervea se concentre sur le couloir Turquie–Afrique de l'Ouest (notamment Sénégal, Côte d'Ivoire, Nigeria, Maroc et Ghana). Les couloirs Afrique du Nord, Golfe et CEI seront ajoutés lors des phases suivantes.",
-  geo_q6_q:"Quelle infrastructure de paiement et de logistique Kervea propose-t-il ?",
-  geo_q6_a:"Kervea prend en charge les méthodes de paiement internationales standard telles que la LC (lettre de crédit) et le TT (virement bancaire). Il s'intègre à des partenaires logistiques vérifiés opérant selon les normes INCOTERMS. Les paiements et livraisons se font directement entre membres — Kervea n'est pas partie à la transaction."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  es:{
   nav_kursusu:"Tribuna",nav_sss:"FAQ",
   kd_eyebrow:"TRIBUNA KERVEA",
-  kd_title:"Nuestras referencias no se compran.",
-  kd_lead:"Kervea está en fase piloto 2026. En esta sección solo se publican <strong>opiniones reales de miembros verificados</strong> — miembros cuyo perfil de LinkedIn, registro mercantil y volumen real de comercio coinciden.",
-  kd_badge:"Nuestro estándar de referencia",
-  kd_m_title:"¿Por qué aún no hay opiniones aquí?",
-  kd_m1t:"Kervea está en fase piloto 2026",
-  kd_m1d:"Los 10 primeros miembros verificados están actualmente en fase de integración. Sus referencias se añadirán aquí con fecha e insignia de verificación a medida que se publiquen.",
-  kd_m2t:"No aceptamos opiniones pagadas",
-  kd_m2d:"Ningún miembro paga a cambio de una opinión o de aparecer destacado. Las opiniones se toman del propio perfil del miembro, sin editar.",
-  kd_m3t:"Detrás de cada opinión hay un miembro verificable",
-  kd_m3d:"Se comprueba el perfil de LinkedIn, el registro mercantil y el volumen de comercio de los últimos 12 meses de cada miembro que deja una opinión. Las opiniones no se publican hasta completar estas tres verificaciones.",
-  kd_m4t:"Las opiniones negativas también se publican",
-  kd_m4d:"Los miembros que valoran a Kervea lo hacen en una escala de 1 a 5 estrellas. No hay filtrado; los comentarios negativos se publican junto con nuestra respuesta.",
-  kd_slot_open:"HUECO ABIERTO",
-  kd_slot1:"Reservado para la primera referencia verificada.",
-  kd_slot2:"Reservado para la segunda referencia verificada.",
-  kd_slot3:"Reservado para la tercera referencia verificada.",
-  kd_slot_when:"Se publica una vez completada la integración del miembro.",
-  kd_cta_t:"Sé uno de los 10 primeros miembros piloto.",
-  kd_cta_d:"Los miembros que se unen durante la fase piloto de Kervea aparecen destacados en la página de inicio y en los resultados de búsqueda. El registro es gratuito; Premium cuesta 280 USD al año.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"Añadir mi empresa",
-  geo_eyebrow:"KERVEA EN BUSCADORES DE IA",
-  geo_title:"Pregúntale a la IA sobre Kervea.",
-  geo_lead:"Para obtener una opinión independiente sobre Kervea, pregúntale directamente a los buscadores de IA. Los enlaces siguientes abren el buscador correspondiente con una consulta preparada — recibirás una respuesta basada en la información pública de Kervea.",
-  geo_ask:"Preguntar",
-  geo_faq_title:"Preguntas Frecuentes",
-  geo_faq_sub:"Las preguntas más frecuentes sobre Kervea y sus respuestas directas. Esta sección también es leída por los buscadores de IA.",
-  geo_q1_q:"¿Qué es Kervea?",
-  geo_q1_a:"Kervea es una red B2B de emparejamiento comercial que conecta directamente a vendedores y compradores utilizando datos de Trademap y aduanas oficiales. No es un intermediario y no cobra comisión. El registro es gratuito y la membresía Premium cuesta 280 USD al año. El corredor inicial es entre Turquía y África Occidental.",
-  geo_q2_q:"¿En qué se diferencia Kervea de Alibaba o plataformas similares?",
-  geo_q2_a:"Tenemos tres diferencias clave. Primero, Kervea no es intermediario — vendedores y compradores se comunican directamente, sin comisión. Segundo, el ranking no se compra — los miembros se clasifican solo por puntuación de compatibilidad, sin tarifas de destacado. Tercero, el precio es totalmente transparente — 280 USD al año de Premium, registro gratuito.",
-  geo_q3_q:"¿Cómo verifica Kervea a sus miembros?",
-  geo_q3_a:"Kervea aplica un sistema de verificación de 4 niveles: (1) verificación de correo electrónico, (2) comprobación del registro mercantil oficial, (3) coincidencia de cuenta bancaria e IBAN, (4) verificación in situ opcional. Ninguno de estos niveles puede omitirse a cambio de pago.",
-  geo_q4_q:"¿Cómo se cobra la membresía de Kervea?",
-  geo_q4_a:"El registro básico es gratuito — puedes crear un perfil, listar tus productos y recibir consultas entrantes sin limitaciones. La membresía Premium cuesta 280 USD al año e incluye búsqueda avanzada, soporte prioritario y acceso a datos comerciales. No hay comisiones ni tarifas por transacción.",
-  geo_q5_q:"¿Qué países cubre Kervea?",
-  geo_q5_a:"Durante su fase piloto 2026, Kervea se centra en el corredor Turquía–África Occidental (especialmente Senegal, Costa de Marfil, Nigeria, Marruecos y Ghana). En fases posteriores se añadirán los corredores de África del Norte, países del Golfo y CEI.",
-  geo_q6_q:"¿Qué infraestructura de pago y logística ofrece Kervea?",
-  geo_q6_a:"Kervea admite métodos de pago internacionales estándar como LC (carta de crédito) y TT (transferencia bancaria). Se integra con socios logísticos verificados que operan bajo estándares INCOTERMS. El pago y la entrega se realizan directamente entre los miembros — Kervea no es parte de la transacción."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ar:{
   nav_kursusu:"المنصة",nav_sss:"الأسئلة",
   kd_eyebrow:"منصة كيرفيا",
-  kd_title:"مراجعاتنا لا تُشترى.",
-  kd_lead:"كيرفيا في مرحلتها التجريبية لعام 2026. يُنشر في هذا القسم فقط <strong>مراجعات حقيقية لأعضاء موثقين</strong> — أعضاء تتطابق ملفاتهم على لينكدإن وسجلاتهم التجارية وأحجام تجارتهم الفعلية.",
-  kd_badge:"معيار المراجعات لدينا",
-  kd_m_title:"لماذا لا توجد مراجعات هنا حتى الآن؟",
-  kd_m1t:"كيرفيا في مرحلتها التجريبية لعام 2026",
-  kd_m1d:"أول 10 أعضاء موثقين في مرحلة الاندماج حاليًا. ستُضاف مراجعاتهم هنا مع التاريخ وشارة التوثيق فور بدء نشرها.",
-  kd_m2t:"لا نقبل مراجعات مدفوعة",
-  kd_m2d:"لا يُطلب من أي عضو مقابل مالي مقابل مراجعة أو ظهور مميز. تُؤخذ المراجعات من ملف العضو نفسه دون تعديل.",
-  kd_m3t:"وراء كل مراجعة عضو يمكن التحقق منه",
-  kd_m3d:"يُتحقق من الملف الشخصي على لينكدإن والسجل التجاري للشركة وحجم التجارة خلال الاثني عشر شهرًا الأخيرة لكل عضو يكتب مراجعة. لا تُنشر المراجعات قبل إتمام هذه الفحوصات الثلاثة.",
-  kd_m4t:"المراجعات السلبية تُنشر أيضًا",
-  kd_m4d:"يقيّم الأعضاء كيرفيا على مقياس من 1 إلى 5 نجوم. لا يوجد فلترة؛ تُنشر التعليقات السلبية مع ردنا عليها.",
-  kd_slot_open:"مقعد شاغر",
-  kd_slot1:"محجوز لأول مراجعة من عضو موثق.",
-  kd_slot2:"محجوز لثاني مراجعة من عضو موثق.",
-  kd_slot3:"محجوز لثالث مراجعة من عضو موثق.",
-  kd_slot_when:"يُنشر عند اكتمال اندماج العضو.",
-  kd_cta_t:"كن من أول 10 أعضاء تجريبيين.",
-  kd_cta_d:"يظهر الأعضاء المنضمون خلال المرحلة التجريبية لكيرفيا في مقدمة الصفحة الرئيسية للمنصة ونتائج البحث. الإدراج مجاني؛ Premium بمبلغ 1000 دولار أمريكي سنويًا.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"أضف شركتي",
-  geo_eyebrow:"كيرفيا في محركات البحث بالذكاء الاصطناعي",
-  geo_title:"اسأل الذكاء الاصطناعي عن كيرفيا.",
-  geo_lead:"للحصول على رأي مستقل حول كيرفيا، اسأل محركات البحث بالذكاء الاصطناعي مباشرة. تفتح الروابط أدناه المحرك المعني باستعلام جاهز — ستحصل على إجابة مبنية على المعلومات المتاحة للجمهور عن كيرفيا.",
-  geo_ask:"اسأل",
-  geo_faq_title:"الأسئلة الشائعة",
-  geo_faq_sub:"الأسئلة الأكثر شيوعًا حول كيرفيا وإجاباتها المباشرة. يُقرأ هذا القسم أيضًا من قبل محركات البحث بالذكاء الاصطناعي.",
-  geo_q1_q:"ما هي كيرفيا؟",
-  geo_q1_a:"كيرفيا شبكة مطابقة تجارية بين الشركات (B2B) تربط البائع بالمشتري مباشرة باستخدام بيانات Trademap والجمارك الرسمية. ليست وسيطًا ولا تأخذ عمولة. الإدراج مجاني، والعضوية Premium بمبلغ 1000 دولار أمريكي سنويًا. ممر التركيز الأولي بين تركيا وغرب أفريقيا.",
-  geo_q2_q:"كيف تختلف كيرفيا عن Alibaba أو المنصات المماثلة؟",
-  geo_q2_a:"لدينا ثلاثة فروق جوهرية. أولًا، كيرفيا ليست وسيطًا — يتواصل البائع والمشتري مباشرة، دون عمولة. ثانيًا، الترتيب لا يُشترى — يُرتَّب الأعضاء وفق درجة التوافق فقط، دون رسوم إبراز. ثالثًا، التسعير شفاف تمامًا — 1000 دولار سنويًا كرسم ثابت لـ Premium، والإدراج مجاني.",
-  geo_q3_q:"كيف توثق كيرفيا أعضاءها؟",
-  geo_q3_a:"تطبق كيرفيا نظام توثيق من 4 مراحل: (1) توثيق البريد الإلكتروني، (2) التحقق من السجل التجاري الرسمي، (3) مطابقة الحساب البنكي وIBAN، (4) توثيق ميداني اختياري. لا يمكن تخطي أي من هذه المراحل مقابل مبلغ مالي.",
-  geo_q4_q:"كيف يتم تسعير عضوية كيرفيا؟",
-  geo_q4_a:"الإدراج الأساسي مجاني — يمكنك إنشاء ملف تعريفي وإدراج منتجاتك واستقبال الطلبات الواردة دون قيود. العضوية Premium بمبلغ ثابت 1000 دولار سنويًا وتوفر ميزات إضافية كالبحث المتقدم، دعم العملاء ذي الأولوية، والوصول إلى بيانات التجارة. لا توجد عمولات أو رسوم على المعاملات.",
-  geo_q5_q:"ما البلدان التي تغطيها كيرفيا؟",
-  geo_q5_a:"خلال مرحلتها التجريبية لعام 2026، تركز كيرفيا على ممر تركيا–غرب أفريقيا (خصوصًا السنغال، ساحل العاج، نيجيريا، المغرب، وغانا). ستُضاف ممرات شمال أفريقيا ودول الخليج ورابطة الدول المستقلة في المراحل التالية.",
-  geo_q6_q:"ما البنية التحتية للدفع واللوجستيات التي توفرها كيرفيا؟",
-  geo_q6_a:"تدعم كيرفيا وسائل الدفع الدولية القياسية مثل الاعتماد المستندي (LC) والحوالة البنكية (TT). لديها تكامل مع شركاء لوجستيين موثقين يعملون وفق معايير INCOTERMS. تجري عمليات الدفع والتسليم مباشرة بين الأعضاء — كيرفيا ليست طرفًا في المعاملة."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ru:{
   nav_kursusu:"Трибуна",nav_sss:"FAQ",
   kd_eyebrow:"ТРИБУНА KERVEA",
-  kd_title:"Наши отзывы нельзя купить.",
-  kd_lead:"Kervea находится в пилотной фазе 2026 года. В этом разделе публикуются только <strong>реальные отзывы проверенных участников</strong> — участников, чей профиль LinkedIn, торговый реестр и реальный торговый оборот совпадают.",
-  kd_badge:"Наш стандарт отзывов",
-  kd_m_title:"Почему здесь пока нет отзывов?",
-  kd_m1t:"Kervea в пилотной фазе 2026 года",
-  kd_m1d:"Первые 10 проверенных участников сейчас находятся на этапе интеграции. Их отзывы будут добавлены сюда с датой и значком верификации по мере публикации.",
-  kd_m2t:"Мы не принимаем платные отзывы",
-  kd_m2d:"Ни один участник не платит за отзыв или продвижение. Отзывы берутся с профиля самого участника без редактирования.",
-  kd_m3t:"За каждым отзывом стоит проверяемый участник",
-  kd_m3d:"У каждого участника, оставившего отзыв, проверяются профиль LinkedIn, торговый реестр компании и объём торговли за последние 12 месяцев. Отзывы не публикуются до завершения всех трёх проверок.",
-  kd_m4t:"Отрицательные отзывы также публикуются",
-  kd_m4d:"Участники оценивают Kervea по шкале от 1 до 5 звёзд. Фильтрации нет; отрицательные отзывы публикуются вместе с нашим ответом.",
-  kd_slot_open:"МЕСТО СВОБОДНО",
-  kd_slot1:"Зарезервировано для первого отзыва проверенного участника.",
-  kd_slot2:"Зарезервировано для второго отзыва проверенного участника.",
-  kd_slot3:"Зарезервировано для третьего отзыва проверенного участника.",
-  kd_slot_when:"Публикуется после завершения интеграции участника.",
-  kd_cta_t:"Станьте одним из первых 10 пилотных участников.",
-  kd_cta_d:"Участники, присоединившиеся во время пилотной фазы Kervea, выделяются на главной странице платформы и в результатах поиска. Регистрация бесплатная; Premium — 1 000 USD в год.",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   kd_cta_btn:"Добавить мою компанию",
-  geo_eyebrow:"KERVEA В ПОИСКОВЫХ СИСТЕМАХ С ИИ",
-  geo_title:"Спросите ИИ о Kervea.",
-  geo_lead:"Чтобы получить независимое мнение о Kervea, спросите напрямую поисковые системы с ИИ. Ссылки ниже открывают соответствующий движок с готовым запросом — вы получите ответ на основе публичной информации о Kervea.",
-  geo_ask:"Спросить",
-  geo_faq_title:"Часто задаваемые вопросы",
-  geo_faq_sub:"Наиболее частые вопросы о Kervea и прямые ответы на них. Этот раздел также читают поисковые системы с ИИ.",
-  geo_q1_q:"Что такое Kervea?",
-  geo_q1_a:"Kervea — это B2B-сеть подбора торговых партнёров, соединяющая продавцов и покупателей напрямую с помощью данных Trademap и официальной таможенной статистики. Не является посредником и не берёт комиссию. Размещение бесплатное, Premium-членство стоит 1 000 USD в год. Первый коридор — Турция и Западная Африка.",
-  geo_q2_q:"Чем Kervea отличается от Alibaba и подобных платформ?",
-  geo_q2_a:"У нас три ключевых отличия. Во-первых, Kervea не посредник — продавцы и покупатели общаются напрямую, без комиссии. Во-вторых, ранжирование нельзя купить — участники ранжируются только по показателю совместимости, без платы за продвижение. В-третьих, тарификация полностью прозрачна — фиксированные 1 000 USD в год за Premium, размещение бесплатно.",
-  geo_q3_q:"Как Kervea проверяет своих участников?",
-  geo_q3_a:"Kervea применяет 4-уровневую систему верификации: (1) подтверждение email, (2) проверка официального торгового реестра, (3) сопоставление банковского счёта и IBAN, (4) опциональная выездная проверка. Ни один из этих уровней нельзя пропустить за оплату.",
-  geo_q4_q:"Как тарифицируется членство в Kervea?",
-  geo_q4_a:"Базовое размещение бесплатно — вы можете создать профиль, разместить продукты и получать входящие запросы без ограничений. Premium-членство стоит фиксированно 1 000 USD в год и предоставляет дополнительные функции, такие как расширенный поиск, приоритетная поддержка и доступ к торговым данным. Нет комиссий и транзакционных сборов.",
-  geo_q5_q:"Какие страны охватывает Kervea?",
-  geo_q5_a:"В пилотной фазе 2026 года Kervea фокусируется на коридоре Турция–Западная Африка (в частности Сенегал, Кот-д'Ивуар, Нигерия, Марокко и Гана). Коридоры Северной Африки, стран Персидского залива и СНГ будут добавлены на следующих этапах.",
-  geo_q6_q:"Какую инфраструктуру платежей и логистики предоставляет Kervea?",
-  geo_q6_a:"Kervea поддерживает стандартные международные способы оплаты, такие как LC (аккредитив) и TT (банковский перевод). Интегрирована с проверенными логистическими партнёрами, работающими по стандартам INCOTERMS. Платежи и доставка выполняются напрямую между участниками — Kervea не является стороной сделки."
- }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
 };
 // Merge Faz 2+3 keys into main T dict
 Object.keys(I18N_FAZ234).forEach(function(lg){
@@ -697,178 +669,172 @@ Object.keys(I18N_FAZ234).forEach(function(lg){
 var I18N_ABOUT = {
  tr:{
   abo_eyebrow:"HAKKIMIZDA",
-  abo_h1:"Aracıların kestiği bir <em>ipek yolu</em>nu<br/>alıcı ve satıcıya geri veriyoruz.",
-  abo_lead:"Kervea, Türkiye ile Batı Afrika arasındaki B2B ticareti — komisyoncular, sahte tedarikçiler ve fuar bekleme salonları arada olmadan — doğrudan buluşturan bir <strong>doğrulanmış ticaret ağıdır</strong>.",
-  abo_toc_story:"Hikaye",abo_toc_how:"Nasıl Çalışıyoruz",abo_toc_way:"Yol Haritası",abo_toc_num:"Rakamlar",abo_toc_team:"Ekip",abo_toc_val:"Değerler",
-  abo_story_h:"Kervea neden var?",
-  abo_story_p1:"Küresel ticaretteki değerin <strong>%8–15'i aracılara, çevirmenlere, fuar organizatörlerine ve sahte tedarikçileri elemek için harcanan zamana</strong> gidiyor. Küçük ve orta ölçekli üreticiler için bu maliyet, yeni bir pazara girmenin önündeki en büyük engel.",
-  abo_story_p2:"Türkiye ile Batı Afrika arasındaki koridor, bu sorunun en belirgin şekilde hissedildiği rotalardan biri: iki tarafta da güçlü üreticiler ve büyüyen tüketici pazarları var, ama arada dört-beş aracı katmanı, dört-altı hafta boşa geçen zaman, ve doğrulanmamış tedarikçi riski.",
-  abo_quote:"Aracıya, çevirmene, komisyoncuya ödediğiniz her ücret, aslında güvensizliğe ödediğiniz bir vergidir. Doğrulama sistemli olduğunda, o vergi ortadan kalkar.",
-  abo_quote_by:"— Kervea Kurucu Prensibi",
-  abo_how_h:"Nasıl çalışıyoruz",
-  abo_flow_1t:"Satıcı",abo_flow_2t:"Kervea Doğrulaması",abo_flow_3t:"Alıcı",abo_way_h:"Yol haritamız",
-  abo_tl_now:"ŞU AN",abo_tl_plan:"HEDEF",
-  abo_tl1t:"Pilot Dönem",abo_tl2t:"Koridor Genişlemesi",abo_tl3t:"Enterprise API",
-  abo_num_h:"Bugün nerdeyiz",
-  abo_num1_l:"Ülke ve bölge",abo_num2_l:"Arayüz ve çeviri dili",abo_num3_l:"Ana sektör",abo_num4_l:"Doğrulama kademesi",abo_num5_l:"Komisyon oranı",abo_num6_l:"Yıllık Premium ücret",
-  abo_team_h:"Ekibimiz",
-  abo_team_t:"Ekip profilleri yakında yayınlanacak",
-  abo_team_r1:"Kurucu Ortak · CEO",abo_team_r2:"Kurucu Ortak · CTO",abo_team_r3:"Operasyon Direktörü",abo_team_r4:"Ticaret Danışmanı · Batı Afrika",
-  abo_team_soon:"Profil yakında",
-  abo_val_h:"Değerlerimiz",
-  abo_v1t:"Şeffaflık",
-  abo_v2t:"Doğrulama",
-  abo_v3t:"Yerellik",
-  abo_v4t:"Bağımsızlık",
-  abo_cta_t:"Kervea'nın pilot döneminde yer alın.",
-  abo_cta_d:"İlk 10 doğrulanmış üye bu koridorun tarihini yazacak. Listeleme ücretsiz, komisyon yok.",
-  abo_cta_p:"Firmamı Ekle",abo_cta_s:"Önce Sorularımı Sor"
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  en:{
   abo_eyebrow:"ABOUT US",
-  abo_h1:"We're giving back to buyers and sellers the <em>silk road</em><br/>that intermediaries have taken.",
-  abo_lead:"Kervea is a <strong>verified trade network</strong> that connects B2B trade between Turkey and West Africa directly — without brokers, fake suppliers or trade fair waiting rooms.",
-  abo_toc_story:"Story",abo_toc_how:"How We Work",abo_toc_way:"Roadmap",abo_toc_num:"Numbers",abo_toc_team:"Team",abo_toc_val:"Values",
-  abo_story_h:"Why Kervea exists",
-  abo_story_p1:"<strong>8–15% of the value in global trade</strong> goes to intermediaries, translators, trade fair organizers, and the time spent filtering out fake suppliers. For small and medium producers, this cost is the biggest barrier to entering a new market.",
-  abo_story_p2:"The Turkey–West Africa corridor is one of the routes where this problem is most acutely felt: strong producers and growing consumer markets on both sides, but four to five layers of intermediaries in between, four to six wasted weeks, and unverified supplier risk.",
-  abo_quote:"Every fee you pay to a broker, translator or commission agent is actually a tax you pay on distrust. When verification is systematic, that tax disappears.",
-  abo_quote_by:"— Kervea Founding Principle",
-  abo_how_h:"How we work",
-  abo_flow_1t:"Seller",abo_flow_2t:"Kervea Verification",abo_flow_3t:"Buyer",abo_way_h:"Our roadmap",
-  abo_tl_now:"NOW",abo_tl_plan:"TARGET",
-  abo_tl1t:"Pilot Phase",abo_tl2t:"Corridor Expansion",abo_tl3t:"Enterprise API",
-  abo_num_h:"Where we are today",
-  abo_num1_l:"Countries and territories",abo_num2_l:"Interface and translation languages",abo_num3_l:"Main sectors",abo_num4_l:"Verification tiers",abo_num5_l:"Commission rate",abo_num6_l:"Annual Premium fee",
-  abo_team_h:"Our team",
-  abo_team_t:"Team profiles will be published soon",
-  abo_team_r1:"Co-founder · CEO",abo_team_r2:"Co-founder · CTO",abo_team_r3:"Operations Director",abo_team_r4:"Trade Advisor · West Africa",
-  abo_team_soon:"Profile coming",
-  abo_val_h:"Our values",
-  abo_v1t:"Transparency",
-  abo_v2t:"Verification",
-  abo_v3t:"Localization",
-  abo_v4t:"Independence",
-  abo_cta_t:"Join Kervea's pilot phase.",
-  abo_cta_d:"The first 10 verified members will write the history of this corridor. Listing is free, no commission.",
-  abo_cta_p:"Add My Company",abo_cta_s:"Ask My Questions First"
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  fr:{
   abo_eyebrow:"À PROPOS",
-  abo_h1:"Nous rendons aux acheteurs et vendeurs la <em>route de la soie</em><br/>que les intermédiaires ont coupée.",
-  abo_lead:"Kervea est un <strong>réseau commercial vérifié</strong> qui connecte directement le commerce B2B entre la Turquie et l'Afrique de l'Ouest — sans courtiers, sans faux fournisseurs et sans salles d'attente de foires commerciales.",
-  abo_toc_story:"Histoire",abo_toc_how:"Comment nous travaillons",abo_toc_way:"Feuille de route",abo_toc_num:"Chiffres",abo_toc_team:"Équipe",abo_toc_val:"Valeurs",
-  abo_story_h:"Pourquoi Kervea existe",
-  abo_story_p1:"<strong>8 à 15 % de la valeur du commerce mondial</strong> vont aux intermédiaires, aux traducteurs, aux organisateurs de foires commerciales, et au temps passé à écarter les faux fournisseurs. Pour les petits et moyens producteurs, ce coût est le plus grand obstacle pour entrer sur un nouveau marché.",
-  abo_story_p2:"Le couloir Turquie–Afrique de l'Ouest est l'une des routes où ce problème se ressent le plus fortement : des producteurs solides et des marchés en croissance des deux côtés, mais quatre à cinq couches d'intermédiaires entre les deux, quatre à six semaines perdues, et le risque de fournisseurs non vérifiés.",
-  abo_quote:"Chaque frais que vous payez à un courtier, un traducteur ou un commissionnaire est en réalité un impôt payé sur la méfiance. Lorsque la vérification est systématique, cet impôt disparaît.",
-  abo_quote_by:"— Principe fondateur de Kervea",
-  abo_how_h:"Comment nous travaillons",
-  abo_flow_1t:"Vendeur",abo_flow_2t:"Vérification Kervea",abo_flow_3t:"Acheteur",abo_way_h:"Notre feuille de route",
-  abo_tl_now:"MAINTENANT",abo_tl_plan:"OBJECTIF",
-  abo_tl1t:"Phase pilote",abo_tl2t:"Expansion du couloir",abo_tl3t:"API Enterprise",
-  abo_num_h:"Où nous en sommes aujourd'hui",
-  abo_num1_l:"Pays et territoires",abo_num2_l:"Langues d'interface et de traduction",abo_num3_l:"Secteurs principaux",abo_num4_l:"Niveaux de vérification",abo_num5_l:"Taux de commission",abo_num6_l:"Frais Premium annuels",
-  abo_team_h:"Notre équipe",
-  abo_team_t:"Les profils de l'équipe seront publiés bientôt",
-  abo_team_r1:"Cofondateur · CEO",abo_team_r2:"Cofondateur · CTO",abo_team_r3:"Directeur des opérations",abo_team_r4:"Conseiller commerce · Afrique de l'Ouest",
-  abo_team_soon:"Profil à venir",
-  abo_val_h:"Nos valeurs",
-  abo_v1t:"Transparence",
-  abo_v2t:"Vérification",
-  abo_v3t:"Localisation",
-  abo_v4t:"Indépendance",
-  abo_cta_t:"Participez à la phase pilote de Kervea.",
-  abo_cta_d:"Les 10 premiers membres vérifiés écriront l'histoire de ce couloir. L'inscription est gratuite, sans commission.",
-  abo_cta_p:"Ajouter mon entreprise",abo_cta_s:"D'abord poser mes questions"
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  es:{
   abo_eyebrow:"SOBRE NOSOTROS",
-  abo_h1:"Devolvemos a compradores y vendedores la <em>ruta de la seda</em><br/>que los intermediarios han cortado.",
-  abo_lead:"Kervea es una <strong>red comercial verificada</strong> que conecta directamente el comercio B2B entre Turquía y África Occidental, sin corredores, sin proveedores falsos y sin salas de espera de ferias comerciales.",
-  abo_toc_story:"Historia",abo_toc_how:"Cómo trabajamos",abo_toc_way:"Hoja de ruta",abo_toc_num:"Cifras",abo_toc_team:"Equipo",abo_toc_val:"Valores",
-  abo_story_h:"Por qué existe Kervea",
-  abo_story_p1:"<strong>El 8–15 % del valor del comercio mundial</strong> va a intermediarios, traductores, organizadores de ferias comerciales y al tiempo empleado en filtrar proveedores falsos. Para los pequeños y medianos productores, este coste es la mayor barrera para entrar en un nuevo mercado.",
-  abo_story_p2:"El corredor Turquía–África Occidental es una de las rutas donde este problema se siente con más claridad: productores sólidos y mercados de consumo en crecimiento en ambos lados, pero cuatro o cinco capas de intermediarios entre medio, cuatro a seis semanas perdidas y riesgo de proveedores no verificados.",
-  abo_quote:"Cada tarifa que pagas a un corredor, traductor o comisionista es en realidad un impuesto que pagas sobre la desconfianza. Cuando la verificación es sistemática, ese impuesto desaparece.",
-  abo_quote_by:"— Principio fundacional de Kervea",
-  abo_how_h:"Cómo trabajamos",
-  abo_flow_1t:"Vendedor",abo_flow_2t:"Verificación Kervea",abo_flow_3t:"Comprador",abo_way_h:"Nuestra hoja de ruta",
-  abo_tl_now:"AHORA",abo_tl_plan:"OBJETIVO",
-  abo_tl1t:"Fase piloto",abo_tl2t:"Expansión del corredor",abo_tl3t:"API Enterprise",
-  abo_num_h:"Dónde estamos hoy",
-  abo_num1_l:"Países y territorios",abo_num2_l:"Idiomas de interfaz y traducción",abo_num3_l:"Sectores principales",abo_num4_l:"Niveles de verificación",abo_num5_l:"Tasa de comisión",abo_num6_l:"Tarifa Premium anual",
-  abo_team_h:"Nuestro equipo",
-  abo_team_t:"Los perfiles del equipo se publicarán próximamente",
-  abo_team_r1:"Cofundador · CEO",abo_team_r2:"Cofundador · CTO",abo_team_r3:"Director de operaciones",abo_team_r4:"Asesor de comercio · África Occidental",
-  abo_team_soon:"Perfil próximamente",
-  abo_val_h:"Nuestros valores",
-  abo_v1t:"Transparencia",
-  abo_v2t:"Verificación",
-  abo_v3t:"Localización",
-  abo_v4t:"Independencia",
-  abo_cta_t:"Únete a la fase piloto de Kervea.",
-  abo_cta_d:"Los primeros 10 miembros verificados escribirán la historia de este corredor. Registro gratuito, sin comisión.",
-  abo_cta_p:"Añadir mi empresa",abo_cta_s:"Antes hacer mis preguntas"
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ar:{
   abo_eyebrow:"من نحن",
-  abo_h1:"نُعيد للمشترين والبائعين <em>طريق الحرير</em><br/>الذي قطعه الوسطاء.",
-  abo_lead:"كيرفيا <strong>شبكة تجارية موثقة</strong> تربط التجارة B2B بين تركيا وغرب أفريقيا مباشرة — دون سماسرة، أو موردين وهميين، أو صالات انتظار في المعارض.",
-  abo_toc_story:"القصة",abo_toc_how:"كيف نعمل",abo_toc_way:"خارطة الطريق",abo_toc_num:"الأرقام",abo_toc_team:"الفريق",abo_toc_val:"القيم",
-  abo_story_h:"لماذا وُجدت كيرفيا",
-  abo_story_p1:"<strong>يذهب 8–15٪ من قيمة التجارة العالمية</strong> إلى الوسطاء والمترجمين ومنظمي المعارض والوقت المستنزف في تصفية الموردين المزيفين. بالنسبة للمنتجين الصغار والمتوسطين، هذه التكلفة هي أكبر عائق أمام دخول سوق جديدة.",
-  abo_story_p2:"ممر تركيا–غرب أفريقيا من أكثر الممرات التي تُلمَس فيها هذه المشكلة بوضوح: منتجون أقوياء وأسواق مستهلكة متنامية على الجانبين، لكن بين الطرفين أربع إلى خمس طبقات من الوسطاء، وأربعة إلى ستة أسابيع مهدرة، ومخاطر المورد غير الموثق.",
-  abo_quote:"كل رسم تدفعه لسمسار أو مترجم أو وكيل عمولة هو في الواقع ضريبة تدفعها على انعدام الثقة. عندما يصبح التوثيق منهجيًا، تختفي تلك الضريبة.",
-  abo_quote_by:"— المبدأ التأسيسي لكيرفيا",
-  abo_how_h:"كيف نعمل",
-  abo_flow_1t:"البائع",abo_flow_2t:"توثيق كيرفيا",abo_flow_3t:"المشتري",abo_way_h:"خارطة طريقنا",
-  abo_tl_now:"الآن",abo_tl_plan:"الهدف",
-  abo_tl1t:"المرحلة التجريبية",abo_tl2t:"توسيع الممر",abo_tl3t:"واجهة Enterprise API",
-  abo_num_h:"أين نحن اليوم",
-  abo_num1_l:"دولة وإقليم",abo_num2_l:"لغة واجهة وترجمة",abo_num3_l:"قطاع رئيسي",abo_num4_l:"مرحلة توثيق",abo_num5_l:"نسبة العمولة",abo_num6_l:"الرسم السنوي Premium",
-  abo_team_h:"فريقنا",
-  abo_team_t:"سيتم نشر ملفات الفريق قريبًا",
-  abo_team_r1:"شريك مؤسس · الرئيس التنفيذي",abo_team_r2:"شريك مؤسس · المدير التقني",abo_team_r3:"مدير العمليات",abo_team_r4:"مستشار تجاري · غرب أفريقيا",
-  abo_team_soon:"الملف قريبًا",
-  abo_val_h:"قيمنا",
-  abo_v1t:"الشفافية",
-  abo_v2t:"التوثيق",
-  abo_v3t:"المحلية",
-  abo_v4t:"الاستقلالية",
-  abo_cta_t:"انضم إلى المرحلة التجريبية لكيرفيا.",
-  abo_cta_d:"أول 10 أعضاء موثقين سيكتبون تاريخ هذا الممر. الإدراج مجاني، لا عمولة.",
-  abo_cta_p:"أضف شركتي",abo_cta_s:"أطرح أسئلتي أولًا"
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ru:{
   abo_eyebrow:"О НАС",
-  abo_h1:"Мы возвращаем покупателям и продавцам <em>шёлковый путь</em>,<br/>перерезанный посредниками.",
-  abo_lead:"Kervea — это <strong>проверенная торговая сеть</strong>, напрямую связывающая B2B-торговлю между Турцией и Западной Африкой, без брокеров, поддельных поставщиков и залов ожидания торговых выставок.",
-  abo_toc_story:"История",abo_toc_how:"Как мы работаем",abo_toc_way:"Дорожная карта",abo_toc_num:"Цифры",abo_toc_team:"Команда",abo_toc_val:"Ценности",
-  abo_story_h:"Почему существует Kervea",
-  abo_story_p1:"<strong>8–15% стоимости в мировой торговле</strong> уходит посредникам, переводчикам, организаторам выставок и на время, потраченное на отсев поддельных поставщиков. Для малых и средних производителей эта стоимость — главный барьер при выходе на новый рынок.",
-  abo_story_p2:"Коридор Турция–Западная Африка — один из маршрутов, где эта проблема ощущается наиболее остро: сильные производители и растущие потребительские рынки с обеих сторон, но между ними четыре-пять слоёв посредников, четыре-шесть впустую потраченных недель и риск непроверенных поставщиков.",
-  abo_quote:"Каждый сбор, который вы платите брокеру, переводчику или комиссионеру, — это на самом деле налог, который вы платите за недоверие. Когда проверка становится системной, этот налог исчезает.",
-  abo_quote_by:"— Основополагающий принцип Kervea",
-  abo_how_h:"Как мы работаем",
-  abo_flow_1t:"Продавец",abo_flow_2t:"Верификация Kervea",abo_flow_3t:"Покупатель",abo_way_h:"Наша дорожная карта",
-  abo_tl_now:"СЕЙЧАС",abo_tl_plan:"ЦЕЛЬ",
-  abo_tl1t:"Пилотный этап",abo_tl2t:"Расширение коридора",abo_tl3t:"Enterprise API",
-  abo_num_h:"Где мы сегодня",
-  abo_num1_l:"Страны и территории",abo_num2_l:"Языки интерфейса и перевода",abo_num3_l:"Основные отрасли",abo_num4_l:"Уровни верификации",abo_num5_l:"Комиссия",abo_num6_l:"Годовая плата Premium",
-  abo_team_h:"Наша команда",
-  abo_team_t:"Профили команды будут опубликованы вскоре",
-  abo_team_r1:"Соучредитель · CEO",abo_team_r2:"Соучредитель · CTO",abo_team_r3:"Директор по операциям",abo_team_r4:"Торговый советник · Западная Африка",
-  abo_team_soon:"Профиль скоро",
-  abo_val_h:"Наши ценности",
-  abo_v1t:"Прозрачность",
-  abo_v2t:"Верификация",
-  abo_v3t:"Локализация",
-  abo_v4t:"Независимость",
-  abo_cta_t:"Присоединяйтесь к пилотному этапу Kervea.",
-  abo_cta_d:"Первые 10 проверенных участников напишут историю этого коридора. Регистрация бесплатная, без комиссии.",
-  abo_cta_p:"Добавить мою компанию",abo_cta_s:"Сначала задать вопросы"
- }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
 };
 // Merge About i18n into main T
 Object.keys(I18N_ABOUT).forEach(function(lg){
@@ -880,92 +846,92 @@ Object.keys(I18N_ABOUT).forEach(function(lg){
 var I18N_SP = {
  tr:{
   pr_h:"Fiyatlandırma",
-  pr_p:"Tek plan. Şeffaf ücret. Komisyon yok.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/yıl",
-  sp_sub:"Tek plan · Tüm özellikler · Komisyon yok · Sıralama satın alınamaz",
-  sp_f1:"Sınırsız doğrulanmış firma eşleşmesi",
-  sp_f2:"6 dilde otomatik profil ve mesaj çevirisi",
-  sp_f3:"Firmalarla doğrudan uçtan uca şifreli iletişim",
-  sp_f4:"Trademap gümrük veri erişimi",
-  sp_f5:"Prospektüs PDF üretici + dosya paylaşımı",
-  sp_f6:"Öncelikli müşteri desteği (12 saat)",
-  sp_f7:"Kervea Kürsüsü'nde öne çıkma hakkı",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"Kervea Premium'a Başla",
  },
  en:{
   pr_h:"Pricing",
-  pr_p:"One plan. Transparent fee. No commission.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/year",
-  sp_sub:"One plan · All features · No commission · Ranking cannot be bought",
-  sp_f1:"Unlimited verified company matches",
-  sp_f2:"Auto profile and message translation in 6 languages",
-  sp_f3:"Direct end-to-end encrypted communication with companies",
-  sp_f4:"Trademap customs data access",
-  sp_f5:"Prospectus PDF generator + file sharing",
-  sp_f6:"Priority customer support (12h)",
-  sp_f7:"Featured placement on Kervea Podium",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"Start Kervea Premium",
  },
  fr:{
   pr_h:"Tarification",
-  pr_p:"Un seul plan. Tarif transparent. Aucune commission.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/an",
-  sp_sub:"Un plan · Toutes les fonctionnalités · Aucune commission · Le classement ne s'achète pas",
-  sp_f1:"Correspondances illimitées d'entreprises vérifiées",
-  sp_f2:"Traduction automatique de profil et de messages en 6 langues",
-  sp_f3:"Communication directe et chiffrée de bout en bout avec les entreprises",
-  sp_f4:"Accès aux données douanières Trademap",
-  sp_f5:"Générateur de prospectus PDF + partage de fichiers",
-  sp_f6:"Support client prioritaire (12 h)",
-  sp_f7:"Mise en avant sur la Tribune Kervea",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"Démarrer Kervea Premium",
  },
  es:{
   pr_h:"Precios",
-  pr_p:"Un solo plan. Tarifa transparente. Sin comisión.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/año",
-  sp_sub:"Un plan · Todas las funciones · Sin comisión · El posicionamiento no se compra",
-  sp_f1:"Coincidencias ilimitadas de empresas verificadas",
-  sp_f2:"Traducción automática de perfil y mensajes en 6 idiomas",
-  sp_f3:"Comunicación directa cifrada de extremo a extremo con empresas",
-  sp_f4:"Acceso a datos aduaneros de Trademap",
-  sp_f5:"Generador de PDF de prospecto + intercambio de archivos",
-  sp_f6:"Soporte prioritario al cliente (12 h)",
-  sp_f7:"Destacado en la Tribuna Kervea",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"Comenzar Kervea Premium",
  },
  ar:{
   pr_h:"التسعير",
-  pr_p:"خطة واحدة. رسم شفاف. لا عمولة.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/سنة",
-  sp_sub:"خطة واحدة · جميع الميزات · لا عمولة · الترتيب لا يُشترى",
-  sp_f1:"مطابقات غير محدودة للشركات الموثقة",
-  sp_f2:"ترجمة تلقائية للملف والرسائل بست لغات",
-  sp_f3:"اتصال مباشر مشفر من الطرف إلى الطرف مع الشركات",
-  sp_f4:"الوصول إلى بيانات Trademap الجمركية",
-  sp_f5:"مولّد PDF للنشرة + مشاركة الملفات",
-  sp_f6:"دعم عملاء بأولوية (12 ساعة)",
-  sp_f7:"الظهور المميز على منصة كيرفيا",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"ابدأ Kervea Premium",
  },
  ru:{
   pr_h:"Цены",
-  pr_p:"Один план. Прозрачная плата. Без комиссии.",
+  
   sp_badge:"KERVEA PREMIUM",
   sp_per:"/год",
-  sp_sub:"Один план · Все функции · Без комиссии · Ранжирование нельзя купить",
-  sp_f1:"Неограниченные совпадения с проверенными компаниями",
-  sp_f2:"Автоматический перевод профиля и сообщений на 6 языков",
-  sp_f3:"Прямое сквозное шифрованное общение с компаниями",
-  sp_f4:"Доступ к таможенным данным Trademap",
-  sp_f5:"Генератор PDF-проспектов + обмен файлами",
-  sp_f6:"Приоритетная поддержка клиентов (12 ч)",
-  sp_f7:"Выделенное размещение на Трибуне Kervea",
+  
+  
+  
+  
+  
+  
+  
+  
   sp_cta:"Начать Kervea Premium",
  }
 };
@@ -990,12 +956,12 @@ Object.keys(I18N_MISC).forEach(function(lg){
 
 // About Mini Map legend i18n (Faz 8)
 var I18N_ABOMM = {
- tr:{abo_mm_active:"TÜRKİYE MERKEZLİ", abo_mm_hub:"AKTİF HUB", abo_mm_future:"HEDEF KORİDOR"},
- en:{abo_mm_active:"TURKEY-ANCHORED", abo_mm_hub:"ACTIVE HUB", abo_mm_future:"TARGET CORRIDOR"},
- fr:{abo_mm_active:"CENTRÉ TURQUIE", abo_mm_hub:"HUB ACTIF", abo_mm_future:"COULOIR CIBLE"},
- es:{abo_mm_active:"CENTRADO EN TURQUÍA", abo_mm_hub:"HUB ACTIVO", abo_mm_future:"CORREDOR OBJETIVO"},
- ar:{abo_mm_active:"مركزه تركيا", abo_mm_hub:"مركز نشط", abo_mm_future:"ممر هدف"},
- ru:{abo_mm_active:"ЦЕНТР — ТУРЦИЯ", abo_mm_hub:"АКТИВНЫЙ ХАБ", abo_mm_future:"ЦЕЛЕВОЙ КОРИДОР"}
+ tr:{  },
+ en:{  },
+ fr:{  },
+ es:{  },
+ ar:{  },
+ ru:{  }
 };
 Object.keys(I18N_ABOMM).forEach(function(lg){
  if(!T[lg]) T[lg] = {};
@@ -1005,71 +971,65 @@ Object.keys(I18N_ABOMM).forEach(function(lg){
 // Trust Badges i18n (Faz 8)
 var I18N_TRUST = {
  tr:{
-  abo_toc_trust:"Güven ve Uyum",
-  abo_trust_h:"Güven ve uyum",
-  abo_trust_lead:"Kervea, ticari veri güvenliğini pilot dönemden itibaren birinci öncelik olarak alır. Aşağıdaki sertifikasyon ve uyum standartları hedeflerimizin ve mevcut uyumluluk seviyemizin şeffaf haritasıdır.",
-  abo_trust_active:"Uyumlu",
-  abo_trust_target1:"Hedef 2027",
-  abo_trust_target2:"Hedef 2028",
-  abo_trust_e2e:"E2E Şifreleme",
-  abo_trust_verify:"4 Kademe Doğrulama",
-  abo_trust_foot:"Uyumluluk durumumuz her çeyrek kamu raporunda güncellenir. Denetim raporlarına erişim için iletişime geçiniz."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  en:{
-  abo_toc_trust:"Trust and Compliance",
-  abo_trust_h:"Trust and compliance",
-  abo_trust_lead:"Kervea has treated commercial data security as a top priority since the pilot phase. The certifications and compliance standards below are a transparent map of our current compliance level and our targets.",
-  abo_trust_active:"Compliant",
-  abo_trust_target1:"Target 2027",
-  abo_trust_target2:"Target 2028",
-  abo_trust_e2e:"E2E Encryption",
-  abo_trust_verify:"4-Tier Verification",
-  abo_trust_foot:"Our compliance status is updated in a quarterly public report. Contact us for audit report access."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  fr:{
-  abo_toc_trust:"Confiance et conformité",
-  abo_trust_h:"Confiance et conformité",
-  abo_trust_lead:"Kervea traite la sécurité des données commerciales comme une priorité absolue depuis la phase pilote. Les certifications et normes de conformité ci-dessous constituent une carte transparente de notre niveau de conformité actuel et de nos objectifs.",
-  abo_trust_active:"Conforme",
-  abo_trust_target1:"Objectif 2027",
-  abo_trust_target2:"Objectif 2028",
-  abo_trust_e2e:"Chiffrement E2E",
-  abo_trust_verify:"Vérification 4 niveaux",
-  abo_trust_foot:"Notre statut de conformité est mis à jour dans un rapport public trimestriel. Contactez-nous pour accéder aux rapports d'audit."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  es:{
-  abo_toc_trust:"Confianza y cumplimiento",
-  abo_trust_h:"Confianza y cumplimiento",
-  abo_trust_lead:"Kervea ha tratado la seguridad de los datos comerciales como una prioridad principal desde la fase piloto. Las certificaciones y estándares de cumplimiento a continuación son un mapa transparente de nuestro nivel de cumplimiento actual y nuestros objetivos.",
-  abo_trust_active:"Cumple",
-  abo_trust_target1:"Objetivo 2027",
-  abo_trust_target2:"Objetivo 2028",
-  abo_trust_e2e:"Cifrado E2E",
-  abo_trust_verify:"Verificación de 4 niveles",
-  abo_trust_foot:"Nuestro estado de cumplimiento se actualiza en un informe público trimestral. Contáctenos para acceder a los informes de auditoría."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ar:{
-  abo_toc_trust:"الثقة والامتثال",
-  abo_trust_h:"الثقة والامتثال",
-  abo_trust_lead:"تعامل كيرفيا مع أمن البيانات التجارية كأولوية قصوى منذ المرحلة التجريبية. الشهادات ومعايير الامتثال أدناه هي خارطة شفافة لمستوى امتثالنا الحالي وأهدافنا.",
-  abo_trust_active:"متوافق",
-  abo_trust_target1:"الهدف 2027",
-  abo_trust_target2:"الهدف 2028",
-  abo_trust_e2e:"تشفير E2E",
-  abo_trust_verify:"توثيق 4 مراحل",
-  abo_trust_foot:"يتم تحديث حالة امتثالنا في تقرير عام ربع سنوي. اتصل بنا للوصول إلى تقارير التدقيق."
- },
+  
+  
+  
+  
+  
+  
+  
+  
+  },
  ru:{
-  abo_toc_trust:"Доверие и соответствие",
-  abo_trust_h:"Доверие и соответствие",
-  abo_trust_lead:"Kervea рассматривает безопасность коммерческих данных как главный приоритет с пилотного этапа. Приведённые ниже сертификаты и стандарты соответствия — прозрачная карта нашего текущего уровня соответствия и наших целей.",
-  abo_trust_active:"Соответствует",
-  abo_trust_target1:"Цель 2027",
-  abo_trust_target2:"Цель 2028",
-  abo_trust_e2e:"E2E шифрование",
-  abo_trust_verify:"4-уровневая верификация",
-  abo_trust_foot:"Наш статус соответствия обновляется в ежеквартальном публичном отчёте. Свяжитесь с нами для доступа к отчётам аудита."
- }
+  
+  
+  
+  
+  
+  
+  
+  
+  }
 };
 Object.keys(I18N_TRUST).forEach(function(lg){
  if(!T[lg]) T[lg] = {};
@@ -1348,17 +1308,29 @@ Object.keys(I18N_F12).forEach(function(lg){
 
 // Faz 17_3 · küre kartı, ülke filtresi, dil menüsü (tr + en zorunlu; eksik anahtar İngilizceye düşer)
 var I18N_F17 = {
- tr:{ lang_pick:"Dil seçimi", all_countries:"Tüm ülkeler", gc_group:"Küre üzerindeki ülkeler",
+ tr:{ ft_col_platform:"Platform", ft_col_company:"Şirket", ft_col_legal:"Yasal", ft_l_hiw:"Nasıl Çalışır",
+      theme_toggle:"Tema değiştir", globe_aria:"Dünya haritası: ülkelerin üzerine gelince bilgi kartı açılır", close:"Kapat", legal_note:"Hukuki metnin bağlayıcı sürümü Türkçedir; aşağıdaki metin Türkçe olarak sunulur.",
+      lang_pick:"Dil seçimi", all_countries:"Tüm ülkeler", gc_group:"Küre üzerindeki ülkeler",
       gc_firms_one:"{n} doğrulanmış firma", gc_firms_other:"{n} doğrulanmış firma" },
- en:{ lang_pick:"Language", all_countries:"All countries", gc_group:"Countries on the globe",
+ en:{ ft_col_platform:"Platform", ft_col_company:"Company", ft_col_legal:"Legal", ft_l_hiw:"How It Works",
+      theme_toggle:"Switch theme", globe_aria:"World globe: point at a country to see an info card", close:"Close", legal_note:"The legally binding version of this document is in Turkish; it is shown below in Turkish.",
+      lang_pick:"Language", all_countries:"All countries", gc_group:"Countries on the globe",
       gc_firms_one:"{n} verified company", gc_firms_other:"{n} verified companies" },
- es:{ lang_pick:"Idioma", all_countries:"Todos los países", gc_group:"Países en el globo",
+ es:{ ft_col_platform:"Plataforma", ft_col_company:"Empresa", ft_col_legal:"Legal", ft_l_hiw:"Cómo Funciona",
+      theme_toggle:"Cambiar tema", globe_aria:"Globo terráqueo: pase el cursor sobre un país para ver su ficha", close:"Cerrar", legal_note:"La versión jurídicamente vinculante de este documento está en turco; se muestra abajo en turco.",
+      lang_pick:"Idioma", all_countries:"Todos los países", gc_group:"Países en el globo",
       gc_firms_one:"{n} empresa verificada", gc_firms_other:"{n} empresas verificadas" },
- fr:{ lang_pick:"Langue", all_countries:"Tous les pays", gc_group:"Pays sur le globe",
+ fr:{ ft_col_platform:"Plateforme", ft_col_company:"Société", ft_col_legal:"Légal", ft_l_hiw:"Comment ça marche",
+      theme_toggle:"Changer de thème", globe_aria:"Globe terrestre : survolez un pays pour afficher sa fiche", close:"Fermer", legal_note:"La version juridiquement contraignante de ce document est en turc ; elle est présentée ci-dessous en turc.",
+      lang_pick:"Langue", all_countries:"Tous les pays", gc_group:"Pays sur le globe",
       gc_firms_one:"{n} entreprise vérifiée", gc_firms_other:"{n} entreprises vérifiées" },
- ar:{ lang_pick:"اللغة", all_countries:"كل الدول", gc_group:"الدول على الكرة الأرضية",
+ ar:{ ft_col_platform:"المنصة", ft_col_company:"الشركة", ft_col_legal:"قانوني", ft_l_hiw:"كيف يعمل",
+      theme_toggle:"تبديل المظهر", globe_aria:"كرة أرضية: مرّر المؤشر فوق دولة لعرض بطاقتها", close:"إغلاق", legal_note:"النسخة الملزمة قانونًا لهذه الوثيقة هي التركية، وتُعرض أدناه بالتركية.",
+      lang_pick:"اللغة", all_countries:"كل الدول", gc_group:"الدول على الكرة الأرضية",
       gc_firms_one:"شركة موثقة واحدة", gc_firms_two:"شركتان موثقتان", gc_firms_few:"{n} شركات موثقة", gc_firms_many:"{n} شركة موثقة", gc_firms_other:"{n} شركة موثقة" },
- ru:{ lang_pick:"Язык", all_countries:"Все страны", gc_group:"Страны на глобусе",
+ ru:{ ft_col_platform:"Платформа", ft_col_company:"Компания", ft_col_legal:"Правовая информация", ft_l_hiw:"Как это работает",
+      theme_toggle:"Сменить тему", globe_aria:"Глобус: наведите курсор на страну, чтобы увидеть карточку", close:"Закрыть", legal_note:"Юридически обязательная версия этого документа — турецкая; ниже она показана на турецком.",
+      lang_pick:"Язык", all_countries:"Все страны", gc_group:"Страны на глобусе",
       gc_firms_one:"{n} проверенная компания", gc_firms_few:"{n} проверенные компании", gc_firms_many:"{n} проверенных компаний", gc_firms_other:"{n} проверенных компаний" }
 };
 Object.keys(I18N_F17).forEach(function(lg){
@@ -1374,10 +1346,10 @@ var I18N_F13 = {
   login_remember:"Beni hatırla", login_forgot:"Parolamı unuttum",
   login_submit:"Giriş yap", login_or:"veya",
   login_no_account:"Hesabın yok mu?", login_signup:"Firmanı ekle",
-  nl_tag:"PİLOT GÜNCELLEMELERİ",
-  nl_h:"İlk 10 üye ilan edildiğinde haberdar olun",
+  
+  
   nl_ph:"E-posta adresiniz", nl_submit:"Abone ol",
-  nl_trust1:"Spam yok", nl_trust2:"KVKK uyumlu", nl_trust3:"Tek tık iptal",
+    
   nl_lvl_all:"Tümü", nl_lvl_all_d:"Tüm bildirimleri al",
   nl_lvl_imp:"Önemli", nl_lvl_imp_d:"Sadece yüksek öncelikli",
   nl_lvl_mnt:"Mesajlar", nl_lvl_mnt_d:"Sadece direkt mesajlar",
@@ -1390,10 +1362,10 @@ var I18N_F13 = {
   login_remember:"Remember me", login_forgot:"Forgot password",
   login_submit:"Sign in", login_or:"or",
   login_no_account:"No account yet?", login_signup:"Add your company",
-  nl_tag:"PILOT UPDATES",
-  nl_h:"Be the first to know when the first 10 members are announced",
+  
+  
   nl_ph:"Your email address", nl_submit:"Subscribe",
-  nl_trust1:"No spam", nl_trust2:"GDPR compliant", nl_trust3:"One-click unsubscribe",
+    
   nl_lvl_all:"All", nl_lvl_all_d:"Receive all notifications",
   nl_lvl_imp:"Important", nl_lvl_imp_d:"High priority only",
   nl_lvl_mnt:"Messages", nl_lvl_mnt_d:"Direct messages only",
@@ -1406,10 +1378,10 @@ var I18N_F13 = {
   login_remember:"Se souvenir de moi", login_forgot:"Mot de passe oublié",
   login_submit:"Se connecter", login_or:"ou",
   login_no_account:"Pas encore de compte ?", login_signup:"Ajouter votre entreprise",
-  nl_tag:"MISES À JOUR PILOTE",
-  nl_h:"Soyez informé lorsque les 10 premiers membres seront annoncés",
+  
+  
   nl_ph:"Votre adresse e-mail", nl_submit:"S'abonner",
-  nl_trust1:"Pas de spam", nl_trust2:"Conforme RGPD", nl_trust3:"Désabonnement en 1 clic",
+    
   nl_lvl_all:"Tous", nl_lvl_all_d:"Recevoir toutes les notifications",
   nl_lvl_imp:"Important", nl_lvl_imp_d:"Priorité élevée uniquement",
   nl_lvl_mnt:"Messages", nl_lvl_mnt_d:"Messages directs uniquement",
@@ -1422,10 +1394,10 @@ var I18N_F13 = {
   login_remember:"Recuérdame", login_forgot:"Olvidé mi contraseña",
   login_submit:"Iniciar sesión", login_or:"o",
   login_no_account:"¿Aún no tienes cuenta?", login_signup:"Añadir empresa",
-  nl_tag:"ACTUALIZACIONES PILOTO",
-  nl_h:"Sé el primero en saber cuándo se anunciarán los primeros 10 miembros",
+  
+  
   nl_ph:"Tu correo electrónico", nl_submit:"Suscribirse",
-  nl_trust1:"Sin spam", nl_trust2:"Cumple RGPD", nl_trust3:"Baja en 1 clic",
+    
   nl_lvl_all:"Todas", nl_lvl_all_d:"Recibir todas las notificaciones",
   nl_lvl_imp:"Importantes", nl_lvl_imp_d:"Sólo alta prioridad",
   nl_lvl_mnt:"Mensajes", nl_lvl_mnt_d:"Sólo mensajes directos",
@@ -1438,10 +1410,10 @@ var I18N_F13 = {
   login_remember:"تذكرني", login_forgot:"نسيت كلمة المرور",
   login_submit:"تسجيل الدخول", login_or:"أو",
   login_no_account:"ليس لديك حساب؟", login_signup:"أضف شركتك",
-  nl_tag:"تحديثات المرحلة التجريبية",
-  nl_h:"كن أول من يعلم عند الإعلان عن الأعضاء العشرة الأوائل",
+  
+  
   nl_ph:"عنوان بريدك الإلكتروني", nl_submit:"اشترك",
-  nl_trust1:"لا رسائل مزعجة", nl_trust2:"متوافق مع GDPR", nl_trust3:"إلغاء بنقرة واحدة",
+    
   nl_lvl_all:"الكل", nl_lvl_all_d:"استقبال جميع الإشعارات",
   nl_lvl_imp:"مهم", nl_lvl_imp_d:"عالي الأولوية فقط",
   nl_lvl_mnt:"رسائل", nl_lvl_mnt_d:"الرسائل المباشرة فقط",
@@ -1454,10 +1426,10 @@ var I18N_F13 = {
   login_remember:"Запомнить меня", login_forgot:"Забыли пароль",
   login_submit:"Войти", login_or:"или",
   login_no_account:"Ещё нет аккаунта?", login_signup:"Добавить компанию",
-  nl_tag:"ПИЛОТНЫЕ ОБНОВЛЕНИЯ",
-  nl_h:"Узнайте первым, когда будут объявлены первые 10 участников",
+  
+  
   nl_ph:"Ваш email", nl_submit:"Подписаться",
-  nl_trust1:"Без спама", nl_trust2:"Соответствие GDPR", nl_trust3:"Отписка в 1 клик",
+    
   nl_lvl_all:"Все", nl_lvl_all_d:"Получать все уведомления",
   nl_lvl_imp:"Важные", nl_lvl_imp_d:"Только высокий приоритет",
   nl_lvl_mnt:"Сообщения", nl_lvl_mnt_d:"Только прямые сообщения",
@@ -1705,144 +1677,144 @@ Object.keys(I18N_F15_AI).forEach(function(lg){
 (function(){var ADD={
  tr:{
   why_h:"Neden Kervea?",
-  why_p:"Doğrulanmış firmalarla doğrudan iletişim. Komisyon yok, güvenilmez tedarikçi yok, sadece gerçek ticaret.",
-  why_1t:"Ülke koridoru",
-  why_2t:"Doğrulama başarısı",
-  why_3t:"Dilde canlı çeviri",
+  
+  
+  
+  
   hiw_tag:"NASIL ÇALIŞIR",
   hiw_h:"Aracı yok. Sadece <em style=\"font-style:normal;color:var(--teal)\">gerçek ticaret</em>.",
-  hiw_1t:"Doğrulanmış partneri bulun",
-  hiw_1a:"AI eşleştirme",
-  hiw_1b:"3 aşamalı doğrulama",
-  hiw_1c:"Kervea rozeti",
-  hiw_2t:"Doğrudan üreticiyle konuşun",
-  hiw_2a:"Otomatik çeviri",
-  hiw_2b:"E2E şifreli",
-  hiw_2c:"Karar vericiye erişim",
-  hiw_3t:"Anlaşın, sevk edin",
-  hiw_3a:"INCOTERM standardı",
-  hiw_3b:"LC/TT desteği",
-  hiw_3c:"Lojistik ağı",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"Gerçek üreticiler, gerçek fabrikalar, gerçek konteynerler",
   ss_p:"Kervea firmaları katalog değil, denetlenmiş sahada üretim yapan ve ihracat kaydı olan işletmelerdir.",
   ss_5t:"Multimodal",
   ss_5s:"Kara, deniz, hava lojistik"},
  en:{
   why_h:"Why Kervea?",
-  why_p:"Direct communication with verified companies. No commissions, no unreliable suppliers, just real trade.",
-  why_1t:"Country corridors",
-  why_2t:"Verification success",
-  why_3t:"Live translation",
+  
+  
+  
+  
   hiw_tag:"HOW IT WORKS",
   hiw_h:"Direct trade. Just <em style=\"font-style:normal;color:var(--teal)\">real connections</em>.",
-  hiw_1t:"Find a verified partner",
-  hiw_1a:"AI matching",
-  hiw_1b:"3-stage verification",
-  hiw_1c:"Kervea badge",
-  hiw_2t:"Talk to the manufacturer directly",
-  hiw_2a:"Auto-translate",
-  hiw_2b:"E2E encrypted",
-  hiw_2c:"Decision-maker access",
-  hiw_3t:"Agree and ship",
-  hiw_3a:"INCOTERM standard",
-  hiw_3b:"LC/TT support",
-  hiw_3c:"Logistics network",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"Real manufacturers, real factories, real containers",
   ss_p:"Kervea firms aren't a catalog — they are audited, on-the-ground producers with real export records.",
   ss_5t:"Multimodal",
   ss_5s:"Road, sea, air logistics"},
  es:{
   why_h:"¿Por qué Kervea?",
-  why_p:"Adiós intermediarios, comisiones y proveedores poco fiables. Comunicación directa, empresas verificadas, comercio real.",
-  why_1t:"Corredores país",
-  why_2t:"Éxito de verificación",
-  why_3t:"Traducción en vivo",
+  
+  
+  
+  
   hiw_tag:"CÓMO FUNCIONA",
   hiw_h:"Contacto directo. <em style=\"font-style:normal;color:var(--teal)\">Solo comercio real</em>.",
-  hiw_1t:"Encuentre un socio verificado",
-  hiw_1a:"Matching IA",
-  hiw_1b:"Verificación en 3 etapas",
-  hiw_1c:"Insignia Kervea",
-  hiw_2t:"Hable directamente con el fabricante",
-  hiw_2a:"Traducción auto",
-  hiw_2b:"Cifrado E2E",
-  hiw_2c:"Acceso decisor",
-  hiw_3t:"Acuerde y envíe",
-  hiw_3a:"Estándar INCOTERM",
-  hiw_3b:"Soporte LC/TT",
-  hiw_3c:"Red logística",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"Fabricantes reales, fábricas reales, contenedores reales",
   ss_p:"Las empresas Kervea son productores auditados con registros reales de exportación, no un catálogo.",
   ss_5t:"Multimodal",
   ss_5s:"Terrestre, marítimo, aéreo"},
  fr:{
   why_h:"Pourquoi Kervea ?",
-  why_p:"Adieu intermédiaires, commissions et fournisseurs peu fiables. Communication directe, entreprises vérifiées, commerce réel.",
-  why_1t:"Corridors pays",
-  why_2t:"Succès de vérification",
-  why_3t:"Traduction en direct",
+  
+  
+  
+  
   hiw_tag:"COMMENT ÇA MARCHE",
   hiw_h:"Pas d'intermédiaires. Juste du <em style=\"font-style:normal;color:var(--teal)\">commerce réel</em>.",
-  hiw_1t:"Trouvez un partenaire vérifié",
-  hiw_1a:"Matching IA",
-  hiw_1b:"Vérification en 3 étapes",
-  hiw_1c:"Badge Kervea",
-  hiw_2t:"Parlez directement au fabricant",
-  hiw_2a:"Traduction auto",
-  hiw_2b:"Chiffrement E2E",
-  hiw_2c:"Accès décideur",
-  hiw_3t:"Convenir et expédier",
-  hiw_3a:"Norme INCOTERM",
-  hiw_3b:"Support LC/TT",
-  hiw_3c:"Réseau logistique",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"Vrais fabricants, vraies usines, vrais conteneurs",
   ss_p:"Les entreprises Kervea sont des producteurs audités avec registres d'export réels, pas un catalogue.",
   ss_5t:"Multimodal",
   ss_5s:"Route, mer, air"},
  ar:{
   why_h:"لماذا Kervea؟",
-  why_p:"وداعاً للوسطاء والعمولات والموردين غير الموثوقين. تواصل مباشر، شركات موثقة، تجارة حقيقية.",
-  why_1t:"ممرات دولية",
-  why_2t:"نجاح التحقق",
-  why_3t:"ترجمة مباشرة",
+  
+  
+  
+  
   hiw_tag:"كيف يعمل",
   hiw_h:"باتصال مباشر. <em style=\"font-style:normal;color:var(--teal)\">تجارة حقيقية فقط</em>.",
-  hiw_1t:"اعثر على شريك موثق",
-  hiw_1a:"مطابقة بالذكاء الاصطناعي",
-  hiw_1b:"تحقق من 3 مراحل",
-  hiw_1c:"شارة Kervea",
-  hiw_2t:"تحدث مباشرة مع الشركة المصنعة",
-  hiw_2a:"ترجمة تلقائية",
-  hiw_2b:"تشفير E2E",
-  hiw_2c:"وصول لصانع القرار",
-  hiw_3t:"اتفق وشحن",
-  hiw_3a:"معيار INCOTERM",
-  hiw_3b:"دعم LC/TT",
-  hiw_3c:"شبكة لوجستية",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"مصنعون حقيقيون، مصانع حقيقية، حاويات حقيقية",
   ss_p:"شركات Kervea ليست دليلاً بل منتجون مدققون لديهم سجلات تصدير حقيقية.",
   ss_5t:"متعدد الوسائط",
   ss_5s:"بري وبحري وجوي"},
  ru:{
   why_h:"Почему Kervea?",
-  why_p:"Прощайте, посредники, комиссии и ненадежные поставщики. Прямое общение, проверенные компании, реальная торговля.",
-  why_1t:"Страновые коридоры",
-  why_2t:"Успех верификации",
-  why_3t:"Живой перевод",
+  
+  
+  
+  
   hiw_tag:"КАК ЭТО РАБОТАЕТ",
   hiw_h:"Без посредников. Только <em style=\"font-style:normal;color:var(--teal)\">реальная торговля</em>.",
-  hiw_1t:"Найдите проверенного партнера",
-  hiw_1a:"AI-подбор",
-  hiw_1b:"3-этапная верификация",
-  hiw_1c:"Значок Kervea",
-  hiw_2t:"Говорите напрямую с производителем",
-  hiw_2a:"Автоперевод",
-  hiw_2b:"E2E-шифрование",
-  hiw_2c:"Доступ к ЛПР",
-  hiw_3t:"Договоритесь и отправьте",
-  hiw_3a:"Стандарт INCOTERM",
-  hiw_3b:"Поддержка LC/TT",
-  hiw_3c:"Логистическая сеть",
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   ss_h:"Реальные производители, реальные заводы, реальные контейнеры",
   ss_p:"Компании Kervea — это проверенные производители с реальными записями экспорта, а не каталог.",
   ss_5t:"Мультимодальные",
@@ -1850,6 +1822,828 @@ Object.keys(I18N_F15_AI).forEach(function(lg){
 Object.keys(ADD).forEach(function(lg){if(!T[lg]) T[lg]={}; Object.keys(ADD[lg]).forEach(function(k){T[lg][k]=ADD[lg][k];});});
 })();
 
+
+// Faz 17_3 · pazarlama metinleri: sade, doğrulanabilir, marka kılavuzu ses tonu (abartı ve uydurma ölçü yok).
+// Eski tanımların yerine geçer; tr + en zorunlu, eksik çeviri İngilizceye düşer.
+var I18N_COPY = {
+ tr:{
+  "h_lead":"Belgeleri bir yönetici tarafından incelenmiş firmalar. Ürün, firma adı veya HS koduyla arayın; sonuçları ülke ve sektöre göre daraltın.",
+  "qt1":"Finlandiya'da mobilya alıcısı",
+  "qt2":"Fildişi Sahili'nde kakao tedarikçisi",
+  "qt3":"Kazakistan'da tekstil alıcısı",
+  "s_pos":"Doğrulanmış firma",
+  "s_ctr":"Firması olan ülke",
+  "why_p":"Kervea bir pazaryeri değildir: sepet, ödeme ve komisyon yoktur. Firmalar belgeleriyle başvurur, bir yönetici inceler; ticareti taraflar kendi aralarında yapar.",
+  "why_1n":"Belge incelemesi",
+  "why_1t":"Başvuran her firmanın belgeleri bir yönetici tarafından kontrol edilir; onaylananlar “doğrulanmış” rozetiyle listelenir.",
+  "why_2n":"Komisyon yok",
+  "why_2t":"Kervea satışa karışmaz. Sepet ve ödeme yoktur; anlaşma ve ödeme firmalar arasında yapılır.",
+  "why_3n":"6 dil",
+  "why_3t":"Site Türkçe, İngilizce, İspanyolca, Fransızca, Arapça ve Rusça kullanılabilir.",
+  "hiw_1t":"Doğrulanmış firmayı bulun",
+  "hiw_1a":"Ürün, firma veya HS kodu",
+  "hiw_1b":"Ülke ve sektör filtresi",
+  "hiw_1c":"Doğrulanmış rozeti",
+  "hiw_2t":"Doğrudan firmayla iletişime geçin",
+  "hiw_2a":"Aynı sektörde mesajlaşma",
+  "hiw_2b":"İletişim bilgisi: Premium",
+  "hiw_2c":"Diğer sektörler: kredi",
+  "hiw_3t":"Anlaşın, sevk edin",
+  "hiw_3a":"Profilde INCOTERM bilgisi",
+  "hiw_3b":"Ödeme şekli firmalar arasında",
+  "hiw_3c":"Kervea satışa karışmaz",
+  "kd_title":"Referanslar, gerçek üyeler yazdıkça yayınlanır.",
+  "kd_lead":"Kervea yeni bir ağdır ve henüz yayınlanmış bir üye yorumu yoktur. Sahte referans göstermiyoruz; üyeler yazıp onay verdikçe burada yer alacak. Yorum karşılığında ücret alınmaz.",
+  "kd_cta_t":"Firmanızı Kervea'ya ekleyin.",
+  "kd_cta_d":"Listeleme ücretsizdir. Başvurunuzdaki belgeler incelendikten sonra profiliniz yayına girer.",
+  "geo_eyebrow":"SSS",
+  "geo_title":"Sıkça sorulan sorular",
+  "geo_lead":"Kervea'nın ne yaptığı ve ne yapmadığı hakkında kısa cevaplar.",
+  "geo_q1_q":"Kervea nedir?",
+  "geo_q1_a":"Kervea, doğrulanmış firmaları ülke ve sektöre göre listeleyen çok dilli bir B2B ticaret eşleştirme ağıdır. Pazaryeri değildir; sepet, ödeme ve komisyon yoktur. Satıcı ile alıcıyı buluşturur, ticareti taraflar kendi aralarında yapar.",
+  "geo_q2_q":"Kervea bir pazaryeri mi?",
+  "geo_q2_a":"Hayır. Kervea satış yapmaz, ödeme toplamaz ve komisyon almaz. Firmaları belgeleriyle doğrular, listeler ve iletişim kurmalarını sağlar.",
+  "geo_q3_q":"Firmalar nasıl doğrulanıyor?",
+  "geo_q3_a":"Başvuran firma ticari kimliğini ve belgelerini (ör. vergi levhası, ticaret sicili) yükler. Belgeleri bir yönetici inceler. Onaylanan firmanın profili “doğrulanmış” rozetiyle yayına girer; onaylanmayan başvuru yayınlanmaz.",
+  "geo_q4_q":"Ücret nasıl işliyor?",
+  "geo_q4_a":"Firma eklemek ve listelenmek ücretsizdir. Premium üyelik yıllıktır ve firmaların iletişim bilgilerini görmenizi sağlar. Başka sektörlerdeki kişilere ulaşmak için kredi kullanılır: üyelikte başlangıç kredisi tanımlanır, ek kredi paketi satın alınabilir. Kervea hiçbir işlemden komisyon almaz.",
+  "geo_q5_q":"Hangi ülkelerden firma var?",
+  "geo_q5_a":"Herhangi bir ülkeden başvurulabilir. Ana sayfadaki küre üzerinde firması olan ülkeler vurgulanır; bir ülkenin üzerine gelince o ülkedeki doğrulanmış firma sayısını görürsünüz.",
+  "geo_q6_q":"Ödeme ve lojistik hizmeti var mı?",
+  "geo_q6_a":"Hayır. Ödeme şekli (ör. akreditif, havale) ve teslimat şartları (INCOTERM) firma profilinde belirtilir; ödeme ve sevkiyat firmalar arasında yürür, Kervea sürece taraf olmaz.",
+  "nl_tag":"DUYURULAR",
+  "nl_h":"Yeni özellikler ve duyurular için e-posta bırakın",
+  "nl_consent":"Duyuru e-postaları almayı kabul ediyorum. İstediğim zaman çıkarılmayı isteyebilirim.",
+  "nl_ok":"Teşekkürler, e-posta adresiniz kaydedildi.",
+  "nl_bad_email":"Geçerli bir e-posta adresi girin.",
+  "nl_need_consent":"Devam etmek için onay kutusunu işaretleyin.",
+  "nl_busy":"Çok fazla deneme yapıldı. Lütfen biraz sonra tekrar deneyin.",
+  "nl_fail":"Kaydedilemedi. Lütfen daha sonra tekrar deneyin.",
+  "nl_sending":"Gönderiliyor…",
+  "ft_brand_desc":"Küresel, çok dilli B2B ticaret eşleştirme ağı. Komisyon yok; firmalar belgeleriyle doğrulanır.",
+  "abo_h1":"Doğru satıcıyla doğru alıcıyı <em>buluşturuyoruz</em>.",
+  "abo_lead":"Kervea, doğrulanmış firmaları ülke ve sektöre göre listeleyen çok dilli bir B2B ticaret eşleştirme ağıdır. <strong>Pazaryeri değildir</strong>: sepet, ödeme ve komisyon yoktur.",
+  "abo_mm_active":"TÜRKİYE",
+  "abo_mm_hub":"FİRMASI OLAN ÜLKE",
+  "abo_mm_future":"HEDEF KORİDOR",
+  "abo_toc_aria":"Sayfa içi gezinme",
+  "abo_toc_what":"Ne yapar",
+  "abo_toc_how":"Nasıl çalışır",
+  "abo_toc_rules":"Üyelik kuralları",
+  "abo_toc_not":"Ne yapmaz",
+  "abo_toc_data":"Verileriniz",
+  "abo_toc_co":"Şirket",
+  "abo_what_h":"Kervea ne yapar?",
+  "abo_w1t":"Firmaları listeler",
+  "abo_w1d":"Başvuran firmalar profil sayfasıyla yayına girer: sektör, ürün, HS kodu, ülke ve iletişim tercihi görünür.",
+  "abo_w2t":"Belgeleri kontrol eder",
+  "abo_w2d":"Her başvurunun belgeleri bir yönetici tarafından incelenir. Onaylanmayan firma listelenmez.",
+  "abo_w3t":"Karşı tarafı bulmayı kolaylaştırır",
+  "abo_w3d":"Ürün, HS kodu, ülke ve sektöre göre arama yapılır; yönü (ihracat / ithalat) uyuşan firmalar öne çıkar.",
+  "abo_w4t":"İletişimi izne bağlar",
+  "abo_w4d":"Firmanın e-posta ve telefonu yalnızca firma izin verdiyse ve yalnızca Premium üyelere gösterilir.",
+  "abo_how_h":"Nasıl çalışır?",
+  "abo_flow_aria":"Ticaret akışı",
+  "abo_flow_1t":"Satıcı",
+  "abo_flow_2t":"Kervea doğrulaması",
+  "abo_flow_3t":"Alıcı",
+  "abo_s1t":"Başvuru",
+  "abo_s1d":"Firma bilgilerini ve belgelerini (ör. vergi levhası, ticaret sicili) yükler.",
+  "abo_s2t":"İnceleme",
+  "abo_s2d":"Bir yönetici belgeleri kontrol eder; sonuç e-postayla bildirilir.",
+  "abo_s3t":"Yayın",
+  "abo_s3d":"Onaylanan firma, “doğrulanmış” rozetiyle aramalarda görünür.",
+  "abo_rules_h":"Üyelik kuralları",
+  "abo_r1t":"Aynı sektör: açık",
+  "abo_r1d":"Aynı sektördeki firmalar birbirini tam görür ve birbirine mesaj yazabilir.",
+  "abo_r2t":"Başka sektör: kilitli",
+  "abo_r2d":"Başka sektörlerdeki firmalar kilitli kart olarak görünür. O sektörlerdeki kişilere kredi harcayarak ulaşılır.",
+  "abo_r3t":"Kredi",
+  "abo_r3d":"Üyelik onaylanınca hesabınıza başlangıç kredisi tanımlanır; gerekirse ek kredi paketi satın alırsınız.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"Firmaların e-posta, telefon ve web sitesi bilgileri Premium üyelere, firma izin verdiyse gösterilir.",
+  "abo_not_h":"Kervea ne yapmaz?",
+  "abo_n1":"Satış yapmaz, ödeme toplamaz, komisyon almaz.",
+  "abo_n2":"İletişim listesi ya da veri satmaz.",
+  "abo_n3":"Sıralamayı satmaz: öne çıkma ücreti yoktur.",
+  "abo_n4":"Ödeme ve sevkiyata taraf olmaz; bunlar firmalar arasında yürür.",
+  "abo_num_h":"Bugün",
+  "abo_num1_l":"Doğrulanmış firma",
+  "abo_num2_l":"Firması olan ülke",
+  "abo_num3_l":"Ana sektör",
+  "abo_num4_l":"Site dili",
+  "abo_data_h":"Verilerinize nasıl bakıyoruz?",
+  "abo_d1t":"Belgeler özel alanda tutulur",
+  "abo_d1d":"Yüklediğiniz belgeler herkese açık değildir; yalnızca yöneticiler görür.",
+  "abo_d2t":"Kart bilgisi bizde saklanmaz",
+  "abo_d2d":"Ödeme, ödeme sağlayıcısının güvenli sayfasında alınır.",
+  "abo_d3t":"İzinleri siz yönetirsiniz",
+  "abo_d3d":"İletişim bilgilerinizin gösterilmesi için verdiğiniz izni panelden istediğiniz zaman geri alabilirsiniz.",
+  "abo_co_h":"Şirket bilgileri",
+  "abo_co_name":"Ticari unvan",
+  "abo_co_addr":"Adres",
+  "abo_co_mersis":"MERSİS no",
+  "abo_co_founders":"Kurucular",
+  "abo_co_todo":"[Eklenecek]",
+  "abo_cta_t":"Firmanızı Kervea'ya ekleyin.",
+  "abo_cta_d":"Listeleme ücretsiz, komisyon yok. Belgeleriniz incelendikten sonra profiliniz yayına girer.",
+  "abo_cta_p":"Firmamı Ekle",
+  "abo_cta_s":"Sıkça sorulan sorular",
+  "pr_p":"Listeleme ücretsiz. Premium yıllık. Komisyon yok.",
+  "sp_sub":"Yıllık üyelik · Komisyon yok · Sıralama satın alınamaz",
+  "sp_f1":"Firmaların e-posta, telefon ve web sitesi bilgileri (firma izin verdiyse)",
+  "sp_f2":"Her Premium alımında bonus kredi",
+  "sp_f3":"Komisyon ve işlem ücreti yok",
+  "sp_note":"Premium olmadan da firma ekleyebilir, arama yapabilir ve profilinizi yayınlayabilirsiniz.",
+  "promo_h2":"Promosyon kodu",
+  "promo_s2":"Elinizde bir kod varsa buraya girin; indirim ödeme adımında uygulanır.",
+  "promo_ph":"Promosyon kodu",
+  "ct_p":"Soru, öneri ya da sorun için yazın; en kısa sürede dönüş yapıyoruz.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"Adres:"
+ },
+ en:{
+  "h_lead":"Companies whose documents were reviewed by an administrator. Search by product, company name or HS code, then narrow the results by country and sector.",
+  "qt1":"Furniture buyer in Finland",
+  "qt2":"Cocoa supplier in Côte d'Ivoire",
+  "qt3":"Textile buyer in Kazakhstan",
+  "s_pos":"Verified companies",
+  "s_ctr":"Countries with companies",
+  "why_p":"Kervea is not a marketplace: there is no cart, no payment and no commission. Companies apply with their documents, an administrator reviews them, and the parties do business directly with each other.",
+  "why_1n":"Document review",
+  "why_1t":"An administrator checks the documents of every applicant. Approved companies are listed with a “verified” badge.",
+  "why_2n":"No commission",
+  "why_2t":"Kervea does not take part in sales. There is no cart or checkout; deals and payments are made between the companies.",
+  "why_3n":"6 languages",
+  "why_3t":"The site is available in Turkish, English, Spanish, French, Arabic and Russian.",
+  "hiw_1t":"Find a verified company",
+  "hiw_1a":"Product, company or HS code",
+  "hiw_1b":"Country and sector filters",
+  "hiw_1c":"Verified badge",
+  "hiw_2t":"Contact the company directly",
+  "hiw_2a":"Messaging within your sector",
+  "hiw_2b":"Contact details: Premium",
+  "hiw_2c":"Other sectors: credits",
+  "hiw_3t":"Agree and ship",
+  "hiw_3a":"INCOTERM shown on the profile",
+  "hiw_3b":"Payment terms agreed between companies",
+  "hiw_3c":"Kervea stays out of the sale",
+  "kd_title":"References are published as real members write them.",
+  "kd_lead":"Kervea is a new network and no member review has been published yet. We do not show made-up references; reviews will appear here once members write them and approve their publication. We never charge for reviews.",
+  "kd_cta_t":"Add your company to Kervea.",
+  "kd_cta_d":"Listing is free. Your profile goes live after the documents in your application have been reviewed.",
+  "geo_eyebrow":"FAQ",
+  "geo_title":"Frequently asked questions",
+  "geo_lead":"Short answers about what Kervea does and what it does not do.",
+  "geo_q1_q":"What is Kervea?",
+  "geo_q1_a":"Kervea is a multilingual B2B trade matching network that lists verified companies by country and sector. It is not a marketplace: there is no cart, no payment and no commission. It brings sellers and buyers together, and they do business directly with each other.",
+  "geo_q2_q":"Is Kervea a marketplace?",
+  "geo_q2_a":"No. Kervea does not sell, collect payments or take commission. It verifies companies from their documents, lists them and lets them get in touch.",
+  "geo_q3_q":"How are companies verified?",
+  "geo_q3_a":"The applicant uploads its business details and documents (for example a tax certificate or trade registry extract). An administrator reviews them. Approved companies go live with a “verified” badge; applications that are not approved are not published.",
+  "geo_q4_q":"How does pricing work?",
+  "geo_q4_a":"Adding and listing a company is free. Premium is an annual membership that lets you see companies' contact details. Reaching people in other sectors uses credits: you get starting credits with your membership and can buy extra credit packs. Kervea takes no commission on anything.",
+  "geo_q5_q":"Which countries have companies?",
+  "geo_q5_a":"Companies can apply from any country. On the globe on the home page, countries that have companies are highlighted; point at a country to see how many verified companies it has.",
+  "geo_q6_q":"Is there a payment or logistics service?",
+  "geo_q6_a":"No. Payment terms (for example letter of credit or bank transfer) and delivery terms (INCOTERM) are shown on the company profile; payment and shipping are handled between the companies and Kervea is not a party to them.",
+  "nl_tag":"ANNOUNCEMENTS",
+  "nl_h":"Leave your e-mail for new features and announcements",
+  "nl_consent":"I agree to receive announcement e-mails. I can ask to be removed at any time.",
+  "nl_ok":"Thank you, your e-mail address has been saved.",
+  "nl_bad_email":"Enter a valid e-mail address.",
+  "nl_need_consent":"Tick the consent box to continue.",
+  "nl_busy":"Too many attempts. Please try again in a few minutes.",
+  "nl_fail":"Could not be saved. Please try again later.",
+  "nl_sending":"Sending…",
+  "ft_brand_desc":"A global, multilingual B2B trade matching network. No commission; companies are verified from their documents.",
+  "abo_h1":"We connect the right seller with the right buyer.",
+  "abo_lead":"Kervea is a multilingual B2B trade matching network that lists verified companies by country and sector. <strong>It is not a marketplace</strong>: there is no cart, no payment and no commission.",
+  "abo_mm_active":"TÜRKİYE",
+  "abo_mm_hub":"COUNTRY WITH COMPANIES",
+  "abo_mm_future":"TARGET CORRIDOR",
+  "abo_toc_aria":"On this page",
+  "abo_toc_what":"What it does",
+  "abo_toc_how":"How it works",
+  "abo_toc_rules":"Membership rules",
+  "abo_toc_not":"What it does not do",
+  "abo_toc_data":"Your data",
+  "abo_toc_co":"Company",
+  "abo_what_h":"What does Kervea do?",
+  "abo_w1t":"Lists companies",
+  "abo_w1d":"Companies that apply go live with a profile page showing sector, products, HS codes, country and their contact preference.",
+  "abo_w2t":"Checks documents",
+  "abo_w2d":"An administrator reviews the documents of every application. A company that is not approved is not listed.",
+  "abo_w3t":"Makes the other side easier to find",
+  "abo_w3d":"You search by product, HS code, country and sector; companies whose direction (export / import) fits yours come first.",
+  "abo_w4t":"Ties contact to consent",
+  "abo_w4d":"A company's e-mail and phone are shown only if the company allows it, and only to Premium members.",
+  "abo_how_h":"How does it work?",
+  "abo_flow_aria":"Trade flow",
+  "abo_flow_1t":"Seller",
+  "abo_flow_2t":"Kervea verification",
+  "abo_flow_3t":"Buyer",
+  "abo_s1t":"Application",
+  "abo_s1d":"The company uploads its details and documents (for example a tax certificate or trade registry extract).",
+  "abo_s2t":"Review",
+  "abo_s2d":"An administrator checks the documents and the result is sent by e-mail.",
+  "abo_s3t":"Publication",
+  "abo_s3d":"An approved company appears in search results with a “verified” badge.",
+  "abo_rules_h":"Membership rules",
+  "abo_r1t":"Same sector: open",
+  "abo_r1d":"Companies in the same sector see each other in full and can message each other.",
+  "abo_r2t":"Other sectors: locked",
+  "abo_r2d":"Companies in other sectors appear as locked cards. You reach people in those sectors by spending credits.",
+  "abo_r3t":"Credits",
+  "abo_r3d":"When your membership is approved your account gets starting credits; you can buy extra credit packs if you need them.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"Companies' e-mail, phone and website are shown to Premium members when the company has allowed it.",
+  "abo_not_h":"What Kervea does not do",
+  "abo_n1":"It does not sell, collect payments or take commission.",
+  "abo_n2":"It does not sell contact lists or data.",
+  "abo_n3":"It does not sell ranking: there is no fee for a better position.",
+  "abo_n4":"It is not a party to payment or shipping; those stay between the companies.",
+  "abo_num_h":"Today",
+  "abo_num1_l":"Verified companies",
+  "abo_num2_l":"Countries with companies",
+  "abo_num3_l":"Main sectors",
+  "abo_num4_l":"Site languages",
+  "abo_data_h":"How we treat your data",
+  "abo_d1t":"Documents are kept private",
+  "abo_d1d":"The documents you upload are not public; only administrators can see them.",
+  "abo_d2t":"Card details are not stored by us",
+  "abo_d2d":"Payment is taken on the payment provider's secure page.",
+  "abo_d3t":"You manage the permissions",
+  "abo_d3d":"You can withdraw the permission to show your contact details from your panel at any time.",
+  "abo_co_h":"Company details",
+  "abo_co_name":"Legal name",
+  "abo_co_addr":"Address",
+  "abo_co_mersis":"MERSIS no.",
+  "abo_co_founders":"Founders",
+  "abo_co_todo":"[To be added]",
+  "abo_cta_t":"Add your company to Kervea.",
+  "abo_cta_d":"Listing is free and there is no commission. Your profile goes live after your documents have been reviewed.",
+  "abo_cta_p":"Add my company",
+  "abo_cta_s":"Frequently asked questions",
+  "pr_p":"Listing is free. Premium is annual. No commission.",
+  "sp_sub":"Annual membership · No commission · Ranking cannot be bought",
+  "sp_f1":"Companies' e-mail, phone and website (when the company allows it)",
+  "sp_f2":"Bonus credits with every Premium purchase",
+  "sp_f3":"No commission or transaction fees",
+  "sp_note":"Without Premium you can still add your company, search, and publish your profile.",
+  "promo_h2":"Promo code",
+  "promo_s2":"If you have a code, enter it here; the discount is applied at checkout.",
+  "promo_ph":"Promo code",
+  "ct_p":"Write to us with a question, a suggestion or a problem; we reply as soon as we can.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"Address:"
+ },
+ es:{
+  "h_lead":"Empresas cuyos documentos ha revisado un administrador. Busque por producto, nombre de empresa o código HS y filtre por país y sector.",
+  "qt1":"Comprador de muebles en Finlandia",
+  "qt2":"Proveedor de cacao en Costa de Marfil",
+  "qt3":"Comprador de textiles en Kazajistán",
+  "s_pos":"Empresas verificadas",
+  "s_ctr":"Países con empresas",
+  "why_p":"Kervea no es un marketplace: no hay carrito, ni pagos, ni comisiones. Las empresas se registran con sus documentos, un administrador los revisa y las partes comercian directamente entre sí.",
+  "why_1n":"Revisión de documentos",
+  "why_1t":"Un administrador comprueba los documentos de cada solicitante. Las empresas aprobadas aparecen con la insignia «verificada».",
+  "why_2n":"Sin comisión",
+  "why_2t":"Kervea no interviene en las ventas. No hay carrito ni pago; los acuerdos y pagos se hacen entre las empresas.",
+  "why_3n":"6 idiomas",
+  "why_3t":"El sitio está disponible en turco, inglés, español, francés, árabe y ruso.",
+  "hiw_1t":"Encuentre una empresa verificada",
+  "hiw_1a":"Producto, empresa o código HS",
+  "hiw_1b":"Filtros de país y sector",
+  "hiw_1c":"Insignia de verificación",
+  "hiw_2t":"Contacte directamente con la empresa",
+  "hiw_2a":"Mensajes dentro de su sector",
+  "hiw_2b":"Datos de contacto: Premium",
+  "hiw_2c":"Otros sectores: créditos",
+  "hiw_3t":"Acuerden y envíen",
+  "hiw_3a":"INCOTERM en el perfil",
+  "hiw_3b":"Pago acordado entre empresas",
+  "hiw_3c":"Kervea no interviene en la venta",
+  "kd_title":"Las referencias se publican cuando las escriben miembros reales.",
+  "kd_lead":"Kervea es una red nueva y todavía no se ha publicado ninguna opinión de miembros. No mostramos referencias inventadas; aparecerán aquí cuando los miembros las escriban y autoricen su publicación. No cobramos por las opiniones.",
+  "kd_cta_t":"Añada su empresa a Kervea.",
+  "kd_cta_d":"Aparecer en la lista es gratis. Su perfil se publica una vez revisados los documentos de su solicitud.",
+  "geo_eyebrow":"PREGUNTAS FRECUENTES",
+  "geo_title":"Preguntas frecuentes",
+  "geo_lead":"Respuestas breves sobre lo que Kervea hace y lo que no hace.",
+  "geo_q1_q":"¿Qué es Kervea?",
+  "geo_q1_a":"Kervea es una red multilingüe de emparejamiento comercial B2B que lista empresas verificadas por país y sector. No es un marketplace: no hay carrito, ni pagos, ni comisiones. Pone en contacto a vendedores y compradores, que comercian directamente entre sí.",
+  "geo_q2_q":"¿Es Kervea un marketplace?",
+  "geo_q2_a":"No. Kervea no vende, no cobra pagos ni comisiones. Verifica a las empresas con sus documentos, las lista y facilita el contacto.",
+  "geo_q3_q":"¿Cómo se verifican las empresas?",
+  "geo_q3_a":"La empresa solicitante sube sus datos y documentos (por ejemplo, certificado fiscal o registro mercantil). Un administrador los revisa. Las empresas aprobadas se publican con la insignia «verificada»; las solicitudes no aprobadas no se publican.",
+  "geo_q4_q":"¿Cómo funcionan las tarifas?",
+  "geo_q4_a":"Añadir y listar una empresa es gratis. Premium es una suscripción anual que permite ver los datos de contacto de las empresas. Para llegar a personas de otros sectores se usan créditos: la membresía incluye créditos iniciales y se pueden comprar paquetes adicionales. Kervea no cobra comisión por nada.",
+  "geo_q5_q":"¿De qué países hay empresas?",
+  "geo_q5_a":"Se puede solicitar desde cualquier país. En el globo de la página de inicio se resaltan los países con empresas; al pasar el cursor sobre un país verá cuántas empresas verificadas tiene.",
+  "geo_q6_q":"¿Hay servicio de pagos o de logística?",
+  "geo_q6_a":"No. Las condiciones de pago (por ejemplo, carta de crédito o transferencia) y de entrega (INCOTERM) figuran en el perfil de la empresa; el pago y el envío se gestionan entre las empresas y Kervea no participa.",
+  "nl_tag":"NOVEDADES",
+  "nl_h":"Deje su correo para novedades y anuncios",
+  "nl_consent":"Acepto recibir correos de novedades. Puedo pedir la baja en cualquier momento.",
+  "nl_ok":"Gracias, su correo electrónico se ha guardado.",
+  "nl_bad_email":"Introduzca un correo electrónico válido.",
+  "nl_need_consent":"Marque la casilla de consentimiento para continuar.",
+  "nl_busy":"Demasiados intentos. Inténtelo de nuevo dentro de unos minutos.",
+  "nl_fail":"No se pudo guardar. Inténtelo de nuevo más tarde.",
+  "nl_sending":"Enviando…",
+  "ft_brand_desc":"Red global y multilingüe de emparejamiento comercial B2B. Sin comisiones; las empresas se verifican con sus documentos.",
+  "abo_h1":"Ponemos en contacto al vendedor adecuado con el comprador adecuado.",
+  "abo_lead":"Kervea es una red multilingüe de emparejamiento comercial B2B que lista empresas verificadas por país y sector. <strong>No es un marketplace</strong>: no hay carrito, ni pagos, ni comisiones.",
+  "abo_mm_active":"TURQUÍA",
+  "abo_mm_hub":"PAÍS CON EMPRESAS",
+  "abo_mm_future":"CORREDOR OBJETIVO",
+  "abo_toc_aria":"En esta página",
+  "abo_toc_what":"Qué hace",
+  "abo_toc_how":"Cómo funciona",
+  "abo_toc_rules":"Reglas de membresía",
+  "abo_toc_not":"Qué no hace",
+  "abo_toc_data":"Sus datos",
+  "abo_toc_co":"Empresa",
+  "abo_what_h":"¿Qué hace Kervea?",
+  "abo_w1t":"Lista empresas",
+  "abo_w1d":"Las empresas que se registran se publican con una página de perfil: sector, productos, códigos HS, país y preferencia de contacto.",
+  "abo_w2t":"Revisa documentos",
+  "abo_w2d":"Un administrador revisa los documentos de cada solicitud. Una empresa no aprobada no se lista.",
+  "abo_w3t":"Facilita encontrar a la otra parte",
+  "abo_w3d":"Se busca por producto, código HS, país y sector; las empresas cuya orientación (exportación / importación) encaja con la suya aparecen primero.",
+  "abo_w4t":"Vincula el contacto al consentimiento",
+  "abo_w4d":"El correo y el teléfono de una empresa se muestran solo si la empresa lo permite y solo a miembros Premium.",
+  "abo_how_h":"¿Cómo funciona?",
+  "abo_flow_aria":"Flujo comercial",
+  "abo_flow_1t":"Vendedor",
+  "abo_flow_2t":"Verificación de Kervea",
+  "abo_flow_3t":"Comprador",
+  "abo_s1t":"Solicitud",
+  "abo_s1d":"La empresa sube sus datos y documentos (por ejemplo, certificado fiscal o registro mercantil).",
+  "abo_s2t":"Revisión",
+  "abo_s2d":"Un administrador comprueba los documentos y el resultado se envía por correo.",
+  "abo_s3t":"Publicación",
+  "abo_s3d":"Una empresa aprobada aparece en las búsquedas con la insignia «verificada».",
+  "abo_rules_h":"Reglas de membresía",
+  "abo_r1t":"Mismo sector: abierto",
+  "abo_r1d":"Las empresas del mismo sector se ven por completo y pueden escribirse.",
+  "abo_r2t":"Otros sectores: bloqueado",
+  "abo_r2d":"Las empresas de otros sectores aparecen como tarjetas bloqueadas. A las personas de esos sectores se llega gastando créditos.",
+  "abo_r3t":"Créditos",
+  "abo_r3d":"Al aprobarse su membresía, su cuenta recibe créditos iniciales; si los necesita, puede comprar paquetes adicionales.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"El correo, el teléfono y el sitio web de las empresas se muestran a los miembros Premium cuando la empresa lo ha permitido.",
+  "abo_not_h":"Lo que Kervea no hace",
+  "abo_n1":"No vende, no cobra pagos ni comisiones.",
+  "abo_n2":"No vende listas de contactos ni datos.",
+  "abo_n3":"No vende posiciones: no hay tarifa por aparecer antes.",
+  "abo_n4":"No participa en el pago ni en el envío; eso queda entre las empresas.",
+  "abo_num_h":"Hoy",
+  "abo_num1_l":"Empresas verificadas",
+  "abo_num2_l":"Países con empresas",
+  "abo_num3_l":"Sectores principales",
+  "abo_num4_l":"Idiomas del sitio",
+  "abo_data_h":"Cómo tratamos sus datos",
+  "abo_d1t":"Los documentos se guardan en privado",
+  "abo_d1d":"Los documentos que sube no son públicos; solo los ven los administradores.",
+  "abo_d2t":"No guardamos los datos de su tarjeta",
+  "abo_d2d":"El pago se realiza en la página segura del proveedor de pagos.",
+  "abo_d3t":"Usted gestiona los permisos",
+  "abo_d3d":"Puede retirar en cualquier momento, desde su panel, el permiso para mostrar sus datos de contacto.",
+  "abo_co_h":"Datos de la empresa",
+  "abo_co_name":"Razón social",
+  "abo_co_addr":"Dirección",
+  "abo_co_mersis":"N.º MERSIS",
+  "abo_co_founders":"Fundadores",
+  "abo_co_todo":"[Por añadir]",
+  "abo_cta_t":"Añada su empresa a Kervea.",
+  "abo_cta_d":"Aparecer en la lista es gratis y no hay comisión. Su perfil se publica tras revisar sus documentos.",
+  "abo_cta_p":"Añadir mi empresa",
+  "abo_cta_s":"Preguntas frecuentes",
+  "pr_p":"Aparecer en la lista es gratis. Premium es anual. Sin comisiones.",
+  "sp_sub":"Membresía anual · Sin comisión · El orden no se puede comprar",
+  "sp_f1":"Correo, teléfono y sitio web de las empresas (cuando la empresa lo permite)",
+  "sp_f2":"Créditos de regalo con cada compra Premium",
+  "sp_f3":"Sin comisiones ni tarifas por transacción",
+  "sp_note":"Sin Premium también puede añadir su empresa, buscar y publicar su perfil.",
+  "promo_h2":"Código promocional",
+  "promo_s2":"Si tiene un código, introdúzcalo aquí; el descuento se aplica al pagar.",
+  "promo_ph":"Código promocional",
+  "ct_p":"Escríbanos para una pregunta, sugerencia o problema; respondemos lo antes posible.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"Dirección:"
+ },
+ fr:{
+  "h_lead":"Des entreprises dont les documents ont été examinés par un administrateur. Recherchez par produit, nom d'entreprise ou code SH, puis filtrez par pays et par secteur.",
+  "qt1":"Acheteur de meubles en Finlande",
+  "qt2":"Fournisseur de cacao en Côte d'Ivoire",
+  "qt3":"Acheteur de textile au Kazakhstan",
+  "s_pos":"Entreprises vérifiées",
+  "s_ctr":"Pays avec des entreprises",
+  "why_p":"Kervea n'est pas une place de marché : ni panier, ni paiement, ni commission. Les entreprises déposent leurs documents, un administrateur les examine et les parties traitent directement entre elles.",
+  "why_1n":"Examen des documents",
+  "why_1t":"Un administrateur vérifie les documents de chaque candidat. Les entreprises approuvées portent le badge « vérifiée ».",
+  "why_2n":"Aucune commission",
+  "why_2t":"Kervea n'intervient pas dans les ventes. Pas de panier ni de paiement : les accords et paiements se font entre les entreprises.",
+  "why_3n":"6 langues",
+  "why_3t":"Le site est disponible en turc, anglais, espagnol, français, arabe et russe.",
+  "hiw_1t":"Trouvez une entreprise vérifiée",
+  "hiw_1a":"Produit, entreprise ou code SH",
+  "hiw_1b":"Filtres pays et secteur",
+  "hiw_1c":"Badge de vérification",
+  "hiw_2t":"Contactez directement l'entreprise",
+  "hiw_2a":"Messagerie au sein de votre secteur",
+  "hiw_2b":"Coordonnées : Premium",
+  "hiw_2c":"Autres secteurs : crédits",
+  "hiw_3t":"Concluez et expédiez",
+  "hiw_3a":"INCOTERM indiqué sur le profil",
+  "hiw_3b":"Paiement convenu entre entreprises",
+  "hiw_3c":"Kervea n'intervient pas dans la vente",
+  "kd_title":"Les références sont publiées au fur et à mesure que de vrais membres les rédigent.",
+  "kd_lead":"Kervea est un réseau récent et aucun avis de membre n'a encore été publié. Nous n'affichons pas de fausses références ; les avis apparaîtront ici lorsque les membres les auront rédigés et auront autorisé leur publication. Aucun avis n'est facturé.",
+  "kd_cta_t":"Ajoutez votre entreprise à Kervea.",
+  "kd_cta_d":"L'inscription est gratuite. Votre profil est publié une fois les documents de votre demande examinés.",
+  "geo_eyebrow":"FAQ",
+  "geo_title":"Questions fréquentes",
+  "geo_lead":"De courtes réponses sur ce que Kervea fait et ne fait pas.",
+  "geo_q1_q":"Qu'est-ce que Kervea ?",
+  "geo_q1_a":"Kervea est un réseau multilingue de mise en relation B2B qui recense des entreprises vérifiées par pays et par secteur. Ce n'est pas une place de marché : ni panier, ni paiement, ni commission. Il met en relation vendeurs et acheteurs, qui traitent directement entre eux.",
+  "geo_q2_q":"Kervea est-elle une place de marché ?",
+  "geo_q2_a":"Non. Kervea ne vend pas, n'encaisse aucun paiement et ne prélève aucune commission. Elle vérifie les entreprises sur la base de leurs documents, les référence et permet leur mise en contact.",
+  "geo_q3_q":"Comment les entreprises sont-elles vérifiées ?",
+  "geo_q3_a":"L'entreprise candidate dépose ses informations et ses documents (par exemple attestation fiscale ou extrait du registre du commerce). Un administrateur les examine. Les entreprises approuvées sont publiées avec le badge « vérifiée » ; les demandes non approuvées ne le sont pas.",
+  "geo_q4_q":"Comment fonctionne la tarification ?",
+  "geo_q4_a":"Ajouter et référencer une entreprise est gratuit. Premium est un abonnement annuel qui donne accès aux coordonnées des entreprises. Pour joindre des personnes d'autres secteurs, on utilise des crédits : des crédits de départ sont attribués avec l'adhésion et des packs supplémentaires peuvent être achetés. Kervea ne prélève aucune commission.",
+  "geo_q5_q":"De quels pays viennent les entreprises ?",
+  "geo_q5_a":"Toutes les entreprises peuvent candidater, quel que soit leur pays. Sur le globe de la page d'accueil, les pays qui comptent des entreprises sont mis en évidence ; survolez un pays pour voir combien d'entreprises vérifiées il compte.",
+  "geo_q6_q":"Y a-t-il un service de paiement ou de logistique ?",
+  "geo_q6_a":"Non. Les conditions de paiement (par exemple crédit documentaire ou virement) et de livraison (INCOTERM) figurent sur le profil de l'entreprise ; le paiement et l'expédition se font entre les entreprises et Kervea n'y est pas partie.",
+  "nl_tag":"ANNONCES",
+  "nl_h":"Laissez votre e-mail pour les nouveautés et annonces",
+  "nl_consent":"J'accepte de recevoir des e-mails d'annonces. Je peux demander à tout moment à ne plus en recevoir.",
+  "nl_ok":"Merci, votre adresse e-mail a bien été enregistrée.",
+  "nl_bad_email":"Saisissez une adresse e-mail valide.",
+  "nl_need_consent":"Cochez la case de consentement pour continuer.",
+  "nl_busy":"Trop de tentatives. Réessayez dans quelques minutes.",
+  "nl_fail":"Enregistrement impossible. Réessayez plus tard.",
+  "nl_sending":"Envoi…",
+  "ft_brand_desc":"Réseau mondial et multilingue de mise en relation B2B. Aucune commission ; les entreprises sont vérifiées sur leurs documents.",
+  "abo_h1":"Nous mettons en relation le bon vendeur et le bon acheteur.",
+  "abo_lead":"Kervea est un réseau multilingue de mise en relation B2B qui recense des entreprises vérifiées par pays et par secteur. <strong>Ce n'est pas une place de marché</strong> : ni panier, ni paiement, ni commission.",
+  "abo_mm_active":"TURQUIE",
+  "abo_mm_hub":"PAYS AVEC DES ENTREPRISES",
+  "abo_mm_future":"CORRIDOR CIBLE",
+  "abo_toc_aria":"Sur cette page",
+  "abo_toc_what":"Ce qu'elle fait",
+  "abo_toc_how":"Comment ça marche",
+  "abo_toc_rules":"Règles d'adhésion",
+  "abo_toc_not":"Ce qu'elle ne fait pas",
+  "abo_toc_data":"Vos données",
+  "abo_toc_co":"Société",
+  "abo_what_h":"Que fait Kervea ?",
+  "abo_w1t":"Référence les entreprises",
+  "abo_w1d":"Les entreprises candidates sont publiées avec une page de profil : secteur, produits, codes SH, pays et préférence de contact.",
+  "abo_w2t":"Vérifie les documents",
+  "abo_w2d":"Un administrateur examine les documents de chaque demande. Une entreprise non approuvée n'est pas référencée.",
+  "abo_w3t":"Facilite la recherche de l'autre partie",
+  "abo_w3d":"La recherche se fait par produit, code SH, pays et secteur ; les entreprises dont l'orientation (export / import) correspond à la vôtre passent en premier.",
+  "abo_w4t":"Subordonne le contact au consentement",
+  "abo_w4d":"L'e-mail et le téléphone d'une entreprise ne sont affichés que si elle l'autorise, et seulement aux membres Premium.",
+  "abo_how_h":"Comment ça marche ?",
+  "abo_flow_aria":"Flux commercial",
+  "abo_flow_1t":"Vendeur",
+  "abo_flow_2t":"Vérification Kervea",
+  "abo_flow_3t":"Acheteur",
+  "abo_s1t":"Candidature",
+  "abo_s1d":"L'entreprise dépose ses informations et ses documents (par exemple attestation fiscale ou extrait du registre du commerce).",
+  "abo_s2t":"Examen",
+  "abo_s2d":"Un administrateur vérifie les documents et le résultat est communiqué par e-mail.",
+  "abo_s3t":"Publication",
+  "abo_s3d":"Une entreprise approuvée apparaît dans les recherches avec le badge « vérifiée ».",
+  "abo_rules_h":"Règles d'adhésion",
+  "abo_r1t":"Même secteur : ouvert",
+  "abo_r1d":"Les entreprises d'un même secteur se voient en entier et peuvent s'écrire.",
+  "abo_r2t":"Autres secteurs : verrouillé",
+  "abo_r2d":"Les entreprises d'autres secteurs apparaissent sous forme de cartes verrouillées. On joint les personnes de ces secteurs en dépensant des crédits.",
+  "abo_r3t":"Crédits",
+  "abo_r3d":"Lorsque votre adhésion est approuvée, votre compte reçoit des crédits de départ ; vous pouvez acheter des packs supplémentaires si besoin.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"L'e-mail, le téléphone et le site web des entreprises sont affichés aux membres Premium lorsque l'entreprise l'a autorisé.",
+  "abo_not_h":"Ce que Kervea ne fait pas",
+  "abo_n1":"Elle ne vend pas, n'encaisse aucun paiement et ne prélève aucune commission.",
+  "abo_n2":"Elle ne vend ni listes de contacts ni données.",
+  "abo_n3":"Elle ne vend pas le classement : aucun supplément pour passer devant.",
+  "abo_n4":"Elle n'est partie ni au paiement ni à l'expédition ; cela reste entre les entreprises.",
+  "abo_num_h":"Aujourd'hui",
+  "abo_num1_l":"Entreprises vérifiées",
+  "abo_num2_l":"Pays avec des entreprises",
+  "abo_num3_l":"Secteurs principaux",
+  "abo_num4_l":"Langues du site",
+  "abo_data_h":"Comment nous traitons vos données",
+  "abo_d1t":"Les documents sont conservés en privé",
+  "abo_d1d":"Les documents que vous déposez ne sont pas publics ; seuls les administrateurs peuvent les voir.",
+  "abo_d2t":"Nous ne conservons pas vos données de carte",
+  "abo_d2d":"Le paiement s'effectue sur la page sécurisée du prestataire de paiement.",
+  "abo_d3t":"Vous gérez les autorisations",
+  "abo_d3d":"Vous pouvez retirer à tout moment, depuis votre espace, l'autorisation d'afficher vos coordonnées.",
+  "abo_co_h":"Informations sur la société",
+  "abo_co_name":"Dénomination sociale",
+  "abo_co_addr":"Adresse",
+  "abo_co_mersis":"N° MERSIS",
+  "abo_co_founders":"Fondateurs",
+  "abo_co_todo":"[À compléter]",
+  "abo_cta_t":"Ajoutez votre entreprise à Kervea.",
+  "abo_cta_d":"L'inscription est gratuite et sans commission. Votre profil est publié une fois vos documents examinés.",
+  "abo_cta_p":"Ajouter mon entreprise",
+  "abo_cta_s":"Questions fréquentes",
+  "pr_p":"L'inscription est gratuite. Premium est annuel. Aucune commission.",
+  "sp_sub":"Abonnement annuel · Aucune commission · Le classement ne s'achète pas",
+  "sp_f1":"E-mail, téléphone et site web des entreprises (si l'entreprise l'autorise)",
+  "sp_f2":"Crédits bonus à chaque achat Premium",
+  "sp_f3":"Aucune commission ni frais de transaction",
+  "sp_note":"Sans Premium, vous pouvez aussi ajouter votre entreprise, rechercher et publier votre profil.",
+  "promo_h2":"Code promo",
+  "promo_s2":"Si vous avez un code, saisissez-le ici ; la remise s'applique au paiement.",
+  "promo_ph":"Code promo",
+  "ct_p":"Écrivez-nous pour une question, une suggestion ou un problème ; nous répondons dès que possible.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"Adresse :"
+ },
+ ar:{
+  "h_lead":"شركات راجع مسؤول مستنداتها. ابحث بالمنتج أو اسم الشركة أو رمز HS، ثم صفِّ النتائج حسب الدولة والقطاع.",
+  "qt1":"مشترٍ للأثاث في فنلندا",
+  "qt2":"مورّد كاكاو في ساحل العاج",
+  "qt3":"مشترٍ للمنسوجات في كازاخستان",
+  "s_pos":"شركات موثّقة",
+  "s_ctr":"دول فيها شركات",
+  "why_p":"Kervea ليست سوقًا إلكترونيًا: لا توجد سلة مشتريات ولا مدفوعات ولا عمولات. تتقدّم الشركات بمستنداتها، ويراجعها مسؤول، ثم تتعامل الأطراف مع بعضها مباشرة.",
+  "why_1n":"مراجعة المستندات",
+  "why_1t":"يتحقق مسؤول من مستندات كل شركة متقدمة، وتُعرض الشركات المعتمدة بشارة «موثّقة».",
+  "why_2n":"بدون عمولة",
+  "why_2t":"لا تتدخل Kervea في عمليات البيع. لا توجد سلة ولا دفع؛ تُبرم الصفقات وتتم المدفوعات بين الشركات.",
+  "why_3n":"6 لغات",
+  "why_3t":"الموقع متاح بالتركية والإنجليزية والإسبانية والفرنسية والعربية والروسية.",
+  "hiw_1t":"اعثر على شركة موثّقة",
+  "hiw_1a":"منتج أو شركة أو رمز HS",
+  "hiw_1b":"تصفية حسب الدولة والقطاع",
+  "hiw_1c":"شارة التوثيق",
+  "hiw_2t":"تواصل مع الشركة مباشرةً",
+  "hiw_2a":"مراسلة ضمن قطاعك",
+  "hiw_2b":"بيانات الاتصال: Premium",
+  "hiw_2c":"القطاعات الأخرى: رصيد",
+  "hiw_3t":"اتفقوا واشحنوا",
+  "hiw_3a":"INCOTERM في الملف التعريفي",
+  "hiw_3b":"شروط الدفع يتفق عليها الطرفان",
+  "hiw_3c":"Kervea لا تتدخل في البيع",
+  "kd_title":"تُنشر المراجع عندما يكتبها أعضاء حقيقيون.",
+  "kd_lead":"Kervea شبكة جديدة ولم يُنشر بعد أي تقييم من الأعضاء. لا نعرض مراجع مختلقة؛ ستظهر التقييمات هنا عندما يكتبها الأعضاء ويوافقون على نشرها. لا نتقاضى أي مقابل على التقييمات.",
+  "kd_cta_t":"أضف شركتك إلى Kervea.",
+  "kd_cta_d":"الإدراج مجاني. يُنشر ملفك بعد مراجعة المستندات المرفقة بطلبك.",
+  "geo_eyebrow":"الأسئلة الشائعة",
+  "geo_title":"الأسئلة الشائعة",
+  "geo_lead":"إجابات قصيرة عمّا تفعله Kervea وما لا تفعله.",
+  "geo_q1_q":"ما هي Kervea؟",
+  "geo_q1_a":"Kervea شبكة متعددة اللغات لمطابقة الأعمال بين الشركات (B2B) تعرض الشركات الموثّقة حسب الدولة والقطاع. ليست سوقًا إلكترونيًا: لا سلة ولا مدفوعات ولا عمولات. تجمع البائعين والمشترين ثم يتعامل الطرفان مباشرة.",
+  "geo_q2_q":"هل Kervea سوق إلكتروني؟",
+  "geo_q2_a":"لا. Kervea لا تبيع ولا تحصّل مدفوعات ولا تأخذ عمولة. تتحقق من الشركات عبر مستنداتها وتعرضها وتتيح لها التواصل.",
+  "geo_q3_q":"كيف يتم التحقق من الشركات؟",
+  "geo_q3_a":"ترفع الشركة المتقدمة بياناتها التجارية ومستنداتها (مثل الشهادة الضريبية أو السجل التجاري). يراجعها مسؤول. تُنشر الشركات المعتمدة بشارة «موثّقة»، ولا تُنشر الطلبات غير المعتمدة.",
+  "geo_q4_q":"كيف تعمل الأسعار؟",
+  "geo_q4_a":"إضافة الشركة وإدراجها مجانيان. Premium اشتراك سنوي يتيح لك الاطلاع على بيانات الاتصال بالشركات. للوصول إلى أشخاص في قطاعات أخرى يُستخدم الرصيد: يُمنح رصيد ابتدائي مع العضوية ويمكن شراء حزم إضافية. لا تأخذ Kervea عمولة على أي شيء.",
+  "geo_q5_q":"من أي الدول توجد شركات؟",
+  "geo_q5_a":"يمكن التقدّم من أي دولة. تُبرز الكرة الأرضية في الصفحة الرئيسية الدول التي فيها شركات؛ مرّر المؤشر فوق دولة لترى عدد الشركات الموثّقة فيها.",
+  "geo_q6_q":"هل توجد خدمة دفع أو شحن؟",
+  "geo_q6_a":"لا. تُذكر شروط الدفع (مثل الاعتماد المستندي أو الحوالة) وشروط التسليم (INCOTERM) في ملف الشركة؛ ويتم الدفع والشحن بين الشركات ولا تكون Kervea طرفًا فيهما.",
+  "nl_tag":"إعلانات",
+  "nl_h":"اترك بريدك الإلكتروني لتصلك الميزات الجديدة والإعلانات",
+  "nl_consent":"أوافق على تلقّي رسائل الإعلانات بالبريد الإلكتروني. ويمكنني طلب إلغاء الاشتراك في أي وقت.",
+  "nl_ok":"شكرًا لك، تم حفظ بريدك الإلكتروني.",
+  "nl_bad_email":"أدخل بريدًا إلكترونيًا صالحًا.",
+  "nl_need_consent":"حدّد خانة الموافقة للمتابعة.",
+  "nl_busy":"محاولات كثيرة. يُرجى المحاولة مرة أخرى بعد قليل.",
+  "nl_fail":"تعذّر الحفظ. يُرجى المحاولة لاحقًا.",
+  "nl_sending":"جارٍ الإرسال…",
+  "ft_brand_desc":"شبكة عالمية متعددة اللغات لمطابقة الأعمال بين الشركات (B2B). بلا عمولات؛ ويتم التحقق من الشركات عبر مستنداتها.",
+  "abo_h1":"نجمع البائع المناسب بالمشتري المناسب.",
+  "abo_lead":"Kervea شبكة متعددة اللغات لمطابقة الأعمال بين الشركات (B2B) تعرض الشركات الموثّقة حسب الدولة والقطاع. <strong>ليست سوقًا إلكترونيًا</strong>: لا سلة ولا مدفوعات ولا عمولات.",
+  "abo_mm_active":"تركيا",
+  "abo_mm_hub":"دولة فيها شركات",
+  "abo_mm_future":"ممر مستهدف",
+  "abo_toc_aria":"في هذه الصفحة",
+  "abo_toc_what":"ما تفعله",
+  "abo_toc_how":"كيف تعمل",
+  "abo_toc_rules":"قواعد العضوية",
+  "abo_toc_not":"ما لا تفعله",
+  "abo_toc_data":"بياناتك",
+  "abo_toc_co":"الشركة",
+  "abo_what_h":"ماذا تفعل Kervea؟",
+  "abo_w1t":"تعرض الشركات",
+  "abo_w1d":"تُنشر الشركات المتقدمة بصفحة تعريفية تعرض القطاع والمنتجات ورموز HS والدولة وتفضيل التواصل.",
+  "abo_w2t":"تراجع المستندات",
+  "abo_w2d":"يراجع مسؤول مستندات كل طلب. الشركة غير المعتمدة لا تُدرج.",
+  "abo_w3t":"تسهّل العثور على الطرف الآخر",
+  "abo_w3d":"يتم البحث بالمنتج ورمز HS والدولة والقطاع؛ وتظهر أولًا الشركات التي يتوافق اتجاهها (تصدير / استيراد) مع اتجاهك.",
+  "abo_w4t":"تربط التواصل بالموافقة",
+  "abo_w4d":"لا يظهر البريد الإلكتروني والهاتف الخاصان بالشركة إلا إذا سمحت الشركة بذلك، وللأعضاء Premium فقط.",
+  "abo_how_h":"كيف تعمل؟",
+  "abo_flow_aria":"مسار التجارة",
+  "abo_flow_1t":"البائع",
+  "abo_flow_2t":"توثيق Kervea",
+  "abo_flow_3t":"المشتري",
+  "abo_s1t":"الطلب",
+  "abo_s1d":"ترفع الشركة بياناتها ومستنداتها (مثل الشهادة الضريبية أو السجل التجاري).",
+  "abo_s2t":"المراجعة",
+  "abo_s2d":"يتحقق مسؤول من المستندات ويصلك القرار عبر البريد الإلكتروني.",
+  "abo_s3t":"النشر",
+  "abo_s3d":"تظهر الشركة المعتمدة في نتائج البحث بشارة «موثّقة».",
+  "abo_rules_h":"قواعد العضوية",
+  "abo_r1t":"القطاع نفسه: مفتوح",
+  "abo_r1d":"تظهر الشركات في القطاع نفسه لبعضها كاملةً ويمكنها المراسلة فيما بينها.",
+  "abo_r2t":"القطاعات الأخرى: مقفلة",
+  "abo_r2d":"تظهر الشركات في القطاعات الأخرى كبطاقات مقفلة. وللوصول إلى الأشخاص في تلك القطاعات يُستخدم الرصيد.",
+  "abo_r3t":"الرصيد",
+  "abo_r3d":"عند اعتماد عضويتك يُضاف إلى حسابك رصيد ابتدائي، ويمكنك شراء حزم رصيد إضافية عند الحاجة.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"تُعرض بيانات البريد الإلكتروني والهاتف والموقع للأعضاء Premium عندما تسمح الشركة بذلك.",
+  "abo_not_h":"ما لا تفعله Kervea",
+  "abo_n1":"لا تبيع ولا تحصّل مدفوعات ولا تأخذ عمولة.",
+  "abo_n2":"لا تبيع قوائم اتصال ولا بيانات.",
+  "abo_n3":"لا تبيع الترتيب: لا توجد رسوم للظهور في مرتبة أفضل.",
+  "abo_n4":"ليست طرفًا في الدفع أو الشحن؛ فهما يتمان بين الشركات.",
+  "abo_num_h":"اليوم",
+  "abo_num1_l":"شركات موثّقة",
+  "abo_num2_l":"دول فيها شركات",
+  "abo_num3_l":"قطاعات رئيسية",
+  "abo_num4_l":"لغات الموقع",
+  "abo_data_h":"كيف نتعامل مع بياناتك",
+  "abo_d1t":"تُحفظ المستندات بشكل خاص",
+  "abo_d1d":"المستندات التي ترفعها ليست علنية؛ لا يراها سوى المسؤولين.",
+  "abo_d2t":"لا نحتفظ ببيانات بطاقتك",
+  "abo_d2d":"يتم الدفع على الصفحة الآمنة لمزوّد خدمة الدفع.",
+  "abo_d3t":"أنت من يدير الأذونات",
+  "abo_d3d":"يمكنك سحب إذن عرض بيانات الاتصال الخاصة بك من لوحتك في أي وقت.",
+  "abo_co_h":"بيانات الشركة",
+  "abo_co_name":"الاسم التجاري",
+  "abo_co_addr":"العنوان",
+  "abo_co_mersis":"رقم MERSİS",
+  "abo_co_founders":"المؤسسون",
+  "abo_co_todo":"[سيُضاف]",
+  "abo_cta_t":"أضف شركتك إلى Kervea.",
+  "abo_cta_d":"الإدراج مجاني وبلا عمولة. يُنشر ملفك بعد مراجعة مستنداتك.",
+  "abo_cta_p":"أضف شركتي",
+  "abo_cta_s":"الأسئلة الشائعة",
+  "pr_p":"الإدراج مجاني. Premium سنوي. بلا عمولات.",
+  "sp_sub":"اشتراك سنوي · بلا عمولة · لا يمكن شراء الترتيب",
+  "sp_f1":"البريد الإلكتروني والهاتف والموقع للشركات (عندما تسمح الشركة بذلك)",
+  "sp_f2":"رصيد إضافي مع كل اشتراك Premium",
+  "sp_f3":"بلا عمولات ولا رسوم معاملات",
+  "sp_note":"حتى من دون Premium يمكنك إضافة شركتك والبحث ونشر ملفك.",
+  "promo_h2":"رمز ترويجي",
+  "promo_s2":"إذا كان لديك رمز فأدخله هنا؛ يُطبَّق الخصم عند الدفع.",
+  "promo_ph":"رمز ترويجي",
+  "ct_p":"راسلنا بسؤال أو اقتراح أو مشكلة؛ سنرد عليك في أقرب وقت.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"العنوان:"
+ },
+ ru:{
+  "h_lead":"Компании, чьи документы проверил администратор. Ищите по товару, названию компании или коду ТН ВЭД и сужайте результаты по стране и сектору.",
+  "qt1":"Покупатель мебели в Финляндии",
+  "qt2":"Поставщик какао в Кот-д'Ивуаре",
+  "qt3":"Покупатель текстиля в Казахстане",
+  "s_pos":"Проверенные компании",
+  "s_ctr":"Страны с компаниями",
+  "why_p":"Kervea — не маркетплейс: здесь нет корзины, платежей и комиссий. Компании подают документы, администратор их проверяет, а стороны торгуют напрямую друг с другом.",
+  "why_1n":"Проверка документов",
+  "why_1t":"Администратор проверяет документы каждого заявителя. Одобренные компании отмечены значком «проверена».",
+  "why_2n":"Без комиссии",
+  "why_2t":"Kervea не участвует в продажах. Нет корзины и оплаты: сделки и расчёты проходят между компаниями.",
+  "why_3n":"6 языков",
+  "why_3t":"Сайт доступен на турецком, английском, испанском, французском, арабском и русском.",
+  "hiw_1t":"Найдите проверенную компанию",
+  "hiw_1a":"Товар, компания или код ТН ВЭД",
+  "hiw_1b":"Фильтры по стране и сектору",
+  "hiw_1c":"Значок проверки",
+  "hiw_2t":"Свяжитесь с компанией напрямую",
+  "hiw_2a":"Сообщения внутри вашего сектора",
+  "hiw_2b":"Контакты: Premium",
+  "hiw_2c":"Другие секторы: кредиты",
+  "hiw_3t":"Договоритесь и отправьте",
+  "hiw_3a":"INCOTERM указан в профиле",
+  "hiw_3b":"Оплата — по договорённости сторон",
+  "hiw_3c":"Kervea не участвует в продаже",
+  "kd_title":"Отзывы публикуются по мере того, как их пишут реальные участники.",
+  "kd_lead":"Kervea — новая сеть, и пока не опубликовано ни одного отзыва участников. Мы не показываем выдуманные отзывы; они появятся здесь, когда участники напишут их и разрешат публикацию. За отзывы мы денег не берём.",
+  "kd_cta_t":"Добавьте свою компанию в Kervea.",
+  "kd_cta_d":"Размещение бесплатно. Ваш профиль появится после проверки документов из заявки.",
+  "geo_eyebrow":"ЧАВО",
+  "geo_title":"Часто задаваемые вопросы",
+  "geo_lead":"Короткие ответы о том, что Kervea делает, а что — нет.",
+  "geo_q1_q":"Что такое Kervea?",
+  "geo_q1_a":"Kervea — многоязычная B2B-сеть подбора партнёров: она показывает проверенные компании по странам и секторам. Это не маркетплейс: нет корзины, платежей и комиссий. Kervea сводит продавцов и покупателей, а торгуют они напрямую.",
+  "geo_q2_q":"Kervea — это маркетплейс?",
+  "geo_q2_a":"Нет. Kervea не продаёт, не принимает платежи и не берёт комиссию. Она проверяет компании по документам, публикует их и помогает им выйти на связь.",
+  "geo_q3_q":"Как проверяются компании?",
+  "geo_q3_a":"Заявитель загружает данные о компании и документы (например, налоговое свидетельство или выписку из торгового реестра). Их проверяет администратор. Одобренные компании публикуются со значком «проверена»; неодобренные заявки не публикуются.",
+  "geo_q4_q":"Как устроена оплата?",
+  "geo_q4_a":"Добавить компанию и разместить её бесплатно. Premium — годовая подписка, открывающая контакты компаний. Чтобы выйти на людей из других секторов, используются кредиты: при регистрации выдаётся стартовый баланс, а дополнительные пакеты можно докупить. Kervea не берёт комиссию ни с чего.",
+  "geo_q5_q":"Из каких стран есть компании?",
+  "geo_q5_a":"Подать заявку можно из любой страны. На глобусе на главной странице подсвечены страны, где есть компании; наведите курсор на страну, чтобы увидеть число проверенных компаний.",
+  "geo_q6_q":"Есть ли услуги по оплате и логистике?",
+  "geo_q6_a":"Нет. Условия оплаты (например, аккредитив или банковский перевод) и поставки (INCOTERM) указаны в профиле компании; оплата и отгрузка проходят между компаниями, Kervea в них не участвует.",
+  "nl_tag":"НОВОСТИ",
+  "nl_h":"Оставьте e-mail, чтобы узнавать о новых функциях и новостях",
+  "nl_consent":"Я согласен(на) получать e-mail с новостями. Я могу в любой момент попросить удалить мой адрес.",
+  "nl_ok":"Спасибо, ваш e-mail сохранён.",
+  "nl_bad_email":"Введите корректный адрес e-mail.",
+  "nl_need_consent":"Отметьте согласие, чтобы продолжить.",
+  "nl_busy":"Слишком много попыток. Повторите через несколько минут.",
+  "nl_fail":"Не удалось сохранить. Повторите попытку позже.",
+  "nl_sending":"Отправка…",
+  "ft_brand_desc":"Глобальная многоязычная B2B-сеть подбора партнёров. Без комиссий; компании проверяются по документам.",
+  "abo_h1":"Мы сводим подходящего продавца с подходящим покупателем.",
+  "abo_lead":"Kervea — многоязычная B2B-сеть подбора партнёров: она показывает проверенные компании по странам и секторам. <strong>Это не маркетплейс</strong>: нет корзины, платежей и комиссий.",
+  "abo_mm_active":"ТУРЦИЯ",
+  "abo_mm_hub":"СТРАНА С КОМПАНИЯМИ",
+  "abo_mm_future":"ЦЕЛЕВОЙ КОРИДОР",
+  "abo_toc_aria":"На этой странице",
+  "abo_toc_what":"Что делает",
+  "abo_toc_how":"Как это работает",
+  "abo_toc_rules":"Правила участия",
+  "abo_toc_not":"Чего не делает",
+  "abo_toc_data":"Ваши данные",
+  "abo_toc_co":"Компания",
+  "abo_what_h":"Что делает Kervea?",
+  "abo_w1t":"Публикует компании",
+  "abo_w1d":"Подавшие заявку компании публикуются со страницей профиля: сектор, товары, коды ТН ВЭД, страна и предпочтения по контактам.",
+  "abo_w2t":"Проверяет документы",
+  "abo_w2d":"Администратор проверяет документы каждой заявки. Неодобренная компания не публикуется.",
+  "abo_w3t":"Помогает найти партнёра",
+  "abo_w3d":"Поиск идёт по товару, коду ТН ВЭД, стране и сектору; первыми показываются компании, чьё направление (экспорт / импорт) подходит вам.",
+  "abo_w4t":"Контакты — только с согласия",
+  "abo_w4d":"E-mail и телефон компании показываются только если она это разрешила, и только участникам Premium.",
+  "abo_how_h":"Как это работает?",
+  "abo_flow_aria":"Схема торговли",
+  "abo_flow_1t":"Продавец",
+  "abo_flow_2t":"Проверка Kervea",
+  "abo_flow_3t":"Покупатель",
+  "abo_s1t":"Заявка",
+  "abo_s1d":"Компания загружает данные и документы (например, налоговое свидетельство или выписку из торгового реестра).",
+  "abo_s2t":"Проверка",
+  "abo_s2d":"Администратор проверяет документы, результат приходит по e-mail.",
+  "abo_s3t":"Публикация",
+  "abo_s3d":"Одобренная компания появляется в поиске со значком «проверена».",
+  "abo_rules_h":"Правила участия",
+  "abo_r1t":"Свой сектор: открыт",
+  "abo_r1d":"Компании одного сектора видят друг друга полностью и могут писать друг другу.",
+  "abo_r2t":"Другие секторы: закрыты",
+  "abo_r2d":"Компании других секторов показываются как закрытые карточки. Выйти на людей из этих секторов можно за кредиты.",
+  "abo_r3t":"Кредиты",
+  "abo_r3d":"После одобрения участия на счёт зачисляются стартовые кредиты; при необходимости можно докупить пакеты.",
+  "abo_r4t":"Premium",
+  "abo_r4d":"E-mail, телефон и сайт компаний показываются участникам Premium, если компания это разрешила.",
+  "abo_not_h":"Чего Kervea не делает",
+  "abo_n1":"Не продаёт, не принимает платежи и не берёт комиссию.",
+  "abo_n2":"Не продаёт списки контактов и данные.",
+  "abo_n3":"Не продаёт позиции в выдаче: платы за выделение нет.",
+  "abo_n4":"Не участвует в оплате и отгрузке: это остаётся между компаниями.",
+  "abo_num_h":"Сегодня",
+  "abo_num1_l":"Проверенные компании",
+  "abo_num2_l":"Страны с компаниями",
+  "abo_num3_l":"Основные секторы",
+  "abo_num4_l":"Языки сайта",
+  "abo_data_h":"Как мы обращаемся с вашими данными",
+  "abo_d1t":"Документы хранятся приватно",
+  "abo_d1d":"Загруженные документы не публичны: их видят только администраторы.",
+  "abo_d2t":"Данные карты у нас не хранятся",
+  "abo_d2d":"Оплата проходит на защищённой странице платёжного провайдера.",
+  "abo_d3t":"Разрешениями управляете вы",
+  "abo_d3d":"Вы можете в любой момент отозвать разрешение показывать ваши контакты в личном кабинете.",
+  "abo_co_h":"Реквизиты компании",
+  "abo_co_name":"Юридическое название",
+  "abo_co_addr":"Адрес",
+  "abo_co_mersis":"Номер MERSIS",
+  "abo_co_founders":"Основатели",
+  "abo_co_todo":"[Будет добавлено]",
+  "abo_cta_t":"Добавьте свою компанию в Kervea.",
+  "abo_cta_d":"Размещение бесплатно, комиссии нет. Профиль появится после проверки ваших документов.",
+  "abo_cta_p":"Добавить мою компанию",
+  "abo_cta_s":"Частые вопросы",
+  "pr_p":"Размещение бесплатно. Premium — годовая подписка. Без комиссии.",
+  "sp_sub":"Годовая подписка · Без комиссии · Позицию в выдаче купить нельзя",
+  "sp_f1":"E-mail, телефон и сайт компаний (если компания это разрешила)",
+  "sp_f2":"Бонусные кредиты при каждой покупке Premium",
+  "sp_f3":"Никаких комиссий и сборов за сделки",
+  "sp_note":"Без Premium вы всё равно можете добавить компанию, искать и опубликовать профиль.",
+  "promo_h2":"Промокод",
+  "promo_s2":"Если у вас есть код, введите его здесь; скидка применится при оплате.",
+  "promo_ph":"Промокод",
+  "ct_p":"Напишите нам с вопросом, предложением или проблемой — мы ответим как можно скорее.",
+  "ct_center":"Kervea",
+  "ct_addr_lbl":"Адрес:"
+ },
+};
+Object.keys(I18N_COPY).forEach(function(lg){ if(!T[lg]) T[lg] = {}; Object.keys(I18N_COPY[lg]).forEach(function(k){ T[lg][k] = I18N_COPY[lg][k]; }); });
 
 // =================== POSITIONS (firms) ===================
 var POS = []; // filled from /kv/firms (server decides what each viewer may see)
@@ -2522,7 +3316,7 @@ function animateCounter(el, target, duration){
 }
 function updateStats(animate){
  var s = computeStats();
- var els = document.querySelectorAll("#statsBar [data-stat]");
+ var els = document.querySelectorAll("[data-stat]");
  els.forEach(function(el){
    var k = el.getAttribute("data-stat");
    var v = s[k] || 0;

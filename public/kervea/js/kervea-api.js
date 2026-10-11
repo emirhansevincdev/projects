@@ -63,7 +63,7 @@ window.kvSubmitLogin = function(){
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ kvShowAlert('destructive','E-posta hatalı','Lütfen geçerli bir e-posta adresi girin.'); return; }
   if(pass.length < 8){ kvShowAlert('destructive','Parola çok kısa','Parola en az 8 karakter olmalı.'); return; }
   var btn=document.querySelector('.kv-login-btn'), old=btn.innerHTML;
-  setBusy(btn,true); btn.innerHTML='<span>Giriş yapılıyor…</span>';
+  setBusy(btn,true); btn.innerHTML='<span>'+kvT('Giriş yapılıyor…')+'</span>';
   api('POST','/kv/auth/login',{email:email,password:pass,remember:remember,code:code||undefined}).then(function(r){
     setBusy(btn,false); btn.innerHTML=old;
     if(r.ok){
@@ -77,7 +77,7 @@ window.kvSubmitLogin = function(){
       showCodeField(); kvShowAlert('info','Doğrulama kodu gerekli','Authenticator uygulamanızdaki 6 haneli kodu girin.');
     } else if(r.status===429){
       var m=Math.ceil(((r.data&&r.data.retry_after)||60)/60);
-      kvShowAlert('destructive','Giriş geçici olarak kilitlendi','Çok fazla hatalı deneme. '+m+' dakika sonra tekrar deneyin.');
+      kvShowAlert('destructive','Giriş geçici olarak kilitlendi',kvT('Çok fazla hatalı deneme. {m} dakika sonra tekrar deneyin.',{m:m}));
     } else if(r.data && r.data.error==='unverified'){
       kvShowAlert('warning','E-posta doğrulanmadı','Hesabınızı etkinleştirmek için e-postanızdaki bağlantıdan parola belirleyin.');
     } else {
@@ -89,7 +89,7 @@ function showCodeField(){
   if(el('kvLoginCode')) return;
   var row=document.querySelector('.kv-login-row'); if(!row) return;
   var d=document.createElement('div'); d.className='kv-float-input';
-  d.innerHTML='<input type="text" id="kvLoginCode" class="kv-float-in" placeholder=" " inputmode="numeric" maxlength="6" autocomplete="one-time-code"/><label for="kvLoginCode" class="kv-float-lbl">Doğrulama kodu (2FA)</label>';
+  d.innerHTML='<input type="text" id="kvLoginCode" class="kv-float-in" placeholder=" " inputmode="numeric" maxlength="6" autocomplete="one-time-code"/><label for="kvLoginCode" class="kv-float-lbl">'+kvT('Doğrulama kodu (2FA)')+'</label>';
   row.parentNode.insertBefore(d,row);
   el('kvLoginCode').focus();
 }
@@ -189,7 +189,6 @@ window.runSearch = function(){
   try{ if(window.AM_GLOBE && AM_GLOBE.selectCountry) AM_GLOBE.selectCountry(CUR_CC); }catch(e){}
   document.querySelectorAll('.qf .seg button').forEach(function(b,i){ b.classList.toggle('on',(i===0&&DIR==='EXP')||(i===1&&DIR==='IMP')); });
   renderPositions();
-  if(typeof toast==='function') toast(tt('toast_search_applied','Arama uygulandı'));
 };
 // ana sayfa istatistikleri gerçek sayımlardan
 window.computeStats = function(){ var s=window.KV_STATS||{firms:0,countries:0}; return {firms:s.firms||0,countries:s.countries||0,sectors:s.sectors||26,langs:6}; };
@@ -298,8 +297,8 @@ window.submitAddCompany = function(){
   if(!cc) missing.push('Ülke');
   if(!ADD_FILES.logo) missing.push('Logo');
   var docs=F('documents'); if(!docs || !docs.files.length) missing.push('Belgeler');
-  if(missing.length){ kvShowAlert('destructive','Eksik alanlar', missing.join(', ')+' zorunludur.'); return; }
-  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması','Açıklama 250–300 kelime olmalı (şu an '+wc+').'); stp(2); return; }
+  if(missing.length){ kvShowAlert('destructive','Eksik alanlar', kvT('{list} zorunludur.',{list:missing.map(function(x){ return kvT(x); }).join(', ')})); return; }
+  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması',kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:wc})); stp(2); return; }
   var fd=new FormData();
   ['name','name_en','tax_id','mersis','founded_year','employees','website','kep','email','phone','rep_name','rep_title','rep_email','address','direction','hs_codes','moq','incoterm','payment_terms','products','certificates'].forEach(function(k){ var v=fv(k); if(v) fd.append(k,v); });
   fd.append('description', addValue('description').trim());
@@ -459,6 +458,8 @@ function saveProfile(){
   api('PUT','/kv/me/company',b).then(function(r){ if(r.ok){ toast(tt('toast_profile_updated','Profil güncellendi')); loadMember(); } else alertErr('Profil kaydedilemedi', r); });
 }
 document.addEventListener('click', function(e){
+  var cancel=e.target.closest && e.target.closest('#dp-profile button[onclick*="toast_cancelled"]');
+  if(cancel){ e.preventDefault(); e.stopImmediatePropagation(); fillPanel(); toast('Değişiklikler geri alındı'); return; }   // İptal: kaydetme, sunucudaki değerleri geri yükle
   var b=e.target.closest && e.target.closest('#dp-profile button[onclick*="toast("]'); if(!b) return;
   e.preventDefault(); e.stopImmediatePropagation(); saveProfile();
 }, true);
@@ -469,19 +470,19 @@ function fillSettings(){
   var card=host.querySelector('.dcard'); if(!card || card.getAttribute('data-kv')==='1') { refreshSettingsState(); return; }
   card.setAttribute('data-kv','1');
   card.innerHTML =
-   '<h3>Güvenlik</h3><p class="card-sub">Hesabınızı koruyan katmanlar.</p>'+
-   '<div class="tglrow"><div class="l"><b>İki Faktörlü Kimlik Doğrulama (2FA)</b><span>Authenticator uygulaması ile giriş kodu</span></div><label class="tgl"><input type="checkbox" id="kvSet2fa"/><span class="slider"></span></label></div>'+
+   '<h3>'+kvT('Güvenlik')+'</h3><p class="card-sub">'+kvT('Hesabınızı koruyan katmanlar.')+'</p>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('İki Faktörlü Kimlik Doğrulama (2FA)')+'</b><span>'+kvT('Authenticator uygulaması ile giriş kodu')+'</span></div><label class="tgl"><input type="checkbox" id="kvSet2fa"/><span class="slider"></span></label></div>'+
    '<div id="kv2faBox" style="display:none;margin:8px 0 16px;padding:14px;border:1px solid var(--line);border-radius:12px"></div>'+
-   '<h3 style="margin-top:24px">İzinler ve Bildirimler (KVKK)</h3><p class="card-sub">Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.</p>'+
-   '<div class="tglrow"><div class="l"><b>İletişim bilgilerimin gösterilmesi</b><span>E-posta/telefon yalnızca Pro üyelere gösterilir. Kapatırsanız kimseye gösterilmez.</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
-   '<div class="tglrow"><div class="l"><b>E-posta bildirimleri</b><span>Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)</span></div><label class="tgl"><input type="checkbox" id="kvSetMkt"/><span class="slider"></span></label></div>'+
-   '<h3 style="margin-top:24px">KVKK / GDPR — Veri Hakları</h3><p class="card-sub">Verileriniz KVKK ve GDPR standartlarında saklanır.</p>'+
+   '<h3 style="margin-top:24px">'+kvT('İzinler ve Bildirimler (KVKK)')+'</h3><p class="card-sub">'+kvT('Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.')+'</p>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('İletişim bilgilerimin gösterilmesi')+'</b><span>'+kvT('E-posta/telefon yalnızca Pro üyelere gösterilir. Kapatırsanız kimseye gösterilmez.')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('E-posta bildirimleri')+'</b><span>'+kvT('Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetMkt"/><span class="slider"></span></label></div>'+
+   '<h3 style="margin-top:24px">'+kvT('KVKK / GDPR — Veri Hakları')+'</h3><p class="card-sub">'+kvT('Verileriniz KVKK ve GDPR standartlarında saklanır.')+'</p>'+
    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">'+
-    '<button class="btn sec sm" id="kvSetExport">Verilerimi İndir (JSON)</button>'+
-    '<button class="btn sec sm" onclick="openM(\'kvkk\')">Aydınlatma Metni</button>'+
-    '<button class="btn sec sm" onclick="openM(\'cookie\')">Gizlilik / Çerez Politikası</button>'+
-    '<button class="btn sec sm" onclick="openM(\'sozl\')">Üyelik Sözleşmesi</button>'+
-    '<button class="btn sm" id="kvSetDelete" style="background:#fff3f0;border-color:#ffcdc0;color:#c33">Hesabı Sil</button></div>';
+    '<button class="btn sec sm" id="kvSetExport">'+kvT('Verilerimi İndir (JSON)')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'kvkk\')">'+kvT('Aydınlatma Metni')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'cookie\')">'+kvT('Gizlilik / Çerez Politikası')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'sozl\')">'+kvT('Üyelik Sözleşmesi')+'</button>'+
+    '<button class="btn sm" id="kvSetDelete" style="background:#fff3f0;border-color:#ffcdc0;color:#c33">'+kvT('Hesabı Sil')+'</button></div>';
   el('kvSetVis').addEventListener('change',function(){ setConsent('contact_visibility',this.checked,this); });
   el('kvSetMkt').addEventListener('change',function(){ setConsent('marketing',this.checked,this); });
   el('kvSet2fa').addEventListener('change',function(){ this.checked ? start2fa(this) : disable2fa(this); });
@@ -505,7 +506,7 @@ function start2fa(box){
   api('POST','/kv/auth/2fa/start').then(function(r){
     if(!r.ok){ box.checked=false; alertErr('2FA başlatılamadı',r); return; }
     var b=el('kv2faBox'); b.style.display='block';
-    b.innerHTML='<p style="margin:0 0 8px;font-size:13.5px">Authenticator uygulamanıza şu anahtarı ekleyin (veya <a href="'+escapeHtml(r.data.uri)+'">buraya tıklayın</a>):</p><code style="display:block;padding:8px 10px;background:var(--chip);border-radius:8px;font-size:14px;letter-spacing:.08em;word-break:break-all">'+escapeHtml(r.data.secret)+'</code><div style="display:flex;gap:8px;margin-top:10px"><input id="kv2faCode" inputmode="numeric" maxlength="6" placeholder="6 haneli kod" style="flex:1"/><button class="btn sm" id="kv2faOk">Doğrula</button></div>';
+    b.innerHTML='<p style="margin:0 0 8px;font-size:13.5px">'+kvT('Authenticator uygulamanıza şu anahtarı ekleyin (veya {link}):',{link:'<a href="'+escapeHtml(r.data.uri)+'">'+kvT('buraya tıklayın')+'</a>'})+'</p><code style="display:block;padding:8px 10px;background:var(--chip);border-radius:8px;font-size:14px;letter-spacing:.08em;word-break:break-all">'+escapeHtml(r.data.secret)+'</code><div style="display:flex;gap:8px;margin-top:10px"><input id="kv2faCode" inputmode="numeric" maxlength="6" placeholder="'+escapeHtml(kvT('6 haneli kod'))+'" style="flex:1"/><button class="btn sm" id="kv2faOk">'+kvT('Doğrula')+'</button></div>';
     el('kv2faOk').addEventListener('click',function(){
       api('POST','/kv/auth/2fa/confirm',{code:el('kv2faCode').value}).then(function(r2){
         if(r2.ok){ b.style.display='none'; ME.user.two_factor=true; toast('2FA etkinleştirildi'); } else alertErr('Kod hatalı',r2);
@@ -550,7 +551,7 @@ function fillOverview(){
   var b=el('ovVerifyBadge');
   if(b){
     var st=co&&co.status;
-    var map={approved:['ov-badge-ok','Firma doğrulandı'],pending:['ov-badge-warn','Başvurunuz inceleniyor — sonuç e-posta ile bildirilecek'],rejected:['ov-badge-warn','Başvurunuz onaylanmadı — e-postanızı kontrol edin'],suspended:['ov-badge-warn','Hesap askıda — destek ile iletişime geçin']};
+    var map={approved:['ov-badge-ok',kvT('Firma doğrulandı')],pending:['ov-badge-warn',kvT('Başvurunuz inceleniyor — sonuç e-posta ile bildirilecek')],rejected:['ov-badge-warn',kvT('Başvurunuz onaylanmadı — e-postanızı kontrol edin')],suspended:['ov-badge-warn','Hesap askıda — destek ile iletişime geçin']};
     var m=map[st]||map.pending;
     b.className='ov-badge '+m[0]; b.innerHTML='<span>'+m[1]+'</span>';
   }
@@ -558,8 +559,8 @@ function fillOverview(){
   if(vals[3]){
     var v=vals[3].querySelector('.ov-stat-val'), s=vals[3].querySelector('.ov-stat-sub');
     var ok=co&&co.status==='approved';
-    if(v){ v.removeAttribute('data-i18n'); v.textContent=ok?'Doğrulandı':'Beklemede'; }
-    if(s){ s.removeAttribute('data-i18n'); s.textContent=ok?'Belgeler Kervea ekibince incelendi':'Belgeler inceleniyor'; }
+    if(v){ v.removeAttribute('data-i18n'); v.textContent=ok?kvT('Doğrulandı'):kvT('Beklemede'); }
+    if(s){ s.removeAttribute('data-i18n'); s.textContent=ok?kvT('Belgeler Kervea ekibince incelendi'):kvT('Belgeler inceleniyor'); }
   }
   api('GET','/kv/matches').then(function(r){
     if(!r.ok) return;
@@ -585,9 +586,9 @@ function fillDocs(){
   var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
   var cards=(ME.documents||[]).map(function(d){
     var kind=/pdf/.test(d.mime)?'pdf':'img';
-    return '<div class="doc-c '+kind+'"><div class="d-ic">'+ICO+'</div><h4 style="word-break:break-word">'+escapeHtml(d.name)+'</h4><div class="d-sub">'+escapeHtml(String(d.mime).replace('application/','').replace('image/','').toUpperCase())+'</div><span class="d-st '+(ok?'ok':'wn')+'">'+(ok?'İncelendi':'İnceleniyor')+'</span><div class="d-meta"><span>'+Math.max(1,Math.round(d.size/1024))+' KB</span><span>'+escapeHtml(d.at)+'</span></div></div>';
+    return '<div class="doc-c '+kind+'"><div class="d-ic">'+ICO+'</div><h4 style="word-break:break-word">'+escapeHtml(d.name)+'</h4><div class="d-sub">'+escapeHtml(String(d.mime).replace('application/','').replace('image/','').toUpperCase())+'</div><span class="d-st '+(ok?'ok':'wn')+'">'+(ok?kvT('İncelendi'):kvT('İnceleniyor'))+'</span><div class="d-meta"><span>'+Math.max(1,Math.round(d.size/1024))+' KB</span><span>'+escapeHtml(d.at)+'</span></div></div>';
   }).join('');
-  grid.innerHTML = cards + '<div class="doc-add" id="kvDocAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><b style="color:var(--body);display:block;margin-bottom:2px">Yeni belge ekle</b><span style="font-size:11px">PDF, PNG, JPG · max 10 MB</span></div>';
+  grid.innerHTML = cards + '<div class="doc-add" id="kvDocAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><b style="color:var(--body);display:block;margin-bottom:2px">'+kvT('Yeni belge ekle')+'</b><span style="font-size:11px">PDF, PNG, JPG · max 10 MB</span></div>';
   var pick=function(){ var f=el('kvDocFile'); if(!f){ f=document.createElement('input'); f.type='file'; f.id='kvDocFile'; f.multiple=true; f.accept='application/pdf,image/jpeg,image/png,image/webp'; f.style.display='none'; f.setAttribute('data-kvdoc','1'); document.body.appendChild(f); f.addEventListener('change',uploadDocs); } f.click(); };
   el('kvDocAdd').addEventListener('click',pick);
   var btn=host.querySelector('.btn'); if(btn && !btn.getAttribute('data-kv')){ btn.setAttribute('data-kv','1'); btn.addEventListener('click',pick); }
@@ -619,7 +620,7 @@ window.renderMatchTable = function(){
       var why = (r.data&&r.data.reason==='no_company') ? 'Eşleşmeler için önce firma profilinizi oluşturun.' : ((r.data&&r.data.reason==='not_approved') ? 'Başvurunuz onaylandığında eşleşmeler burada listelenir.' : tt('empty_matches','Filtrelere uyan eşleşme yok'));
       wrap.innerHTML='<div class="empty" style="padding:40px 20px;text-align:center;color:var(--faint)">'+why+'</div>'; return;
     }
-    var RZ={dir_c:'Karşılıklı yön',sec:'Aynı sektör',hs:'HS kodu ortak',vf:'Doğrulanmış',veteran:'Deneyimli firma'};
+    var RZ={dir_c:kvT('Karşılıklı yön'),sec:kvT('Aynı sektör'),hs:kvT('HS kodu ortak'),vf:kvT('Doğrulanmış'),veteran:kvT('Deneyimli firma')};
     var CIRC=2*Math.PI*32;
     wrap.innerHTML='<div class="mgrid">'+list.map(function(p){
       var cls=p.uyum>=90?'hi':p.uyum>=80?'md':'lo', off=CIRC-(p.uyum/100)*CIRC, dirCls=p.dir==='IMP'?'imp':'exp';
@@ -628,7 +629,7 @@ window.renderMatchTable = function(){
       return '<div class="mcard"'+lockedCls+'><div class="mring '+cls+'"><svg viewBox="0 0 76 76"><circle class="rbg" cx="38" cy="38" r="32"/><circle class="rfg" cx="38" cy="38" r="32" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="rtxt"><div class="n">'+escapeHtml(p.uyum)+'</div><div class="s">Match</div></div></div>'+
        '<div class="mmid"><div class="mhead"><div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px">'+(p.locked?secTileHTML(p.sec,44,10):logoTile(p,44,10))+'<div style="flex:1;min-width:0"><div class="mnm">'+escapeHtml(p.nm)+'</div><div class="msub">'+escapeHtml(p.locked?'•••••':((d[p.cn_key]||p.cn_key)+(p.yr?' · '+p.yr:'')))+(p.sec!=null?' · '+escapeHtml(secs[p.sec]||''):'')+'</div></div></div>'+(p.dir?'<span class="mdirpill '+dirCls+'">'+dirLabel(p)+'</span>':'')+'</div>'+
        '<div class="mreasons">'+reasons+'</div>'+
-       '<div class="mbars"><div class="mbar"><div class="bl"><span>Ürün Uyumu</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>Yön Uyumu</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
+       '<div class="mbars"><div class="mbar"><div class="bl"><span>'+kvT('Ürün Uyumu')+'</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>'+kvT('Yön Uyumu')+'</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
        '<div class="mact">'+(p.locked?'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">PRO</button>':'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
     }).join('')+'</div>';
   });
@@ -800,7 +801,9 @@ window.renderMatchTable = function(){
   };
   kvApplyExtraI18n();
   // Dil değişince yeniden uygula
-  var _sl=window.setLang; window.setLang=function(l){ var r=_sl.apply(this,arguments); try{ kvApplyExtraI18n(); }catch(e){} return r; };
+  var _sl=window.setLang; window.setLang=function(l){ var r=_sl.apply(this,arguments); try{ kvApplyExtraI18n(); }catch(e){}
+    try{ if(ME){ var sc=document.querySelector('#dp-settings .dcard'); if(sc) sc.removeAttribute('data-kv'); fillPanel(); } }catch(e){}
+    return r; };
 })();
 
 // ───────────────────────── adresler (gerçek URL) ─────────────────────────

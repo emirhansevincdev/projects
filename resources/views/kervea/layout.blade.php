@@ -34,6 +34,7 @@
 @include('kervea.partials.firm-modal')
 <script>window.KV_BOOT = @json($boot);</script>
 <script src="{{ asset('kervea/js/kervea-app.js') }}?v={{ config('kervea.asset_version') }}"></script>
+<script src="{{ asset('kervea/js/kv-i18n.js') }}?v={{ @filemtime(public_path('kervea/js/kv-i18n.js')) ?: 1 }}"></script>
 <script src="{{ asset('kervea/js/kervea-api.js') }}?v={{ config('kervea.asset_version') }}"></script>
 <script src="{{ asset('kervea/js/kv-globe.js') }}?v={{ @filemtime(public_path('kervea/js/kv-globe.js')) ?: 1 }}"></script>
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)

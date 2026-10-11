@@ -13,7 +13,7 @@
 </svg>
           <b>KER<span style="color:#0D8A80">VEA</span></b>
         </a>
-        <p class="fx-tag" data-i18n="ft_brand_desc">Doğrulanmış B2B ticaret ağı. Aracısız, komisyonsuz, gerçek ihracat ve ithalat bağlantıları.</p>
+        <p class="fx-tag" data-i18n="ft_brand_desc">Küresel, çok dilli B2B ticaret eşleştirme ağı. Komisyon yok; firmalar belgeleriyle doğrulanır.</p>
       </div>
 
       <!-- Platform -->
@@ -33,7 +33,6 @@
         <ul>
           <li><a onclick="go('about')" data-i18n="nav_about">Hakkımızda</a></li>
           <li><a onclick="go('contact')" data-i18n="nav_contact">İletişim</a></li>
-          <li><a onclick="go('pricing')" data-i18n="ft_l_enterprise">Kurumsal Çözümler</a></li>
         </ul>
       </div>
 
@@ -50,7 +49,7 @@
 
     <div class="fx-bar">
       <div class="fx-copy">
-        <b>© 2026 Kervea Ticaret A.Ş.</b> · v10.0 · <span data-i18n="ft_tagline">Modern İpek Yolu</span>
+        <b>© 2026 Kervea</b> · <span data-i18n="ft_tagline">Modern İpek Yolu</span>
       </div>
       <div class="fx-social" aria-label="Sosyal medya">
         <a href="https://www.linkedin.com/company/kervea" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">

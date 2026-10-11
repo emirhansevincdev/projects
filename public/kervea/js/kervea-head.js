@@ -3,6 +3,17 @@
 // KERVEA · GÜVENLİK YARDIMCILARI (Faz 9)
 // ═══════════════════════════════════════════════════════════════
 
+// Kayıtlı dil seçimi: ilk boyamadan önce <html lang dir> doğru olsun (Arapça için sağdan sola, yanıp sönme yok).
+(function(){
+  try {
+    var l = localStorage.getItem('kervea_lang');
+    if(l && /^(tr|en|es|fr|ar|ru)$/.test(l)){
+      document.documentElement.setAttribute('lang', l);
+      document.documentElement.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    }
+  } catch(e){}
+})();
+
 // XSS Protection: user input'u HTML-safe hale getir
 window.escapeHtml = function(str){
   if(str === null || str === undefined) return '';
@@ -75,7 +86,7 @@ window.validateFileUpload = function(file, opts){
   var errors = [];
   if(!file) return { ok:false, errors:['Dosya seçilmedi'] };
   if(file.size > maxSize){
-    errors.push('Dosya çok büyük (max ' + (maxSize/1024/1024).toFixed(1) + ' MB)');
+    errors.push(window.kvT ? window.kvT('Dosya çok büyük (max {mb} MB)', { mb: (maxSize/1024/1024).toFixed(1) }) : 'Dosya çok büyük (max ' + (maxSize/1024/1024).toFixed(1) + ' MB)');
   }
   if(!file.type || !allowedTypes.test(file.type)){
     errors.push('İzin verilmeyen dosya tipi. Yalnızca JPEG, PNG, WebP' + (opts.allowPdf === false ? '' : ' ve PDF') + ' kabul edilir.');
