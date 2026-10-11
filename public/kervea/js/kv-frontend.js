@@ -122,6 +122,7 @@ function translateAttrs(root){
         if(el.hasAttribute(pair[1])) return;   // anahtarlı olanlara setLang bakar
         src = cur; el.setAttribute(ok, src);
       }
+      if(typeof window.kvHas === 'function' && !window.kvHas(src)) return;   // sözlükte yok: başka kodun yazdığı değere dokunma
       var out = window.kvT(src);
       if(out !== cur) el.setAttribute(a, out);
     });

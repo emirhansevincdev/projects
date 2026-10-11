@@ -333,6 +333,7 @@ window.kvT = function(s, vars){
   return fill(out, vars);
 };
 window.kvDict = add;     // diğer dosyalar kendi satırlarını ekleyebilir
+window.kvHas = function(s){ return Object.prototype.hasOwnProperty.call(C, String(s)); };   // sözlükte bu Türkçe metin için çeviri var mı
 
 // Mevcut çağrılar (kvShowAlert / toast / confirm / prompt) Türkçe kaynak metinle yazılmış: çıktıdan hemen önce çevrilir.
 function wrap(name, positions){
