@@ -56,6 +56,8 @@ class FirmController extends Controller
               return FirmPresenter::card($pair[0], $pair[1], $locked);
           })->all();
 
+        \App\Services\Kv\AnalyticsRecorder::searchResults($r, $items, $criteria);   // analytics: impressions + search log (never throws)
+
         return response()->json(['total' => $total, 'items' => $items, 'plan' => FirmPresenter::viewerPlan($user)])
             ->header('Cache-Control', 'no-store');
     }
@@ -127,6 +129,8 @@ class FirmController extends Controller
         $revealed = $user && FirmPresenter::isPro($user)
             && Reveal::where('user_id', $user->id)->where('company_id', $c->id)->exists();
 
+        \App\Services\Kv\AnalyticsRecorder::profileView($r, $c);   // analytics: counts one visit (skips owner/team/admin/bots, dedupes; never throws)
+
         return response()->json(FirmPresenter::detail($c, $user, null, $revealed))->header('Cache-Control', 'no-store');
     }
 
@@ -152,6 +156,7 @@ class FirmController extends Controller
                 return response()->json(['error' => 'quota'], 429);
             }
             Reveal::create(['user_id' => $user->id, 'company_id' => $c->id]);
+            \App\Services\Kv\AnalyticsRecorder::contactReveal($r, $c);   // analytics: only a NEW reveal counts
         }
         $d = FirmPresenter::detail($c->load(['sector', 'photos']), $user, null, true);
         return response()->json(['contact' => $d['contact'] ?? null]);

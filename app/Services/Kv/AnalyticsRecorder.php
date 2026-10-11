@@ -28,8 +28,8 @@ class AnalyticsRecorder
     private const BOT = '/bot\b|bot\/|crawl|spider|slurp|facebookexternalhit|headless|lighthouse|pingdom|uptime|monitor|preview|curl\/|wget|python-requests|python-urllib|httpclient|okhttp|go-http|libwww|java\/|node-fetch|axios\/|postman/i';
     private const SOURCES = ['detail', 'match', 'search'];
 
-    /** A company page was opened (FirmController::show). */
-    public static function profileView(Request $r, Company $c, string $source = 'detail'): void
+    /** A company page was opened (FirmController::show). $source null = work it out from the request (see sourceOf()). */
+    public static function profileView(Request $r, Company $c, ?string $source = null): void
     {
         try {
             if ($c->status !== Company::STATUS_APPROVED) {
@@ -43,7 +43,7 @@ class AnalyticsRecorder
             if (! Cache::add('kv-pv:'.$c->id.':'.$v['key'], 1, $ttl)) {
                 return;                                           // same viewer, same company, within the window
             }
-            $source = in_array($source, self::SOURCES, true) ? $source : 'detail';
+            $source = $source !== null && in_array($source, self::SOURCES, true) ? $source : self::sourceOf($r);
             DB::transaction(function () use ($c, $v, $source) {
                 ProfileView::create([
                     'company_id' => $c->id,
@@ -100,6 +100,28 @@ class AnalyticsRecorder
     }
 
     // ───────────────────────────── internals ─────────────────────────────
+
+    /**
+     * How the visitor reached the page: an explicit ?src=detail|match|search wins; otherwise the same-origin Referer decides
+     * (opened from the member panel's matches = match, from the public result list = search, a direct /company/<slug> link or no
+     * referrer = detail). It only labels the owner's own statistic, so a forged value harms nobody.
+     */
+    public static function sourceOf(Request $r): string
+    {
+        $src = strtolower((string) $r->query('src', ''));
+        if (in_array($src, self::SOURCES, true)) {
+            return $src;
+        }
+        $ref = (string) $r->headers->get('referer', '');
+        if ($ref === '' || parse_url($ref, PHP_URL_HOST) !== $r->getHost()) {
+            return 'detail';
+        }
+        $path = rtrim((string) parse_url($ref, PHP_URL_PATH), '/');
+        if ($path === '/panel') {
+            return 'match';
+        }
+        return $path === '' ? 'search' : 'detail';
+    }
 
     private static function impressions(array $v, array $items): void
     {
