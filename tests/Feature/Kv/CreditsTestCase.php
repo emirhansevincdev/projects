@@ -36,11 +36,17 @@ abstract class CreditsTestCase extends KvTestCase
     /** Person of another sector with both channels (never use real-looking data outside tests). */
     protected function person(array $over = []): Person
     {
-        return Person::create($over + [
+        $status = $over['status'] ?? null;
+        unset($over['status']);                                          // guarded on purpose: set explicitly below
+        $p = Person::create($over + [
             'name' => 'Mikko Virtanen', 'title' => 'CEO & Founder', 'department' => 'ceo', 'company_name' => 'Nordic Kaluste Oy',
             'country_cc' => 'fi', 'sector_id' => $this->sec(9), 'email' => 'mikko@nordic-kaluste.test', 'phone' => '+358 40 123 4567',
             'linkedin' => 'https://linkedin.com/in/mikko-v', 'source' => 'manual',
         ]);
+        if ($status) {
+            $p->forceFill(['status' => $status])->save();
+        }
+        return $p;
     }
 
     protected function giveCredits(Company $c, int $n): void
