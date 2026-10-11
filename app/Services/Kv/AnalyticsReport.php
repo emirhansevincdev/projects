@@ -145,7 +145,7 @@ class AnalyticsReport
      */
     private static function visitors(Company $co, bool $premium, Carbon $from, Carbon $to): array
     {
-        $rows = self::views((int) $co->id, $from, $to)->orderByDesc('id')->limit(20)->get();
+        $rows = self::views((int) $co->id, $from, $to)->orderByDesc('created_at')->orderByDesc('id')->limit(20)->get();
         $viewers = collect();
         if ($premium) {
             $ids = $rows->pluck('viewer_company_id')->filter()->unique()->values();

@@ -42,6 +42,7 @@ var X={
   an_b_h:'Sektör karşılaştırması', an_b_sub:'Aynı sektördeki diğer {n} onaylı firmanın ortalamasıyla', an_b_you:'Sizin firmanız', an_b_avg:'Sektör ortalaması',
   an_b_none:'Karşılaştırma, aynı sektörde en az {n} diğer onaylı firma olduğunda gösterilir; böylece tek bir firmanın verisi ortalamadan okunamaz.', an_b_have:'Şu an: {k}',
   an_u_s:'sn', an_u_m:'dk', an_u_h:'sa', an_u_d:'g',
+  an_nocompany:'Analiz, firma başvurunuz onaylandıktan sonra açılır.', an_ov_pending:'Onaydan sonra',
   an_ov_30:'Son 30 gün', an_ov_noperm:'Analiz yetkiniz yok', an_ov_err:'Yüklenemedi'
  },
  en:{
@@ -73,6 +74,7 @@ var X={
   an_b_h:'Sector comparison', an_b_sub:'Against the average of the other {n} approved companies in your sector', an_b_you:'Your company', an_b_avg:'Sector average',
   an_b_none:'The comparison is shown once at least {n} other approved companies are in your sector, so no single company can be read from the average.', an_b_have:'Right now: {k}',
   an_u_s:'s', an_u_m:'min', an_u_h:'h', an_u_d:'d',
+  an_nocompany:'Analytics opens once your company application is approved.', an_ov_pending:'After approval',
   an_ov_30:'Last 30 days', an_ov_noperm:'No analytics permission', an_ov_err:'Could not be loaded'
  },
  es:{
@@ -104,6 +106,7 @@ var X={
   an_b_h:'Comparación con el sector', an_b_sub:'Frente a la media de las otras {n} empresas aprobadas de su sector', an_b_you:'Su empresa', an_b_avg:'Media del sector',
   an_b_none:'La comparación se muestra cuando hay al menos {n} otras empresas aprobadas en su sector, para que no se puedan deducir los datos de una sola empresa a partir de la media.', an_b_have:'Ahora: {k}',
   an_u_s:'s', an_u_m:'min', an_u_h:'h', an_u_d:'d',
+  an_nocompany:'El análisis se activa cuando se apruebe la solicitud de su empresa.', an_ov_pending:'Tras la aprobación',
   an_ov_30:'Últimos 30 días', an_ov_noperm:'Sin permiso de análisis', an_ov_err:'No se pudo cargar'
  },
  fr:{
@@ -135,6 +138,7 @@ var X={
   an_b_h:'Comparaison sectorielle', an_b_sub:'Par rapport à la moyenne des {n} autres sociétés approuvées de votre secteur', an_b_you:'Votre société', an_b_avg:'Moyenne du secteur',
   an_b_none:'La comparaison s’affiche lorsqu’au moins {n} autres sociétés approuvées sont dans votre secteur, afin qu’on ne puisse pas déduire les données d’une seule société de la moyenne.', an_b_have:'Actuellement : {k}',
   an_u_s:'s', an_u_m:'min', an_u_h:'h', an_u_d:'j',
+  an_nocompany:'Les analyses s’ouvrent une fois la demande de votre société approuvée.', an_ov_pending:'Après l’approbation',
   an_ov_30:'30 derniers jours', an_ov_noperm:'Pas d’autorisation d’analyses', an_ov_err:'Chargement impossible'
  },
  ar:{
@@ -166,6 +170,7 @@ var X={
   an_b_h:'المقارنة مع القطاع', an_b_sub:'مقابل متوسط الشركات المعتمدة الأخرى في قطاعكم وعددها {n}', an_b_you:'شركتكم', an_b_avg:'متوسط القطاع',
   an_b_none:'تظهر المقارنة عندما يوجد في قطاعكم {n} شركات معتمدة أخرى على الأقل، حتى لا يمكن استنتاج بيانات شركة واحدة من المتوسط.', an_b_have:'حاليًا: {k}',
   an_u_s:'ث', an_u_m:'د', an_u_h:'س', an_u_d:'ي',
+  an_nocompany:'تُتاح التحليلات بعد الموافقة على طلب شركتكم.', an_ov_pending:'بعد الموافقة',
   an_ov_30:'آخر 30 يومًا', an_ov_noperm:'لا صلاحية للتحليلات', an_ov_err:'تعذّر التحميل'
  },
  ru:{
@@ -197,6 +202,7 @@ var X={
   an_b_h:'Сравнение с отраслью', an_b_sub:'Со средним по другим одобренным компаниям вашей отрасли ({n})', an_b_you:'Ваша компания', an_b_avg:'Среднее по отрасли',
   an_b_none:'Сравнение появляется, когда в вашей отрасли есть минимум {n} других одобренных компаний, чтобы по среднему нельзя было узнать данные одной компании.', an_b_have:'Сейчас: {k}',
   an_u_s:'с', an_u_m:'мин', an_u_h:'ч', an_u_d:'дн',
+  an_nocompany:'Аналитика откроется после одобрения заявки вашей компании.', an_ov_pending:'После одобрения',
   an_ov_30:'Последние 30 дней', an_ov_noperm:'Нет права на аналитику', an_ov_err:'Не удалось загрузить'
  }
 };
@@ -273,17 +279,21 @@ function sameUser(){
   if(S_.who!==w){ S_.who=w; S_.data=null; S_.err=null; S_.at=0; S_.loading=false; S_.seq++; OV.data=null; OV.state='idle'; }
 }
 
+// The server is the authority (403 below); this only avoids a request that is certain to be refused for a team member without the permission.
+function mayView(){ var u=window.KV_USER; return !(u && Array.isArray(u.perms) && u.perms.indexOf('analytics')===-1); }
+
 function api(method, url){ return window.KV_API ? window.KV_API(method, url) : Promise.resolve({ok:false,status:0,data:{}}); }
 
 function load(){
   sameUser();
+  if(!mayView()){ S_.seq++; S_.loading=false; S_.data=null; S_.err='perm'; render(); return; }
   var seq=++S_.seq; S_.loading=true; S_.err=null;
   render();
   api('GET','/kv/analytics?range='+S_.range).then(function(r){
     if(seq!==S_.seq) return;
     S_.loading=false;
     if(r.ok && r.data && r.data.totals){ S_.data=r.data; S_.err=null; S_.at=Date.now(); if(S_.range===30) renderOverview(r.data, 'ok'); }
-    else { S_.data=null; S_.err = r.status===403 ? 'perm' : 'err'; }      // never leave another range's numbers under the new range
+    else { S_.data=null; S_.err = r.status===403 ? (r.data && r.data.error==='no_company' ? 'nocompany' : 'perm') : 'err'; }   // never leave another range's numbers under the new range
     render();
   });
 }
@@ -324,6 +334,7 @@ function render(){
   var f=document.createDocumentFragment(); post=[];
   host.removeAttribute('aria-busy');
   if(S_.err==='perm'){ f.appendChild(box('', 'lock', null, L('an_noperm'))); }
+  else if(S_.err==='nocompany'){ f.appendChild(box('', 'info', null, L('an_nocompany'))); }
   else if(!S_.data && S_.err){ f.appendChild(box('err','warn', L('an_err'), null, [btn(L('an_retry'), load)])); }
   else if(!S_.data){
     var sk=E('div','an-kpis'); for(var i=0;i<6;i++) sk.appendChild(E('div','an-sk')); f.appendChild(sk);
@@ -334,6 +345,9 @@ function render(){
     var since=ymd(d.tracking_since), from=ymd(d.from);
     if(since && from && since>from){
       var n=E('div','an-note'); n.appendChild(icon(ICO.info,14)); n.appendChild(E('span',null,L('an_since',{d:fdate(since)}))); f.appendChild(n);
+    }
+    if(d.previous && d.previous.available===false){
+      var n2=E('div','an-note'); n2.appendChild(icon(ICO.info,14)); n2.appendChild(E('span',null,L('an_d_nocmp'))); f.appendChild(n2);
     }
     var t=d.totals||{};
     var none=!((t.profile_view||{}).n || (t.search_impression||{}).n || (t.contact_reveal||{}).n || (t.msg_received||{}).n || (d.visitors&&d.visitors.items&&d.visitors.items.length));
@@ -353,8 +367,8 @@ function render(){
 
 // ── KPI cards ──
 function deltaEl(tot, range){
+  if(!tot || tot.delta==null || (tot.n===0 && tot.prev===0)) return null;     // nothing to compare (said once above the cards, not on every card)
   var e=E('div','an-d');
-  if(!tot || tot.delta==null){ e.textContent=L('an_d_nocmp'); return e; }
   if(tot.delta===0){ e.textContent='= '+L('an_d_same'); return e; }
   var up=tot.delta>0; e.classList.add(up?'up':'dn');
   var head=(up?'↑ ':'↓ ') + (tot.pct!=null ? pct(Math.abs(tot.pct)) : '+'+nf(Math.abs(tot.delta)));
@@ -381,9 +395,14 @@ function kpis(d){
   if(avg==null){ c.appendChild(E('div','an-s',L('an_nodata_reply'))); }
   else {
     var dd=E('div','an-d');
-    if(rp.prev_avg_seconds!=null){ dd.textContent=(avg<rp.prev_avg_seconds?'↓ ':(avg>rp.prev_avg_seconds?'↑ ':'= '))+L('an_d_prev',{v:dur(rp.prev_avg_seconds)}); if(avg<rp.prev_avg_seconds) dd.classList.add('up'); else if(avg>rp.prev_avg_seconds) dd.classList.add('dn'); }
-    else dd.textContent=L('an_d_nocmp');
-    c.appendChild(dd); c.appendChild(E('div','an-s',L('an_s_reply',{n:nf(rp.count||0)})));
+    if(rp.prev_avg_seconds!=null){
+      var diff=avg-rp.prev_avg_seconds, arrow=diff<0?'↓ ':(diff>0?'↑ ':'= ');
+      dd.textContent=arrow+(diff!==0 ? dur(Math.abs(diff))+' · ' : '')+L('an_d_prev',{v:dur(rp.prev_avg_seconds)});
+      if(diff<0) dd.classList.add('up'); else if(diff>0) dd.classList.add('dn');             // a shorter reply time is the good direction
+    }
+    else dd=null;
+    if(dd) c.appendChild(dd);
+    c.appendChild(E('div','an-s',L('an_s_reply',{n:nf(rp.count||0)})));
   }
   g.appendChild(c);
   return g;
@@ -498,7 +517,7 @@ function chartCard(d){
     svg.addEventListener('blur', hide);
     wrap.appendChild(svg);
     var old2=wrap.querySelector('.an-chart-empty'); if(old2) old2.remove();
-    if(!max){ var em=E('div','an-chart-empty',L('an_ch_empty')); wrap.appendChild(em); }
+    if(!max){ var em=E('div','an-chart-empty'); em.appendChild(E('span',null,L('an_ch_empty'))); wrap.appendChild(em); }
     var note=meta.querySelector('.an-bk'); if(note) note.remove();
     if(bk.size>1){ var nn=E('span','an-bk', bk.size===7?L('an_ch_weekly'):L('an_ch_days',{n:nf(bk.size)})); meta.insertBefore(nn, tb); }
   }
@@ -517,7 +536,7 @@ function chartCard(d){
 // ── lists with bars ──
 function flagEl(cc){
   if(cc && /^[a-z]{2}$/.test(cc)){                                     // codes come from the server; still only [a-z]{2} ever reaches a URL
-    var im=E('img'); im.alt=''; im.setAttribute('loading','lazy'); im.src='/flags/'+cc+'.svg';
+    var im=E('img'); im.alt=''; im.src='/flags/'+cc+'.svg';
     im.addEventListener('error', function(){ im.style.visibility='hidden'; });
     return im;
   }
@@ -647,6 +666,7 @@ function renderOverview(data, state){
   var v=card.querySelector('.ov-stat-val'), s=card.querySelector('.ov-stat-sub');
   if(s) s.removeAttribute('data-i18n');
   if(OV.state==='perm'){ if(v) v.textContent='—'; if(s) s.textContent=L('an_ov_noperm'); return; }
+  if(OV.state==='nocompany'){ if(v) v.textContent='—'; if(s) s.textContent=L('an_ov_pending'); return; }
   if(OV.state==='err' || !OV.data){ if(v) v.textContent='—'; if(s) s.textContent=L('an_ov_err'); return; }
   var t=(OV.data.totals||{}).profile_view||{n:0};
   if(v) v.textContent=nf(t.n||0);
@@ -658,11 +678,12 @@ function renderOverview(data, state){
 }
 window.kvAnalyticsOverview=function(){
   sameUser();
+  if(!mayView()){ renderOverview(null,'perm'); return; }
   var w=S_.who;
   api('GET','/kv/analytics?range=30').then(function(r){
     if(w!==who()) return;                                              // someone else signed in meanwhile
     if(r.ok && r.data && r.data.totals) renderOverview(r.data,'ok');
-    else renderOverview(null, r.status===403 ? 'perm' : 'err');
+    else renderOverview(null, r.status===403 ? (r.data && r.data.error==='no_company' ? 'nocompany' : 'perm') : 'err');
   });
 };
 
@@ -686,7 +707,7 @@ var _setLang=window.setLang;
 if(typeof _setLang==='function'){
   window.setLang=function(){
     var r=_setLang.apply(this, arguments);
-    try{ register(); applyStatic(); if(S_.data) render(); if(OV.data||OV.state==='perm'||OV.state==='err') renderOverview(); }catch(e){}
+    try{ register(); applyStatic(); if(S_.data) render(); if(OV.data||OV.state==='perm'||OV.state==='nocompany'||OV.state==='err') renderOverview(); }catch(e){}
     return r;
   };
 }
