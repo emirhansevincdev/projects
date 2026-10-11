@@ -214,6 +214,7 @@ window.kvFillOverview = function(me){
   setText('ovStatDocs', co ? String(docs) : '—');
   setText('ovStatDocsSub', co ? kt(docs ? 'Yalnızca Kervea yöneticileri görür' : 'Henüz belge yüklenmedi') : '');
   setText('ovStatVerify', co ? kt(approved ? 'Doğrulandı' : 'Beklemede') : '—');
+  var verEl = $('ovStatVerify'); if(verEl) verEl.classList.toggle('is-ok', !!approved);
   setText('ovStatVerifySub', co ? kt(approved ? 'Belgeler Kervea ekibince incelendi' : 'Belgeler inceleniyor') : '');
   setText('ovStatMatchesSub', kt(approved ? 'Sektör ve ürün kriterlerinize göre' : 'Başvurunuz onaylandıktan sonra listelenir'));
 

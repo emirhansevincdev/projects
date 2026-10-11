@@ -250,3 +250,7 @@ html[data-theme="dark"] .sp-amount{background:none;-webkit-text-fill-color:curre
   .hhero .searchbig{padding:10px 10px 10px 14px;gap:8px}
   .searchbig .btn{padding:10px 14px}
 }
+
+/* Genel bakış: onaylı firmada "Doğrulandı" yeşil (amber yalnızca beklemede/uyarı) */
+.ov-stat-val-txt.is-ok{color:var(--emer,#0A5F56)}
+html[data-theme="dark"] .ov-stat-val-txt.is-ok{color:#8FE9C4}
