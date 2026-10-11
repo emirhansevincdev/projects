@@ -2494,6 +2494,7 @@ html[data-theme="dark"] .nav{background:rgba(10,22,20,.75)}
 .kv-amap-node:hover .kv-amap-froute,.kv-amap-node:focus .kv-amap-froute{opacity:1;stroke:var(--am-tr);stroke-dasharray:none}
 .kv-amap-node:hover .kv-amap-fut,.kv-amap-node:focus .kv-amap-fut{stroke:var(--am-tr)}
 .kv-amap-node:hover .kv-amap-t-fut,.kv-amap-node:focus .kv-amap-t-fut{opacity:1}
+.kv-amap-node:hover .kv-amap-hub,.kv-amap-node:focus .kv-amap-hub{stroke:var(--am-tr)}
 .kv-amap-hub{fill:var(--am-hub);stroke:var(--am-halo);stroke-width:8}
 .kv-amap-tr{fill:var(--am-tr);stroke:var(--am-halo);stroke-width:10}
 .kv-amap-pulse{fill:none;stroke:var(--am-tr);stroke-width:5;opacity:0;

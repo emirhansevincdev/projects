@@ -5336,12 +5336,16 @@ function renderAboMap(){
   KV_AMAP.active.forEach(function(d, i){
     out.push('<path class="kv-amap-route" style="animation-delay:'+(0.25 + i*0.18).toFixed(2)+'s" pathLength="1" d="'+arc(X(d.lng), Y(d.lat), 0.20)+'"/>');
   });
-  // aktif hublar + etiket
-  var lab = [ {dx:-24, dy:-10, a:"end"}, {dx:-24, dy:44, a:"end"}, {dx:26, dy:46, a:"start"} ];
-  KV_AMAP.active.forEach(function(d, i){
-    var x = X(d.lng), y = Y(d.lat), L = lab[i] || lab[0];
-    out.push('<text class="kv-amap-t" x="'+f(x + L.dx)+'" y="'+f(y + L.dy)+'" text-anchor="'+L.a+'">'+nm(d.cc)+'</text>');
-    out.push('<circle class="kv-amap-hub" cx="'+f(x)+'" cy="'+f(y)+'" r="14"/>');
+  // aktif hublar: ad ve gerçek firma sayısı üzerine gelince/odaklanınca görünür (etiketler üst üste binmesin)
+  var by2 = (window.KV_STATS && KV_STATS.by_country) || {};
+  KV_AMAP.active.forEach(function(d){
+    var x = X(d.lng), y = Y(d.lat), n = +by2[d.cc] || 0;
+    var lbl = nm(d.cc) + (n > 0 ? ' · ' + n : '');
+    out.push('<g class="kv-amap-node kv-amap-node-act" tabindex="0" role="img" aria-label="'+lbl+'">' +
+      '<circle class="kv-amap-hit" cx="'+f(x)+'" cy="'+f(y)+'" r="30"/>' +
+      '<circle class="kv-amap-hub" cx="'+f(x)+'" cy="'+f(y)+'" r="14"/>' +
+      '<text class="kv-amap-t kv-amap-t-fut" x="'+f(x)+'" y="'+f(y - 26)+'" text-anchor="middle">'+lbl+'</text>' +
+    '</g>');
   });
   // Türkiye
   out.push('<circle class="kv-amap-pulse" cx="'+f(hx)+'" cy="'+f(hy)+'" r="19"/>');
