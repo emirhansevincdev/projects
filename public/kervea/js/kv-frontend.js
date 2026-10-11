@@ -9,11 +9,22 @@ function $(id){ return document.getElementById(id); }
 
 // ───────────────────────── açılır menüler: yerleşim, Escape, modal kilidi ─────────────────────────
 // Liste ekranın altına sığmıyorsa yukarı açılır ve yüksekliği sınırlanır; kaydırma liste içinde kalır.
+// Ekranın üstündeki başlığın (menü + şehir bandı) altı: açılır liste bunun altına taşmaz.
+function headerBottom(){
+  var b = 0;
+  ['.nav', '.nav-marquee'].forEach(function(sel){
+    var e = document.querySelector(sel); if(!e) return;
+    var cs = getComputedStyle(e);
+    if(cs.display === 'none' || cs.visibility === 'hidden') return;
+    var r = e.getBoundingClientRect(); if(r.bottom > b && r.top < window.innerHeight) b = r.bottom;
+  });
+  return Math.max(0, b);
+}
 function placePanel(panel, anchor, max){
   if(!panel || !anchor) return;
-  panel.classList.remove('kv-up'); panel.style.maxHeight = '';
-  var r = anchor.getBoundingClientRect(), vh = window.innerHeight;
-  var below = vh - r.bottom - 14, above = r.top - 14;
+  panel.classList.remove('kv-up'); panel.style.maxHeight = ''; panel.style.marginLeft = ''; panel.style.width = '';
+  var r = anchor.getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = window.innerHeight, hb = headerBottom();
+  var below = vh - r.bottom - 14, above = r.top - hb - 12;
   var want = Math.min(max, vh * 0.72);
   if(below >= Math.min(want, 260) || below >= above){
     panel.style.maxHeight = Math.max(160, Math.min(want, below)) + 'px';
@@ -21,6 +32,12 @@ function placePanel(panel, anchor, max){
     panel.classList.add('kv-up');
     panel.style.maxHeight = Math.max(160, Math.min(want, above)) + 'px';
   }
+  // dar ekranda panel görünür alana sığar: genişlik kısılır, taşan kısım geri çekilir (RTL'de de geçerli)
+  if(vw <= 520){ panel.style.width = Math.min(panel.offsetWidth || vw, vw - 24) + 'px'; }
+  var pr = panel.getBoundingClientRect(), dx = 0;
+  if(pr.right > vw - 8) dx = vw - 8 - pr.right; else if(pr.left < 8) dx = 8 - pr.left;
+  if(pr.width > vw - 16){ panel.style.width = (vw - 16) + 'px'; pr = panel.getBoundingClientRect(); dx = pr.right > vw - 8 ? vw - 8 - pr.right : (pr.left < 8 ? 8 - pr.left : 0); }
+  if(dx) panel.style.marginLeft = Math.round(dx) + 'px';
 }
 var _toggleDD = window.toggleDD;
 window.toggleDD = function(id){

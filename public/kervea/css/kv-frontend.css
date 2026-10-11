@@ -161,3 +161,12 @@ html[data-theme="dark"] .kv-nl-status.err{color:#FCA5A5}
 
 /* yasal metin penceresi: Türkçe dışındaki dillerde hukuken geçerli metin notu */
 .kv-legal-note{margin:0 0 14px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--chip);font-size:13px;line-height:1.5;color:var(--body)}
+
+/* dar ekranda sektör adları ikinci satıra geçer, kesilmez */
+@media (max-width:520px){
+  .secpick-grid .schip .sn{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+}
+
+/* firma penceresi: koyu zemin üstündeki "listeye dön" bağlantısı okunur */
+.fm-back{color:#CFE3DD}
+.fm-back:hover{color:#8FE9C4 !important}
