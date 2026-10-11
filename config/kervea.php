@@ -60,13 +60,31 @@ return [
         'min_peers_for_benchmark' => 5,    // sector benchmark is shown only when at least this many firms are compared
     ],
     'team' => [
+        // Seats include the owner (prototype: "4/10 koltuk"): owner + invited/active/disabled people may not exceed this.
         'max_members' => 10,
-        'invite_days' => 7,
-        'roles' => [                       // default permissions per role; the owner always has all of them
+        'invite_days' => 7,                // informational: the password-setup link itself lives as long as auth.passwords.users.expire (24 h); "resend" issues a fresh one
+        'invites_per_day' => 20,           // invitation + resend e-mails one company may trigger per rolling 24 h (anti mail-bombing)
+        'activity_limit' => 100,           // entries returned by GET /kv/activity
+        'activity_retention_days' => 400,  // older kv_activity rows are removed by `php artisan kv:prune-activity`
+        // roles: default permissions per role; the owner always has all of them and is not a role you can assign
+        'roles' => [
             'admin' => ['label' => 'Yönetici', 'perms' => ['matches', 'profile', 'docs', 'messages', 'people', 'analytics', 'team']],
             'sales' => ['label' => 'Satış', 'perms' => ['matches', 'messages', 'people']],
             'ops' => ['label' => 'Operasyon', 'perms' => ['profile', 'docs']],
         ],
+        // permission catalogue (labels are Turkish source texts; the panel translates them by key)
+        'perms' => [
+            'matches' => ['label' => 'Eşleşmeler', 'group' => 'work'],
+            'messages' => ['label' => 'Mesajlar', 'group' => 'work'],
+            'people' => ['label' => 'Kişiler', 'group' => 'work'],
+            'analytics' => ['label' => 'Analiz', 'group' => 'work'],
+            'profile' => ['label' => 'Firma profili', 'group' => 'company'],
+            'docs' => ['label' => 'Belgeler', 'group' => 'company'],
+            'team' => ['label' => 'Ekip ve aktivite', 'group' => 'admin'],
+            'billing' => ['label' => 'Premium ve kredi satın alma', 'group' => 'admin'],
+        ],
+        // only the company owner may hand these out (and manage people who hold them)
+        'owner_only_perms' => ['team', 'billing'],
     ],
 
     'stripe' => [

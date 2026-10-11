@@ -79,6 +79,7 @@ class MemberController extends Controller
         } catch (\InvalidArgumentException $e) {
             return response()->json(['message' => 'Dosya kabul edilmedi: '.$e->getMessage()], 422);
         }
+        class_exists(\App\Services\Kv\Activity::class) && \App\Services\Kv\Activity::log($company->id, $r->user()->id, 'doc.upload', ['count' => count($v['documents'])]);
         return response()->json(['ok' => true]);
     }
 
@@ -109,6 +110,7 @@ class MemberController extends Controller
             'type' => $v['type'], 'granted' => (bool) $v['granted'],
             'ip' => $r->ip(), 'user_agent' => mb_substr((string) $r->userAgent(), 0, 255),
         ]);
+        class_exists(\App\Services\Kv\Activity::class) && \App\Services\Kv\Activity::log($c->id, $r->user()->id, 'consent.change', ['type' => $v['type'], 'granted' => (bool) $v['granted']]);
         return response()->json(['ok' => true, 'type' => $v['type'], 'granted' => (bool) $v['granted']]);
     }
 
@@ -138,6 +140,7 @@ class MemberController extends Controller
         }
         if (isset($v['social'])) $c->social = ApplicationController::cleanSocial($v['social']);
         $c->save();
+        class_exists(\App\Services\Kv\Activity::class) && \App\Services\Kv\Activity::log($c->id, $r->user()->id, 'profile.update', ['fields' => array_values(array_intersect(array_keys($v), ['name', 'sector', 'description', 'social', 'products', 'hs_codes', 'website', 'email', 'phone', 'address', 'city']))]);
         return response()->json(['ok' => true]);
     }
 
