@@ -242,3 +242,11 @@ html[data-theme="dark"] .sp-amount{background:none;-webkit-text-fill-color:curre
 .kv-draft-note{margin:10px 0 0;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--chip);font-size:13px;color:var(--body);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
 .kv-draft-del{background:none;border:0;padding:0;font:inherit;color:var(--teal);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .kv-draft-del:hover{color:var(--hover)}
+
+/* Arama kutusu: düğme etiketi uzun dillerde (Correspondre, Emparejar) ve dar ekranda kırpılmaz; yazı alanı gerektiğinde daralır */
+.searchbig input{min-width:0;text-overflow:ellipsis}
+.searchbig .btn{flex:0 0 auto;white-space:nowrap}
+@media (max-width:480px){
+  .hhero .searchbig{padding:10px 10px 10px 14px;gap:8px}
+  .searchbig .btn{padding:10px 14px}
+}
