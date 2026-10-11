@@ -5354,10 +5354,6 @@ var KERVEA_HUBS = [
       ScrollTrigger.refresh();
     }, 100);
 
-    // 3D tilt effect on firm cards
-    setupCardTilt();
-    // Magnetic buttons
-    setupMagneticButtons();
    }
 
    // Watch for language / sort re-renders to re-apply reveals
@@ -5368,64 +5364,6 @@ var KERVEA_HUBS = [
    if(pg) _obs.observe(pg, {childList:true});
  }
 })();
-
-// ===== 3D tilt on firm cards (mouse-follow perspective + glow) =====
-function setupCardTilt(){
- document.addEventListener("mousemove", function(e){
-   var card = e.target.closest(".pc");
-   if(!card) return;
-   var r = card.getBoundingClientRect();
-   var cx = (e.clientX - r.left) / r.width;
-   var cy = (e.clientY - r.top) / r.height;
-   var rx = (cy - .5) * -6; // tilt X
-   var ry = (cx - .5) * 6;  // tilt Y
-   card.style.transform = "perspective(1000px) rotateX("+rx+"deg) rotateY("+ry+"deg) translateY(-4px) scale(1.01)";
-   card.style.transition = "transform .1s ease-out, box-shadow .3s";
-   // Mouse-follow glow via CSS custom prop
-   card.style.setProperty("--mx", (cx*100)+"%");
-   card.style.setProperty("--my", (cy*100)+"%");
- }, true);
- // Reset on card leave via delegation on grid
- var grid = document.getElementById("posgrid");
- if(grid){
-   grid.addEventListener("mouseleave", function(){
-     grid.querySelectorAll(".pc").forEach(function(c){
-       c.style.transform = "";
-       c.style.transition = "transform .5s cubic-bezier(.2,.9,.3,1.2)";
-     });
-   });
-   // Also reset when hovering non-card area
-   grid.addEventListener("mousemove", function(e){
-     if(!e.target.closest(".pc")){
-       grid.querySelectorAll(".pc").forEach(function(c){
-         if(c.style.transform){ c.style.transform = ""; }
-       });
-     }
-   });
- }
-}
-
-// ===== Magnetic pull on primary buttons =====
-function setupMagneticButtons(){
- document.addEventListener("mousemove", function(e){
-   var btn = e.target.closest(".btn:not(.sec)");
-   if(!btn || btn.closest(".msginput")) return; // skip send button (too small, too frequent)
-   var r = btn.getBoundingClientRect();
-   var mx = e.clientX - (r.left + r.width/2);
-   var my = e.clientY - (r.top + r.height/2);
-   var strength = .25;
-   btn.style.transform = "translate("+(mx*strength)+"px,"+(my*strength)+"px)";
-   btn.style.transition = "transform .15s ease-out";
- });
- document.addEventListener("mouseleave", function(e){
-   var btn = e.target.closest && e.target.closest(".btn:not(.sec)");
-   if(!btn) return;
-   btn.style.transform = "";
-   btn.style.transition = "transform .35s cubic-bezier(.2,.9,.3,1.2)";
- }, true);
-}
-
-
 
 // ═══════════════════════════════════════════════════════════════════
 // KERVEA · HAKKIMIZDA HARİTASI (Faz 17)

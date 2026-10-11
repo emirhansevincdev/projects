@@ -213,3 +213,27 @@ html[data-theme="dark"] .prof-preview .pp-badge{background:var(--card)}
 .kv-ro{pointer-events:none;opacity:.7}
 .kv-hint.bad{color:#B3261E}
 input[readonly][data-pf]{cursor:not-allowed}
+
+/* ── Sakinleştirme: şablon görünümü veren süsler kaldırıldı (marka rengi ve yazı tipleri aynı) ───────
+   Eğimli/manyetik kartlar ve düğmeler, ışık süpürmesi, parlayan gölgeler, cam bulanıklığı, nabız atan noktalar. */
+.btn{background:var(--teal);box-shadow:0 1px 2px rgba(10,33,31,.18);will-change:auto;transition:background .15s,box-shadow .15s,border-color .15s}
+.btn:hover{background:var(--hover);box-shadow:0 2px 6px -2px rgba(10,33,31,.28);transform:none}
+.btn::before{display:none !important}
+.btn.sec{background:transparent;box-shadow:none}
+.btn.sec:hover{background:var(--chip);box-shadow:none;transform:none}
+.btn:focus-visible{outline:2px solid var(--lite);outline-offset:2px}
+.pc{backdrop-filter:none;-webkit-backdrop-filter:none;transform-style:flat;will-change:auto;background:var(--card)}
+.pc::before,.pc::after{display:none !important}
+.pc:hover{border-color:var(--teal);box-shadow:var(--sh-md);transform:none}
+html[data-theme="dark"] .pc:hover{box-shadow:var(--sh-md)}
+.plan:hover{transform:none;box-shadow:var(--sh-md)}
+.plan.hl::after{display:none}
+.fpcover::before{animation:none}
+.tli::before,.pulse-dot,.tm-status.ok .dot,.pulse h3::before,.htag .dot{animation:none !important;box-shadow:none !important}
+.whyk-content .whyk-ic{backdrop-filter:none;-webkit-backdrop-filter:none}
+.sp-amount{background:none;-webkit-text-fill-color:currentColor;color:var(--ink)}
+html[data-theme="dark"] .sp-amount{background:none;-webkit-text-fill-color:currentColor;color:#F5FAF8}
+
+/* ".sec" hem bölüm hem düğme sınıfı: bölümün "24px 0 80px" dolgusu ".wrap" yan boşluklarını siliyordu (firma listesi kenara yapışıyordu) */
+.wrap.sec{padding-left:28px;padding-right:28px}
+@media (max-width:480px){ .wrap.sec{padding-left:16px;padding-right:16px} }
