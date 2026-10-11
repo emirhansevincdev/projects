@@ -3287,13 +3287,12 @@ function buildSectorSelect(id, includeAll){
 
 // =================== LIVE STATS (dynamic + animated counters) ===================
 function computeStats(){
- var firms = POS.length;
- var seenC = {}, seenS = {};
- POS.forEach(function(p){ seenC[p.cn_key]=1; seenS[p.sec]=1; });
+ // yalnızca sunucudan gelen gerçek sayılar (GET /kv/stats); gelene kadar 0 — uydurma ilk değer yok
+ var s = window.KV_STATS || {};
  return {
-   firms: firms,
-   countries: (typeof COUNTRIES !== "undefined" && COUNTRIES && COUNTRIES.length) || 249,  // platformun ülke/bölge listesi (ISO 3166)
-   sectors: 26,  // full sector coverage
+   firms: s.firms || 0,
+   countries: s.countries || 0,
+   sectors: s.sectors || 0,
    langs: 6      // TR EN ES FR AR RU
  };
 }
