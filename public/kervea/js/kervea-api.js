@@ -382,11 +382,11 @@ window.applyPromo = function(id){
 window.applyKvPromo = function(){
   var inp=el('kvPayPromo'); var code=(inp.value||'').trim().toUpperCase();
   checkPromo(code,function(d){
-    var discRow=el('kvPayDiscRow'), discEl=el('kvPayDisc'), totalEl=el('kvPayTotal'), cta=document.querySelector('.kv-pay-cta-txt');
+    var discRow=el('kvPayDiscRow'), discEl=el('kvPayDisc'), totalEl=el('kvPayTotal');
     if(d){
       PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents};
       discRow.style.display='flex'; discEl.textContent='−'+fmtUsd(d.discount_cents); totalEl.textContent=fmtUsd(d.total_cents);
-      if(cta) cta.innerHTML=((T_().pay_confirm)||'Ödemeyi Onayla — ')+'<b>'+fmtUsd(d.total_cents)+'</b>';
+      var ctaTotal=el('kvPayCtaTotal'); if(ctaTotal) ctaTotal.textContent=fmtUsd(d.total_cents);
       toast(kvT('{code} uygulandı',{code:code}));
     } else if(code){ kvShowAlert('destructive','Geçersiz promosyon kodu',kvT('{code} kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.',{code:code})); }
   });
@@ -409,15 +409,6 @@ window.kvConfirmPayment = function(){
     kvShowAlert('info','Siparişiniz alındı',kvT('Sipariş #{n} oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.',{n:r.data.order}));
   });
 };
-// Kart verisi bu sayfada toplanmaz (PCI): kart alanlarını gizle, ödeme sağlayıcının sayfasında alınır.
-(function(){
-  var ids=['kvCcNumber','kvCcHolder','kvCcExp','kvCcCvc'];
-  ids.forEach(function(id){ var i=el(id); if(!i) return; var wrap=i.closest('.kv-float-input,.kv-pay-field,.kv-field,div'); if(wrap) wrap.style.display='none'; i.removeAttribute('required'); });
-  var prev=document.querySelector('.kv-card-preview,.kv-cc-preview'); if(prev) prev.style.display='none';
-  var note=document.createElement('p'); note.style.cssText='font-size:13px;color:var(--faint);margin:10px 0'; note.textContent=tt('pay_hosted','Kart bilgileri bu sayfada alınmaz; güvenli ödeme sayfasına yönlendirileceksiniz.');
-  var host=el('kvCcNumber'); if(host){ var form=host.closest('form')||host.closest('.kv-pay-form')||host.parentElement.parentElement; if(form) form.insertBefore(note,form.firstChild); }
-})();
-
 // ───────────────────────── üye paneli (gerçek veri) ─────────────────────────
 var ME=null;
 function loadMember(){

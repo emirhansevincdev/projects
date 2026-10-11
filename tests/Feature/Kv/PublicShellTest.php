@@ -32,6 +32,20 @@ class PublicShellTest extends KvTestCase
         $this->assertStringNotContainsString('280', substr($html, 0, strpos($html, '</head>')));
     }
 
+    public function test_the_payment_window_asks_for_no_card_data_and_invents_no_tax_or_refund_terms(): void
+    {
+        $html = $this->get('/')->getContent();
+        $a = strpos($html, 'id="mPay"');
+        $pay = substr($html, $a, strpos($html, 'id="mGate"') - $a);
+
+        $this->assertStringContainsString('id="kvPayConfirmBtn"', $pay);
+        foreach (['kvCcNumber', 'kvCcCvc', 'ccPreview', 'KDV', '14 gün', 'PCI-DSS', 'Visa'] as $bad) {
+            $this->assertStringNotContainsString($bad, $pay, "payment window must not contain: {$bad}");
+        }
+        // amounts are filled from the server price (KV_BOOT.premium), never typed into the markup
+        $this->assertDoesNotMatchRegularExpression('/\$\d{3}\.\d\d/', $pay);
+    }
+
     public function test_site_details_are_exposed_only_when_configured(): void
     {
         config(['kervea.frontend.address' => null, 'kervea.frontend.legal_name' => null, 'kervea.frontend.links' => ['linkedin' => null, 'x' => null, 'youtube' => null, 'instagram' => null]]);

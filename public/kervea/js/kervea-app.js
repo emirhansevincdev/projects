@@ -4111,96 +4111,6 @@ function stp(n){
 }
 
 // =================== NEW HELPERS ===================
-function applyPromo(id){
- var el=document.getElementById(id); if(!el) return;
- var code = el.value.trim().toUpperCase();
- var valid = {"LAUNCH25":"%25","KERVEA2026":"%30","EARLY50":"%50"};
- if(valid[code]){ toast(code+" · "+valid[code]+" indirim uygulandı ✓"); el.style.borderColor="var(--verify)"; }
- else if(code){ toast(tt("toast_invalid_promo","Geçersiz promosyon kodu")); el.style.borderColor="#d97757"; }
-}
-function setBill(mode, btn){
- document.querySelectorAll("#billTog button").forEach(function(b){b.classList.remove("on");});
- btn.classList.add("on");
- document.querySelectorAll(".prv").forEach(function(el){
-   el.textContent = "$"+el.getAttribute("data-"+mode);
- });
-}
-// Payment modal state
-var PAY_MODE = "m", PAY_DISCOUNT = 0, PAY_DISCOUNT_CODE = "";
-// Credit card live preview helpers
-function ccFormat(input){
- var v = input.value.replace(/\s+/g,'').replace(/[^0-9]/gi,'');
- var parts = [];
- for(var i=0;i<v.length;i+=4) parts.push(v.substr(i,4));
- input.value = parts.join(' ');
- var prev = document.getElementById('ccNum');
- if(prev){
-  var display = v.padEnd(16,'•').substr(0,16);
-  var groups = [];
-  for(var j=0;j<16;j+=4) groups.push(display.substr(j,4));
-  prev.textContent = groups.join(' ').replace(/•/g,'•');
- }
-}
-function ccNamePrev(input){
- input.value = input.value.toUpperCase();
- var prev = document.getElementById('ccName');
- if(prev) prev.textContent = input.value || 'AD SOYAD';
-}
-function ccExpFormat(input){
- var v = input.value.replace(/\s+/g,'').replace(/[^0-9]/gi,'');
- if(v.length > 2) v = v.substr(0,2) + '/' + v.substr(2,2);
- input.value = v;
- var prev = document.getElementById('ccExp');
- if(prev) prev.textContent = v || '••/••';
-}
-function setPayBill(mode, btn){
- PAY_MODE = mode;
- document.querySelectorAll("#payBill button").forEach(function(b){b.classList.remove("on");});
- btn.classList.add("on");
- var per = document.getElementById("payPer");
- if(per) per.textContent = mode==="m" ? "/ay" : "/ay (yıllık faturalı)";
- recalcPay();
-}
-function applyPayPromo(){
- var el = document.getElementById("payPromo"); if(!el) return;
- var code = el.value.trim().toUpperCase();
- var valid = {"LAUNCH25":25,"KERVEA2026":30,"EARLY50":50};
- if(valid[code]){
-   PAY_DISCOUNT = valid[code]; PAY_DISCOUNT_CODE = code;
-   el.style.borderColor = "var(--verify)";
-   toast(code+" · %"+valid[code]+" indirim uygulandı ✓");
- } else if(code){
-   PAY_DISCOUNT = 0; PAY_DISCOUNT_CODE = "";
-   el.style.borderColor = "#d97757";
-   toast(tt("toast_invalid_promo","Geçersiz promosyon kodu"));
- } else {
-   PAY_DISCOUNT = 0; PAY_DISCOUNT_CODE = "";
- }
- recalcPay();
-}
-function recalcPay(){
- // Pro plan base: $349/mo, $279/mo when yearly (billed annually)
- var base = PAY_MODE==="m" ? 349 : 279;
- var disc = base * (PAY_DISCOUNT/100);
- var afterDisc = base - disc;
- var kdv = afterDisc * 0.20;
- var total = afterDisc + kdv;
- var fmt = function(n){ return "$"+n.toFixed(2); };
- var sub = document.getElementById("paySub"); if(sub) sub.textContent = fmt(base);
- var kdvEl = document.getElementById("payKdv"); if(kdvEl) kdvEl.textContent = fmt(kdv);
- var discRow = document.getElementById("payDiscRow"), discEl = document.getElementById("payDisc");
- if(discRow && discEl){
-   if(PAY_DISCOUNT>0){ discRow.style.display = "flex"; discEl.textContent = "−"+fmt(disc)+" ("+PAY_DISCOUNT_CODE+")"; }
-   else { discRow.style.display = "none"; }
- }
- var totEl = document.getElementById("payTotal"); if(totEl) totEl.textContent = fmt(total);
- var btnEl = document.getElementById("payBtnTotal"); if(btnEl) btnEl.textContent = fmt(total);
-}
-function ovRange(el, days){
- document.querySelectorAll(".ovhead .rr span").forEach(function(s){s.classList.remove("on");});
- el.classList.add("on");
- toast(days+" günlük görünüm uygulandı");
-}
 function previewGallery(ev, targetId){
  var files = ev.target.files; if(!files.length) return;
  var host = document.getElementById(targetId||"addGalPrev"); if(!host) return;
@@ -4230,9 +4140,8 @@ function uploadAddLogo(ev){
 function openM(k){
  var m=document.getElementById("m"+k.charAt(0).toUpperCase()+k.slice(1));
  if(m) m.classList.add("open");
- if(k==="pay" && typeof recalcPay==="function") recalcPay();
 }
-function closeM(k){var m=document.getElementById("m"+k.charAt(0).toUpperCase()+k.slice(1)); if(m)m.classList.remove("open"); if(k==="pay" && typeof kvWipeCardFields==="function") kvWipeCardFields();}
+function closeM(k){var m=document.getElementById("m"+k.charAt(0).toUpperCase()+k.slice(1)); if(m)m.classList.remove("open");}
 
 // =================== TOAST ===================
 function toast(t){var el=document.getElementById("tst");el.textContent=t;el.classList.add("on");setTimeout(function(){el.classList.remove("on");},2200);}
@@ -5321,67 +5230,6 @@ if(document.readyState === "loading"){ document.addEventListener("DOMContentLoad
 
 
 
-
-// ═══════════════════════════════════════════════════════════════
-// KERVEA PAY (Faz 10 · AddCashDisclosure benzeri)
-// ═══════════════════════════════════════════════════════════════
-
-function kvFormatCardNumber(input){
-  var v = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-  var chunks = v.match(/.{1,4}/g);
-  input.value = chunks ? chunks.join(' ') : '';
-}
-function kvFormatExp(input){
-  var v = input.value.replace(/\D/g, '');
-  if(v.length >= 2){ v = v.slice(0,2) + '/' + v.slice(2,4); }
-  input.value = v;
-}
-function kvUpdateCardPreview(){
-  var num = document.getElementById('kvCcNumber');
-  var holder = document.getElementById('kvCcHolder');
-  var exp = document.getElementById('kvCcExp');
-  if(num){
-    var v = num.value.replace(/\s+/g,'');
-    var padded = v.padEnd(16, '•').match(/.{1,4}/g).join(' ');
-    var el = document.getElementById('ccNum');
-    if(el) el.textContent = padded;
-  }
-  if(holder){
-    var el = document.getElementById('ccName');
-    if(el) el.textContent = holder.value.toUpperCase() || (T[LANG] && T[LANG].pay_card_holder_ph) || 'AD SOYAD';
-  }
-  if(exp){
-    var el = document.getElementById('ccExp');
-    if(el) el.textContent = exp.value || '••/••';
-  }
-}
-
-function applyKvPromo(){
-  var code = (document.getElementById('kvPayPromo').value || '').trim().toUpperCase();
-  var validCodes = { 'KERVEA': 0.20, 'LAUNCH25': 0.25, 'PILOT10': 0.10 };
-  var discRow = document.getElementById('kvPayDiscRow');
-  var discEl = document.getElementById('kvPayDisc');
-  var totalEl = document.getElementById('kvPayTotal');
-  var ctaText = document.querySelector('.kv-pay-cta-txt');
-  var base = 280, kdv = base * 0.20;
-  if(validCodes[code]){
-    var disc = base * validCodes[code];
-    var newTotal = (base - disc + (base - disc) * 0.20).toFixed(2);
-    discRow.style.display = 'flex';
-    discEl.textContent = '−$' + disc.toFixed(2);
-    totalEl.textContent = '$' + newTotal;
-    if(ctaText) ctaText.innerHTML = ((T[LANG] && T[LANG].pay_confirm) || 'Ödemeyi Onayla — ') + '<b>$' + newTotal + '</b>';
-    if(typeof toast === 'function') toast('%' + (validCodes[code]*100).toFixed(0) + ' indirim uygulandı');
-  } else if(code){
-    if(typeof toast === 'function') toast('Geçersiz promosyon kodu');
-    kvShowAlert('destructive', 'Geçersiz promosyon kodu', code + ' kodu tanınmıyor. Kontrol edip tekrar deneyin.');
-  }
-}
-
-// Kart alanlarını temizle: değerler form kapandıktan sonra DOM'da/bellekte beklemesin.
-function kvWipeCardFields(){
-  ['kvCcNumber','kvCcHolder','kvCcExp','kvCcCvc'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
-}
 
 // ═══════════════════════════════════════════════════════════════
 // KERVEA ALERT (Faz 10 · Alert15 benzeri)

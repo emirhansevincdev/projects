@@ -92,10 +92,15 @@ if(window.MutationObserver){
 syncModalLock();
 
 // ───────────────────────── Premium fiyatı: yalnızca sunucu yapılandırmasından ─────────────────────────
+// Ödeme penceresindeki tutarlar da buradan gelir (KDV vb. satır uydurulmaz; gerçek tutar sipariş anında sunucuda hesaplanır).
 (function(){
   var amt = $('spAmount');
   var price = window.KV_BOOT && KV_BOOT.premium;
   if(amt && price) amt.textContent = String(price);
+  if(price){
+    var txt = '$' + Number(price).toFixed(2);
+    ['kvPayPlanPrice', 'kvPayTotal', 'kvPayCtaTotal'].forEach(function(id){ var e = $(id); if(e) e.textContent = txt; });
+  }
 })();
 
 // ───────────────────────── erişilebilirlik etiketleri, ipuçları, yer tutucular: arayüz diline çevrilir ─────────────────────────
