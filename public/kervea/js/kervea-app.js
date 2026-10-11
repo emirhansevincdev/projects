@@ -4424,97 +4424,8 @@ function validateCardInputs(cardNo, name, exp, cvc){
   if((cvc||"").length < 3){ toast(tt("pay_err_cvc","CVC girin")); return false; }
   return true;
 }
-function completeCreditsPurchase(){
-  var cardNo = document.getElementById("credCoCardNo").value;
-  var name   = document.getElementById("credCoName").value;
-  var exp    = document.getElementById("credCoExp").value;
-  var cvc    = document.getElementById("credCoCvc").value;
-  if(!validateCardInputs(cardNo, name, exp, cvc)) return;
-  var pack = parseInt(document.getElementById("credCoPack").textContent, 10);
-  var price = parseInt(document.getElementById("credCoPrice").textContent, 10);
-  // Simülasyon: gerçek Stripe entegrasyonu backend gerektirir
-  var cur = getCredits();
-  setCredits(cur + pack);
-  closeM("credits");
-  // Reset for next open
-  backToCredsPack();
-  document.getElementById("credCoCardNo").value = "";
-  document.getElementById("credCoName").value = "";
-  document.getElementById("credCoExp").value = "";
-  document.getElementById("credCoCvc").value = "";
-  toast("✓ "+pack+" "+tt("creds_added","kredi eklendi")+" · $"+price+" "+tt("creds_charged","tahsil edildi"));
-}
-// v21: PRO AKTİVASYON — pay modal 'Öde' butonunun çağırdığı ana fonksiyon
-function activatePro(){
-  // v22 FIX: Doğru DOM ID'leri (ccInput, ccExpInput, ccCvcInput, ccNameInput)
-  var cardNoEl = document.getElementById("ccInput");
-  var expEl    = document.getElementById("ccExpInput");
-  var cvcEl    = document.getElementById("ccCvcInput");
-  var nameEl   = document.getElementById("ccNameInput");
-  // Kart validasyonu ZORUNLU — ödeme yapılmadan geçilmez
-  if(!cardNoEl || !expEl || !cvcEl || !nameEl){
-    toast("Ödeme formu yüklenemedi. Sayfayı yenileyin.");
-    return;
-  }
-  var cardNo = cardNoEl.value || "";
-  var exp    = expEl.value || "";
-  var cvc    = cvcEl.value || "";
-  var name   = nameEl.value || "";
-  if(!validateCardInputs(cardNo, name, exp, cvc)) return;
-  // Simüle işlem — küçük gecikme (gerçek Stripe hissi için)
-  var payBtn = document.querySelector("#mPay button.btn.lg");
-  if(payBtn){ payBtn.disabled = true; payBtn.style.opacity = "0.7"; payBtn.innerHTML = "<span>İşleniyor…</span>"; }
-  setTimeout(function(){
-    if(payBtn){ payBtn.disabled = false; payBtn.style.opacity = "1"; }
-    _finishActivatePro();
-  }, 700);
-}
-function _finishActivatePro(){
-  // USER objesini oluştur ya da güncelle
-  if(!USER){ USER = { name:"Kervea Ticaret", email:"info@kervea.io", provider:"card" }; }
-  USER.plan = "pro";
-  // Persist
-  ls("user", JSON.stringify(USER));
-  ls("plan", "pro");
-  ls("kv_auth", "1");
-  // Pro hediye: +100 kredi
-  var cur = getCredits();
-  setCredits(cur + 100);
-  // Modal kapat + toast
-  closeM("pay");
-  closeM("gate");
-  toast("✓ " + tt("toast_pay_success","Ödeme başarılı — Pro aktif") + " · +100 " + tt("creds_lbl","Kredi"));
-  // Refresh tüm paywall-etkilenen görünümleri
-  try {
-    if(typeof renderPeople === "function") renderPeople();
-    if(typeof renderPositions === "function") renderPositions();
-    if(typeof renderSecStrip === "function") renderSecStrip();
-    // Person drawer açıksa yenile
-    var pd = document.querySelector(".pd-overlay.open");
-    if(pd) pd.classList.remove("open");
-  } catch(e){ console.warn("[v21] Refresh error:", e); }
-}
-// v21: Page load'da plan'ı localStorage'dan oku
-document.addEventListener("DOMContentLoaded", function(){
-  try {
-    var savedUser = ls("user");
-    var savedPlan = ls("plan");
-    if(savedUser){
-      try { USER = JSON.parse(savedUser); } catch(e){ USER = null; }
-    }
-    if(savedPlan === "pro" || savedPlan === "enterprise"){
-      USER = USER || { name:"Kervea Ticaret", email:"info@kervea.io" };
-      USER.plan = savedPlan;
-    }
-  } catch(e){ /* silent */ }
-});
-
-// Overview credit badge'i başlangıçta güncelle
-document.addEventListener("DOMContentLoaded", function(){
-  var cur = getCredits();
-  var elN = document.getElementById("creditN"); if(elN) elN.textContent = String(cur);
-});
-
+// Ödeme ve kredi satın alma sunucudaki siparişlerle yürür (kervea-api.js kvConfirmPayment, kv-credits.js); burada simülasyon yoktur.
+// Plan ve kredi bakiyesi yalnızca sunucudan gelir; tarayıcı depolamasına (localStorage) güvenilmez.
 
 
 // v32: Prospectus use-case seçimi
@@ -5317,8 +5228,7 @@ var KERVEA_HUBS = [
  var st = ls("theme"); if(st){THEME=st; document.documentElement.setAttribute("data-theme",st);}
  // Restore language
  var sl = ls("lang") || "tr";
- // Restore user
- var su = ls("user"); if(su){try{USER=JSON.parse(su);}catch(e){}}
+ // Oturum yalnızca sunucudan gelir (kervea-api.js applyUser); tarayıcıda saklanan kullanıcı/plan kullanılmaz
  // Build UI FIRST (before GSAP animations)
  setLang(sl);
  sortBy("uyum");
@@ -5504,53 +5414,6 @@ function applyKvPromo(){
 // Kart alanlarını temizle: değerler form kapandıktan sonra DOM'da/bellekte beklemesin.
 function kvWipeCardFields(){
   ['kvCcNumber','kvCcHolder','kvCcExp','kvCcCvc'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
-}
-function kvConfirmPayment(){
-  // Client-side validation
-  var num = document.getElementById('kvCcNumber').value.replace(/\s+/g, '');
-  var holder = document.getElementById('kvCcHolder').value.trim();
-  var exp = document.getElementById('kvCcExp').value;
-  var cvc = document.getElementById('kvCcCvc').value;
-  
-  if(num.length < 13 || num.length > 19 || !/^\d+$/.test(num)){
-    kvShowAlert('destructive', 'Kart numarası hatalı', 'Lütfen geçerli bir kart numarası girin (13-19 hane).');
-    return;
-  }
-  if(holder.length < 3){
-    kvShowAlert('destructive', 'Kart sahibi adı hatalı', 'Kart üzerindeki adı girin (min 3 karakter).');
-    return;
-  }
-  if(!/^\d{2}\/\d{2}$/.test(exp)){
-    kvShowAlert('destructive', 'Son kullanma tarihi hatalı', 'AA/YY formatında girin (örnek: 12/28).');
-    return;
-  }
-  if(!/^\d{3,4}$/.test(cvc)){
-    kvShowAlert('destructive', 'CVC hatalı', 'Kartın arkasındaki 3-4 haneli kodu girin.');
-    return;
-  }
-  
-  // Rate limit
-  if(typeof rateLimit === 'function' && !rateLimit('payment', 5)){
-    kvShowAlert('destructive', 'Çok fazla deneme', '1 dakika içinde çok fazla ödeme denemesi yapıldı. Lütfen bekleyin.');
-    return;
-  }
-  
-  // Loading state
-  var btn = document.getElementById('kvPayConfirmBtn');
-  btn.disabled = true;
-  btn.querySelector('.kv-pay-cta-txt').style.display = 'none';
-  btn.querySelector('.kv-pay-cta-loading').style.display = 'inline-flex';
-  
-  // Simulated payment (real flow → backend + Stripe.js)
-  setTimeout(function(){
-    btn.disabled = false;
-    btn.querySelector('.kv-pay-cta-txt').style.display = 'inline';
-    btn.querySelector('.kv-pay-cta-loading').style.display = 'none';
-    kvWipeCardFields();
-    closeM('pay');
-    if(typeof toast === 'function') toast('Ödemeniz alındı · Kervea Premium aktif');
-    kvShowAlert('success', 'Ödeme başarılı', 'Kervea Premium üyeliğiniz aktifleşti. E-postanıza fatura gönderildi.');
-  }, 2000);
 }
 
 // ═══════════════════════════════════════════════════════════════

@@ -159,8 +159,6 @@ html[data-theme="dark"] .kv-nl-status.ok{color:#8FE9C4}
 html[data-theme="dark"] .kv-nl-status.err{color:#FCA5A5}
 .kv-nl-btn[disabled]{opacity:.65;cursor:progress}
 
-/* yasal metin penceresi: Türkçe dışındaki dillerde hukuken geçerli metin notu */
-.kv-legal-note{margin:0 0 14px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--chip);font-size:13px;line-height:1.5;color:var(--body)}
 
 /* dar ekranda sektör adları ikinci satıra geçer, kesilmez */
 @media (max-width:520px){

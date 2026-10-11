@@ -67,6 +67,7 @@ function closePopups(){
   var closed = false;
   document.querySelectorAll('.ddlist.open').forEach(function(l){ l.classList.remove('open'); closed = true; });
   var sp = $('secPick'); if(sp && sp.classList.contains('open')){ sp.classList.remove('open'); closed = true; }
+  var um = $('kvUserMenu'); if(um && um.classList.contains('open') && typeof window.closeUserMenu === 'function'){ window.closeUserMenu(); closed = true; }
   var lm = $('lm'); if(lm && lm.classList.contains('open')){ lm.classList.remove('open'); closed = true; var b = document.querySelector('.langbtn'); if(b) b.focus(); }
   return closed;
 }
@@ -123,23 +124,10 @@ var _openM = window.openM;
 if(typeof _openM === 'function'){
   window.openM = function(id){
     var r = _openM.apply(this, arguments);
-    try{ var m = $('m' + String(id).charAt(0).toUpperCase() + String(id).slice(1)); if(m) translateAttrs(m); legalNote(id); }catch(e){}
+    try{ var m = $('m' + String(id).charAt(0).toUpperCase() + String(id).slice(1)); if(m) translateAttrs(m); }catch(e){}
     return r;
   };
 }
-
-// ───────────────────────── yasal metinler: Türkçe dışındaki dillerde "yalnızca Türkçe metin geçerlidir" notu ─────────────────────────
-function legalNote(id){
-  if(['kvkk', 'sozl', 'cookie'].indexOf(id) < 0) return;
-  var m = $('m' + id.charAt(0).toUpperCase() + id.slice(1)); if(!m) return;
-  var host = m.querySelector('.mbody') || m.querySelector('.mbox'); if(!host) return;
-  var n = m.querySelector('.kv-legal-note');
-  if((window.LANG || 'tr') === 'tr'){ if(n) n.remove(); return; }
-  if(!n){ n = document.createElement('p'); n.className = 'kv-legal-note'; n.setAttribute('role', 'note'); host.insertBefore(n, host.firstChild); }
-  n.textContent = window.kvT('Hukuken yalnızca Türkçe metin geçerlidir.');
-}
-document.addEventListener('kv:lang', function(){ ['kvkk', 'sozl', 'cookie'].forEach(function(id){ var m = $('m' + id.charAt(0).toUpperCase() + id.slice(1)); if(m && m.classList.contains('open')) legalNote(id); }); });
-
 
 // ───────────────────────── metin çevirisi: data-kvt (Türkçe kaynak metin → seçili dil) ─────────────────────────
 function kt(s, v){ return typeof window.kvT === 'function' ? window.kvT(s, v) : s; }

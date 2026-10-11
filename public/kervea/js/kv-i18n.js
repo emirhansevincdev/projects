@@ -189,7 +189,6 @@ add([
  ['Ticaret akışı','Trade flow','Flujo comercial','Flux commercial','مسار التجارة','Схема сделки'],
  ['Daha fazla','More','Más','Plus','المزيد','Ещё'],
  ['Pro üyeler için','For Premium members','Para miembros Premium','Pour les membres Premium','لأعضاء Premium','Для участников Premium'],
- ['Hukuken yalnızca Türkçe metin geçerlidir.','Only the Turkish text is legally binding.','Solo el texto en turco tiene validez jurídica.','Seul le texte turc fait foi.','النص التركي وحده هو الملزم قانونًا.','Юридическую силу имеет только текст на турецком языке.'],
 ]);
 
 
