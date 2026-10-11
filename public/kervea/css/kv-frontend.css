@@ -170,3 +170,46 @@ html[data-theme="dark"] .kv-nl-status.err{color:#FCA5A5}
 /* firma penceresi: koyu zemin üstündeki "listeye dön" bağlantısı okunur */
 .fm-back{color:#CFE3DD}
 .fm-back:hover{color:#8FE9C4 !important}
+
+/* ── Üye paneli: genel bakış ve profil ───────────────────────────────────────────────────────── */
+.ov-next{display:flex;flex-direction:column;min-height:280px}
+.ov-next-list{list-style:none;margin:0;padding:6px 18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;flex:1}
+.ov-next-list li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.45;color:var(--body)}
+.ov-next-list li:last-child{border-bottom:0}
+.ov-next-list li i{flex:0 0 auto;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;margin-top:-1px}
+.ov-next-list li.done i{background:var(--emer);color:#fff}
+.ov-next-list li.todo i{color:var(--faint)}
+.ov-next-list li.done > span,.ov-next-list li.done > .ov-next-btn{color:var(--faint)}
+.ov-next-btn{background:none;border:0;padding:0;margin:0;font:inherit;color:var(--teal);text-align:start;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.ov-next-btn:hover{color:var(--hover)}
+.ov-next-btn:focus-visible{outline:2px solid var(--lite);outline-offset:3px;border-radius:3px}
+.ov-portfolio-list{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:4px 14px}
+.ov-pl-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.ov-pl-row:last-child{border-bottom:0}
+.ov-pl-row:hover{background:var(--chip)}
+.ov-cta-primary{background:var(--teal) !important;box-shadow:none !important}
+.ov-cta-primary:hover{background:var(--hover) !important}
+.ov-stat-card:hover{transform:none}
+.kv-hint{margin:10px 0 0;font-size:13px;color:var(--faint);min-height:1.3em}
+.kv-hint.bad{color:#B3261E;font-weight:600}
+html[data-theme="dark"] .kv-hint.bad{color:#FCA5A5}
+.upl2.kv-disabled{opacity:.55;cursor:not-allowed}
+.galpreview .thumb .del{border:0;font-size:14px;line-height:1;padding:0}
+.galpreview .thumb .del:focus-visible{outline:2px solid #fff;outline-offset:1px}
+.prof-preview .pp-cover.has-img{background-size:cover}
+.prof-preview .pp-cover:not(.has-img){background-image:none}
+.prof-preview .pp-logo img{border-radius:8px}
+.prof-preview .pp-badge{background:#fff;backdrop-filter:none;-webkit-backdrop-filter:none;letter-spacing:.04em;text-transform:none;font-size:11px}
+html[data-theme="dark"] .prof-preview .pp-badge{background:var(--card)}
+.phchip.warn::before{content:"•"}
+
+/* ekran dışı katmanlar: kapalıyken gölgesi sayfanın kenarına sızmaz, odaklanamaz */
+.pdrawer:not(.open){visibility:hidden;box-shadow:none}
+.pdrawer{transition:transform .3s var(--ease,ease),visibility 0s linear .3s,box-shadow .3s}
+.pdrawer.open{visibility:visible;transition:transform .3s var(--ease,ease),visibility 0s,box-shadow .3s}
+.toast{opacity:0;visibility:hidden;transition:transform .3s var(--ease,ease),opacity .2s,visibility 0s linear .3s}
+.toast.on{opacity:1;visibility:visible;transition:transform .3s var(--ease,ease),opacity .2s,visibility 0s}
+/* değiştirilemeyen alanlar (ülke) */
+.kv-ro{pointer-events:none;opacity:.7}
+.kv-hint.bad{color:#B3261E}
+input[readonly][data-pf]{cursor:not-allowed}

@@ -45,11 +45,11 @@
     <div class="panelstep" id="ps2">
      <div class="fg">
       <div><label class="fl" data-i18n="fl_sec">Ana Sektör *</label><select data-f="sector" id="addSecSel" onchange="renderAddSecChip()"></select><div id="addSecChip" style="margin-top:8px"></div></div>
-      <div><label class="fl" data-i18n="fl_dir">Ticaret Yönü *</label><select data-f="direction"><option value="EXP" data-i18n="dir_exp">Satıyorum (İhracat)</option><option value="IMP" data-i18n="dir_imp">Alıyorum (İthalat)</option><option data-i18n="dir_both">Her ikisi</option></select></div>
+      <div><label class="fl" data-i18n="fl_dir">Ticaret Yönü *</label><select data-f="direction"><option value="EXP" data-i18n="dir_exp">Satıyorum (İhracat)</option><option value="IMP" data-i18n="dir_imp">Alıyorum (İthalat)</option><option value="BOTH" data-i18n="dir_both">Her ikisi</option></select></div>
       <div><label class="fl" data-i18n="fl_hs">HS Kodu (virgülle)</label><input data-f="hs_codes" maxlength="200" placeholder="5205, 5208, 9403"/></div>
       <div><label class="fl" data-i18n="fl_moq">MOQ (Minimum Sipariş)</label><input data-f="moq" maxlength="200" placeholder="10 ton / 1000 adet"/></div>
       <div><label class="fl" data-i18n="fl_inc">INCOTERM Tercihi</label><select data-f="incoterm"><option value="">—</option><option>FOB</option><option>CIF</option><option>DAP</option><option>EXW</option><option>FCA</option><option>DDP</option></select></div>
-      <div><label class="fl" data-i18n="fl_pay">Ödeme Şekli</label><select data-f="payment_terms"><option value="">—</option><option>LC</option><option data-i18n="pay_tt_cash">TT Peşin</option><option data-i18n="pay_tt_30">TT 30 gün</option><option data-i18n="pay_tt_60">TT 60 gün</option><option>CAD</option></select></div>
+      <div><label class="fl" data-i18n="fl_pay">Ödeme Şekli</label><select data-f="payment_terms"><option value="">—</option><option value="LC">LC</option><option value="TT Peşin" data-i18n="pay_tt_cash">TT Peşin</option><option value="TT 30 gün" data-i18n="pay_tt_30">TT 30 gün</option><option value="TT 60 gün" data-i18n="pay_tt_60">TT 60 gün</option><option value="CAD">CAD</option></select></div>
      </div>
      <label class="fl" data-i18n="fl_products">Ana Ürünler / Hizmetler</label>
      <input data-f="products" maxlength="500" data-i18n-ph="ph_products" placeholder="Örn. Pamuk ipliği, Dokuma kumaş, Örme kumaş"/>

@@ -135,6 +135,7 @@ function logoTile(p, size, radius){
   if(p.logo) return '<div style="width:'+size+'px;height:'+size+'px;border-radius:'+radius+'px;overflow:hidden;background:#fff;border:1px solid var(--line);flex:none"><img src="'+escapeHtml(p.logo)+'" alt="" style="width:100%;height:100%;object-fit:contain"/></div>';
   return secTileHTML(p.sec, size, radius);
 }
+window.kvLogoTile = logoTile;
 function query(){
   var qs=[];
   if(DIR) qs.push('dir='+encodeURIComponent(DIR));
@@ -430,39 +431,55 @@ window.loadMember=loadMember;
 var fillPanel=function(){
   if(!ME) return;
   var co=ME.company, raw=co&&co.raw||{};
-  var P=document.querySelectorAll('#dp-profile input[type=text], #dp-profile input:not([type]), #dp-profile input[type=email], #dp-profile input[type=number], #dp-profile select, #dp-profile textarea');
-  // alanları sırasıyla etiketle (panel işaretlemesi sabit sıradadır)
-  var order=['name','name_en','tax_id','mersis','founded_year','employees','city','kep','website','email','phone','rep_name','rep_title','address','sector','direction','incoterm','payment_terms','description','hs_codes','moq','certificates','social_wa','social_li','social_ig','social_fb','social_x','social_yt'];
-  var k=0; P.forEach(function(i){ if(i.type==='file'||i.type==='checkbox') return; if(order[k]) i.setAttribute('data-pf',order[k]); k++; });
+  // alanlar işaretlemedeki data-pf adlarıyla eşlenir (sıraya bağlı değil)
   document.querySelectorAll('#dp-profile [data-pf]').forEach(function(i){
     var f=i.getAttribute('data-pf'), v='';
     if(/^social_/.test(f)) v=(raw.social||{})[f.slice(7)]||'';
     else if(f==='sector') v=(co&&co.sec!=null)?String(co.sec):'';
     else v=raw[f]==null?'':raw[f];
-    if(i.tagName==='SELECT'){ for(var o=0;o<i.options.length;o++){ if((i.options[o].value||i.options[o].text)==v){ i.selectedIndex=o; break; } } }
-    else i.value=v;
-    if(f==='tax_id'||f==='mersis'){ i.readOnly=true; i.title='Kimlik numarası değişikliği için destek ile iletişime geçin'; i.style.opacity='.7'; }
+    if(i.tagName==='SELECT'){
+      var hit=-1; for(var o=0;o<i.options.length;o++){ if((i.options[o].value||i.options[o].text)===String(v)){ hit=o; break; } }
+      i.selectedIndex = hit>=0 ? hit : 0;       // değer yoksa boş seçenek ("—"); sahte varsayılan gösterilmez
+    } else i.value=v;
+    if(f==='tax_id'||f==='mersis'){ i.readOnly=true; i.title=kvT('Kimlik numarası değişikliği için destek ile iletişime geçin'); i.style.opacity='.7'; }
   });
+  // ülke: yalnızca gösterilir (değiştirilemez)
+  try{ buildCountryDD('ddProfCountry', raw.country_cc||'tr'); }catch(e){}
   try{ renderProfSecChip(); }catch(e){}
+  descCount();
   fillSettings();
 }
-function saveProfile(){
-  var b={social:{}};
+function descCount(){
+  var t=document.querySelector('#dp-profile [data-pf="description"]'), c=el('pfDescCount'); if(!t||!c) return;
+  var n=wordCount(t.value);
+  c.textContent=kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:n});
+  c.classList.toggle('bad', n<250||n>300);
+}
+document.addEventListener('input',function(e){ if(e.target && e.target.getAttribute && e.target.getAttribute('data-pf')==='description') descCount(); });
+var profileSaving=false;
+var PROFILE_REQUIRED=[['name','Firma adı'],['email','E-posta'],['phone','Telefon'],['rep_name','Yetkili adı'],['founded_year','Kuruluş yılı'],['description','Firma açıklaması'],['sector','Sektör']];
+function saveProfile(btn){
+  if(profileSaving) return;
+  var b={social:{}}, missing=[];
   document.querySelectorAll('#dp-profile [data-pf]').forEach(function(i){
     var f=i.getAttribute('data-pf'); if(f==='tax_id'||f==='mersis') return;
     var v=(i.value||'').trim();
-    if(/^social_/.test(f)) b.social[f.slice(7)]=v; else if(v!=='') b[f]=v;
+    if(/^social_/.test(f)) b.social[f.slice(7)]=v; else b[f]=v;      // boş bırakılan isteğe bağlı alan silinir
   });
-  if(b.founded_year) b.founded_year=parseInt(b.founded_year,10);
-  if(b.sector!==undefined) b.sector=parseInt(b.sector,10);
-  api('PUT','/kv/me/company',b).then(function(r){ if(r.ok){ toast(tt('toast_profile_updated','Profil güncellendi')); loadMember(); } else alertErr('Profil kaydedilemedi', r); });
+  PROFILE_REQUIRED.forEach(function(r){ if(!b[r[0]]) missing.push(kvT(r[1])); });
+  if(missing.length){ kvShowAlert('destructive','Eksik alanlar',kvT('{list} zorunludur.',{list:missing.join(', ')})); return; }
+  var wc=wordCount(b.description);
+  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması',kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:wc})); return; }
+  b.founded_year=parseInt(b.founded_year,10);
+  b.sector=parseInt(b.sector,10);
+  profileSaving=true; setBusy(btn,true);
+  api('PUT','/kv/me/company',b).then(function(r){
+    profileSaving=false; setBusy(btn,false);
+    if(r.ok){ toast(tt('toast_profile_updated','Profil güncellendi')); loadMember(); } else alertErr('Profil kaydedilemedi', r);
+  });
 }
-document.addEventListener('click', function(e){
-  var cancel=e.target.closest && e.target.closest('#dp-profile button[onclick*="toast_cancelled"]');
-  if(cancel){ e.preventDefault(); e.stopImmediatePropagation(); fillPanel(); toast('Değişiklikler geri alındı'); return; }   // İptal: kaydetme, sunucudaki değerleri geri yükle
-  var b=e.target.closest && e.target.closest('#dp-profile button[onclick*="toast("]'); if(!b) return;
-  e.preventDefault(); e.stopImmediatePropagation(); saveProfile();
-}, true);
+window.kvSaveProfile=function(btn){ saveProfile(btn); };
+window.kvCancelProfile=function(){ fillPanel(); toast('Değişiklikler geri alındı'); };   // İptal: kaydetme, sunucudaki değerleri geri yükle
 
 // Ayarlar: gerçek tercihler (KVKK geri alma, 2FA, veri indirme, hesap silme)
 function fillSettings(){
@@ -544,41 +561,7 @@ window.showPanel=function(sec,btn){
 })();
 window.kvExportData = function(){ window.open('/kv/me/export','_blank','noopener'); };
 
-function fillOverview(){
-  if(!ME) return;
-  var co=ME.company, u=ME.user||{};
-  var nm=el('ovUserName'); if(nm) nm.textContent=u.name||'';
-  var b=el('ovVerifyBadge');
-  if(b){
-    var st=co&&co.status;
-    var map={approved:['ov-badge-ok',kvT('Firma doğrulandı')],pending:['ov-badge-warn',kvT('Başvurunuz inceleniyor — sonuç e-posta ile bildirilecek')],rejected:['ov-badge-warn',kvT('Başvurunuz onaylanmadı — e-postanızı kontrol edin')],suspended:['ov-badge-warn','Hesap askıda — destek ile iletişime geçin']};
-    var m=map[st]||map.pending;
-    b.className='ov-badge '+m[0]; b.innerHTML='<span>'+m[1]+'</span>';
-  }
-  var vals=document.querySelectorAll('#dp-overview .ov-stat-card');
-  if(vals[3]){
-    var v=vals[3].querySelector('.ov-stat-val'), s=vals[3].querySelector('.ov-stat-sub');
-    var ok=co&&co.status==='approved';
-    if(v){ v.removeAttribute('data-i18n'); v.textContent=ok?kvT('Doğrulandı'):kvT('Beklemede'); }
-    if(s){ s.removeAttribute('data-i18n'); s.textContent=ok?kvT('Belgeler Kervea ekibince incelendi'):kvT('Belgeler inceleniyor'); }
-  }
-  api('GET','/kv/matches').then(function(r){
-    if(!r.ok) return;
-    var n=(r.data.items||[]).length;
-    if(vals[0]){ var vv=vals[0].querySelector('.ov-stat-val'), ss=vals[0].querySelector('.ov-stat-sub'); if(vv) vv.textContent=n||'—'; if(ss){ ss.removeAttribute('data-i18n'); ss.textContent=n?'Sektör ve ürün kriterlerinize göre':'Doğrulama sonrası listelenir'; } }
-    var empty=document.querySelector('#dp-overview .ov-portfolio-empty');
-    if(empty && n){
-      var d=CI[LANG]||CI.tr;
-      empty.className='ov-portfolio-list';
-      empty.innerHTML=r.data.items.slice(0,3).map(function(p){
-        var ico = p.locked?secTileHTML(p.sec,40,10):logoTile(p,40,10);
-        return '<div style="display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:'+(p.locked?'default':'pointer')+'" '+(p.locked?'':'onclick="openFirm(\''+escapeJs(p.id)+'\')"')+'>'+ico+
-          '<div style="flex:1;min-width:0"><b>'+escapeHtml(p.nm)+'</b><div style="color:var(--faint);font-size:13px">'+escapeHtml(p.locked?'•••••':(d[p.cn_key]||p.cn_key))+'</div></div>'+
-          '<span class="pill" style="background:var(--emer);color:#fff">'+escapeHtml(p.uyum)+' '+T_().match_score+'</span></div>';
-      }).join('');
-    }
-  });
-}
+function fillOverview(){ if(ME && window.kvFillOverview) window.kvFillOverview(ME); }   // kv-frontend.js: genel bakış gerçek veriden çizilir
 function fillDocs(){
   var host=el('dp-docs'); if(!host||!ME) return;
   var grid=host.querySelector('.doc-grid'); if(!grid) return;

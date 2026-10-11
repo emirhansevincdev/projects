@@ -192,6 +192,61 @@ add([
  ['Hukuken yalnızca Türkçe metin geçerlidir.','Only the Turkish text is legally binding.','Solo el texto en turco tiene validez jurídica.','Seul le texte turc fait foi.','النص التركي وحده هو الملزم قانونًا.','Юридическую силу имеет только текст на турецком языке.'],
 ]);
 
+
+// ── üye paneli: genel bakış, profil görselleri, belgeler ──
+add([
+ ['Durum yükleniyor…','Loading status…','Cargando estado…','Chargement du statut…','جارٍ تحميل الحالة…','Загрузка статуса…'],
+ ['Yükleniyor…','Loading…','Cargando…','Chargement…','جارٍ التحميل…','Загрузка…'],
+ ['Profili düzenle','Edit profile','Editar perfil','Modifier le profil','تعديل الملف','Редактировать профиль'],
+ ['Profil doluluğu','Profile completeness','Perfil completo','Profil renseigné','اكتمال الملف','Заполненность профиля'],
+ ['Yüklenen belge','Documents uploaded','Documentos subidos','Documents envoyés','المستندات المرفوعة','Загруженные документы'],
+ ['Sonraki adımlar','Next steps','Próximos pasos','Prochaines étapes','الخطوات التالية','Следующие шаги'],
+ ['Başvurunuz onaylandıktan sonra listelenir','Listed once your application is approved','Se listan cuando se apruebe su solicitud','Listées après l\'approbation de votre candidature','تظهر بعد الموافقة على طلبك','Появятся после одобрения заявки'],
+ ['{n} / {total} alan dolu','{n} of {total} fields filled','{n} de {total} campos completos','{n} champs sur {total} renseignés','{n} من {total} حقول مكتملة','Заполнено {n} из {total} полей'],
+ ['Yalnızca Kervea yöneticileri görür','Visible to Kervea administrators only','Solo los administradores de Kervea las ven','Visibles uniquement par les administrateurs Kervea','يراها مسؤولو Kervea فقط','Видны только администраторам Kervea'],
+ ['Henüz belge yüklenmedi','No documents uploaded yet','Aún no se han subido documentos','Aucun document envoyé pour l\'instant','لم يتم رفع أي مستند بعد','Документы ещё не загружены'],
+ ['Başvurunuz onaylandı','Your application is approved','Su solicitud está aprobada','Votre candidature est approuvée','تمت الموافقة على طلبك','Ваша заявка одобрена'],
+ ['Başvurunuzun incelenmesini bekleyin','Wait for your application to be reviewed','Espere a que se revise su solicitud','Attendez l\'examen de votre candidature','انتظر مراجعة طلبك','Дождитесь рассмотрения заявки'],
+ ['Başvurunuz onaylanmadı; e-postanızı kontrol edin','Your application was not approved; check your e-mail','Su solicitud no fue aprobada; revise su correo','Votre candidature n\'a pas été approuvée ; vérifiez vos e-mails','لم تتم الموافقة على طلبك؛ راجع بريدك الإلكتروني','Заявка не одобрена; проверьте почту'],
+ ['Hesap askıda; destek ile iletişime geçin','Account suspended; contact support','Cuenta suspendida; contacte con soporte','Compte suspendu ; contactez le support','الحساب معلّق؛ تواصل مع الدعم','Аккаунт приостановлен; обратитесь в поддержку'],
+ ['Profilinizi tamamlayın (%{n} dolu)','Complete your profile ({n}% filled)','Complete su perfil ({n} % completo)','Complétez votre profil ({n} % renseigné)','أكمل ملفك ({n}٪ مكتمل)','Заполните профиль (заполнено {n}%)'],
+ ['Profiliniz eksiksiz','Your profile is complete','Su perfil está completo','Votre profil est complet','ملفك مكتمل','Профиль заполнен полностью'],
+ ['Doğrulama belgelerinizi yükleyin','Upload your verification documents','Suba sus documentos de verificación','Envoyez vos documents de vérification','ارفع مستندات التحقق','Загрузите документы для проверки'],
+ ['Belgeleriniz yüklendi ({n})','Your documents are uploaded ({n})','Sus documentos están subidos ({n})','Vos documents sont envoyés ({n})','تم رفع مستنداتك ({n})','Документы загружены ({n})'],
+ ['İletişim bilgilerinizin gösterilmesine izin verin','Allow your contact details to be shown','Permita que se muestren sus datos de contacto','Autorisez l\'affichage de vos coordonnées','اسمح بإظهار بيانات الاتصال الخاصة بك','Разрешите показ ваших контактов'],
+ ['İletişim bilgileriniz Premium üyelere gösteriliyor','Your contact details are shown to Premium members','Sus datos de contacto se muestran a miembros Premium','Vos coordonnées sont affichées aux membres Premium','تُعرض بيانات اتصالك لأعضاء Premium','Ваши контакты видны участникам Premium'],
+ ['Doğrulanmış firma','Verified company','Empresa verificada','Entreprise vérifiée','شركة موثّقة','Проверенная компания'],
+ ['Başvuru inceleniyor','Application under review','Solicitud en revisión','Candidature en cours d\'examen','الطلب قيد المراجعة','Заявка на рассмотрении'],
+ ['Logo','Logo','Logotipo','Logo','الشعار','Логотип'],
+ ['Belgeler','Documents','Documentos','Documents','المستندات','Документы'],
+ ['Sosyal medya','Social media','Redes sociales','Réseaux sociaux','وسائل التواصل الاجتماعي','Социальные сети'],
+ ['Galeri ({n}/{max})','Gallery ({n}/{max})','Galería ({n}/{max})','Galerie ({n}/{max})','المعرض ({n}/{max})','Галерея ({n}/{max})'],
+ ['Şu anki görünüm','Current look','Aspecto actual','Aperçu actuel','المظهر الحالي','Текущий вид'],
+ ['PNG, JPG veya WebP · en fazla 2 MB','PNG, JPG or WebP · max 2 MB','PNG, JPG o WebP · máx. 2 MB','PNG, JPG ou WebP · 2 Mo max','PNG أو JPG أو WebP · بحد أقصى 2 ميغابايت','PNG, JPG или WebP · до 2 МБ'],
+ ['Kapak görseli','Cover image','Imagen de portada','Image de couverture','صورة الغلاف','Обложка'],
+ ['PNG, JPG veya WebP · en fazla 5 MB','PNG, JPG or WebP · max 5 MB','PNG, JPG o WebP · máx. 5 MB','PNG, JPG ou WebP · 5 Mo max','PNG أو JPG أو WebP · بحد أقصى 5 ميغابايت','PNG, JPG или WebP · до 5 МБ'],
+ ['Kapak görselini kaldır','Remove cover image','Quitar la imagen de portada','Retirer l\'image de couverture','إزالة صورة الغلاف','Удалить обложку'],
+ ['Fotoğraf ekle','Add a photo','Añadir una foto','Ajouter une photo','إضافة صورة','Добавить фото'],
+ ['PNG, JPG veya WebP · her biri en fazla 5 MB','PNG, JPG or WebP · max 5 MB each','PNG, JPG o WebP · máx. 5 MB cada una','PNG, JPG ou WebP · 5 Mo max chacune','PNG أو JPG أو WebP · بحد أقصى 5 ميغابايت لكل صورة','PNG, JPG или WebP · до 5 МБ каждое'],
+ ['Görseller yüklenir yüklenmez kaydedilir.','Images are saved as soon as they are uploaded.','Las imágenes se guardan en cuanto se suben.','Les images sont enregistrées dès leur envoi.','تُحفظ الصور فور رفعها.','Изображения сохраняются сразу после загрузки.'],
+ ['Görsel yükleniyor…','Uploading image…','Subiendo imagen…','Envoi de l\'image…','جارٍ رفع الصورة…','Загрузка изображения…'],
+ ['Logo güncellendi','Logo updated','Logotipo actualizado','Logo mis à jour','تم تحديث الشعار','Логотип обновлён'],
+ ['Kapak güncellendi','Cover updated','Portada actualizada','Couverture mise à jour','تم تحديث الغلاف','Обложка обновлена'],
+ ['Kapak kaldırıldı','Cover removed','Portada eliminada','Couverture retirée','تمت إزالة الغلاف','Обложка удалена'],
+ ['Fotoğraf eklendi','Photo added','Foto añadida','Photo ajoutée','تمت إضافة الصورة','Фото добавлено'],
+ ['Fotoğraf kaldırıldı','Photo removed','Foto eliminada','Photo retirée','تمت إزالة الصورة','Фото удалено'],
+ ['Fotoğrafı kaldır','Remove photo','Quitar la foto','Retirer la photo','إزالة الصورة','Удалить фото'],
+ ['Görsel yüklenemedi','The image could not be uploaded','No se pudo subir la imagen','L\'image n\'a pas pu être envoyée','تعذّر رفع الصورة','Не удалось загрузить изображение'],
+ ['Görsel kaldırılamadı','The image could not be removed','No se pudo quitar la imagen','L\'image n\'a pas pu être retirée','تعذّرت إزالة الصورة','Не удалось удалить изображение'],
+ ['En fazla {n} fotoğraf eklenebilir.','At most {n} photos can be added.','Se pueden añadir como máximo {n} fotos.','{n} photos maximum.','يمكن إضافة {n} صور كحد أقصى.','Можно добавить не более {n} фото.'],
+ ['Belgelerim','My documents','Mis documentos','Mes documents','مستنداتي','Мои документы'],
+ ['Başvuruda yüklediğiniz belgeler yalnızca Kervea yöneticilerine görünür; başka firmalara gösterilmez.','The documents you upload with your application are visible only to Kervea administrators; they are not shown to other companies.','Los documentos que sube con su solicitud solo los ven los administradores de Kervea; no se muestran a otras empresas.','Les documents envoyés avec votre candidature ne sont visibles que par les administrateurs Kervea ; ils ne sont pas montrés aux autres entreprises.','المستندات التي ترفعها مع طلبك يراها مسؤولو Kervea فقط ولا تُعرض للشركات الأخرى.','Документы, загруженные с заявкой, видны только администраторам Kervea и не показываются другим компаниям.'],
+ ['Yeni Belge Yükle','Upload a new document','Subir un documento','Envoyer un document','رفع مستند جديد','Загрузить документ'],
+ ['Ayarlar','Settings','Ajustes','Paramètres','الإعدادات','Настройки'],
+ ['Hesap ve güvenlik tercihleri.','Account and security preferences.','Preferencias de cuenta y seguridad.','Préférences du compte et de sécurité.','تفضيلات الحساب والأمان.','Настройки аккаунта и безопасности.'],
+ ['Gönderiliyor…','Sending…','Enviando…','Envoi…','جارٍ الإرسال…','Отправка…'],
+]);
+
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
 function fill(s, vars){
   if(!vars) return s;
@@ -229,6 +284,27 @@ wrap('toast', [0]);
   if(_confirm && !_confirm.__kvT){ window.confirm = function(m){ return _confirm.call(window, window.kvT(m)); }; window.confirm.__kvT = true; }
   if(_prompt && !_prompt.__kvT){ window.prompt = function(m, d){ return _prompt.call(window, window.kvT(m), d); }; window.prompt.__kvT = true; }
 })();
+
+// Metin düzeltmeleri: T sözlüğündeki eski, abartılı ya da doğrulanamayan ifadelerin yerine geçer (anahtar aynı, metin yeni).
+(function(){
+  if(!window.T) return;
+  var X = {
+   tr:{ mt_sub:'Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.',
+        ov_port_empty_p:'Firma başvurunuz onaylandığında, sektörünüze ve HS kodlarınıza göre eşleşen firmalar burada listelenir.' },
+   en:{ mt_sub:'Ranked by your sector, products and trade direction. You can filter them and download them as CSV.',
+        ov_port_empty_p:'Once your application is approved, companies that match your sector and HS codes are listed here.' },
+   es:{ mt_sub:'Ordenadas según su sector, sus productos y su orientación comercial. Puede filtrarlas y descargarlas en CSV.',
+        ov_port_empty_p:'Cuando se apruebe su solicitud, aquí aparecerán las empresas que coincidan con su sector y sus códigos HS.' },
+   fr:{ mt_sub:'Classées selon votre secteur, vos produits et votre sens d\'échange. Vous pouvez les filtrer et les télécharger en CSV.',
+        ov_port_empty_p:'Une fois votre candidature approuvée, les entreprises correspondant à votre secteur et à vos codes SH seront listées ici.' },
+   ar:{ mt_sub:'مرتبة حسب قطاعك ومنتجاتك واتجاه تجارتك. يمكنك تصفيتها وتنزيلها بصيغة CSV.',
+        ov_port_empty_p:'بعد الموافقة على طلبك، ستظهر هنا الشركات المطابقة لقطاعك ورموز HS الخاصة بك.' },
+   ru:{ mt_sub:'Отсортированы по вашей отрасли, товарам и направлению торговли. Можно отфильтровать и скачать в CSV.',
+        ov_port_empty_p:'После одобрения заявки здесь появятся компании, подходящие по вашей отрасли и кодам ТН ВЭД.' }
+  };
+  Object.keys(X).forEach(function(l){ if(!T[l]) T[l] = {}; Object.assign(T[l], X[l]); });
+})();
+
 // Eksik çeviri anahtarı: önce İngilizce, sonra Türkçe (ham anahtar ya da undefined asla görünmez).
 // T[dil][anahtar] okuyan tüm kod (panel dosyaları dâhil) bu geri dönüşü otomatik alır.
 (function(){
