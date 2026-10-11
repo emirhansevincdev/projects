@@ -49,6 +49,7 @@ return [
     'people' => [
         'page_size' => 25,
         'daily_reveal_limit' => 200,       // anti-scraping ceiling per company and day (credits are the main limit)
+        'import_max_rows' => 2000,         // admin CSV import: rows per file (all-or-nothing refusal above this)
     ],
     'messaging' => [
         'max_body' => 4000,
