@@ -313,6 +313,8 @@ add([
  ['Firma, ürün veya HS kodu ara...','Search company, product or HS code...','Buscar empresa, producto o código HS...','Rechercher une entreprise, un produit ou un code SH...','ابحث عن شركة أو منتج أو رمز HS...','Поиск компании, товара или кода ТН ВЭД...'],
  ['Ülke değişikliği için destek ile iletişime geçin','Contact support to change the country','Contacte con soporte para cambiar el país','Contactez le support pour modifier le pays','تواصل مع الدعم لتغيير الدولة','Для смены страны обратитесь в поддержку'],
  ['Match','Match','Afinidad','Affinité','تطابق','Совпадение'],
+ ['Sayfanız henüz yayında değil','Your page is not live yet','Su página aún no está publicada','Votre page n\'est pas encore en ligne','صفحتك لم تُنشر بعد','Ваша страница ещё не опубликована'],
+ ['Başvurunuz onaylandığında profiliniz herkese açık sayfada yayınlanır.','Once your application is approved, your profile is published on a public page.','Cuando se apruebe su solicitud, su perfil se publicará en una página pública.','Une fois votre candidature approuvée, votre profil est publié sur une page publique.','بعد الموافقة على طلبك سيُنشر ملفك في صفحة عامة.','После одобрения заявки ваш профиль будет опубликован на открытой странице.'],
  ['@kullaniciadi','@username','@usuario','@utilisateur','@username','@username'],
  ['10 ton / 1000 adet','10 tons / 1,000 pcs','10 toneladas / 1000 uds.','10 tonnes / 1000 pièces','10 أطنان / 1000 قطعة','10 т / 1000 шт.'],
 ]);

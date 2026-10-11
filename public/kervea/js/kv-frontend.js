@@ -173,6 +173,13 @@ translateDom();
   }).observe(document.body, { childList: true, subtree: true });
 })();
 
+// "Herkese görünen sayfayı aç": örnek firma değil, üyenin kendi firmasının gerçek sayfası (yalnızca onaylıysa yayında)
+window.openMyProfile = function(){
+  var co = window.KV_ME && KV_ME.company;
+  if(co && co.status === 'approved' && co.id && typeof window.openFirm === 'function'){ window.openFirm(co.id); return; }
+  if(typeof window.kvShowAlert === 'function') window.kvShowAlert('info', kt('Sayfanız henüz yayında değil'), kt('Başvurunuz onaylandığında profiliniz herkese açık sayfada yayınlanır.'));
+};
+
 // ───────────────────────── üye paneli: genel bakış ve profil başlığı (gerçek veriden) ─────────────────────────
 var PROFILE_FIELDS = ['name', 'tax_id', 'country_cc', 'city', 'address', 'email', 'phone', 'rep_name', 'founded_year', 'direction', 'hs_codes', 'products', 'description', 'website', 'certificates'];
 function completion(me){
