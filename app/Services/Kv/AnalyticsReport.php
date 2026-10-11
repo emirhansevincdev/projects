@@ -194,7 +194,7 @@ class AnalyticsReport
                 break;
             }
         }
-        $codes = array_keys($codes);
+        $codes = array_map('strval', array_keys($codes));      // numeric array keys come back as ints: keep codes strings
 
         $sectorSearches = $co->sector_id
             ? SearchLog::where('sector_id', $co->sector_id)->whereBetween('created_at', [$from, $to])->count()
