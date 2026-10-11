@@ -62,18 +62,17 @@ class Metrics
         }
         $d = $day === null ? Carbon::now()->toDateString() : Carbon::parse($day)->toDateString();
         $conn = DB::connection();
-        $t = $conn->getTablePrefix().self::TABLE;
-        if (in_array($conn->getDriverName(), ['mysql', 'mariadb'], true)) {
-            $conn->statement(
-                "insert into {$t} (company_id, day, metric, n) values (?, ?, ?, ?) on duplicate key update n = n + ?",
-                [$companyId, $d, $metric, $by, $by]
-            );
-        } else {                                                       // sqlite (>= 3.24) and pgsql
-            $conn->statement(
-                "insert into {$t} (company_id, day, metric, n) values (?, ?, ?, ?) on conflict (company_id, day, metric) do update set n = {$t}.n + ?",
-                [$companyId, $d, $metric, $by, $by]
-            );
+        $conn->statement(self::upsertSql($conn->getDriverName(), $conn->getTablePrefix().self::TABLE), [$companyId, $d, $metric, $by, $by]);
+    }
+
+    /** The one-statement atomic upsert for a database driver (bindings: company_id, day, metric, n, n). Public so tests can pin both dialects. */
+    public static function upsertSql(string $driver, string $table): string
+    {
+        if (in_array($driver, ['mysql', 'mariadb'], true)) {
+            return "insert into {$table} (company_id, day, metric, n) values (?, ?, ?, ?) on duplicate key update n = n + ?";
         }
+        // sqlite (>= 3.24) and pgsql
+        return "insert into {$table} (company_id, day, metric, n) values (?, ?, ?, ?) on conflict (company_id, day, metric) do update set n = {$table}.n + ?";
     }
 
     /**

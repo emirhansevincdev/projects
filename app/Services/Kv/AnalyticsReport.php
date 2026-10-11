@@ -81,6 +81,7 @@ class AnalyticsReport
             'hs' => self::hsDemand($co, $fromTs, $toTs),
             'reach' => self::reach($co),
             'benchmark' => self::benchmark($co, $from, $to, $cur),
+            'benchmark_min_peers' => max(2, (int) config('kervea.analytics.min_peers_for_benchmark', 5)),
         ];
     }
 
