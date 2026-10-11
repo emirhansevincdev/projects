@@ -29,7 +29,8 @@
     <td>{{ $reasons[$e->reason] ?? $e->reason }}@if($e->ref_type)<br><span class="k">{{ $e->ref_type }} #{{ $e->ref_id }}</span>@endif</td>
     <td style="text-align:right;font-weight:700;color:{{ $e->delta > 0 ? 'var(--ok)' : 'var(--bad)' }}">{{ $e->delta > 0 ? '+' : '' }}{{ $e->delta }}</td>
     <td style="text-align:right">{{ $e->balance_after }}</td>
-    <td>{{ $e->meta['note'] ?? ($e->meta['channel'] ?? ($e->meta['pack'] ?? '')) }}@if($e->user_id && isset($users[$e->user_id]))<br><span class="k">{{ $users[$e->user_id] }}</span>@endif</td></tr>
+    <td>@if(isset($e->meta['note'])){{ $e->meta['note'] }}@elseif(isset($e->meta['channel'])){{ $e->meta['channel'] === 'phone' ? 'telefon' : 'e-posta' }}@elseif(isset($e->meta['pack'])){{ $e->meta['pack'] }} kredilik paket @if(isset($e->meta['amount_cents']))({{ number_format($e->meta['amount_cents']/100, 2) }} {{ $e->meta['currency'] ?? 'USD' }})@endif @endif
+     @if($e->user_id && isset($users[$e->user_id]))<br><span class="k">{{ $users[$e->user_id] }}</span>@endif</td></tr>
   @endforeach</tbody></table>{{ $ledger->links() }}@endif
  </div>
 </div>

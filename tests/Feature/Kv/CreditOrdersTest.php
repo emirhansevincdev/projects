@@ -140,6 +140,33 @@ class CreditOrdersTest extends CreditsTestCase
         $this->assertSame('pending', $o->status);
     }
 
+    public function test_an_unreachable_payment_provider_closes_the_order_and_delivers_nothing(): void
+    {
+        config(['kervea.stripe.secret' => 'sk_test_fake']);
+        $broken = new class {
+            public object $checkout;
+            public function __construct()
+            {
+                $this->checkout = new class { public object $sessions; public function __construct() { $this->sessions = new class { public function create(): never { throw new \RuntimeException('connection refused, key sk_test_fake'); } }; } };
+            }
+        };
+        $this->app->instance('kv.stripe', $broken);
+        [$owner, $c] = $this->member();
+        $this->actingAs($owner);
+        $this->postJson('/kv/orders/credits', ['pack' => '100'])->assertStatus(502)->assertJsonPath('error', 'provider_unavailable');
+        $this->postJson('/kv/orders', [])->assertStatus(502);
+        $this->assertSame(['failed', 'failed'], Order::orderBy('id')->pluck('status')->all());
+        $this->assertSame(0, CreditService::balance($c->id));
+        $this->assertNotSame('pro', $owner->fresh()->kv_plan);
+        // a failed order cannot be settled by a late webhook either
+        $o = Order::first();
+        $o->forceFill(['provider' => 'stripe', 'provider_ref' => 'cs_late'])->save();
+        $this->webhook('cs_late', 1000)->assertOk();
+        $this->assertSame('paid', $o->fresh()->status);                    // the money really arrived: delivering is correct
+        $this->assertSame(100, CreditService::balance($c->id));
+        $this->assertStringNotContainsString('sk_test_fake', file_exists(storage_path('logs/laravel.log')) ? (string) file_get_contents(storage_path('logs/laravel.log')) : '');
+    }
+
     // ── delivering ───────────────────────────────────────────────────────────────
 
     public function test_admin_marking_a_credits_order_paid_delivers_the_pack_once(): void

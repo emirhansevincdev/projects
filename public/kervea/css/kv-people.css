@@ -1,1 +1,71 @@
 /* Kervea panel · people — styles that belong only to this feature (shared styles live in kervea.css) */
+
+.kv-ppl-rule{display:flex;gap:10px;align-items:flex-start;margin:0 0 12px;padding:10px 14px;background:var(--chip);border-radius:10px;font-size:13px;color:var(--body);line-height:1.45}
+.kv-ppl-rule svg{flex:0 0 auto;margin-top:2px;color:var(--teal)}
+.kv-ppl-rule[hidden]{display:none}
+.kv-ppl-country{padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:12.5px;max-width:200px;cursor:pointer}
+.kv-ppl-country:focus-visible,.ppl-fil .ppl-sr input:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.ppl-fil .fx{user-select:none}
+
+/* wider e-mail column (an opened address must fit) */
+@media(min-width:901px){.ppl-tbl .ppl-thd,.ppl-tbl .ppl-row.kv{grid-template-columns:1.2fr 1.3fr 1fr 1.75fr 1.15fr 52px}}
+
+/* rows: channel cells with the price visible BEFORE the click */
+.ppl-tbl .ppl-body{transition:opacity .15s}
+.ppl-tbl .ppl-row.kv .ppl-nm{cursor:pointer}
+.ppl-tbl .ppl-row.kv .kv-ch{min-width:0}
+.reveal-btn.kv-open{gap:6px}
+.reveal-btn.kv-open svg{width:13px;height:13px;flex:0 0 auto}
+.reveal-btn.kv-open .kv-cost{display:inline-flex;align-items:center;gap:2px;font-style:normal;font-size:11px;font-weight:700;color:var(--teal);background:var(--chip);border-radius:100px;padding:1px 7px 1px 5px}
+.reveal-btn.kv-open .kv-cost svg{width:10px;height:10px}
+.reveal-btn.kv-open.busy{opacity:.6;cursor:progress}
+.reveal-btn.kv-open:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.reveal-btn.revealed.kv-val{max-width:100%;gap:6px}
+.reveal-btn.revealed.kv-val .kv-vt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.reveal-btn.revealed.kv-val .kv-cp{background:transparent;border:0;padding:2px;margin-inline-start:2px;color:var(--teal);cursor:pointer;display:inline-flex;border-radius:5px}
+.reveal-btn.revealed.kv-val .kv-cp:hover{background:var(--chip)}
+.reveal-btn.revealed.kv-val svg:first-child{flex:0 0 auto}
+
+/* states */
+.kv-ppl-state{padding:44px 20px;text-align:center;color:var(--faint);font-size:13.5px}
+.kv-ppl-state p{margin:0 0 12px}
+.kv-skel{height:12px;border-radius:6px;background:linear-gradient(90deg,var(--paper),var(--chip),var(--paper));background-size:200% 100%;animation:kvPplSk 1.2s linear infinite}
+@keyframes kvPplSk{to{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.kv-skel{animation:none}}
+.kv-skel-row{pointer-events:none}
+
+/* pager */
+.kv-ppl-pager{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--faint)}
+.kv-ppl-pager:empty{display:none}
+.kv-pg-btns{display:flex;align-items:center;gap:10px}
+.kv-pg-btns .btn[disabled]{opacity:.45;cursor:not-allowed}
+.kv-pg-cur{color:var(--body);font-weight:600}
+
+/* mobile: a row becomes a small card instead of a squeezed table */
+@media(max-width:900px){
+ .ppl-tbl .ppl-thd{display:none}
+ .ppl-tbl .ppl-row.kv{grid-template-columns:1fr 1fr;grid-template-areas:"nm nm" "cmp ttl" "em ph";gap:10px 12px;padding:14px 16px}
+ .ppl-tbl .ppl-row.kv .ppl-nm{grid-area:nm}
+ .ppl-tbl .ppl-row.kv .col-cmp{grid-area:cmp;display:flex}
+ .ppl-tbl .ppl-row.kv .col-ttl{grid-area:ttl;display:block;white-space:normal}
+ .ppl-tbl .ppl-row.kv .kv-em{grid-area:em}
+ .ppl-tbl .ppl-row.kv .col-phn{grid-area:ph;display:block}
+ .ppl-tbl .ppl-row.kv .col-act{display:none}
+}
+@media(max-width:480px){
+ .ppl-tbl .ppl-row.kv{grid-template-columns:1fr;grid-template-areas:"nm" "cmp" "ttl" "em" "ph"}
+ .ppl-fil .kv-ppl-country{max-width:none;flex:1 1 100%}
+ .ppl-fil .fx{padding:7px 10px}
+}
+
+/* KVKK removal form (built by kv-people.js) */
+.kv-rm label{display:block;font-size:12px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;margin:12px 0 4px}
+.kv-rm input,.kv-rm textarea{width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-family:var(--sans);font-size:14px}
+.kv-rm input:focus-visible,.kv-rm textarea:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+.kv-rm .kv-rm-intro{margin:0;font-size:13.5px;color:var(--body);line-height:1.5}
+.kv-rm .kv-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.kv-rm .kv-rm-send{margin-top:16px;width:100%;justify-content:center}
+
+/* drawer: the contact buttons keep their price badge and wrap on narrow screens */
+.pdrawer .pd-fld .v{flex-wrap:wrap;justify-content:flex-end}
+.pdrawer .pd-actions:empty{display:none}

@@ -159,8 +159,9 @@ window.renderPositions = function(){
     var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
     grid.innerHTML=items.map(function(p){
       var locked=!!p.locked, cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
-      var lockBadge = locked ? '<div class="lockbadge" title="Pro üyeler için"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">PRO</span></div>' : '';
-      var lockOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
+      var lockBadge = locked ? '<div class="lockbadge" title="'+(p.lock==='sector'?escapeHtml(tt('kvl_card_p','')):'Pro üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">'+(p.lock==='sector'?escapeHtml(tt('kvl_badge','SEKTÖR')):'PRO')+'</span></div>' : '';
+      var planOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
+      var lockOverlay = (locked && window.kvLockOverlay) ? kvLockOverlay(p, planOverlay) : planOverlay;   // other-sector cards: kv-credits.js
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
       var score = (p.uyum!=null) ? '<span class="mid"><span class="uyum">'+escapeHtml(p.uyum)+' '+t.match_score+'</span></span>' : '<span class="mid"></span>';
       var flag = (!locked && p.fc) ? '<img src="/flags/'+escapeHtml(p.fc)+'.svg" onerror="this.style.visibility=\'hidden\'"/>' : '';
@@ -211,6 +212,7 @@ function socialLink(k, v, cls){
   return '<a class="'+cls+' '+k+'" href="'+escapeHtml(sanitizeUrl(href))+'" target="_blank" rel="noopener noreferrer nofollow" title="'+titles[k]+'" style="display:inline-flex;align-items:center;justify-content:center">'+ICONS[k].replace('<svg','<svg width="20" height="20"')+'</a>';
 }
 window.renderFirmPage = function(p){
+  if(p.sector_locked && window.kvSectorLockedPage){ kvSectorLockedPage(p); return; }      // kv-credits.js
   var t=T_(), d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr;
   var cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
   var soc=p.socials||{}, c=p.contact||null;
@@ -223,21 +225,9 @@ window.renderFirmPage = function(p){
   function row(k,v){ return v?'<tr><td>'+k+'</td><td>'+escapeHtml(v)+'</td></tr>':''; }
   var trade = row(t.fp_sector,sec)+row(t.fp_hs,p.hs)+row(t.fp_moq,p.moq)+row('INCOTERM',p.inc)+row(t.fp_pay,p.pay)+(p.dir?'<tr><td>'+t.fp_dir+'</td><td>'+dirLabel(p)+'</td></tr>':'')+row(t.fp_cert,p.certs);
   var tradeBlock = trade ? '<div class="fpblock"><h3>'+t.fp_trade+'</h3><table class="fptable">'+trade+'</table></div>' : '';
-  var rep = (p.tem) ? '<div class="fpblock"><h3>'+(t.fp_rep||'Yetkili')+'</h3><div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:50%;background:'+sm.g+';color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">'+escapeHtml(initials(p.tem))+'</div><div><b>'+escapeHtml(p.tem)+'</b>'+(p.temtitle?'<div style="color:var(--faint);font-size:13px">'+escapeHtml(p.temtitle)+'</div>':'')+'</div></div></div>' : '';
+  var rep = (p.tem) ? '<div class="fpblock"><h3>'+(t.fp_rep||'Yetkili')+'</h3><div style="display:flex;align-items:center;gap:12px"><div style="width:44px;height:44px;border-radius:50%;background:'+sm.g+';color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700">'+escapeHtml(initials(p.tem))+'</div><div><b>'+escapeHtml(p.tem)+'</b>'+(p.temtitle?'<div style="color:var(--faint);font-size:13px">'+escapeHtml(p.temtitle)+'</div>':'')+'</div></div></div>' : ((p.rep_locked && window.kvRepLocked) ? kvRepLocked(p) : '');
 
-  var contact;
-  if(c){
-    var wa = c.wa ? '<a class="btn fpwa" href="https://wa.me/'+String(c.wa).replace(/[^\d]/g,'')+'" target="_blank" rel="noopener noreferrer">'+ICONS.wa.replace('<svg','<svg width="15" height="15"')+' WhatsApp</a>' : '';
-    contact = (wa?'<div class="fpcta">'+wa+'</div>':'')+'<table class="fptable">'+row(t.fp_rep,p.tem)+row(t.fp_email,c.email)+row(t.fp_phone,c.phone)+row(t.fl_address?t.fl_address.toUpperCase():'ADRES',c.addr)+'</table>';
-  } else if(p.contact_consent===false){
-    contact = '<p style="color:var(--faint);font-size:13.5px;margin:6px 0 0">'+tt('fp_no_consent','Bu firma iletişim bilgilerini paylaşmamayı tercih etti.')+'</p>';
-  } else {
-    var isGuest=!window.KV_USER;
-    contact = '<div class="contact-lock"><div class="locked-inner"><table class="fptable"><tr><td>'+t.fp_rep+'</td><td>'+escapeHtml(p.tem||'—')+'</td></tr><tr><td>'+t.fp_email+'</td><td>••••••@•••••.•••</td></tr><tr><td>'+t.fp_phone+'</td><td>+•• ••• ••• ••</td></tr></table></div>'+
-      '<div class="lock-veil" role="button" tabindex="0" onclick="'+(isGuest?'go(\'login\')':'revealContact(\''+escapeJs(p.id)+'\')')+'"><div class="lock-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>'+
-      '<div class="lock-title">'+(t.lock_title||'İletişim bilgileri Pro üyelere açık')+'</div><div class="lock-sub">'+(t.lock_sub||'Telefon, e-posta ve web sitesi Pro üyelere açılır.')+'</div>'+
-      '<button class="lock-cta" onclick="event.stopPropagation();'+(isGuest?'go(\'login\')':(isPro()?'revealContact(\''+escapeJs(p.id)+'\')':'upgradeToPro()'))+'">'+(isGuest?(t.nav_login||'Giriş')+' →':(isPro()?(t.fp_reveal||'Bilgileri göster')+' →':(t.lock_cta||"Pro'a Yükselt")+' →'))+'</button></div></div>';
-  }
+  var contact = window.kvContactBlock ? kvContactBlock(p) : '';     // placeholders only for locked states (kv-credits.js)
   var socials = ['li','yt','ig','fb','x'].map(function(k){ return socialLink(k,soc[k],'sbtn'); }).join('');
   var years = p.yr ? (new Date().getFullYear()-p.yr) : null;
   el('fpgContent').innerHTML = cover+
@@ -246,7 +236,7 @@ window.renderFirmPage = function(p){
    '<div class="fpgridmain"><div>'+
     '<div class="fpblock"><h3>'+t.fp_about+'</h3><p style="white-space:pre-line">'+escapeHtml(p.desc||'')+'</p>'+tags+'</div>'+gal+tradeBlock+'</div>'+
    '<aside class="fpaside"><div class="fpblock"><h3>'+t.fp_contact+'</h3>'+contact+'</div>'+rep+
-   (socials?'<div class="fpblock"><h3>'+(t.sec_social_sh||'Sosyal medya')+'</h3><div class="fpsocials">'+socials+'</div></div>':'')+
+   (socials?'<div class="fpblock"><h3>'+(t.sec_social_sh||'Sosyal medya')+'</h3><div class="fpsocials">'+socials+'</div></div>':((p.socials_locked && window.kvSocialsLocked) ? kvSocialsLocked(p) : ''))+
    (years!=null?'<div class="fpblock"><h3>'+t.fp_stats+'</h3><div class="fpstat"><div class="s"><div class="n">'+years+'</div><div class="l">'+t.fp_years+'</div></div></div></div>':'')+
    '</aside></div>';
   if(window.gsap){ gsap.utils.toArray('#fpgContent .fpblock').forEach(function(b,i){ gsap.fromTo(b,{autoAlpha:0,y:16},{autoAlpha:1,y:0,duration:.45,delay:.1+i*.06,ease:'expo.out',clearProps:'transform,opacity'}); }); }
@@ -256,6 +246,8 @@ window.revealContact = function(slug){
     if(r.ok && r.data.contact){ var p=FIRM_CACHE[slug]; if(p){ p.contact=r.data.contact; p.contact_locked=false; renderFirmPage(p); } return; }
     var e=(r.data||{}).error;
     if(e==='pro_required') upgradeToPro();
+    else if(e==='sector_locked' && window.kvGoPeople) kvShowAlert('info',tt('kvl_sec_h','Farklı sektör'),tt('kvl_sec_p',''));
+    else if(e==='no_company') kvShowAlert('warning','Onaylı firma gerekli','Bu işlem için onaylı bir firma hesabı gerekir.');
     else if(e==='no_consent') kvShowAlert('info','Paylaşım kapalı','Bu firma iletişim bilgilerini paylaşmamayı tercih etti.');
     else if(e==='quota' || r.status===429) kvShowAlert('warning','Günlük limit doldu','Bugün için iletişim bilgisi görüntüleme limitine ulaştınız. Yarın tekrar deneyin.');
     else alertErr('İşlem yapılamadı', r);
@@ -628,7 +620,7 @@ window.renderMatchTable = function(){
        '<div class="mmid"><div class="mhead"><div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px">'+(p.locked?secTileHTML(p.sec,44,10):logoTile(p,44,10))+'<div style="flex:1;min-width:0"><div class="mnm">'+escapeHtml(p.nm)+'</div><div class="msub">'+escapeHtml(p.locked?'•••••':((d[p.cn_key]||p.cn_key)+(p.yr?' · '+p.yr:'')))+(p.sec!=null?' · '+escapeHtml(secs[p.sec]||''):'')+'</div></div></div>'+(p.dir?'<span class="mdirpill '+dirCls+'">'+dirLabel(p)+'</span>':'')+'</div>'+
        '<div class="mreasons">'+reasons+'</div>'+
        '<div class="mbars"><div class="mbar"><div class="bl"><span>Ürün Uyumu</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>Yön Uyumu</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
-       '<div class="mact">'+(p.locked?'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">PRO</button>':'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
+       '<div class="mact">'+(p.locked?(p.lock==='sector'?'<button class="btn" onclick="kvGoPeople()" style="pointer-events:auto">'+escapeHtml(tt('kvl_card_cta','Kişiler'))+'</button>':'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">PRO</button>'):'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
     }).join('')+'</div>';
   });
 };
@@ -827,6 +819,6 @@ document.addEventListener('DOMContentLoaded',function(){
     var cur=document.querySelector('.view.on'); if(cur && cur.id!==BOOT.view && PATHS[cur.id]){ try{ history.replaceState({kv:cur.id},'',PATHS[cur.id]); }catch(e){} }
   }
   if(window.KV_USER){ loadMember(); }
-  if(/[?&]paid=1/.test(location.search)){ setTimeout(function(){ pingSession(); kvShowAlert('success','Ödeme alındı','Premium üyeliğiniz birkaç saniye içinde aktif olur.'); },600); }
+  if(/[?&]paid=1/.test(location.search) && !/[?&]credits=1/.test(location.search)){ setTimeout(function(){ pingSession(); kvShowAlert('success','Ödeme alındı','Premium üyeliğiniz birkaç saniye içinde aktif olur.'); },600); }
 });
 })();

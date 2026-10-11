@@ -63,8 +63,7 @@ class OrderController extends Controller
             return response()->json(['ok' => true, 'order' => $order->id, 'paid' => true]);
         }
 
-        $stripe = $this->stripe($secret);
-        $session = $stripe->checkout->sessions->create([
+        $session = $this->checkout($order, $secret, [
             'mode' => 'payment',
             'customer_email' => $user->email,
             'client_reference_id' => (string) $order->id,
@@ -79,8 +78,10 @@ class OrderController extends Controller
             'metadata' => ['order_id' => (string) $order->id],
             'success_url' => url('/panel?paid=1'),
             'cancel_url' => url('/pricing?cancelled=1'),
-        ], ['idempotency_key' => 'kv-order-'.$order->id]);
-        $order->update(['provider' => 'stripe', 'provider_ref' => $session->id]);
+        ]);
+        if (! $session) {
+            return response()->json(['error' => 'provider_unavailable'], 502);
+        }
 
         return response()->json(['ok' => true, 'order' => $order->id, 'provider' => 'stripe', 'redirect' => $session->url]);
     }
@@ -116,8 +117,7 @@ class OrderController extends Controller
         }
 
         $order = Order::create($this->creditsOrderAttributes($user->id, $company->id, $pack));
-        $stripe = $this->stripe($secret);
-        $session = $stripe->checkout->sessions->create([
+        $session = $this->checkout($order, $secret, [
             'mode' => 'payment',
             'customer_email' => $user->email,
             'client_reference_id' => (string) $order->id,
@@ -132,10 +132,29 @@ class OrderController extends Controller
             'metadata' => ['order_id' => (string) $order->id, 'kind' => 'credits'],
             'success_url' => url('/panel?paid=1&credits=1'),
             'cancel_url' => url('/panel?cancelled=1&credits=1'),
-        ], ['idempotency_key' => 'kv-order-'.$order->id]);
-        $order->update(['provider' => 'stripe', 'provider_ref' => $session->id]);
+        ]);
+        if (! $session) {
+            return response()->json(['error' => 'provider_unavailable'], 502);
+        }
 
         return response()->json(['ok' => true, 'order' => $order->id, 'provider' => 'stripe', 'credits' => $pack['credits'], 'redirect' => $session->url]);
+    }
+
+    /**
+     * Creates the hosted Checkout session for an order. When the provider is unreachable the order is closed as failed
+     * (nothing was charged, nothing is delivered) and null comes back so the caller can answer 502; only the exception class is logged.
+     */
+    private function checkout(Order $order, string $secret, array $params): ?object
+    {
+        try {
+            $session = $this->stripe($secret)->checkout->sessions->create($params, ['idempotency_key' => 'kv-order-'.$order->id]);
+        } catch (\Throwable $e) {
+            $order->forceFill(['status' => 'failed'])->save();
+            Log::warning('kv: stripe checkout could not be created', ['order' => $order->id, 'error' => get_class($e)]);
+            return null;
+        }
+        $order->update(['provider' => 'stripe', 'provider_ref' => $session->id]);
+        return $session;
     }
 
     /** The Stripe client; tests bind a fake under 'kv.stripe' so no request leaves the machine. */

@@ -21,6 +21,7 @@
       <li><span class="sp-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="sp_f5">Prospektüs PDF üretici + dosya paylaşımı</span></li>
       <li><span class="sp-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="sp_f6">Öncelikli müşteri desteği (12 saat)</span></li>
       <li><span class="sp-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="sp_f7">Kervea Kürsüsü'nde öne çıkma hakkı</span></li>
+      <li id="kvSpF8" hidden><span class="sp-check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span data-i18n="sp_f8">Üyelikle birlikte {bonus} kredi hediye: farklı sektörlerdeki karar vericilere ulaşın</span></li>
      </ul>
 
      <button class="btn sp-cta" onclick="openM('pay')" data-i18n="sp_cta">Kervea Premium'a Başla</button>
@@ -28,6 +29,13 @@
     </div>
    </div>
 
+
+   <!-- ═══ KREDİ PAKETLERİ (fiyatlar sunucu yapılandırmasından gelir) ═══ -->
+   <div class="kv-pr-credits" id="kvPrCredits" hidden>
+    <h3 data-i18n="kvc_pr_h">Kredi ile farklı sektörlere ulaşın</h3>
+    <p data-i18n="kvc_pr_p">Her yeni üyeye {signup} kredi hediye, Premium üyelikle {bonus} kredi daha. Her e-posta veya telefon {cost} kredi; kullanılmayan krediler devreder.</p>
+    <div class="kv-pr-packs" id="kvPrPacks"></div>
+   </div>
 
    <!-- ═══ PROMO KODU ═══ -->
    <div class="promobox">

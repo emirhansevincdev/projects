@@ -11,87 +11,55 @@
 
 <!-- MODALS -->
 
-<!-- v20: Credits Purchase Modal -->
-<div class="modal" id="mCredits"><div class="mbox creds-modal" style="max-width:640px;width:calc(100vw - 32px)"><div class="mhead"><h3 data-i18n="creds_h">Kredi Paketleri</h3><button class="mclose" onclick="closeM('credits')">×</button></div><div class="mbody" style="padding:22px">
- <!-- STEP 1: Paket seçimi -->
+<!-- Credits modal: packs, prices and the balance come from GET /kv/credits (kv-credits.js); payment happens on Stripe's hosted page -->
+<div class="modal" id="mCredits"><div class="mbox creds-modal" style="max-width:640px;width:calc(100vw - 32px)"><div class="mhead"><h3 data-i18n="creds_h">Kredi Paketleri</h3><button class="mclose" onclick="closeM('credits')" aria-label="Close">×</button></div><div class="mbody" style="padding:22px">
+ <!-- STEP 1: pack choice -->
  <div id="credsStep1">
-  <p style="font-size:14px;color:var(--body);margin-bottom:8px" data-i18n="creds_sub">Her karar vericinin e-posta veya telefonu 1 kredi. Kullanılmayan krediler bir sonraki aya devreder.</p>
+  <div id="kvCredNotice" class="kv-cr-warn" role="status" hidden></div>
+  <p style="font-size:14px;color:var(--body);margin-bottom:8px" data-i18n="creds_sub">Her karar vericinin e-posta veya telefonu 1 kredi. Kullanılmayan krediler devreder.</p>
   <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--chip);border-radius:10px;margin-bottom:16px">
    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-   <span style="font-size:13px;color:var(--body)"><b id="credCurrentBal">47</b> <span data-i18n="creds_current">mevcut krediniz var</span></span>
+   <span style="font-size:13px;color:var(--body)"><b id="credCurrentBal">–</b> <span data-i18n="creds_current">mevcut krediniz var</span></span>
   </div>
-  <div class="creds-grid">
-   <div class="creds-pack" data-pack="100" data-price="10" onclick="selectCredPack(this)">
-    <div class="cp-n">100</div>
-    <div class="cp-l" data-i18n="creds_lbl">Kredi</div>
-    <div class="cp-p">$10</div>
-    <div class="cp-pp">$0.10 / <span data-i18n="creds_per_lbl">kredi</span></div>
-   </div>
-   <div class="creds-pack popular selected" data-pack="500" data-price="45" onclick="selectCredPack(this)">
-    <div class="cp-n">500</div>
-    <div class="cp-l" data-i18n="creds_lbl">Kredi</div>
-    <div class="cp-p">$45</div>
-    <div class="cp-pp">$0.09 / <span data-i18n="creds_per_lbl">kredi</span> · <span style="color:var(--teal);font-weight:700" data-i18n="creds_save10">%10 avantaj</span></div>
-   </div>
-   <div class="creds-pack" data-pack="1000" data-price="85" onclick="selectCredPack(this)">
-    <div class="cp-n">1000</div>
-    <div class="cp-l" data-i18n="creds_lbl">Kredi</div>
-    <div class="cp-p">$85</div>
-    <div class="cp-pp">$0.085 / <span data-i18n="creds_per_lbl">kredi</span> · <span style="color:var(--teal);font-weight:700" data-i18n="creds_save15">%15 avantaj</span></div>
-  </div>
-  </div>
+  <div class="creds-grid" id="kvCredPacks" aria-live="polite"><div class="kv-cr-skel"></div><div class="kv-cr-skel"></div><div class="kv-cr-skel"></div></div>
+  <div id="kvCredErr" class="kv-cr-err" hidden></div>
   <div class="creds-summary">
-   <div class="lb"><span data-i18n="creds_you_get">Alacağınız</span>: <b><span id="credSelPack">500</span> <span data-i18n="creds_lbl">Kredi</span></b></div>
-   <div class="vv">$<span id="credSelPrice">45</span></div>
+   <div class="lb"><span data-i18n="creds_you_get">Alacağınız</span>: <b><span id="credSelPack">–</span> <span data-i18n="creds_lbl">Kredi</span></b></div>
+   <div class="vv">$<span id="credSelPrice">–</span></div>
   </div>
-  <button class="creds-btn-buy" onclick="proceedToCredsCheckout()">
+  <button class="creds-btn-buy" id="kvCredNext" type="button" onclick="proceedToCredsCheckout()" disabled>
    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-   <span data-i18n="creds_continue">Ödemeye Devam</span> · $<span id="credBuyPrice">45</span>
+   <span data-i18n="creds_continue">Ödemeye Devam</span><span>· $<span id="credBuyPrice">–</span></span>
   </button>
   <p style="font-size:11.5px;color:var(--faint);margin-top:12px;text-align:center">
-   🔒 <span data-i18n="creds_secure">Stripe ile güvenli ödeme · 3D Secure</span>
+   <span data-i18n="creds_secure">Kart ödemesi Stripe'ın güvenli sayfasında alınır · 3D Secure</span>
   </p>
  </div>
- <!-- STEP 2: Kart bilgileri ve ödeme -->
+ <!-- STEP 2: no card form on our page (PCI) – a short explanation and a button to the hosted payment page -->
  <div id="credsStep2" style="display:none">
-  <button onclick="backToCredsPack()" style="background:none;border:none;color:var(--teal);font-size:13px;cursor:pointer;margin-bottom:14px;padding:0;display:inline-flex;align-items:center;gap:5px">
+  <button type="button" onclick="backToCredsPack()" id="kvCredBack" style="background:none;border:none;color:var(--teal);font-size:13px;cursor:pointer;margin-bottom:14px;padding:0;display:inline-flex;align-items:center;gap:5px">
    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
    <span data-i18n="creds_back">Paketlere dön</span>
   </button>
-  <div style="background:linear-gradient(135deg,rgba(13,138,128,.08),rgba(143,233,196,.05));border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center">
+  <div style="background:linear-gradient(135deg,rgba(13,138,128,.08),rgba(143,233,196,.05));border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center">
    <div>
-    <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink)"><span id="credCoPack">500</span> <span data-i18n="creds_lbl">Kredi</span></div>
+    <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:var(--ink)"><span id="credCoPack">–</span> <span data-i18n="creds_lbl">Kredi</span></div>
     <div style="font-size:12px;color:var(--faint);margin-top:2px" data-i18n="creds_onetime">Tek seferlik ödeme</div>
    </div>
-   <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--teal)">$<span id="credCoPrice">45</span></div>
+   <div style="font-family:var(--serif);font-size:24px;font-weight:700;color:var(--teal)">$<span id="credCoPrice">–</span></div>
   </div>
-  <div style="display:grid;grid-template-columns:1fr;gap:12px">
-   <div>
-    <label style="display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:5px" data-i18n="pay_card">Kart Numarası</label>
-    <input id="credCoCardNo" type="text" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCardNo(this)" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:14px;background:var(--card);color:var(--ink);box-sizing:border-box"/>
-   </div>
-   <div>
-    <label style="display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:5px" data-i18n="pay_card_holder_lbl">Kart Sahibi</label>
-    <input id="credCoName" type="text" placeholder="AD SOYAD" oninput="this.value=this.value.toUpperCase()" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-family:var(--sans);font-size:14px;background:var(--card);color:var(--ink);box-sizing:border-box"/ maxlength="200">
-   </div>
-   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-    <div>
-     <label style="display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:5px" data-i18n="pay_exp">Son Tarih</label>
-     <input id="credCoExp" type="text" placeholder="AA/YY" maxlength="5" oninput="formatExp(this)" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:14px;background:var(--card);color:var(--ink);box-sizing:border-box"/>
-    </div>
-    <div>
-     <label style="display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:5px">CVC</label>
-     <input id="credCoCvc" type="text" placeholder="123" maxlength="4" style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:14px;background:var(--card);color:var(--ink);box-sizing:border-box"/>
-    </div>
-   </div>
+  <div id="kvCredHosted">
+   <ul class="kv-cr-steps">
+    <li data-i18n="kvc_step1">Aşağıdaki düğme sizi Stripe'ın güvenli ödeme sayfasına götürür.</li>
+    <li data-i18n="kvc_step2">Kart bilgilerinizi orada girersiniz; Kervea sunucularına ulaşmaz ve saklanmaz.</li>
+    <li data-i18n="kvc_step3">Ödeme onaylanınca krediler firma hesabınıza otomatik eklenir.</li>
+   </ul>
+   <button class="creds-btn-buy" id="kvCredPay" type="button" onclick="completeCreditsPurchase()" style="margin-top:6px">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    <span data-i18n="kvc_pay_btn">Güvenli ödeme sayfasına git</span><span>· $<span id="credCoBtnPrice">–</span></span>
+   </button>
   </div>
-  <button class="creds-btn-buy" onclick="completeCreditsPurchase()" style="margin-top:20px">
-   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-   <span data-i18n="pay_btn">Öde</span> · $<span id="credCoBtnPrice">45</span>
-  </button>
-  <p style="font-size:11.5px;color:var(--faint);margin-top:12px;text-align:center">
-   🔒 <span data-i18n="creds_secure">Stripe ile güvenli ödeme · 3D Secure</span>
-  </p>
+  <div id="kvCredPending" class="kv-cr-pending" hidden></div>
  </div>
 </div></div></div>
 

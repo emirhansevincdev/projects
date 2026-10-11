@@ -1,1 +1,80 @@
 /* Kervea panel · credits — styles that belong only to this feature (shared styles live in kervea.css) */
+
+/* "best value" badge on a credit pack: the text comes from the page language (kv-credits.js sets data-badge) */
+.creds-pack.popular::before{content:attr(data-badge)}
+.creds-pack:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* hidden by script (an inline display on the button would defeat the [hidden] attribute) */
+.kv-hide{display:none!important}
+
+/* sidebar badge with the credit balance (teal, not the red "unread" colour) */
+.dm-badge.kv-cr-badge{background:var(--teal)}
+.dm-badge.kv-cr-badge[hidden]{display:none}
+.dmenu a.on .dm-badge.kv-cr-badge{background:rgba(4,20,15,.28);color:#04140f}
+
+/* credit modal states */
+.kv-cr-skel{height:132px;border-radius:14px;background:linear-gradient(90deg,var(--paper),var(--chip),var(--paper));background-size:200% 100%;animation:kvCrSk 1.2s linear infinite}
+@keyframes kvCrSk{to{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.kv-cr-skel{animation:none}}
+.kv-cr-err{background:#fde3e1;border:1px solid #f4b8b3;color:#b3261e;border-radius:10px;padding:10px 14px;font-size:13px;margin:0 0 12px}
+html[data-theme="dark"] .kv-cr-err{background:rgba(201,64,64,.15);border-color:rgba(201,64,64,.4);color:#ffb4ab}
+.kv-cr-warn{background:#fff4dc;border:1px solid #f0d49a;color:#7a5200;border-radius:10px;padding:10px 14px;font-size:13px;line-height:1.45;margin:0 0 12px;font-weight:600}
+.kv-cr-warn[hidden]{display:none}
+html[data-theme="dark"] .kv-cr-warn{background:rgba(224,161,0,.14);border-color:rgba(224,161,0,.4);color:#f3d28a}
+.kv-cr-steps{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px;counter-reset:kvs}
+.kv-cr-steps li{counter-increment:kvs;display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--body);line-height:1.45}
+.kv-cr-steps li::before{content:counter(kvs);flex:0 0 22px;height:22px;border-radius:50%;background:var(--chip);color:var(--teal);font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center}
+.kv-cr-pending{text-align:center;padding:10px 6px 4px}
+.kv-cr-pending h4{font-family:var(--serif);font-size:17px;color:var(--ink);margin:8px 0 6px}
+.kv-cr-pending p{font-size:13.5px;color:var(--body);line-height:1.5;margin:0 0 14px}
+.kv-cr-pending-ic{width:46px;height:46px;border-radius:50%;background:var(--chip);color:var(--teal);display:inline-flex;align-items:center;justify-content:center}
+.kv-cr-hist{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;font-size:13px}
+.kv-cr-hist>summary{cursor:pointer;color:var(--teal);font-weight:600;list-style:none}
+.kv-cr-hist>summary::-webkit-details-marker{display:none}
+.kv-cr-hist>summary::after{content:"▾";margin-left:6px;font-size:11px}
+.kv-cr-hist[open]>summary::after{content:"▴"}
+.kv-cr-hist .hist-list{max-height:200px;overflow:auto;margin-top:8px}
+.kv-cr-hist .hr{display:grid;grid-template-columns:92px 1fr auto 52px;gap:8px;padding:7px 2px;border-bottom:1px solid var(--line);align-items:center}
+.kv-cr-hist .hr:last-child{border:0}
+.kv-cr-hist .hr .d{color:var(--faint);font-size:12px}
+.kv-cr-hist .hr .l{color:var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kv-cr-hist .hr .a{font-weight:700;text-align:right}
+.kv-cr-hist .hr .a.pos{color:var(--verify)}
+.kv-cr-hist .hr .a.neg{color:var(--ink)}
+.kv-cr-hist .hr .b{color:var(--faint);text-align:right;font-size:12px}
+.kv-cr-hist .hr.empty{display:block;color:var(--faint);text-align:center}
+@media(max-width:480px){.kv-cr-hist .hr{grid-template-columns:78px 1fr auto 44px}}
+
+/* pricing page: credit packs (public price list) */
+.kv-pr-credits{max-width:760px;margin:26px auto 0;padding:20px 22px;border:1px solid var(--line);border-radius:16px;background:var(--card);text-align:left}
+.kv-pr-credits[hidden]{display:none}
+.kv-pr-credits h3{font-family:var(--serif);font-size:18px;color:var(--ink);margin:0 0 6px}
+.kv-pr-credits p{font-size:13.5px;color:var(--body);line-height:1.55;margin:0 0 14px}
+.kv-pr-packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.kv-pr-pack{display:flex;flex-direction:column;align-items:center;gap:2px;padding:14px 10px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);cursor:pointer;font-family:var(--sans);transition:.15s;color:var(--ink)}
+.kv-pr-pack:hover{border-color:var(--teal);transform:translateY(-2px)}
+.kv-pr-pack b{font-family:var(--serif);font-size:24px;line-height:1.1}
+.kv-pr-pack span{font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+.kv-pr-pack em{font-style:normal;font-family:var(--serif);font-weight:700;font-size:17px;color:var(--teal);margin-top:4px}
+.single-plan .sp-features li[hidden]{display:none}
+
+/* ── Premium lock on the firm page: placeholders only, never real (or blurred real) data ── */
+.kv-lock{border:1px dashed var(--line);border-radius:12px;padding:14px 14px 16px;margin-top:10px;background:linear-gradient(180deg,var(--paper),var(--card))}
+.kv-lock-hd{display:flex;align-items:center;gap:10px;margin-bottom:8px;color:var(--ink)}
+.kv-lock-hd b{font-family:var(--serif);font-size:14.5px}
+.kv-lock-ic{flex:0 0 auto;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--emer));color:#fff;display:inline-flex;align-items:center;justify-content:center}
+.kv-lock-ic svg{width:13px;height:13px}
+.kv-lock-tbl{margin:4px 0 6px}
+.kv-lock-tbl td:first-child{width:36%}
+.kv-ph{display:inline-block;height:10px;width:70%;max-width:190px;border-radius:6px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 11px);vertical-align:middle}
+.kv-ph-w{width:120px;display:block;margin:2px 0 6px}
+.kv-lock-sub{font-size:12.5px;color:var(--body);line-height:1.5;margin:6px 0 12px}
+.kv-lock-cta{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--teal),var(--emer));color:#fff;border:0;border-radius:100px;padding:9px 18px;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
+.kv-lock-cta:hover{transform:translateY(-1px);box-shadow:0 8px 18px -6px rgba(13,138,128,.55)}
+.kv-lock-cta:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.kv-lock-mini{display:flex;gap:12px;align-items:flex-start}
+.kv-lock-note{font-size:12.5px;color:var(--faint);line-height:1.45}
+.kv-sector-lock{max-width:560px;text-align:left}
+.kv-sector-lock .kv-lock-ic{width:40px;height:40px;margin-bottom:8px}
+.kv-sector-lock .kv-lock-ic svg{width:18px;height:18px}
+.kv-sector-lock p{color:var(--body);font-size:14px;line-height:1.55;margin:6px 0 14px}

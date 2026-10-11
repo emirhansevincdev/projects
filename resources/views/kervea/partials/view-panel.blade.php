@@ -8,7 +8,7 @@
     <a onclick="showPanel('matches',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="p_matches">Eşleşmeler</span></a>
     <a onclick="showPanel('profile',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="p_profile">Firma Profilim</span></a>
     <a onclick="showPanel('messages',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span data-i18n="p_msgs">Mesajlar</span><span class="dm-badge">3</span></a>
-    <a onclick="showPanel('people',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span data-i18n="p_people">Kişiler</span><span class="dm-badge new">PRO</span></a>
+    <a onclick="showPanel('people',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg><span data-i18n="p_people">Kişiler</span><span class="dm-badge kv-cr-badge" id="kvPplBadge" hidden title="Kredi"></span></a>
     <a onclick="showPanel('analytics',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span data-i18n="p_ana">Analiz</span></a>
     <a onclick="showPanel('docs',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="p_docs">Belgelerim</span></a>
     <a onclick="showPanel('team',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M22 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/></svg><span data-i18n="p_team">Ekip</span></a>
@@ -418,36 +418,42 @@
      </div>
     </div>
 
-    <!-- PEOPLE / Prospeo-style contact discovery -->
+    <!-- PEOPLE / Prospeo-style contact discovery (kv-people.js renders the table from /kv/people) -->
     <div class="dpanel" id="dp-people">
      <div class="ppl-hd">
       <div>
-       <h2><span data-i18n="ppl_title">Kişiler</span> <span style="background:linear-gradient(135deg,#8b5cf6,#6366f1);color:#fff;font-size:11px;padding:3px 9px;border-radius:100px;font-weight:700;letter-spacing:.05em;margin-left:6px;vertical-align:middle">PRO</span></h2>
-       <p class="sub" data-i18n="ppl_sub">Doğrulanmış firmalardaki karar vericilere doğrudan erişim. E-posta ve telefon bilgilerini tek tıkla açın.</p>
+       <h2><span data-i18n="ppl_title">Kişiler</span></h2>
+       <p class="sub" data-i18n="ppl_sub">Kendi sektörünüzün dışındaki firmalarda karar vericilere doğrudan erişim. Her e-posta veya telefon bilgisi 1 kredi.</p>
       </div>
-      <div class="credits">
+      <div class="credits" id="kvCreditBox">
        <div class="cr-i"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-       <div style="flex:1"><div class="cr-n"><span id="creditN">47</span></div><div class="cr-l" data-i18n="ppl_credits">Kredi kaldı</div><div class="cr-b" data-i18n="ppl_renew">Aylık yenilenir</div></div><button onclick="openM('credits')" style="padding:8px 12px;background:linear-gradient(135deg,var(--teal),var(--emer));color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span data-i18n="creds_add_btn">Kredi Ekle</span></button>
+       <div style="flex:1"><div class="cr-n"><span id="creditN">–</span></div><div class="cr-l" data-i18n="ppl_credits">Kredi kaldı</div><div class="cr-b" data-i18n="ppl_renew">Kullanılmayan krediler devreder</div></div><button type="button" id="kvCrBuy" onclick="openM('credits')" style="padding:8px 12px;background:linear-gradient(135deg,var(--teal),var(--emer));color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:12px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span data-i18n="creds_add_btn">Kredi Ekle</span></button>
       </div>
      </div>
+     <div class="kv-ppl-rule" id="kvPplRule">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <span data-i18n="kvp_rule">Burada kendi sektörünüz dışındaki kişiler listelenir. Kendi sektörünüzdeki firmalara Eşleşmeler sekmesinden ulaşırsınız.</span>
+     </div>
      <div class="ppl-fil">
-      <div class="ppl-sr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><input maxlength="200" placeholder="Kişi adı, firma veya ünvan ara..." data-i18n-placeholder="ppl_search" oninput="filterPeople(this.value)"/></div>
-      <span class="fx active" onclick="pplFilter(this,'all')" data-i18n="ppl_all">Tümü</span>
-      <span class="fx" onclick="pplFilter(this,'ceo')" data-i18n="ppl_ceo">CEO/Kurucu</span>
-      <span class="fx" onclick="pplFilter(this,'purchasing')" data-i18n="ppl_purchasing">Satın Alma</span>
-      <span class="fx" onclick="pplFilter(this,'sales')" data-i18n="ppl_sales">Satış</span>
-      <span class="fx" onclick="pplFilter(this,'export')" data-i18n="ppl_export">İhracat/İthalat</span>
-      <span class="fx" onclick="pplFilter(this,'ops')" data-i18n="ppl_ops">Operasyon</span>
+      <div class="ppl-sr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg><input id="kvPplSearch" maxlength="120" placeholder="Kişi adı, firma veya ünvan ara..." data-i18n-placeholder="ppl_search" autocomplete="off"/></div>
+      <span class="fx active" data-dept="all" data-i18n="ppl_all">Tümü</span>
+      <span class="fx" data-dept="ceo" data-i18n="ppl_ceo">CEO/Kurucu</span>
+      <span class="fx" data-dept="purchasing" data-i18n="ppl_purchasing">Satın Alma</span>
+      <span class="fx" data-dept="sales" data-i18n="ppl_sales">Satış</span>
+      <span class="fx" data-dept="export" data-i18n="ppl_export">İhracat/İthalat</span>
+      <span class="fx" data-dept="ops" data-i18n="ppl_ops">Operasyon</span>
+      <select id="kvPplCountry" class="kv-ppl-country" aria-label="Ülke"><option value="" data-i18n="kvp_all_countries">Tüm ülkeler</option></select>
      </div>
      <div class="ppl-tbl">
       <div class="ppl-thd">
        <div data-i18n="ppl_col_person">KİŞİ</div><div class="col-cmp" data-i18n="ppl_col_firm">FİRMA</div><div class="col-ttl" data-i18n="ppl_col_title">ÜNVAN</div><div data-i18n="ppl_col_email">E-POSTA</div><div class="col-phn" data-i18n="ppl_col_phone">TELEFON</div><div class="col-act" data-i18n="ppl_col_act">İŞLEM</div>
       </div>
-      <div id="pplBody" class="ppl-body"></div>
+      <div id="pplBody" class="ppl-body" aria-live="polite"></div>
      </div>
+     <div class="kv-ppl-pager" id="kvPplPager"></div>
      <div style="margin-top:14px;padding:14px;background:var(--paper);border-radius:12px;font-size:12.5px;color:var(--body);display:flex;gap:12px;align-items:center">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" style="flex:0 0 auto"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-      <span><span data-i18n="ppl_kvkk">Kişi bilgileri kamuya açık kaynaklardan derlenmiştir.</span> <a onclick="toast(tt('toast_form_opened','Talep formu açıldı'))" style="color:var(--teal);cursor:pointer" data-i18n="ppl_kvkk_link">buradan başvurabilir</a>.</span>
+      <span><span data-i18n="ppl_kvkk">Kişi bilgileri kamuya açık kaynaklardan derlenmiştir.</span> <a href="#" id="kvPplRemovalLink" style="color:var(--teal);cursor:pointer" data-i18n="ppl_kvkk_link">buradan başvurabilir</a>.</span>
      </div>
     </div>
 
