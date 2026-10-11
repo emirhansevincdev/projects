@@ -42,6 +42,14 @@
 .hhero::after{background:
   linear-gradient(90deg,rgba(4,18,15,.88) 0%,rgba(4,18,15,.72) 34%,rgba(4,18,15,.26) 60%,rgba(4,18,15,0) 78%),
   linear-gradient(180deg,rgba(4,18,15,.32) 0%,rgba(4,18,15,0) 22%,rgba(4,18,15,0) 76%,rgba(4,18,15,.5) 100%)}
+/* Arapça (sağdan sola): metin sağda, küre solda; okunurluk perdesi de ters yönde */
+@media (min-width:861px){
+  html[dir="rtl"] .hhero #globeMap{right:auto;left:-7%}
+  html[dir="rtl"] .hhero::after{background:
+    linear-gradient(270deg,rgba(4,18,15,.88) 0%,rgba(4,18,15,.72) 34%,rgba(4,18,15,.26) 60%,rgba(4,18,15,0) 78%),
+    linear-gradient(180deg,rgba(4,18,15,.32) 0%,rgba(4,18,15,0) 22%,rgba(4,18,15,0) 76%,rgba(4,18,15,.5) 100%)}
+  html[dir="rtl"] .hhero > .wrap{direction:rtl}
+}
 #firmsSec{scroll-margin-top:122px}
 @media (max-width:860px){
   .hhero #globeMap{top:auto;bottom:-4%;right:50%;transform:translateX(50%);height:auto;width:min(150vw,900px)}
@@ -150,3 +158,6 @@ html[dir="rtl"] .kv-nl-consent{text-align:right}
 html[data-theme="dark"] .kv-nl-status.ok{color:#8FE9C4}
 html[data-theme="dark"] .kv-nl-status.err{color:#FCA5A5}
 .kv-nl-btn[disabled]{opacity:.65;cursor:progress}
+
+/* yasal metin penceresi: Türkçe dışındaki dillerde hukuken geçerli metin notu */
+.kv-legal-note{margin:0 0 14px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--chip);font-size:13px;line-height:1.5;color:var(--body)}

@@ -73,4 +73,54 @@ if(window.MutationObserver){
 }
 syncModalLock();
 
+// ───────────────────────── Premium fiyatı: yalnızca sunucu yapılandırmasından ─────────────────────────
+(function(){
+  var amt = $('spAmount');
+  var price = window.KV_BOOT && KV_BOOT.premium;
+  if(amt && price) amt.textContent = String(price);
+})();
+
+// ───────────────────────── erişilebilirlik etiketleri / ipuçları: arayüz diline çevrilir ─────────────────────────
+// Kaynak metin Türkçe (aria-label / title); sözlükte karşılığı varsa seçili dilde gösterilir, yoksa olduğu gibi kalır.
+function translateAttrs(root){
+  if(typeof window.kvT !== 'function') return;
+  (root || document).querySelectorAll('[aria-label],[title]').forEach(function(el){
+    ['aria-label', 'title'].forEach(function(a){
+      var cur = el.getAttribute(a); if(cur === null || cur === '') return;
+      var ok = 'data-kv-o-' + a;
+      var src = el.getAttribute(ok);
+      if(src === null){
+        if(el.hasAttribute('data-i18n-aria') && a === 'aria-label') return;   // anahtarlı olanlara setLang bakar
+        if(el.hasAttribute('data-i18n-title') && a === 'title') return;
+        src = cur; el.setAttribute(ok, src);
+      }
+      var out = window.kvT(src);
+      if(out !== cur) el.setAttribute(a, out);
+    });
+  });
+}
+document.addEventListener('kv:lang', function(){ translateAttrs(); });
+translateAttrs();
+// modal pencereleri sonradan açılınca (ör. ödeme) etiketleri tazele
+var _openM = window.openM;
+if(typeof _openM === 'function'){
+  window.openM = function(id){
+    var r = _openM.apply(this, arguments);
+    try{ var m = $('m' + String(id).charAt(0).toUpperCase() + String(id).slice(1)); if(m) translateAttrs(m); legalNote(id); }catch(e){}
+    return r;
+  };
+}
+
+// ───────────────────────── yasal metinler: Türkçe dışındaki dillerde "yalnızca Türkçe metin geçerlidir" notu ─────────────────────────
+function legalNote(id){
+  if(['kvkk', 'sozl', 'cookie'].indexOf(id) < 0) return;
+  var m = $('m' + id.charAt(0).toUpperCase() + id.slice(1)); if(!m) return;
+  var host = m.querySelector('.mbody') || m.querySelector('.mbox'); if(!host) return;
+  var n = m.querySelector('.kv-legal-note');
+  if((window.LANG || 'tr') === 'tr'){ if(n) n.remove(); return; }
+  if(!n){ n = document.createElement('p'); n.className = 'kv-legal-note'; n.setAttribute('role', 'note'); host.insertBefore(n, host.firstChild); }
+  n.textContent = window.kvT('Hukuken yalnızca Türkçe metin geçerlidir.');
+}
+document.addEventListener('kv:lang', function(){ ['kvkk', 'sozl', 'cookie'].forEach(function(id){ var m = $('m' + id.charAt(0).toUpperCase() + id.slice(1)); if(m && m.classList.contains('open')) legalNote(id); }); });
+
 })();

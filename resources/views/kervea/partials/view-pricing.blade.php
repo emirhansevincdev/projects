@@ -9,7 +9,7 @@
     <div class="sp-inner">
      <div class="sp-badge" data-i18n="sp_badge">KERVEA PREMIUM</div>
      <div class="sp-price">
-      <span class="sp-currency">$</span><span class="sp-amount" id="spAmount">@endverbatim{{ (int) config('kervea.premium.price_usd') }}@verbatim</span><span class="sp-per" data-i18n="sp_per">/yıl</span>
+      <span class="sp-currency">$</span><span class="sp-amount" id="spAmount"></span><span class="sp-per" data-i18n="sp_per">/yıl</span>
      </div>
      <p class="sp-sub" data-i18n="sp_sub">Yıllık üyelik · Komisyon yok · Sıralama satın alınamaz</p>
 

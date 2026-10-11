@@ -2737,7 +2737,13 @@ function toggleTheme(){
 // i18n helper — toast/confirm mesajlarını çevirmek için (v16+)
 // Kullanım: toast(tt('key_x','Türkçe default'))
 function tt(k, fb){
-  try { return (T && T[LANG] && T[LANG][k]) || fb || ""; }
+  try {
+    var v = T && T[LANG] && T[LANG][k]; if(v) return v;
+    // anahtar yoksa: Türkçe kaynak metnin sözlükteki (kv-i18n.js) karşılığı, sonra İngilizce, en son Türkçe metin
+    if(fb && typeof window.kvT === "function"){ var r = window.kvT(fb); if(r && r !== fb) return r; }
+    if(LANG !== "tr" && T && T.en && T.en[k]) return T.en[k];
+    return fb || "";
+  }
   catch(e){ return fb || ""; }
 }
 

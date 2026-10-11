@@ -174,6 +174,24 @@ add([
  ['Küre üzerindeki ülkeler','Countries on the globe','Países en el globo','Pays sur le globe','الدول على الكرة الأرضية','Страны на глобусе']
 ]);
 
+
+// ── erişilebilirlik etiketleri / ipuçları (aria-label, title) ──
+add([
+ ['Tema değiştir','Toggle theme','Cambiar tema','Changer de thème','تبديل المظهر','Сменить тему'],
+ ['Dünya küresi: ülkeler ve doğrulanmış firma sayıları','World globe: countries and verified company counts','Globo terráqueo: países y número de empresas verificadas','Globe terrestre : pays et nombre d\'entreprises vérifiées','كرة أرضية: الدول وعدد الشركات الموثّقة','Глобус: страны и число проверенных компаний'],
+ ['Sosyal medya','Social media','Redes sociales','Réseaux sociaux','وسائل التواصل الاجتماعي','Социальные сети'],
+ ['Parolayı göster','Show password','Mostrar contraseña','Afficher le mot de passe','إظهار كلمة المرور','Показать пароль'],
+ ['Parolayı gizle','Hide password','Ocultar contraseña','Masquer le mot de passe','إخفاء كلمة المرور','Скрыть пароль'],
+ ['Kapat','Close','Cerrar','Fermer','إغلاق','Закрыть'],
+ ['Kapat (ESC)','Close (Esc)','Cerrar (Esc)','Fermer (Échap)','إغلاق (Esc)','Закрыть (Esc)'],
+ ['Panel menüsü','Panel menu','Menú del panel','Menu du tableau de bord','قائمة اللوحة','Меню кабинета'],
+ ['Sayfa içi gezinme','On-page navigation','Navegación de la página','Navigation de la page','التنقل داخل الصفحة','Навигация по странице'],
+ ['Ticaret akışı','Trade flow','Flujo comercial','Flux commercial','مسار التجارة','Схема сделки'],
+ ['Daha fazla','More','Más','Plus','المزيد','Ещё'],
+ ['Pro üyeler için','For Premium members','Para miembros Premium','Pour les membres Premium','لأعضاء Premium','Для участников Premium'],
+ ['Hukuken yalnızca Türkçe metin geçerlidir.','Only the Turkish text is legally binding.','Solo el texto en turco tiene validez jurídica.','Seul le texte turc fait foi.','النص التركي وحده هو الملزم قانونًا.','Юридическую силу имеет только текст на турецком языке.'],
+]);
+
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
 function fill(s, vars){
   if(!vars) return s;
@@ -210,5 +228,25 @@ wrap('toast', [0]);
   var _confirm = window.confirm, _prompt = window.prompt;
   if(_confirm && !_confirm.__kvT){ window.confirm = function(m){ return _confirm.call(window, window.kvT(m)); }; window.confirm.__kvT = true; }
   if(_prompt && !_prompt.__kvT){ window.prompt = function(m, d){ return _prompt.call(window, window.kvT(m), d); }; window.prompt.__kvT = true; }
+})();
+// Eksik çeviri anahtarı: önce İngilizce, sonra Türkçe (ham anahtar ya da undefined asla görünmez).
+// T[dil][anahtar] okuyan tüm kod (panel dosyaları dâhil) bu geri dönüşü otomatik alır.
+(function(){
+  if(!window.T || typeof Proxy === 'undefined') return;
+  ['en','es','fr','ar','ru'].forEach(function(l){
+    var base = T[l];
+    if(!base || base.__kvFb) return;
+    var fb = l === 'en' ? 'tr' : 'en';
+    var p = new Proxy(base, {
+      get: function(t, k){
+        if(k === '__kvFb') return true;
+        var v = t[k];
+        if(v !== undefined || typeof k !== 'string') return v;
+        var f = T[fb]; return f ? f[k] : undefined;
+      },
+      has: function(t, k){ return (k in t) || (typeof k === 'string' && T[fb] && (k in T[fb])); }
+    });
+    T[l] = p;
+  });
 })();
 })();
