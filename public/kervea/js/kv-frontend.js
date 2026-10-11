@@ -363,4 +363,100 @@ wireMedia();
 document.addEventListener('kv:member', function(e){ var me = e.detail || window.KV_ME; renderProfileHead(me); window.kvFillOverview(me); loadMedia(); });
 document.addEventListener('kv:lang', function(){ if(window.KV_ME){ renderProfileHead(window.KV_ME); window.kvFillOverview(window.KV_ME); } });
 
+
+// ───────────────────────── site bilgileri (config/kervea.php 'frontend'): iletişim, şirket, sosyal bağlantılar ─────────────────────────
+// Dolu olan alan gösterilir; boş olan, müşterinin dolduracağı yer olarak işaretli kalır (iletişim/Hakkımızda) ya da gizlenir (sosyal simgeler).
+(function(){
+  var SITE = window.KV_SITE || {};
+  function safeUrl(u){ return /^https?:\/\//i.test(String(u || '')) ? String(u) : ''; }
+  function fill(id, v){
+    var e = $(id); if(!e || !v) return;
+    e.classList.remove('kv-todo'); e.removeAttribute('data-i18n'); e.textContent = String(v);
+  }
+  fill('ctAddr', SITE.address); fill('ctPhone', SITE.contact_phone);
+  fill('aboCoName', SITE.legal_name); fill('aboCoAddr', SITE.address); fill('aboCoMersis', SITE.mersis); fill('aboCoFounders', SITE.founders);
+  var mail = $('ctMail'); if(mail){ if(SITE.contact_email){ mail.textContent = SITE.contact_email; mail.href = 'mailto:' + SITE.contact_email; } }
+  var any = false, links = SITE.links || {};
+  document.querySelectorAll('[data-site-link]').forEach(function(a){
+    var u = safeUrl(links[a.getAttribute('data-site-link')]);
+    if(u){ a.href = u; a.hidden = false; any = true; } else { a.hidden = true; a.removeAttribute('href'); }
+  });
+  var box = $('fxSocial'); if(box) box.hidden = !any;
+})();
+
+
+// firması olan ülkeler (Hakkımızda haritası) gerçek sayılar gelince yeniden çizilir
+document.addEventListener('kv:stats', function(){ if(typeof window.renderAboMap === 'function') window.renderAboMap(); });
+
+
+// ───────────────────────── bülten: POST /kv/newsletter (e-posta + onay kutusu; sonuç sunucudan gelir) ─────────────────────────
+(function(){
+  var form = $('kvNlForm'); if(!form) return;
+  var btn = $('kvNlBtn'), st = $('kvNlStatus'), busy = false;
+  function say(msg, cls){ if(!st) return; st.textContent = msg || ''; st.className = 'kv-nl-status' + (cls ? ' ' + cls : ''); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(busy) return;
+    var email = ($('kvNlEmail').value || '').trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ say(kt('Lütfen geçerli bir e-posta adresi girin.'), 'err'); $('kvNlEmail').focus(); return; }
+    if(!$('kvNlConsent').checked){ say(kt('Devam etmek için onay kutusunu işaretleyin.'), 'err'); $('kvNlConsent').focus(); return; }
+    busy = true; if(btn) btn.disabled = true; say(kt('Gönderiliyor…'));
+    KV_API('POST', '/kv/newsletter', { email: email, consent: true, locale: window.LANG || 'tr', website: ($('kvNlWebsite') || {}).value || '' }).then(function(r){
+      busy = false; if(btn) btn.disabled = false;
+      if(r.ok){
+        say(((window.T && (T[window.LANG] || T.tr).nl_ok) || kt('Teşekkürler, e-posta adresiniz kaydedildi.')), 'ok');
+        $('kvNlEmail').value = ''; $('kvNlConsent').checked = false;
+      } else if(r.status === 429){ say(kt('Kısa süre sonra tekrar deneyin.'), 'err'); }
+      else if(r.status === 422){ say(serverMsg(r, kt('Lütfen geçerli bir e-posta adresi girin.')), 'err'); }
+      else say(serverMsg(r, kt('Bir hata oluştu. Lütfen tekrar deneyin.')), 'err');
+    });
+  });
+})();
+
+// ───────────────────────── firma ekleme: taslak (yalnızca bu tarayıcıda; belge ve görseller hariç) ─────────────────────────
+(function(){
+  var KEY = 'kv_add_draft_v1', restored = false;
+  var lb = $('addLogoBox'); if(lb && !lb.getAttribute('data-empty')) lb.setAttribute('data-empty', lb.innerHTML);
+  function fields(){ return Array.prototype.slice.call(document.querySelectorAll('#add [data-f]')).filter(function(i){ return i.type !== 'file' && i.type !== 'password' && i.type !== 'checkbox'; }); }
+  function load(){ try{ var raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; }catch(e){ return null; } }
+  function drop(){ try{ localStorage.removeItem(KEY); }catch(e){} }
+  window.kvDraftSave = function(){
+    var d = { f: {}, step: window.CS || 1, at: Date.now() };
+    fields().forEach(function(i){ var k = i.getAttribute('data-f'); if(i.value !== '') d.f[k] = i.value; });
+    var cb = $('ddAddCountry'); d.cc = (cb && cb.getAttribute('data-cc')) || '';
+    var cy = $('ddAddCity'), ci = cy && cy.querySelector('.cityinput'); d.city = ci ? ci.value : ((cy && cy.getAttribute('data-city')) || '');
+    try{ localStorage.setItem(KEY, JSON.stringify(d)); window.toast(kt('Taslak bu tarayıcıya kaydedildi (belgeler ve görseller hariç).')); showNote(true); }
+    catch(e){ window.toast(kt('Taslak kaydedilemedi: tarayıcı depolaması kapalı.')); }
+  };
+  function showNote(on){
+    var n = $('kvDraftNote');
+    if(!on){ if(n) n.remove(); return; }
+    var host = document.querySelector('#add .stp-sub'); if(!host) return;
+    if(!n){
+      n = document.createElement('div'); n.id = 'kvDraftNote'; n.className = 'kv-draft-note';
+      n.innerHTML = '<span id="kvDraftTxt"></span> <button type="button" class="kv-draft-del"></button>';
+      host.parentNode.appendChild(n);
+      n.querySelector('button').addEventListener('click', function(){ drop(); showNote(false); window.toast(kt('Taslak silindi.')); });
+    }
+    n.querySelector('#kvDraftTxt').textContent = kt('Kayıtlı taslağınız geri yüklendi.');
+    n.querySelector('button').textContent = kt('Taslağı sil');
+  }
+  function restore(){
+    var d = load(); if(!d || !d.f) return;
+    fields().forEach(function(i){ var k = i.getAttribute('data-f'); if(d.f[k] !== undefined) i.value = d.f[k]; });
+    try{ if(d.cc && typeof window.selectCountry === 'function'){ window.selectCountry('ddAddCountry', d.cc); var cb = $('ddAddCountry'); if(cb) cb.setAttribute('data-cc', d.cc); } }catch(e){}
+    try{ if(d.city){ var ci = document.querySelector('#ddAddCity .cityinput'); if(ci) ci.value = d.city; else if(typeof window.selectCity === 'function') window.selectCity('ddAddCity', d.city); } }catch(e){}
+    try{ if(typeof window.renderAddSecChip === 'function') window.renderAddSecChip(); }catch(e){}
+    showNote(true);
+  }
+  restored = true; restore();      // sayfa yüklenirken (alanlar DOM'da hazır; adres /add-company olsa da olmasa da)
+  document.addEventListener('kv:lang', function(){ if($('kvDraftNote')) showNote(true); });
+  // başvuru gerçekten gönderilip sunucu kabul edince taslak silinir
+  var _alert = window.kvShowAlert;
+  if(typeof _alert === 'function') window.kvShowAlert = function(variant, title){
+    if(variant === 'success' && title === 'Başvurunuz alındı'){ drop(); showNote(false); }
+    return _alert.apply(this, arguments);
+  };
+})();
+
 })();

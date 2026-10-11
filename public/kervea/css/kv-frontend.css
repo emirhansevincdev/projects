@@ -237,3 +237,10 @@ html[data-theme="dark"] .sp-amount{background:none;-webkit-text-fill-color:curre
 /* ".sec" hem bölüm hem düğme sınıfı: bölümün "24px 0 80px" dolgusu ".wrap" yan boşluklarını siliyordu (firma listesi kenara yapışıyordu) */
 .wrap.sec{padding-left:28px;padding-right:28px}
 @media (max-width:480px){ .wrap.sec{padding-left:16px;padding-right:16px} }
+
+/* "hidden" özniteliği, display veren sınıf kurallarına yenilmesin */
+[hidden]{display:none !important}
+
+.kv-draft-note{margin:10px 0 0;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--chip);font-size:13px;color:var(--body);display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.kv-draft-del{background:none;border:0;padding:0;font:inherit;color:var(--teal);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.kv-draft-del:hover{color:var(--hover)}

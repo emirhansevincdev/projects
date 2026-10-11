@@ -4254,12 +4254,12 @@ function previewGallery(ev, targetId){
    })(files[i]);
  }
  ev.target.value = "";
- toast(files.length+" görsel eklendi");
+ toast(kvT("{n} görsel seçildi",{n:files.length}));
 }
 function uploadAddLogo(ev){
  var f = ev.target.files[0]; if(!f) return;
  var r = new FileReader();
- r.onload = function(){document.getElementById("addLogoBox").innerHTML='<img src="'+r.result+'" style="width:100%;height:100%;object-fit:cover"/>'; toast(tt("toast_logo_uploaded","Logo yüklendi"));};
+ r.onload = function(){document.getElementById("addLogoBox").innerHTML='<img src="'+r.result+'" style="width:100%;height:100%;object-fit:cover"/>'; toast(kvT("Logo seçildi"));};
  r.readAsDataURL(f);
 }
 
@@ -5374,7 +5374,7 @@ function renderAboMap(){
   // Veri fonksiyonun içinde: setLang sayfa açılışında bu satırlara gelinmeden çağırabiliyor.
   var KV_AMAP = {
   hub:    { cc:"tr", lng:35,  lat:39 },
-  active: [ { cc:"sn", lng:-14, lat:15 }, { cc:"ci", lng:-5, lat:7 }, { cc:"ng", lng:3, lat:7 } ],
+  active: [],   // firması olan ülkeler: aşağıda GET /kv/stats (by_country) verisinden doldurulur
   future: [ { cc:"de", lng:10, lat:51 }, { cc:"gb", lng:-3, lat:54 }, { cc:"es", lng:-4, lat:40 }, { cc:"it", lng:12, lat:43 },
             { cc:"ma", lng:-7, lat:32 }, { cc:"eg", lng:30, lat:27 }, { cc:"sa", lng:45, lat:24 }, { cc:"ae", lng:54, lat:24 },
             { cc:"ru", lng:55, lat:60 }, { cc:"kz", lng:67, lat:48 }, { cc:"cn", lng:105, lat:35 }, { cc:"in", lng:78, lat:22 },
@@ -5382,6 +5382,17 @@ function renderAboMap(){
             { cc:"au", lng:133, lat:-25 } ]
 };
   var host = document.getElementById("kvAboMap"); if(!host) return;
+  // Gerçek veri: yalnızca onaylı firması olan ülkeler "firması olan ülke" olarak işaretlenir; hedef koridorlardan çıkarılır.
+  (function(){
+    var by = (window.KV_STATS && KV_STATS.by_country) || {}, hubs = window.KERVEA_HUBS || [];
+    Object.keys(by).forEach(function(cc){
+      if(cc === "tr" || !(by[cc] > 0)) return;
+      var h = hubs.filter(function(x){ return x.cc === cc; })[0];
+      if(h) KV_AMAP.active.push({ cc: cc, lng: h.lon, lat: h.lat });
+    });
+    var act = {}; KV_AMAP.active.forEach(function(a){ act[a.cc] = 1; });
+    KV_AMAP.future = KV_AMAP.future.filter(function(d){ return !act[d.cc]; });
+  })();
   var names = (typeof CI !== "undefined" && (CI[LANG] || CI.tr)) || {};
   function nm(cc){ return escapeHtml(names[cc] || cc.toUpperCase()); }
   function X(lng){ return ((lng + 180) / 360 * 2000); }

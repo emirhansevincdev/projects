@@ -274,6 +274,7 @@ function F(name){ return document.querySelector('#add [data-f="'+name+'"]'); }
 function fv(name){ var e=F(name); return e? (e.value||'').trim() : ''; }
 function wordCount(s){ var m=String(s||'').trim().match(/\S+/g); return m?m.length:0; }
 var ADD_FILES = { logo:null, cover:null, photos:[] };
+window.kvRemoveAddLogo=function(){ ADD_FILES.logo=null; var f=el('addLogoFile'); if(f) f.value=''; var b=el('addLogoBox'); if(b) b.innerHTML=b.getAttribute('data-empty')||''; toast(tt('toast_logo_removed','Logo kaldırıldı')); };
 document.addEventListener('change', function(e){
   var i=e.target; if(!i || i.type!=='file') return;
   if(i.id==='addLogoFile') ADD_FILES.logo=i.files[0]||null;

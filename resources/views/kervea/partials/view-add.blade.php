@@ -6,7 +6,7 @@
     <h1 data-i18n="add_h">Firmanı Ekle</h1>
     <p class="stp-sub" data-i18n="add_p">6 adımda küresel görünürlük. Her adım kaydedilir; istediğin an dönebilirsin.</p>
    </div>
-   <button class="stp-save" onclick="toast((T[LANG]&&T[LANG].add_draft_saved)||'Taslak kaydedildi — devam etmek için giriş yapın')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span data-i18n="add_draft_btn">Sonra Devam Et</span></button>
+   <button class="stp-save" type="button" onclick="kvDraftSave()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span data-i18n="add_draft_btn">Sonra Devam Et</span></button>
   </div>
   <div class="stp-progress" data-step="1" id="stpProg">
    <div class="stp-progress-fill" id="stpFill" style="width:0"></div>
@@ -61,11 +61,11 @@
     <!-- STEP 3: Logo + Gallery -->
     <div class="panelstep" id="ps3">
      <div class="logoup">
-      <div class="box" id="addLogoBox">KT</div>
+      <div class="box" id="addLogoBox"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
       <div class="info">
        <b data-i18n="logo_h">Firma Logosu *</b>
        <span data-i18n="logo_hint">Önerilen: 400×400px, PNG/JPG/SVG, max 2MB</span>
-       <div style="display:flex;gap:6px"><button type="button" class="btn sm" onclick="document.getElementById('addLogoFile').click()" data-i18n="upload">Yükle</button><button type="button" class="btn sm sec" onclick="document.getElementById('addLogoBox').innerHTML='KT';toast((T[LANG]&&T[LANG].toast_logo_removed)||'Logo kaldırıldı')" data-i18n="remove">Kaldır</button></div>
+       <div style="display:flex;gap:6px"><button type="button" class="btn sm" onclick="document.getElementById('addLogoFile').click()" data-i18n="upload">Yükle</button><button type="button" class="btn sm sec" onclick="kvRemoveAddLogo()" data-i18n="remove">Kaldır</button></div>
        <input type="file" id="addLogoFile" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="uploadAddLogo(event)"/>
       </div>
      </div>
@@ -75,7 +75,7 @@
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
       <div class="tt" data-i18n="cover_tt">Kapak fotoğrafını yükle</div>
       <div class="st" data-i18n="cover_st">Firma sayfanızın üstünde görünecek · 1600×400px önerilen · max 5MB</div>
-      <input type="file" id="addCoverFile" accept="image/jpeg,image/png,image/webp" onchange="toast((T[LANG]&&T[LANG].toast_cover_uploaded)||'Kapak yüklendi')"/>
+      <input type="file" id="addCoverFile" accept="image/jpeg,image/png,image/webp" onchange="if(this.files&&this.files.length)toast(kvT('Kapak görseli seçildi'))"/>
      </div>
 
      <label class="fl" style="margin-top:8px" data-i18n="gal_h">Ürün / Tesis Fotoğrafları (max 5)</label>
@@ -194,14 +194,14 @@
     <!-- STEP 6: Publish + Promo -->
     <div class="panelstep" id="ps6">
      <div style="text-align:center;padding:20px 20px 10px">
-      <div style="font-size:52px;margin-bottom:10px">🎉</div>
+      <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--chip);color:var(--teal);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
       <h3 style="font-size:22px;margin-bottom:6px" data-i18n="pub_h">Başvurunuz alındı</h3>
       <p style="color:var(--faint);font-size:14px;max-width:480px;margin:0 auto 20px" data-i18n="pub_p">Manuel doğrulama 24-48 saat içinde tamamlanır. Yayın hazır olduğunda e-posta ve SMS ile bilgilendirileceksiniz.</p>
      </div>
      <div class="promobox" style="max-width:520px;margin:10px auto 0">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
       <div class="txt"><b data-i18n="promo_h">Promosyon Kodun mu var?</b><span data-i18n="promo_s">İlk 3 ay Pro plana %30 indirim.</span></div>
-      <input maxlength="200" placeholder="KERVEA2026" id="addPromo"/>
+      <input maxlength="200" data-i18n-ph="promo_ph" placeholder="Promosyon kodu" id="addPromo" autocomplete="off"/>
       <button class="btn sm" onclick="applyPromo('addPromo')" data-i18n="apply">Uygula</button>
      </div>
     </div>

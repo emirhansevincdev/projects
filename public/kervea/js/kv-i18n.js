@@ -247,6 +247,16 @@ add([
  ['Gönderiliyor…','Sending…','Enviando…','Envoi…','جارٍ الإرسال…','Отправка…'],
 ]);
 
+
+// ── firma ekleme sihirbazı: taslak, görsel seçimi; bülten ──
+add([
+ ['Logo seçildi','Logo selected','Logotipo seleccionado','Logo sélectionné','تم اختيار الشعار','Логотип выбран'],
+ ['{n} görsel seçildi','{n} images selected','{n} imágenes seleccionadas','{n} images sélectionnées','تم اختيار {n} صور','Выбрано изображений: {n}'],
+ ['Kapak görseli seçildi','Cover image selected','Imagen de portada seleccionada','Image de couverture sélectionnée','تم اختيار صورة الغلاف','Обложка выбрана'],
+ ['Taslak kaydedilemedi: tarayıcı depolaması kapalı.','The draft could not be saved: browser storage is off.','No se pudo guardar el borrador: el almacenamiento del navegador está desactivado.','Le brouillon n\'a pas pu être enregistré : le stockage du navigateur est désactivé.','تعذّر حفظ المسودة: تخزين المتصفح معطّل.','Не удалось сохранить черновик: хранилище браузера отключено.'],
+ ['Devam etmek için onay kutusunu işaretleyin.','Tick the box to continue.','Marque la casilla para continuar.','Cochez la case pour continuer.','ضع علامة في المربع للمتابعة.','Отметьте флажок, чтобы продолжить.'],
+]);
+
 // Türkçe metnin seçili dildeki karşılığı (yer tutucular: {ad}).
 function fill(s, vars){
   if(!vars) return s;
@@ -290,17 +300,59 @@ wrap('toast', [0]);
   if(!window.T) return;
   var X = {
    tr:{ mt_sub:'Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.',
-        ov_port_empty_p:'Firma başvurunuz onaylandığında, sektörünüze ve HS kodlarınıza göre eşleşen firmalar burada listelenir.' },
+        ov_port_empty_p:'Firma başvurunuz onaylandığında, sektörünüze ve HS kodlarınıza göre eşleşen firmalar burada listelenir.',
+        add_p:'Firmanızı 6 adımda ekleyin. “Sonra Devam Et” ile girdiğiniz bilgileri bu tarayıcıya taslak olarak kaydedebilirsiniz.',
+        logo_hint:'Önerilen: 400×400 piksel · PNG, JPG veya WebP · en fazla 2 MB',
+        promo_s:'Elinizde bir kod varsa girin; indirim ödeme adımında uygulanır.',
+        pub_h:'Göndermeye hazırsınız',
+        pub_p:'Başvurunuz “Başvuruyu gönder” düğmesiyle iletilir. Belgelerinizi bir yönetici inceler; sonuç e-posta adresinize bildirilir.',
+        step_publish:'Başvuruyu gönder', s6_pub:'Gönder',
+        doc_txt:'Faaliyet belgesi, sicil gazetesi, imza sirküleri, kalite sertifikaları' },
    en:{ mt_sub:'Ranked by your sector, products and trade direction. You can filter them and download them as CSV.',
-        ov_port_empty_p:'Once your application is approved, companies that match your sector and HS codes are listed here.' },
+        ov_port_empty_p:'Once your application is approved, companies that match your sector and HS codes are listed here.',
+        add_p:'Add your company in 6 steps. “Continue later” saves what you have entered as a draft in this browser.',
+        logo_hint:'Recommended: 400×400 px · PNG, JPG or WebP · max 2 MB',
+        promo_s:'If you have a code, enter it; the discount is applied at checkout.',
+        pub_h:'Ready to submit',
+        pub_p:'Your application is sent with the “Submit application” button. An administrator reviews your documents; the result is sent to your e-mail address.',
+        step_publish:'Submit application', s6_pub:'Submit',
+        doc_txt:'Business certificate, trade registry gazette, signature circular, quality certificates' },
    es:{ mt_sub:'Ordenadas según su sector, sus productos y su orientación comercial. Puede filtrarlas y descargarlas en CSV.',
-        ov_port_empty_p:'Cuando se apruebe su solicitud, aquí aparecerán las empresas que coincidan con su sector y sus códigos HS.' },
+        ov_port_empty_p:'Cuando se apruebe su solicitud, aquí aparecerán las empresas que coincidan con su sector y sus códigos HS.',
+        add_p:'Añada su empresa en 6 pasos. «Continuar después» guarda lo que ha escrito como borrador en este navegador.',
+        logo_hint:'Recomendado: 400×400 px · PNG, JPG o WebP · máx. 2 MB',
+        promo_s:'Si tiene un código, introdúzcalo; el descuento se aplica al pagar.',
+        pub_h:'Listo para enviar',
+        pub_p:'Su solicitud se envía con el botón «Enviar solicitud». Un administrador revisa sus documentos; el resultado se envía a su correo.',
+        step_publish:'Enviar solicitud', s6_pub:'Enviar',
+        doc_txt:'Certificado de actividad, gaceta del registro mercantil, circular de firma, certificados de calidad' },
    fr:{ mt_sub:'Classées selon votre secteur, vos produits et votre sens d\'échange. Vous pouvez les filtrer et les télécharger en CSV.',
-        ov_port_empty_p:'Une fois votre candidature approuvée, les entreprises correspondant à votre secteur et à vos codes SH seront listées ici.' },
+        ov_port_empty_p:'Une fois votre candidature approuvée, les entreprises correspondant à votre secteur et à vos codes SH seront listées ici.',
+        add_p:'Ajoutez votre entreprise en 6 étapes. « Continuer plus tard » enregistre votre saisie comme brouillon dans ce navigateur.',
+        logo_hint:'Recommandé : 400×400 px · PNG, JPG ou WebP · 2 Mo max',
+        promo_s:'Si vous avez un code, saisissez-le ; la remise est appliquée au paiement.',
+        pub_h:'Prêt à envoyer',
+        pub_p:'Votre candidature est envoyée avec le bouton « Envoyer la candidature ». Un administrateur examine vos documents ; le résultat est envoyé à votre adresse e-mail.',
+        step_publish:'Envoyer la candidature', s6_pub:'Envoi',
+        doc_txt:'Certificat d\'activité, extrait du registre du commerce, circulaire de signature, certificats de qualité' },
    ar:{ mt_sub:'مرتبة حسب قطاعك ومنتجاتك واتجاه تجارتك. يمكنك تصفيتها وتنزيلها بصيغة CSV.',
-        ov_port_empty_p:'بعد الموافقة على طلبك، ستظهر هنا الشركات المطابقة لقطاعك ورموز HS الخاصة بك.' },
+        ov_port_empty_p:'بعد الموافقة على طلبك، ستظهر هنا الشركات المطابقة لقطاعك ورموز HS الخاصة بك.',
+        add_p:'أضف شركتك في 6 خطوات. زر «المتابعة لاحقًا» يحفظ ما أدخلته كمسودة في هذا المتصفح.',
+        logo_hint:'المقترح: 400×400 بكسل · PNG أو JPG أو WebP · بحد أقصى 2 ميغابايت',
+        promo_s:'إذا كان لديك رمز فأدخله؛ يُطبَّق الخصم عند الدفع.',
+        pub_h:'جاهز للإرسال',
+        pub_p:'يُرسَل طلبك بزر «إرسال الطلب». يراجع أحد المسؤولين مستنداتك، ثم تصلك النتيجة على بريدك الإلكتروني.',
+        step_publish:'إرسال الطلب', s6_pub:'إرسال',
+        doc_txt:'شهادة النشاط، جريدة السجل التجاري، دائرية التوقيع، شهادات الجودة' },
    ru:{ mt_sub:'Отсортированы по вашей отрасли, товарам и направлению торговли. Можно отфильтровать и скачать в CSV.',
-        ov_port_empty_p:'После одобрения заявки здесь появятся компании, подходящие по вашей отрасли и кодам ТН ВЭД.' }
+        ov_port_empty_p:'После одобрения заявки здесь появятся компании, подходящие по вашей отрасли и кодам ТН ВЭД.',
+        add_p:'Добавьте компанию за 6 шагов. «Продолжить позже» сохранит введённые данные как черновик в этом браузере.',
+        logo_hint:'Рекомендуется: 400×400 px · PNG, JPG или WebP · до 2 МБ',
+        promo_s:'Если у вас есть код, введите его; скидка применяется при оплате.',
+        pub_h:'Готово к отправке',
+        pub_p:'Заявка отправляется кнопкой «Отправить заявку». Администратор проверит документы; результат придёт на ваш e-mail.',
+        step_publish:'Отправить заявку', s6_pub:'Отправка',
+        doc_txt:'Свидетельство о деятельности, выписка из торгового реестра, образец подписи, сертификаты качества' }
   };
   Object.keys(X).forEach(function(l){ if(!T[l]) T[l] = {}; Object.assign(T[l], X[l]); });
 })();

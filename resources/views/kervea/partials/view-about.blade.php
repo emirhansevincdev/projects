@@ -124,10 +124,10 @@
   <section id="abo-co" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_co_h">Şirket bilgileri</h2></div>
     <dl class="kv-co">
-      <div><dt data-i18n="abo_co_name">Ticari unvan</dt><dd><span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
-      <div><dt data-i18n="abo_co_addr">Adres</dt><dd><span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
-      <div><dt data-i18n="abo_co_mersis">MERSİS no</dt><dd><span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
-      <div><dt data-i18n="abo_co_founders">Kurucular</dt><dd><span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
+      <div><dt data-i18n="abo_co_name">Ticari unvan</dt><dd><span class="kv-todo" id="aboCoName" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
+      <div><dt data-i18n="abo_co_addr">Adres</dt><dd><span class="kv-todo" id="aboCoAddr" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
+      <div><dt data-i18n="abo_co_mersis">MERSİS no</dt><dd><span class="kv-todo" id="aboCoMersis" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
+      <div><dt data-i18n="abo_co_founders">Kurucular</dt><dd><span class="kv-todo" id="aboCoFounders" data-i18n="abo_co_todo">[Eklenecek]</span></dd></div>
     </dl>
   </section>
 

@@ -14,8 +14,8 @@
    </div>
    <div class="dcard">
     <h3 data-i18n="ct_center">Kervea</h3>
-    <p style="font-size:14px;color:var(--body);margin-bottom:16px"><b data-i18n="ct_addr_lbl">Adres:</b> <span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></p>
-    <p style="font-size:14px;color:var(--body)"><b data-i18n="ct_email_lbl">E-posta:</b> <a href="mailto:hello@kervea.ai">hello@kervea.ai</a><br/><b data-i18n="ct_phone_lbl">Telefon:</b> <span class="kv-todo" data-i18n="abo_co_todo">[Eklenecek]</span></p>
+    <p style="font-size:14px;color:var(--body);margin-bottom:16px"><b data-i18n="ct_addr_lbl">Adres:</b> <span class="kv-todo" id="ctAddr" data-i18n="abo_co_todo">[Eklenecek]</span></p>
+    <p style="font-size:14px;color:var(--body)"><b data-i18n="ct_email_lbl">E-posta:</b> <a id="ctMail" href="mailto:hello@kervea.ai">hello@kervea.ai</a><br/><b data-i18n="ct_phone_lbl">Telefon:</b> <span class="kv-todo" id="ctPhone" data-i18n="abo_co_todo">[Eklenecek]</span></p>
    </div>
   </div>
  </div>
