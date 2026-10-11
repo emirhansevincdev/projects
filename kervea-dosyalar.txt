@@ -730,6 +730,11 @@ resources/views/kervea/admin/applications.blade.php
 resources/views/kervea/admin/companies.blade.php
 resources/views/kervea/admin/contacts.blade.php
 resources/views/kervea/admin/layout.blade.php
+resources/views/kervea/admin/menu/analytics.blade.php
+resources/views/kervea/admin/menu/credits.blade.php
+resources/views/kervea/admin/menu/messages.blade.php
+resources/views/kervea/admin/menu/people.blade.php
+resources/views/kervea/admin/menu/team.blade.php
 resources/views/kervea/admin/orders.blade.php
 resources/views/kervea/admin/promos.blade.php
 resources/views/kervea/admin/sectors.blade.php

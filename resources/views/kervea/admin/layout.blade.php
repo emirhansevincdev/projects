@@ -40,6 +40,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:12px 
  <a href="{{ route('admin.kervea.contacts') }}" class="{{ request()->routeIs('admin.kervea.contacts*') ? 'on' : '' }}">İletişim Mesajları @if($newMsgs)<span class="n">{{ $newMsgs }}</span>@endif</a>
  <a href="{{ route('admin.kervea.promos') }}" class="{{ request()->routeIs('admin.kervea.promos*') ? 'on' : '' }}">Promosyon Kodları</a>
  <a href="{{ route('admin.kervea.orders') }}" class="{{ request()->routeIs('admin.kervea.orders*') ? 'on' : '' }}">Siparişler</a>
+ @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)@includeIf('kervea.admin.menu.'.$kvFeature)@endforeach
  <div class="sep"></div>
  <a href="{{ url('/') }}" target="_blank">Siteyi aç ↗</a>
 </aside>
