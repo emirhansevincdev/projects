@@ -35,7 +35,9 @@ class CanonicalUrl
         }
         config(['app.url' => $base]);
         URL::forceRootUrl($base);
-        URL::forceScheme(parse_url($base, PHP_URL_SCHEME));
+        if (str_starts_with($base, 'https://')) {
+            URL::forceScheme('https');            // only ever upgrade: an APP_URL typed with http:// must not turn an https site's links into http
+        }
         return $base;
     }
 }
