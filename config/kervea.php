@@ -65,7 +65,7 @@ return [
         'invite_days' => 7,                // informational: the password-setup link itself lives as long as auth.passwords.users.expire (24 h); "resend" issues a fresh one
         'invites_per_day' => 20,           // invitation + resend e-mails one company may trigger per rolling 24 h (anti mail-bombing)
         'activity_limit' => 100,           // entries returned by GET /kv/activity
-        'activity_retention_days' => 400,  // older kv_activity rows are removed by `php artisan kv:prune-activity`
+        'activity_retention_days' => 400,  // older kv_activity rows are removed by `php artisan kervea:prune-activity` (schedule it daily)
         // roles: default permissions per role; the owner always has all of them and is not a role you can assign
         'roles' => [
             'admin' => ['label' => 'Yönetici', 'perms' => ['matches', 'profile', 'docs', 'messages', 'people', 'analytics', 'team']],
