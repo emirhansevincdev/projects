@@ -200,6 +200,8 @@ window.kvFillOverview = function(me){
   if(!me || !$('dp-overview')) return;
   var co = me.company, u = me.user || {}, st = co && co.status, c = completion(me), docs = (me.documents || []).length, approved = st === 'approved';
   setText('ovUserName', u.name || '');
+  var anKey = String(u.id || '') + ':' + String(co && co.id || '');
+  if(window.kvAnalyticsOverview && (anKey !== ovAnKey || Date.now() - ovAnAt > 30000)){ ovAnKey = anKey; ovAnAt = Date.now(); window.kvAnalyticsOverview(); }   // "Profil Görüntülenme" card: kv-analytics.js
 
   // doğrulama durumu: yalnızca sunucudaki başvuru durumu
   var badge = $('ovVerifyBadge');
@@ -268,7 +270,7 @@ window.kvFillOverview = function(me){
     paintMatches(items);
   });
 };
-var matchCache = null;
+var matchCache = null, ovAnKey = '', ovAnAt = 0;
 document.addEventListener('click', function(e){
   var b = e.target.closest && e.target.closest('.ov-next-btn'); if(!b) return;
   var go = b.getAttribute('data-go'), panel = b.getAttribute('data-panel');

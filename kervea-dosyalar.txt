@@ -1,5 +1,6 @@
 .editorconfig
 .env.example
+app/Console/Commands/KerveaAnalyticsPrune.php
 app/Console/Commands/KerveaCreditsBackfill.php
 app/Console/Commands/KerveaMakeAdmin.php
 app/Console/Commands/KerveaSocialSetup.php
@@ -52,6 +53,7 @@ app/Http/Controllers/Frontend/FrontendController.php
 app/Http/Controllers/Frontend/LanguageController.php
 app/Http/Controllers/InstallController.php
 app/Http/Controllers/Kervea/PageController.php
+app/Http/Controllers/Kv/AnalyticsController.php
 app/Http/Controllers/Kv/ApplicationController.php
 app/Http/Controllers/Kv/AuthController.php
 app/Http/Controllers/Kv/ContactController.php
@@ -123,9 +125,11 @@ app/Models/Kv/NewsletterSubscriber.php
 app/Models/Kv/Order.php
 app/Models/Kv/Person.php
 app/Models/Kv/PersonReveal.php
+app/Models/Kv/ProfileView.php
 app/Models/Kv/PromoCode.php
 app/Models/Kv/RemovalRequest.php
 app/Models/Kv/Reveal.php
+app/Models/Kv/SearchLog.php
 app/Models/Kv/Sector.php
 app/Models/Kv/SocialIdentity.php
 app/Models/Kv/TeamMember.php
@@ -162,6 +166,8 @@ app/Models/payment_gateway/Razorpay.php
 app/Models/payment_gateway/StripePay.php
 app/Providers/AppServiceProvider.php
 app/Providers/RouteServiceProvider.php
+app/Services/Kv/AnalyticsRecorder.php
+app/Services/Kv/AnalyticsReport.php
 app/Services/Kv/CompanyContext.php
 app/Services/Kv/CreditService.php
 app/Services/Kv/FirmPresenter.php
@@ -171,6 +177,7 @@ app/Services/Kv/LegacyUserColumns.php
 app/Services/Kv/MessageAttachments.php
 app/Services/Kv/Messaging.php
 app/Services/Kv/MessagingException.php
+app/Services/Kv/Metrics.php
 app/Services/Kv/PeopleImporter.php
 app/Services/Kv/SocialAuth.php
 app/Services/Kv/SocialAuthException.php
@@ -228,6 +235,7 @@ database/migrations/2026_10_12_200001_create_kv_credit_ledger.php
 database/migrations/2026_10_12_200002_extend_kv_orders_for_credits.php
 database/migrations/2026_10_12_200003_create_kv_people_tables.php
 database/migrations/2026_10_12_300001_create_kv_messaging_tables.php
+database/migrations/2026_10_12_400001_create_kv_analytics_tables.php
 database/migrations/2026_10_12_900001_create_kv_newsletter_table.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php

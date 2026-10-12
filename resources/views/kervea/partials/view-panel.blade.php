@@ -57,9 +57,9 @@
          <div class="ov-stat-sub" id="ovStatProfileSub"></div>
        </div>
        <div class="ov-stat-card">
-         <div class="ov-stat-hd"><div class="ov-stat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><div class="ov-stat-lbl" data-kvt>Yüklenen belge</div></div>
-         <div class="ov-stat-val" id="ovStatDocs">—</div>
-         <div class="ov-stat-sub" id="ovStatDocsSub"></div>
+         <div class="ov-stat-hd"><div class="ov-stat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="ov-stat-lbl" data-i18n="ov_stat_views">Profil Görüntülenme</div></div>
+         <div class="ov-stat-val">—</div>
+         <div class="ov-stat-sub"></div>
        </div>
        <div class="ov-stat-card">
          <div class="ov-stat-hd"><div class="ov-stat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="ov-stat-lbl" data-i18n="ov_stat_verif">Doğrulama Seviyesi</div></div>
@@ -315,36 +315,21 @@
      </div>
     </div>
 
-    <!-- ANALYTICS / DEEP -->
+    <!-- ANALYSIS: every number comes from GET /kv/analytics (rendered by public/kervea/js/kv-analytics.js); nothing here is a sample -->
     <div class="dpanel" id="dp-analytics">
-     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+     <div class="an-head">
       <div>
-       <h2 data-i18n="an_deep_h">Derin Analiz</h2>
-       <p class="sub">Firmanızın ağdaki konumu, ticaret akışı ve rakip karşılaştırması</p>
+       <h2 data-i18n="an_h">Analiz</h2>
+       <p class="sub" data-i18n="an_sub">Firma sayfanızın ağda ne kadar görüldüğü. Yalnızca platformun gerçekten ölçtüğü veriler gösterilir.</p>
       </div>
-      <div class="rr"><span>7g</span><span class="on">30g</span><span>90g</span><span>1y</span></div>
+      <div class="an-range" id="anRange" role="group" aria-label="Zaman aralığı" data-i18n-aria="an_range_lbl">
+       <button type="button" data-range="7" data-i18n="an_r7">7 gün</button>
+       <button type="button" data-range="30" class="on" aria-pressed="true" data-i18n="an_r30">30 gün</button>
+       <button type="button" data-range="90" data-i18n="an_r90">90 gün</button>
+       <button type="button" data-range="365" data-i18n="an_r365">1 yıl</button>
+      </div>
      </div>
-     <div class="an-grid">
-      <div class="an-c"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Ağ Erişimi</h4><div class="an-n">24,586</div><div class="an-d up">↑ %18 — Firmanız 24.586 kişilik ağa ulaştı</div><div class="an-bar"><div style="width:68%"></div></div></div>
-      <div class="an-c"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Ort. Eşleşme Skoru</h4><div class="an-n">89.4%</div><div class="an-d up">↑ 3.2 puan — Sektör ort. 76%</div><div class="an-bar"><div style="width:89%"></div></div></div>
-      <div class="an-c"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Ort. Cevap Süresi</h4><div class="an-n">2s 14dk</div><div class="an-d dn">↓ 32dk daha yavaş — hedef: 2s altı</div><div class="an-bar"><div style="width:58%;background:linear-gradient(90deg,#c78a2a,#e6a54a)"></div></div></div>
-      <div class="an-c"><h4><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Dönüşüm Oranı</h4><div class="an-n">%12.4</div><div class="an-d up">↑ %2.1 — 100 eşleşmenin 12'si teklife dönüştü</div><div class="an-bar"><div style="width:12%"></div></div></div>
-     </div>
-     <div class="hs-table">
-      <h3>En Çok Talep Gören HS Kodlarınız <span style="font-size:11px;font-weight:400;color:var(--faint)">Son 30 gün</span></h3>
-      <div class="hs-r"><span class="hs-c">5208</span><div class="hs-nm"><b>Pamuklu dokuma kumaş</b><span>34 talep · 12 aktif teklif · 3 kapanan sipariş</span></div><div class="hs-b"><div style="width:88%"></div></div><span class="hs-v">88</span></div>
-      <div class="hs-r"><span class="hs-c">9403</span><div class="hs-nm"><b>Mobilya (metal iskeletli)</b><span>28 talep · 8 aktif · 2 kapanan</span></div><div class="hs-b"><div style="width:72%"></div></div><span class="hs-v">72</span></div>
-      <div class="hs-r"><span class="hs-c">5205</span><div class="hs-nm"><b>Pamuk ipliği (tarak)</b><span>19 talep · 5 aktif</span></div><div class="hs-b"><div style="width:52%"></div></div><span class="hs-v">52</span></div>
-      <div class="hs-r"><span class="hs-c">4415</span><div class="hs-nm"><b>Ahşap paletler ve sandıklar</b><span>14 talep · 3 aktif · 1 kapanan</span></div><div class="hs-b"><div style="width:38%"></div></div><span class="hs-v">38</span></div>
-      <div class="hs-r"><span class="hs-c">6006</span><div class="hs-nm"><b>Örme kumaşlar (elastan)</b><span>11 talep · 4 aktif</span></div><div class="hs-b"><div style="width:29%"></div></div><span class="hs-v">29</span></div>
-     </div>
-     <div class="hs-table">
-      <h3>Rakip Karşılaştırması <span style="font-size:11px;font-weight:400;color:var(--faint)">Aynı sektör · aynı ülke · benzer büyüklük</span></h3>
-      <div class="hs-r" style="grid-template-columns:1fr 100px 100px 100px"><div><b>Sizin firmanız</b><span style="color:var(--faint);font-size:11px">Kervea Ticaret A.Ş.</span></div><span style="text-align:center;color:var(--verify);font-weight:700">89.4%</span><span style="text-align:center;font-weight:700">142</span><span style="text-align:center;font-weight:700">%12.4</span></div>
-      <div class="hs-r" style="grid-template-columns:1fr 100px 100px 100px"><div><b>Sektör Ortalaması</b><span style="color:var(--faint);font-size:11px">Tekstil · Türkiye · 10-50 çalışan</span></div><span style="text-align:center;color:var(--faint)">76%</span><span style="text-align:center;color:var(--faint)">98</span><span style="text-align:center;color:var(--faint)">%8.1</span></div>
-      <div class="hs-r" style="grid-template-columns:1fr 100px 100px 100px;color:var(--faint)"><div><b>En iyi %10 (P90)</b><span style="font-size:11px">Sektör lideri firmalar</span></div><span style="text-align:center">94%</span><span style="text-align:center">218</span><span style="text-align:center">%18.7</span></div>
-      <div class="hs-r" style="grid-template-columns:1fr 100px;color:var(--faint);border-top:1px solid var(--line);padding-top:12px;margin-top:6px"><b style="color:var(--body);font-family:var(--sans);font-weight:600">Metrikler:</b><span style="font-size:11px;text-align:right">Skor · Eşleşme · Dönüşüm</span></div>
-     </div>
+     <div id="anBody" class="an-body" aria-live="polite"><div class="an-empty-inline" data-i18n="an_loading">Analiz verileri yükleniyor…</div></div>
     </div>
 
     <!-- DOCUMENTS -->

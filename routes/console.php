@@ -10,3 +10,6 @@ Artisan::command('inspire', function () {
 
 // Housekeeping for the member panel (needs the server cron entry documented in docs/KERVEA-KURULUM.md).
 Schedule::command('kv:prune-message-files')->daily();
+// Kervea analytics: delete counters / visit rows / search log past their retention (config kervea.analytics.*).
+// Needs the usual cron entry:  * * * * * cd /path/to/site && php artisan schedule:run >> /dev/null 2>&1
+\Illuminate\Support\Facades\Schedule::command('kervea:analytics-prune')->daily();
