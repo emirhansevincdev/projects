@@ -92,6 +92,8 @@ Bu depodaki `config/database.php` artık parolayı `.env`'den (`DB_*`) okur; bet
 | `KERVEA_PREMIUM_PRICE_USD` | Varsayılan 280. Müşteri 240 mı 280 mi kararını vermeli. |
 | `STRIPE_SECRET`, `STRIPE_WEBHOOK_SECRET` | Ödeme sağlayıcısı kararından sonra. Webhook: `POST /kv/webhooks/stripe`. |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `LINKEDIN_CLIENT_ID`, `LINKEDIN_CLIENT_SECRET` | Google / LinkedIn ile giriş. Boşsa o düğme sitede görünmez. Nasıl alınır: aşağıdaki **Google ve LinkedIn ile giriş** bölümü. |
+| `KERVEA_CONTACT_EMAIL`, `KERVEA_CONTACT_PHONE`, `KERVEA_ADDRESS`, `KERVEA_LEGAL_NAME`, `KERVEA_MERSIS`, `KERVEA_FOUNDERS` | İletişim sayfası, Hakkımızda ve alt bilgide görünen **gerçek** kurum bilgileri. Boş bırakılan alan sitede açıkça "yakında" yer tutucusu olarak görünür; uydurma bilgi yazılmaz. |
+| `KERVEA_LINK_LINKEDIN`, `KERVEA_LINK_X`, `KERVEA_LINK_YOUTUBE`, `KERVEA_LINK_INSTAGRAM` | Sosyal medya adresleri (tam `https://…`). Boş olan simge sitede hiç görünmez. |
 | `KERVEA_LEGACY_ROUTES=false` | Şablonun eski otel/araç/ilan rotaları kapalı kalmalı. |
 
 ### Google ve LinkedIn ile giriş
@@ -156,6 +158,16 @@ Not: Yeni tablo (`kv_social_identities`) `kervea-deploy.sh` ile otomatik oluşur
 
 Web sunucusu belge kökü **`public/`** olmalı; `.env`, `storage/`, `vendor/` web'den erişilemez olmalı (betik bunu da dışarıdan dener ve uyarır).
 
+### Zamanlanmış görevler (cron) — bir kez kurulur
+
+Mesaj eki temizliği, analiz sayaçlarının eski kayıtlarının silinmesi ve etkinlik kaydı temizliği Laravel zamanlayıcısıyla çalışır. Sunucuda **tek bir cron satırı** yeterlidir (`crontab -e`):
+
+```
+* * * * * cd /var/www/kervea.ai && php artisan schedule:run >> /dev/null 2>&1
+```
+
+Kurulu mu diye bakmak için: `php artisan schedule:list` (üç Kervea görevi listelenir). Cron kurulmazsa site çalışır; yalnızca eski kayıtlar silinmez.
+
 ## 2. Yönetici
 
 Yönetici = `users.role = 1`. Mevcut Atlas yöneticisi aynen geçerlidir; **Kervea giriş sayfasından (`/login`) girince doğrudan `/admin/kervea/applications` açılır.**
@@ -165,7 +177,7 @@ Yönetici yoksa (parola komut satırına yazılmaz, ekranda gizli girilir):
 cd /var/www/kervea.ai && php artisan kervea:make-admin
 ```
 
-Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) · İletişim Mesajları · Promosyon Kodları · Siparişler.
+Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) · İletişim Mesajları · Promosyon Kodları · Siparişler · Krediler · Kişiler · Mesaj Şikayetleri · Ekipler · Bülten.
 
 ## 3. Akış
 
@@ -200,7 +212,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 * **Şablonun açık kayıt/giriş/şifre-sıfırlama uçları kaldırıldı** (`routes/auth.php`); hesaplar yalnızca yönetici onayıyla oluşur.
 * **Eski ilan/otel/araç rotaları, installer, `/clear-cache` vb. 404** döner (`legacy` middleware). Eski admin ekranları dosya olarak durur ama menüden kullanılmaz.
 * **Sahte demo veriler kaldırıldı** (firma, kişi, mesaj, ziyaretçi, ekip, sahte belge listesi). Veri yoksa boş durum gösterilir.
-* **Panelde gizlenen sekmeler:** Mesajlar, Analiz, Ekip, Aktivite, Prospektüs, Kişiler — gerçek veri kaynağı yok; marka kılavuzu "taraflar arası mesajlaşma yok / veri simsarı değiliz" diyor. Müşteri kararıyla yeniden açılabilir.
+* **Panel sekmeleri artık gerçek veriyle çalışır** (Mesajlar, Kişiler, Analiz, Ekip, Aktivite; bkz. bölüm 7). Yalnızca **Prospektüs** sekmesi hâlâ gizlidir (müşteri kararı bekliyor). Hiçbir sekmede örnek/sahte sayı yoktur; veri yoksa boş durum gösterilir.
 * **Kart bilgisi sitede toplanmaz** (PCI). Kart alanları gizlidir; ödeme sağlayıcının sayfasında alınır.
 * amCharts harita paketi (ücretsiz lisans) kendi sunucumuzdan yüklenir; lisans gereği amCharts logosu görünür kalmalıdır.
 
@@ -210,5 +222,43 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 2. **Hakkımızda** içeriği (misyon, vizyon, kurumsal kimlik), gerçek ekip bilgileri.
 3. Sitedeki **doğrulanamayan metinler**: "uçtan uca şifreli mesajlaşma", "Trademap gümrük veri erişimi", "%94 doğrulama başarısı", "E2E şifreleme: Aktif". Marka kılavuzu "sahte metrik / boş vaat yok" der; ya gerçekleşmeli ya metinden çıkarılmalı.
 4. KVKK metinlerinin (Aydınlatma, Açık Rıza, Gizlilik, Üyelik Sözleşmesi v1.2) pencere içeriği.
-5. Mesajlaşma/analitik gibi gizlenen panel sekmeleri için karar.
+5. **Kişiler** (Prospeo benzeri) için **veri**: sistem hazır, içinde kişi yok. Yalnızca hukuka uygun kaynaktan toplanmış kişi verisi yüklenmeli (bkz. bölüm 7 uyarısı). Prospektüs sekmesi için karar.
 6. Firmalar için TİM alt sektör listesi (admin panelinden girilebilir).
+
+## 7. Üye paneli özellikleri
+
+Hepsi sunucuda hesaplanır ve denetlenir; arayüz yalnızca gösterir. Yeni tabloların hepsi `kervea-deploy.sh` ile otomatik oluşur (`2026_10_*` dosyaları).
+
+### Sektör kuralı ve Premium kilidi
+* Üye, **kendi sektöründeki** firmaları (alt sektörleri dahil) görür. Başka sektördeki firmalar kartta kilitli ve maskeli gelir (ad, ülke, HS kodu sunucudan hiç gönderilmez); o sektörün insanlarına **Kişiler** sekmesinden kredi ile ulaşılır.
+* Aynı sektörde ilk 3 firma açık, kalanı Premium ile açılır. **Firma ve kişi iletişim bilgileri (e-posta, telefon, web, adres, WhatsApp) her zaman Premium'dur** ve firma iznine bağlıdır; misafir ve ücretsiz üye bunları hiçbir yoldan göremez.
+* Yönetici bu kuraldan etkilenmez.
+
+### Krediler
+* Başvurusu **onaylanan her yeni üyeye otomatik 50 kredi** yüklenir (`KERVEA` ayarı: `config/kervea.php` → `credits.signup`). Eski üyelere bir kez dağıtmak için: `php artisan kervea:credits-backfill --dry-run`, sonra `php artisan kervea:credits-backfill`. Defter ile bakiye uyuşuyor mu: `php artisan kervea:credits-backfill --audit`.
+* Her Premium alımında **+100 kredi** hediye. Paketler (`config/kervea.php` → `credits.packs`): 100 kredi $10 · 500 kredi $45 · 1000 kredi $85. Fiyatlar **müşteri onayı bekleyen taslak değerlerdir**.
+* Kredi yalnızca **farklı sektördeki kişilerin** e-posta (1 kredi) ve telefon (1 kredi) bilgisini açmak içindir. Aynı kişiyi tekrar açmak kredi harcamaz. Her hareket `kv_credit_ledger` defterine yazılır; yönetici **Krediler** sayfasından firma bazında görür ve düzeltme yapabilir.
+* Satın alma: Stripe Checkout (kart bilgisi sitemize hiç gelmez). `STRIPE_SECRET` yoksa sipariş "bekliyor" kalır, yönetici **Siparişler**'den ödendi işaretler (kredi o anda yüklenir, tekrar işaretlemek çift yükleme yapmaz).
+
+### Kişiler
+* Veri **sizin/müşterinin** sağlayacağı kişi listesidir; sistem kişi uydurmaz. Yönetici → **Kişiler** → CSV içe aktar. Şablon sayfadan indirilir; sütunlar: `name, title, department, company_name, country, sector, email, phone, linkedin` (zorunlu: `name, company_name, country, sector`). Excel formülü gibi başlayan hücreler (`=`, `@` …) reddedilir; aynı e-posta tekrar eklenmez; en fazla 2000 satır/dosya.
+* **KVKK / hukuki uyarı:** Kişilerin e-posta ve telefon bilgileri kişisel veridir. Verinin kaynağı, aydınlatma yükümlülüğü ve hukuka uygunluk (meşru menfaat / açık rıza) müşteri ve hukuk müşaviri tarafından netleştirilmeden **canlıya gerçek kişi verisi yüklenmemelidir.** Kişiler "kaldırma talebi" formuyla çıkarılmak isteyebilir; talepler yöneticide **Kişiler → Kaldırma talepleri** altında görünür, kaldırılan kişi içe aktarmada bir daha eklenmez.
+
+### Mesajlar
+* Yalnızca **aynı sektördeki onaylı** firmalar birbirine yazar. Görüşmeyi **başlatmak Premium'dur**, cevap vermek ücretsizdir. Ek dosyalar özel diskte tutulur. Kullanıcı engelleyebilir/şikayet edebilir; şikayetler yönetici **Mesaj Şikayetleri** sayfasına düşer.
+* Yeni mesaj bildirimi e-postası gider; mesajlaşma "uçtan uca şifreli" değildir ve sitede öyle anılmaz.
+
+### Analiz
+* Yalnızca platformun gerçekten ölçtüğü sayılar: firma sayfası ziyaretleri (kendi ekibiniz ve botlar sayılmaz, aynı kişi kısa sürede tekrar sayılmaz), aramalarda görünme, iletişim açma, kişi açma, mesaj/cevap süresi. Sektör kıyaslaması **yalnızca en az 5 firma karşılaştırılabiliyorsa** gösterilir (küçük sektörde kimliği belli etmemek için).
+* Saklama süresi 400 gün (`config/kervea.php` → `analytics.retention_days`); eski kayıtları `kervea:analytics-prune` günlük siler.
+
+### Ekip
+* Firma sahibi ekip arkadaşı davet eder (en fazla 10 kişi); davetli e-postadaki bağlantıyla parolasını belirler. Roller: **Yönetici, Satış, Operasyon**; sahibi tek tek izin vererek (eşleşmeler, profil, belgeler, mesajlar, kişiler, analiz, ekip) özelleştirebilir. Faturalama ve hesap silme **yalnızca sahibe** aittir; Premium aboneliği sahibin planıdır ve tüm ekibe uygulanır.
+* **Aktivite** sekmesi kimin neyi yaptığını gösterir (giriş, davet, izin değişikliği, iletişim açma …); yönetici **Ekipler** sayfasından tüm firmaların ekiplerini görür.
+
+### Bülten
+Ana sayfadaki e-posta formu `kv_newsletter_subscribers` tablosuna yazar (çift kayıt ve spam sınırlı); yönetici **Bülten** sayfasından listeyi görür ve CSV indirir. Otomatik toplu e-posta gönderimi yoktur.
+
+### Dil
+Altı dil (TR, EN, ES, FR, AR, RU). TR ve EN eksiksizdir; diğer diller **ana dili o olan biri tarafından gözden geçirilmelidir** — çeviri bulunamazsa İngilizce, o da yoksa Türkçe gösterilir (ham anahtar asla görünmez). Arapçada sayfa yönü otomatik sağdan sola döner.
+
