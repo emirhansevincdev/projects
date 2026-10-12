@@ -63,7 +63,7 @@ window.kvSubmitLogin = function(){
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ kvShowAlert('destructive','E-posta hatalı','Lütfen geçerli bir e-posta adresi girin.'); return; }
   if(pass.length < 8){ kvShowAlert('destructive','Parola çok kısa','Parola en az 8 karakter olmalı.'); return; }
   var btn=document.querySelector('.kv-login-btn'), old=btn.innerHTML;
-  setBusy(btn,true); btn.innerHTML='<span>Giriş yapılıyor…</span>';
+  setBusy(btn,true); btn.innerHTML='<span>'+kvT('Giriş yapılıyor…')+'</span>';
   api('POST','/kv/auth/login',{email:email,password:pass,remember:remember,code:code||undefined}).then(function(r){
     setBusy(btn,false); btn.innerHTML=old;
     if(r.ok){
@@ -77,7 +77,7 @@ window.kvSubmitLogin = function(){
       showCodeField(); kvShowAlert('info','Doğrulama kodu gerekli','Authenticator uygulamanızdaki 6 haneli kodu girin.');
     } else if(r.status===429){
       var m=Math.ceil(((r.data&&r.data.retry_after)||60)/60);
-      kvShowAlert('destructive','Giriş geçici olarak kilitlendi','Çok fazla hatalı deneme. '+m+' dakika sonra tekrar deneyin.');
+      kvShowAlert('destructive','Giriş geçici olarak kilitlendi',kvT('Çok fazla hatalı deneme. {m} dakika sonra tekrar deneyin.',{m:m}));
     } else if(r.data && r.data.error==='unverified'){
       kvShowAlert('warning','E-posta doğrulanmadı','Hesabınızı etkinleştirmek için e-postanızdaki bağlantıdan parola belirleyin.');
     } else {
@@ -89,7 +89,7 @@ function showCodeField(){
   if(el('kvLoginCode')) return;
   var row=document.querySelector('.kv-login-row'); if(!row) return;
   var d=document.createElement('div'); d.className='kv-float-input';
-  d.innerHTML='<input type="text" id="kvLoginCode" class="kv-float-in" placeholder=" " inputmode="numeric" maxlength="6" autocomplete="one-time-code"/><label for="kvLoginCode" class="kv-float-lbl">Doğrulama kodu (2FA)</label>';
+  d.innerHTML='<input type="text" id="kvLoginCode" class="kv-float-in" placeholder=" " inputmode="numeric" maxlength="6" autocomplete="one-time-code"/><label for="kvLoginCode" class="kv-float-lbl">'+kvT('Doğrulama kodu (2FA)')+'</label>';
   row.parentNode.insertBefore(d,row);
   el('kvLoginCode').focus();
 }
@@ -135,10 +135,11 @@ function logoTile(p, size, radius){
   if(p.logo) return '<div style="width:'+size+'px;height:'+size+'px;border-radius:'+radius+'px;overflow:hidden;background:#fff;border:1px solid var(--line);flex:none"><img src="'+escapeHtml(p.logo)+'" alt="" style="width:100%;height:100%;object-fit:contain"/></div>';
   return secTileHTML(p.sec, size, radius);
 }
+window.kvLogoTile = logoTile;
 function query(){
   var qs=[];
   if(DIR) qs.push('dir='+encodeURIComponent(DIR));
-  if(CUR_CC && CUR_CC!=='tr') qs.push('cc='+encodeURIComponent(CUR_CC));
+  if(CUR_CC) qs.push('cc='+encodeURIComponent(CUR_CC));
   if(CUR_SEC!=='' && CUR_SEC!=null) qs.push('sec='+encodeURIComponent(CUR_SEC));
   if(KV_Q) qs.push('q='+encodeURIComponent(KV_Q));
   return qs.join('&');
@@ -159,7 +160,7 @@ window.renderPositions = function(){
     var d=CI[LANG]||CI.tr, secs=SI[LANG]||SI.tr, t=T_();
     grid.innerHTML=items.map(function(p){
       var locked=!!p.locked, cn=d[p.cn_key]||p.cn_key, sec=(p.sec!=null?secs[p.sec]:'')||'', sm=getSecMeta(p.sec);
-      var lockBadge = locked ? '<div class="lockbadge" title="'+(p.lock==='sector'?escapeHtml(tt('kvl_card_p','')):'Pro üyeler için')+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">'+(p.lock==='sector'?escapeHtml(tt('kvl_badge','SEKTÖR')):'PRO')+'</span></div>' : '';
+      var lockBadge = locked ? '<div class="lockbadge" title="'+(p.lock==='sector'?escapeHtml(tt('kvl_card_p','')):kvT('Premium üyeler için'))+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg><span style="font-size:9px;font-weight:700;letter-spacing:.06em;margin-left:4px">'+(p.lock==='sector'?escapeHtml(tt('kvl_badge','SEKTÖR')):'PREMIUM')+'</span></div>' : '';
       var planOverlay = locked ? ('<div class="lock-overlay" onclick="upgradeToPro()"><div class="lo-ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h4>'+t.gate_title+'</h4><p>'+t.gate_sub+'</p><button class="lo-cta" onclick="event.stopPropagation();upgradeToPro()">'+t.gate_cta+'</button></div>') : '';
       var lockOverlay = (locked && window.kvLockOverlay) ? kvLockOverlay(p, planOverlay) : planOverlay;   // other-sector cards: kv-credits.js
       var click = locked ? '' : 'onclick="openFirm(\''+escapeJs(p.id)+'\')"';
@@ -187,13 +188,13 @@ window.runSearch = function(){
   if(/alıcı|almac|buyer|ithalat|import/.test(q)) DIR='IMP';
   if(/tedarik|satıcı|supplier|ihracat|export/.test(q)) DIR='EXP';
   buildCountryDD('ddCountry', CUR_CC);
+  try{ if(window.AM_GLOBE && AM_GLOBE.selectCountry) AM_GLOBE.selectCountry(CUR_CC); }catch(e){}
   document.querySelectorAll('.qf .seg button').forEach(function(b,i){ b.classList.toggle('on',(i===0&&DIR==='EXP')||(i===1&&DIR==='IMP')); });
   renderPositions();
-  if(typeof toast==='function') toast(tt('toast_search_applied','Arama uygulandı'));
 };
 // ana sayfa istatistikleri gerçek sayımlardan
 window.computeStats = function(){ var s=window.KV_STATS||{firms:0,countries:0}; return {firms:s.firms||0,countries:s.countries||0,sectors:s.sectors||26,langs:6}; };
-api('GET','/kv/stats').then(function(r){ if(r.ok){ window.KV_STATS=r.data; try{updateStats(false);}catch(e){} } });
+api('GET','/kv/stats').then(function(r){ if(r.ok){ window.KV_STATS=r.data; try{updateStats(true);}catch(e){} try{ document.dispatchEvent(new CustomEvent('kv:stats',{detail:r.data})); }catch(e){} } });
 
 var FIRM_CACHE = {};
 window.openFirm = function(slug){
@@ -265,6 +266,7 @@ function F(name){ return document.querySelector('#add [data-f="'+name+'"]'); }
 function fv(name){ var e=F(name); return e? (e.value||'').trim() : ''; }
 function wordCount(s){ var m=String(s||'').trim().match(/\S+/g); return m?m.length:0; }
 var ADD_FILES = { logo:null, cover:null, photos:[] };
+window.kvRemoveAddLogo=function(){ ADD_FILES.logo=null; var f=el('addLogoFile'); if(f) f.value=''; var b=el('addLogoBox'); if(b) b.innerHTML=b.getAttribute('data-empty')||''; toast(tt('toast_logo_removed','Logo kaldırıldı')); };
 document.addEventListener('change', function(e){
   var i=e.target; if(!i || i.type!=='file') return;
   if(i.id==='addLogoFile') ADD_FILES.logo=i.files[0]||null;
@@ -289,8 +291,8 @@ window.submitAddCompany = function(){
   if(!cc) missing.push('Ülke');
   if(!ADD_FILES.logo) missing.push('Logo');
   var docs=F('documents'); if(!docs || !docs.files.length) missing.push('Belgeler');
-  if(missing.length){ kvShowAlert('destructive','Eksik alanlar', missing.join(', ')+' zorunludur.'); return; }
-  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması','Açıklama 250–300 kelime olmalı (şu an '+wc+').'); stp(2); return; }
+  if(missing.length){ kvShowAlert('destructive','Eksik alanlar', kvT('{list} zorunludur.',{list:missing.map(function(x){ return kvT(x); }).join(', ')})); return; }
+  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması',kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:wc})); stp(2); return; }
   var fd=new FormData();
   ['name','name_en','tax_id','mersis','founded_year','employees','website','kep','email','phone','rep_name','rep_title','rep_email','address','direction','hs_codes','moq','incoterm','payment_terms','products','certificates'].forEach(function(k){ var v=fv(k); if(v) fd.append(k,v); });
   fd.append('description', addValue('description').trim());
@@ -365,20 +367,20 @@ function checkPromo(code, cb){
 window.applyPromo = function(id){
   var inp=el(id); if(!inp) return; var code=inp.value.trim().toUpperCase();
   checkPromo(code,function(d){
-    if(d){ PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents}; inp.style.borderColor='var(--verify)'; toast(code+' · '+(d.type==='percent'?'%'+d.value:fmtUsd(d.value))+' indirim uygulandı ✓'); }
+    if(d){ PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents}; inp.style.borderColor='var(--verify)'; toast(kvT('{code} · {d} indirim uygulandı ✓',{code:code,d:(d.type==='percent'?'%'+d.value:fmtUsd(d.value))})); }
     else if(code){ PROMO={code:'',valid:false,discount:0,total:null}; inp.style.borderColor='#d97757'; toast(tt('toast_invalid_promo','Geçersiz promosyon kodu')); }
   });
 };
 window.applyKvPromo = function(){
   var inp=el('kvPayPromo'); var code=(inp.value||'').trim().toUpperCase();
   checkPromo(code,function(d){
-    var discRow=el('kvPayDiscRow'), discEl=el('kvPayDisc'), totalEl=el('kvPayTotal'), cta=document.querySelector('.kv-pay-cta-txt');
+    var discRow=el('kvPayDiscRow'), discEl=el('kvPayDisc'), totalEl=el('kvPayTotal');
     if(d){
       PROMO={code:code,valid:true,discount:d.discount_cents,total:d.total_cents};
       discRow.style.display='flex'; discEl.textContent='−'+fmtUsd(d.discount_cents); totalEl.textContent=fmtUsd(d.total_cents);
-      if(cta) cta.innerHTML=((T_().pay_confirm)||'Ödemeyi Onayla — ')+'<b>'+fmtUsd(d.total_cents)+'</b>';
-      toast(code+' uygulandı');
-    } else if(code){ kvShowAlert('destructive','Geçersiz promosyon kodu',code+' kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.'); }
+      var ctaTotal=el('kvPayCtaTotal'); if(ctaTotal) ctaTotal.textContent=fmtUsd(d.total_cents);
+      toast(kvT('{code} uygulandı',{code:code}));
+    } else if(code){ kvShowAlert('destructive','Geçersiz promosyon kodu',kvT('{code} kodu geçersiz, süresi dolmuş veya kullanım limiti dolmuş.',{code:code})); }
   });
 };
 window.kvConfirmPayment = function(){
@@ -396,18 +398,9 @@ window.kvConfirmPayment = function(){
     if(r.data.redirect){ location.href=r.data.redirect; return; }       // Stripe barındırılan ödeme sayfası
     closeM('pay');
     if(r.data.paid){ kvShowAlert('success','Premium aktif','Üyeliğiniz etkinleştirildi.'); pingSession(); loadMember(); return; }
-    kvShowAlert('info','Siparişiniz alındı','Sipariş #'+r.data.order+' oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.');
+    kvShowAlert('info','Siparişiniz alındı',kvT('Sipariş #{n} oluşturuldu. Ödeme bilgileri e-postanızla paylaşılacak; ödeme onaylanınca Premium otomatik açılır.',{n:r.data.order}));
   });
 };
-// Kart verisi bu sayfada toplanmaz (PCI): kart alanlarını gizle, ödeme sağlayıcının sayfasında alınır.
-(function(){
-  var ids=['kvCcNumber','kvCcHolder','kvCcExp','kvCcCvc'];
-  ids.forEach(function(id){ var i=el(id); if(!i) return; var wrap=i.closest('.kv-float-input,.kv-pay-field,.kv-field,div'); if(wrap) wrap.style.display='none'; i.removeAttribute('required'); });
-  var prev=document.querySelector('.kv-card-preview,.kv-cc-preview'); if(prev) prev.style.display='none';
-  var note=document.createElement('p'); note.style.cssText='font-size:13px;color:var(--faint);margin:10px 0'; note.textContent=tt('pay_hosted','Kart bilgileri bu sayfada alınmaz; güvenli ödeme sayfasına yönlendirileceksiniz.');
-  var host=el('kvCcNumber'); if(host){ var form=host.closest('form')||host.closest('.kv-pay-form')||host.parentElement.parentElement; if(form) form.insertBefore(note,form.firstChild); }
-})();
-
 // ───────────────────────── üye paneli (gerçek veri) ─────────────────────────
 var ME=null;
 function loadMember(){
@@ -422,37 +415,55 @@ window.loadMember=loadMember;
 var fillPanel=function(){
   if(!ME) return;
   var co=ME.company, raw=co&&co.raw||{};
-  var P=document.querySelectorAll('#dp-profile input[type=text], #dp-profile input:not([type]), #dp-profile input[type=email], #dp-profile input[type=number], #dp-profile select, #dp-profile textarea');
-  // alanları sırasıyla etiketle (panel işaretlemesi sabit sıradadır)
-  var order=['name','name_en','tax_id','mersis','founded_year','employees','city','kep','website','email','phone','rep_name','rep_title','address','sector','direction','incoterm','payment_terms','description','hs_codes','moq','certificates','social_wa','social_li','social_ig','social_fb','social_x','social_yt'];
-  var k=0; P.forEach(function(i){ if(i.type==='file'||i.type==='checkbox') return; if(order[k]) i.setAttribute('data-pf',order[k]); k++; });
+  // alanlar işaretlemedeki data-pf adlarıyla eşlenir (sıraya bağlı değil)
   document.querySelectorAll('#dp-profile [data-pf]').forEach(function(i){
     var f=i.getAttribute('data-pf'), v='';
     if(/^social_/.test(f)) v=(raw.social||{})[f.slice(7)]||'';
     else if(f==='sector') v=(co&&co.sec!=null)?String(co.sec):'';
     else v=raw[f]==null?'':raw[f];
-    if(i.tagName==='SELECT'){ for(var o=0;o<i.options.length;o++){ if((i.options[o].value||i.options[o].text)==v){ i.selectedIndex=o; break; } } }
-    else i.value=v;
-    if(f==='tax_id'||f==='mersis'){ i.readOnly=true; i.title='Kimlik numarası değişikliği için destek ile iletişime geçin'; i.style.opacity='.7'; }
+    if(i.tagName==='SELECT'){
+      var hit=-1; for(var o=0;o<i.options.length;o++){ if((i.options[o].value||i.options[o].text)===String(v)){ hit=o; break; } }
+      i.selectedIndex = hit>=0 ? hit : 0;       // değer yoksa boş seçenek ("—"); sahte varsayılan gösterilmez
+    } else i.value=v;
+    if(f==='tax_id'||f==='mersis'){ i.readOnly=true; i.title=kvT('Kimlik numarası değişikliği için destek ile iletişime geçin'); i.style.opacity='.7'; }
   });
+  // ülke: yalnızca gösterilir (değiştirilemez)
+  try{ buildCountryDD('ddProfCountry', raw.country_cc||'tr'); }catch(e){}
   try{ renderProfSecChip(); }catch(e){}
+  descCount();
   fillSettings();
 }
-function saveProfile(){
-  var b={social:{}};
+function descCount(){
+  var t=document.querySelector('#dp-profile [data-pf="description"]'), c=el('pfDescCount'); if(!t||!c) return;
+  var n=wordCount(t.value);
+  c.textContent=kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:n});
+  c.classList.toggle('bad', n<250||n>300);
+}
+document.addEventListener('input',function(e){ if(e.target && e.target.getAttribute && e.target.getAttribute('data-pf')==='description') descCount(); });
+var profileSaving=false;
+var PROFILE_REQUIRED=[['name','Firma adı'],['email','E-posta'],['phone','Telefon'],['rep_name','Yetkili adı'],['founded_year','Kuruluş yılı'],['description','Firma açıklaması'],['sector','Sektör']];
+function saveProfile(btn){
+  if(profileSaving) return;
+  var b={social:{}}, missing=[];
   document.querySelectorAll('#dp-profile [data-pf]').forEach(function(i){
     var f=i.getAttribute('data-pf'); if(f==='tax_id'||f==='mersis') return;
     var v=(i.value||'').trim();
-    if(/^social_/.test(f)) b.social[f.slice(7)]=v; else if(v!=='') b[f]=v;
+    if(/^social_/.test(f)) b.social[f.slice(7)]=v; else b[f]=v;      // boş bırakılan isteğe bağlı alan silinir
   });
-  if(b.founded_year) b.founded_year=parseInt(b.founded_year,10);
-  if(b.sector!==undefined) b.sector=parseInt(b.sector,10);
-  api('PUT','/kv/me/company',b).then(function(r){ if(r.ok){ toast(tt('toast_profile_updated','Profil güncellendi')); loadMember(); } else alertErr('Profil kaydedilemedi', r); });
+  PROFILE_REQUIRED.forEach(function(r){ if(!b[r[0]]) missing.push(kvT(r[1])); });
+  if(missing.length){ kvShowAlert('destructive','Eksik alanlar',kvT('{list} zorunludur.',{list:missing.join(', ')})); return; }
+  var wc=wordCount(b.description);
+  if(wc<250||wc>300){ kvShowAlert('destructive','Firma açıklaması',kvT('Açıklama 250–300 kelime olmalı (şu an {n}).',{n:wc})); return; }
+  b.founded_year=parseInt(b.founded_year,10);
+  b.sector=parseInt(b.sector,10);
+  profileSaving=true; setBusy(btn,true);
+  api('PUT','/kv/me/company',b).then(function(r){
+    profileSaving=false; setBusy(btn,false);
+    if(r.ok){ toast(tt('toast_profile_updated','Profil güncellendi')); loadMember(); } else alertErr('Profil kaydedilemedi', r);
+  });
 }
-document.addEventListener('click', function(e){
-  var b=e.target.closest && e.target.closest('#dp-profile button[onclick*="toast("]'); if(!b) return;
-  e.preventDefault(); e.stopImmediatePropagation(); saveProfile();
-}, true);
+window.kvSaveProfile=function(btn){ saveProfile(btn); };
+window.kvCancelProfile=function(){ fillPanel(); toast('Değişiklikler geri alındı'); };   // İptal: kaydetme, sunucudaki değerleri geri yükle
 
 // Ayarlar: gerçek tercihler (KVKK geri alma, 2FA, veri indirme, hesap silme)
 function fillSettings(){
@@ -460,19 +471,19 @@ function fillSettings(){
   var card=host.querySelector('.dcard'); if(!card || card.getAttribute('data-kv')==='1') { refreshSettingsState(); return; }
   card.setAttribute('data-kv','1');
   card.innerHTML =
-   '<h3>Güvenlik</h3><p class="card-sub">Hesabınızı koruyan katmanlar.</p>'+
-   '<div class="tglrow"><div class="l"><b>İki Faktörlü Kimlik Doğrulama (2FA)</b><span>Authenticator uygulaması ile giriş kodu</span></div><label class="tgl"><input type="checkbox" id="kvSet2fa"/><span class="slider"></span></label></div>'+
+   '<h3>'+kvT('Güvenlik')+'</h3><p class="card-sub">'+kvT('Hesabınızı koruyan katmanlar.')+'</p>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('İki Faktörlü Kimlik Doğrulama (2FA)')+'</b><span>'+kvT('Authenticator uygulaması ile giriş kodu')+'</span></div><label class="tgl"><input type="checkbox" id="kvSet2fa"/><span class="slider"></span></label></div>'+
    '<div id="kv2faBox" style="display:none;margin:8px 0 16px;padding:14px;border:1px solid var(--line);border-radius:12px"></div>'+
-   '<h3 style="margin-top:24px">İzinler ve Bildirimler (KVKK)</h3><p class="card-sub">Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.</p>'+
-   '<div class="tglrow"><div class="l"><b>İletişim bilgilerimin gösterilmesi</b><span>E-posta/telefon yalnızca Pro üyelere gösterilir. Kapatırsanız kimseye gösterilmez.</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
-   '<div class="tglrow"><div class="l"><b>E-posta bildirimleri</b><span>Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)</span></div><label class="tgl"><input type="checkbox" id="kvSetMkt"/><span class="slider"></span></label></div>'+
-   '<h3 style="margin-top:24px">KVKK / GDPR — Veri Hakları</h3><p class="card-sub">Verileriniz KVKK ve GDPR standartlarında saklanır.</p>'+
+   '<h3 style="margin-top:24px">'+kvT('İzinler ve Bildirimler (KVKK)')+'</h3><p class="card-sub">'+kvT('Verdiğiniz izinleri istediğiniz zaman geri alabilirsiniz; her değişiklik kayıt altına alınır.')+'</p>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('İletişim bilgilerimin gösterilmesi')+'</b><span>'+kvT('E-posta/telefon yalnızca Premium üyelere gösterilir. Kapatırsanız kimseye gösterilmez.')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetVis"/><span class="slider"></span></label></div>'+
+   '<div class="tglrow"><div class="l"><b>'+kvT('E-posta bildirimleri')+'</b><span>'+kvT('Sektörünüze yeni firma katıldığında ve platform duyurularında e-posta (ticari elektronik ileti)')+'</span></div><label class="tgl"><input type="checkbox" id="kvSetMkt"/><span class="slider"></span></label></div>'+
+   '<h3 style="margin-top:24px">'+kvT('KVKK / GDPR — Veri Hakları')+'</h3><p class="card-sub">'+kvT('Verileriniz KVKK ve GDPR standartlarında saklanır.')+'</p>'+
    '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">'+
-    '<button class="btn sec sm" id="kvSetExport">Verilerimi İndir (JSON)</button>'+
-    '<button class="btn sec sm" onclick="openM(\'kvkk\')">Aydınlatma Metni</button>'+
-    '<button class="btn sec sm" onclick="openM(\'cookie\')">Gizlilik / Çerez Politikası</button>'+
-    '<button class="btn sec sm" onclick="openM(\'sozl\')">Üyelik Sözleşmesi</button>'+
-    '<button class="btn sm" id="kvSetDelete" style="background:#fff3f0;border-color:#ffcdc0;color:#c33">Hesabı Sil</button></div>';
+    '<button class="btn sec sm" id="kvSetExport">'+kvT('Verilerimi İndir (JSON)')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'kvkk\')">'+kvT('Aydınlatma Metni')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'cookie\')">'+kvT('Gizlilik / Çerez Politikası')+'</button>'+
+    '<button class="btn sec sm" onclick="openM(\'sozl\')">'+kvT('Üyelik Sözleşmesi')+'</button>'+
+    '<button class="btn sm" id="kvSetDelete" style="background:#fff3f0;border-color:#ffcdc0;color:#c33">'+kvT('Hesabı Sil')+'</button></div>';
   el('kvSetVis').addEventListener('change',function(){ setConsent('contact_visibility',this.checked,this); });
   el('kvSetMkt').addEventListener('change',function(){ setConsent('marketing',this.checked,this); });
   el('kvSet2fa').addEventListener('change',function(){ this.checked ? start2fa(this) : disable2fa(this); });
@@ -496,7 +507,7 @@ function start2fa(box){
   api('POST','/kv/auth/2fa/start').then(function(r){
     if(!r.ok){ box.checked=false; alertErr('2FA başlatılamadı',r); return; }
     var b=el('kv2faBox'); b.style.display='block';
-    b.innerHTML='<p style="margin:0 0 8px;font-size:13.5px">Authenticator uygulamanıza şu anahtarı ekleyin (veya <a href="'+escapeHtml(r.data.uri)+'">buraya tıklayın</a>):</p><code style="display:block;padding:8px 10px;background:var(--chip);border-radius:8px;font-size:14px;letter-spacing:.08em;word-break:break-all">'+escapeHtml(r.data.secret)+'</code><div style="display:flex;gap:8px;margin-top:10px"><input id="kv2faCode" inputmode="numeric" maxlength="6" placeholder="6 haneli kod" style="flex:1"/><button class="btn sm" id="kv2faOk">Doğrula</button></div>';
+    b.innerHTML='<p style="margin:0 0 8px;font-size:13.5px">'+kvT('Authenticator uygulamanıza şu anahtarı ekleyin (veya {link}):',{link:'<a href="'+escapeHtml(r.data.uri)+'">'+kvT('buraya tıklayın')+'</a>'})+'</p><code style="display:block;padding:8px 10px;background:var(--chip);border-radius:8px;font-size:14px;letter-spacing:.08em;word-break:break-all">'+escapeHtml(r.data.secret)+'</code><div style="display:flex;gap:8px;margin-top:10px"><input id="kv2faCode" inputmode="numeric" maxlength="6" placeholder="'+escapeHtml(kvT('6 haneli kod'))+'" style="flex:1"/><button class="btn sm" id="kv2faOk">'+kvT('Doğrula')+'</button></div>';
     el('kv2faOk').addEventListener('click',function(){
       api('POST','/kv/auth/2fa/confirm',{code:el('kv2faCode').value}).then(function(r2){
         if(r2.ok){ b.style.display='none'; ME.user.two_factor=true; toast('2FA etkinleştirildi'); } else alertErr('Kod hatalı',r2);
@@ -526,49 +537,15 @@ window.showPanel=function(sec,btn){
 
 
 // ───────────────────────── panel: gerçek veri olmayan bölümler gizlenir ─────────────────────────
-// Aktivite ve Prospektüs sekmeleri için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur.
+// Aktivite sekmesi için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur. (Prospektüs artık profil verisinden üretilir.)
 (function(){
-  var hide=['activity','prospect'], css='';          // messages, people, analytics and team are real now (kv-*.js)
+  var hide=['activity'], css='';          // messages, people, analytics and team are real now (kv-*.js)
   hide.forEach(function(k){ css+='.dmenu a[onclick*="showPanel(\''+k+'\'"]{display:none!important}#dp-'+k+'{display:none!important}'; });
   var st=document.createElement('style'); st.id='kv-hide-mock'; st.textContent=css; document.head.appendChild(st);
 })();
 window.kvExportData = function(){ window.open('/kv/me/export','_blank','noopener'); };
 
-function fillOverview(){
-  if(!ME) return;
-  var co=ME.company, u=ME.user||{};
-  var nm=el('ovUserName'); if(nm) nm.textContent=u.name||'';
-  var b=el('ovVerifyBadge');
-  if(b){
-    var st=co&&co.status;
-    var map={approved:['ov-badge-ok','Firma doğrulandı'],pending:['ov-badge-warn','Başvurunuz inceleniyor — sonuç e-posta ile bildirilecek'],rejected:['ov-badge-warn','Başvurunuz onaylanmadı — e-postanızı kontrol edin'],suspended:['ov-badge-warn','Hesap askıda — destek ile iletişime geçin']};
-    var m=map[st]||map.pending;
-    b.className='ov-badge '+m[0]; b.innerHTML='<span>'+m[1]+'</span>';
-  }
-  var vals=document.querySelectorAll('#dp-overview .ov-stat-card');
-  if(vals[3]){
-    var v=vals[3].querySelector('.ov-stat-val'), s=vals[3].querySelector('.ov-stat-sub');
-    var ok=co&&co.status==='approved';
-    if(v){ v.removeAttribute('data-i18n'); v.textContent=ok?'Doğrulandı':'Beklemede'; }
-    if(s){ s.removeAttribute('data-i18n'); s.textContent=ok?'Belgeler Kervea ekibince incelendi':'Belgeler inceleniyor'; }
-  }
-  api('GET','/kv/matches').then(function(r){
-    if(!r.ok) return;
-    var n=(r.data.items||[]).length;
-    if(vals[0]){ var vv=vals[0].querySelector('.ov-stat-val'), ss=vals[0].querySelector('.ov-stat-sub'); if(vv) vv.textContent=n||'—'; if(ss){ ss.removeAttribute('data-i18n'); ss.textContent=n?'Sektör ve ürün kriterlerinize göre':'Doğrulama sonrası listelenir'; } }
-    var empty=document.querySelector('#dp-overview .ov-portfolio-empty');
-    if(empty && n){
-      var d=CI[LANG]||CI.tr;
-      empty.className='ov-portfolio-list';
-      empty.innerHTML=r.data.items.slice(0,3).map(function(p){
-        var ico = p.locked?secTileHTML(p.sec,40,10):logoTile(p,40,10);
-        return '<div style="display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:'+(p.locked?'default':'pointer')+'" '+(p.locked?'':'onclick="openFirm(\''+escapeJs(p.id)+'\')"')+'>'+ico+
-          '<div style="flex:1;min-width:0"><b>'+escapeHtml(p.nm)+'</b><div style="color:var(--faint);font-size:13px">'+escapeHtml(p.locked?'•••••':(d[p.cn_key]||p.cn_key))+'</div></div>'+
-          '<span class="pill" style="background:var(--emer);color:#fff">'+escapeHtml(p.uyum)+' '+T_().match_score+'</span></div>';
-      }).join('');
-    }
-  });
-}
+function fillOverview(){ if(ME && window.kvFillOverview) window.kvFillOverview(ME); }   // kv-frontend.js: genel bakış gerçek veriden çizilir
 function fillDocs(){
   var host=el('dp-docs'); if(!host||!ME) return;
   var grid=host.querySelector('.doc-grid'); if(!grid) return;
@@ -576,9 +553,9 @@ function fillDocs(){
   var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
   var cards=(ME.documents||[]).map(function(d){
     var kind=/pdf/.test(d.mime)?'pdf':'img';
-    return '<div class="doc-c '+kind+'"><div class="d-ic">'+ICO+'</div><h4 style="word-break:break-word">'+escapeHtml(d.name)+'</h4><div class="d-sub">'+escapeHtml(String(d.mime).replace('application/','').replace('image/','').toUpperCase())+'</div><span class="d-st '+(ok?'ok':'wn')+'">'+(ok?'İncelendi':'İnceleniyor')+'</span><div class="d-meta"><span>'+Math.max(1,Math.round(d.size/1024))+' KB</span><span>'+escapeHtml(d.at)+'</span></div></div>';
+    return '<div class="doc-c '+kind+'"><div class="d-ic">'+ICO+'</div><h4 style="word-break:break-word">'+escapeHtml(d.name)+'</h4><div class="d-sub">'+escapeHtml(String(d.mime).replace('application/','').replace('image/','').toUpperCase())+'</div><span class="d-st '+(ok?'ok':'wn')+'">'+(ok?kvT('İncelendi'):kvT('İnceleniyor'))+'</span><div class="d-meta"><span>'+Math.max(1,Math.round(d.size/1024))+' KB</span><span>'+escapeHtml(d.at)+'</span></div></div>';
   }).join('');
-  grid.innerHTML = cards + '<div class="doc-add" id="kvDocAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><b style="color:var(--body);display:block;margin-bottom:2px">Yeni belge ekle</b><span style="font-size:11px">PDF, PNG, JPG · max 10 MB</span></div>';
+  grid.innerHTML = cards + '<div class="doc-add" id="kvDocAdd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><b style="color:var(--body);display:block;margin-bottom:2px">'+kvT('Yeni belge ekle')+'</b><span style="font-size:11px">PDF, PNG, JPG · max 10 MB</span></div>';
   var pick=function(){ var f=el('kvDocFile'); if(!f){ f=document.createElement('input'); f.type='file'; f.id='kvDocFile'; f.multiple=true; f.accept='application/pdf,image/jpeg,image/png,image/webp'; f.style.display='none'; f.setAttribute('data-kvdoc','1'); document.body.appendChild(f); f.addEventListener('change',uploadDocs); } f.click(); };
   el('kvDocAdd').addEventListener('click',pick);
   var btn=host.querySelector('.btn'); if(btn && !btn.getAttribute('data-kv')){ btn.setAttribute('data-kv','1'); btn.addEventListener('click',pick); }
@@ -607,20 +584,20 @@ window.renderMatchTable = function(){
     });
     var cnt=el('mfCount'); if(cnt) cnt.textContent=list.length;
     if(!list.length){
-      var why = (r.data&&r.data.reason==='no_company') ? 'Eşleşmeler için önce firma profilinizi oluşturun.' : ((r.data&&r.data.reason==='not_approved') ? 'Başvurunuz onaylandığında eşleşmeler burada listelenir.' : tt('empty_matches','Filtrelere uyan eşleşme yok'));
+      var why = (r.data&&r.data.reason==='no_company') ? kvT('Eşleşmeler için önce firma profilinizi oluşturun.') : ((r.data&&r.data.reason==='not_approved') ? kvT('Başvurunuz onaylandığında eşleşmeler burada listelenir.') : tt('empty_matches','Filtrelere uyan eşleşme yok'));
       wrap.innerHTML='<div class="empty" style="padding:40px 20px;text-align:center;color:var(--faint)">'+why+'</div>'; return;
     }
-    var RZ={dir_c:'Karşılıklı yön',sec:'Aynı sektör',hs:'HS kodu ortak',vf:'Doğrulanmış',veteran:'Deneyimli firma'};
+    var RZ={dir_c:kvT('Karşılıklı yön'),sec:kvT('Aynı sektör'),hs:kvT('HS kodu ortak'),vf:kvT('Doğrulanmış'),veteran:kvT('Deneyimli firma')};
     var CIRC=2*Math.PI*32;
     wrap.innerHTML='<div class="mgrid">'+list.map(function(p){
       var cls=p.uyum>=90?'hi':p.uyum>=80?'md':'lo', off=CIRC-(p.uyum/100)*CIRC, dirCls=p.dir==='IMP'?'imp':'exp';
       var reasons=(p.reasons||[]).map(function(k){ return '<span class="rz'+(k==='dir_c'?' hot':'')+'">'+RZ[k]+'</span>'; }).join('');
       var lockedCls=p.locked?' style="position:relative;filter:blur(3px);pointer-events:none;user-select:none"':'';
-      return '<div class="mcard"'+lockedCls+'><div class="mring '+cls+'"><svg viewBox="0 0 76 76"><circle class="rbg" cx="38" cy="38" r="32"/><circle class="rfg" cx="38" cy="38" r="32" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="rtxt"><div class="n">'+escapeHtml(p.uyum)+'</div><div class="s">Match</div></div></div>'+
+      return '<div class="mcard"'+lockedCls+'><div class="mring '+cls+'"><svg viewBox="0 0 76 76"><circle class="rbg" cx="38" cy="38" r="32"/><circle class="rfg" cx="38" cy="38" r="32" stroke-dasharray="'+CIRC.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="rtxt"><div class="n">'+escapeHtml(p.uyum)+'</div><div class="s">'+kvT('Match')+'</div></div></div>'+
        '<div class="mmid"><div class="mhead"><div style="flex:1;min-width:0;display:flex;align-items:center;gap:10px">'+(p.locked?secTileHTML(p.sec,44,10):logoTile(p,44,10))+'<div style="flex:1;min-width:0"><div class="mnm">'+escapeHtml(p.nm)+'</div><div class="msub">'+escapeHtml(p.locked?'•••••':((d[p.cn_key]||p.cn_key)+(p.yr?' · '+p.yr:'')))+(p.sec!=null?' · '+escapeHtml(secs[p.sec]||''):'')+'</div></div></div>'+(p.dir?'<span class="mdirpill '+dirCls+'">'+dirLabel(p)+'</span>':'')+'</div>'+
        '<div class="mreasons">'+reasons+'</div>'+
-       '<div class="mbars"><div class="mbar"><div class="bl"><span>Ürün Uyumu</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>Yön Uyumu</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
-       '<div class="mact">'+(p.locked?(p.lock==='sector'?'<button class="btn" onclick="kvGoPeople()" style="pointer-events:auto">'+escapeHtml(tt('kvl_card_cta','Kişiler'))+'</button>':'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">PRO</button>'):'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
+       '<div class="mbars"><div class="mbar"><div class="bl"><span>'+kvT('Ürün Uyumu')+'</span><b>'+p.prod+'</b></div><div class="bt"><div style="width:'+p.prod+'%"></div></div></div><div class="mbar"><div class="bl"><span>'+kvT('Yön Uyumu')+'</span><b>'+p.dirfit+'</b></div><div class="bt"><div style="width:'+p.dirfit+'%"></div></div></div></div></div>'+
+       '<div class="mact">'+(p.locked?(p.lock==='sector'?'<button class="btn" onclick="kvGoPeople()" style="pointer-events:auto">'+escapeHtml(tt('kvl_card_cta','Kişiler'))+'</button>':'<button class="btn" onclick="upgradeToPro()" style="pointer-events:auto">'+kvT('Premium')+'</button>'):'<button class="btn sec" onclick="openFirm(\''+escapeJs(p.id)+'\')">'+t.detail+' →</button>')+'</div></div>';
     }).join('')+'</div>';
   });
 };
@@ -791,7 +768,9 @@ window.renderMatchTable = function(){
   };
   kvApplyExtraI18n();
   // Dil değişince yeniden uygula
-  var _sl=window.setLang; window.setLang=function(l){ var r=_sl.apply(this,arguments); try{ kvApplyExtraI18n(); }catch(e){} return r; };
+  var _sl=window.setLang; window.setLang=function(l){ var r=_sl.apply(this,arguments); try{ kvApplyExtraI18n(); }catch(e){}
+    try{ if(ME){ var sc=document.querySelector('#dp-settings .dcard'); if(sc) sc.removeAttribute('data-kv'); fillPanel(); } }catch(e){}
+    return r; };
 })();
 
 // ───────────────────────── adresler (gerçek URL) ─────────────────────────

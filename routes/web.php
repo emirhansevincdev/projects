@@ -135,6 +135,12 @@ Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin
     }
 });
 
+// Public front-end endpoints: routes/kv/frontend-public.php (guests: newsletter), routes/kv/frontend.php (members: profile media);
+// admin pages: routes/kv/admin-frontend.php
+Route::prefix('kv')->group(base_path('routes/kv/frontend-public.php'));
+Route::prefix('kv')->group(base_path('routes/kv/frontend.php'));
+Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin'])->group(base_path('routes/kv/admin-frontend.php'));
+
 // ── Legacy template routes (hotel/car/listing directory, customer/agent areas, installer, helpers) ──
 // Kervea is not a marketplace/directory. These are kept only so route() names used by the old admin views
 // still resolve; every URL answers 404 unless KERVEA_LEGACY_ROUTES=true. Never enable in production.

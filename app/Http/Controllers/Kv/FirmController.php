@@ -135,14 +135,25 @@ class FirmController extends Controller
         return $out;
     }
 
-    /** GET /kv/stats – real counters for the hero bar (no invented numbers). */
+    /**
+     * GET /kv/stats – real counters for the hero bar and the globe hover card (no invented numbers).
+     * `by_country` maps ISO alpha-2 (lower case) to the number of APPROVED companies; countries without one are absent.
+     */
     public function stats()
     {
-        $q = Company::approved();
+        $byCountry = Company::approved()
+            ->whereNotNull('country_cc')
+            ->selectRaw('lower(country_cc) as cc, count(*) as n')
+            ->groupByRaw('lower(country_cc)')
+            ->pluck('n', 'cc')
+            ->map(fn ($n) => (int) $n)
+            ->filter(fn ($n) => $n > 0);
+
         return response()->json([
-            'firms' => (clone $q)->count(),
-            'countries' => (clone $q)->distinct('country_cc')->count('country_cc'),
+            'firms' => (int) $byCountry->sum(),
+            'countries' => $byCountry->count(),
             'sectors' => \App\Models\Kv\Sector::whereNull('parent_id')->where('is_active', true)->count(),
+            'by_country' => $byCountry->isEmpty() ? new \stdClass : $byCountry->all(),
         ])->header('Cache-Control', 'public, max-age=60');
     }
 

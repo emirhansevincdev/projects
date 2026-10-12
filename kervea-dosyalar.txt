@@ -25,6 +25,7 @@ app/Http/Controllers/Admin/KerveaCreditsAdminController.php
 app/Http/Controllers/Admin/KerveaPeopleAdminController.php
 app/Http/Controllers/Admin/ListingController.php
 app/Http/Controllers/Admin/MessageReportController.php
+app/Http/Controllers/Admin/NewsletterAdminController.php
 app/Http/Controllers/Admin/NewsletterController.php
 app/Http/Controllers/Admin/PaymentController.php
 app/Http/Controllers/Admin/PricingController.php
@@ -58,8 +59,10 @@ app/Http/Controllers/Kv/CreditController.php
 app/Http/Controllers/Kv/FirmController.php
 app/Http/Controllers/Kv/MemberController.php
 app/Http/Controllers/Kv/MessageController.php
+app/Http/Controllers/Kv/NewsletterController.php
 app/Http/Controllers/Kv/OrderController.php
 app/Http/Controllers/Kv/PeopleController.php
+app/Http/Controllers/Kv/ProfileMediaController.php
 app/Http/Controllers/Kv/PromoController.php
 app/Http/Controllers/Kv/SocialController.php
 app/Http/Controllers/PaymentController.php
@@ -116,6 +119,7 @@ app/Models/Kv/CreditLedger.php
 app/Models/Kv/Message.php
 app/Models/Kv/MessageBlock.php
 app/Models/Kv/MessageReport.php
+app/Models/Kv/NewsletterSubscriber.php
 app/Models/Kv/Order.php
 app/Models/Kv/Person.php
 app/Models/Kv/PersonReveal.php
@@ -224,6 +228,7 @@ database/migrations/2026_10_12_200001_create_kv_credit_ledger.php
 database/migrations/2026_10_12_200002_extend_kv_orders_for_credits.php
 database/migrations/2026_10_12_200003_create_kv_people_tables.php
 database/migrations/2026_10_12_300001_create_kv_messaging_tables.php
+database/migrations/2026_10_12_900001_create_kv_newsletter_table.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php
 database/seeders/data/i18n.json
@@ -507,6 +512,7 @@ public/icon.svg
 public/kervea/css/kervea.css
 public/kervea/css/kv-analytics.css
 public/kervea/css/kv-credits.css
+public/kervea/css/kv-frontend.css
 public/kervea/css/kv-messages.css
 public/kervea/css/kv-people.css
 public/kervea/css/kv-team.css
@@ -526,6 +532,9 @@ public/kervea/js/kervea-app.js
 public/kervea/js/kervea-head.js
 public/kervea/js/kv-analytics.js
 public/kervea/js/kv-credits.js
+public/kervea/js/kv-frontend.js
+public/kervea/js/kv-globe.js
+public/kervea/js/kv-i18n.js
 public/kervea/js/kv-messages.js
 public/kervea/js/kv-people.js
 public/kervea/js/kv-team.js
@@ -760,11 +769,13 @@ resources/views/kervea/admin/credits.blade.php
 resources/views/kervea/admin/layout.blade.php
 resources/views/kervea/admin/menu/analytics.blade.php
 resources/views/kervea/admin/menu/credits.blade.php
+resources/views/kervea/admin/menu/frontend.blade.php
 resources/views/kervea/admin/menu/messages.blade.php
 resources/views/kervea/admin/menu/people.blade.php
 resources/views/kervea/admin/menu/team.blade.php
 resources/views/kervea/admin/messages/report.blade.php
 resources/views/kervea/admin/messages/reports.blade.php
+resources/views/kervea/admin/newsletter.blade.php
 resources/views/kervea/admin/orders.blade.php
 resources/views/kervea/admin/people-import.blade.php
 resources/views/kervea/admin/people-removals.blade.php
@@ -905,11 +916,14 @@ routes/custom_field.php
 routes/customer.php
 routes/kv/admin-analytics.php
 routes/kv/admin-credits.php
+routes/kv/admin-frontend.php
 routes/kv/admin-messages.php
 routes/kv/admin-people.php
 routes/kv/admin-team.php
 routes/kv/analytics.php
 routes/kv/credits.php
+routes/kv/frontend-public.php
+routes/kv/frontend.php
 routes/kv/messages.php
 routes/kv/people.php
 routes/kv/team.php

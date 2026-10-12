@@ -98,53 +98,22 @@
       <div class="kv-pay-summary">
         <div class="kv-pay-plan-row">
           <span class="kv-pay-plan-lbl" data-i18n="pay_plan_name">Kervea Premium · Yıllık</span>
-          <span class="kv-pay-plan-price">$280.00</span>
+          <span class="kv-pay-plan-price" id="kvPayPlanPrice">—</span>
         </div>
         <div class="kv-pay-plan-sub" data-i18n="pay_plan_sub">Tek plan · Tüm özellikler · Komisyon yok</div>
         
         <div class="kv-pay-divider"></div>
-        
-        <div class="kv-pay-row">
-          <span data-i18n="pay_subtotal">Ara toplam</span>
-          <span>$280.00</span>
-        </div>
-        <div class="kv-pay-row kv-pay-row-muted">
-          <span data-i18n="pay_kdv">KDV (%20)</span>
-          <span>$56.00</span>
-        </div>
         <div class="kv-pay-row kv-pay-row-disc" id="kvPayDiscRow" style="display:none">
           <span data-i18n="pay_disc">İndirim</span>
           <span id="kvPayDisc">−$0.00</span>
         </div>
         <div class="kv-pay-total-row">
           <span data-i18n="pay_total">Toplam</span>
-          <span id="kvPayTotal">$336.00</span>
+          <span id="kvPayTotal">—</span>
         </div>
       </div>
       
-      <!-- Kayıtlı kartlar (yoksa "Kart ekle") -->
       <div class="kv-pay-cards">
-        <div class="kv-pay-section-lbl" data-i18n="pay_payment_method">Ödeme yöntemi</div>
-        <div class="kv-pay-cards-list" id="kvPayCardsList">
-          <!-- Placeholder: yeni kart -->
-          <label class="kv-card-item kv-card-item-active">
-            <input type="radio" name="kv_payment_card" value="new" checked/>
-            <div class="kv-card-info">
-              <div class="kv-card-icons">
-                <svg viewBox="0 0 40 24" width="32" height="20" aria-hidden="true"><rect width="40" height="24" rx="3" fill="#1a1f71"/><text x="20" y="17" text-anchor="middle" fill="#fff" font-family="Arial Black" font-size="10" font-weight="900" font-style="italic">VISA</text></svg>
-                <svg viewBox="0 0 40 24" width="32" height="20" aria-hidden="true"><rect width="40" height="24" rx="3" fill="#fff" stroke="#eee"/><circle cx="16" cy="12" r="7" fill="#eb001b"/><circle cx="24" cy="12" r="7" fill="#f79e1b" opacity=".85"/></svg>
-              </div>
-              <div class="kv-card-txt">
-                <div class="kv-card-nm" data-i18n="pay_new_card">Yeni kart</div>
-                <div class="kv-card-sub" data-i18n="pay_new_card_sub">Visa, Mastercard, Amex</div>
-              </div>
-            </div>
-            <div class="kv-card-check">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </div>
-          </label>
-        </div>
-        
         <!-- Promo kodu -->
         <div class="kv-pay-promo">
           <input type="text" id="kvPayPromo" placeholder="Promosyon kodu (isteğe bağlı)" data-i18n-ph="pay_promo_ph" maxlength="30"/>
@@ -153,55 +122,20 @@
       </div>
     </div>
     
-    <!-- Sağ: Kart bilgileri formu -->
+    <!-- Sağ: bilgilendirme + onay -->
     <div class="kv-pay-right">
-      <!-- Canlı kart önizleme -->
-      <div class="card3d" id="ccPreview">
-        <div class="brand"><div class="kv">Kervea</div><div class="chip"></div></div>
-        <div class="num" id="ccNum">•••• •••• •••• ••••</div>
-        <div class="foot">
-          <div><div class="lbl" data-i18n="pay_card_holder">KART SAHİBİ</div><div class="val" id="ccName" data-i18n="pay_card_holder_ph">AD SOYAD</div></div>
-          <div><div class="lbl" data-i18n="pay_card_exp_short">SON TARİH</div><div class="val" id="ccExp">••/••</div></div>
-          <div class="visa">VISA</div>
-        </div>
-      </div>
-      
-      <div class="kv-pay-form">
-        <label class="fl">
-          <span data-i18n="pay_card_holder_name">Kart sahibi adı</span>
-          <input type="text" id="kvCcHolder" placeholder="Ad Soyad" data-i18n-ph="pay_card_holder_ph2" maxlength="80" oninput="kvUpdateCardPreview()"/>
-        </label>
-        <label class="fl">
-          <span data-i18n="pay_card_number">Kart numarası</span>
-          <input type="text" id="kvCcNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric" oninput="kvFormatCardNumber(this);kvUpdateCardPreview()"/>
-        </label>
-        <div class="kv-pay-form-row">
-          <label class="fl">
-            <span data-i18n="pay_card_exp">Son kullanma</span>
-            <input type="text" id="kvCcExp" placeholder="AA/YY" maxlength="5" inputmode="numeric" oninput="kvFormatExp(this);kvUpdateCardPreview()"/>
-          </label>
-          <label class="fl">
-            <span data-i18n="pay_card_cvc">CVC</span>
-            <input type="password" id="kvCcCvc" placeholder="123" maxlength="4" inputmode="numeric" pattern="[0-9]{3,4}" autocomplete="cc-csc"/>
-          </label>
-        </div>
-      </div>
       
       <!-- Disclosure: güvenlik bilgisi -->
       <div class="kv-pay-disclosure">
         <div class="kv-pay-disc-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <span data-i18n="pay_disc_secure">Kart bilgileriniz Kervea sunucularında saklanmaz. Ödemeler Stripe (PCI-DSS L1) altyapısı üzerinden işlenir.</span>
-        </div>
-        <div class="kv-pay-disc-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span data-i18n="pay_disc_cancel">İstediğiniz zaman iptal edebilir, 14 gün içinde koşulsuz iade talep edebilirsiniz.</span>
+          <span data-i18n="pay_disc_secure">Kart bilgileriniz bu sayfada alınmaz ve Kervea sunucularında saklanmaz. Onayladığınızda siparişiniz oluşturulur; ödeme güvenli ödeme sayfasında ya da e-postayla paylaşılan bilgilerle tamamlanır.</span>
         </div>
       </div>
       
       <!-- Confirm CTA -->
       <button type="button" class="btn kv-pay-cta" id="kvPayConfirmBtn" onclick="kvConfirmPayment()">
-        <span class="kv-pay-cta-txt" data-i18n="pay_confirm">Ödemeyi Onayla — <b>$336.00</b></span>
+        <span class="kv-pay-cta-txt"><span data-i18n="pay_confirm">Ödemeyi Onayla — </span><b id="kvPayCtaTotal">—</b></span>
         <span class="kv-pay-cta-loading" style="display:none">
           <svg class="kv-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
           <span data-i18n="pay_processing">İşleniyor…</span>

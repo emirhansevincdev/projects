@@ -458,6 +458,7 @@ function renderPricing(){
     return '<button type="button" class="kv-pr-pack" onclick="kvBuyPack(\''+escJs(p.pack)+'\')"><b>'+esc(intFmt(p.credits))+'</b><span>'+esc(t('creds_lbl','Kredi'))+'</span><em>$'+esc(money(p.price_usd))+'</em></button>';
   }).join('');
   var li=$('kvSpF8'); if(li) li.hidden = !(c.pro_bonus>0);
+  var gen=$('kvSpF2'); if(gen) gen.hidden = c.pro_bonus>0;   // the generic "bonus credits" line gives way to the one with the exact number
 }
 window.kvBuyPack = function(pack){ KVC.sel = String(pack); window.openM('credits'); };
 

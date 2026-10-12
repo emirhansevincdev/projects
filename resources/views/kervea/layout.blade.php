@@ -3,11 +3,12 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{!! str_replace('__KV_BASE__', rtrim(config('app.url'), '/'), view('kervea.partials.head-seo')->render()) !!}
+{!! str_replace(['__KV_BASE__', '__KV_PRICE__'], [rtrim(config('app.url'), '/'), (int) config('kervea.premium.price_usd')], view('kervea.partials.head-seo')->render()) !!}
 <link rel="stylesheet" href="{{ asset('kervea/css/kervea.css') }}?v={{ config('kervea.asset_version') }}">
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
 <link rel="stylesheet" href="{{ asset('kervea/css/kv-'.$kvFeature.'.css') }}?v={{ config('kervea.asset_version') }}">
 @endforeach
+<link rel="stylesheet" href="{{ asset('kervea/css/kv-frontend.css') }}?v={{ @filemtime(public_path('kervea/css/kv-frontend.css')) ?: 1 }}">
 @php($social = array_filter($boot['social'] ?? []))
 {{-- "Sign in with Google/LinkedIn" buttons exist in the markup; hide the ones without keys already in the HTML so nothing flashes before JS runs. --}}
 <style>@if(! $social)#login .kv-login-social,#login .kv-login-sep{display:none}@else @foreach(\App\Services\Kv\SocialAuth::PROVIDERS as $p)@unless(isset($social[$p]))#login .kv-login-social-btn[data-social="{{ $p }}"]{display:none}@endunless @endforeach @if(count($social) === 1)#login .kv-login-social{grid-template-columns:1fr}@endif @endif</style>
@@ -32,10 +33,14 @@
 @include('kervea.partials.footer')
 @include('kervea.partials.firm-modal')
 <script>window.KV_BOOT = @json($boot);</script>
+<script>window.KV_SITE = @json(array_filter((array) config('kervea.frontend', []), fn ($v) => $v !== null && $v !== '' && $v !== []));</script>
 <script src="{{ asset('kervea/js/kervea-app.js') }}?v={{ config('kervea.asset_version') }}"></script>
+<script src="{{ asset('kervea/js/kv-i18n.js') }}?v={{ @filemtime(public_path('kervea/js/kv-i18n.js')) ?: 1 }}"></script>
 <script src="{{ asset('kervea/js/kervea-api.js') }}?v={{ config('kervea.asset_version') }}"></script>
+<script src="{{ asset('kervea/js/kv-globe.js') }}?v={{ @filemtime(public_path('kervea/js/kv-globe.js')) ?: 1 }}"></script>
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
 <script src="{{ asset('kervea/js/kv-'.$kvFeature.'.js') }}?v={{ config('kervea.asset_version') }}"></script>
 @endforeach
+<script src="{{ asset('kervea/js/kv-frontend.js') }}?v={{ @filemtime(public_path('kervea/js/kv-frontend.js')) ?: 1 }}"></script>
 </body>
 </html>

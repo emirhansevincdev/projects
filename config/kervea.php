@@ -88,4 +88,21 @@ return [
             'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         ],
     ],
+
+    // Public site details shown on the contact page, About page and footer. Everything is optional: an empty value shows
+    // a clearly marked placeholder (contact / About) or hides the item (social icons) until the customer fills it in .env.
+    'frontend' => [
+        'contact_email' => env('KERVEA_CONTACT_EMAIL', 'hello@kervea.ai'),
+        'contact_phone' => env('KERVEA_CONTACT_PHONE'),
+        'address' => env('KERVEA_ADDRESS'),
+        'legal_name' => env('KERVEA_LEGAL_NAME'),
+        'mersis' => env('KERVEA_MERSIS'),
+        'founders' => env('KERVEA_FOUNDERS'),
+        'links' => [
+            'linkedin' => env('KERVEA_LINK_LINKEDIN'),
+            'x' => env('KERVEA_LINK_X'),
+            'youtube' => env('KERVEA_LINK_YOUTUBE'),
+            'instagram' => env('KERVEA_LINK_INSTAGRAM'),
+        ],
+    ],
 ];

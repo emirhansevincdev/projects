@@ -2482,13 +2482,22 @@ html[data-theme="dark"] .nav{background:rgba(10,22,20,.75)}
 .kv-amap-canvas{width:100%;overflow:hidden}
 .kv-amap-svg{display:block;width:100%;height:auto;direction:ltr}
 .kv-amap-grid line{stroke:var(--am-grid);stroke-width:2;vector-effect:non-scaling-stroke;stroke-width:1}
-.kv-amap-land{fill:var(--am-land)}
-.kv-amap-route{fill:none;stroke:var(--am-tr);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round;
+.kv-amap-land{fill:var(--am-land);pointer-events:none}
+.kv-amap-grid,.kv-amap-route,.kv-amap-t{pointer-events:none}
+.kv-amap-route{fill:none;stroke:var(--am-tr);stroke-width:7;stroke-linecap:round;
   stroke-dasharray:1;stroke-dashoffset:1;animation:kvAmapDraw 1.1s cubic-bezier(.4,0,.2,1) forwards}
-.kv-amap-fut{fill:var(--am-bg);stroke:var(--am-fut);stroke-width:1.5;vector-effect:non-scaling-stroke;opacity:.85}
-.kv-amap-hub{fill:var(--am-hub);stroke:var(--am-halo);stroke-width:2.5;vector-effect:non-scaling-stroke}
-.kv-amap-tr{fill:var(--am-tr);stroke:var(--am-halo);stroke-width:3;vector-effect:non-scaling-stroke}
-.kv-amap-pulse{fill:none;stroke:var(--am-tr);stroke-width:1.5;vector-effect:non-scaling-stroke;opacity:0;
+.kv-amap-froute{fill:none;stroke:var(--am-fut);stroke-width:3;stroke-dasharray:3 11;stroke-linecap:round;opacity:.5;transition:opacity .2s,stroke .2s}
+.kv-amap-hit{fill:transparent;stroke:none;cursor:pointer}
+.kv-amap-fut{fill:var(--am-bg);stroke:var(--am-fut);stroke-width:5;transition:stroke .2s}
+.kv-amap-t-fut{font-size:34px;opacity:0;pointer-events:none;transition:opacity .2s}
+.kv-amap-node{outline:none}
+.kv-amap-node:hover .kv-amap-froute,.kv-amap-node:focus .kv-amap-froute{opacity:1;stroke:var(--am-tr);stroke-dasharray:none}
+.kv-amap-node:hover .kv-amap-fut,.kv-amap-node:focus .kv-amap-fut{stroke:var(--am-tr)}
+.kv-amap-node:hover .kv-amap-t-fut,.kv-amap-node:focus .kv-amap-t-fut{opacity:1}
+.kv-amap-node:hover .kv-amap-hub,.kv-amap-node:focus .kv-amap-hub{stroke:var(--am-tr)}
+.kv-amap-hub{fill:var(--am-hub);stroke:var(--am-halo);stroke-width:8}
+.kv-amap-tr{fill:var(--am-tr);stroke:var(--am-halo);stroke-width:10}
+.kv-amap-pulse{fill:none;stroke:var(--am-tr);stroke-width:5;opacity:0;
   transform-box:fill-box;transform-origin:center;animation:kvAmapPulse 3.2s ease-out 1.2s infinite}
 .kv-amap-t{font-family:inherit;font-size:36px;font-weight:600;fill:var(--am-body);
   paint-order:stroke;stroke:var(--am-halo);stroke-width:8px;stroke-linejoin:round}
@@ -3693,17 +3702,10 @@ html[dir="rtl"] .fx-bar{direction:rtl}
 }
 .sp-amount{
   font-size:5rem;font-weight:700;
-  color:#0A2723;line-height:1;letter-spacing:-.03em;
-  background:linear-gradient(180deg,#0A2723 0%,#0A5F56 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent
+  color:#0A2723;line-height:1;letter-spacing:-.03em
 }
 [data-theme="dark"] .sp-currency{color:#8FE9C4}
-[data-theme="dark"] .sp-amount{
-  background:linear-gradient(180deg,#F5FAF8 0%,#8FE9C4 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent
-}
+[data-theme="dark"] .sp-amount{color:#F5FAF8}
 .sp-per{
   font-size:1rem;color:#546E71;font-weight:500;margin-left:4px
 }
@@ -5531,3 +5533,43 @@ html[dir="rtl"] .fx-bar{direction:rtl}
   transition:transform .15s ease
 }
 .ov-ai-cta-pri:hover{transform:translateY(-1px)}
+/* ═══════════ Faz 17_3 · müşteri prototipinden taşınan düzeltmeler ═══════════ */
+/* .sec hem sayfa bölümü hem ikincil buton sınıfı; bölümün 24/0/80 dolgusu butonlara sızıyordu */
+.btn.sec{padding:11px 18px}
+.btn.sec.sm,.btn.sm.sec{padding:8px 13px}
+.btn.sec.lg,.btn.lg.sec{padding:14px 24px}
+/* Profil tamamlanma halkası: etiket halkanın dışına, altına */
+.profhero .phring-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 auto}
+.profhero .phring-cap{font-size:10px;color:var(--faint);font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+/* Dil/kullanıcı menüleri şehir bandının (z:80) altında kalıyordu; ilk seçenek tıklanamıyordu */
+.nav{z-index:120}
+.langmenu{z-index:130}
+.langbtn .kv-globe-ic{opacity:.75}
+.langbtn .kv-caret{font-size:10px;opacity:.7}
+.langmenu a{gap:10px}
+.langmenu .kv-lc{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:18px;padding:0 5px;border-radius:5px;
+  font-size:10.5px;font-weight:700;letter-spacing:.04em;color:var(--emer);background:var(--chip);font-family:var(--sans)}
+.langmenu a.on{color:var(--ink);font-weight:600}
+.langmenu a.on::after{content:"✓";margin-left:auto;color:var(--teal);font-size:12px}
+/* Hızlı filtre açılır menüleri (sektör, ülke) alttaki sayaç kartlarının altında kalıyor, şeffaf görünüyordu */
+.hhero .qf{position:relative;z-index:40}
+.hhero .stats{position:relative;z-index:1}
+/* Hero döngüsü: uzun bölge adları (África Occidental, Западная Африка) kesilmesin */
+.kv-hero-loop-container{min-width:min(210px,60vw)}
+html[dir="rtl"] .kv-hero-loop-item{left:auto;right:0}
+/* Kürenin alt yarısı metin katmanının altında kalıp tıklanamıyordu */
+.hhero > .wrap{pointer-events:none}
+.hhero > .wrap > *{pointer-events:auto}
+/* Mobil üst menü: sekmeler 74px'lik sütuna sıkışıp taşıyordu */
+@media (max-width:860px){
+  .nav .wrap{flex-wrap:wrap;height:auto;row-gap:4px;padding-top:8px;padding-bottom:6px}
+  .nav .brand{margin-right:auto}
+  .nav .tabs{order:10;flex:1 0 100%;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -4px}
+  .nav .tabs::-webkit-scrollbar{display:none}
+  .nav .tab{white-space:nowrap;flex:0 0 auto}
+}
+@media (max-width:480px){
+  .nav .wrap{padding-left:14px;padding-right:14px;column-gap:6px}
+  .nav .brand svg{width:26px;height:26px}
+  .nav .ghostbtn{padding-left:8px;padding-right:8px}
+}
