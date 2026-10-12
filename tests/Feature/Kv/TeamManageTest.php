@@ -47,6 +47,24 @@ class TeamManageTest extends TeamTestCase
         $this->assertSame([], CompanyContext::resolve($m->user)['perms']);
     }
 
+    public function test_update_changes_nothing_but_role_and_permissions_whatever_else_is_sent(): void
+    {
+        [$owner, $c] = $this->member('Acme', 'a@acme.test');
+        [$other, $oc] = $this->otherFirm();
+        [$u, $m] = $this->mate($c, 'ops', null, 'invited', 'ops@c.test');
+        $this->actingAs($owner)->patchJson("/kv/team/{$m->id}", [
+            'role' => 'sales', 'status' => 'active', 'company_id' => $oc->id, 'user_id' => $other->id, 'email' => 'hijack@evil.test', 'name' => 'Evil', 'accepted_at' => now()->toDateTimeString(),
+        ])->assertOk();
+        $m->refresh();
+        $this->assertSame('sales', $m->role);
+        $this->assertSame('invited', $m->status);                                      // activation only ever happens through the password link
+        $this->assertSame($c->id, $m->company_id);
+        $this->assertSame($u->id, $m->user_id);
+        $this->assertSame('ops@c.test', $m->email);
+        $this->assertNull($m->accepted_at);
+        $this->assertNotSame('Evil', $m->name);
+    }
+
     public function test_update_validates_its_input(): void
     {
         [$owner, $c] = $this->member('Acme', 'a@acme.test');
