@@ -2,6 +2,7 @@
    Re-uses the prototype's tm-* / ac-* classes from kervea.css and adds what the real screens need. Logical properties keep RTL (Arabic) correct. */
 
 /* ── helpers used by kv-team.js ── */
+.dpanel{scroll-margin-top:84px}
 .kvt-hide{display:none!important}
 [hidden].kvt-state,.kvt-tbl[hidden],.kvt-empty[hidden],.kvt-info[hidden],.kvt-seats[hidden],.kvt-who[hidden],.kvt-trim[hidden],.kvt-err[hidden],.ac-timeline[hidden]{display:none!important}
 
@@ -59,8 +60,9 @@ body.kvt-nobilling [data-kv-perm="billing"]{display:none!important}
 .kvt-tbl .col-last{font-size:12px;color:var(--faint)}
 .kvt-tbl .col-menu{position:relative;text-align:end}
 .kvt-row.kvt-busy{opacity:.55;pointer-events:none;transition:opacity .15s}
-.kvt-you{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;color:var(--teal);background:rgba(13,138,128,.12);border-radius:100px;padding:1px 8px;vertical-align:middle;margin-inline-start:4px}
+.kvt-tbl .tm-user b .kvt-you,.kvt-you{display:inline-block;overflow:visible;white-space:nowrap;font-size:10.5px;font-weight:700;letter-spacing:.03em;color:var(--teal);background:rgba(13,138,128,.12);border-radius:100px;padding:1px 8px;vertical-align:middle;margin-inline-start:4px;line-height:1.5}
 .kvt-dim{color:var(--faint)}
+.kvt-modal .fld label .kvt-custom-tag{display:inline;margin-inline-start:6px}
 .kvt-custom-tag{font-size:10.5px;font-weight:600;color:var(--faint);margin-top:4px;text-transform:none;letter-spacing:0}
 .kvt-chip{display:inline-block;font-size:11px;font-weight:600;color:var(--body);background:var(--paper);border:1px solid var(--line);border-radius:100px;padding:2px 9px;margin:0 4px 4px 0;white-space:nowrap}
 [dir=rtl] .kvt-chip{margin:0 0 4px 4px}
@@ -76,15 +78,17 @@ body.kvt-nobilling [data-kv-perm="billing"]{display:none!important}
 .kvt-dot:focus-visible,.kvt-menu button:focus-visible,.kvt-modal button:focus-visible,.kvt-modal input:focus-visible,.kvt-modal select:focus-visible,.kvt-modal summary:focus-visible,.ac-fx:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 
 /* ⋮ menu: logical alignment, can flip upward near the bottom of the screen */
-.kvt-menu{inset-inline-end:0;right:auto;left:auto;text-align:start;min-width:230px}
+.kvt-menu{right:auto;left:auto;inset-inline-end:0;text-align:start;min-width:230px}
 .kvt-menu.up{top:auto;bottom:calc(100% + 4px)}
 .kvt-menu button{text-align:start}
 .kvt-menu button.kvt-danger-item{color:#dc2626}
 
 /* ── modals (extend .tm-modal) ── */
-.kvt-modal{width:min(560px,94vw)}
+.kvt-modal{width:min(640px,94vw);display:flex;flex-direction:column;overflow:hidden;max-height:min(92vh,860px)}
+.kvt-modal .mh,.kvt-modal .mf{flex:0 0 auto}
+.kvt-modal .mb{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 .kvt-modal.kvt-confirm{width:min(440px,94vw)}
-.kvt-modal .mx{inset-inline-end:14px;right:auto;left:auto}
+.kvt-modal .mx{right:auto;left:auto;inset-inline-end:14px}
 .kvt-modal .mh{padding-inline-end:56px}
 .kvt-modal .mh h3{overflow-wrap:anywhere}
 .kvt-modal .mf .btn.kvt-danger{background:#c33;color:#fff}
@@ -102,10 +106,11 @@ body.kvt-nobilling [data-kv-perm="billing"]{display:none!important}
 .kvt-details .kvt-grid{padding-bottom:12px}
 .kvt-grp{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:10px 0 2px}
 .kvt-grp:first-child{margin-top:2px}
-.kvt-grid{gap:6px}
+.kvt-grid{gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.kvt-grid .kvt-grp{grid-column:1/-1}
 
-/* permission checkbox cards: a real (visually hidden) checkbox inside a label */
-.kvt-perm{position:relative;align-items:flex-start;padding:10px 12px;text-align:start}
+/* permission checkbox cards: a real (visually hidden) checkbox inside a label (reset what `.tm-modal .fld label` would impose) */
+.kvt-modal .fld label.kvt-perm,.kvt-modal label.kvt-perm{display:flex;position:relative;align-items:flex-start;gap:12px;padding:10px 12px;margin:0;text-align:start;text-transform:none;letter-spacing:0;font-size:inherit;font-weight:inherit;color:inherit}
 .kvt-perm .kvt-cb{position:absolute;opacity:0;width:20px;height:20px;margin:0;inset-inline-start:12px;top:11px;cursor:pointer}
 .kvt-perm .cx{display:flex;flex:0 0 auto;font-style:normal}
 .kvt-perm .kvt-cb:focus-visible+.cx{outline:2px solid var(--teal);outline-offset:2px}
@@ -155,6 +160,7 @@ html[data-theme="dark"] .kvt-trim{color:#e0b36a}
  .kvt-stat{border-inline-start:0;padding-inline-start:0}
  .kvt-roles{grid-template-columns:1fr}
 }
+@media(max-width:600px){.kvt-grid{grid-template-columns:1fr}}
 @media(max-width:560px){
  .kvt-modal{width:100vw;max-height:94vh;top:auto;bottom:0;left:0;transform:translateY(0);border-radius:16px 16px 0 0}
  .kvt-modal.open{transform:translateY(0)}

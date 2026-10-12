@@ -58,8 +58,9 @@ class TeamController extends Controller
     }
 
     /** The row shape the panel renders (no secrets, no token hash). */
-    private function row(array $ctx, TeamMember $m, array $logins = []): array
+    private function row(array $ctx, TeamMember $m, ?array $logins = null): array
     {
+        $logins ??= $m->user_id ? Activity::lastLogins([$m->user_id]) : [];      // single-row answers look the person's last sign-in up themselves
         $you = $ctx['member'] && (int) $ctx['member']->id === (int) $m->id;
         return [
             'id' => $m->id,

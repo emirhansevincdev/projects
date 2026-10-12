@@ -479,10 +479,17 @@ function goOverview(){
 var _showPanel = window.showPanel;
 if(typeof _showPanel === 'function'){
   window.showPanel = function(sec, btn){
-    if(blocked(sec)){ showNoAccess(sec); return; }
+    if(blocked(sec)){ showNoAccess(sec); revealOnPhone('noaccess'); return; }
     NO_ACCESS_OPEN = null;
-    return _showPanel.apply(this, arguments);
+    var r = _showPanel.apply(this, arguments);
+    revealOnPhone(sec);
+    return r;
   };
+}
+// phones stack the menu above the content: after choosing a tab, bring the tab's content into view
+function revealOnPhone(sec){
+  if(!window.matchMedia || !window.matchMedia('(max-width:820px)').matches) return;
+  setTimeout(function(){ var el = $('dp-' + sec); if(el && el.classList.contains('on') && el.scrollIntoView){ try{ el.scrollIntoView({block:'start', behavior:'smooth'}); }catch(e){ el.scrollIntoView(); } } }, 60);
 }
 function ownerOnlyToggle(hide){
   var cls = 'kvt-hide';
@@ -508,7 +515,7 @@ function whoChip(){
   if(!u || !inCompany() || !role){ w.hidden = true; w.innerHTML = ''; return; }
   var co = (window.KV_ME && window.KV_ME.company && (window.KV_ME.company.nm || window.KV_ME.company.name)) || '';
   w.hidden = false;
-  w.innerHTML = '<span class="tm-role-badge '+esc(role)+'">'+esc(roleLabel(role))+'</span>'+(co ? '<span class="kvt-who-co">'+esc(co)+'</span>' : '');
+  w.innerHTML = '<span class="tm-role-badge '+esc(role)+'">'+esc(roleLabel(role))+'</span>'+(co ? '<span class="kvt-who-co"><bdi>'+esc(co)+'</bdi></span>' : '');
 }
 function nocoBanner(){
   var host = $('dp-overview'); if(!host) return;
@@ -659,7 +666,7 @@ function rowHtml(m, owner){
   else { menu = '<button class="tm-dot kvt-dot" type="button" data-act="menu" data-id="'+Number(m.id)+'" aria-haspopup="menu" aria-expanded="false" title="'+esc(L('m_open'))+'" aria-label="'+esc(L('m_open'))+'">⋮</button>'; }
   var busy = !owner && S.busy[m.id];
   return '<div class="tm-row kvt-row'+(busy ? ' kvt-busy' : '')+'"'+(owner ? ' data-owner="1"' : ' data-id="'+Number(m.id)+'"')+'>'+
-    '<div class="tm-user col-user">'+avatar(m.name || m.email, m.email)+'<div><b>'+esc(m.name || m.email)+(m.you ? ' <span class="kvt-you">'+esc(L('you'))+'</span>' : '')+'</b><span>'+esc(m.email)+'</span></div></div>'+
+    '<div class="tm-user col-user">'+avatar(m.name || m.email, m.email)+'<div><b><bdi>'+esc(m.name || m.email)+'</bdi>'+(m.you ? ' <span class="kvt-you">'+esc(L('you'))+'</span>' : '')+'</b><span><bdi>'+esc(m.email)+'</bdi></span></div></div>'+
     '<div class="col-role"><span class="tm-role-badge '+esc(role)+'">'+esc(roleLabel(role))+'</span>'+(!owner && m.custom ? '<div class="kvt-custom-tag">'+esc(L('e_custom'))+'</div>' : '')+'</div>'+
     '<div class="col-perms">'+permsSummary(m.perms, owner)+'</div>'+
     '<div class="col-last">'+lastHtml(m, owner)+'</div>'+
@@ -880,7 +887,7 @@ function openEdit(id){
   var D = S.data, name = m.name || m.email;
   var opts = D.roles.map(function(r){ return '<option value="'+esc(r.key)+'"'+(r.key === m.role ? ' selected' : '')+'>'+esc(roleLabel(r.key))+'</option>'; }).join('');
   var box = openModal('<div class="mh"><h3>'+esc(L('e_h'))+'</h3><p>'+esc(L('e_sub', {name: name}))+'</p><button class="mx" type="button" data-close aria-label="'+esc(L('close'))+'">×</button></div>'+
-    '<div class="mb"><div class="tm-user-preview">'+avatar(name, m.email)+'<div style="flex:1;min-width:0"><b>'+esc(name)+'</b><span>'+esc(m.email)+'</span></div></div>'+
+    '<div class="mb"><div class="tm-user-preview">'+avatar(name, m.email)+'<div style="flex:1;min-width:0"><b><bdi>'+esc(name)+'</bdi></b><span><bdi>'+esc(m.email)+'</bdi></span></div></div>'+
     '<div class="fld"><label for="kvtRole">'+esc(L('e_role'))+'</label><select id="kvtRole">'+opts+'</select><p class="kvt-hint">'+esc(L('e_hint'))+'</p></div>'+
     '<div class="fld"><label>'+esc(L('e_perms'))+' <span class="kvt-custom-tag" id="kvtCustomTag" hidden>'+esc(L('e_custom'))+'</span></label><div class="tm-perm-grid kvt-grid" id="kvtGrid">'+permGridHtml(m.perms)+'</div></div>'+
     '<div class="kvt-trim" id="kvtTrim" hidden>'+esc(L('trimmed'))+'</div>'+

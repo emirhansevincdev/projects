@@ -97,7 +97,8 @@ class TeamService
         $token = Password::broker()->createToken($user);
         $url = url('/set-password?token='.$token.'&email='.urlencode($user->email));
         try {
-            Mail::to($user->email)->send(new KvMail('Kervea ekip daveti · '.$company->name, 'team_invite', [
+            $co = mb_substr(trim((string) preg_replace('/[\p{Cc}\s]+/u', ' ', $company->name)), 0, 100);        // no line breaks may reach the Subject header
+            Mail::to($user->email)->send(new KvMail('Kervea ekip daveti · '.$co, 'team_invite', [
                 'name' => $m->name ?: $user->name,
                 'company' => $company,
                 'inviter' => $inviter?->name,

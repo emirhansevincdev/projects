@@ -54,6 +54,12 @@ class TeamAdminTest extends TeamTestCase
         $html = $this->actingAs($admin)->get('/admin/kervea/teams')->getContent();
         $this->assertStringNotContainsString('<script>alert(1)</script>', $html);
         $this->assertStringContainsString('&lt;script&gt;', $html);
+        // a name is never interpolated into inline JavaScript (the confirm text travels in a data attribute)
+        $this->mate($c, 'sales', null, 'active', 'quote@c.test', "x');alert(document.cookie);('");
+        $html = $this->actingAs($admin)->get('/admin/kervea/teams')->getContent();
+        $this->assertStringNotContainsString("confirm('x", $html);
+        $this->assertStringNotContainsString("alert(document.cookie);('", $html);
+        $this->assertStringContainsString('onsubmit="return confirm(this.dataset.msg)"', $html);
         $html = $this->actingAs($admin)->get('/admin/kervea/teams?q=FIND-ME')->getContent();
         $this->assertStringContainsString('Finder', $html);
         $this->assertStringNotContainsString('xss@c.test', $html);
