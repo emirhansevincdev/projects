@@ -13,3 +13,5 @@ Schedule::command('kv:prune-message-files')->daily();
 // Kervea analytics: delete counters / visit rows / search log past their retention (config kervea.analytics.*).
 // Needs the usual cron entry:  * * * * * cd /path/to/site && php artisan schedule:run >> /dev/null 2>&1
 \Illuminate\Support\Facades\Schedule::command('kervea:analytics-prune')->daily();
+// Team activity log: delete entries past kervea.team.activity_retention_days.
+Schedule::command('kervea:prune-activity')->daily();
