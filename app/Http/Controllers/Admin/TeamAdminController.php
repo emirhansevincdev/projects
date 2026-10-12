@@ -18,10 +18,10 @@ class TeamAdminController extends Controller
         $q = trim((string) $r->query('q', ''));
         $base = TeamMember::query()->join('kv_companies', 'kv_companies.id', '=', 'kv_team_members.company_id')
             ->when($q !== '', function ($w) use ($q) {
-                $like = '%'.str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], mb_strtolower($q)).'%';
-                $w->where(fn ($x) => $x->whereRaw('LOWER(kv_companies.name) like ?', [$like])
-                    ->orWhereRaw('LOWER(kv_team_members.email) like ?', [$like])
-                    ->orWhereRaw('LOWER(kv_team_members.name) like ?', [$like]));
+                $like = '%'.str_replace(['!', '%', '_'], ['!!', '!%', '!_'], mb_strtolower($q)).'%';       // "!" as the escape character works the same on MySQL and SQLite
+                $w->where(fn ($x) => $x->whereRaw('LOWER(kv_companies.name) like ? escape \'!\'', [$like])
+                    ->orWhereRaw('LOWER(kv_team_members.email) like ? escape \'!\'', [$like])
+                    ->orWhereRaw('LOWER(kv_team_members.name) like ? escape \'!\'', [$like]));
             });
 
         // one page of companies that have at least one team member, biggest teams first

@@ -741,6 +741,7 @@ document.addEventListener('click', function(e){ if(!e.target.closest || (!e.targ
 
 /* iyimser (optimistic) işlem: ekranı hemen güncelle, sunucu reddederse geri al ve nedenini göster */
 function mutate(id, apply, request, done){
+  if(S.busy[id] || !S.data) return;                       // one request per person at a time
   var snap = JSON.stringify(S.data);
   S.busy[id] = true;
   apply(); renderTeam();
@@ -762,21 +763,24 @@ function doDisable(id){
   var m = findMember(id); if(!m) return;
   var name = m.name || m.email;
   confirmDlg({title: L('cf_dis_t', {name: name}), text: L('cf_dis_d'), ok: L('m_disable'), danger: true}, function(){
-    mutate(id, function(){ findMember(id).status = 'disabled'; }, function(){ return API('POST', '/kv/team/'+id+'/disable'); }, function(){ say(L('t_disabled', {name: name})); });
+    mutate(id, function(){ var x = findMember(id); if(x) x.status = 'disabled'; }, function(){ return API('POST', '/kv/team/'+id+'/disable'); }, function(){ say(L('t_disabled', {name: name})); });
   });
 }
 function doEnable(id){
   var m = findMember(id); if(!m) return; var name = m.name || m.email;
-  mutate(id, function(){ findMember(id).status = 'active'; }, function(){ return API('POST', '/kv/team/'+id+'/enable'); }, function(){ say(L('t_enabled', {name: name})); });
+  mutate(id, function(){ var x = findMember(id); if(x) x.status = 'active'; }, function(){ return API('POST', '/kv/team/'+id+'/enable'); }, function(){ say(L('t_enabled', {name: name})); });
 }
 function doRemove(id){
   var m = findMember(id); if(!m) return; var name = m.name || m.email;
   confirmDlg({title: L('cf_rem_t', {name: name}), text: L(m.status === 'invited' ? 'cf_rem_i' : 'cf_rem_a'), ok: L('m_remove'), danger: true}, function(){
+    if(!S.data || S.busy[id]) return;
     var snap = JSON.stringify(S.data);
+    S.busy[id] = true;
     S.data.members = S.data.members.filter(function(x){ return x.id !== id; });
     S.data.seats.used = Math.max(1, S.data.seats.used - 1); S.data.seats.free = S.data.seats.max - S.data.seats.used;
     renderTeam();
     API('DELETE', '/kv/team/'+id).then(function(r){
+      delete S.busy[id];
       if(r.ok){ if(r.data && r.data.seats){ S.data.seats = r.data.seats; renderTeam(); } say(L('t_removed', {name: name})); }
       else { S.data = JSON.parse(snap); renderTeam(); alertBox('destructive', L('x_title'), errText(r)); if(isStale(r)) loadTeam(); }
     });
@@ -858,6 +862,7 @@ function openInvite(){
   bindPerms(grid, function(){ $('kvtTrim').hidden = true; });
   function showErr(text){ var e = $('kvtErr'); e.textContent = text; e.hidden = !text; }
   function send(){
+    if($('kvtSend').disabled) return;                       // a request is already on its way (Enter pressed twice)
     var name = $('kvtInvName').value.trim(), email = $('kvtInvEmail').value.trim();
     if(name.length < 2){ showErr(L('x_v_name')); $('kvtInvName').focus(); return; }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showErr(L('x_v_email')); $('kvtInvEmail').focus(); return; }
@@ -909,7 +914,7 @@ function openEdit(id){
   $('kvtSave').addEventListener('click', function(){
     var role = sel.value, perms = checkedPerms(grid);
     closeModal();
-    mutate(id, function(){ var x = findMember(id); x.role = role; x.perms = perms; x.custom = !sameSet(perms, roleDefaults(role)); },
+    mutate(id, function(){ var x = findMember(id); if(x){ x.role = role; x.perms = perms; x.custom = !sameSet(perms, roleDefaults(role)); } },
       function(){ return API('PATCH', '/kv/team/'+id, {role: role, perms: perms}); },
       function(){ say(L('t_updated', {name: name})); });
   });

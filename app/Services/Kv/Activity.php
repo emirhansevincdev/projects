@@ -53,10 +53,12 @@ class Activity
     public static function recent(int $companyId, int $limit = 100): array
     {
         $rows = ActivityEntry::where('company_id', $companyId)->orderByDesc('id')->limit(max(1, min(500, $limit)))->get();
-        $names = User::whereIn('id', $rows->pluck('user_id')->filter()->unique()->all())->pluck('name', 'id');
-        return $rows->map(function (ActivityEntry $r) use ($names) {
+        $people = User::whereIn('id', $rows->pluck('user_id')->filter()->unique()->all())->get(['id', 'name', 'role'])->keyBy('id');
+        $names = $people->map(fn ($u) => $u->name);
+        return $rows->map(function (ActivityEntry $r) use ($names, $people) {
             $meta = $r->meta ?: [];
-            $support = ! empty($meta['support']);          // an admin acted for Kervea support: never expose the admin's identity
+            // a platform admin acting for Kervea support (flagged by the caller, or simply an admin account): never expose who
+            $support = ! empty($meta['support']) || (int) ($people[$r->user_id]->role ?? 0) === 1;
             return [
                 'id' => $r->id,
                 'action' => $r->action,

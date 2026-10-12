@@ -63,8 +63,10 @@ class TeamAdminTest extends TeamTestCase
         $html = $this->actingAs($admin)->get('/admin/kervea/teams?q=FIND-ME')->getContent();
         $this->assertStringContainsString('Finder', $html);
         $this->assertStringNotContainsString('xss@c.test', $html);
-        $html = $this->actingAs($admin)->get('/admin/kervea/teams?q='.urlencode('100%_'))->getContent();     // wildcards are literal
-        $this->assertStringContainsString('Aramanıza uyan ekip bulunamadı', $html);
+        foreach (['100%_', '%', '_'] as $wild) {                                                               // wildcards are literal characters
+            $html = $this->actingAs($admin)->get('/admin/kervea/teams?q='.urlencode($wild))->getContent();
+            $this->assertStringContainsString('Aramanıza uyan ekip bulunamadı', $html, $wild);
+        }
     }
 
     public function test_an_admin_can_disable_and_enable_a_person_and_their_sessions_end(): void

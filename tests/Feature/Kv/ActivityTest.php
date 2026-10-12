@@ -179,11 +179,16 @@ class ActivityTest extends TeamTestCase
     public function test_support_actions_never_reveal_which_admin_acted(): void
     {
         [$owner, $c] = $this->member('Acme', 'a@acme.test');
-        Activity::log($c->id, $this->admin()->id, 'team.disable', ['name' => 'Orhan', 'support' => true]);
+        $admin = $this->admin();
+        Activity::log($c->id, $admin->id, 'team.disable', ['name' => 'Orhan', 'support' => true]);
+        Activity::log($c->id, $admin->id, 'credits.grant', ['credits' => 50]);          // another feature that did not flag it: an admin account is support anyway
         $items = $this->actingAs($owner)->getJson('/kv/activity')->json('items');
-        $this->assertTrue($items[0]['support']);
-        $this->assertNull($items[0]['by']);
-        $this->assertFalse($items[0]['you']);
+        foreach ($items as $i) {
+            $this->assertTrue($i['support']);
+            $this->assertNull($i['by']);
+            $this->assertFalse($i['you']);
+        }
+        $this->assertCount(2, $items);
         $this->assertStringNotContainsString('Admin', json_encode($items));
     }
 
