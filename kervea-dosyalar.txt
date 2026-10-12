@@ -3,6 +3,7 @@
 app/Console/Commands/KerveaAnalyticsPrune.php
 app/Console/Commands/KerveaCreditsBackfill.php
 app/Console/Commands/KerveaMakeAdmin.php
+app/Console/Commands/KerveaPruneActivity.php
 app/Console/Commands/KerveaSocialSetup.php
 app/Console/Commands/KerveaSocialStatus.php
 app/Console/Commands/KerveaSocialUnlink.php
@@ -34,6 +35,7 @@ app/Http/Controllers/Admin/ProfileController.php
 app/Http/Controllers/Admin/ReviewsReportsController.php
 app/Http/Controllers/Admin/SettingController.php
 app/Http/Controllers/Admin/SubscriptionController.php
+app/Http/Controllers/Admin/TeamAdminController.php
 app/Http/Controllers/Admin/UserController.php
 app/Http/Controllers/Agent/AgentCalendlyController.php
 app/Http/Controllers/Agent/AgentController.php
@@ -53,6 +55,7 @@ app/Http/Controllers/Frontend/FrontendController.php
 app/Http/Controllers/Frontend/LanguageController.php
 app/Http/Controllers/InstallController.php
 app/Http/Controllers/Kervea/PageController.php
+app/Http/Controllers/Kv/ActivityController.php
 app/Http/Controllers/Kv/AnalyticsController.php
 app/Http/Controllers/Kv/ApplicationController.php
 app/Http/Controllers/Kv/AuthController.php
@@ -67,6 +70,7 @@ app/Http/Controllers/Kv/PeopleController.php
 app/Http/Controllers/Kv/ProfileMediaController.php
 app/Http/Controllers/Kv/PromoController.php
 app/Http/Controllers/Kv/SocialController.php
+app/Http/Controllers/Kv/TeamController.php
 app/Http/Controllers/PaymentController.php
 app/Http/Controllers/SeoController.php
 app/Http/Controllers/Updater.php
@@ -110,6 +114,7 @@ app/Models/FrontendSettings.php
 app/Models/HomePageSetting.php
 app/Models/Hotel.php
 app/Models/HotelListing.php
+app/Models/Kv/ActivityEntry.php
 app/Models/Kv/Company.php
 app/Models/Kv/CompanyDocument.php
 app/Models/Kv/CompanyPhoto.php
@@ -166,6 +171,7 @@ app/Models/payment_gateway/Razorpay.php
 app/Models/payment_gateway/StripePay.php
 app/Providers/AppServiceProvider.php
 app/Providers/RouteServiceProvider.php
+app/Services/Kv/Activity.php
 app/Services/Kv/AnalyticsRecorder.php
 app/Services/Kv/AnalyticsReport.php
 app/Services/Kv/CompanyContext.php
@@ -181,6 +187,7 @@ app/Services/Kv/Metrics.php
 app/Services/Kv/PeopleImporter.php
 app/Services/Kv/SocialAuth.php
 app/Services/Kv/SocialAuthException.php
+app/Services/Kv/TeamService.php
 app/Services/Kv/Totp.php
 app/View/Components/AppLayout.php
 app/View/Components/GuestLayout.php
@@ -236,6 +243,7 @@ database/migrations/2026_10_12_200002_extend_kv_orders_for_credits.php
 database/migrations/2026_10_12_200003_create_kv_people_tables.php
 database/migrations/2026_10_12_300001_create_kv_messaging_tables.php
 database/migrations/2026_10_12_400001_create_kv_analytics_tables.php
+database/migrations/2026_10_12_500001_create_kv_activity_table.php
 database/migrations/2026_10_12_900001_create_kv_newsletter_table.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php
@@ -790,6 +798,7 @@ resources/views/kervea/admin/people-removals.blade.php
 resources/views/kervea/admin/people.blade.php
 resources/views/kervea/admin/promos.blade.php
 resources/views/kervea/admin/sectors.blade.php
+resources/views/kervea/admin/teams.blade.php
 resources/views/kervea/layout.blade.php
 resources/views/kervea/legal.blade.php
 resources/views/kervea/legal/kvkk.blade.php
@@ -804,6 +813,7 @@ resources/views/kervea/mail/application_received.blade.php
 resources/views/kervea/mail/application_rejected.blade.php
 resources/views/kervea/mail/new_message.blade.php
 resources/views/kervea/mail/sector_match.blade.php
+resources/views/kervea/mail/team_invite.blade.php
 resources/views/kervea/partials/firm-modal.blade.php
 resources/views/kervea/partials/footer.blade.php
 resources/views/kervea/partials/head-seo.blade.php

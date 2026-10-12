@@ -35,7 +35,7 @@ class CompanyContext
         if (! $m || ! $m->company) {
             return null;
         }
-        $perms = is_array($m->perms) ? array_values(array_intersect($m->perms, self::PERMS)) : self::defaultPerms($m->role);
+        $perms = self::effectivePerms($m);
         $owner = User::find($m->company->user_id) ?: $u;
         return self::pack($m->company, $m->role, $perms, $owner, $m);
     }
@@ -65,6 +65,13 @@ class CompanyContext
     {
         $ctx = self::resolve($u);
         return $ctx ? $ctx['owner'] : $u;
+    }
+
+    /** What a team member may do: their own override (kv_team_members.perms) or else the defaults of their role, in PERMS order. @return list<string> */
+    public static function effectivePerms(TeamMember $m): array
+    {
+        $list = is_array($m->perms) ? $m->perms : self::defaultPerms((string) $m->role);
+        return array_values(array_intersect(self::PERMS, $list));
     }
 
     /** @return list<string> */

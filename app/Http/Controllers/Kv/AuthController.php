@@ -77,6 +77,9 @@ class AuthController extends Controller
         RateLimiter::clear($key);
         Auth::login($user, (bool) ($v['remember'] ?? false));
         $r->session()->regenerate();
+        if ($ctx = CompanyContext::resolve($user)) {                                    // sign-ins of panel users show up in the company's activity log
+            class_exists(\App\Services\Kv\Activity::class) && \App\Services\Kv\Activity::log($ctx['company']->id, $user->id, 'auth.login', ['role' => $ctx['role']]);
+        }
         return response()->json(['ok' => true, 'user' => self::userPayload($user), 'csrf' => csrf_token()]);
     }
 
@@ -108,6 +111,7 @@ class AuthController extends Controller
             $user->forceFill(['password' => $password, 'remember_token' => Str::random(60)]);
             if (! $user->email_verified_at) $user->email_verified_at = now();
             $user->save();
+            \App\Services\Kv\TeamService::activateFor($user);                          // opening a team invitation = choosing the password through its link
             event(new PasswordReset($user));
         });
         return $status === Password::PASSWORD_RESET

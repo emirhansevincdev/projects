@@ -212,7 +212,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 * **Şablonun açık kayıt/giriş/şifre-sıfırlama uçları kaldırıldı** (`routes/auth.php`); hesaplar yalnızca yönetici onayıyla oluşur.
 * **Eski ilan/otel/araç rotaları, installer, `/clear-cache` vb. 404** döner (`legacy` middleware). Eski admin ekranları dosya olarak durur ama menüden kullanılmaz.
 * **Sahte demo veriler kaldırıldı** (firma, kişi, mesaj, ziyaretçi, ekip, sahte belge listesi). Veri yoksa boş durum gösterilir.
-* **Panel sekmeleri artık gerçek veriyle çalışır** (Mesajlar, Kişiler, Analiz, Ekip, Aktivite; bkz. bölüm 7). Yalnızca **Prospektüs** sekmesi hâlâ gizlidir (müşteri kararı bekliyor). Hiçbir sekmede örnek/sahte sayı yoktur; veri yoksa boş durum gösterilir.
+* **Panel sekmeleri artık gerçek veriyle çalışır** (Mesajlar, Kişiler, Analiz, Ekip, Aktivite; bkz. bölüm 7). **Prospektüs** sekmesi firmanın kendi profil verisinden tek sayfalık tanıtım belgesi üretir (yazdır / PDF kaydet). Hiçbir sekmede örnek/sahte sayı yoktur; veri yoksa boş durum gösterilir.
 * **Kart bilgisi sitede toplanmaz** (PCI). Kart alanları gizlidir; ödeme sağlayıcının sayfasında alınır.
 * amCharts harita paketi (ücretsiz lisans) kendi sunucumuzdan yüklenir; lisans gereği amCharts logosu görünür kalmalıdır.
 
@@ -222,7 +222,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 2. **Hakkımızda** içeriği (misyon, vizyon, kurumsal kimlik), gerçek ekip bilgileri.
 3. Sitedeki **doğrulanamayan metinler**: "uçtan uca şifreli mesajlaşma", "Trademap gümrük veri erişimi", "%94 doğrulama başarısı", "E2E şifreleme: Aktif". Marka kılavuzu "sahte metrik / boş vaat yok" der; ya gerçekleşmeli ya metinden çıkarılmalı.
 4. KVKK metinlerinin (Aydınlatma, Açık Rıza, Gizlilik, Üyelik Sözleşmesi v1.2) pencere içeriği.
-5. **Kişiler** (Prospeo benzeri) için **veri**: sistem hazır, içinde kişi yok. Yalnızca hukuka uygun kaynaktan toplanmış kişi verisi yüklenmeli (bkz. bölüm 7 uyarısı). Prospektüs sekmesi için karar.
+5. **Kişiler** (Prospeo benzeri) için **veri**: sistem hazır, içinde kişi yok. Yalnızca hukuka uygun kaynaktan toplanmış kişi verisi yüklenmeli (bkz. bölüm 7 uyarısı).
 6. Firmalar için TİM alt sektör listesi (admin panelinden girilebilir).
 
 ## 7. Üye paneli özellikleri

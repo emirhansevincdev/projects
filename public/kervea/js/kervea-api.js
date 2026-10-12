@@ -536,13 +536,8 @@ window.showPanel=function(sec,btn){
 };
 
 
-// ───────────────────────── panel: gerçek veri olmayan bölümler gizlenir ─────────────────────────
-// Aktivite sekmesi için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur. (Prospektüs artık profil verisinden üretilir.)
-(function(){
-  var hide=['activity'], css='';          // messages, people, analytics and team are real now (kv-*.js)
-  hide.forEach(function(k){ css+='.dmenu a[onclick*="showPanel(\''+k+'\'"]{display:none!important}#dp-'+k+'{display:none!important}'; });
-  var st=document.createElement('style'); st.id='kv-hide-mock'; st.textContent=css; document.head.appendChild(st);
-})();
+// Every panel tab is backed by real data now (messages, people, analytics, team, activity: kv-*.js; prospectus: built from the profile),
+// so nothing is hidden any more.
 window.kvExportData = function(){ window.open('/kv/me/export','_blank','noopener'); };
 
 function fillOverview(){ if(ME && window.kvFillOverview) window.kvFillOverview(ME); }   // kv-frontend.js: genel bakış gerçek veriden çizilir
