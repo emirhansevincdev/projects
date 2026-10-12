@@ -57,7 +57,10 @@ class AuthController extends Controller
 
         $user = User::where('email', $v['email'])->first();
         // Same message for unknown user / wrong password (no account enumeration).
-        if (! $user || ! in_array((int) $user->role, [1, 2], true) || ! Hash::check($v['password'], $user->password)) {
+        // A password check ALWAYS runs (against a dummy hash for unknown accounts) so response time does not reveal which e-mails exist.
+        $known = $user && in_array((int) $user->role, [1, 2], true);
+        $passwordOk = Hash::check($v['password'], $known ? $user->password : '$2y$12$KXY4kE43gi6EVgmD7z/InuILm/5ltQgBTdWbG0a8b74D7nCVealRa');
+        if (! $known || ! $passwordOk) {
             RateLimiter::hit($key, 900);
             return response()->json(['error' => 'invalid'], 422);
         }
@@ -123,6 +126,9 @@ class AuthController extends Controller
     public function twoFactorStart(Request $r)
     {
         $u = $r->user();
+        if ($u->two_factor_confirmed_at) {
+            return response()->json(['error' => 'already_enabled'], 409);          // turning it off needs the password (twoFactorDisable); a session alone must not be enough
+        }
         $secret = Totp::newSecret();
         $u->forceFill(['two_factor_secret' => $secret, 'two_factor_confirmed_at' => null])->save();
         return response()->json(['secret' => $secret, 'uri' => Totp::uri($secret, $u->email)]);

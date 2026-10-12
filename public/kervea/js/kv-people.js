@@ -181,6 +181,7 @@ function load(){
     draw();
   });
 }
+document.addEventListener('kv:logout', function(){ S.seq++; S.data=null; S.items=[]; S.stamp=0; S.err=null; S.loading=false; S.q=''; S.dept='all'; S.cc=''; S.page=1; S.openId=null; S.pending={}; try{ draw(); }catch(e){} });
 function fresh(){ if(S.loading){ draw(); return; } if(!S.data || Date.now()-S.stamp>20000) load(); else draw(); }
 
 function chCell(p, ch){

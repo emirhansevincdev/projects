@@ -14,13 +14,14 @@ class NewsletterAdminController extends Controller
         $q = trim((string) $r->query('q', ''));
         $rows = $this->query($q)->paginate(50)->withQueryString();
         $total = NewsletterSubscriber::count();
-        $active = NewsletterSubscriber::whereNull('unsubscribed_at')->count();
+        $active = NewsletterSubscriber::whereNull('unsubscribed_at')->whereNotNull('confirmed_at')->count();
 
         return view('kervea.admin.newsletter', compact('rows', 'q', 'total', 'active'));
     }
 
     /**
-     * GET export: every address that has not unsubscribed, with its consent proof.
+     * GET export: every CONFIRMED address that has not unsubscribed, with its consent proof and its personal unsubscribe link
+     * (put that link into the footer of every newsletter, e.g. as a mail-merge column).
      * Built in memory and returned as a plain response (the legacy PreventBackHistory middleware calls
      * ->header() on the response, which Symfony's streamed responses do not have).
      */
@@ -30,12 +31,13 @@ class NewsletterAdminController extends Controller
         $name = 'kervea-bulten-'.now()->format('Ymd-His').'.csv';
 
         $out = fopen('php://temp', 'w+');
-        fputcsv($out, ['e-posta', 'dil', 'onay zamani', 'onay IP', 'onay tarayici']);
-        $this->query($q)->whereNull('unsubscribed_at')->reorder('id')->chunkById(500, function ($chunk) use ($out) {
+        fputcsv($out, ['e-posta', 'dil', 'form zamani', 'onay (cift onay) zamani', 'form IP', 'form tarayici', 'cikis baglantisi']);
+        // only addresses whose owner confirmed through the mailed link (double opt-in) and who have not left
+        $this->query($q)->whereNull('unsubscribed_at')->whereNotNull('confirmed_at')->reorder('id')->chunkById(500, function ($chunk) use ($out) {
             foreach ($chunk as $s) {
                 fputcsv($out, array_map([$this, 'cell'], [
-                    $s->email, $s->locale, optional($s->consented_at)->format('Y-m-d H:i:s'),
-                    $s->consent_ip, $s->consent_user_agent,
+                    $s->email, $s->locale, optional($s->consented_at)->format('Y-m-d H:i:s'), optional($s->confirmed_at)->format('Y-m-d H:i:s'),
+                    $s->consent_ip, $s->consent_user_agent, $s->unsubscribeUrl(),
                 ]));
             }
         });

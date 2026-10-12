@@ -281,6 +281,37 @@ class CreditOrdersTest extends CreditsTestCase
         $this->assertSame('pro', $owner->fresh()->kv_plan);
     }
 
+    public function test_a_free_promo_code_can_be_redeemed_once_per_company(): void
+    {
+        $this->fakeStripe();
+        PromoCode::create(['code' => 'FREE100', 'type' => 'percent', 'value' => 100]);
+        [$owner, $c] = $this->member();
+        $this->actingAs($owner)->postJson('/kv/orders', ['promo' => 'FREE100'])->assertOk()->assertJsonPath('paid', true);
+        $this->actingAs($owner)->postJson('/kv/orders', ['promo' => 'FREE100'])->assertStatus(422)->assertJsonPath('error', 'invalid_promo');
+        $this->assertSame(100, CreditService::balance($c->id), 'the bonus is granted once, not once per request');
+        $this->assertSame(1, PromoCode::where('code', 'FREE100')->value('used_count'));
+    }
+
+    public function test_a_code_with_max_uses_cannot_be_redeemed_past_its_limit_even_with_orders_created_earlier(): void
+    {
+        $this->fakeStripe();
+        $code = PromoCode::create(['code' => 'ONLYONE', 'type' => 'percent', 'value' => 100, 'max_uses' => 1]);
+        [$a, $ca] = $this->member('A Co', 'a@x.test');
+        [$b, $cb] = $this->member('B Co', 'b@x.test');
+        $mk = fn ($u, $c) => Order::create(['user_id' => $u->id, 'company_id' => $c->id, 'plan' => 'pro', 'period' => 'year', 'amount_cents' => 0, 'discount_cents' => 28000, 'currency' => 'USD', 'promo_code_id' => $code->id, 'kind' => Order::KIND_PRO]);
+        // both orders are created while the code still looks usable...
+        $oa = $mk($a, $ca);
+        $ob = $mk($b, $cb);
+        OrderController::markPaid($oa, 'x1', 'promo');
+        OrderController::markPaid($ob, 'x2', 'promo');
+        // ...but only the first one is delivered
+        $this->assertSame('paid', $oa->fresh()->status);
+        $this->assertSame('cancelled', $ob->fresh()->status);
+        $this->assertNotSame('pro', $b->fresh()->kv_plan ?? 'free');
+        $this->assertSame(0, CreditService::balance($cb->id));
+        $this->assertSame(1, (int) $code->fresh()->used_count);
+    }
+
     public function test_orders_page_shows_kind_and_credits(): void
     {
         [$owner, $c] = $this->member();

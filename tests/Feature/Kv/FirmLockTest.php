@@ -280,7 +280,7 @@ class FirmLockTest extends CreditsTestCase
         $this->assertSame(0, Reveal::count());
     }
 
-    public function test_matches_lock_other_sector_firms_and_keep_the_free_quota_inside_the_sector(): void
+    public function test_matches_are_limited_to_the_own_sector_and_keep_the_free_quota_inside_it(): void
     {
         [$me] = $this->member('Seller', 's@x.test', ['direction' => 'EXP', 'hs_codes' => '5208', 'products' => 'pamuklu kumaş']);
         foreach (range(1, 4) as $i) {
@@ -289,11 +289,29 @@ class FirmLockTest extends CreditsTestCase
         $this->member('Başka Sektör', 'o@x.test', ['direction' => 'IMP', 'hs_codes' => '5208', 'products' => 'pamuklu kumaş', 'sector_id' => $this->sec(9)]);
 
         $items = $this->actingAs($me)->getJson('/kv/matches')->assertOk()->json('items');
-        $this->assertCount(5, $items);
-        $this->assertCount(2, array_filter($items, fn ($i) => $i['locked']));
-        $sectorLocked = array_values(array_filter($items, fn ($i) => ($i['lock'] ?? null) === 'sector'));
-        $this->assertCount(1, $sectorLocked);
+        // other sectors are not matched at all (scoring them would let a member probe their masked HS codes through their own profile)
+        $this->assertCount(4, $items);
+        $this->assertCount(1, array_filter($items, fn ($i) => $i['locked']));
+        $this->assertSame([], array_filter($items, fn ($i) => ($i['lock'] ?? null) === 'sector'));
         $this->assertStringNotContainsString('Başka', json_encode($items));
+    }
+
+    public function test_masked_firms_of_other_sectors_cannot_be_found_through_search_filters(): void
+    {
+        [$me] = $this->member('Seller', 's@x.test', ['direction' => 'EXP', 'hs_codes' => '5208', 'products' => 'kumaş']);
+        $this->member('Zeytin Gizli Gıda', 'z@x.test', ['country_cc' => 'tr', 'hs_codes' => '1509', 'products' => 'zeytinyağı', 'sector_id' => $this->sec(9)]);
+
+        // no filter: the firm is listed, masked, and carries no score
+        $all = $this->actingAs($me)->getJson('/kv/firms')->assertOk()->json('items');
+        $masked = array_values(array_filter($all, fn ($i) => ($i['lock'] ?? null) === 'sector'));
+        $this->assertCount(1, $masked);
+        $this->assertNull($masked[0]['uyum']);
+
+        // by hidden attributes (name, HS code, country, products) it can not be reached
+        foreach (['q=zeytin', 'q=1509', 'q=zeytinyağı', 'cc=tr&q=1509'] as $qs) {
+            $hit = $this->actingAs($me)->getJson('/kv/firms?'.$qs)->assertOk()->json('items');
+            $this->assertSame([], array_filter($hit, fn ($i) => ($i['lock'] ?? null) === 'sector'), $qs);
+        }
     }
 
     public function test_members_without_a_sector_and_unapproved_companies_fall_back_to_the_guest_rule(): void

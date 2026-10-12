@@ -433,7 +433,7 @@ document.addEventListener('kv:stats', function(){ if(typeof window.renderAboMap 
     KV_API('POST', '/kv/newsletter', { email: email, consent: true, locale: window.LANG || 'tr', website: ($('kvNlWebsite') || {}).value || '' }).then(function(r){
       busy = false; if(btn) btn.disabled = false;
       if(r.ok){
-        say(((window.T && (T[window.LANG] || T.tr).nl_ok) || kt('Teşekkürler, e-posta adresiniz kaydedildi.')), 'ok');
+        say(((window.T && (T[window.LANG] || T.tr).nl_ok) || kt('Teşekkürler. E-posta adresinize bir onay bağlantısı gönderdik; abonelik bağlantıya tıkladığınızda tamamlanır.')), 'ok');
         $('kvNlEmail').value = ''; $('kvNlConsent').checked = false;
       } else if(r.status === 429){ say(kt('Kısa süre sonra tekrar deneyin.'), 'err'); }
       else if(r.status === 422){ say(serverMsg(r, kt('Lütfen geçerli bir e-posta adresi girin.')), 'err'); }
@@ -525,7 +525,7 @@ window.kvProspectus = function(mode){
     '.foot{margin-top:28px;border-top:1px solid #DCE9E6;padding-top:12px;color:#6B7C7D;font-size:12px;text-align:center}.bar{position:sticky;top:0;background:#0A211F;color:#fff;padding:10px 16px;margin:-28px -24px 20px;display:flex;gap:12px;align-items:center;justify-content:space-between;font-size:13px}' +
     '.bar button{background:#0D8A80;color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer}@media print{.bar{display:none}body{padding:0}}';
   var statusTxt = kt(co.status === 'approved' ? 'Doğrulanmış firma · Kervea' : 'Başvurusu inceleniyor · Kervea');
-  var doc = '<!DOCTYPE html><html lang="' + L + '" dir="' + (rtl ? 'rtl' : 'ltr') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escapeHtml(raw.name) + ' — Kervea</title><style>' + css + '</style></head><body>' +
+  var doc = '<!DOCTYPE html><html lang="' + (/^(tr|en|es|fr|ar|ru)$/.test(L) ? L : 'en') + '" dir="' + (rtl ? 'rtl' : 'ltr') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + escapeHtml(raw.name) + ' — Kervea</title><style>' + css + '</style></head><body>' +
     '<div class="bar"><span>' + escapeHtml(raw.name) + '</span><button type="button" onclick="window.print()">' + escapeHtml(kt('Prospektüsü aç ve yazdır / PDF kaydet')) + '</button></div>' +
     '<div class="hdr">' + logo + '<div><h1>' + escapeHtml(raw.name) + '</h1><div class="sub">' + escapeHtml(sub) + ' · ' + escapeHtml(statusTxt) + '</div></div></div>' +
     (raw.description ? '<h2>' + escapeHtml(kt('Firma özeti')) + '</h2><div class="desc">' + escapeHtml(raw.description) + '</div>' : '') +
@@ -537,8 +537,10 @@ window.kvProspectus = function(mode){
     (mode === 'print' ? '<script>window.addEventListener("load",function(){setTimeout(function(){window.print()},500)})<\/script>' : '') +
     '</body></html>';
   var url = URL.createObjectURL(new Blob([doc], { type: 'text/html;charset=utf-8' }));
-  var w = window.open(url, '_blank');
-  if(!w){ say(kt('Prospektüs penceresi açılamadı: tarayıcınızın açılır pencere engelini bu site için kapatın.'), true); URL.revokeObjectURL(url); return; }
+  // an anchor click opens the document without giving it a handle on this page (window.open with 'noopener' always returns null)
+  var a = document.createElement('a');
+  a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+  document.body.appendChild(a); a.click(); a.remove();
   say('');
   setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
 };

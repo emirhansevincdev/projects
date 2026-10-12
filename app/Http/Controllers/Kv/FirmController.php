@@ -42,6 +42,12 @@ class FirmController extends Controller
                 ->orWhere('description', 'like', $like));
         }
 
+        if ($viewer['scoped'] && (! empty($v['cc']) || ! empty($v['q']))) {
+            // Firms of other sectors are shown masked, so they must not be searchable by the attributes that are masked
+            // (country, name, products, HS codes): otherwise filters + the stable locked id would rebuild them one query at a time.
+            $q->whereIn('sector_id', $viewer['tree']);
+        }
+
         $criteria = ['dir' => $v['dir'] ?? null, 'cc' => $v['cc'] ?? null, 'sec' => $secId, 'q' => $v['q'] ?? null];
         $hasCriteria = (bool) array_filter([$criteria['cc'], $criteria['sec'], $criteria['q']]);
 
@@ -81,7 +87,11 @@ class FirmController extends Controller
         $myChapters = array_unique(array_map(fn ($h) => substr(preg_replace('/\D/', '', $h), 0, 2), $myHs));
         $myTokens = array_filter(preg_split('/[\s,;]+/u', mb_strtolower((string) $mine->products)), fn ($t) => mb_strlen($t) >= 4);
 
-        $rows = Company::approved()->with('sector')->where('id', '!=', $mine->id)->limit(500)->get();
+        // Matches are firms of the member's OWN sector; other sectors are reached through "Kişiler" with credits.
+        // (Scoring other sectors would let a member probe their masked HS codes by editing their own profile.)
+        $rows = Company::approved()->with('sector')->where('id', '!=', $mine->id)
+            ->when($viewer['scoped'], fn ($w) => $w->whereIn('sector_id', $viewer['tree']))
+            ->limit(500)->get();
         $scored = $rows->map(function (Company $c) use ($mine, $myChapters, $myTokens) {
             $sameSector = $c->sector_id && $c->sector_id === $mine->sector_id;
             $theirHs = array_filter(array_map('trim', preg_split('/[,;\s]+/', (string) $c->hs_codes)));
@@ -125,7 +135,7 @@ class FirmController extends Controller
             if ($viewer['company_id'] !== null && $viewer['company_id'] === $c->id) {
                 $card = FirmPresenter::card($c, $score, false);
             } elseif (! FirmPresenter::inScope($viewer, $c)) {
-                $card = FirmPresenter::card($c, $score, true, 'sector');
+                $card = FirmPresenter::card($c, null, true, 'sector');       // no score either: it would leak token/country/HS hits
             } elseif (! $viewer['premium'] && $open >= FirmPresenter::FREE_FIRM_LIMIT) {
                 $card = FirmPresenter::card($c, $score, true, 'plan');
             } else {

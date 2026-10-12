@@ -351,7 +351,8 @@ class MessageController extends Controller
     {
         $me = $this->me($r);
         $other = Company::approved()->where('slug', $slug)->first();
-        if (! $other) {
+        // A firm outside the member's sector looks exactly like a firm that does not exist (no name, no existence oracle).
+        if (! $other || ! \App\Services\Kv\FirmPresenter::inScope(\App\Services\Kv\FirmPresenter::viewer($r->user(), $r), $other)) {
             return $this->fail('not_found');
         }
         return $this->json(Messaging::eligibility($me, $r->user(), $other) + ['company' => ['slug' => $other->slug, 'name' => $other->name]]);

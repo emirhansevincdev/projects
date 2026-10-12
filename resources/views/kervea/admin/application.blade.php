@@ -25,6 +25,13 @@
 <table><thead><tr><th>Tür</th><th>Durum</th><th>Sürüm</th><th>IP</th><th>Zaman</th></tr></thead><tbody>
 @foreach($company->consents as $c)<tr><td>{{ $c->type }}</td><td>{{ $c->granted ? 'Verildi' : 'Verilmedi/geri alındı' }}</td><td>{{ $c->version }}</td><td>{{ $c->ip }}</td><td>{{ $c->created_at->format('d.m.Y H:i') }}</td></tr>@endforeach
 </tbody></table></div>
+@php $kvTopSectors = \App\Models\Kv\Sector::whereNull('parent_id')->orderBy('meta_idx')->get(); $kvCurRoot = $company->sector ? ($company->sector->parent_id ?: $company->sector->id) : null; @endphp
+<div class="card"><h3 style="margin-top:0">Sektör değişikliği</h3>
+ <p class="k" style="margin:0 0 8px">Üyeler sektörünü kendileri değiştiremez (kim kimi görür, kime yazar ve kredi ile kime ulaşır buna bağlıdır). Üye destek isterse buradan değiştirin.</p>
+ <form method="post" action="{{ route('admin.kervea.company.sector', $company) }}" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">@csrf
+  <select name="sector_id">@foreach($kvTopSectors as $s)<option value="{{ $s->id }}" @selected($s->id === $kvCurRoot)>{{ $s->name('tr') }}</option>@endforeach</select>
+  <button class="btn" onclick="return confirm('Firmanın sektörü değiştirilsin mi?')">Sektörü değiştir</button></form>
+</div>
 @if($company->status==='pending')
 <div class="card" style="display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start">
  <form method="post" action="{{ route('admin.kervea.approve', $company) }}">@csrf<button class="btn" onclick="return confirm('Başvuru onaylansın ve üyeye bağlantı gönderilsin mi?')">Onayla</button></form>

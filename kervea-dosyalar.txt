@@ -189,6 +189,7 @@ app/Services/Kv/SocialAuth.php
 app/Services/Kv/SocialAuthException.php
 app/Services/Kv/TeamService.php
 app/Services/Kv/Totp.php
+app/Support/CanonicalUrl.php
 app/View/Components/AppLayout.php
 app/View/Components/GuestLayout.php
 artisan
@@ -245,6 +246,7 @@ database/migrations/2026_10_12_300001_create_kv_messaging_tables.php
 database/migrations/2026_10_12_400001_create_kv_analytics_tables.php
 database/migrations/2026_10_12_500001_create_kv_activity_table.php
 database/migrations/2026_10_12_900001_create_kv_newsletter_table.php
+database/migrations/2026_10_12_900002_add_confirmed_at_to_kv_newsletter.php
 database/seeders/DatabaseSeeder.php
 database/seeders/KerveaSeeder.php
 database/seeders/data/i18n.json
@@ -812,8 +814,10 @@ resources/views/kervea/mail/application_approved.blade.php
 resources/views/kervea/mail/application_received.blade.php
 resources/views/kervea/mail/application_rejected.blade.php
 resources/views/kervea/mail/new_message.blade.php
+resources/views/kervea/mail/newsletter_confirm.blade.php
 resources/views/kervea/mail/sector_match.blade.php
 resources/views/kervea/mail/team_invite.blade.php
+resources/views/kervea/newsletter-result.blade.php
 resources/views/kervea/partials/firm-modal.blade.php
 resources/views/kervea/partials/footer.blade.php
 resources/views/kervea/partials/head-seo.blade.php

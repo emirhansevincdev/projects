@@ -3,7 +3,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="csrf-token" content="{{ csrf_token() }}">
-{!! str_replace(['__KV_BASE__', '__KV_PRICE__'], [rtrim(config('app.url'), '/'), (int) config('kervea.premium.price_usd')], view('kervea.partials.head-seo')->render()) !!}
+{!! str_replace(['__KV_BASE__', '__KV_PRICE__'], [e(rtrim(config('app.url'), '/')), (int) config('kervea.premium.price_usd')], view('kervea.partials.head-seo')->render()) !!}
 <link rel="stylesheet" href="{{ asset('kervea/css/kervea.css') }}?v={{ config('kervea.asset_version') }}">
 @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)
 <link rel="stylesheet" href="{{ asset('kervea/css/kv-'.$kvFeature.'.css') }}?v={{ config('kervea.asset_version') }}">

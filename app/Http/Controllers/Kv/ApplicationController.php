@@ -53,10 +53,10 @@ class ApplicationController extends Controller
             'certificates' => 'nullable|string|max:500',
             'social' => 'nullable|array',
             'social.*' => 'nullable|string|max:200',
-            'logo' => ($creating ? 'required' : 'sometimes')."|file|mimetypes:image/jpeg,image/png,image/webp|max:{$u['logo_max_kb']}",
-            'cover' => "nullable|file|mimetypes:image/jpeg,image/png,image/webp|max:{$u['image_max_kb']}",
+            'logo' => ($creating ? 'required' : 'sometimes')."|file|mimetypes:image/jpeg,image/png,image/webp|dimensions:max_width=8000,max_height=8000|max:{$u['logo_max_kb']}",
+            'cover' => "nullable|file|mimetypes:image/jpeg,image/png,image/webp|dimensions:max_width=8000,max_height=8000|max:{$u['image_max_kb']}",
             'photos' => "nullable|array|max:{$u['max_photos']}",
-            'photos.*' => "file|mimetypes:image/jpeg,image/png,image/webp|max:{$u['image_max_kb']}",
+            'photos.*' => "file|mimetypes:image/jpeg,image/png,image/webp|dimensions:max_width=8000,max_height=8000|max:{$u['image_max_kb']}",
             'documents' => ($creating ? 'required' : 'nullable')."|array|max:{$u['max_docs']}",
             'documents.*' => "file|mimetypes:application/pdf,image/jpeg,image/png,image/webp|max:{$u['doc_max_kb']}",
         ];

@@ -43,6 +43,10 @@ class OrderController extends Controller
             if (! $promo || ! $promo->isUsable()) {
                 return response()->json(['error' => 'invalid_promo'], 422);
             }
+            // one redemption per company: a code cannot be used again (and again) by the same firm to farm free years / bonus credits
+            if (Order::where('company_id', $company->id)->where('promo_code_id', $promo->id)->where('status', 'paid')->exists()) {
+                return response()->json(['error' => 'invalid_promo'], 422);
+            }
             $discount = $promo->discountFor($price);
         }
         $total = max(0, $price - $discount);
@@ -60,6 +64,9 @@ class OrderController extends Controller
         }
         if ($total === 0) {
             $this->markPaid($order, 'promo-free-'.$order->id, 'promo');
+            if ($order->status !== 'paid') {
+                return response()->json(['error' => 'invalid_promo'], 422);          // the code ran out (or was used by this firm) meanwhile
+            }
             return response()->json(['ok' => true, 'order' => $order->id, 'paid' => true]);
         }
 
@@ -205,6 +212,30 @@ class OrderController extends Controller
         DB::transaction(function () use ($order, $ref, $provider) {
             $locked = Order::whereKey($order->id)->lockForUpdate()->first();
             if (! $locked || $locked->status === 'paid') return;
+
+            // Promo codes are redeemed here, atomically, never at order creation. A FREE order whose code ran out meanwhile (or that this
+            // firm already redeemed) is cancelled instead of delivered; an order that was paid for is always delivered (the customer paid).
+            if ($locked->kind !== Order::KIND_CREDITS && $locked->promo_code_id) {
+                $free = (int) $locked->amount_cents === 0;
+                if ($free && $locked->company_id) {
+                    Company::whereKey($locked->company_id)->lockForUpdate()->first();            // serialises this firm's free orders
+                    $again = Order::where('company_id', $locked->company_id)->where('promo_code_id', $locked->promo_code_id)
+                        ->where('status', 'paid')->where('id', '!=', $locked->id)->exists();
+                    if ($again) {
+                        $locked->forceFill(['status' => 'cancelled'])->save();
+                        $order->refresh();
+                        return;
+                    }
+                }
+                if (! PromoCode::redeem((int) $locked->promo_code_id)) {
+                    if ($free) {
+                        $locked->forceFill(['status' => 'cancelled'])->save();
+                        $order->refresh();
+                        return;
+                    }
+                    Log::warning('kv: promo code used up while a paid order was in flight', ['order' => $locked->id, 'promo' => $locked->promo_code_id]);
+                }
+            }
             $locked->forceFill(['status' => 'paid', 'paid_at' => now(), 'provider' => $provider, 'provider_ref' => $locked->provider_ref ?: $ref])->save();
 
             $company = $locked->company_id ? Company::find($locked->company_id) : null;
@@ -218,7 +249,6 @@ class OrderController extends Controller
                     Log::warning('kv: paid credits order without a company to credit', ['order' => $locked->id]);
                 }
             } else {
-                if ($locked->promo_code_id) PromoCode::where('id', $locked->promo_code_id)->increment('used_count');
                 // the subscription belongs to the company OWNER, whoever (team member with billing rights) paid
                 $user = ($company && $company->user_id ? User::find($company->user_id) : null) ?: User::find($locked->user_id);
                 if ($user) {

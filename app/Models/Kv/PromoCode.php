@@ -19,6 +19,17 @@ class PromoCode extends Model
         return true;
     }
 
+    /**
+     * Take one use of the code atomically (the guarded UPDATE is the only thing that can say "no" under concurrency).
+     * Unlimited codes (max_uses NULL) always succeed.
+     */
+    public static function redeem(int $id): bool
+    {
+        return static::query()->whereKey($id)
+            ->where(fn ($w) => $w->whereNull('max_uses')->orWhereColumn('used_count', '<', 'max_uses'))
+            ->increment('used_count') > 0;
+    }
+
     /** Discount in cents for a given amount. */
     public function discountFor(int $amountCents): int
     {

@@ -4,6 +4,8 @@ namespace Tests\Feature\Kv;
 
 use App\Models\Kv\NewsletterSubscriber;
 use App\Models\User;
+use App\Mail\Kv\KvMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\RateLimiter;
 
 class NewsletterTest extends KvTestCase
@@ -49,16 +51,62 @@ class NewsletterTest extends KvTestCase
         $this->assertSame($a->status(), $b->status());
     }
 
-    public function test_someone_who_left_can_sign_up_again_with_fresh_proof(): void
+    public function test_someone_who_left_cannot_be_signed_up_again_by_a_third_party(): void
     {
+        Mail::fake();
         $this->sub([], ['User-Agent' => 'old'])->assertOk();
-        NewsletterSubscriber::firstOrFail()->forceFill(['unsubscribed_at' => now()->subDay()])->save();
+        NewsletterSubscriber::firstOrFail()->forceFill(['unsubscribed_at' => now()->subDay(), 'confirmed_at' => now()->subDays(2)])->save();
+        Mail::fake();                                                              // forget the first confirmation mail
 
-        $this->sub([], ['User-Agent' => 'new'])->assertOk();
+        $this->sub([], ['User-Agent' => 'attacker'])->assertOk()->assertExactJson(['ok' => true]);   // same answer, nothing changes
         $row = NewsletterSubscriber::firstOrFail();
-        $this->assertNull($row->unsubscribed_at);
-        $this->assertSame('new', $row->consent_user_agent);
-        $this->assertSame(1, NewsletterSubscriber::count());
+        $this->assertNotNull($row->unsubscribed_at, 'the opt-out must survive');
+        $this->assertSame('old', $row->consent_user_agent);
+        Mail::assertNothingSent();
+    }
+
+    public function test_signing_up_sends_a_confirmation_mail_and_only_the_click_makes_it_active(): void
+    {
+        Mail::fake();
+        $this->sub()->assertOk();
+        $row = NewsletterSubscriber::firstOrFail();
+        $this->assertNull($row->confirmed_at);
+        Mail::assertSent(KvMail::class, fn (KvMail $m) => $m->hasTo('ayse@example.com') && $m->template === 'newsletter_confirm'
+            && str_contains($m->data['url'], '/kv/newsletter/confirm/'.$row->id.'?') && str_contains($m->data['url'], 'signature='));
+
+        // a forged / unsigned link does nothing
+        $this->get('/kv/newsletter/confirm/'.$row->id)->assertStatus(403);
+        $this->get('/kv/newsletter/confirm/'.$row->id.'?signature=abc')->assertStatus(403);
+        $this->assertNull($row->fresh()->confirmed_at);
+
+        $this->get($row->confirmUrl())->assertOk()->assertSee('Aboneliğiniz onaylandı');
+        $this->assertNotNull($row->fresh()->confirmed_at);
+    }
+
+    public function test_the_confirmation_mail_is_not_repeated_within_an_hour(): void
+    {
+        Mail::fake();
+        $this->sub()->assertOk();
+        $this->sub()->assertOk();
+        $this->sub()->assertOk();
+        Mail::assertSent(KvMail::class, 1);
+        $this->travel(61)->minutes();
+        $this->sub()->assertOk();
+        Mail::assertSent(KvMail::class, 2);
+    }
+
+    public function test_the_signed_unsubscribe_link_removes_the_address_and_cannot_be_forged(): void
+    {
+        Mail::fake();
+        $this->sub()->assertOk();
+        $row = NewsletterSubscriber::firstOrFail();
+        $row->forceFill(['confirmed_at' => now()])->save();
+
+        $this->get('/kv/newsletter/unsubscribe/'.$row->id)->assertStatus(403);
+        $this->assertNull($row->fresh()->unsubscribed_at);
+        $this->get($row->unsubscribeUrl())->assertOk()->assertSee('Listeden çıkarıldınız');
+        $this->assertNotNull($row->fresh()->unsubscribed_at);
+        $this->get($row->unsubscribeUrl())->assertOk();                           // idempotent
     }
 
     public function test_invalid_input_is_rejected_with_validation_errors(): void
@@ -138,8 +186,11 @@ class NewsletterTest extends KvTestCase
 
     public function test_csv_export_contains_active_subscribers_with_proof_and_neutralises_formulas(): void
     {
+        Mail::fake();
         $this->sub(['email' => 'alpha@example.com', 'locale' => 'en'], ['User-Agent' => '=HYPERLINK("http://evil")'])->assertOk();
         $this->sub(['email' => 'gone@example.com'])->assertOk();
+        $this->sub(['email' => 'unconfirmed@example.com'])->assertOk();
+        NewsletterSubscriber::whereIn('email', ['alpha@example.com', 'gone@example.com'])->update(['confirmed_at' => now()]);
         NewsletterSubscriber::where('email', 'gone@example.com')->update(['unsubscribed_at' => now()]);
 
         $res = $this->actingAs($this->admin())->get('/admin/kervea/newsletter/export')->assertOk();
@@ -150,6 +201,8 @@ class NewsletterTest extends KvTestCase
         $this->assertStringContainsString('alpha@example.com', $csv);
         $this->assertStringContainsString('127.0.0.1', $csv);
         $this->assertStringNotContainsString('gone@example.com', $csv);                       // unsubscribed addresses are not exported
+        $this->assertStringNotContainsString('unconfirmed@example.com', $csv);                // nor are addresses nobody confirmed
+        $this->assertStringContainsString('/kv/newsletter/unsubscribe/', $csv);               // every row carries its own opt-out link
         $this->assertStringContainsString("'=HYPERLINK", $csv);                                // formula injection neutralised
         $this->assertStringNotContainsString(',=HYPERLINK', $csv);
     }

@@ -45,12 +45,25 @@ class MemberController extends Controller
                 $consents[$t] = $c->hasConsent($t);
             }
         }
-        return response()->json([
-            'user' => AuthController::userPayload($r->user()),
-            'company' => $c ? FirmPresenter::detail($c, $r->user()) + [
+        $company = null;
+        if ($c) {
+            $company = FirmPresenter::detail($c, $r->user()) + [
                 'status' => $c->status,
                 'raw' => $c->only(['name', 'name_en', 'tax_id', 'mersis', 'founded_year', 'employees', 'country_cc', 'city', 'address', 'website', 'kep', 'email', 'phone', 'rep_name', 'rep_title', 'rep_email', 'direction', 'hs_codes', 'moq', 'incoterm', 'payment_terms', 'products', 'description', 'certificates', 'social']),
-            ] : null,
+            ];
+            // Team members without the "profile" permission never receive identity numbers or contact data (they cannot open that tab):
+            // the values are replaced by a dot so the completeness figures on the overview still count them as filled.
+            $ctx = CompanyContext::forRequest($r);
+            if ($ctx && ! in_array('profile', $ctx['perms'], true)) {
+                foreach (['tax_id', 'mersis', 'kep', 'address', 'website', 'email', 'phone', 'rep_name', 'rep_email'] as $k) {
+                    if (! empty($company['raw'][$k])) $company['raw'][$k] = '•';
+                }
+                unset($company['contact']);
+            }
+        }
+        return response()->json([
+            'user' => AuthController::userPayload($r->user()),
+            'company' => $company,
             'consents' => $consents,
             'documents' => $c ? $c->documents->map(fn ($d) => [
                 'name' => $d->original_name, 'mime' => $d->mime, 'size' => $d->size, 'at' => $d->created_at->toDateString(),
@@ -131,9 +144,16 @@ class MemberController extends Controller
             }
         }
         if (isset($v['sector'])) {
+            // The sector decides who a firm can see, message and reach with credits, so members cannot hop between sectors:
+            // only the same sector is accepted here; a real change goes through Kervea support (admin edits the firm).
             $sec = Sector::where('meta_idx', (int) $v['sector'])->whereNull('parent_id')->first();
             abort_unless($sec, 422);
-            $c->sector_id = $sec->id;
+            $current = Sector::query()->whereKey($c->sector_id)->first();
+            $currentRoot = $current ? (int) ($current->parent_id ?: $current->id) : null;
+            if ($currentRoot !== null && $currentRoot !== (int) $sec->id) {
+                return response()->json(['error' => 'sector_locked', 'message' => 'Sektör değişikliği yalnızca Kervea ekibi tarafından yapılır. Lütfen İletişim sayfasından bize yazın.'], 422);
+            }
+            if ($currentRoot === null) $c->sector_id = $sec->id;
         }
         foreach (['name', 'name_en', 'founded_year', 'employees', 'city', 'address', 'website', 'kep', 'email', 'phone', 'rep_name', 'rep_title', 'rep_email', 'direction', 'hs_codes', 'moq', 'incoterm', 'payment_terms', 'products', 'description', 'certificates'] as $f) {
             if (array_key_exists($f, $v)) $c->{$f} = is_string($v[$f]) ? strip_tags($v[$f]) : $v[$f];

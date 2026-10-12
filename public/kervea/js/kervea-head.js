@@ -30,8 +30,13 @@ window.escapeHtml = function(str){
 window.sanitizeUrl = function(url){
   if(!url) return '#';
   var u = String(url).trim();
-  // Data/JavaScript URI'leri engelle
-  if(/^(javascript|data|vbscript):/i.test(u)) return '#';
+  // Allow-list: the browser strips tabs/newlines/control characters inside a scheme ("java\tscript:"), so a deny-list test on
+  // the raw text is bypassable. Resolve the URL the way the browser will and accept only http, https, mailto and tel.
+  try{
+    var p = new URL(u, window.location.origin).protocol;
+    if(['http:','https:','mailto:','tel:'].indexOf(p) === -1) return '#';
+  }catch(e){ return '#'; }
+  if(/^[\u0000-\u001f]/.test(u)) return '#';
   return u;
 };
 

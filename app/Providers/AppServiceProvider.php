@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \App\Support\CanonicalUrl::apply();      // never build links from the Host header (see the class)
         Paginator::useBootstrap();
 
         // Reset / first-time password links open the Kervea page, not the legacy template view.

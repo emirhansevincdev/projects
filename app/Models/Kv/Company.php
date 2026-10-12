@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Company extends Model
 {
     protected $table = 'kv_companies';
-    protected $guarded = ['id', 'status', 'is_verified', 'user_id', 'reviewed_at', 'reviewed_by'];
+    protected $guarded = ['id', 'status', 'is_verified', 'user_id', 'reviewed_at', 'reviewed_by', 'credit_balance'];
     protected $casts = ['social' => 'array', 'is_verified' => 'boolean', 'reviewed_at' => 'datetime'];
 
     public const STATUS_PENDING = 'pending';

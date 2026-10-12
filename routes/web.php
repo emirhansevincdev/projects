@@ -63,6 +63,7 @@ Route::prefix('admin/kervea')->name('admin.kervea.')->middleware(['auth', 'admin
     Route::get('applications/{company}', 'applicationShow')->name('application');
     Route::post('applications/{company}/approve', 'approve')->name('approve');
     Route::post('applications/{company}/reject', 'reject')->name('reject');
+    Route::post('applications/{company}/sector', 'companySector')->name('company.sector');
     Route::get('documents/{document}', 'document')->name('document');
     Route::get('companies', 'companies')->name('companies');
     Route::post('companies/{company}/status', 'companyStatus')->name('company.status');
@@ -109,13 +110,13 @@ Route::prefix('kv')->group(function () {
         Route::get('me', [\App\Http\Controllers\Kv\MemberController::class, 'show']);
         Route::get('matches', [\App\Http\Controllers\Kv\FirmController::class, 'matches'])->middleware('throttle:30,1');
         Route::post('me/documents', [\App\Http\Controllers\Kv\MemberController::class, 'addDocuments'])->middleware('throttle:10,10');
-        Route::get('me/export', [\App\Http\Controllers\Kv\MemberController::class, 'export']);
-        Route::put('me/company', [\App\Http\Controllers\Kv\MemberController::class, 'update']);
-        Route::post('me/consents', [\App\Http\Controllers\Kv\MemberController::class, 'consent']);
-        Route::delete('me', [\App\Http\Controllers\Kv\MemberController::class, 'destroy']);
-        Route::post('auth/2fa/start', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorStart']);
-        Route::post('auth/2fa/confirm', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorConfirm']);
-        Route::post('auth/2fa/disable', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorDisable']);
+        Route::get('me/export', [\App\Http\Controllers\Kv\MemberController::class, 'export'])->middleware('throttle:6,10,kv-me-export');
+        Route::put('me/company', [\App\Http\Controllers\Kv\MemberController::class, 'update'])->middleware('throttle:30,10,kv-me-update');
+        Route::post('me/consents', [\App\Http\Controllers\Kv\MemberController::class, 'consent'])->middleware('throttle:20,10,kv-me-consent');
+        Route::delete('me', [\App\Http\Controllers\Kv\MemberController::class, 'destroy'])->middleware('throttle:5,10,kv-me-delete');
+        Route::post('auth/2fa/start', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorStart'])->middleware('throttle:10,10,kv-2fa-start');
+        Route::post('auth/2fa/confirm', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorConfirm'])->middleware('throttle:10,10,kv-2fa-confirm');
+        Route::post('auth/2fa/disable', [\App\Http\Controllers\Kv\AuthController::class, 'twoFactorDisable'])->middleware('throttle:5,10,kv-2fa-disable');
         Route::post('orders', [\App\Http\Controllers\Kv\OrderController::class, 'store'])->middleware('throttle:10,1');
     });
 

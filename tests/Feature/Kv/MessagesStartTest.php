@@ -194,7 +194,7 @@ class MessagesStartTest extends MessagesTestCase
 
         $this->actingAs($a)->getJson("/kv/messages/can-message/{$cb->slug}")->assertOk()->assertJson(['can' => true, 'reason' => null, 'conversation_id' => null, 'is_pro' => true]);
         $this->actingAs($b)->getJson("/kv/messages/can-message/{$ca->slug}")->assertOk()->assertJson(['can' => false, 'reason' => 'pro_required', 'is_pro' => false]);
-        $this->actingAs($a)->getJson("/kv/messages/can-message/{$cc->slug}")->assertOk()->assertJson(['can' => false, 'reason' => 'sector_mismatch']);
+        $this->actingAs($a)->getJson("/kv/messages/can-message/{$cc->slug}")->assertNotFound();     // other sector = indistinguishable from a firm that does not exist
         $this->actingAs($a)->getJson("/kv/messages/can-message/{$ca->slug}")->assertOk()->assertJson(['can' => false, 'reason' => 'self']);
         $this->actingAs($a)->getJson('/kv/messages/can-message/nobody')->assertNotFound();
 

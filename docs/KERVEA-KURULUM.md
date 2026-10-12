@@ -85,7 +85,7 @@ Bu depodaki `config/database.php` artık parolayı `.env`'den (`DB_*`) okur; bet
 | Anahtar | Not |
 |---|---|
 | `APP_ENV=production`, `APP_DEBUG=false` | **Zorunlu.** Debug açıkken hata sayfaları sır sızdırır. |
-| `APP_URL=https://kervea.ai` | Sitenin tarayıcıda açıldığı **tam adres** (https, `www` yok, sonda `/` yok). Betiğin sağlık testi ve Google/LinkedIn yönlendirme adresi buradan alınır. |
+| `APP_URL=https://kervea.ai` | Sitenin tarayıcıda açıldığı **tam adres** (https, `www` yok, sonda `/` yok). Betiğin sağlık testi ve Google/LinkedIn yönlendirme adresi buradan alınır. **Güvenlik:** e-postadaki parola/davet/onay bağlantıları da yalnızca buradan üretilir (sahte `Host` başlığıyla bağlantı yönlendirilemez). `localhost` / `127.0.0.1` / `*.test` yazılırsa bu koruma kapanır; canlıda gerçek adres yazılmalı. |
 | `SESSION_SECURE_COOKIE=true` | HTTPS'te. |
 | `MAIL_*` | **Zorunlu.** Onay e-postası (parola belirleme bağlantısı) gitmeden hiçbir üye giriş yapamaz. SPF/DKIM/DMARC kurulmalı. |
 | `KERVEA_ADMIN_EMAIL` | Yeni başvuru / iletişim bildirimi gidecek adres (boşsa tüm yöneticilere). |
@@ -230,6 +230,8 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 Hepsi sunucuda hesaplanır ve denetlenir; arayüz yalnızca gösterir. Yeni tabloların hepsi `kervea-deploy.sh` ile otomatik oluşur (`2026_10_*` dosyaları).
 
 ### Sektör kuralı ve Premium kilidi
+* **Üye sektörünü kendisi değiştiremez** (hangi firmaları gördüğü, kime yazabildiği ve kredi ile kime ulaştığı buna bağlıdır). Değişiklik isteyen üye için: Yönetici → Başvurular/Firmalar → firma sayfası → **Sektör değişikliği**.
+* Başka sektördeki firmalar kart olarak (maskeli) görünür, **ad/ülke/ürün/HS koduyla aranamaz** ve Eşleşmeler listesine girmez; bu sektördeki kişilere **Kişiler** sekmesinden ulaşılır.
 * Üye, **kendi sektöründeki** firmaları (alt sektörleri dahil) görür. Başka sektördeki firmalar kartta kilitli ve maskeli gelir (ad, ülke, HS kodu sunucudan hiç gönderilmez); o sektörün insanlarına **Kişiler** sekmesinden kredi ile ulaşılır.
 * Aynı sektörde ilk 3 firma açık, kalanı Premium ile açılır. **Firma ve kişi iletişim bilgileri (e-posta, telefon, web, adres, WhatsApp) her zaman Premium'dur** ve firma iznine bağlıdır; misafir ve ücretsiz üye bunları hiçbir yoldan göremez.
 * Yönetici bu kuraldan etkilenmez.
@@ -238,6 +240,7 @@ Hepsi sunucuda hesaplanır ve denetlenir; arayüz yalnızca gösterir. Yeni tabl
 * Başvurusu **onaylanan her yeni üyeye otomatik 50 kredi** yüklenir (`KERVEA` ayarı: `config/kervea.php` → `credits.signup`). Eski üyelere bir kez dağıtmak için: `php artisan kervea:credits-backfill --dry-run`, sonra `php artisan kervea:credits-backfill`. Defter ile bakiye uyuşuyor mu: `php artisan kervea:credits-backfill --audit`.
 * Her Premium alımında **+100 kredi** hediye. Paketler (`config/kervea.php` → `credits.packs`): 100 kredi $10 · 500 kredi $45 · 1000 kredi $85. Fiyatlar **müşteri onayı bekleyen taslak değerlerdir**.
 * Kredi yalnızca **farklı sektördeki kişilerin** e-posta (1 kredi) ve telefon (1 kredi) bilgisini açmak içindir. Aynı kişiyi tekrar açmak kredi harcamaz. Her hareket `kv_credit_ledger` defterine yazılır; yönetici **Krediler** sayfasından firma bazında görür ve düzeltme yapabilir.
+* Promosyon kodu: bir firma aynı kodu **bir kez** kullanabilir; "en fazla kullanım" sınırı eşzamanlı isteklerde de aşılmaz. %100 indirimli kod Premium'u ve +100 krediyi **bir kez** verir.
 * Satın alma: Stripe Checkout (kart bilgisi sitemize hiç gelmez). `STRIPE_SECRET` yoksa sipariş "bekliyor" kalır, yönetici **Siparişler**'den ödendi işaretler (kredi o anda yüklenir, tekrar işaretlemek çift yükleme yapmaz).
 
 ### Kişiler
@@ -257,7 +260,7 @@ Hepsi sunucuda hesaplanır ve denetlenir; arayüz yalnızca gösterir. Yeni tabl
 * **Aktivite** sekmesi kimin neyi yaptığını gösterir (giriş, davet, izin değişikliği, iletişim açma …); yönetici **Ekipler** sayfasından tüm firmaların ekiplerini görür.
 
 ### Bülten
-Ana sayfadaki e-posta formu `kv_newsletter_subscribers` tablosuna yazar (çift kayıt ve spam sınırlı); yönetici **Bülten** sayfasından listeyi görür ve CSV indirir. Otomatik toplu e-posta gönderimi yoktur.
+Ana sayfadaki form **çift onaylıdır**: adres kaydedilir, sahibine "Aboneliği onayla" e-postası gider (aynı adrese saatte en fazla bir kez); yalnızca bağlantıya tıklayanlar aktif olur. Böylece kimse başkasının adresini kaydedemez. Yönetici → **Bülten** sayfasında durumlar: *Onay bekliyor · Onaylı · Ayrıldı*. **CSV yalnızca onaylı ve ayrılmamış adresleri** içerir ve her satırda o kişiye özel **çıkış bağlantısı** vardır: bülteninizin altına bu bağlantıyı koyun (toplu gönderim aracınızda bir sütun olarak). Çıkış yapan adres, formdan tekrar eklenemez. Otomatik toplu e-posta gönderimi sitede yoktur.
 
 ### Dil
 Altı dil (TR, EN, ES, FR, AR, RU). TR ve EN eksiksizdir; diğer diller **ana dili o olan biri tarafından gözden geçirilmelidir** — çeviri bulunamazsa İngilizce, o da yoksa Türkçe gösterilir (ham anahtar asla görünmez). Arapçada sayfa yönü otomatik sağdan sola döner.

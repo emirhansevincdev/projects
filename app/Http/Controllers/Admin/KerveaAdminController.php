@@ -40,6 +40,20 @@ class KerveaAdminController extends Controller
         return view('kervea.admin.application', compact('company', 'country'));
     }
 
+    /** Members cannot change their own sector (it decides who they can see, message and reach with credits); support does it here. */
+    public function companySector(Request $r, Company $company)
+    {
+        $v = $r->validate(['sector_id' => 'required|integer|exists:kv_sectors,id']);
+        $sec = Sector::findOrFail((int) $v['sector_id']);
+        abort_if($sec->parent_id !== null, 422, 'Ana sektör seçin.');
+        $old = $company->sector_id;
+        $company->sector_id = $sec->id;
+        $company->subsector_id = null;
+        $company->save();
+        class_exists(\App\Services\Kv\Activity::class) && \App\Services\Kv\Activity::log($company->id, $r->user()->id, 'sector.change', ['from' => $old, 'to' => $sec->id]);
+        return back()->with('ok', 'Sektör güncellendi.');
+    }
+
     public function document(CompanyDocument $document)
     {
         abort_unless(Storage::disk('local')->exists($document->path), 404);

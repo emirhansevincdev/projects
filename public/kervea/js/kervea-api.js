@@ -41,7 +41,17 @@ function setBusy(btn, on){ if(!btn) return; btn.disabled = !!on; btn.style.opaci
 // ───────────────────────── oturum (sunucu = gerçek) ─────────────────────────
 window.KV_USER = BOOT.user || null;
 window.kvIsLoggedIn = function(){ return !!window.KV_USER; };
+var kvWho = null;                       // e-mail of the signed-in member ('' = signed out); null until the first applyUser
+// A different person (or nobody) is now signed in on this page: nothing of the previous member may stay in memory or in the form fields.
+function kvResetClientState(){
+  try{ ME=null; window.KV_ME=null; FIRM_CACHE={}; POS=[]; }catch(e){}
+  try{ document.querySelectorAll('#dp-profile input, #dp-profile textarea, #dp-profile select').forEach(function(f){ if(f.type==='checkbox'||f.type==='radio') f.checked=false; else if(f.tagName!=='SELECT') f.value=''; }); }catch(e){}
+  try{ document.dispatchEvent(new CustomEvent('kv:logout')); }catch(e){}
+}
 function applyUser(u){
+  var who = u ? String(u.email||'') : '';
+  if(kvWho !== null && who !== kvWho) kvResetClientState();
+  kvWho = who;
   window.KV_USER = u || null;
   if(u){
     window.USER = {plan:u.plan, name:u.name, email:u.email, company:u.company, is_admin:!!u.is_admin};
@@ -406,7 +416,8 @@ var ME=null;
 function loadMember(){
   if(!window.KV_USER) return;
   api('GET','/kv/me').then(function(r){
-    if(!r.ok) return; ME=r.data; fillPanel();
+    if(!r.ok || !window.KV_USER) return;                              // a reply that arrives after sign-out must not repopulate the page
+    ME=r.data; fillPanel();
     window.KV_ME=ME;                                                   // panel features (kv-*.js) read the member payload from here
     try{ document.dispatchEvent(new CustomEvent('kv:member',{detail:ME})); }catch(e){}
   });
