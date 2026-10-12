@@ -534,9 +534,9 @@ window.showPanel=function(sec,btn){
 
 
 // ───────────────────────── panel: gerçek veri olmayan bölümler gizlenir ─────────────────────────
-// Aktivite ve Prospektüs sekmeleri için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur.
+// Prospektüs sekmesi için henüz gerçek veri kaynağı yok: sahte içerik göstermek yerine kapalı tutulur.
 (function(){
-  var hide=['activity','prospect'], css='';          // messages, people, analytics and team are real now (kv-*.js)
+  var hide=['prospect'], css='';          // messages, people, analytics, team and activity are real now (kv-*.js)
   hide.forEach(function(k){ css+='.dmenu a[onclick*="showPanel(\''+k+'\'"]{display:none!important}#dp-'+k+'{display:none!important}'; });
   var st=document.createElement('style'); st.id='kv-hide-mock'; st.textContent=css; document.head.appendChild(st);
 })();

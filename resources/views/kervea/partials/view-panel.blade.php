@@ -543,85 +543,35 @@
      </div>
     </div>
 
-    <!-- TEAM MANAGEMENT -->
+    <!-- TEAM MANAGEMENT (kv-team.js renders the list from GET /kv/team) -->
     <div class="dpanel" id="dp-team">
-     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+     <div class="kvt-head">
       <div>
-       <h2 data-i18n="tm_title">Ekip Yönetimi</h2>
-       <p class="sub" data-i18n="tm_sub">Firmanızda birden fazla kullanıcı hesabı yönetin. Roller ve izinler.</p>
+       <h2 data-i18n="kvt_title">Ekip Yönetimi</h2>
+       <p class="sub" data-i18n="kvt_sub">Firmanız için çalışma arkadaşlarınızı davet edin, rollerini ve erişebilecekleri bölümleri belirleyin.</p>
       </div>
-      <div style="display:flex;gap:10px;align-items:center">
-       <span style="font-size:12px;color:var(--faint)"><b style="color:var(--ink)">4/10</b> <span data-i18n="tm_seats">koltuk</span></span>
-       <button class="btn" onclick="openInviteModal()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg><span data-i18n="tm_invite">Kullanıcı Davet Et</span></button>
-      </div>
-     </div>
-     <div class="tm-tbl">
-      <div class="tm-thd">
-       <div data-i18n="tm_col_user">KULLANICI</div><div class="col-role" data-i18n="tm_role">ROL</div><div class="col-perms" data-i18n="tm_perms">İZİNLER</div><div class="col-last" data-i18n="tm_last">SON ETKİNLİK</div><div data-i18n="tm_status">DURUM</div><div></div>
-      </div>
-      <div class="tm-row" id="tm-emrah"><div class="tm-user"><div class="av" style="background:linear-gradient(135deg,#0D8A80,#0A5F56)">EY</div><div><b>Emrah Yılmaz</b><span>emrah@kervea.com · Sen</span></div></div>
-       <div class="col-role"><span class="tm-role-badge owner" data-i18n="tm_owner">Sahip</span></div>
-       <div class="col-perms" style="font-size:12px;color:var(--body)" data-i18n="tm_p_all">Tüm modüller</div>
-       <div class="col-last" style="font-size:12px;color:var(--faint)">Şu an aktif</div>
-       <div><span class="tm-status ok"><span class="dot"></span><span data-i18n="tm_active">Aktif</span></span></div>
-       <div style="text-align:right;position:relative"><button class="tm-dot" onclick="toggleTmMenu('emrah',this)" title="Menu">⋮</button></div>
-      </div>
-      <div class="tm-row" id="tm-selin"><div class="tm-user"><div class="av" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">SD</div><div><b>Selin Demir</b><span>selin.demir@kervea.com</span></div></div>
-       <div class="col-role"><span class="tm-role-badge admin" data-i18n="tm_admin">Yönetici</span></div>
-       <div class="col-perms" style="font-size:12px;color:var(--body)" data-i18n="tm_p_all">Tüm modüller</div>
-       <div class="col-last" style="font-size:12px;color:var(--faint)">2 saat önce</div>
-       <div><span class="tm-status ok"><span class="dot"></span><span data-i18n="tm_active">Aktif</span></span></div>
-       <div style="text-align:right;position:relative"><button class="tm-dot" onclick="toggleTmMenu('selin',this)" title="Menu">⋮</button></div>
-      </div>
-      <div class="tm-row" id="tm-mehmet"><div class="tm-user"><div class="av" style="background:linear-gradient(135deg,#c78a2a,#e6a54a)">MK</div><div><b>Mehmet Karaca</b><span>mehmet.k@kervea.com</span></div></div>
-       <div class="col-role"><span class="tm-role-badge sales" data-i18n="tm_sales">Satış</span></div>
-       <div class="col-perms" style="font-size:12px;color:var(--body)" data-i18n="tm_p_msg">Sadece mesajlaşma</div>
-       <div class="col-last" style="font-size:12px;color:var(--faint)">Dün 18:34</div>
-       <div><span class="tm-status ok"><span class="dot"></span><span data-i18n="tm_active">Aktif</span></span></div>
-       <div style="text-align:right;position:relative"><button class="tm-dot" onclick="toggleTmMenu('mehmet',this)" title="Menu">⋮</button></div>
-      </div>
-      <div class="tm-row" id="tm-ayse"><div class="tm-user"><div class="av" style="background:linear-gradient(135deg,#3b82f6,#60a5fa)">AŞ</div><div><b>Ayşe Şahin</b><span>ayse.sahin@kervea.com</span></div></div>
-       <div class="col-role"><span class="tm-role-badge ops" data-i18n="tm_ops">Operasyon</span></div>
-       <div class="col-perms" style="font-size:12px;color:var(--body)" data-i18n="tm_p_prof">Profil + Doküman</div>
-       <div class="col-last" style="font-size:12px;color:var(--faint)">3 gün önce</div>
-       <div><span class="tm-status wn"><span class="dot"></span><span data-i18n="tm_pending">Beklemede</span></span></div>
-       <div style="text-align:right;position:relative"><button class="tm-dot" onclick="toggleTmMenu('ayse',this)" title="Menu">⋮</button></div>
+      <div class="kvt-head-actions">
+       <span class="kvt-seats" id="kvtSeats" hidden></span>
+       <button class="btn" type="button" id="kvtInviteBtn" disabled><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg><span data-i18n="kvt_invite">Kullanıcı Davet Et</span></button>
       </div>
      </div>
-     <div style="margin-top:16px;background:linear-gradient(135deg,var(--card),var(--paper));border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:20px">
-      <div>
-       <h4 style="font-family:var(--serif);font-size:14px;margin-bottom:6px;color:var(--ink)">Rol tabanlı erişim kontrolü</h4>
-       <p style="font-size:12px;color:var(--body);line-height:1.6">Her kullanıcının erişebileceği modüller ve gerçekleştirebileceği işlemler rolüne göre otomatik ayarlanır. Sahip &gt; Yönetici &gt; Satış = Operasyon &gt; Sadece görüntüleme.</p>
-      </div>
-      <div style="border-left:1px solid var(--line);padding-left:20px">
-       <div style="font-family:var(--serif);font-size:20px;font-weight:700;color:var(--teal)">4</div>
-       <div style="font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em">Aktif kullanıcı</div>
-      </div>
-      <div style="border-left:1px solid var(--line);padding-left:20px">
-       <div style="font-family:var(--serif);font-size:20px;font-weight:700;color:var(--ink)">6</div>
-       <div style="font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em">Boş koltuk</div>
-      </div>
-     </div>
+     <div class="kvt-state" id="kvtState" role="status" aria-live="polite"><span data-i18n="kvt_loading">Yükleniyor…</span></div>
+     <div class="tm-tbl kvt-tbl" id="kvtTable" hidden></div>
+     <div class="kvt-empty" id="kvtEmpty" hidden></div>
+     <div class="kvt-info" id="kvtInfo" hidden></div>
     </div>
 
-    <!-- ACTIVITY TIMELINE -->
+    <!-- ACTIVITY (kv-team.js renders the list from GET /kv/activity) -->
     <div class="dpanel" id="dp-activity">
-     <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+     <div class="kvt-head">
       <div>
-       <h2 data-i18n="ac_title">Aktivite Zaman Çizelgesi</h2>
-       <p class="sub" data-i18n="ac_sub">Son 30 günün tam kaydı.</p>
+       <h2 data-i18n="kvt_ac_title">Aktivite</h2>
+       <p class="sub" data-i18n="kvt_ac_sub">Firmanızın panelindeki son hareketler: ekip değişiklikleri, profil ve belge güncellemeleri, girişler.</p>
       </div>
      </div>
-     <div class="ac-filters">
-      <span class="ac-fx active" onclick="acFilter(this,'all')" data-i18n="ac_filter_all">Tümü</span>
-      <span class="ac-fx" onclick="acFilter(this,'msg')" data-i18n="ac_filter_msg">Mesajlar</span>
-      <span class="ac-fx" onclick="acFilter(this,'match')" data-i18n="ac_filter_match">Eşleşmeler</span>
-      <span class="ac-fx" onclick="acFilter(this,'doc')" data-i18n="ac_filter_doc">Belgeler</span>
-      <span class="ac-fx" onclick="acFilter(this,'prof')" data-i18n="ac_filter_prof">Profil</span>
-     </div>
-     <div class="ac-timeline" id="acList">
-      <!-- Populated by renderActivity() -->
-     </div>
+     <div class="ac-filters" id="kvtAcFilters" role="tablist"></div>
+     <div class="kvt-state" id="kvtAcState" role="status" aria-live="polite"><span data-i18n="kvt_loading">Yükleniyor…</span></div>
+     <div class="ac-timeline" id="acList" hidden></div>
     </div>
 
     <!-- PROSPECT -->
