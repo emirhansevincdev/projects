@@ -205,7 +205,7 @@ class SocialLogin {
 
     if (response.success) {
 
-      getPhotoFromUrl(context, user, googleUser.photoUrl!);
+      getPhotoFromUrl(context, user, googleUser.photoUrl);
     } else {
       QuickHelp.hideLoadingDialog(context);
       QuickHelp.showErrorResult(context, response.error!.code);
@@ -296,31 +296,39 @@ class SocialLogin {
   }
 
   static void getPhotoFromUrl(
-      BuildContext context, UserModel user, String url) async {
-    File avatar = await QuickHelp.downloadFile(url, "avatar.jpeg") as File;
+      BuildContext context, UserModel user, String? url) async {
+    // The whole body used to run with no error handling: a missing photo
+    // URL (common - not every Google/Facebook account has one) or any
+    // network hiccup during the download threw here, and since nothing
+    // ever reached goHome() in that case, the non-dismissible loading
+    // dialog from showLoadingDialog() stayed on screen forever (seen as a
+    // stuck gray screen until the app was force-closed and reopened).
+    try {
+      if (url != null && url.isNotEmpty) {
+        File avatar = await QuickHelp.downloadFile(url, "avatar.jpeg") as File;
 
-    ParseFileBase parseFile;
-    if (QuickHelp.isWebPlatform()) {
-      //Seems weird, but this lets you get the data from the selected file as an Uint8List very easily.
-      ParseWebFile file =
-          ParseWebFile(null, name: "avatar.jpeg", url: avatar.path);
-      await file.download();
-      parseFile = ParseWebFile(file.file, name: file.name);
-    } else {
-      parseFile = ParseFile(File(avatar.path));
+        ParseFileBase parseFile;
+        if (QuickHelp.isWebPlatform()) {
+          //Seems weird, but this lets you get the data from the selected file as an Uint8List very easily.
+          ParseWebFile file =
+              ParseWebFile(null, name: "avatar.jpeg", url: avatar.path);
+          await file.download();
+          parseFile = ParseWebFile(file.file, name: file.name);
+        } else {
+          parseFile = ParseFile(File(avatar.path));
+        }
+
+        user.setAvatar = parseFile;
+        //user.setAvatar1 = parseFile;
+
+        await user.save();
+      }
+    } catch (error) {
+      print("getPhotoFromUrl: avatar download/save failed - $error");
     }
 
-    user.setAvatar = parseFile;
-    //user.setAvatar1 = parseFile;
-
-    final ParseResponse response = await user.save();
-    if (response.success) {
-      saveAgencyEarn(context, user);
-      goHome(context, user);
-    } else {
-      saveAgencyEarn(context, user);
-      goHome(context, user);
-    }
+    saveAgencyEarn(context, user);
+    goHome(context, user);
   }
 
   static saveAgencyEarn(BuildContext context, UserModel user){
