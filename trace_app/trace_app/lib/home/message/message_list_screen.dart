@@ -26,6 +26,7 @@ import '../greetings/greetings_from_new_friend_screen.dart';
 import '../notifications/notifications_screen.dart';
 import '../official_announcement/official_announcement_screen.dart';
 import '../report/report_screen.dart';
+import '../search/global_search_widget.dart';
 
 // ignore_for_file: must_be_immutable
 class MessagesListScreen extends StatefulWidget {
@@ -322,6 +323,20 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
           fontWeight: FontWeight.w900,
         ),
         actions: [
+          IconButton(
+            onPressed: () => showGlobalSearch(
+              currentUser: widget.currentUser!,
+              context: context,
+              onlyEvent: false,
+              onlyLives: false,
+              onlyUsers: true,
+            ),
+            icon: Icon(
+              Icons.search_rounded,
+              color: isDarkMode ? Colors.white : kGrayColor,
+              size: 22,
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(
@@ -344,11 +359,11 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
         children: [
           ContainerCorner(
             width: size.width,
-            height: 110,
-            marginTop: 10,
+            height: 78,
+            marginTop: 6,
             child: GridView.count(
               crossAxisCount: 4,
-              childAspectRatio: .7,
+              childAspectRatio: 1.1,
               physics: NeverScrollableScrollPhysics(),
               children: List.generate(
                 officialMessagesIcons.length,
@@ -388,16 +403,18 @@ class _MessagesListScreenState extends State<MessagesListScreen> {
             QuickHelp.goToNavigatorScreen(context, screenTogo);
           },
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
                 iconURL,
-                width: size.width / 7,
-                height: size.width / 7,
+                width: size.width / 10,
+                height: size.width / 10,
                 //color: kTra,
               ),
               TextWithTap(
                 caption,
-                marginTop: 5,
+                marginTop: 3,
+                fontSize: 11,
                 alignment: Alignment.center,
                 textAlign: TextAlign.center,
               ),
