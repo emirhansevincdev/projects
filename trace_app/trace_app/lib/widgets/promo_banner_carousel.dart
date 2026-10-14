@@ -107,14 +107,11 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
             onPageChanged: (index) => setState(() => _page = index),
             itemBuilder: (context, index) {
               OfficialAnnouncementModel banner = _banners[index];
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                child: GestureDetector(
-                  onTap: () => _openBanner(banner),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(18),
-                    child: banner.getPreviewImage?.url != null
+              return GestureDetector(
+                onTap: () => _openBanner(banner),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: banner.getPreviewImage?.url != null
                         ? CachedNetworkImage(
                             imageUrl: banner.getPreviewImage!.url!,
                             fit: BoxFit.cover,
@@ -124,7 +121,6 @@ class _PromoBannerCarouselState extends State<PromoBannerCarousel> {
                             ),
                           )
                         : Container(color: kPrimaryColor.withOpacity(0.15)),
-                  ),
                 ),
               );
             },
