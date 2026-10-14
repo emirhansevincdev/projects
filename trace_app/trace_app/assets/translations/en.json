@@ -2776,9 +2776,10 @@
   },
 
   "go_live_options": {
-    "video_stream": "Video Stream",
+    "video_stream": "Live Stream",
     "live_party": "Live Party",
-    "audio_stream": "Audio Stream",
+    "audio_stream": "Voice Room",
+    "game_stream": "Game Stream",
     "music_": "Music",
     "dancing_": "dancing",
     "cosplay_": "Cosplay",

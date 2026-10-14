@@ -2776,9 +2776,10 @@
   },
 
   "go_live_options": {
-    "video_stream": "Video Yayımı",
+    "video_stream": "Canlı Yayım",
     "live_party": "Canlı Parti",
-    "audio_stream": "Səsli Yayım",
+    "audio_stream": "Səs Otağı",
+    "game_stream": "Oyun Yayımı",
     "music_": "Musiqi",
     "dancing_": "rəqs",
     "cosplay_": "Cosplay",

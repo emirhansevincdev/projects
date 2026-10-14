@@ -158,7 +158,7 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
     )
       ..audioVideoView.foregroundBuilder = hostAudioVideoViewForegroundBuilder
       ..preview.showPreviewForHost = false
-      ..bottomMenuBar.hostExtendButtons = [shareMediaButton, privateLiveBtn]
+      ..bottomMenuBar.hostExtendButtons = [giftButton, privateLiveBtn, shareMediaButton]
       ..avatarBuilder = (BuildContext context, Size size, ZegoUIKitUser? user,
           Map extraInfo) {
         return user != null
@@ -344,7 +344,7 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
             ..audioVideoView.useVideoViewAspectFill = true
             ..audioVideoView.showUserNameOnView = true
             ..audioVideoView.containerRect = () {
-              return Rect.fromLTWH(0, 0, size.width, size.height / 1.4);
+              return Rect.fromLTWH(0, 0, size.width, size.height);
             }
             ..audioVideoView.containerBuilder = (
                 context,
@@ -354,7 +354,7 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
                 ) {
               return SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: 550,
+                height: size.height,
                 child: GridView.count(
                   physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(left: 10, right: 10, top: 120),
@@ -599,32 +599,22 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
               )
                   : const SizedBox();
             }
+            // Just the viewer count badge up here - the avatar row of
+            // watching users has been moved down into customUiComponent(),
+            // under the room header, to match the reference layout.
             ..memberButton.builder = (number) {
               return ContainerCorner(
-                width: 70,
-                height: 40,
+                height: 26,
                 marginRight: 5,
-                child: Stack(
-                  alignment: Alignment.centerRight,
-                  clipBehavior: Clip.none,
-                  children: [
-                    getTopGifters(),
-                    Positioned(
-                      right: -7,
-                      child: ContainerCorner(
-                        color: Colors.black38,
-                        borderRadius: 50,
-                        child: TextWithTap(
-                          QuickHelp.convertToK(number),
-                          color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          marginLeft: 3,
-                          marginRight: 3,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ],
+                color: Colors.black38,
+                borderRadius: 50,
+                child: TextWithTap(
+                  QuickHelp.convertToK(number),
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  marginLeft: 8,
+                  marginRight: 8,
+                  fontSize: 11,
                 ),
               );
             }
@@ -688,6 +678,7 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
 
   ZegoLiveStreamingMenuBarExtendButton get privateLiveBtn =>
       ZegoLiveStreamingMenuBarExtendButton(
+        index: 1,
         child: IconButton(
           style: IconButton.styleFrom(
             shape: const CircleBorder(),
@@ -1089,7 +1080,9 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
 
   ZegoLiveStreamingMenuBarExtendButton get shareMediaButton =>
       ZegoLiveStreamingMenuBarExtendButton(
-        index: 0,
+        // No explicit index: falls to the end of the bar (after the gift
+        // and private-live buttons), making it the first to overflow into
+        // the "..." more menu once the bar's maxCount is exceeded.
         child: Obx((){
           return ContainerCorner(
             color: Colors.white,
@@ -1578,6 +1571,13 @@ class MultiUsersLiveScreenState extends State<MultiUsersLiveScreen> with TickerP
               ],
             );
           },
+        ),
+        Positioned(
+          left: 15,
+          right: 15,
+          top: 95,
+          height: 32,
+          child: getTopGifters(),
         ),
         Obx((){
           return Positioned(

@@ -61,7 +61,10 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
 
   var liveTagsSelected = [];
 
-  int pagesIndex = 1;
+  // Defaults to the "party" tab (index 3 in the reordered
+  // video/audio/game/party list below), matching the previous default when
+  // party was at index 1.
+  int pagesIndex = 3;
 
   bool showTempAlert = false;
   bool showErrorOnTitleInput = false;
@@ -111,9 +114,15 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
 
   var liveTypeOptionTitle = [
     "go_live_options.video_stream".tr(),
-    "go_live_options.live_party".tr(),
     "go_live_options.audio_stream".tr(),
+    "go_live_options.game_stream".tr(),
+    "go_live_options.live_party".tr(),
   ];
+
+  // Underlying live flow for each tab above (same index order): "game"
+  // reuses the plain camera-broadcast flow - it's a label/category only,
+  // not a separate streaming mode.
+  static const List<String> _liveTypeKind = ["video", "audio", "game", "party"];
 
   @override
   void initState() {
@@ -211,7 +220,8 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
                 automaticallyImplyLeading: false,
                 backgroundColor: kTransparentColor,
                 leading: Visibility(
-                  visible: pagesIndex == 0,
+                  visible: _liveTypeKind[pagesIndex] == "video" ||
+                      _liveTypeKind[pagesIndex] == "game",
                   child: IconButton(
                     onPressed: () => switchCamera(),
                     icon: const Icon(
@@ -586,7 +596,8 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
 
   Widget footer() {
     var size = MediaQuery.of(context).size;
-    if (pagesIndex == 0) {
+    String kind = _liveTypeKind[pagesIndex];
+    if (kind == "video" || kind == "game") {
       return ContainerCorner(
         color: kVioletColor,
         borderWidth: 0,
@@ -619,7 +630,7 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
           fontWeight: FontWeight.bold,
         ),
       );
-    } else if (pagesIndex == 1) {
+    } else if (kind == "party") {
       return ContainerCorner(
         width: size.width,
         marginLeft: 15,
@@ -877,7 +888,8 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
 
   Widget background() {
     var size = MediaQuery.of(context).size;
-    if (pagesIndex == 0) {
+    String kind = _liveTypeKind[pagesIndex];
+    if (kind == "video" || kind == "game") {
       if (cameraController == null) {
         return ContainerCorner(
           borderWidth: 0,
@@ -888,7 +900,7 @@ class _LivePreviewScreenState extends State<LivePreviewScreen>
       } else {
         return CameraPreview(cameraController!);
       }
-    } else if (pagesIndex == 1) {
+    } else if (kind == "party") {
       return Image.asset(
         "assets/images/live_bg.png",
         height: size.height,

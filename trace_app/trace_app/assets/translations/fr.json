@@ -2702,9 +2702,10 @@
     "pk_explain": "Une vitrine passionnante de compétence, de stratégie et de compétition, où les champions se lèvent et les légendes se forgent dans la bataille."
   },
   "go_live_options": {
-    "video_stream": "Diffusion Vidéo",
+    "video_stream": "Diffusion en Direct",
     "live_party": "Fête en Direct",
-    "audio_stream": "Diffusion Audio",
+    "audio_stream": "Salon Vocal",
+    "game_stream": "Diffusion de Jeu",
     "music_": "Musique",
     "dancing_": "Danse",
     "cosplay_": "Cosplay",

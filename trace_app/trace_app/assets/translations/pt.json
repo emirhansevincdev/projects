@@ -2703,9 +2703,10 @@
     "pk_explain": "Um emocionante showcase de habilidade, estratégia e competição, onde campeões surgem e lendas são forjadas na batalha."
   },
   "go_live_options": {
-    "video_stream": "Transmissão de Vídeo",
+    "video_stream": "Transmissão ao Vivo",
     "live_party": "Festa ao Vivo",
-    "audio_stream": "Transmissão de Áudio",
+    "audio_stream": "Sala de Voz",
+    "game_stream": "Transmissão de Jogo",
     "music_": "Música",
     "dancing_": "Dançando",
     "cosplay_": "Cosplay",
