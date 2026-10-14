@@ -29,6 +29,7 @@ import 'package:trace/models/UserModel.dart';
 import 'package:trace/ui/container_with_corner.dart';
 import 'package:trace/ui/text_with_tap.dart';
 import 'package:trace/widgets/promo_banner_carousel.dart';
+import 'package:trace/widgets/user_discovery_list.dart';
 import 'package:trace/utils/colors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../models/StoriesAuthorsModel.dart';
@@ -285,7 +286,11 @@ class _FeedHomeScreenState extends State<FeedHomeScreen>
       body: Column(
         children: [
           PromoBannerCarousel(currentUser: widget.currentUser),
-          Expanded(child: initQuery(false)),
+          Expanded(
+            child: SingleChildScrollView(
+              child: UserDiscoveryList(currentUser: widget.currentUser!),
+            ),
+          ),
         ],
       ),
     );
