@@ -66,6 +66,7 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
   var numbersCaptions = [
     "tab_profile.followings_".tr(),
     "tab_profile.followers_".tr(),
+    "tab_profile.friends_".tr(),
     "profile_list_menu.moments_".tr(),
   ];
 
@@ -594,6 +595,10 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
         currentUser: widget.currentUser,
         isFollowers: true,
       ),
+      FollowersScreen(
+        currentUser: widget.currentUser,
+        isFriends: true,
+      ),
       MyMomentsScreen(
         currentUser: widget.currentUser,
       ),
@@ -602,9 +607,14 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
       ),
     ];
 
+    int friendsCount = widget.currentUser!.getFollowers!
+        .where((id) => widget.currentUser!.getFollowing!.contains(id))
+        .length;
+
     var numbers = [
       widget.currentUser!.getFollowing!.length,
       widget.currentUser!.getFollowers!.length,
+      friendsCount,
       widget.currentUser!.getPostIdList!.length,
     ];
 
@@ -720,7 +730,7 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
                   caption: numbersCaptions[index],
                   screenToGo: numbersCaptionsScreens[index],
                   number: numbers[index],
-                  visitor: index == 2 ? true : false,
+                  visitor: index == 3 ? true : false,
                 ),
               ),
             ),

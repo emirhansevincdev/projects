@@ -1433,6 +1433,7 @@
     "level_": "Sv.",
     "followings_": "Takip Edilenler",
     "followers_": "Takipçiler",
+    "friends_": "Arkadaşlarım",
     "close_friends": "Yakın arkadaşlar",
     "visitors_": "Ziyaretçiler",
     "noble_privileges": "Soylu ayrıcalıkları",
@@ -1638,10 +1639,13 @@
   "followers_screen": {
     "follower_": "Takipçiler",
     "following_": "Takip Edilenler",
+    "friends_": "Arkadaşlarım",
     "followers_amount": "Takipçi sayısı: {amount}",
     "following_amount": "Takip edilen sayısı: {amount}",
+    "friends_amount": "Arkadaş sayısı: {amount}",
     "no_followers": "Takipçiniz yok",
-    "no_followings": "Kimseyi takip etmiyorsunuz"
+    "no_followings": "Kimseyi takip etmiyorsunuz",
+    "no_friends": "Henüz karşılıklı takipleştiğin kimse yok"
   },
   "visit_screen": {
     "my_visitors": "Ziyaretçilerim",

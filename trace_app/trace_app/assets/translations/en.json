@@ -1433,6 +1433,7 @@
     "level_": "Lv.",
     "followings_": "Following",
     "followers_": "Followers",
+    "friends_": "My Friends",
     "close_friends": "Close friends",
     "visitors_": "Visitors",
     "noble_privileges": "Noble privileges",
@@ -1638,10 +1639,13 @@
   "followers_screen": {
     "follower_": "Followers",
     "following_": "Following",
+    "friends_": "My Friends",
     "followers_amount": "Number of followers: {amount}",
     "following_amount": "Number of following: {amount}",
+    "friends_amount": "Number of friends: {amount}",
     "no_followers": "You have no followers",
-    "no_followings": "You are not following anyone"
+    "no_followings": "You are not following anyone",
+    "no_friends": "You don't have any mutual friends yet"
   },
   "visit_screen": {
     "my_visitors": "My visitors",

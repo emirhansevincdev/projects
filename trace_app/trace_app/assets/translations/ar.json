@@ -1431,6 +1431,7 @@
     "level_": "المستوى:",
     "followings_": "المتابِعون",
     "followers_": "المتابَعون",
+    "friends_": "أصدقائي",
     "close_friends": "الأصدقاء المقرَّبون",
     "visitors_": "الزوار",
     "noble_privileges": "امتيازات النبلاء",
@@ -1636,10 +1637,13 @@
   "followers_screen": {
     "follower_": "متابعون",
     "following_": "متابعة",
+    "friends_": "أصدقائي",
     "followers_amount": "عدد المتابعين: {amount}",
     "following_amount": "عدد المستخدمين المتابعين: {amount}",
+    "friends_amount": "عدد الأصدقاء: {amount}",
     "no_followers": "ليس لديك متابعين",
-    "no_followings": "أنت لا تتابع أي شخص"
+    "no_followings": "أنت لا تتابع أي شخص",
+    "no_friends": "ليس لديك أصدقاء متبادلون بعد"
   },
   "visit_screen": {
     "my_visitors": "زواري",

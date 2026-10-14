@@ -18,8 +18,12 @@ import '../profile/user_profile_screen.dart';
 class FollowersScreen extends StatefulWidget {
   UserModel? currentUser;
   bool? isFollowers;
+  // Karşılıklı takipleşilen kullanıcılar ("Arkadaşlarım"). true olduğunda
+  // isFollowers göz ardı edilir.
+  bool? isFriends;
 
-  FollowersScreen({this.currentUser, this.isFollowers, Key? key})
+  FollowersScreen(
+      {this.currentUser, this.isFollowers, this.isFriends, Key? key})
       : super(key: key);
 
   @override
@@ -30,6 +34,9 @@ class _FollowersScreenState extends State<FollowersScreen> {
   String keyUpdate = "connect";
   List<String> followersIds = [];
   List<String> followingIds = [];
+
+  List<String> get mutualIds =>
+      followersIds.where((id) => followingIds.contains(id)).toList();
 
   @override
   void initState() {
@@ -51,16 +58,22 @@ class _FollowersScreenState extends State<FollowersScreen> {
 
     int followersAmount = widget.currentUser!.getFollowers!.length;
     int followingAmount = widget.currentUser!.getFollowing!.length;
+    int friendsAmount = mutualIds.length;
 
-    String title = widget.isFollowers!
-        ? "followers_screen.follower_".tr()
-        : "followers_screen.following_".tr();
+    String title = widget.isFriends == true
+        ? "followers_screen.friends_".tr()
+        : widget.isFollowers!
+            ? "followers_screen.follower_".tr()
+            : "followers_screen.following_".tr();
 
-    String amountCaption = widget.isFollowers!
-        ? "followers_screen.followers_amount"
-            .tr(namedArgs: {"amount": "$followersAmount"})
-        : "followers_screen.following_amount"
-            .tr(namedArgs: {"amount": "$followingAmount"});
+    String amountCaption = widget.isFriends == true
+        ? "followers_screen.friends_amount"
+            .tr(namedArgs: {"amount": "$friendsAmount"})
+        : widget.isFollowers!
+            ? "followers_screen.followers_amount"
+                .tr(namedArgs: {"amount": "$followersAmount"})
+            : "followers_screen.following_amount"
+                .tr(namedArgs: {"amount": "$followingAmount"});
 
     return Scaffold(
       appBar: AppBar(
@@ -109,7 +122,9 @@ class _FollowersScreenState extends State<FollowersScreen> {
   Widget users() {
     String emptyMessage = "";
 
-    if (widget.isFollowers!) {
+    if (widget.isFriends == true) {
+      emptyMessage = "followers_screen.no_friends".tr();
+    } else if (widget.isFollowers!) {
       emptyMessage = "followers_screen.no_followers".tr();
     } else {
       emptyMessage = "followers_screen.no_followings".tr();
@@ -118,7 +133,9 @@ class _FollowersScreenState extends State<FollowersScreen> {
     QueryBuilder<UserModel> queryBuilder =
         QueryBuilder<UserModel>(UserModel.forQuery());
 
-    if (widget.isFollowers!) {
+    if (widget.isFriends == true) {
+      queryBuilder.whereContainedIn(UserModel.keyId, mutualIds);
+    } else if (widget.isFollowers!) {
       queryBuilder.whereContainedIn(UserModel.keyId, followersIds);
     } else {
       queryBuilder.whereContainedIn(UserModel.keyId, followingIds);
@@ -156,7 +173,7 @@ class _FollowersScreenState extends State<FollowersScreen> {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      if(widget.isFollowers! && widget.currentUser!.getLevelUserVip! > 4 && widget.currentUser!.getMysteryMan!)
+                      if(widget.isFollowers == true && widget.currentUser!.getLevelUserVip! > 4 && widget.currentUser!.getMysteryMan!)
                         ContainerCorner(
                           width: size.width / 6,
                           height: size.width / 6,
@@ -285,7 +302,7 @@ class _FollowersScreenState extends State<FollowersScreen> {
   }
 
   Widget button(UserModel user) {
-    if (widget.isFollowers!) {
+    if (widget.isFollowers == true || widget.isFriends == true) {
 
       if (followersIds.contains(user.objectId) &&
           followingIds.contains(user.objectId)) {

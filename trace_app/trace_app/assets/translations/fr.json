@@ -1432,6 +1432,7 @@
     "level_": "Niv.",
     "followings_": "Abonnements",
     "followers_": "Abonnés",
+    "friends_": "Mes amis",
     "close_friends": "Amis proches",
     "visitors_": "Visiteurs",
     "noble_privileges": "Privilèges nobles",
@@ -1637,10 +1638,13 @@
   "followers_screen": {
     "follower_": "Abonnés",
     "following_": "Abonnements",
+    "friends_": "Mes amis",
     "followers_amount": "Nombre d'abonnés : {amount}",
     "following_amount": "Nombre d'abonnements : {amount}",
+    "friends_amount": "Nombre d'amis : {amount}",
     "no_followers": "Vous n'avez aucun abonné",
-    "no_followings": "Vous ne suivez personne"
+    "no_followings": "Vous ne suivez personne",
+    "no_friends": "Vous n'avez pas encore d'amis en commun"
   },
   "visit_screen": {
     "my_visitors": "Mes visiteurs",
