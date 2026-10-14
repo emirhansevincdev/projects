@@ -127,6 +127,9 @@ class _VideoNewFeedScreenState<V extends VideoInfo>
     widget.api.getListVideo().then((value) {
       temps.addAll(value);
       _notifyDataChanged();
+    }).catchError((e) {
+      debugPrint("VideoNewFeedScreen: getListVideo failed - $e");
+      _notifyDataChanged();
     });
   }
 

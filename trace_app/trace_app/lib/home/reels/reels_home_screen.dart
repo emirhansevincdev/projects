@@ -184,22 +184,36 @@ class _ReelsHomeScreenState extends State<ReelsHomeScreen>
     ParseResponse apiResponse = await queryBuilder.query();
     if (apiResponse.success) {
       if (apiResponse.results != null) {
+        debugPrint(
+            "ReelsHomeScreen: query ok, ${apiResponse.results!.length} post(s) returned");
         for (PostsModel postsModel in apiResponse.results!) {
-          VideoInfo videoInfo = VideoInfo(
+          try {
+            String? videoUrl = postsModel.getVideo?.url;
+            if (videoUrl == null) {
+              debugPrint(
+                  "ReelsHomeScreen: skipping post ${postsModel.objectId} - video field has no URL");
+              continue;
+            }
+            videos.add(VideoInfo(
               postModel: postsModel,
               currentUser: widget.currentUser,
-              url: postsModel.getVideo!
-                  .url);
-
-          videos.add(videoInfo);
+              url: videoUrl,
+            ));
+          } catch (e) {
+            debugPrint(
+                "ReelsHomeScreen: skipping post ${postsModel.objectId} - $e");
+          }
         }
         videos.shuffle();
         return videos;
       } else {
+        debugPrint("ReelsHomeScreen: query ok but results is null");
         return [];
       }
     } else {
-      return []; //apiResponse.error as dynamic;
+      debugPrint(
+          "ReelsHomeScreen: query FAILED - code=${apiResponse.error?.code} message=${apiResponse.error?.message}");
+      return [];
     }
   }
 }
