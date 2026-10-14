@@ -28,6 +28,7 @@ import '../coins_and_points/coins_and_points_screen.dart';
 import '../coins_and_points/points_screen.dart';
 import '../coins_trading/coins_trading_screen.dart';
 import '../contact_us/contact_us_screen.dart';
+import '../family/family_screen.dart';
 import '../fan_club/fan_club_screen.dart';
 import '../feedback/my_feedback_screen.dart';
 import '../guardian_vip/guardian_and_vip_store_screen.dart';
@@ -36,6 +37,7 @@ import '../help/help_screen.dart';
 import '../host_center/host_center_screen.dart';
 import '../invitation/invitation_screen.dart';
 import '../level/level_screen.dart';
+import '../menu/referral_program_screen.dart';
 import '../mvp/mvp_screen.dart';
 import '../my_moments/my_moments_screen.dart';
 import '../my_obtained_items/my_obtained_items.dart';
@@ -271,22 +273,24 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
     "profile_list_menu.host_center".tr(),
     //"profile_list_menu.batter_of_glory".tr(),
     "profile_list_menu.who_viewed_me".tr(),
-    "profile_list_menu.view_record".tr(),
+    "profile_list_menu.family_".tr(),
     "profile_list_menu.customer_service".tr(),
     "profile_list_menu.help_center".tr(),
     "profile_list_menu.feed_back".tr(),
     "profile_list_menu.contact_us".tr(),
+    "profile_screen.op_invite_friends".tr(),
   ];
 
   // Leading icons paired 1:1 with listMenuTitle, purely decorative.
   static const List<IconData> _listMenuIcons = [
     Icons.storefront_outlined,
     Icons.visibility_outlined,
-    Icons.history_rounded,
+    Icons.diversity_3_rounded,
     Icons.support_agent_rounded,
     Icons.help_outline_rounded,
     Icons.feedback_outlined,
     Icons.mail_outline_rounded,
+    Icons.person_add_alt_1_rounded,
   ];
 
   var colors = [Colors.redAccent, Colors.amber, Colors.deepPurpleAccent];
@@ -349,11 +353,10 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
         currentUser: widget.currentUser,
         initialIndex: 0,
       ),
-      VisitScreen(
+      FamilyScreen(
         currentUser: widget.currentUser,
-        initialIndex: 1,
       ),
-      ReportScreen(
+      HelpScreen(
         currentUser: widget.currentUser,
       ),
       HelpScreen(
@@ -363,6 +366,9 @@ class _TabProfileScreenState extends State<TabProfileScreen> {
         currentUser: widget.currentUser,
       ),
       ContactUsScreen(
+        currentUser: widget.currentUser,
+      ),
+      ReferralScreen(
         currentUser: widget.currentUser,
       ),
     ];
