@@ -795,6 +795,7 @@ resources/views/kervea/admin/messages/report.blade.php
 resources/views/kervea/admin/messages/reports.blade.php
 resources/views/kervea/admin/newsletter.blade.php
 resources/views/kervea/admin/orders.blade.php
+resources/views/kervea/admin/pagination.blade.php
 resources/views/kervea/admin/people-import.blade.php
 resources/views/kervea/admin/people-removals.blade.php
 resources/views/kervea/admin/people.blade.php

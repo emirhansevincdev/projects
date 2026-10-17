@@ -14,14 +14,14 @@ return [
     'admin_email' => env('KERVEA_ADMIN_EMAIL'),
 
     // Pricing is decided on the server only; the front-end merely displays it.
-    // Customer still has to confirm the final base fee (240 vs 280 USD).
+    // The final base fee (240 or 280 USD) still has to be confirmed.
     'premium' => [
         'price_usd' => (int) env('KERVEA_PREMIUM_PRICE_USD', 280),
         'currency' => 'USD',
         'period_days' => 365,
     ],
 
-    // "About" copy for the company description (customer spec: 250–300 words).
+    // "About" copy for the company description (250–300 words).
     'description_words' => ['min' => 250, 'max' => 300],
 
     'uploads' => [
@@ -64,7 +64,7 @@ return [
         'country_header' => 'CF-IPCountry', // request header that carries a guest's country (set by Cloudflare); absent = country unknown
     ],
     'team' => [
-        // Seats include the owner (prototype: "4/10 koltuk"): owner + invited/active/disabled people may not exceed this.
+        // Seats include the owner (e.g. "4/10 seats"): owner + invited/active/disabled people may not exceed this.
         'max_members' => 10,
         'invite_days' => 7,                // informational: the password-setup link itself lives as long as auth.passwords.users.expire (24 h); "resend" issues a fresh one
         'invites_per_day' => 20,           // invitation + resend e-mails one company may trigger per rolling 24 h (anti mail-bombing)
@@ -113,7 +113,7 @@ return [
     ],
 
     // Public site details shown on the contact page, About page and footer. Everything is optional: an empty value shows
-    // a clearly marked placeholder (contact / About) or hides the item (social icons) until the customer fills it in .env.
+    // a clearly marked placeholder (contact / About) or hides the item (social icons) until it is filled in .env.
     'frontend' => [
         'contact_email' => env('KERVEA_CONTACT_EMAIL', 'hello@kervea.ai'),
         'contact_phone' => env('KERVEA_CONTACT_PHONE'),

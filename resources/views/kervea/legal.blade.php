@@ -2,7 +2,7 @@
 <html lang="tr" dir="ltr" data-theme="light"><head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; base-uri 'self';"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; form-action 'none'; base-uri 'self';"/>
 <title>{{ $title }} — Kervea</title>
 <meta name="description" content="{{ $title }} — Kervea B2B ticaret eşleştirme ağı."/>
 <link rel="canonical" href="{{ rtrim(config('app.url'), '/') }}/{{ $path }}"/>

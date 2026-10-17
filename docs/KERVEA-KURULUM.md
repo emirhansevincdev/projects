@@ -237,7 +237,7 @@ Hepsi sunucuda hesaplanır ve denetlenir; arayüz yalnızca gösterir. Yeni tabl
 * Yönetici bu kuraldan etkilenmez.
 
 ### Krediler
-* Başvurusu **onaylanan her yeni üyeye otomatik 50 kredi** yüklenir (`KERVEA` ayarı: `config/kervea.php` → `credits.signup`). Eski üyelere bir kez dağıtmak için: `php artisan kervea:credits-backfill --dry-run`, sonra `php artisan kervea:credits-backfill`. Defter ile bakiye uyuşuyor mu: `php artisan kervea:credits-backfill --audit`.
+* Başvurusu **onaylanan her yeni üyeye otomatik 50 kredi** yüklenir (`KERVEA` ayarı: `config/kervea.php` → `credits.signup`). Eski üyelere bir kez dağıtmak için: `php artisan kervea:credits-backfill --dry-run`, sonra `php artisan kervea:credits-backfill`. Defter ile bakiye uyuşuyor mu (yalnızca okur, hiçbir şey yazmaz): `php artisan kervea:credits-backfill --dry-run --audit`.
 * Her Premium alımında **+100 kredi** hediye. Paketler (`config/kervea.php` → `credits.packs`): 100 kredi $10 · 500 kredi $45 · 1000 kredi $85. Fiyatlar **müşteri onayı bekleyen taslak değerlerdir**.
 * Kredi yalnızca **farklı sektördeki kişilerin** e-posta (1 kredi) ve telefon (1 kredi) bilgisini açmak içindir. Aynı kişiyi tekrar açmak kredi harcamaz. Her hareket `kv_credit_ledger` defterine yazılır; yönetici **Krediler** sayfasından firma bazında görür ve düzeltme yapabilir.
 * Promosyon kodu: bir firma aynı kodu **bir kez** kullanabilir; "en fazla kullanım" sınırı eşzamanlı isteklerde de aşılmaz. %100 indirimli kod Premium'u ve +100 krediyi **bir kez** verir.

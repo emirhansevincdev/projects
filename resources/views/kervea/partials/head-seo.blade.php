@@ -1,6 +1,6 @@
 @verbatim
 <!-- CSP: yalnızca kendi alan adımız; dış betik, yazı tipi ya da analitik yok -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; upgrade-insecure-requests; frame-ancestors 'none'; form-action 'self'; base-uri 'self';"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; upgrade-insecure-requests; form-action 'self'; base-uri 'self';"/>
 <title>Kervea — Doğrulanmış firmalarla alıcı ve tedarikçi bulun</title>
 
 <!-- ─── Temel SEO (metinler sitedeki gerçek özellikleri anlatır; ölçülemeyen iddia yok) ─── -->
@@ -13,15 +13,8 @@
 <meta name="application-name" content="Kervea">
 <meta name="format-detection" content="telephone=no">
 
-<!-- ─── Canonical + hreflang ─────────────────────────────────────── -->
-<link rel="canonical" href="__KV_BASE__/">
-<link rel="alternate" hreflang="tr" href="__KV_BASE__/">
-<link rel="alternate" hreflang="en" href="__KV_BASE__/en">
-<link rel="alternate" hreflang="es" href="__KV_BASE__/es">
-<link rel="alternate" hreflang="fr" href="__KV_BASE__/fr">
-<link rel="alternate" hreflang="ar" href="__KV_BASE__/ar">
-<link rel="alternate" hreflang="ru" href="__KV_BASE__/ru">
-<link rel="alternate" hreflang="x-default" href="__KV_BASE__/">
+<!-- ─── Canonical (her sayfa kendi adresini bildirir; dil değişimi tarayıcıda yapıldığı için dile özel adres yoktur) ─── -->
+<link rel="canonical" href="__KV_URL__">
 
 <!-- ─── Favicon paketi ────────────────────────────────────────────── -->
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -34,7 +27,7 @@
 <meta property="og:site_name" content="Kervea">
 <meta property="og:title" content="Kervea — Doğrulanmış firmalarla alıcı ve tedarikçi bulun">
 <meta property="og:description" content="Belgeleri incelenmiş firmaları ülke ve sektöre göre arayın. Pazaryeri değil: sepet, ödeme ve komisyon yok. Listeleme ücretsiz.">
-<meta property="og:url" content="__KV_BASE__/">
+<meta property="og:url" content="__KV_URL__">
 <meta property="og:image" content="__KV_BASE__/og-image.jpg">
 <meta property="og:image:secure_url" content="__KV_BASE__/og-image.jpg">
 <meta property="og:image:type" content="image/jpeg">

@@ -28,6 +28,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:12px 
 .err{background:#fde3e1;border:1px solid #f4b8b3;color:var(--bad);padding:10px 14px;border-radius:10px;margin-bottom:16px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px}.k{color:var(--faint);font-size:12px;text-transform:uppercase;letter-spacing:.4px}.v{margin-bottom:10px;word-break:break-word}
 .empty{text-align:center;color:var(--faint);padding:36px}
+.kv-pg{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 0}.kv-pg a,.kv-pg span{min-width:34px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;text-align:center;font-size:13px;text-decoration:none;color:var(--ink)}.kv-pg .on{background:var(--teal);border-color:var(--teal);color:#fff}.kv-pg .off,.kv-pg .gap{opacity:.45}
 .filters{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.filters a{padding:6px 14px;border-radius:99px;background:#e7f1ef;color:var(--teal-d);text-decoration:none;font-weight:600;font-size:13px}.filters a.on{background:var(--teal);color:#fff}
 @media(max-width:860px){.side{position:static;width:auto}.main{margin:0;padding:18px}.grid2{grid-template-columns:1fr}}
 </style></head><body>
@@ -40,7 +41,7 @@ label{display:block;font-size:13px;font-weight:700;color:var(--ink);margin:12px 
  <a href="{{ route('admin.kervea.contacts') }}" class="{{ request()->routeIs('admin.kervea.contacts*') ? 'on' : '' }}">İletişim Mesajları @if($newMsgs)<span class="n">{{ $newMsgs }}</span>@endif</a>
  <a href="{{ route('admin.kervea.promos') }}" class="{{ request()->routeIs('admin.kervea.promos*') ? 'on' : '' }}">Promosyon Kodları</a>
  <a href="{{ route('admin.kervea.orders') }}" class="{{ request()->routeIs('admin.kervea.orders*') ? 'on' : '' }}">Siparişler</a>
- @foreach(['credits', 'people', 'messages', 'analytics', 'team'] as $kvFeature)@includeIf('kervea.admin.menu.'.$kvFeature)@endforeach
+ @foreach(['credits', 'people', 'messages', 'analytics', 'team', 'frontend'] as $kvFeature)@includeIf('kervea.admin.menu.'.$kvFeature)@endforeach
  <div class="sep"></div>
  <a href="{{ url('/') }}" target="_blank">Siteyi aç ↗</a>
 </aside>

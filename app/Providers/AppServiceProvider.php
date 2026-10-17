@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \App\Support\CanonicalUrl::apply();      // never build links from the Host header (see the class)
-        Paginator::useBootstrap();
+        Paginator::defaultView('kervea.admin.pagination');      // the admin pages' own small pager (no CSS framework needed)
 
         // Reset / first-time password links open the Kervea page, not the legacy template view.
         \Illuminate\Auth\Notifications\ResetPassword::createUrlUsing(function ($user, string $token) {

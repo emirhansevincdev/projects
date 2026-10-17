@@ -161,37 +161,18 @@ class MessagesInboxTest extends MessagesTestCase
     {
         [$a, $ca] = $this->firm('Alpha Textile', true);
         [$b, $cb] = $this->firm('Beta Fabrics');
-        $calls = $this->metricsSpy();
         $id = $this->startConv($a, $cb);
         $this->travel(90)->seconds();
         $this->actingAs($b)->postJson("/kv/conversations/$id/messages", ['body' => 'answer'])->assertCreated();
         $this->actingAs($b)->postJson("/kv/conversations/$id/messages", ['body' => 'follow-up, not an answer'])->assertCreated();
 
-        $calls = $calls();
-        if ($calls === null) {
-            $this->markTestSkipped('Metrics service not present in this branch');
-        }
-        $count = fn ($company, $metric) => collect($calls)->where('0', $company)->where('1', $metric)->count();
-        $sum = fn ($company, $metric) => collect($calls)->where('0', $company)->where('1', $metric)->sum('2');
-        $this->assertSame(2, $count($ca->id, 'msg_received'), 'A received both messages of B');
-        $this->assertSame(1, $count($cb->id, 'msg_received'), 'B received the first message');
-        $this->assertSame(1, $count($cb->id, 'reply_count'), 'only the first message after the other side counts as an answer');
+        $sum = fn ($company, $metric) => (int) \Illuminate\Support\Facades\DB::table('kv_metrics_daily')->where('company_id', $company)->where('metric', $metric)->sum('n');
+        $this->assertSame(2, $sum($ca->id, 'msg_received'), 'A received both messages of B');
+        $this->assertSame(1, $sum($cb->id, 'msg_received'), 'B received the first message');
+        $this->assertSame(1, $sum($cb->id, 'reply_count'), 'only the first message after the other side counts as an answer');
         $this->assertGreaterThanOrEqual(90, $sum($cb->id, 'reply_seconds'));
-        $this->assertSame(0, $count($ca->id, 'reply_count'));
-        $this->assertSame(1, $count($ca->id, 'conv_started'));
-        $this->assertSame(1, $count($cb->id, 'conv_started'));
-    }
-
-    /** Registers a recording stand-in for the analytics service when the real one is not in this branch. @return \Closure(): ?array */
-    private function metricsSpy(): \Closure
-    {
-        if (! class_exists(\App\Services\Kv\Metrics::class)) {
-            eval('namespace App\Services\Kv; class Metrics { public static array $calls = []; public static function inc(int $companyId, string $metric, int $by = 1): void { self::$calls[] = [$companyId, $metric, $by]; } }');
-        }
-        if (! property_exists(\App\Services\Kv\Metrics::class, 'calls')) {
-            return fn () => null;       // the real analytics service: its own tests cover the counters
-        }
-        \App\Services\Kv\Metrics::$calls = [];
-        return fn () => \App\Services\Kv\Metrics::$calls;
+        $this->assertSame(0, $sum($ca->id, 'reply_count'));
+        $this->assertSame(1, $sum($ca->id, 'conv_started'));
+        $this->assertSame(1, $sum($cb->id, 'conv_started'));
     }
 }
