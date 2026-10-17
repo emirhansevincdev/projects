@@ -9,7 +9,7 @@ use App\Models\Kv\Order;
 use App\Models\Kv\PromoCode;
 use App\Services\Kv\CreditService;
 
-/** C5: credit packs and the Premium bonus. Prices come from config, delivery is idempotent, billing permission is required. */
+/** Credit packs and the Premium bonus. Prices come from config, delivery is idempotent, billing permission is required. */
 class CreditOrdersTest extends CreditsTestCase
 {
     private function fakeStripe(): object

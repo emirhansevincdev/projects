@@ -8,7 +8,7 @@ use App\Models\Kv\Sector;
 use App\Services\Kv\FirmPresenter;
 
 /**
- * C1 premium lock + C2 sector scoping. The JSON bodies are checked for the actual secret strings, not just for flags.
+ * Premium lock and sector scoping. The JSON bodies are checked for the actual secret strings, not just for flags.
  */
 class FirmLockTest extends CreditsTestCase
 {

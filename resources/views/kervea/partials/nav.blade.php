@@ -44,7 +44,7 @@
  </div>
  <a class="ghostbtn" onclick="go('login')" data-i18n="nav_login">Giriş</a>
  
- <!-- User Dropdown (DropdownMenu1 adaptasyonu) -->
+ <!-- User Dropdown -->
  <div class="kv-usermenu" id="kvUserMenu" style="display:none">
    <button class="kv-usermenu-trigger" id="kvUserMenuTrigger" onclick="toggleUserMenu(event)" aria-haspopup="menu" aria-expanded="false" aria-label="Panel menüsü">
      <span class="kv-usermenu-avatar" id="kvUserAvatar">K</span>

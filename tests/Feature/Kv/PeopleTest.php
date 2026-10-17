@@ -10,7 +10,7 @@ use App\Models\Kv\RemovalRequest;
 use App\Services\Kv\CreditService;
 use Illuminate\Support\Facades\Mail;
 
-/** C4: the "Kişiler" member API – sector scoping, paid reveal, permissions. Contact data never appears before a reveal. */
+/** The "Kişiler" member API – sector scoping, paid reveal, permissions. Contact data never appears before a reveal. */
 class PeopleTest extends CreditsTestCase
 {
     /** A textile member (sector 10) with 50 credits. */

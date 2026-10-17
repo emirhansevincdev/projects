@@ -214,7 +214,7 @@ Yönetici menüsü: Başvurular · Firmalar · Sektörler (alt sektör ekleme) �
 * **Sahte demo veriler kaldırıldı** (firma, kişi, mesaj, ziyaretçi, ekip, sahte belge listesi). Veri yoksa boş durum gösterilir.
 * **Panel sekmeleri artık gerçek veriyle çalışır** (Mesajlar, Kişiler, Analiz, Ekip, Aktivite; bkz. bölüm 7). **Prospektüs** sekmesi firmanın kendi profil verisinden tek sayfalık tanıtım belgesi üretir (yazdır / PDF kaydet). Hiçbir sekmede örnek/sahte sayı yoktur; veri yoksa boş durum gösterilir.
 * **Kart bilgisi sitede toplanmaz** (PCI). Kart alanları gizlidir; ödeme sağlayıcının sayfasında alınır.
-* amCharts harita paketi (ücretsiz lisans) kendi sunucumuzdan yüklenir; lisans gereği amCharts logosu görünür kalmalıdır.
+* Dünya küresi amCharts 5 ile çizilir ve kendi sunucumuzdan yüklenir. amCharts'ın ücretsiz lisansı logosunun görünür kalmasını şart koşar; sitede logo **gizlidir**. Canlıda ya amCharts ticari lisansı alınıp kaydedilmeli ya da `public/kervea/js/kv-globe.js` içindeki `_logo.dispose()` satırı kaldırılmalıdır.
 
 ## 6. Müşteriden beklenenler
 

@@ -143,7 +143,7 @@
 </div></div>
 
 <!-- ============================================
-     KERVEA KÜRSÜSÜ (Faz 2 · Wall of Love)
+     KERVEA KÜRSÜSÜ
      Dürüst versiyon: Kervea 2026'da başladı, sahte
      referans yok. Schema.org iskeleti hazır — ilk
      doğrulanmış üye referansları geldikçe doldurulacak.

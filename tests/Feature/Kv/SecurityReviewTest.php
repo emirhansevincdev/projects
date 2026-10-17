@@ -4,7 +4,7 @@ namespace Tests\Feature\Kv;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-/** Regression tests for the issues found by the independent security review. */
+/** Security regression tests. */
 class SecurityReviewTest extends CreditsTestCase
 {
     use RefreshDatabase;

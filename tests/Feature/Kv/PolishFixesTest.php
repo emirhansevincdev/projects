@@ -4,7 +4,7 @@ namespace Tests\Feature\Kv;
 
 use App\Models\Kv\NewsletterSubscriber;
 
-/** Small correctness fixes found by the independent package review. */
+/** Small correctness fixes. */
 class PolishFixesTest extends KvTestCase
 {
     public function test_every_page_names_its_own_canonical_and_og_url_and_no_dead_language_alternates(): void

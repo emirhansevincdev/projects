@@ -8,7 +8,7 @@ use App\Models\Kv\RemovalRequest;
 use App\Services\Kv\CreditService;
 use Illuminate\Http\UploadedFile;
 
-/** C4 admin side: directory CRUD, CSV import (hostile input), KVKK removal inbox. */
+/** People admin side: directory CRUD, CSV import (hostile input), KVKK removal inbox. */
 class PeopleAdminTest extends CreditsTestCase
 {
     private function csv(string $body, string $name = 'kisiler.csv'): UploadedFile

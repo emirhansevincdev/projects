@@ -7,7 +7,7 @@ namespace Tests\Feature\Kv;
  */
 class PublicShellTest extends KvTestCase
 {
-    public function test_home_renders_without_template_leaks_or_unverifiable_claims_in_the_head(): void
+    public function test_home_renders_without_placeholder_leaks_or_unverifiable_claims_in_the_head(): void
     {
         $html = $this->get('/')->assertOk()->getContent();
 
