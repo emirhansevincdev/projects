@@ -2,7 +2,7 @@
 <section id="about" class="view">
  <div class="wrap sec">
 
-  <!-- ═══════════ HERO: ne olduğumuz + firmaların bulunduğu ülkeler ═══════════ -->
+  {{-- ═══════════ HERO: ne olduğumuz + firmaların bulunduğu ülkeler ═══════════ --}}
   <div class="abo-hero">
     <div class="abo-hero-txt">
       <div class="abo-eyebrow" data-i18n="abo_eyebrow">HAKKIMIZDA</div>
@@ -30,7 +30,7 @@
     <a href="#abo-co" data-i18n="abo_toc_co">Şirket</a>
   </nav>
 
-  <!-- ═══════════ NE YAPAR ═══════════ -->
+  {{-- ═══════════ NE YAPAR ═══════════ --}}
   <section id="abo-what" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_what_h">Kervea ne yapar?</h2></div>
     <div class="kv-points">
@@ -41,7 +41,7 @@
     </div>
   </section>
 
-  <!-- ═══════════ NASIL ÇALIŞIR ═══════════ -->
+  {{-- ═══════════ NASIL ÇALIŞIR ═══════════ --}}
   <section id="abo-how" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_how_h">Nasıl çalışır?</h2></div>
     <div class="abo-flow" data-i18n-aria="abo_flow_aria" aria-label="Ticaret akışı">
@@ -77,7 +77,7 @@
     </ol>
   </section>
 
-  <!-- ═══════════ ÜYELİK KURALLARI ═══════════ -->
+  {{-- ═══════════ ÜYELİK KURALLARI ═══════════ --}}
   <section id="abo-rules" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_rules_h">Üyelik kuralları</h2></div>
     <div class="kv-points">
@@ -88,7 +88,7 @@
     </div>
   </section>
 
-  <!-- ═══════════ NE YAPMAZ ═══════════ -->
+  {{-- ═══════════ NE YAPMAZ ═══════════ --}}
   <section id="abo-not" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_not_h">Kervea ne yapmaz?</h2></div>
     <ul class="kv-nots">
@@ -99,7 +99,7 @@
     </ul>
   </section>
 
-  <!-- ═══════════ BUGÜN: yalnızca gerçek sayılar ═══════════ -->
+  {{-- ═══════════ BUGÜN: yalnızca gerçek sayılar ═══════════ --}}
   <section id="abo-num" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_num_h">Bugün</h2></div>
     <div class="abo-num-grid" id="aboStats">
@@ -110,7 +110,7 @@
     </div>
   </section>
 
-  <!-- ═══════════ VERİLERİNİZ ═══════════ -->
+  {{-- ═══════════ VERİLERİNİZ ═══════════ --}}
   <section id="abo-data" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_data_h">Verilerinize nasıl bakıyoruz?</h2></div>
     <div class="kv-points kv-points-3">
@@ -120,7 +120,7 @@
     </div>
   </section>
 
-  <!-- ═══════════ ŞİRKET (müşterinin dolduracağı bilgiler) ═══════════ -->
+  {{-- ═══════════ ŞİRKET (müşterinin dolduracağı bilgiler) ═══════════ --}}
   <section id="abo-co" class="abo-block">
     <div class="abo-block-hd"><h2 data-i18n="abo_co_h">Şirket bilgileri</h2></div>
     <dl class="kv-co">
@@ -143,5 +143,5 @@
  </div>
 </section>
 
-<!-- CONTACT -->
+{{-- CONTACT --}}
 @endverbatim

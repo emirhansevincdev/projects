@@ -3,7 +3,7 @@
  <div class="hhero">
   <div class="h-photo"></div>
   <div class="hbg">
-   <!-- 3D dönen dünya küresi (amCharts 5 orthographic projection) -->
+   {{-- 3D dönen dünya küresi (amCharts 5 orthographic projection) --}}
    <div id="globeMap" aria-label="Kervea küresel koridor haritası" role="img"></div>
  </div><!-- /.hbg -->
 
@@ -39,7 +39,7 @@
      <button class="on" onclick="setDir('EXP',this)" data-i18n="f_exp">İhracat</button>
      <button onclick="setDir('IMP',this)" data-i18n="f_imp">İthalat</button>
     </div>
-    <!-- Compact sector picker inline with the filter row -->
+    {{-- Compact sector picker inline with the filter row --}}
     <div class="secpick compact" id="secPick">
      <button class="secpick-trigger" onclick="toggleSecPick()">
       <span id="secPickTrigger"><span class="sp-lbl">Sektör</span></span>
@@ -50,7 +50,7 @@
       <div class="secpick-grid" id="secStripHero"></div>
      </div>
     </div>
-    <!-- Sector select kept for state, hidden — visual chip strip below is the primary UI -->
+    {{-- Sector select kept for state, hidden — visual chip strip below is the primary UI --}}
     <select id="secSel" onchange="applyFilters();renderSecStrip()" style="display:none"></select>
    </div>
    <div class="stats" id="statsBar">
@@ -80,7 +80,7 @@
  </div>
 
 
- <!-- WHY KERVEA (trust bar - 3 photo cards over image backgrounds) -->
+ {{-- WHY KERVEA (trust bar - 3 photo cards over image backgrounds) --}}
 <div class="whyk-sec"><div class="wrap">
  <div class="whyk-hd">
   <h2 data-i18n="why_h">Neden Kervea?</h2>
@@ -111,7 +111,7 @@
  </div>
 </div></div>
 
- <!-- HOW KERVEA WORKS (3 photo cards) -->
+ {{-- HOW KERVEA WORKS (3 photo cards) --}}
 <div class="hiw-sec"><div class="wrap">
  <div class="hiw-hd">
   <span class="tag" data-i18n="hiw_tag">NASIL ÇALIŞIR</span>
@@ -164,7 +164,7 @@
     </div>
   </div>
 </section>
-<!-- /KERVEA KÜRSÜSÜ -->
+{{-- /KERVEA KÜRSÜSÜ --}}
 
 <!-- ============================================
      SIKÇA SORULAN SORULAR (schema.org FAQPage)
@@ -216,10 +216,10 @@
     </div>
   </div>
 </section>
-<!-- /SSS -->
+{{-- /SSS --}}
 
 
 </section>
 
-<!-- ADD -->
+{{-- ADD --}}
 @endverbatim

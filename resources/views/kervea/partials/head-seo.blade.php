@@ -53,7 +53,7 @@
   "@type": "Organization",
   "name": "Kervea",
   "url": "__KV_BASE__",
-  "logo": "__KV_BASE__/logo.png",
+  "logo": "__KV_BASE__/icon-512.png",
   "description": "Doğrulanmış firmaları ülke ve sektöre göre listeleyen çok dilli B2B eşleştirme ağı. Pazaryeri değildir; komisyon almaz.",
   "availableLanguage": ["Turkish", "English", "Spanish", "French", "Arabic", "Russian"]
 }

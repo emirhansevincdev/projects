@@ -19,9 +19,9 @@
     <a onclick="doLogout()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span data-i18n="p_out">Çıkış</span></a>
    </div>
    <div>
-    <!-- OVERVIEW -->
+    {{-- OVERVIEW --}}
     <div class="dpanel on" id="dp-overview">
-     <!-- Hoş geldin: ad ve doğrulama durumu sunucudan gelir (kervea-api.js fillOverview) -->
+     {{-- Hoş geldin: ad ve doğrulama durumu sunucudan gelir (kervea-api.js fillOverview) --}}
      <div class="ov-welcome">
        <div class="ov-welcome-t">
          <h2 class="ov-welcome-h"><span data-i18n="ov_greeting">Merhaba</span>, <span id="ovUserName"></span></h2>
@@ -44,7 +44,7 @@
        </div>
      </div>
 
-     <!-- Sayılar: yalnızca gerçek veri; veri yoksa "—" -->
+     {{-- Sayılar: yalnızca gerçek veri; veri yoksa "—" --}}
      <div class="ov-stats">
        <div class="ov-stat-card">
          <div class="ov-stat-hd"><div class="ov-stat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="ov-stat-lbl" data-i18n="ov_stat_matches">Eşleşme</div></div>
@@ -92,7 +92,7 @@
      </div>
 
     </div>
-    <!-- MATCHES -->
+    {{-- MATCHES --}}
     <div class="dpanel" id="dp-matches">
      <h2 data-i18n="mt_h">Eşleşmelerim</h2>
      <p class="sub" data-i18n="mt_sub">Sektörünüze, ürünlerinize ve ticaret yönünüze göre sıralanır. Filtreleyebilir ve CSV olarak indirebilirsiniz.</p>
@@ -105,7 +105,7 @@
      </div>
      <div class="dcard" style="padding:0;overflow:hidden"><div id="mtable-wrap"></div></div>
     </div>
-    <!-- PROFILE -->
+    {{-- PROFILE --}}
     <div class="dpanel" id="dp-profile">
      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
       <div>
@@ -115,7 +115,7 @@
       <button class="btn sec" onclick="openMyProfile()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span data-i18n="preview_page">Herkese Görünen Sayfayı Aç</span></button>
      </div>
 
-     <!-- Profil başlığı: ad, ülke ve doluluk oranı sunucudaki verilerden hesaplanır -->
+     {{-- Profil başlığı: ad, ülke ve doluluk oranı sunucudaki verilerden hesaplanır --}}
      <div class="profhero">
       <div class="phring-wrap">
        <div class="phring">
@@ -131,7 +131,7 @@
       </div>
      </div>
 
-     <!-- Section anchor navigation -->
+     {{-- Section anchor navigation --}}
      <div class="prof-anchors">
       <a href="#sec_visual" onclick="scrollAnchor('sec_visual',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-kvt>Görsel Kimlik</span></a>
       <a href="#sec_legal" onclick="scrollAnchor('sec_legal',event)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-kvt>Yasal & Firma</span></a>
@@ -141,7 +141,7 @@
 
      <div class="dcard" id="sec_visual">
       <h3 data-i18n="sec_visual">Görsel Kimlik</h3>
-      <!-- Herkese açık firma kartının şu anki hâli (gerçek logo, kapak, sektör) -->
+      {{-- Herkese açık firma kartının şu anki hâli (gerçek logo, kapak, sektör) --}}
       <div class="prof-preview">
        <div class="pp-cover" id="ppCover"></div>
        <div class="pp-logo" id="ppLogo"></div>
@@ -235,7 +235,7 @@
       <button class="btn sec" type="button" onclick="kvCancelProfile()" data-i18n="cancel">İptal</button>
      </div>
     </div>
-    <!-- MESSAGES -->
+    {{-- MESSAGES --}}
     <div class="dpanel" id="dp-messages">
      <h2 data-i18n="msg_h">Mesajlarım</h2>
      <p class="sub" id="kvMsgSub" data-i18n="kvm_sub">Aynı sektördeki onaylı firmalarla platform içinde yazışın.</p>
@@ -276,7 +276,7 @@
      </div>
     </div>
 
-    <!-- PEOPLE / Prospeo-style contact discovery (kv-people.js renders the table from /kv/people) -->
+    {{-- PEOPLE / contact discovery (kv-people.js renders the table from /kv/people) --}}
     <div class="dpanel" id="dp-people">
      <div class="ppl-hd">
       <div>
@@ -315,7 +315,7 @@
      </div>
     </div>
 
-    <!-- ANALYSIS: every number comes from GET /kv/analytics (rendered by public/kervea/js/kv-analytics.js); nothing here is a sample -->
+    {{-- ANALYSIS: every number comes from GET /kv/analytics (rendered by public/kervea/js/kv-analytics.js); nothing here is a sample --}}
     <div class="dpanel" id="dp-analytics">
      <div class="an-head">
       <div>
@@ -332,7 +332,7 @@
      <div id="anBody" class="an-body" aria-live="polite"><div class="an-empty-inline" data-i18n="an_loading">Analiz verileri yükleniyor…</div></div>
     </div>
 
-    <!-- DOCUMENTS -->
+    {{-- DOCUMENTS --}}
     <div class="dpanel" id="dp-docs">
      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
       <div>
@@ -344,7 +344,7 @@
      <div class="doc-grid"></div>
     </div>
 
-    <!-- TEAM MANAGEMENT (kv-team.js renders the list from GET /kv/team) -->
+    {{-- TEAM MANAGEMENT (kv-team.js renders the list from GET /kv/team) --}}
     <div class="dpanel" id="dp-team">
      <div class="kvt-head">
       <div>
@@ -362,7 +362,7 @@
      <div class="kvt-info" id="kvtInfo" hidden></div>
     </div>
 
-    <!-- ACTIVITY (kv-team.js renders the list from GET /kv/activity) -->
+    {{-- ACTIVITY (kv-team.js renders the list from GET /kv/activity) --}}
     <div class="dpanel" id="dp-activity">
      <div class="kvt-head">
       <div>
@@ -375,7 +375,7 @@
      <div class="ac-timeline" id="acList" hidden></div>
     </div>
 
-    <!-- PROSPECT: firmanın kendi profil verisinden tek sayfalık tanıtım belgesi (yazdır / PDF olarak kaydet) -->
+    {{-- PROSPECT: firmanın kendi profil verisinden tek sayfalık tanıtım belgesi (yazdır / PDF olarak kaydet) --}}
     <div class="dpanel" id="dp-prospect">
      <h2 data-i18n="pr_title">Prospektüs Üretici</h2>
      <p class="sub" data-kvt>Firma profilinizden tek sayfalık bir tanıtım belgesi hazırlanır. Belge yeni sekmede açılır; yazdır penceresinde “PDF olarak kaydet”i seçerek indirebilirsiniz.</p>
@@ -408,7 +408,7 @@
       <p class="kv-hint" id="kvProspStatus" role="status" aria-live="polite"></p>
      </div>
     </div>
-   <!-- SETTINGS -->
+   {{-- SETTINGS --}}
     <div class="dpanel" id="dp-settings">
      <h2 data-kvt>Ayarlar</h2>
      <p class="sub" data-kvt>Hesap ve güvenlik tercihleri.</p>
@@ -419,5 +419,5 @@
  </div>
 </section>
 
-<!-- FIRM PROFILE PAGE (real page, not modal) -->
+{{-- FIRM PROFILE PAGE (real page, not modal) --}}
 @endverbatim

@@ -19,7 +19,7 @@
   </div>
   <div class="sec">
    <div class="form">
-    <!-- STEP 1: Company -->
+    {{-- STEP 1: Company --}}
     <div class="panelstep on" id="ps1">
      <div class="fg">
       <div><label class="fl" data-i18n="fl_cname">Firma Adı *</label><input data-f="name" maxlength="200" data-i18n-ph="ph_cname" placeholder="Örn. XYZ Ticaret A.Ş." autocomplete="organization"/></div>
@@ -41,7 +41,7 @@
      <label class="fl" data-i18n="fl_address">Firma Adresi</label>
      <textarea data-f="address" maxlength="1000" rows="2" data-i18n-ph="ph_address" placeholder="Cadde, No, Semt / İlçe / Şehir / Ülke"></textarea>
     </div>
-    <!-- STEP 2: Sector -->
+    {{-- STEP 2: Sector --}}
     <div class="panelstep" id="ps2">
      <div class="fg">
       <div><label class="fl" data-i18n="fl_sec">Ana Sektör *</label><select data-f="sector" id="addSecSel" onchange="renderAddSecChip()"></select><div id="addSecChip" style="margin-top:8px"></div></div>
@@ -58,7 +58,7 @@
      <label class="fl" data-i18n="fl_certs">Sertifikalar</label>
      <input data-f="certificates" maxlength="500" placeholder="ISO 9001, ISO 14001, GOTS, HACCP..."/>
     </div>
-    <!-- STEP 3: Logo + Gallery -->
+    {{-- STEP 3: Logo + Gallery --}}
     <div class="panelstep" id="ps3">
      <div class="logoup">
       <div class="box" id="addLogoBox"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
@@ -88,7 +88,7 @@
      <div class="galpreview" id="addGalPrev"></div>
     </div>
 
-    <!-- STEP 4: Social Media & Links -->
+    {{-- STEP 4: Social Media & Links --}}
     <div class="panelstep" id="ps4">
      <p style="color:var(--faint);font-size:13.5px;margin-bottom:16px" data-i18n="social_intro">Sosyal medya ve iletişim kanallarınız — alıcılar buradan size ulaşacak.</p>
      <div class="social-grid">
@@ -101,7 +101,7 @@
      </div>
     </div>
 
-    <!-- STEP 5: Documents & Consent -->
+    {{-- STEP 5: Documents & Consent --}}
     <div class="panelstep" id="ps5">
      <label class="fl" data-i18n="doc_h">Belgeler *</label>
      <div class="upl" onclick="this.querySelector('input').click()"><span data-i18n="doc_txt">Faaliyet Belgesi, Sicil Gazetesi, İmza Sirküleri, Kalite Sertifikaları</span><input data-f="documents" type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf"></div>
@@ -191,7 +191,7 @@
      </div>
     </div>
 
-    <!-- STEP 6: Publish + Promo -->
+    {{-- STEP 6: Publish + Promo --}}
     <div class="panelstep" id="ps6">
      <div style="text-align:center;padding:20px 20px 10px">
       <div style="width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--chip);color:var(--teal);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -229,5 +229,5 @@
  </div>
 </section>
 
-<!-- PRICING -->
+{{-- PRICING --}}
 @endverbatim

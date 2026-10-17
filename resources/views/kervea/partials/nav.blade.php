@@ -44,7 +44,7 @@
  </div>
  <a class="ghostbtn" onclick="go('login')" data-i18n="nav_login">Giriş</a>
  
- <!-- User Dropdown -->
+ {{-- User Dropdown --}}
  <div class="kv-usermenu" id="kvUserMenu" style="display:none">
    <button class="kv-usermenu-trigger" id="kvUserMenuTrigger" onclick="toggleUserMenu(event)" aria-haspopup="menu" aria-expanded="false" aria-label="Panel menüsü">
      <span class="kv-usermenu-avatar" id="kvUserAvatar">K</span>
@@ -83,11 +83,11 @@
  </div>
 </div></nav>
 
-<!-- v25: Compliance / Data Source Marquee -->
+{{-- v25: Compliance / Data Source Marquee --}}
 <div class="nav-marquee" aria-hidden="true">
  <div class="nm-track" id="nmTrack"></div>
 </div>
 
 
-<!-- HOME -->
+{{-- HOME --}}
 @endverbatim

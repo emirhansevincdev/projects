@@ -2,7 +2,7 @@
 <footer class="foot-x" role="contentinfo">
   <div class="wrap">
     <div class="fx-grid">
-      <!-- Marka -->
+      {{-- Marka --}}
       <div class="fx-brand">
         <a class="fx-logo" onclick="go('home')" role="button" aria-label="Kervea">
           <svg viewBox="0 0 200 200" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="fg" x1=".1" y1="0" x2=".9" y2="1"><stop offset="0" stop-color="#0D8A80"/><stop offset="1" stop-color="#0A5F56"/></linearGradient></defs>
@@ -16,7 +16,7 @@
         <p class="fx-tag" data-i18n="ft_brand_desc">Küresel, çok dilli B2B ticaret eşleştirme ağı. Komisyon yok; firmalar belgeleriyle doğrulanır.</p>
       </div>
 
-      <!-- Platform -->
+      {{-- Platform --}}
       <div class="fx-col">
         <h4 data-i18n="ft_col_platform">Platform</h4>
         <ul>
@@ -27,7 +27,7 @@
         </ul>
       </div>
 
-      <!-- Şirket -->
+      {{-- Şirket --}}
       <div class="fx-col">
         <h4 data-i18n="ft_col_company">Şirket</h4>
         <ul>
@@ -36,7 +36,7 @@
         </ul>
       </div>
 
-      <!-- Yasal -->
+      {{-- Yasal --}}
       <div class="fx-col">
         <h4 data-i18n="ft_col_legal">Yasal</h4>
         <ul>

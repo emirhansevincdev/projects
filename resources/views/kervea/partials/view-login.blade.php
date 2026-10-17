@@ -16,7 +16,7 @@
     </div>
     
     <div class="kv-login-body">
-      <!-- Floating input · Email -->
+      {{-- Floating input · Email --}}
       <div class="kv-float-input">
         <input type="email" id="kvLoginEmail" class="kv-float-in" placeholder=" " autocomplete="email" maxlength="254" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" required/>
         <label for="kvLoginEmail" class="kv-float-lbl" data-i18n="login_email">E-posta adresi</label>
@@ -25,7 +25,7 @@
         </div>
       </div>
       
-      <!-- Floating input · Password -->
+      {{-- Floating input · Password --}}
       <div class="kv-float-input">
         <input type="password" id="kvLoginPass" class="kv-float-in" placeholder=" " autocomplete="current-password" maxlength="128" required minlength="8"/>
         <label for="kvLoginPass" class="kv-float-lbl" data-i18n="login_pass">Parola</label>

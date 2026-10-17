@@ -4,7 +4,7 @@
   <div class="ph"><h1 data-i18n="pr_h">Fiyatlandırma</h1><p data-i18n="pr_p">Listeleme ücretsiz. Premium yıllık. Komisyon yok.</p></div>
   <div class="sec" style="text-align:center">
 
-   <!-- ═══ TEK PLAN KARTI (fiyat sunucu yapılandırmasından gelir) ═══ -->
+   {{-- ═══ TEK PLAN KARTI (fiyat sunucu yapılandırmasından gelir) ═══ --}}
    <div class="single-plan">
     <div class="sp-inner">
      <div class="sp-badge" data-i18n="sp_badge">KERVEA PREMIUM</div>
@@ -27,14 +27,14 @@
    </div>
 
 
-   <!-- ═══ KREDİ PAKETLERİ (fiyatlar sunucu yapılandırmasından gelir) ═══ -->
+   {{-- ═══ KREDİ PAKETLERİ (fiyatlar sunucu yapılandırmasından gelir) ═══ --}}
    <div class="kv-pr-credits" id="kvPrCredits" hidden>
     <h3 data-i18n="kvc_pr_h">Kredi ile farklı sektörlere ulaşın</h3>
     <p data-i18n="kvc_pr_p">Her yeni üyeye {signup} kredi hediye, Premium üyelikle {bonus} kredi daha. Her e-posta veya telefon {cost} kredi; kullanılmayan krediler devreder.</p>
     <div class="kv-pr-packs" id="kvPrPacks"></div>
    </div>
 
-   <!-- ═══ PROMO KODU ═══ -->
+   {{-- ═══ PROMO KODU ═══ --}}
    <div class="promobox">
     <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
     <div class="txt"><b data-i18n="promo_h2">Promosyon kodu</b><span data-i18n="promo_s2">Elinizde bir kod varsa buraya girin; indirim ödeme adımında uygulanır.</span></div>

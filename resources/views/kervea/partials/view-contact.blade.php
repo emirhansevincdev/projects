@@ -21,7 +21,7 @@
  </div>
 
 
-  <!-- ═══ Bülten: POST /kv/newsletter (e-posta + onay kanıtı sunucuda saklanır) ═══ -->
+  {{-- ═══ Bülten: POST /kv/newsletter (e-posta + onay kanıtı sunucuda saklanır) ═══ --}}
   <div class="kv-newsletter">
     <div class="kv-nl-inner">
       <div class="kv-nl-text">
@@ -46,5 +46,5 @@
   </div>
 </section>
 
-<!-- LOGIN -->
+{{-- LOGIN --}}
 @endverbatim

@@ -36,9 +36,14 @@ class ImageStore
             $src = $dst;
         }
 
-        $ext = $mime === 'image/png' ? 'png' : 'webp';  // photos → webp, transparency kept for PNG logos
+        // photos → webp (jpeg when this GD build has no WebP encoder), transparency kept for PNG logos
+        $ext = $mime === 'image/png' ? 'png' : (function_exists('imagewebp') ? 'webp' : 'jpg');
         ob_start();
-        $ext === 'png' ? imagepng($src, null, 6) : imagewebp($src, null, 82);
+        match ($ext) {
+            'png' => imagepng($src, null, 6),
+            'webp' => imagewebp($src, null, 82),
+            default => imagejpeg($src, null, 85),
+        };
         $bin = ob_get_clean();
         imagedestroy($src);
 

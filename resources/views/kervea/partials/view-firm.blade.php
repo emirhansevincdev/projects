@@ -9,11 +9,11 @@
  </div>
 </section>
 
-<!-- MODALS -->
+{{-- MODALS --}}
 
-<!-- Credits modal: packs, prices and the balance come from GET /kv/credits (kv-credits.js); payment happens on Stripe's hosted page -->
+{{-- Credits modal: packs, prices and the balance come from GET /kv/credits (kv-credits.js); payment happens on Stripe's hosted page --}}
 <div class="modal" id="mCredits"><div class="mbox creds-modal" style="max-width:640px;width:calc(100vw - 32px)"><div class="mhead"><h3 data-i18n="creds_h">Kredi Paketleri</h3><button class="mclose" onclick="closeM('credits')" aria-label="Close">×</button></div><div class="mbody" style="padding:22px">
- <!-- STEP 1: pack choice -->
+ {{-- STEP 1: pack choice --}}
  <div id="credsStep1">
   <div id="kvCredNotice" class="kv-cr-warn" role="status" hidden></div>
   <p style="font-size:14px;color:var(--body);margin-bottom:8px" data-i18n="creds_sub">Her karar vericinin e-posta veya telefonu 1 kredi. Kullanılmayan krediler devreder.</p>
@@ -35,7 +35,7 @@
    <span data-i18n="creds_secure">Kart ödemesi Stripe'ın güvenli sayfasında alınır · 3D Secure</span>
   </p>
  </div>
- <!-- STEP 2: no card form on our page (PCI) – a short explanation and a button to the hosted payment page -->
+ {{-- STEP 2: no card form on our page (PCI) – a short explanation and a button to the hosted payment page --}}
  <div id="credsStep2" style="display:none">
   <button type="button" onclick="backToCredsPack()" id="kvCredBack" style="background:none;border:none;color:var(--teal);font-size:13px;cursor:pointer;margin-bottom:14px;padding:0;display:inline-flex;align-items:center;gap:5px">
    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
@@ -92,9 +92,9 @@
   </div>
   <div class="mbody kv-pay-body">
     
-    <!-- Sol: Özet + Kart tercihi -->
+    {{-- Sol: Özet + Kart tercihi --}}
     <div class="kv-pay-left">
-      <!-- Fiyat özet kartı -->
+      {{-- Fiyat özet kartı --}}
       <div class="kv-pay-summary">
         <div class="kv-pay-plan-row">
           <span class="kv-pay-plan-lbl" data-i18n="pay_plan_name">Kervea Premium · Yıllık</span>
@@ -114,7 +114,7 @@
       </div>
       
       <div class="kv-pay-cards">
-        <!-- Promo kodu -->
+        {{-- Promo kodu --}}
         <div class="kv-pay-promo">
           <input type="text" id="kvPayPromo" placeholder="Promosyon kodu (isteğe bağlı)" data-i18n-ph="pay_promo_ph" maxlength="30"/>
           <button type="button" class="btn sm sec" onclick="applyKvPromo()" data-i18n="apply">Uygula</button>
@@ -122,10 +122,10 @@
       </div>
     </div>
     
-    <!-- Sağ: bilgilendirme + onay -->
+    {{-- Sağ: bilgilendirme + onay --}}
     <div class="kv-pay-right">
       
-      <!-- Disclosure: güvenlik bilgisi -->
+      {{-- Disclosure: güvenlik bilgisi --}}
       <div class="kv-pay-disclosure">
         <div class="kv-pay-disc-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -133,7 +133,7 @@
         </div>
       </div>
       
-      <!-- Confirm CTA -->
+      {{-- Confirm CTA --}}
       <button type="button" class="btn kv-pay-cta" id="kvPayConfirmBtn" onclick="kvConfirmPayment()">
         <span class="kv-pay-cta-txt"><span data-i18n="pay_confirm">Ödemeyi Onayla — </span><b id="kvPayCtaTotal">—</b></span>
         <span class="kv-pay-cta-loading" style="display:none">
@@ -147,10 +147,10 @@
  </div>
 </div>
 <div class="modal gate-modal" id="mGate"><div class="mbox"><button class="mclose" onclick="closeM('gate')" style="position:absolute;right:12px;top:12px;z-index:10">×</button><div id="gateBody" class="mbody" style="padding:0"></div></div></div>
-<!-- Team Management Modals -->
+{{-- Team Management Modals --}}
 <div class="tm-modal-back" id="tmBack" onclick="closeTmModal()"></div>
 
-<!-- Invite User Modal -->
+{{-- Invite User Modal --}}
 <div class="tm-modal" id="tmInviteModal" role="dialog" aria-modal="true">
  <div class="mh">
   <h3 data-i18n="tm_inv_h">Yeni Kullanıcı Davet Et</h3>
@@ -179,7 +179,7 @@
  </div>
 </div>
 
-<!-- Permissions Editor Modal -->
+{{-- Permissions Editor Modal --}}
 <div class="tm-modal" id="tmPermModal" role="dialog" aria-modal="true">
  <div class="mh">
   <h3 data-i18n="tm_perm_h">Rol ve İzinleri Düzenle</h3>
@@ -213,7 +213,7 @@
  </div>
 </div>
 
-<!-- Person Detail Drawer (Prospeo-style side sheet) -->
+{{-- Person Detail Drawer (Prospeo-style side sheet) --}}
 <div class="pdrawer-back" id="pdBack" onclick="closePersonDrawer()"></div>
 <div class="pdrawer" id="pdDrawer" role="dialog" aria-modal="true">
  <div class="pd-hd">

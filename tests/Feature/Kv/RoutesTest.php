@@ -11,7 +11,7 @@ class RoutesTest extends KvTestCase
             $this->assertStringContainsString('"view":"'.$view.'"', $res->getContent(), $url);
             $this->assertStringContainsString('id="kvLoginEmail"', $res->getContent());      // same single-page shell everywhere
         }
-        $res = $this->get('/company/some-firm')->assertOk();
+        $res = $this->get('/company/some-firm')->assertNotFound();           // no such firm: a real 404, the shell still renders
         $this->assertStringContainsString('"view":"firm"', $res->getContent());
         $this->assertStringContainsString('"firm":"some-firm"', $res->getContent());
     }

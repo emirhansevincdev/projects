@@ -58,7 +58,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // Payment provider webhooks are authenticated by their signature, not by a CSRF token.
-        $middleware->appendToGroup('web', SecurityHeaders::class);
+        $middleware->append(SecurityHeaders::class);          // every response, also the framework's own 404 / 405 pages
         $middleware->validateCsrfTokens(except: ['kv/webhooks/stripe']);
         // Guests hitting a protected page are sent to the Kervea sign-in, not the template's login view.
         $middleware->redirectGuestsTo('/login');
